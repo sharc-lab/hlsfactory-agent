@@ -1,0 +1,278 @@
+import argparse
+import os
+import shutil
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+from pprint import pp
+from typing import TypeVar
+
+from dotenv import load_dotenv
+from joblib import Parallel, delayed
+from llm import Model
+from llm_openrouter import OpenRouterChat
+from pydantic import BaseModel, ConfigDict
+
+T_unwrap = TypeVar("T_unwrap")
+
+
+def unwrap(x: T_unwrap | None, err_msg: str | None = None) -> T_unwrap:
+    if x is None:
+        # raise ValueError("Unwrapped a None Value")
+        if err_msg is None:
+            raise ValueError("Unwrapped a None Value")
+        else:
+            raise ValueError(f"Unwrapped a None Value: {err_msg}")
+
+    return x
+
+
+def build_model(model_id: str, openrouter_key: str) -> Model:
+    llm: OpenRouterChat = OpenRouterChat(
+        model_id=model_id,
+        key=openrouter_key,
+        api_base="https://openrouter.ai/api/v1",
+        headers={"HTTP-Referer": "https://llm.datasette.io/", "X-Title": "LLM"},
+        supports_schema=True,
+    )
+    return llm  # type: ignore
+
+
+class HLSDesign(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    kernel_name: str
+    source_files: list[str]
+
+
+class HLSDesigns(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    designs: list[HLSDesign]
+
+
+def extract_top_level_designs(src_dir: Path, llm: Model) -> HLSDesigns:
+    prompt_system = """
+    You are an AI assistant and high-level synthesis (HLS) design expert that analyzes a collection of unstructured High-Level Synthesis (HLS) source code files.
+    
+    Your task is to:
+    1. Identify kernels: Find all top-level HLS designs or kernels
+    2. Determine dependencies: For each identified kernel, list all source files it depends on, including files where it includes functions, classes, or constructs.
+    3. Output format: Provide the results in a JSON array with the stucture defined below.ArithmeticError
+
+    You will output a JSON array with the following structure:
+    ```json
+    [
+        {
+            "kernel_name": "<kernel_name>",
+            "source_files": ["<file1.cpp>", "<file2.h>", "<file3.cpp>"]
+        },
+        ...
+    ]
+    ```
+
+    Additional Guidelines:
+    - Multiple kernels may share the same source files; ensure each kernel lists all its dependencies.
+    - Exclude non-C/C++/H files (e.g., README.md, tcl scripts, bash scripts, ...)  from the source_files list, but use them to inform your analysis.
+    - If uncertain whether a file is required, include it (prefer false positives over false negatives).
+    - Do not include files that are clearly irrelevant (e.g., documentation, configs unrelated to kernels).
+    - Ignore files that are not used by any kernel.
+    - `source_files` should be a list of relative paths to the files from the provided source directory; do not include files that do not exist.
+    """
+
+    prompt_user = ""
+    for file_path in src_dir.rglob("*"):
+        # check if file is a binary file, like test data or something
+        if not file_path.is_file():
+            continue
+        if file_path.suffix.lower() not in {
+            ".cpp",
+            ".c",
+            ".cc",
+            ".cxx",
+            ".h",
+            ".hpp",
+            ".hxx",
+            ".tcl",
+            ".md",
+            ".sh",
+            ".py",
+        }:
+            continue
+        relative_path = file_path.relative_to(src_dir)
+        file_txt = file_path.read_text()
+
+        prompt_user += f"```{str(relative_path)}\n"
+        prompt_user += file_txt
+        prompt_user += "\n```\n"
+        prompt_user += "\n"
+
+    r = llm.prompt(
+        prompt_user, system=prompt_system, schema=HLSDesigns.model_json_schema()
+    )
+    r._force()
+    r_text = r.text()
+    designs = HLSDesigns.model_validate_json(r_text)
+    return designs
+
+
+class SubComponents(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    sub_components: list[str]
+
+
+def break_down_hls_design(design: HLSDesign, src_dir: Path, llm: Model) -> list[str]:
+    prompt_system = """
+    You are an AI assistant and high-level synthesis (HLS) design expert.
+
+    Given the HLS source code files, identify all the sub-components in the design.
+
+    A sub-component is a separate C++ function in the code that is not the top-level function and is part of the HLS design.
+    This sub-component must be under the hierarchy of the top-level HLS function.
+    This can also include sub-functions that are called by other sub-functions.
+    A sub-component should be identified by the function name.
+    If a sub-component is not listed as a separate C++ function, it should not be listed at all.
+
+    These sub-components must be HLS synthesizable code part of the HLS design.
+    We are not interested in testbench functions or runtime functions that are not part of the synthesizable code.
+    Therefore, do not include functions that are clearly part of the testbench or runtime support code.
+
+    Things that are NOT sub-components and should NOT be included in the output:
+    - OpenCL code for kernel invocation, runtime setup, and teardown functions
+    - Testbench functions that call the top-level kernel function
+    - Code use to generate data to feed into the kernel
+    - Any code that uses `malloc`
+
+    Output the list of sub-components in the design as a json list of strings as shown below.
+    ```json
+    [
+        "subcomponent_1",
+        "subcomponent_2",
+        ...
+    ]
+    ```
+    """
+
+    prompt_user = ""
+    for file_path in design.source_files:
+        file_txt = (src_dir.resolve() / file_path).read_text()
+        prompt_user += f"```{str(file_path)}\n"
+        prompt_user += file_txt
+        prompt_user += "\n```\n"
+        prompt_user += "\n"
+
+    r = llm.prompt(
+        prompt_user,
+        system=prompt_system,
+        schema=SubComponents.model_json_schema(),
+    )
+    r._force()
+    r_text = r.text()
+    print("LLM Response Text:")
+    print(r_text)
+    sub_components = SubComponents.model_validate_json(r_text)
+    sub_components_list = sub_components.sub_components
+    return sub_components_list
+
+
+def main(args: argparse.Namespace) -> None:
+    src_dir: Path = args.src_dir
+    dst_dir: Path = args.dst_dir
+    # assert isinstance(src_dir, Path)
+    # assert isinstance(dst_dir, Path)
+    if not isinstance(src_dir, Path):
+        raise ValueError("src_dir is not a valid Path")
+    if not isinstance(dst_dir, Path):
+        raise ValueError("dst_dir is not a valid Path")
+
+    if not src_dir.exists():
+        raise FileNotFoundError(f"Source directory {src_dir} does not exist.")
+
+    if dst_dir.exists():
+        shutil.rmtree(dst_dir)
+    dst_dir.mkdir(parents=True, exist_ok=False)
+
+    load_dotenv()
+    openrouter_key = unwrap(
+        os.getenv("OPENROUTER_API_KEY"), "OPENROUTER_API_KEY not found"
+    )
+    if not isinstance(openrouter_key, str):
+        raise ValueError("OPENROUTER_API_KEY is not a valid string")
+    if openrouter_key is None:
+        raise ValueError("OPENROUTER_API_KEY is None or empty")
+
+    model_id__extract_top_level_designs: str = args.model_id__extract_top_level_designs
+    model_id__break_down_hls_design: str = args.model_id__break_down_hls_design
+
+    model__extract_top_level_designs = build_model(
+        model_id__extract_top_level_designs, openrouter_key
+    )
+    model__break_down_hls_design = build_model(
+        model_id__break_down_hls_design, openrouter_key
+    )
+
+    print(f"Processing source directory to extract top-level designs: {src_dir}")
+    designs = extract_top_level_designs(src_dir, model__extract_top_level_designs)
+    pp(designs)
+    (dst_dir / "designs.json").write_text(designs.model_dump_json(indent=4))
+
+    dir_subcomponents = dst_dir / "subcomponents"
+    dir_subcomponents.mkdir(parents=True, exist_ok=False)
+
+    def _sanitize_filename(name: str) -> str:
+        return name.replace(" ", "_").replace("/", "_")
+
+    def _process_design(idx: int, design: HLSDesign) -> None:
+        try:
+            print(f"Processing design to extract sub-components: {design.kernel_name}")
+            model = model__break_down_hls_design
+            sub_components = break_down_hls_design(design, src_dir, model)
+            pp(sub_components)
+            safe_name = _sanitize_filename(design.kernel_name)
+            (dir_subcomponents / f"{idx}__{safe_name}.json").write_text(
+                SubComponents(sub_components=sub_components).model_dump_json(indent=4)
+            )
+        except Exception as e:
+            print(f"Error processing design {design.kernel_name}: {e}")
+
+    Parallel(n_jobs=8, backend="threading")(
+        delayed(_process_design)(idx, design)
+        for idx, design in enumerate(designs.designs)
+    )
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="HLSFactory Agent")
+    parser.add_argument(
+        "src_dir",
+        type=Path,
+        help="Path to the source directory containing HLS files.",
+    )
+    parser.add_argument(
+        "--dst_dir",
+        type=Path,
+        default=Path("./extracted_designs"),
+        help="Path to the destination directory for extracted designs.",
+    )
+    parser.add_argument(
+        "--model_id__extract_top_level_designs",
+        type=str,
+        default="google/gemini-2.5-flash",
+        # default="qwen/qwen3-coder-30b-a3b-instruct",
+        # default="openai/gpt-5-nano",
+        help="Model ID for LLM to use.",
+    )
+    parser.add_argument(
+        "--model_id__break_down_hls_design",
+        type=str,
+        default="openai/gpt-5-nano",
+        help="Model ID for LLM to use.",
+    )
+
+    args = parser.parse_args()
+    return args
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    main(args)

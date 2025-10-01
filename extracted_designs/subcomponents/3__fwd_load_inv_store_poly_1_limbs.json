@@ -1,0 +1,10 @@
+{
+    "sub_components": [
+        "fwd_load_inv_store_poly_1_limbs",
+        "barrett_reduce",
+        "multiplyTwoInverse",
+        "hardcoded_fullMul_0",
+        "hardcoded_fullMul_1",
+        "hardcoded_lowerHalfMul_2"
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "sub_components": [
+        "multiplyTwoInverse",
+        "hardcoded_fullMul_0",
+        "hardcoded_fullMul_1",
+        "hardcoded_lowerHalfMul_2",
+        "barrett_reduce",
+        "TFBuf_loadTF_wiFW",
+        "TFBuf_loadTF_woFW",
+        "TFBuf_comp",
+        "TFBuf_wiFW_1"
+    ]
+}

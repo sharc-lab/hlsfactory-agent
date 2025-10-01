@@ -1,0 +1,44 @@
+{
+    "designs": [
+        {
+            "kernel_name": "workload",
+            "source_files": [
+                "streamcluster_2_pipeline/src/streamcluster.cpp",
+                "streamcluster_2_pipeline/src/streamcluster.h"
+            ]
+        },
+        {
+            "kernel_name": "workload",
+            "source_files": [
+                "streamcluster_1_tiling/src/streamcluster.cpp",
+                "streamcluster_1_tiling/src/streamcluster.h",
+                "streamcluster_1_tiling/src/local_support.cpp"
+            ]
+        },
+        {
+            "kernel_name": "workload",
+            "source_files": [
+                "streamcluster_3_doublebuffer/src/streamcluster.cpp",
+                "streamcluster_3_doublebuffer/src/streamcluster.h",
+                "streamcluster_3_doublebuffer/src/local_support.cpp"
+            ]
+        },
+        {
+            "kernel_name": "workload",
+            "source_files": [
+                "streamcluster_0_baseline/src/streamcluster.cpp",
+                "streamcluster_0_baseline/src/streamcluster.h",
+                "streamcluster_0_baseline/src/local_support.cpp"
+            ]
+        },
+        {
+            "kernel_name": "workload",
+            "source_files": [
+                "streamcluster_4_coalescing/src/streamcluster.cpp",
+                "streamcluster_4_coalescing/src/streamcluster.h",
+                "streamcluster_4_coalescing/src/local_support.cpp",
+                "streamcluster_4_coalescing/src/../../../common/mc.h"
+            ]
+        }
+    ]
+}
