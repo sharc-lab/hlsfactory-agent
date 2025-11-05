@@ -1,0 +1,9 @@
+{
+    "sub_components": [
+        "MD5Init",
+        "MD5Update",
+        "MD5Final",
+        "MD5Pad",
+        "MD5Transform"
+    ]
+}

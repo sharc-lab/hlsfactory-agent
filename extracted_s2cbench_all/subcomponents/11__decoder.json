@@ -1,0 +1,15 @@
+{
+    "sub_components": [
+        "init",
+        "recv",
+        "exec",
+        "send",
+        "run",
+        "decode_block",
+        "de_quantization",
+        "idct",
+        "data_shift_up",
+        "rad_to_deg",
+        "pow_func"
+    ]
+}

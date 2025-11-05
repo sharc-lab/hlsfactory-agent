@@ -1,0 +1,14 @@
+{
+    "sub_components": [
+        "MULx",
+        "MULxPOW",
+        "MULalpha",
+        "DIValpha",
+        "S1",
+        "S2",
+        "ClockLFSRInitializationMode",
+        "ClockLFSRKeyStreamMode",
+        "ClockFSM",
+        "Initialize"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "sub_components": [
+        "AddRoundKey",
+        "Computing",
+        "dataget",
+        "KeyExpansion",
+        "MixColumns",
+        "mul",
+        "ShiftRows",
+        "SubBytes",
+        "SubWord",
+        "RotWord"
+    ]
+}

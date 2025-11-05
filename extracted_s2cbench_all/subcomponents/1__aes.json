@@ -1,0 +1,14 @@
+{
+    "sub_components": [
+        "assign_key",
+        "SubBytes",
+        "ShiftRows",
+        "MixColumns",
+        "xtime_2",
+        "xadd",
+        "xtime_3",
+        "clip",
+        "KeyExpansion",
+        "AddRoundKey"
+    ]
+}

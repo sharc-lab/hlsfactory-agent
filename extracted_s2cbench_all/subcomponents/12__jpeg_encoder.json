@@ -1,0 +1,13 @@
+{
+    "sub_components": [
+        "jpeg_dct",
+        "jpeg_quantization",
+        "jpeg_zigzag",
+        "jpeg_rle",
+        "huffman_main",
+        "jpeg_getCat",
+        "jpeg_DCcode",
+        "jpeg_ACcode",
+        "jpeg_addzero"
+    ]
+}

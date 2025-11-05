@@ -1,0 +1,6 @@
+{
+    "sub_components": [
+        "quicksort::sort",
+        "quicksort::swap"
+    ]
+}
