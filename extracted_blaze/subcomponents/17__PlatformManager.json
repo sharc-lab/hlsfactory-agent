@@ -1,0 +1,15 @@
+{
+    "sub_components": [
+        "PlatformManager::PlatformManager",
+        "PlatformManager::accExists",
+        "PlatformManager::platformExists",
+        "PlatformManager::getPlatformByAccId",
+        "PlatformManager::getPlatformById",
+        "PlatformManager::getTaskManager",
+        "PlatformManager::registerAcc",
+        "PlatformManager::removeAcc",
+        "PlatformManager::create",
+        "PlatformManager::removeShared",
+        "PlatformManager::getLabels"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "sub_components": [
+        "AccAgent::AccAgent",
+        "AccAgent::createTask",
+        "AccAgent::writeInput",
+        "AccAgent::readOutput"
+    ]
+}

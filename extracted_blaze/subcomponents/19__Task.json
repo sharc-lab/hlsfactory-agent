@@ -1,0 +1,17 @@
+{
+    "sub_components": [
+        "Task::execute",
+        "Task::getEnv",
+        "Task::isInputReady",
+        "Task::getOutput",
+        "Task::getInputLength",
+        "Task::getInputNumItems",
+        "Task::getInput",
+        "Task::addConfig",
+        "Task::getConfig",
+        "Task::addInputBlock",
+        "Task::inputBlockReady",
+        "Task::getOutputBlock",
+        "Task::isReady"
+    ]
+}

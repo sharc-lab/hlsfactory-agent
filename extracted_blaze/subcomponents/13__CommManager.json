@@ -1,0 +1,10 @@
+{
+    "sub_components": [
+        "CommManager::startAccept",
+        "CommManager::handleAccept",
+        "AppCommManager::process",
+        "AppCommManager::handleAccRegister",
+        "AppCommManager::handleAccDelete",
+        "GAMCommManager::process"
+    ]
+}

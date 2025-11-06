@@ -1,0 +1,21 @@
+{
+    "sub_components": [
+        "blaze::Admin::sendMessage",
+        "blaze::Admin::registerAcc",
+        "blaze::Admin::deleteAcc",
+        "blaze::CommManager::startAccept",
+        "blaze::CommManager::handleAccept",
+        "blaze::AppCommManager::process",
+        "blaze::AppCommManager::handleAccRegister",
+        "blaze::AppCommManager::handleAccDelete",
+        "blaze::GAMCommManager::process",
+        "blaze::PlatformManager::PlatformManager",
+        "blaze::PlatformManager::accExists",
+        "blaze::PlatformManager::platformExists",
+        "blaze::PlatformManager::getPlatformByAccId",
+        "blaze::PlatformManager::getPlatformById",
+        "blaze::PlatformManager::getTaskManager",
+        "blaze::PlatformManager::removeShared",
+        "blaze::PlatformManager::getLabels"
+    ]
+}

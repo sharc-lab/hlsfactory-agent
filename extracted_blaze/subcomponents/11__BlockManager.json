@@ -1,0 +1,10 @@
+{
+    "sub_components": [
+        "BlockManager::getAlloc",
+        "BlockManager::get",
+        "BlockManager::do_add",
+        "BlockManager::remove",
+        "BlockManager::evict",
+        "BlockManager::update"
+    ]
+}

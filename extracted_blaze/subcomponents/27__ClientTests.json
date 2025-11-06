@@ -1,0 +1,25 @@
+{
+    "sub_components": [
+        "CommManager::CommManager",
+        "CommManager::~CommManager",
+        "CommManager::startAccept",
+        "CommManager::handleAccept",
+        "AppCommManager::AppCommManager",
+        "AppCommManager::process",
+        "AppCommManager::handleAccRegister",
+        "AppCommManager::handleAccDelete",
+        "GAMCommManager::GAMCommManager",
+        "GAMCommManager::process",
+        "PlatformManager::PlatformManager",
+        "PlatformManager::accExists",
+        "PlatformManager::platformExists",
+        "PlatformManager::getPlatformByAccId",
+        "PlatformManager::getPlatformById",
+        "PlatformManager::getTaskManager",
+        "PlatformManager::removeShared",
+        "PlatformManager::getLabels",
+        "PlatformManager::create",
+        "PlatformManager::registerAcc",
+        "PlatformManager::removeAcc"
+    ]
+}

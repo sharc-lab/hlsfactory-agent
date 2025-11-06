@@ -1,0 +1,12 @@
+{
+    "sub_components": [
+        "add",
+        "get",
+        "remove",
+        "start",
+        "getTaskEnv",
+        "setTaskEnv",
+        "getTaskInputBlock",
+        "setTaskInputBlock"
+    ]
+}
