@@ -1,0 +1,17 @@
+{
+    "designs": [
+        {
+            "kernel_name": "multistream_BitBlender",
+            "source_files": [
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\multistream_BitBlender.cpp",
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\BitBlender.h",
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\host_HBM.cpp",
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\host_QSFP_aurora.cpp",
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\hostside_bitblender_dataprep.cpp",
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\SW_MurmurHash3.cpp",
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\Aurora.hpp",
+                "BitBlender_HLS\\BitBlender_samplecode\\5-9-8-16-10_n0\\src\\hostside_aurorahelpers.cpp"
+            ]
+        }
+    ]
+}
