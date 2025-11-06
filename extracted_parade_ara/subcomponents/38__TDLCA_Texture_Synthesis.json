@@ -1,0 +1,12 @@
+{
+    "sub_components": [
+        "CreateBuffer_TexSynth1LCacc_td",
+        "TexSynth1LCacc_td_buf",
+        "Wait_td__TexSynth1LCacc",
+        "TexSynth1LCacc_CalculateBiNSize",
+        "CreateBuffer_TexSynth2LCacc_td",
+        "TexSynth2LCacc_td_buf",
+        "Wait_td__TexSynth2LCacc",
+        "TexSynth2LCacc_CalculateBiNSize"
+    ]
+}
