@@ -1,0 +1,18 @@
+{
+    "sub_components": [
+        "Swaptions_thread",
+        "SW_Swaptions::Initialize",
+        "SW_Swaptions::Shutdown",
+        "SW_Swaptions::Run",
+        "SW_Swaptions::CumNormalInv",
+        "SW_Swaptions::RanUnif",
+        "SW_Swaptions::dmatrix",
+        "SW_Swaptions::free_dmatrix",
+        "SW_Swaptions::dvector",
+        "SW_Swaptions::free_dvector",
+        "SW_Swaptions::nrerror",
+        "SW_Swaptions::HJM_SimPath_Forward_Blocking",
+        "SW_Swaptions::HJM_SimPath_Forward_Blocking_2",
+        "SW_Swaptions::serialB"
+    ]
+}

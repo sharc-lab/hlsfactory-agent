@@ -1,0 +1,287 @@
+{
+    "designs": [
+        {
+            "kernel_name": "SW_BlackScholes",
+            "source_files": [
+                "SW_BlackScholes\\SW_BlackScholes.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_BlackScholes",
+            "source_files": [
+                "SW_BlackScholes_Pthread\\SW_BlackScholes_Pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_CBIR",
+            "source_files": [
+                "SW_CBIR\\SW_CBIR.cpp",
+                "SW_CBIR\\cnn_cfg.hpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Deblur",
+            "source_files": [
+                "SW_Deblur\\SW_Deblur.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Deblur",
+            "source_files": [
+                "SW_Deblur_Pthread\\SW_Deblur_Pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Denoise",
+            "source_files": [
+                "SW_Denoise\\SW_Denoise.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Denoise",
+            "source_files": [
+                "SW_Denoise_Pthread\\SW_Denoise_Pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Disparity_Map",
+            "source_files": [
+                "SW_Disparity_Map\\SW_Disparity_Map.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Disparity_Map",
+            "source_files": [
+                "SW_Disparity_Map_Pthread\\SW_Disparity_Map_Pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_EKF_SLAM",
+            "source_files": [
+                "SW_EKF_SLAM\\SW_EKF_SLAM.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_EKF_SLAM",
+            "source_files": [
+                "SW_EKF_SLAM_Pthread\\SW_EKF_SLAM_pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_LPCIP_Desc",
+            "source_files": [
+                "SW_LPCIP_Desc\\SW_LPCIP_Desc.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_LPCIP_Desc",
+            "source_files": [
+                "SW_LPCIP_Desc_Pthread\\SW_LPCIP_Desc_pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Registration",
+            "source_files": [
+                "SW_Registration\\SW_Registration.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Registration",
+            "source_files": [
+                "SW_Registration_Pthread\\SW_Registration_Pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Robot_Localization",
+            "source_files": [
+                "SW_Robot_Localization\\SW_Robot_Localization.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Robot_Localization",
+            "source_files": [
+                "SW_Robot_Localization_Pthread\\SW_Robot_Localization_pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Segmentation",
+            "source_files": [
+                "SW_Segmentation\\SW_Segmentation.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Segmentation",
+            "source_files": [
+                "SW_Segmentation_Pthread\\SW_Segmentation_Pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_StreamCluster",
+            "source_files": [
+                "SW_StreamCluster\\SW_StreamCluster.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_StreamCluster",
+            "source_files": [
+                "SW_StreamCluster_Pthread\\SW_StreamCluster_Pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Swaptions",
+            "source_files": [
+                "SW_Swaptions\\SW_Swaptions.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Swaptions",
+            "source_files": [
+                "SW_Swaptions_Pthread\\SW_Swaptions_pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Texture_Synthesis",
+            "source_files": [
+                "SW_Texture_Synthesis\\SW_Texture_Synthesis.cpp"
+            ]
+        },
+        {
+            "kernel_name": "SW_Texture_Synthesis",
+            "source_files": [
+                "SW_Texture_Synthesis_Pthread\\SW_Texture_Synthesis_pthread.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDCLA_BlackScholes",
+            "source_files": [
+                "TDLCA_BlackScholes\\BlackScholesLCacc.h",
+                "TDLCA_BlackScholes\\TDLCA_BlackScholes.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_CBIR",
+            "source_files": [
+                "TDLCA_CBIR\\cnn_cfg.hpp",
+                "TDLCA_CBIR\\ManhattanDistLCacc.h",
+                "TDLCA_CBIR\\MatMul400LCacc.h",
+                "TDLCA_CBIR\\MatMulLCacc.h",
+                "TDLCA_CBIR\\PartialSortLCacc.h",
+                "TDLCA_CBIR\\PoolLCacc.h",
+                "TDLCA_CBIR\\ReluLCacc.h",
+                "TDLCA_CBIR\\TDLCA_CBIR.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Deblur",
+            "source_files": [
+                "TDLCA_Deblur_Modified\\Blur1LCacc.h",
+                "TDLCA_Deblur_Modified\\Blur2LCacc.h",
+                "TDLCA_Deblur_Modified\\Blur3LCacc.h",
+                "TDLCA_Deblur_Modified\\Deblur1LCacc.h",
+                "TDLCA_Deblur_Modified\\Deblur2LCacc.h",
+                "TDLCA_Deblur_Modified\\Denoise1LCacc.h",
+                "TDLCA_Deblur_Modified\\TDLCA_Deblur.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Denoise",
+            "source_files": [
+                "TDLCA_Denoise\\Denoise1LCacc.h",
+                "TDLCA_Denoise\\Denoise2LCacc.h",
+                "TDLCA_Denoise\\TDLCA_Denoise.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Disparity_Map",
+            "source_files": [
+                "TDLCA_Disparity_Map\\DispMapCompSADLCacc.h",
+                "TDLCA_Disparity_Map\\DispMapFindDispLCacc.h",
+                "TDLCA_Disparity_Map\\DispMapIntegSum1LCacc.h",
+                "TDLCA_Disparity_Map\\DispMapIntegSum2LCacc.h",
+                "TDLCA_Disparity_Map\\TDLCA_Disparity_Map.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_EKF_SLAM",
+            "source_files": [
+                "TDLCA_EKF_SLAM\\JacobiansLCacc.h",
+                "TDLCA_EKF_SLAM\\SphericalCoordsLCacc.h",
+                "TDLCA_EKF_SLAM\\TDLCA_EKF_SLAM.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_LPCIP_Desc",
+            "source_files": [
+                "TDLCA_LPCIP_Desc\\LPCIPLCacc.h",
+                "TDLCA_LPCIP_Desc\\TDLCA_LPCIP_Desc.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_MatMul",
+            "source_files": [
+                "TDLCA_MatMul\\MatMulLCacc.h",
+                "TDLCA_MatMul\\TDLCA_MatMul.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Registration",
+            "source_files": [
+                "TDLCA_Registration_Modified\\Blur1LCacc.h",
+                "TDLCA_Registration_Modified\\Blur2LCacc.h",
+                "TDLCA_Registration_Modified\\Blur3LCacc.h",
+                "TDLCA_Registration_Modified\\Registration1LCacc.h",
+                "TDLCA_Registration_Modified\\TDLCA_Registration.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Robot_Localization",
+            "source_files": [
+                "TDLCA_Robot_Localization\\RobLocLCacc.h",
+                "TDLCA_Robot_Localization\\TDLCA_Robot_Localization.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Segmentation",
+            "source_files": [
+                "TDLCA_Segmentation\\Segmentation1LCacc.h",
+                "TDLCA_Segmentation\\TDLCA_Segmentation.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_StreamCluster",
+            "source_files": [
+                "TDLCA_StreamCluster\\StreamCluster1LCacc.h",
+                "TDLCA_StreamCluster\\StreamCluster3LCacc.h",
+                "TDLCA_StreamCluster\\StreamCluster4LCacc.h",
+                "TDLCA_StreamCluster\\StreamCluster5LCacc.h",
+                "TDLCA_StreamCluster\\StreamCluster6LCacc.h",
+                "TDLCA_StreamCluster\\TDLCA_StreamCluster.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Swaptions",
+            "source_files": [
+                "TDLCA_Swaptions\\Swaptions1LCacc.h",
+                "TDLCA_Swaptions\\Swaptions2LCacc.h",
+                "TDLCA_Swaptions\\Swaptions3LCacc.h",
+                "TDLCA_Swaptions\\Swaptions4LCacc.h",
+                "TDLCA_Swaptions\\TDLCA_Swaptions.cpp"
+            ]
+        },
+        {
+            "kernel_name": "TDLCA_Texture_Synthesis",
+            "source_files": [
+                "TDLCA_Texture_Synthesis\\TDLCA_Texture_Synthesis.cpp",
+                "TDLCA_Texture_Synthesis\\TexSynth1LCacc.h",
+                "TDLCA_Texture_Synthesis\\TexSynth2LCacc.h"
+            ]
+        },
+        {
+            "kernel_name": "Sample",
+            "source_files": [
+                "TDLCA_VectorAddSample\\Sample.cpp",
+                "TDLCA_VectorAddSample\\VectorAddSampleLCacc.h"
+            ]
+        }
+    ]
+}

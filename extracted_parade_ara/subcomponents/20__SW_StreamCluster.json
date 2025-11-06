@@ -1,0 +1,8 @@
+{
+    "sub_components": [
+        "dist",
+        "cost_thread",
+        "gl_lower_thread",
+        "close_thread"
+    ]
+}

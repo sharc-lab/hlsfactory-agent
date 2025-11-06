@@ -1,0 +1,10 @@
+{
+    "sub_components": [
+        "selectff",
+        "selectfi",
+        "selectii",
+        "TexSynInitVals",
+        "TexSynCreateCand",
+        "TexSynCompareAll"
+    ]
+}

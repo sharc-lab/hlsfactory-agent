@@ -1,0 +1,7 @@
+{
+    "sub_components": [
+        "DispMapCompSAD",
+        "DispMapIntegSum",
+        "DispMapFindDisp"
+    ]
+}

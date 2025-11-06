@@ -1,0 +1,32 @@
+{
+    "sub_components": [
+        "image_copy",
+        "reset_sc",
+        "reset_spike_pointer",
+        "poisson_pe",
+        "poisson",
+        "encoding_pe",
+        "neuron_conv",
+        "neuron_fc",
+        "neuron_output",
+        "pool_pe",
+        "pool_spike_aggregation",
+        "pool_pe_1",
+        "pool_spike_aggregation_1",
+        "fc_spike_aggregation",
+        "load",
+        "compute",
+        "conv_pe",
+        "conv_pe_1",
+        "load_kernel",
+        "load_kernel_pf",
+        "load_kernel_hw",
+        "conv_spike_aggregation_pf",
+        "conv_spike_aggregation_pf_1",
+        "conv_spike_aggregation",
+        "conv_spike_aggregation_1",
+        "output_spike_aggregation",
+        "max_measurement",
+        "max_measurement_2"
+    ]
+}

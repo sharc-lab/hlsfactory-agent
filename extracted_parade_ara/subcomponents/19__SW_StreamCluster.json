@@ -1,0 +1,9 @@
+{
+    "sub_components": [
+        "Initialize",
+        "Run",
+        "Shutdown",
+        "dist",
+        "pgain"
+    ]
+}

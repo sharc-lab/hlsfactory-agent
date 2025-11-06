@@ -1,0 +1,11 @@
+{
+    "sub_components": [
+        "feature_extraction",
+        "ConvCore",
+        "PoolKernel",
+        "ReluKernel",
+        "FcnReorder",
+        "find_nearest_neighbors",
+        "indexing"
+    ]
+}
