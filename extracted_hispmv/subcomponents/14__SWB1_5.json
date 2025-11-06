@@ -1,0 +1,18 @@
+{
+    "sub_components": [
+        "MM2S_A",
+        "MM2S_B",
+        "MM2S_C",
+        "S2MM_C",
+        "LoadB",
+        "DummyReadB",
+        "ComputeAB",
+        "PreAccumulator",
+        "AccumBuffer",
+        "Arbiter_C",
+        "Compute_C",
+        "ADD",
+        "SWB",
+        "SSW"
+    ]
+}

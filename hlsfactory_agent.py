@@ -99,7 +99,7 @@ def extract_top_level_designs(src_dir: Path, llm: Model) -> HLSDesigns:
         }:
             continue
         relative_path = file_path.relative_to(src_dir)
-        file_txt = file_path.read_text()
+        file_txt = file_path.read_text(encoding='utf-8', errors='ignore')
 
         prompt_user += f"```{str(relative_path)}\n"
         prompt_user += file_txt
@@ -155,7 +155,7 @@ def break_down_hls_design(design: HLSDesign, src_dir: Path, llm: Model) -> list[
 
     prompt_user = ""
     for file_path in design.source_files:
-        file_txt = (src_dir.resolve() / file_path).read_text()
+        file_txt = (src_dir.resolve() / file_path).read_text(encoding='utf-8', errors='ignore')
         prompt_user += f"```{str(file_path)}\n"
         prompt_user += file_txt
         prompt_user += "\n```\n"

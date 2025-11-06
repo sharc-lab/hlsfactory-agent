@@ -1,0 +1,6 @@
+{
+    "sub_components": [
+        "calc_epsilon_inv",
+        "pack_and_compress_eri"
+    ]
+}

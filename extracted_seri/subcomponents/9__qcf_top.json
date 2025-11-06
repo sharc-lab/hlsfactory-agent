@@ -1,0 +1,31 @@
+{
+    "sub_components": [
+        "t_preparation",
+        "t_recurrence_relations",
+        "t_permutation",
+        "t_gaussian_quadrature_a",
+        "t_gaussian_quadrature_b",
+        "t_find_bmax",
+        "t_compress_store",
+        "calc_intermediates",
+        "calc_tbb_tbc",
+        "preparation",
+        "recurrence_relations",
+        "load_dcbaox_bufs",
+        "load_dcbaox_bufs_pt",
+        "gaussian_quadrature_split",
+        "calc_epsilon_inv",
+        "pack_and_compress_eri",
+        "extract_nth_digit",
+        "calc_ncg",
+        "calc_num_eris_per_quartet",
+        "calc_ord_rys",
+        "ceil_div",
+        "next_pow2",
+        "collect_gq_accessed_indices",
+        "collect_gq_segment_accessed_indices",
+        "get_unique_elements",
+        "calc_segment_unique_len",
+        "collect_gq_segment_unique_indices"
+    ]
+}
