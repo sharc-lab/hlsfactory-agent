@@ -10,3 +10,7 @@ wheels/
 .venv
 
 .env
+
+# Local scratch and cache directories
+scratch/
+uv-cache/HLSSourceCode/

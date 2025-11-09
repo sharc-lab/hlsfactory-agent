@@ -1,0 +1,55 @@
+{
+    "designs": [
+        {
+            "kernel_name": "workload",
+            "source_files": [
+                "streamcluster.cpp",
+                "streamcluster.h",
+                "streamcluster_old.cpp",
+                "local_support.cpp"
+            ]
+        },
+        {
+            "kernel_name": "compute",
+            "source_files": [
+                "streamcluster.cpp",
+                "streamcluster.h"
+            ]
+        },
+        {
+            "kernel_name": "load",
+            "source_files": [
+                "streamcluster.cpp",
+                "streamcluster.h"
+            ]
+        },
+        {
+            "kernel_name": "store",
+            "source_files": [
+                "streamcluster.cpp",
+                "streamcluster.h"
+            ]
+        },
+        {
+            "kernel_name": "pgain",
+            "source_files": [
+                "local_support.cpp",
+                "streamcluster.h"
+            ]
+        },
+        {
+            "kernel_name": "pFL",
+            "source_files": [
+                "local_support.cpp",
+                "streamcluster.h"
+            ]
+        },
+        {
+            "kernel_name": "streamCluster",
+            "source_files": [
+                "local_support.cpp",
+                "streamcluster.h"
+            ]
+        }
+    ]
+}

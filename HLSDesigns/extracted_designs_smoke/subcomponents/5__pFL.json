@@ -1,0 +1,20 @@
+{
+    "sub_components": [
+        "_clTask",
+        "_clClean",
+        "isIdentical",
+        "floatcomp",
+        "shuffle",
+        "intshuffle",
+        "dist",
+        "pspeedy",
+        "pgain",
+        "pFL",
+        "selectfeasible_fast",
+        "pkmedian",
+        "contcenters",
+        "copycenters",
+        "streamCluster",
+        "run_benchmark"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "sub_components": [
+        "merge_stream",
+        "load_fifos",
+        "flush_fifos"
+    ]
+}

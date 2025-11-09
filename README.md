@@ -12,18 +12,22 @@ directory containing one or more HLS designs:
 
 ```bash
 UV_CACHE_DIR=.uv-cache uv run python hlsfactory_agent.py /path/to/hls/repos \
-  --output-manifest extracted_designs.json \
-  --materialise ./dataset_out
+  --dst_dir ./HLSDesigns
 ```
 
-The command writes a structured manifest (by default to stdout) and, if the
-`--materialise` flag is provided, emits HLSFactory-ready design directories
-containing:
+The command writes a structured manifest and emits HLSFactory-ready design directories
+under `./HLSDesigns`, containing:
 
 - the original sources (copied or symlinked)
 - auto-generated `dataset_hls.tcl` entry script and `top.txt`
 - `design_manifest.json` with static and LLM-enriched metadata
 - optional `kernel_description_generated.md` summarising the kernel
+
+### Repository layout
+
+- `HLSSourceCode/`: bundled example HLS source trees (`auto_ntt/`, `StreamCluster/`)
+- `HLSDesigns/`: extracted design manifests and subcomponents
+  - `extracted_designs/`, `extracted_designs_2/`, `extracted_designs_smoke/`
 
 ## LLM Integration
 
@@ -48,3 +52,25 @@ OpenRouter, install the companion plugin as declared in `pyproject.toml` and set
   environments so dependency caches stay within the workspace.
 - `python -m compileall hlsfactory_agent.py` (through `uv run`) offers a quick
   syntax check.
+
+## Smoke tests
+
+Run schema validation against the bundled extracted outputs:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run pytest -q
+```
+
+### GitHub ingestion
+
+Fetch a GitHub repo, extract designs from an optional subdirectory, and write outputs under `HLSDesigns/<group>`:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run python scripts/fetch_from_github.py \
+  https://github.com/user/repo \
+  --github_branch main \
+  --github_subdir path/inside/repo \
+  --group_name my_repo_designs
+```
+
+This clones into `HLSSourceCode/<repo>/` and writes to `HLSDesigns/<group>/`. Omit `--github_subdir` to use the repo root; omit `--group_name` to default to the repo name.

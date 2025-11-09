@@ -1,0 +1,9 @@
+{
+    "sub_components": [
+        "load_dcbaox_bufs",
+        "load_dcbaox_bufs_pt",
+        "gaussian_quadrature_split",
+        "split_stream",
+        "merge_stream"
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "sub_components": [
+        "load",
+        "compute",
+        "store",
+        "workload",
+        "setup",
+        "stage_0",
+        "stage_1",
+        "stage_2",
+        "result",
+        "streamCluster",
+        "pkmedian",
+        "pFL",
+        "pgain",
+        "contcenters",
+        "copycenters",
+        "shuffle",
+        "intshuffle",
+        "dist",
+        "floatcomp",
+        "isIdentical",
+        "outcenterIDs"
+    ]
+}

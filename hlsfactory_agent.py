@@ -213,6 +213,22 @@ def main(args: argparse.Namespace) -> None:
 
     print(f"Processing source directory to extract top-level designs: {src_dir}")
     designs = extract_top_level_designs(src_dir, model__extract_top_level_designs)
+    # Change by Jay: Filter out any LLM-suggested source files that do not actually
+    # exist under the provided src_dir. This improves correctness by ensuring the
+    # manifest only references real files discoverable in this run context.
+    filtered_design_list: list[HLSDesign] = []
+    for design in designs.designs:
+        existing_files = [p for p in design.source_files if (src_dir / p).exists()]
+        if len(existing_files) != len(design.source_files):
+            missing_count = len(design.source_files) - len(existing_files)
+            print(
+                f"Warning: Dropping {missing_count} non-existent file(s) from '" \
+                f"{design.kernel_name}'"
+            )
+        filtered_design_list.append(
+            HLSDesign(kernel_name=design.kernel_name, source_files=existing_files)
+        )
+    designs = HLSDesigns(designs=filtered_design_list)
     pp(designs)
     (dst_dir / "designs.json").write_text(designs.model_dump_json(indent=4))
 
@@ -251,7 +267,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dst_dir",
         type=Path,
-        default=Path("./extracted_designs"),
+        default=Path("./HLSDesigns"),
         help="Path to the destination directory for extracted designs.",
     )
     parser.add_argument(
