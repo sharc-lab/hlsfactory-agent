@@ -1,76 +1,166 @@
 # HLSFactory Agent
 
-Utilities for turning ad-hoc HLS source trees into HLSFactory-compatible design
-directories, with *all* semantic decisions delegated to a configured large
-language model via the [`llm`](https://github.com/simonw/llm) Python package.
+Analyze HLS/C++ source trees with an LLM and emit structured design metadata.
 
-## Quickstart
+This agent:
+- discovers top-level HLS kernels and their dependent files
+- extracts synthesizable sub-components per design
+- writes results to a destination directory for downstream tooling
 
-Run the agent using `uv run` so that the bundled dependencies (namely
-[`llm`](https://github.com/simonw/llm)) are available. Point the tool at a root
-directory containing one or more HLS designs:
+All semantic decisions are delegated to an OpenRouter-backed LLM. The code uses the `llm_openrouter` plugin to talk to the OpenRouter API.
 
-```bash
-UV_CACHE_DIR=.uv-cache uv run python hlsfactory_agent.py /path/to/hls/repos \
-  --dst_dir ./HLSDesigns
-```
+## What it does (two-pass analysis)
 
-The command writes a structured manifest and emits HLSFactory-ready design directories
-under `./HLSDesigns`, containing:
+- **Pass 1 – Discover designs**:
+  - Sends a filtered subset of repository files to the LLM with instructions to find top-level kernels and list their dependent source files.
+  - Produces `designs.json` containing an array of discovered designs: kernel name + selected file paths.
+- **Pass 2 – Extract sub-components**:
+  - For each design from Pass 1, sends only that design’s files to the LLM.
+  - Produces one JSON file per design under `subcomponents/` containing a list of sub-component function names.
 
-- the original sources (copied or symlinked)
-- auto-generated `dataset_hls.tcl` entry script and `top.txt`
-- `design_manifest.json` with static and LLM-enriched metadata
-- optional `kernel_description_generated.md` summarising the kernel
+## Token and size controls
 
-### Repository layout
+To keep prompts small and predictable, the agent:
+- **Includes only these file extensions**: `.c, .cpp, .cc, .cxx, .h, .hpp, .hxx`
+- **Skips directories** anywhere in the path: `.git, .svn, .hg, build, cmake-build, out, dist, venv, .venv, node_modules, third_party, external, .cache`
+- **Caps per-file size** with `--max_file_bytes` (default: 100,000 bytes)
+- **Caps total prompt size** with `--max_prompt_chars` (default: 150,000 characters)
 
-- `HLSSourceCode/`: bundled example HLS source trees (`auto_ntt/`, `StreamCluster/`)
-- `HLSDesigns/`: extracted design manifests and subcomponents
-  - `extracted_designs/`, `extracted_designs_2/`, `extracted_designs_smoke/`
+If adding another file would exceed the total budget, the agent stops adding more files. Adjust the limits via CLI flags as needed for your model/context window.
 
-## LLM Integration
+## Requirements
 
-All detection, metadata extraction, and summarisation is performed by the LLM –
-there are no hand-written heuristics. Configure the backend via the standard
-`llm` configuration files or by passing `--llm-model`. Useful knobs:
+- Python environment with [`uv`](https://github.com/astral-sh/uv) recommended
+- OpenRouter API key in the environment:
+  - `OPENROUTER_API_KEY=<your_key>`
 
-- `--llm-temperature` (default `0.2`)
-- `--llm-max-output-tokens`
-- `--llm-max-functions`
-- `--llm-code-chars`
+Dependencies are declared in `pyproject.toml` (notably `llm-openrouter`).
 
-Disable the LLM phase with `--disable-llm` if you prefer heuristic-only output.
-
-Remember to set any API keys required by the selected model provider. When using
-OpenRouter, install the companion plugin as declared in `pyproject.toml` and set
-`OPENROUTER_API_KEY` in the environment.
-
-## Developer Notes
-
-- Use `UV_CACHE_DIR=.uv-cache` when running commands under sandboxed
-  environments so dependency caches stay within the workspace.
-- `python -m compileall hlsfactory_agent.py` (through `uv run`) offers a quick
-  syntax check.
-
-## Smoke tests
-
-Run schema validation against the bundled extracted outputs:
+## Quickstart (run the agent directly)
 
 ```bash
-UV_CACHE_DIR=.uv-cache uv run pytest -q
+UV_CACHE_DIR=.uv-cache uv run python hlsfactory_agent.py /path/to/src \
+  --dst_dir ./HLSDesigns \
+  --model_id__extract_top_level_designs deepseek/deepseek-v3.2-exp \
+  --model_id__break_down_hls_design deepseek/deepseek-v3.2-exp
 ```
 
-### GitHub ingestion
+Useful flags to control prompt size:
+- `--max_prompt_chars 120000`
+- `--max_file_bytes 65536`
 
-Fetch a GitHub repo, extract designs from an optional subdirectory, and write outputs under `HLSDesigns/<group>`:
+Example with limits:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run python hlsfactory_agent.py /path/to/src \
+  --dst_dir ./HLSDesigns \
+  --model_id__extract_top_level_designs deepseek/deepseek-v3.2-exp \
+  --model_id__break_down_hls_design deepseek/deepseek-v3.2-exp \
+  --max_prompt_chars 120000 \
+  --max_file_bytes 65536
+```
+
+## GitHub ingestion helper
+
+Fetch a GitHub repo, optionally target a branch/subdirectory, then run the agent on it:
 
 ```bash
 UV_CACHE_DIR=.uv-cache uv run python scripts/fetch_from_github.py \
   https://github.com/user/repo \
   --github_branch main \
   --github_subdir path/inside/repo \
-  --group_name my_repo_designs
+  --group_name my_repo_designs \
+  --model_id__extract_top_level_designs deepseek/deepseek-v3.2-exp \
+  --model_id__break_down_hls_design deepseek/deepseek-v3.2-exp
 ```
 
-This clones into `HLSSourceCode/<repo>/` and writes to `HLSDesigns/<group>/`. Omit `--github_subdir` to use the repo root; omit `--group_name` to default to the repo name.
+- Clones into `HLSSourceCode/<name or repo>/`
+- Writes outputs to `HLSDesigns/<group_name or name>/`
+- Omit `--github_subdir` to analyze the repo root; omit `--group_name` to default to the sources folder name.
+
+### Interactive mode (optional)
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run python scripts/fetch_from_github.py \
+  https://github.com/user/repo \
+  --interactive
+```
+
+Prompts:
+- Name for HLSSourceCode folder [`<repo>`]
+- Name for HLSDesigns group [`<answer above>`]
+- Branch to fetch [auto-detect]
+
+You can always skip prompts by supplying flags, for example:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run python scripts/fetch_from_github.py \
+  https://github.com/user/repo \
+  --name MySources --group_name MyDesigns \
+  --github_branch master --github_subdir fpga
+```
+
+## Outputs
+
+Under the `--dst_dir` (default `./HLSDesigns`):
+
+- `designs.json`: list of designs detected by the LLM.
+  - Each entry includes:
+    - `kernel_name`: top-level kernel name
+    - `source_files`: relative paths selected by the LLM that exist on disk
+- `subcomponents/`: directory containing one JSON file per design:
+  - Filename format: `<index>__<kernel_name_sanitized>.json`
+  - JSON contains:
+    - `sub_components`: list of function names considered synthesizable parts of the kernel
+
+Example snippet of `designs.json`:
+
+```json
+{
+  "designs": [
+    {
+      "kernel_name": "my_kernel",
+      "source_files": [
+        "src/top.cpp",
+        "include/top.hpp",
+        "src/utils.cpp"
+      ]
+    }
+  ]
+}
+```
+
+## How relevance is determined
+
+- The agent assembles a prompt from files that pass the filters (extensions, skipped dirs, size limits).
+- The LLM decides which files are actually part of each kernel and returns paths.
+- The agent prunes any non-existent paths before writing outputs.
+- The sub-components pass only includes files that the model selected for that design (and that remain under the per-file size limit).
+
+## Model configuration
+
+- The code constructs an OpenRouter client and uses the model IDs you provide:
+  - `--model_id__extract_top_level_designs`
+  - `--model_id__break_down_hls_design`
+- Ensure `OPENROUTER_API_KEY` is set.
+- You can point to any model available via OpenRouter; choose models with larger context windows for bigger codebases, or lower the prompt limits to fit within budget.
+
+## Privacy considerations
+
+- Only C/C++ sources and headers are sent to the LLM for analysis.
+- Common vendor/build/cache directories are skipped entirely.
+- Large files are excluded above the configured per-file cap.
+- You control total and per-file budgets to reduce data sent externally.
+
+## Developer notes
+
+- Use `UV_CACHE_DIR=.uv-cache` when running commands so dependency caches stay within the workspace.
+- `python -m compileall hlsfactory_agent.py` (via `uv run`) offers a quick syntax check.
+
+## Smoke tests
+
+If tests are added for schema validation, run them with:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run pytest -q
+```

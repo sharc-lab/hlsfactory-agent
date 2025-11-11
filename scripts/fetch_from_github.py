@@ -20,8 +20,8 @@ def main() -> None:
     parser.add_argument("--name", type=str, default=None, help="Folder name to use under HLSSourceCode (default: repo name)")
     parser.add_argument("--group_name", type=str, default=None, help="Group name under HLSDesigns (default: same as --name)")
     parser.add_argument("--interactive", action="store_true", help="Prompt for names if not provided")
-    parser.add_argument("--model_id__extract_top_level_designs", type=str, default="google/gemini-2.5-flash")
-    parser.add_argument("--model_id__break_down_hls_design", type=str, default="openai/gpt-5-nano")
+    parser.add_argument("--model_id__extract_top_level_designs", type=str, default="deepseek/deepseek-v3.2-exp")
+    parser.add_argument("--model_id__break_down_hls_design", type=str, default="deepseek/deepseek-v3.2-exp")
     args = parser.parse_args()
 
     repo_name = derive_repo_name(args.github_url)

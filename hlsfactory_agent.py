@@ -12,10 +12,53 @@ from llm import Model
 from llm_openrouter import OpenRouterChat
 from pydantic import BaseModel, ConfigDict
 
+"""
+High-level Synthesis (HLS) repository analyzer.
+
+Builds an OpenRouter-backed LLM client, sends selected repository files to the
+LLM to identify top-level designs, and extracts sub-components per design.
+
+Prompt size is constrained by file-type allowlist, skip-dirs, and size limits.
+These limits can be overridden via CLI flags.
+"""
+
 T_unwrap = TypeVar("T_unwrap")
+
+# Prompt-size controls
+ALLOWED_SUFFIXES: set[str] = {
+    ".cpp",
+    ".c",
+    ".cc",
+    ".cxx",
+    ".h",
+    ".hpp",
+    ".hxx",
+}
+SKIP_DIR_NAMES: set[str] = {
+    ".git",
+    ".svn",
+    ".hg",
+    "build",
+    "cmake-build",
+    "out",
+    "dist",
+    "venv",
+    ".venv",
+    "node_modules",
+    "third_party",
+    "external",
+    ".cache",
+}
+# Roughly ~40k tokens if chars/4; adjust as needed
+MAX_PROMPT_CHARS: int = 150_000
+# Prevent any single giant file from blowing the budget
+MAX_FILE_BYTES: int = 100_000
 
 
 def unwrap(x: T_unwrap | None, err_msg: str | None = None) -> T_unwrap:
+    """
+    Return x if not None, otherwise raise ValueError with an optional message.
+    """
     if x is None:
         # raise ValueError("Unwrapped a None Value")
         if err_msg is None:
@@ -27,6 +70,9 @@ def unwrap(x: T_unwrap | None, err_msg: str | None = None) -> T_unwrap:
 
 
 def build_model(model_id: str, openrouter_key: str) -> Model:
+    """
+    Construct an OpenRouterChat model bound to the given model_id and key.
+    """
     llm: OpenRouterChat = OpenRouterChat(
         model_id=model_id,
         key=openrouter_key,
@@ -38,6 +84,9 @@ def build_model(model_id: str, openrouter_key: str) -> Model:
 
 
 class HLSDesign(BaseModel):
+    """
+    A single top-level HLS kernel and its dependent source files.
+    """
     model_config = ConfigDict(extra="forbid")
 
     kernel_name: str
@@ -45,19 +94,26 @@ class HLSDesign(BaseModel):
 
 
 class HLSDesigns(BaseModel):
+    """
+    Collection of discovered HLS designs.
+    """
     model_config = ConfigDict(extra="forbid")
 
     designs: list[HLSDesign]
 
 
 def extract_top_level_designs(src_dir: Path, llm: Model) -> HLSDesigns:
+    """
+    Build a prompt from filtered repository files and ask the LLM to enumerate
+    top-level HLS kernels and their dependent source files.
+    """
     prompt_system = """
     You are an AI assistant and high-level synthesis (HLS) design expert that analyzes a collection of unstructured High-Level Synthesis (HLS) source code files.
     
     Your task is to:
     1. Identify kernels: Find all top-level HLS designs or kernels
     2. Determine dependencies: For each identified kernel, list all source files it depends on, including files where it includes functions, classes, or constructs.
-    3. Output format: Provide the results in a JSON array with the stucture defined below.ArithmeticError
+    3. Output format: Provide the results in a JSON array with the structure defined below.
 
     You will output a JSON array with the following structure:
     ```json
@@ -72,7 +128,7 @@ def extract_top_level_designs(src_dir: Path, llm: Model) -> HLSDesigns:
 
     Additional Guidelines:
     - Multiple kernels may share the same source files; ensure each kernel lists all its dependencies.
-    - Exclude non-C/C++/H files (e.g., README.md, tcl scripts, bash scripts, ...)  from the source_files list, but use them to inform your analysis.
+    - Only include C/C++ source and header files in `source_files` (.c, .cpp, .cc, .cxx, .h, .hpp, .hxx).
     - If uncertain whether a file is required, include it (prefer false positives over false negatives).
     - Do not include files that are clearly irrelevant (e.g., documentation, configs unrelated to kernels).
     - Ignore files that are not used by any kernel.
@@ -80,31 +136,33 @@ def extract_top_level_designs(src_dir: Path, llm: Model) -> HLSDesigns:
     """
 
     prompt_user = ""
+    used_chars = 0
     for file_path in src_dir.rglob("*"):
-        # check if file is a binary file, like test data or something
+        # Skip directories by name anywhere in the path
+        parts = set(file_path.parts)
+        if parts & SKIP_DIR_NAMES:
+            continue
         if not file_path.is_file():
             continue
-        if file_path.suffix.lower() not in {
-            ".cpp",
-            ".c",
-            ".cc",
-            ".cxx",
-            ".h",
-            ".hpp",
-            ".hxx",
-            ".tcl",
-            ".md",
-            ".sh",
-            ".py",
-        }:
+        if file_path.suffix.lower() not in ALLOWED_SUFFIXES:
+            continue
+        try:
+            if file_path.stat().st_size > MAX_FILE_BYTES:
+                continue
+        except OSError:
             continue
         relative_path = file_path.relative_to(src_dir)
-        file_txt = file_path.read_text()
+        try:
+            file_txt = file_path.read_text()
+        except Exception:
+            continue
 
-        prompt_user += f"```{str(relative_path)}\n"
-        prompt_user += file_txt
-        prompt_user += "\n```\n"
-        prompt_user += "\n"
+        block = f"```{str(relative_path)}\n{file_txt}\n```\n\n"
+        # Stop if adding this block would exceed the budget
+        if used_chars + len(block) > MAX_PROMPT_CHARS:
+            break
+        prompt_user += block
+        used_chars += len(block)
 
     r = llm.prompt(
         prompt_user, system=prompt_system, schema=HLSDesigns.model_json_schema()
@@ -122,6 +180,10 @@ class SubComponents(BaseModel):
 
 
 def break_down_hls_design(design: HLSDesign, src_dir: Path, llm: Model) -> list[str]:
+    """
+    Given a single design's selected files, ask the LLM to identify synthesizable
+    sub-components (non-top-level functions that are part of the kernel).
+    """
     prompt_system = """
     You are an AI assistant and high-level synthesis (HLS) design expert.
 
@@ -155,7 +217,13 @@ def break_down_hls_design(design: HLSDesign, src_dir: Path, llm: Model) -> list[
 
     prompt_user = ""
     for file_path in design.source_files:
-        file_txt = (src_dir.resolve() / file_path).read_text()
+        full_path = (src_dir.resolve() / file_path)
+        try:
+            if full_path.stat().st_size > MAX_FILE_BYTES:
+                continue
+            file_txt = full_path.read_text()
+        except Exception:
+            continue
         prompt_user += f"```{str(file_path)}\n"
         prompt_user += file_txt
         prompt_user += "\n```\n"
@@ -213,9 +281,6 @@ def main(args: argparse.Namespace) -> None:
 
     print(f"Processing source directory to extract top-level designs: {src_dir}")
     designs = extract_top_level_designs(src_dir, model__extract_top_level_designs)
-    # Change by Jay: Filter out any LLM-suggested source files that do not actually
-    # exist under the provided src_dir. This improves correctness by ensuring the
-    # manifest only references real files discoverable in this run context.
     filtered_design_list: list[HLSDesign] = []
     for design in designs.designs:
         existing_files = [p for p in design.source_files if (src_dir / p).exists()]
@@ -258,6 +323,9 @@ def main(args: argparse.Namespace) -> None:
 
 
 def parse_args() -> argparse.Namespace:
+    """
+    CLI for configuring source/destination paths, model IDs, and prompt budgets.
+    """
     parser = argparse.ArgumentParser(description="HLSFactory Agent")
     parser.add_argument(
         "src_dir",
@@ -273,16 +341,28 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--model_id__extract_top_level_designs",
         type=str,
-        default="google/gemini-2.5-flash",
+        default="deepseek/deepseek-v3.2-exp",
         # default="qwen/qwen3-coder-30b-a3b-instruct",
-        # default="openai/gpt-5-nano",
+        # default="deepseek/deepseek-coder",
         help="Model ID for LLM to use.",
     )
     parser.add_argument(
         "--model_id__break_down_hls_design",
         type=str,
-        default="openai/gpt-5-nano",
+        default="deepseek/deepseek-v3.2-exp",
         help="Model ID for LLM to use.",
+    )
+    parser.add_argument(
+        "--max_prompt_chars",
+        type=int,
+        default=150_000,
+        help="Maximum total characters to include across all files in the discovery prompt.",
+    )
+    parser.add_argument(
+        "--max_file_bytes",
+        type=int,
+        default=100_000,
+        help="Maximum file size (bytes) to include in prompts.",
     )
 
     args = parser.parse_args()
@@ -291,4 +371,12 @@ def parse_args() -> argparse.Namespace:
 
 if __name__ == "__main__":
     args = parse_args()
+    # Allow overriding prompt budgets from CLI
+    global MAX_PROMPT_CHARS, MAX_FILE_BYTES
+    try:
+        MAX_PROMPT_CHARS = int(args.max_prompt_chars)
+        MAX_FILE_BYTES = int(args.max_file_bytes)
+    except Exception:
+        # If invalid values are provided, keep defaults
+        pass
     main(args)
