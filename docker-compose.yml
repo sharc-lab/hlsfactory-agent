@@ -1,0 +1,9 @@
+# convenient way to run docker container - docker-compose up
+version: '3.8'
+
+services:
+  hls-organizer:
+    build: .  # . finds the dockerfile from the current directory
+    volumes:
+      - ./output:/output  # automatically creates output folder
+    environment:
