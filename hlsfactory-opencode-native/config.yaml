@@ -1,0 +1,32 @@
+# HLSFactory OpenCode Native Configuration
+# This config is for reference - paths are passed directly to the agent
+
+# Source repository containing HLS designs
+source_repo: /path/to/your/hls/repo
+output_dir: /path/to/your/output/dir
+
+# Compilation settings (used by the agent)
+compilation:
+  compiler: clang++
+  flags:
+    - "-c"           # Compile to object file (no linking)
+    - "-std=c++17"   # C++ standard
+    - "-Wall"        # Enable warnings
+  max_fix_attempts: 3
+
+# File patterns (used by the agent for identification)
+patterns:
+  source_extensions:
+    - ".cpp"
+    - ".c"
+    - ".h"
+    - ".hpp"
+  testbench_patterns:
+    - "tb_*.cpp"
+    - "*_tb.cpp"
+    - "*_test.cpp"
+    - "test_*.cpp"
+    - "testbench*.cpp"
+
+# Stubs directory location (relative to this file)
+stubs_dir: ./stubs
