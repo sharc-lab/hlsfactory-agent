@@ -17,4 +17,4 @@ echo "Building and running..."
 docker-compose build
 docker-compose run --rm hls-organizer python agent_script.py "$REPO_URL"
 
-echo "✓ Done! Check ./output/reorganized/"
+echo "Done! Check ./output/"

@@ -1,25 +1,25 @@
 # use python as base image
 FROM python:3.11-slim
 
-# updates package list, installs git and curl, deletes cached package lists to save space
-RUN apt-get update && \ 
-    apt-get install -y git curl && \ 
+# install git, curl, clang
+RUN apt-get update && \
+    apt-get install -y git curl clang && \
     rm -rf /var/lib/apt/lists/*
+
+# RUN pip install uv && \ 
+# uv pip compile pyproject.toml -o requirements.txt && \ 
+# pip install -r requirements.txt
+
+# install opencode
+RUN curl -fsSL https://opencode.ai/install | bash
 
 # sets the working directory to /workspace
 WORKDIR /workspace
 
-# copies all the libraries
-COPY pyproject.toml uv.lock* ./
-RUN pip install uv && \ 
-    uv pip compile pyproject.toml -o requirements.txt && \ 
-    pip install -r requirements.txt
-
-# copies our opencode script - doesn't exist yet
-# COPY agent_script.py
-
-# create output directory
-RUN mkdir -p /output
+# copy the agent script
+COPY agent_script.py .
 
 # command to run on start up
 # CMD ["python", "agent_script.py"]
+# create output directory
+RUN mkdir -p /output
