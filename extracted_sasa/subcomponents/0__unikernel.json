@@ -1,7 +1,0 @@
-{
-    "sub_components": [
-        "exchange_stream",
-        "exchange_with_up",
-        "exchange_with_down"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "sub_components": [
-        "GAMCommManager::process",
-        "AppCommManager::process",
-        "AppCommManager::handleAccRegister",
-        "AppCommManager::handleAccDelete"
-    ]
-}

@@ -1,7 +1,0 @@
-{
-    "sub_components": [
-        "load",
-        "compute",
-        "store"
-    ]
-}

@@ -1,7 +1,0 @@
-{
-    "sub_components": [
-        "denoise1_thread",
-        "denoise2_thread",
-        "denoise3_thread"
-    ]
-}

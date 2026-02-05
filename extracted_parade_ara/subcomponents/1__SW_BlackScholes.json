@@ -1,9 +1,0 @@
-{
-    "sub_components": [
-        "SW_BlackScholes::CNDF",
-        "SW_BlackScholes::BlkSchlsEqEuroNoDiv",
-        "SW_BlackScholes::Initialize",
-        "SW_BlackScholes::Shutdown",
-        "BlackScholes_thread"
-    ]
-}

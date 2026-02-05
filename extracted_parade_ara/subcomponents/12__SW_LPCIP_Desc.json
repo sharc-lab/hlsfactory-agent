@@ -1,6 +1,0 @@
-{
-    "sub_components": [
-        "SW_LPCIP_Desc::computeLPCIP",
-        "LPCIP_Desc_thread"
-    ]
-}

@@ -1,7 +1,0 @@
-{
-    "sub_components": [
-        "calc_intermediates",
-        "calc_tbb_tbc",
-        "preparation"
-    ]
-}

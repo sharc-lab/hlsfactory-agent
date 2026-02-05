@@ -1,6 +1,0 @@
-{
-    "sub_components": [
-        "TaskEnv::createBlock(int,int,int,int,int)",
-        "TaskEnv::createBlock(const DataBlock& block)"
-    ]
-}

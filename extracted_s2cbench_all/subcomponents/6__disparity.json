@@ -1,7 +1,0 @@
-{
-    "sub_components": [
-        "shift_diff",
-        "window_sad",
-        "find_disparity"
-    ]
-}

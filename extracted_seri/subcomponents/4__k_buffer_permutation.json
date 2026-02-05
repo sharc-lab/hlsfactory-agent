@@ -1,8 +1,0 @@
-{
-    "sub_components": [
-        "load_fifos",
-        "flush_fifos",
-        "merge_stream",
-        "split_stream"
-    ]
-}
