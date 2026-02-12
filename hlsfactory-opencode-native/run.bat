@@ -19,11 +19,14 @@ REM Require SOURCE_REPO argument, OUTPUT_DIR is optional
 if "%~1"=="" (
     echo Usage: run.bat SOURCE_REPO [OUTPUT_DIR]
     exit /b 1
+    echo Usage: run.bat SOURCE_REPO [OUTPUT_DIR]
+    exit /b 1
 ) else (
     set "SOURCE_REPO=%~1"
 )
 
 if "%~2"=="" (
+    set "OUTPUT_DIR=%SOURCE_REPO%\_hlsfactory_output_native"
     set "OUTPUT_DIR=%SOURCE_REPO%\_hlsfactory_output_native"
 ) else (
     set "OUTPUT_DIR=%~2"
@@ -53,6 +56,19 @@ cd /d "%SCRIPT_DIR%\.."
 
 echo Starting OpenCode orchestrator...
 echo.
+
+REM Build the prompt
+set "PROMPT=Process the HLS repository at '%SOURCE_REPO%' and extract all HLS designs to '%OUTPUT_DIR%'. "
+set "PROMPT=%PROMPT%Execute the complete HLSFactory pipeline: "
+set "PROMPT=%PROMPT%1. Analyze the repository and identify all HLS designs "
+set "PROMPT=%PROMPT%2. Extract each design into its own folder "
+set "PROMPT=%PROMPT%3. Find or generate testbenches for each design "
+set "PROMPT=%PROMPT%4. Generate documentation for each design "
+set "PROMPT=%PROMPT%5. Compile with clang++ and fix any errors "
+set "PROMPT=%PROMPT%6. Generate TCL synthesis scripts "
+set "PROMPT=%PROMPT%7. Create the final manifest. "
+set "PROMPT=%PROMPT%The HLS stub headers are available at: %SCRIPT_DIR%/stubs. "
+set "PROMPT=%PROMPT%Work through each stage systematically and process ALL designs found."
 
 REM Build the prompt
 set "PROMPT=Process the HLS repository at '%SOURCE_REPO%' and extract all HLS designs to '%OUTPUT_DIR%'. "

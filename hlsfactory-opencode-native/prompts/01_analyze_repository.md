@@ -69,6 +69,7 @@ Use file searching and reading commands to explore the repository:
 - Look for TCL files that might specify top-level functions
 - Check for README or documentation files
 - Use file-writing tools to save `{{OUTPUT_DIR}}/designs.json`
+- Use file-writing tools to save `{{OUTPUT_DIR}}/designs.json`
 
 ## Output Location
 
