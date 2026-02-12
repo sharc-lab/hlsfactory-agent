@@ -8,15 +8,23 @@ REM Get script directory
 set "SCRIPT_DIR=%~dp0"
 set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
 
-REM Default values or use arguments
+REM Load .env file from project root (one level up from script dir)
+if exist "%SCRIPT_DIR%\..\.env" (
+    for /f "usebackq eol=# tokens=1,* delims==" %%A in ("%SCRIPT_DIR%\..\.env") do (
+        set "%%A=%%B"
+    )
+)
+
+REM Require SOURCE_REPO argument, OUTPUT_DIR is optional
 if "%~1"=="" (
-    set "SOURCE_REPO=C:/Users/tanma/OneDrive/Documents/GitHub/S2CBench"
+    echo Usage: run.bat SOURCE_REPO [OUTPUT_DIR]
+    exit /b 1
 ) else (
     set "SOURCE_REPO=%~1"
 )
 
 if "%~2"=="" (
-    set "OUTPUT_DIR=C:/Users/tanma/OneDrive/Documents/GitHub/S2CBench/_hlsfactory_output_native"
+    set "OUTPUT_DIR=%SOURCE_REPO%\_hlsfactory_output_native"
 ) else (
     set "OUTPUT_DIR=%~2"
 )
@@ -40,14 +48,27 @@ if %ERRORLEVEL% NEQ 0 (
 REM Create output directory if it doesn't exist
 if not exist "%OUTPUT_DIR%" mkdir "%OUTPUT_DIR%"
 
-REM Change to script directory
-cd /d "%SCRIPT_DIR%"
+REM Change to project root so OpenCode picks up opencode.json
+cd /d "%SCRIPT_DIR%\.."
 
 echo Starting OpenCode orchestrator...
 echo.
 
+REM Build the prompt
+set "PROMPT=Process the HLS repository at '%SOURCE_REPO%' and extract all HLS designs to '%OUTPUT_DIR%'. "
+set "PROMPT=%PROMPT%Execute the complete HLSFactory pipeline: "
+set "PROMPT=%PROMPT%1. Analyze the repository and identify all HLS designs "
+set "PROMPT=%PROMPT%2. Extract each design into its own folder "
+set "PROMPT=%PROMPT%3. Find or generate testbenches for each design "
+set "PROMPT=%PROMPT%4. Generate documentation for each design "
+set "PROMPT=%PROMPT%5. Compile with clang++ and fix any errors "
+set "PROMPT=%PROMPT%6. Generate TCL synthesis scripts "
+set "PROMPT=%PROMPT%7. Create the final manifest. "
+set "PROMPT=%PROMPT%The HLS stub headers are available at: %SCRIPT_DIR%/stubs. "
+set "PROMPT=%PROMPT%Work through each stage systematically and process ALL designs found."
+
 REM Run OpenCode with the orchestrator agent
-opencode run --agent hlsfactory-orchestrator "Process the HLS repository at '%SOURCE_REPO%' and extract all HLS designs to '%OUTPUT_DIR%'. Execute the complete HLSFactory pipeline: 1. Analyze the repository and identify all HLS designs 2. Extract each design into its own folder 3. Find or generate testbenches for each design 4. Generate documentation for each design 5. Compile with clang++ and fix any errors 6. Generate TCL synthesis scripts 7. Create the final manifest. The HLS stub headers are available at: %SCRIPT_DIR%/stubs. Work through each stage systematically and process ALL designs found."
+opencode run -m openrouter/moonshotai/kimi-k2.5 "%PROMPT%"
 
 echo.
 echo ==============================================

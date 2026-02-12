@@ -1,13 +1,21 @@
 #!/bin/bash
 # HLSFactory OpenCode Native - Run Script
-# Usage: ./run.sh [SOURCE_REPO] [OUTPUT_DIR]
+# Usage: ./run.sh SOURCE_REPO [OUTPUT_DIR]
 
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-# Default values from config or arguments
-SOURCE_REPO="${1:-C:/Users/tanma/OneDrive/Documents/GitHub/S2CBench}"
-OUTPUT_DIR="${2:-C:/Users/tanma/OneDrive/Documents/GitHub/S2CBench/_hlsfactory_output_native}"
+# Load .env file from project root
+if [ -f "$PROJECT_ROOT/.env" ]; then
+    set -a
+    source "$PROJECT_ROOT/.env"
+    set +a
+fi
+
+# Require SOURCE_REPO argument, OUTPUT_DIR is optional
+SOURCE_REPO="${1:?Usage: ./run.sh SOURCE_REPO [OUTPUT_DIR]}"
+OUTPUT_DIR="${2:-${SOURCE_REPO}/_hlsfactory_output_native}"
 
 echo "=============================================="
 echo "HLSFactory OpenCode Native"
@@ -27,6 +35,9 @@ fi
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
 
+# Change to project root so OpenCode picks up opencode.json
+cd "$PROJECT_ROOT"
+
 # Build the prompt
 PROMPT="Process the HLS repository at '$SOURCE_REPO' and extract all HLS designs to '$OUTPUT_DIR'.
 
@@ -43,12 +54,11 @@ The HLS stub headers are available at: $SCRIPT_DIR/stubs
 
 Work through each stage systematically and process ALL designs found."
 
-# Run OpenCode with the orchestrator agent
+# Run OpenCode
 echo "Starting OpenCode orchestrator..."
 echo ""
 
-cd "$SCRIPT_DIR"
-opencode run --agent hlsfactory-orchestrator "$PROMPT"
+opencode run -m openrouter/moonshotai/kimi-k2.5 "$PROMPT"
 
 echo ""
 echo "=============================================="
