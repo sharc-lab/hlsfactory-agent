@@ -1,0 +1,168 @@
+{
+  "repository": "https://github.com/UCLA-VAST/HP-FFT-HLS",
+  "project_name": "HP-FFT-HLS",
+  "extraction_date": "2026-02-14",
+  "total_designs": 16,
+  "fft_sizes": [256, 1024],
+  "variants": [
+    "UF1", "UF2", "UF4", "UF8", "UF16", "UF32", 
+    "no_StagePipeline", "original_C_style"
+  ],
+  "designs": {
+    "n256_UF1": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 1,
+      "variant": "UF1",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n256_UF2": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 2,
+      "variant": "UF2",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n256_UF4": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 4,
+      "variant": "UF4",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n256_UF8": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 8,
+      "variant": "UF8",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n256_UF16": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 16,
+      "variant": "UF16",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n256_UF32": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 32,
+      "variant": "UF32",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n256_no_StagePipeline": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 1,
+      "variant": "no_StagePipeline",
+      "top_function": "FFT_TOP",
+      "interface": "array",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n256_original_C_style": {
+      "fft_size": 256,
+      "stages": 8,
+      "unroll_factor": 1,
+      "variant": "original_C_style",
+      "top_function": "FFT_TOP",
+      "interface": "array",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_UF1": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 1,
+      "variant": "UF1",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_UF2": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 2,
+      "variant": "UF2",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_UF4": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 4,
+      "variant": "UF4",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_UF8": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 8,
+      "variant": "UF8",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_UF16": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 16,
+      "variant": "UF16",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_UF32": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 32,
+      "variant": "UF32",
+      "top_function": "FFT_TOP",
+      "interface": "hls::stream",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_no_StagePipeline": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 1,
+      "variant": "no_StagePipeline",
+      "top_function": "FFT_TOP",
+      "interface": "array",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    },
+    "n1024_original_C_style": {
+      "fft_size": 1024,
+      "stages": 10,
+      "unroll_factor": 1,
+      "variant": "original_C_style",
+      "top_function": "FFT_TOP",
+      "interface": "array",
+      "files": ["FFT.h", "FFT.cpp", "testbench.cpp", "synth.tcl"]
+    }
+  },
+  "stub_headers": [
+    "ap_int.h",
+    "ap_fixed.h",
+    "hls_stream.h",
+    "hls_vector.h",
+    "hls_streamofblocks.h",
+    "hls_fft.h",
+    "ap_axi_sdata.h"
+  ],
+  "compilation_status": "success",
+  "synthesis_ready": true
+}
