@@ -12,7 +12,11 @@
   "model": "openrouter/moonshotai/kimi-k2.5",
   "permission": {
     "external_directory": {
-      "C:\\Users\\tanma\\OneDrive\\Documents\\GitHub\\**": "allow"
+      "/workspace/**": "allow",
+      "/workspace/*": "allow",
+      "/output/**": "allow",
+      "/output/*": "allow",
+      "/*": "allow"
     }
   }
 }

@@ -2,74 +2,72 @@ import subprocess
 import sys
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
+# ensure repository url is included
+if len(sys.argv) < 2:
+    print("Usage: python agent_script.py SOURCE_REPO_URL")
+    sys.exit()
 
-def clone_repo(repo_url: str, dest: Path) -> None:
-    """Clone a GitHub repo to the destination directory."""
-    subprocess.run(["git", "clone", repo_url, str(dest)], check=True)
+# get the current directory
+script_dir = Path(__file__).parent.resolve()
+project_root = script_dir # script is currently in project root
 
+# assign source_repo and output_dir default
+source_repo = sys.argv[1]
+output_dir = sys.argv[2] if len(sys.argv) > 2 else "./output"
 
-def extract_repo_name(repo_url: str) -> str:
-    """Extract repository name from GitHub URL."""
-    # Handle both https://github.com/user/repo and https://github.com/user/repo.git
-    name = repo_url.rstrip("/").split("/")[-1]
-    if name.endswith(".git"):
-        name = name[:-4]
-    return name
+# access the openrouter api key
+load_dotenv()
+api_key = os.getenv("OPENROUTER_API_KEY")
 
+prompt = f"""Process the HLS repository at {source_repo} and extract all HLS designs to '/output'.
 
-def run_opencode(repo_path: Path, output_path: Path, repo_name: str) -> None:
-    """Run opencode to extract HLS designs from the repo."""
+Execute the complete HLSFactory pipeline:
+1. Clone the repository from {source_repo} into /workspace/repo
+2. Analyze the repository and identify all HLS designs
+3. Extract each design into its own folder under /output
+4. Find or generate testbenches for each design
+5. Generate documentation for each design
+6. Compile with clang++ and fix any errors
+7. Generate TCL synthesis scripts
+8. Create the final manifest
+9. Put all the design folders within a parent folder with the name of repository under /output
 
-    prompt = f"""You are inside a Docker container with full bash access and clang installed.
+The HLS stub headers are available at: /workspace/stubs
 
-Your task: Extract all HLS (High-Level Synthesis) designs from the repository at {repo_path} and organize them into {output_path}.
+Work through each stage systematically and process ALL designs found.
 
-Desired output structure:
-```
-{output_path}/HLS_DESIGNS_{repo_name}/
-├── Design_1/
-│   ├── SourceCode/
-│   ├── TestBench/
-│   └── ... (other relevant files)
-├── Design_2/
-│   ├── SourceCode/
-│   ├── TestBench/
-│   └── ...
-```
+IMPORTANT: Start executing immediately. Do not just list steps — run the actual commands. Begin by cloning the repository now."""
 
-Each design folder should contain all files needed to synthesize that HLS design. Separate source code from testbenches.
+# script starts
+print("==============================================")
+print("HLSFactory OpenCode Native")
+print("==============================================")
+print("Source Repository: ", source_repo)
+print("Output Directory: ", output_dir)
+print("==============================================")
 
-You have free reign to:
-- Explore the repository structure
-- Run any bash commands
-- Use clang to verify source code compiles (if you choose)
-- Create directories and copy/organize files as needed
+#build docker image
+print("Building Docker image...")
+subprocess.run(["docker-compose", "-f", f"{project_root}/docker-compose.yml", "build"], check=True)
 
-Go ahead and extract the HLS designs."""
+# Run the agent inside the container, no --rm so we can copy files out
+print("Starting OpenCode orchestrator...")
+subprocess.run(["docker-compose", "-f", f"{project_root}/docker-compose.yml", "run",
+                "hls-organizer", "opencode", "run", "-m", "openrouter/moonshotai/kimi-k2.5",
+                prompt], check=True)
 
-    subprocess.run(["opencode", prompt], cwd=str(repo_path), check=True)
+print("==============================================")
+print("Pipeline complete!")
+print("==============================================")
 
+# copy results from container to host
+result = subprocess.run(["docker", "ps", "-lq"], capture_output=True, text=True)
+container_id = result.stdout.strip()
+Path(output_dir).mkdir(parents=True, exist_ok=True)
+subprocess.run(["docker", "cp", f"{container_id}:/output/.", f"{output_dir}/"], check=True)
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python agent_script.py <github-repo-url>")
-        sys.exit(1)
-
-    repo_url = sys.argv[1]
-    repo_name = extract_repo_name(repo_url)
-
-    repo_path = Path("/workspace/repo")
-    output_path = Path("/output")
-
-    print(f"Cloning {repo_url}...")
-    clone_repo(repo_url, repo_path)
-
-    print(f"Running opencode to extract HLS designs...")
-    run_opencode(repo_path, output_path, repo_name)
-
-    print(f"Done! Check {output_path}/HLS_DESIGNS_{repo_name}/")
-
-
-if __name__ == "__main__":
-    main()
+# clean up the container
+subprocess.run(["docker", "rm", f"{container_id}"])
+print(f"Results copied to {output_dir}")

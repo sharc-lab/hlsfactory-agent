@@ -1,0 +1,118 @@
+{
+  "repository": "InTAR",
+  "url": "https://github.com/OswaldHe/InTAR.git",
+  "designs": [
+    {
+      "name": "gating-net_sequential",
+      "design": "gating-net",
+      "variant": "sequential",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/gating-net/sequential/gating-net-sequential-kernel.cpp",
+      "output_dir": "gating-net_sequential"
+    },
+    {
+      "name": "gating-net_spatial",
+      "design": "gating-net",
+      "variant": "spatial",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/gating-net/spatial/gating-net-spatial-kernel.cpp",
+      "output_dir": "gating-net_spatial"
+    },
+    {
+      "name": "cnn-4L_cnn-4L-intrra-kernel.cpp",
+      "design": "cnn-4L",
+      "variant": "cnn-4L-intrra-kernel.cpp",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/cnn-4L/cnn-4L-intrra-kernel.cpp",
+      "output_dir": "cnn-4L_cnn-4L-intrra-kernel.cpp"
+    },
+    {
+      "name": "cnn-4L_sequential",
+      "design": "cnn-4L",
+      "variant": "sequential",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/cnn-4L/sequential/cnn-4L-sequential-kernel.cpp",
+      "output_dir": "cnn-4L_sequential"
+    },
+    {
+      "name": "cnn-4L_spatial",
+      "design": "cnn-4L",
+      "variant": "spatial",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/cnn-4L/spatial/cnn-4L-spatial-kernel.cpp",
+      "output_dir": "cnn-4L_spatial"
+    },
+    {
+      "name": "mlp_mlp-intrra-kernel.cpp",
+      "design": "mlp",
+      "variant": "mlp-intrra-kernel.cpp",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/mlp/mlp-intrra-kernel.cpp",
+      "output_dir": "mlp_mlp-intrra-kernel.cpp"
+    },
+    {
+      "name": "mlp_sequential",
+      "design": "mlp",
+      "variant": "sequential",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/mlp/sequential/mlp-sequential-kernel.cpp",
+      "output_dir": "mlp_sequential"
+    },
+    {
+      "name": "mlp_spatial",
+      "design": "mlp",
+      "variant": "spatial",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/mlp/spatial/mlp-spatial-kernel.cpp",
+      "output_dir": "mlp_spatial"
+    },
+    {
+      "name": "vae_vae-intrra-kernel.cpp",
+      "design": "vae",
+      "variant": "vae-intrra-kernel.cpp",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/vae/vae-intrra-kernel.cpp",
+      "output_dir": "vae_vae-intrra-kernel.cpp"
+    },
+    {
+      "name": "vae_sequential",
+      "design": "vae",
+      "variant": "sequential",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/vae/sequential/vae-sequential-kernel.cpp",
+      "output_dir": "vae_sequential"
+    },
+    {
+      "name": "vae_spatial",
+      "design": "vae",
+      "variant": "spatial",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/vae/spatial/vae-spatial-kernel.cpp",
+      "output_dir": "vae_spatial"
+    },
+    {
+      "name": "self-attn_self-attn-intrra-kernel.cpp",
+      "design": "self-attn",
+      "variant": "self-attn-intrra-kernel.cpp",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/self-attn/self-attn-intrra-kernel.cpp",
+      "output_dir": "self-attn_self-attn-intrra-kernel.cpp"
+    },
+    {
+      "name": "self-attn_sequential",
+      "design": "self-attn",
+      "variant": "sequential",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/self-attn/sequential/self-attn-sequential-kernel.cpp",
+      "output_dir": "self-attn_sequential"
+    },
+    {
+      "name": "self-attn_spatial",
+      "design": "self-attn",
+      "variant": "spatial",
+      "top_function": "measure_cycle",
+      "source_file": "/workspace/repo/benchmark/self-attn/spatial/self-attn-spatial-kernel.cpp",
+      "output_dir": "self-attn_spatial"
+    }
+  ]
+}

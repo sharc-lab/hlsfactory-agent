@@ -6,20 +6,19 @@ RUN apt-get update && \
     apt-get install -y git curl clang && \
     rm -rf /var/lib/apt/lists/*
 
-# RUN pip install uv && \ 
-# uv pip compile pyproject.toml -o requirements.txt && \ 
-# pip install -r requirements.txt
-
 # install opencode
 RUN curl -fsSL https://opencode.ai/install | bash
+# where opencode is installed
+ENV PATH="/root/.opencode/bin:${PATH}"
 
-# sets the working directory to /workspace
+# set the working directory to /workspace
 WORKDIR /workspace
 
-# copy the agent script
-COPY agent_script.py .
+# copy opencode config
+COPY opencode.json .
 
-# command to run on start up
-# CMD ["python", "agent_script.py"]
+# copy HLS stub headers
+COPY hlsfactory-opencode-native/stubs/ ./stubs/
+
 # create output directory
 RUN mkdir -p /output
