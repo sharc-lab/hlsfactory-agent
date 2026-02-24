@@ -1,0 +1,86 @@
+{
+  "repository": {
+    "name": "FORC",
+    "url": "https://github.com/SFU-HiAccel/FORC",
+    "description": "FPGA accelerator for ORC file processing with Zlib decompression, decoding, and filtering"
+  },
+  "designs": [
+    {
+      "name": "orc_proc",
+      "type": "tapa_kernel",
+      "top_function": "orc_proc",
+      "source_files": [
+        "kernel/orc_proc.cpp",
+        "kernel/orc_proc.h",
+        "kernel/orcDecomp.h",
+        "kernel/zlibTapa.h",
+        "kernel/orc_decoder.h",
+        "kernel/orc_filter.h",
+        "kernel/fixed_codes.hpp",
+        "kernel/ap_int.h",
+        "kernel/hls_stream.h"
+      ],
+      "description": "Main ORC processing kernel with dataflow architecture"
+    },
+    {
+      "name": "orcDecomp",
+      "type": "hls_module",
+      "top_function": "DecompHead",
+      "source_files": [
+        "kernel/orcDecomp.h",
+        "kernel/orc_proc.h"
+      ],
+      "description": "ORC header parsing and data stream extraction"
+    },
+    {
+      "name": "zlib_decompress",
+      "type": "hls_module",
+      "top_function": "huffmanDecoder",
+      "source_files": [
+        "kernel/zlibTapa.h",
+        "kernel/orc_proc.h",
+        "kernel/fixed_codes.hpp"
+      ],
+      "description": "Zlib decompression with Huffman and LZ77 decoding"
+    },
+    {
+      "name": "orc_decoder",
+      "type": "hls_module",
+      "top_function": "load",
+      "source_files": [
+        "kernel/orc_decoder.h",
+        "kernel/orc_proc.h"
+      ],
+      "description": "ORC encoding decoder supporting multiple encoding types"
+    },
+    {
+      "name": "orc_filter",
+      "type": "hls_module",
+      "top_function": "FilterData",
+      "source_files": [
+        "kernel/orc_filter.h",
+        "kernel/orc_proc.h"
+      ],
+      "description": "Range-based and index-based data filtering"
+    }
+  ],
+  "host_files": [
+    "host/orc_proc_host.cpp",
+    "host/orc_proc_host.h",
+    "host/orc_proc_host_1S1C.cpp",
+    "host/orc_proc_host_1S1C.h",
+    "host/opencl_util.h"
+  ],
+  "stubs": [
+    "kernel/ap_int.h",
+    "kernel/ap_fixed.h",
+    "kernel/hls_stream.h",
+    "kernel/ap_axi_sdata.h"
+  ],
+  "target_device": "xilinx_u280_xdma_201920_3",
+  "framework": "TAPA",
+  "tested_on": {
+    "vitis": "2021.2",
+    "tapa": "0.0.20221113.1"
+  }
+}
