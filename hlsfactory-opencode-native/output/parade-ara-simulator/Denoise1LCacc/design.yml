@@ -1,0 +1,51 @@
+# Design Configuration for Denoise1LCacc
+# HLSFactory YAML Format
+
+design:
+  name: "Denoise1LCacc"
+  type: "lcacc_accelerator"
+  framework: "PARADE"
+  repository: "parade-ara-simulator"
+  benchmark: "Denoise"
+  
+  # Accelerator Properties
+  properties:
+    opcodes: [0, 101]
+    compute_nodes: 3
+    transfer_operations: 7
+    buffer_creations: 4
+    has_signature_mode: true
+    has_task_distributed_mode: true
+  
+  # Source Files
+  sources:
+    - Denoise1LCacc.h
+  
+  # Testbench
+  testbench:
+    - testbench.cpp
+  
+  # Synthesis
+  synthesis:
+    tool: "vivado_hls"
+    script: "synthesis.tcl"
+    top_function: "Denoise1LCacc_sig"
+    clock_period: 10
+    part: "xc7z020clg484-1"
+  
+  # Compilation
+  compilation:
+    compiler: "clang"
+    standard: "c++11"
+    includes:
+      - /workspace/stubs
+    flags: "-c -fsyntax-only"
+  
+  # Documentation
+  documentation:
+    readme: "README.md"
+    info: "design_info.json"
+
+metadata:
+  generated_by: "HLSFactory Pipeline"
+  extraction_date: ""1771973916.8857605""

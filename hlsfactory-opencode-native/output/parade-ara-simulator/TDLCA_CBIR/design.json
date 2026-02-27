@@ -1,0 +1,36 @@
+{
+  "name": "TDLCA_CBIR",
+  "repository": "parade-ara-simulator",
+  "description": "#include "../../BenchmarkNode.h" #include "cnn_cfg.hpp" #include "MatMulLCacc.h" #include "MatMul400LCacc.h" #include "ReluLCacc.h" #include "PoolLCacc.h" #include "ManhattanDistLCacc.h" #include "Par",
+  "accelerator_modules": [
+    "ManhattanDistLCacc.h",
+    "MatMul400LCacc.h",
+    "MatMulLCacc.h",
+    "PartialSortLCacc.h",
+    "PoolLCacc.h",
+    "ReluLCacc.h"
+  ],
+  "top_function": "CBIRLCacc",
+  "files": {
+    "headers": [
+      "ManhattanDistLCacc.h",
+      "MatMul400LCacc.h",
+      "MatMulLCacc.h",
+      "PartialSortLCacc.h",
+      "PoolLCacc.h",
+      "ReluLCacc.h"
+    ],
+    "sources": [
+      "TDLCA_CBIR.cpp"
+    ]
+  },
+  "language": "C++",
+  "framework": "PARADE LCAcc",
+  "target": {
+    "vendor": "Xilinx",
+    "family": "Virtex-7",
+    "part": "xc7vx485tffg1761-2"
+  },
+  "clock_period": 10,
+  "testbench_generated": true
+}

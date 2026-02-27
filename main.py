@@ -1,5 +1,6 @@
 import argparse
 import subprocess
+import sys
 import json
 import uuid
 from datetime import datetime, timezone
@@ -12,7 +13,7 @@ from minisweagent.environments.docker import DockerEnvironment
 
 def build_prompt(repo_url: str) -> str:
     return (
-        f"Process the HLS repository at '{repo_url}'.\n"
+        f"Process the HLS repository at '{repo_url}' and extract all HLS designs to '/output'.\n"
         "\n"
         "Execute the complete HLSFactory pipeline:\n"
         f"1. Clone the repository from '{repo_url}' into /workspace/repo\n"
@@ -20,13 +21,19 @@ def build_prompt(repo_url: str) -> str:
         "3. Extract each design into its own folder under /output\n"
         "4. Find or generate testbenches for each design\n"
         "5. Generate documentation for each design\n"
-        "6. Compile with clang++ and fix any errors (HLS stubs are at /workspace/stubs)\n"
+        "6. Compile each design's source code using clang to verify it compiles without errors. "
+        "Record any errors in a compile_log.txt inside the design folder.\n"
         "7. Generate TCL synthesis scripts\n"
         "8. Create the final manifest\n"
-        "9. Put all design folders in a parent folder named after the repo under /output\n"
+        "9. Put all the design folders within a parent folder with the name of repository under /output\n"
         "\n"
-        "Work through each stage systematically and process ALL designs found.\n"
-        "Start executing immediately — begin by cloning the repository now."
+        "The HLS stub headers are available at: /workspace/stubs\n"
+        "\n"
+        "Work through each stage systematically and process ALL designs found. "
+        "Do not skip any design, testbench creation, or compilation step — these are all required.\n"
+        "\n"
+        "IMPORTANT: Start executing immediately. Do not just list steps — run the actual commands. "
+        "Begin by cloning the repository now."
     )
 
 def main():
@@ -103,6 +110,19 @@ def main():
 
     print(f"Trajectory: {traj_path}")
     print(f"Benchmark:  {benchmark_path}")
+
+    # 7. copy /output from the container to the host
+    container_id = subprocess.run(
+        ["docker", "ps", "-lq"],
+        capture_output=True, text=True, check=True,
+    ).stdout.strip()
+
+    if not container_id:
+        print("Warning: could not find container ID, skipping output copy.", file=sys.stderr)
+    else:
+        subprocess.run(["docker", "cp", f"{container_id}:/output/.", str(output_dir)], check=True)
+        subprocess.run(["docker", "rm", container_id], check=True)
+        print(f"HLS results copied to {output_dir}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,26 @@
+=== HLS Compilation Test ===
+Started: Tue Feb 24 22:28:02 UTC 2026
+
+TDLCA_BlackScholes: SUCCESS
+TDLCA_CBIR: SUCCESS
+TDLCA_Deblur_Modified: SUCCESS
+TDLCA_Denoise: SUCCESS
+TDLCA_Disparity_Map: SUCCESS
+TDLCA_EKF_SLAM: SUCCESS
+TDLCA_LPCIP_Desc: SUCCESS
+TDLCA_MatMul: SUCCESS
+TDLCA_Registration_Modified: SUCCESS
+TDLCA_Robot_Localization: SUCCESS
+TDLCA_Segmentation: SUCCESS
+TDLCA_StreamCluster: SUCCESS
+TDLCA_Swaptions: SUCCESS
+TDLCA_Texture_Synthesis: SUCCESS
+TDLCA_VectorAddSample: SUCCESS
+
+========================================
+Summary:
+  Successful: 15
+  Failed: 0
+  Total: 15
+
+Completed: Tue Feb 24 22:28:22 UTC 2026

@@ -1,0 +1,24 @@
+{
+  "name": "JacobiansLCacc",
+  "opcodes": [
+    "0",
+    "801"
+  ],
+  "has_signature_mode": true,
+  "has_task_distributed_mode": true,
+  "compute_nodes": 3,
+  "transfer_operations": 11,
+  "buffer_creations": 4,
+  "signature_functions": [
+    "CreateBuffer_JacobiansLCacc",
+    "JacobiansLCacc"
+  ],
+  "task_distributed_functions": [
+    "PrepareAsync",
+    "WaitAsync",
+    "CreateBuffer_JacobiansLCacc",
+    "JacobiansLCacc"
+  ],
+  "benchmark": "EKF_SLAM",
+  "source_path": "/workspace/repo/benchmarks/Benchmarks/TDLCA_EKF_SLAM/JacobiansLCacc.h"
+}

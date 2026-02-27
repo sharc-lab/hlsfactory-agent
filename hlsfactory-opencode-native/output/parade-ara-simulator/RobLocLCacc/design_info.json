@@ -1,0 +1,24 @@
+{
+  "name": "RobLocLCacc",
+  "opcodes": [
+    "0",
+    "820"
+  ],
+  "has_signature_mode": true,
+  "has_task_distributed_mode": true,
+  "compute_nodes": 3,
+  "transfer_operations": 19,
+  "buffer_creations": 4,
+  "signature_functions": [
+    "CreateBuffer_RobLocLCacc",
+    "RobLocLCacc"
+  ],
+  "task_distributed_functions": [
+    "PrepareAsync",
+    "WaitAsync",
+    "CreateBuffer_RobLocLCacc",
+    "RobLocLCacc"
+  ],
+  "benchmark": "Robot_Localization",
+  "source_path": "/workspace/repo/benchmarks/Benchmarks/TDLCA_Robot_Localization/RobLocLCacc.h"
+}

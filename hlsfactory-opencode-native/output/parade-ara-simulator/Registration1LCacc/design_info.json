@@ -1,0 +1,24 @@
+{
+  "name": "Registration1LCacc",
+  "opcodes": [
+    "0",
+    "401"
+  ],
+  "has_signature_mode": true,
+  "has_task_distributed_mode": true,
+  "compute_nodes": 3,
+  "transfer_operations": 21,
+  "buffer_creations": 4,
+  "signature_functions": [
+    "CreateBuffer_Registration1LCacc",
+    "Registration1LCacc"
+  ],
+  "task_distributed_functions": [
+    "PrepareAsync",
+    "WaitAsync",
+    "CreateBuffer_Registration1LCacc",
+    "Registration1LCacc"
+  ],
+  "benchmark": "Registration_Modified",
+  "source_path": "/workspace/repo/benchmarks/Benchmarks/TDLCA_Registration_Modified/Registration1LCacc.h"
+}

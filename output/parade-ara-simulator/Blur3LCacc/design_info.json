@@ -1,0 +1,24 @@
+{
+  "name": "Blur3LCacc",
+  "opcodes": [
+    "0",
+    "105"
+  ],
+  "has_signature_mode": true,
+  "has_task_distributed_mode": true,
+  "compute_nodes": 3,
+  "transfer_operations": 7,
+  "buffer_creations": 4,
+  "signature_functions": [
+    "CreateBuffer_Blur3LCacc",
+    "Blur3LCacc"
+  ],
+  "task_distributed_functions": [
+    "PrepareAsync",
+    "WaitAsync",
+    "CreateBuffer_Blur3LCacc",
+    "Blur3LCacc"
+  ],
+  "benchmark": "Deblur_Modified",
+  "source_path": "/workspace/repo/benchmarks/Benchmarks/TDLCA_Deblur_Modified/Blur3LCacc.h"
+}

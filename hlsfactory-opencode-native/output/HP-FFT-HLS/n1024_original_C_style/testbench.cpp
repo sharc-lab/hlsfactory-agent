@@ -37,7 +37,7 @@ int main()
     cout << "FFT run FFT_TOP" << endl;
     hls::stream<hls::vector<complex<float>, UF*2>>  xn_input_strm;
     hls::stream<hls::vector<complex<float>, UF*2>>  xk_output_strm;
-    for (int b = 0; b < 2; b++){
+    for (int b = 0; b < batch_size; b++){
         FFT_TOP(data[b], dataFq[b]);
     }
     

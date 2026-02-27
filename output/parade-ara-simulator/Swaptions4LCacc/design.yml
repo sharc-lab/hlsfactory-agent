@@ -1,0 +1,51 @@
+# Design Configuration for Swaptions4LCacc
+# HLSFactory YAML Format
+
+design:
+  name: "Swaptions4LCacc"
+  type: "lcacc_accelerator"
+  framework: "PARADE"
+  repository: "parade-ara-simulator"
+  benchmark: "Swaptions"
+  
+  # Accelerator Properties
+  properties:
+    opcodes: [0, 1304]
+    compute_nodes: 3
+    transfer_operations: 11
+    buffer_creations: 4
+    has_signature_mode: true
+    has_task_distributed_mode: true
+  
+  # Source Files
+  sources:
+    - Swaptions4LCacc.h
+  
+  # Testbench
+  testbench:
+    - testbench.cpp
+  
+  # Synthesis
+  synthesis:
+    tool: "vivado_hls"
+    script: "synthesis.tcl"
+    top_function: "Swaptions4LCacc_sig"
+    clock_period: 10
+    part: "xc7z020clg484-1"
+  
+  # Compilation
+  compilation:
+    compiler: "clang"
+    standard: "c++11"
+    includes:
+      - /workspace/stubs
+    flags: "-c -fsyntax-only"
+  
+  # Documentation
+  documentation:
+    readme: "README.md"
+    info: "design_info.json"
+
+metadata:
+  generated_by: "HLSFactory Pipeline"
+  extraction_date: ""1771973934.1309774""

@@ -1,0 +1,26 @@
+{
+  "name": "TDLCA_MatMul",
+  "repository": "parade-ara-simulator",
+  "description": "#include "../../BenchmarkNode.h" #include <stdint.h> #include "MatMulLCacc.h" ",
+  "accelerator_modules": [
+    "MatMulLCacc.h"
+  ],
+  "top_function": "MatMulLCacc",
+  "files": {
+    "headers": [
+      "MatMulLCacc.h"
+    ],
+    "sources": [
+      "TDLCA_MatMul.cpp"
+    ]
+  },
+  "language": "C++",
+  "framework": "PARADE LCAcc",
+  "target": {
+    "vendor": "Xilinx",
+    "family": "Virtex-7",
+    "part": "xc7vx485tffg1761-2"
+  },
+  "clock_period": 10,
+  "testbench_generated": true
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Deblur1LCacc",
+  "opcodes": [
+    "0",
+    "201"
+  ],
+  "has_signature_mode": true,
+  "has_task_distributed_mode": true,
+  "compute_nodes": 3,
+  "transfer_operations": 9,
+  "buffer_creations": 4,
+  "signature_functions": [
+    "CreateBuffer_Deblur1LCacc",
+    "Deblur1LCacc"
+  ],
+  "task_distributed_functions": [
+    "PrepareAsync",
+    "WaitAsync",
+    "CreateBuffer_Deblur1LCacc",
+    "Deblur1LCacc"
+  ],
+  "benchmark": "Deblur_Modified",
+  "source_path": "/workspace/repo/benchmarks/Benchmarks/TDLCA_Deblur_Modified/Deblur1LCacc.h"
+}

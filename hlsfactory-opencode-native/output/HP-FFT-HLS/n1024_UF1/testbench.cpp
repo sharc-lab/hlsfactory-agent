@@ -37,7 +37,7 @@ int main()
     cout << "FFT run FFT_TOP" << endl;
     hls::stream<hls::vector<complex<float>, UF*2>>  xn_input_strm;
     hls::stream<hls::vector<complex<float>, UF*2>>  xk_output_strm;
-    for (int b = 0; b < 2; b++){
+    for (int b = 0; b < batch_size; b++){
         for (int idx = 0; idx < FFT_NUM/(UF*2); idx++) {
             hls::vector<complex<float>, UF*2> temp;
             for (int u = 0; u < UF*2; u++) {

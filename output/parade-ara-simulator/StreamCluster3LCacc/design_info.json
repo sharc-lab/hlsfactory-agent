@@ -1,0 +1,24 @@
+{
+  "name": "StreamCluster3LCacc",
+  "opcodes": [
+    "0",
+    "1203"
+  ],
+  "has_signature_mode": true,
+  "has_task_distributed_mode": true,
+  "compute_nodes": 3,
+  "transfer_operations": 17,
+  "buffer_creations": 4,
+  "signature_functions": [
+    "CreateBuffer_StreamCluster3LCacc",
+    "StreamCluster3LCacc"
+  ],
+  "task_distributed_functions": [
+    "PrepareAsync",
+    "WaitAsync",
+    "CreateBuffer_StreamCluster3LCacc",
+    "StreamCluster3LCacc"
+  ],
+  "benchmark": "StreamCluster",
+  "source_path": "/workspace/repo/benchmarks/Benchmarks/TDLCA_StreamCluster/StreamCluster3LCacc.h"
+}

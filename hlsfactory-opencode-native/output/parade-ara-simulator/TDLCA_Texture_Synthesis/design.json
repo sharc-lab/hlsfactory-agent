@@ -1,0 +1,6 @@
+{
+  "name": "TDLCA_Texture_Synthesis",
+  "repository": "parade-ara-simulator",
+  "description": "Texture_Synthesis hardware accelerator",
+  "top_function": "Texture_SynthesisLCacc"
+}

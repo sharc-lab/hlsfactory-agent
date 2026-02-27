@@ -1,0 +1,24 @@
+{
+  "name": "DispMapCompSADLCacc",
+  "opcodes": [
+    "0",
+    "830"
+  ],
+  "has_signature_mode": true,
+  "has_task_distributed_mode": true,
+  "compute_nodes": 3,
+  "transfer_operations": 9,
+  "buffer_creations": 4,
+  "signature_functions": [
+    "CreateBuffer_DispMapCompSADLCacc",
+    "DispMapCompSADLCacc"
+  ],
+  "task_distributed_functions": [
+    "PrepareAsync",
+    "WaitAsync",
+    "CreateBuffer_DispMapCompSADLCacc",
+    "DispMapCompSADLCacc"
+  ],
+  "benchmark": "Disparity_Map",
+  "source_path": "/workspace/repo/benchmarks/Benchmarks/TDLCA_Disparity_Map/DispMapCompSADLCacc.h"
+}
