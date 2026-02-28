@@ -1,7 +1,0 @@
-Compilation Log for TDLCA_Swaptions
-Timestamp: Tue Feb 24 22:28:18 UTC 2026
-========================================
-
-SUCCESS: Testbench compilation passed
-STATUS: SUCCESS
-

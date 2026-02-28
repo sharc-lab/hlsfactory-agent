@@ -1,7 +1,0 @@
-Compilation Log for TDLCA_Denoise
-Timestamp: Tue Feb 24 22:28:07 UTC 2026
-========================================
-
-SUCCESS: Testbench compilation passed
-STATUS: SUCCESS
-

@@ -1,6 +1,0 @@
-{
-  "name": "TDLCA_VectorAddSample",
-  "repository": "parade-ara-simulator",
-  "description": "VectorAddSample hardware accelerator",
-  "top_function": "VectorAddSampleLCacc"
-}

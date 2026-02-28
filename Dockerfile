@@ -10,7 +10,7 @@ RUN apt-get update && \
 WORKDIR /workspace
 
 # copy HLS stubs
-COPY hlsfactory-opencode-native/stubs /workspace/stubs
+COPY stubs /workspace/stubs
 
 # command to run on start up
 # CMD ["python", "agent_script.py"]

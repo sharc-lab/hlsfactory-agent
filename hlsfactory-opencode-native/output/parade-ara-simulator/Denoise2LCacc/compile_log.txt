@@ -1,7 +1,0 @@
-Compile Log for Denoise2LCacc
-==================================================
-
-Command: clang++ -std=c++11 -fsyntax-only -I /workspace/stubs -I /workspace/repo/benchmarks -I /output/parade-ara-simulator/Denoise2LCacc -c /output/parade-ara-simulator/Denoise2LCacc/compile_wrapper.cpp -o /output/parade-ara-simulator/Denoise2LCacc/compile_wrapper.o
-
-Status: SUCCESS
-Result: Design compiles without errors

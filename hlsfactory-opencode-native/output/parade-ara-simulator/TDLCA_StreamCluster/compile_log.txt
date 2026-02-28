@@ -1,7 +1,0 @@
-Compilation Log for TDLCA_StreamCluster
-Timestamp: Tue Feb 24 22:28:17 UTC 2026
-========================================
-
-SUCCESS: Testbench compilation passed
-STATUS: SUCCESS
-
