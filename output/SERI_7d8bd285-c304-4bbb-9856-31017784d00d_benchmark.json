@@ -1,0 +1,10 @@
+{
+  "run_id": "7d8bd285-c304-4bbb-9856-31017784d00d",
+  "timestamp": "2026-03-02T16:05:44.551935+00:00",
+  "repo_url": "https://github.com/SFU-HiAccel/SERI.git",
+  "model": "moonshotai/kimi-k2.5",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.34144424999999995,
+  "total_api_calls": 194,
+  "traj_file": "SERI_7d8bd285-c304-4bbb-9856-31017784d00d.traj.json"
+}

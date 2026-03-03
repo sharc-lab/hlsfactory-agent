@@ -1,0 +1,4 @@
+=== Compiling reg_lu_decompose_hls ===
+Source: kernel.c
+Type: Vitis_HLS
+Compilation check complete

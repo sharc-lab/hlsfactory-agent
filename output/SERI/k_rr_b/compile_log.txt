@@ -1,0 +1,38 @@
+Compilation Command: clang++ -c -std=c++17 -fsyntax-only -I. -DAP_INT_MAX_W=8192 -DAM_ABCD=3131 -ferror-limit=10 k_rr_b.cpp\nReturn Code: 1\n\nSTDOUT:\n\n\nSTDERR:\nk_rr_b.cpp:149:46: error: no viable conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'const ap_uint<512>'
+  149 |                     ucba_stream_out_1.write( packed_dcbaox );
+      |                                              ^~~~~~~~~~~~~
+./ap_int.h:14:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'const ap_uint<512> &' for 1st argument
+   14 | class ap_uint {
+      |       ^~~~~~~
+./ap_int.h:14:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'ap_uint<512> &&' for 1st argument
+   14 | class ap_uint {
+      |       ^~~~~~~
+./ap_int.h:22:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'int' for 1st argument
+   22 |     ap_uint(int val) { *this = val; }
+      |     ^       ~~~~~~~
+./ap_int.h:23:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'long' for 1st argument
+   23 |     ap_uint(long val) { *this = val; }
+      |     ^       ~~~~~~~~
+./ap_int.h:24:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned int' for 1st argument
+   24 |     ap_uint(unsigned val) { *this = val; }
+      |     ^       ~~~~~~~~~~~~
+./ap_int.h:25:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned long' for 1st argument
+   25 |     ap_uint(unsigned long val) { *this = val; }
+      |     ^       ~~~~~~~~~~~~~~~~~
+./ap_int.h:26:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned long long' for 1st argument
+   26 |     ap_uint(unsigned long long val) { *this = val; }
+      |     ^       ~~~~~~~~~~~~~~~~~~~~~~
+./ap_int.h:27:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'const char *' for 1st argument
+   27 |     ap_uint(const char* val) { *this = std::stoull(val); }
+      |     ^       ~~~~~~~~~~~~~~~
+./ap_int.h:30:5: note: candidate template ignored: could not match 'ap_uint' against 'packed_array'
+   30 |     ap_uint(const ap_uint<_AP_W2>& other) {
+      |     ^
+./packed_array.hpp:66:5: note: candidate function
+   66 |     operator ap_uint<bit_width>() // NOLINT(*-explicit-constructor)
+      |     ^
+./hls_stream.h:29:25: note: passing argument to parameter 'val' here
+   29 |     void write(const T& val) {
+      |                         ^
+1 error generated.
+\n\nCompilation completed with errors (see above).\nNote: Some errors are due to design-specific configurations and Xilinx HLS-specific constructs.\nThe design can still be synthesized with Vitis HLS.\n

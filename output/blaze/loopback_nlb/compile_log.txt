@@ -1,0 +1,28 @@
+Compiling: NLB.cpp
+Command: clang -c -fsyntax-only -I/workspace/stubs -I/workspace/repo/manager/include -I/workspace/repo/manager/include/blaze -std=c++11 /output/blaze/loopback_nlb/NLB.cpp
+Result: FAILED (return code 1)
+STDERR:
+/output/blaze/loopback_nlb/NLB.cpp:10:10: fatal error: 'blaze.h' file not found
+   10 | #include "blaze.h" 
+      |          ^~~~~~~~~
+1 error generated.
+
+--------------------------------------------------
+Compiling: NLBApp.h
+Command: clang -c -fsyntax-only -I/workspace/stubs -I/workspace/repo/manager/include -I/workspace/repo/manager/include/blaze -std=c++11 /output/blaze/loopback_nlb/NLBApp.h
+Result: FAILED (return code 1)
+STDERR:
+error: invalid argument '-std=c++11' not allowed with 'C'
+
+--------------------------------------------------
+Compiling: testbench.cpp
+Command: clang -c -fsyntax-only -I/workspace/stubs -I/workspace/repo/manager/include -I/workspace/repo/manager/include/blaze -std=c++11 /output/blaze/loopback_nlb/testbench.cpp
+Result: FAILED (return code 1)
+STDERR:
+In file included from /output/blaze/loopback_nlb/testbench.cpp:15:
+/output/blaze/loopback_nlb/NLB.cpp:10:10: fatal error: 'blaze.h' file not found
+   10 | #include "blaze.h" 
+      |          ^~~~~~~~~
+1 error generated.
+
+--------------------------------------------------

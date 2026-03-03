@@ -1,0 +1,81 @@
+{
+  "repository": {
+    "name": "SyncNN",
+    "url": "https://github.com/SFU-HiAccel/SyncNN.git",
+    "description": "Spiking Convolutional Neural Network (SCNN) implementations for FPGA using HLS"
+  },
+  "extraction_date": "2025-03-02",
+  "total_designs": 3,
+  "designs": [
+    {
+      "name": "LeNet",
+      "path": "LeNet",
+      "type": "Spiking CNN",
+      "architecture": "LeNet-L",
+      "dataset": "MNIST",
+      "top_function": "network",
+      "files": {
+        "source": ["src.cpp"],
+        "testbench": ["tb.cpp"],
+        "headers": ["includes/header.h", "includes/mnist_2.h", "includes/neuron_labels.h", "includes/sds_utils.h"],
+        "documentation": ["README.md"],
+        "scripts": ["synthesis.tcl"],
+        "logs": ["compile_log.txt"]
+      },
+      "compilation": {
+        "source_status": "SUCCESS",
+        "testbench_status": "FAILED",
+        "testbench_error": "Missing trained weight files"
+      }
+    },
+    {
+      "name": "NiN",
+      "path": "NiN",
+      "type": "Spiking CNN",
+      "architecture": "Network in Network",
+      "dataset": "CIFAR-10",
+      "top_function": "network",
+      "files": {
+        "source": ["src.cpp"],
+        "testbench": ["tb.cpp"],
+        "headers": ["includes/header.h", "includes/cifar10_1.h", "includes/neuron_labels.h", "includes/sds_utils.h"],
+        "documentation": ["README.md"],
+        "scripts": ["synthesis.tcl"],
+        "logs": ["compile_log.txt"]
+      },
+      "compilation": {
+        "source_status": "SUCCESS",
+        "testbench_status": "FAILED",
+        "testbench_error": "Missing trained weight files"
+      }
+    },
+    {
+      "name": "VGG13",
+      "path": "VGG13",
+      "type": "Spiking CNN",
+      "architecture": "VGG13",
+      "dataset": "CIFAR-10",
+      "top_function": "network",
+      "files": {
+        "source": ["src.cpp"],
+        "testbench": ["tb.cpp"],
+        "headers": ["includes/header.h", "includes/cifar10_2.h", "includes/neuron_labels.h", "includes/sds_utils.h"],
+        "documentation": ["README.md"],
+        "scripts": ["synthesis.tcl"],
+        "logs": ["compile_log.txt"]
+      },
+      "compilation": {
+        "source_status": "SUCCESS",
+        "testbench_status": "FAILED",
+        "testbench_error": "Missing trained weight files"
+      }
+    }
+  ],
+  "summary": {
+    "designs_extracted": 3,
+    "designs_compiled": 3,
+    "testbenches_available": 3,
+    "testbenches_compiled": 0,
+    "note": "All designs compile successfully. Testbenches require trained weight files not included in the repository."
+  }
+}

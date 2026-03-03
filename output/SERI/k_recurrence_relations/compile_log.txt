@@ -1,0 +1,1 @@
+Compilation Command: clang++ -c -std=c++17 -fsyntax-only -I. -DAP_INT_MAX_W=8192 -DAM_ABCD=3131 -ferror-limit=10 k_recurrence_relations.cpp\nReturn Code: 0\n\nSTDOUT:\n\n\nSTDERR:\n\n\nCompilation completed successfully!\n

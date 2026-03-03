@@ -1,0 +1,80 @@
+{
+  "repository": {
+    "name": "CHIP-KNN",
+    "url": "https://github.com/SFU-HiAccel/CHIP-KNN.git",
+    "description": "Configurable and High-Performance K-Nearest Neighbors accelerator on cloud FPGAs",
+    "license": "License information from repository",
+    "papers": [
+      {
+        "title": "CHIP-KNNv2: A Configurable and High-Performance K-Nearest Neighbors Accelerator on HBM-based FPGAs",
+        "venue": "ACM TRETS 2023",
+        "doi": "10.1145/3616873"
+      },
+      {
+        "title": "CHIP-KNN: A Configurable and High-Performance K-Nearest Neighbors Accelerator on Cloud FPGAs",
+        "venue": "IEEE ICFPT 2020"
+      }
+    ]
+  },
+  "designs": [
+    {
+      "name": "singlePE_design",
+      "path": "singlePE_design",
+      "type": "HLS",
+      "description": "Single Processing Element KNN accelerator with double-buffering",
+      "top_function": "Knn",
+      "target_platform": "Xilinx U280",
+      "target_frequency_mhz": 225,
+      "parameters": {
+        "INPUT_DIM": 16,
+        "TOP": 10,
+        "NUM_SP_PTS": 4194304,
+        "DISTANCE_METRIC": "Manhattan",
+        "NUM_PE": 1,
+        "DATA_TYPE": "float"
+      },
+      "files": {
+        "kernel": ["src/knn.cpp", "src/knn.h"],
+        "host": ["src/knn-host.cpp"],
+        "testbench": ["src/tb_knn.cpp"],
+        "build": ["src/Makefile", "src/knn.ini"],
+        "scripts": ["synthesis.tcl"]
+      }
+    },
+    {
+      "name": "multiPE_design",
+      "path": "multiPE_design",
+      "type": "HLS",
+      "description": "Multi Processing Element KNN accelerator with streaming architecture",
+      "top_function": "Knn",
+      "target_platform": "Xilinx U280",
+      "target_frequency_mhz": 225,
+      "parameters": {
+        "INPUT_DIM": 16,
+        "TOP": 10,
+        "NUM_SP_PTS": 4194304,
+        "DISTANCE_METRIC": "Manhattan",
+        "NUM_PE": 4,
+        "DATA_TYPE": "float"
+      },
+      "files": {
+        "kernel": ["src/knn.cpp", "src/knn.h"],
+        "host": ["src/knn-host.cpp"],
+        "testbench": ["src/tb_knn.cpp"],
+        "build": ["src/Makefile", "src/knn.ini"],
+        "scripts": ["synthesis.tcl"]
+      }
+    }
+  ],
+  "tools": {
+    "framework": "TAPA",
+    "hls_tool": "Vitis HLS",
+    "target_fpga": "Xilinx Alveo U280"
+  },
+  "extraction_info": {
+    "timestamp": "2024",
+    "num_designs": 2,
+    "design_types": ["singlePE", "multiPE"],
+    "all_designs_processed": true
+  }
+}

@@ -3,12 +3,26 @@ import subprocess
 import sys
 import json
 import uuid
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
 from minisweagent.agents.default import DefaultAgent
-from minisweagent.models import get_model
+from minisweagent.models.openrouter_model import OpenRouterModel
 from minisweagent.environments.docker import DockerEnvironment
+from minisweagent.config import get_config_from_spec
+
+
+def load_env(env_path: Path) -> None:
+    if not env_path.is_file():
+        return
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip().strip("'\""))
 
 
 def build_prompt(repo_url: str) -> str:
@@ -57,7 +71,7 @@ def main():
     )
     args = parser.parse_args()
 
-    # script_dir = Path(__file__).resolve().parent
+    load_env(Path(__file__).resolve().parent / ".env")
     output_dir = Path(args.output_dir)
     repo_url = args.source_repo
     repo_name = repo_url.rstrip("/").split("/")[-1].removesuffix(".git")
@@ -75,9 +89,11 @@ def main():
     )
 
     # 3. instantiate the agent
+    agent_config = get_config_from_spec("default")["agent"]
     agent = DefaultAgent(
-        get_model("openrouter/moonshotai/kimi-k2.5"),
+        OpenRouterModel(model_name="moonshotai/kimi-k2.5"),
         env,
+        **agent_config,
     )
 
     # 4. run the agent
@@ -96,7 +112,7 @@ def main():
           "run_id": run_id,
           "timestamp": datetime.now(timezone.utc).isoformat(),
           "repo_url": repo_url,
-          "model": "openrouter/moonshotai/kimi-k2.5",
+          "model": "moonshotai/kimi-k2.5",
           "exit_status": result.get("exit_status"),
           "total_cost_usd": agent.cost,
           "total_api_calls": agent.n_calls,

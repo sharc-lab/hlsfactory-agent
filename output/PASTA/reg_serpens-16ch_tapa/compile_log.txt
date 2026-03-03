@@ -1,0 +1,5 @@
+=== Compiling reg_serpens-16ch_tapa ===
+Source: serpens.cpp
+Type: TAPA
+Compilation failed (expected for TAPA designs)
+Compilation check complete

@@ -1,0 +1,5 @@
+=== Compiling apps_network ===
+Source: network.cpp
+Type: TAPA
+Compilation failed (expected for TAPA designs)
+Compilation check complete

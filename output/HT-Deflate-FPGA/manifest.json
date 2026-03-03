@@ -1,0 +1,108 @@
+{
+  "repository": "https://github.com/UCLA-VAST/HT-Deflate-FPGA.git",
+  "extraction_date": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+  "base_path": "/output/HT-Deflate-FPGA",
+  "designs": {
+    "found": 3,
+    "processed": 3,
+    "hls_designs": 0,
+    "rtl_designs": 3
+  },
+  "design_folders": [
+    {
+      "name": "deflate_aws",
+      "path": "/output/HT-Deflate-FPGA/designs/deflate_aws",
+      "type": "rtl",
+      "platform": "AWS FPGA",
+      "files": 28,
+      "description": "Deflate compression engine AWS implementation with high-throughput LZ77 and Huffman coding",
+      "key_files": [
+        "deflate_top.v",
+        "huffman_translation.v",
+        "hash_match.v",
+        "calc_match_len.v",
+        "pack_out_data.v"
+      ],
+      "synthesis": {
+        "vivado_script": "synthesis_aws.tcl",
+        "target_device": "xcvu9p-flga2104-2-i"
+      }
+    },
+    {
+      "name": "deflate_harp2", 
+      "path": "/output/HT-Deflate-FPGA/designs/deflate_harp2",
+      "type": "rtl",
+      "platform": "Intel HARP2",
+      "files": 33, 
+      "description": "Deflate compression engine Intel HARP2 implementation optimized for Stratix-10 platform",
+      "key_files": [
+        "deflate_top.v",
+        "huffman_translation.v", 
+        "hash_match.v",
+        "calc_match_len.v",
+        "pack_out_data.v"
+      ],
+      "synthesis": {
+        "quartus_script": "synthesis_harp2.tcl",
+        "target_device": "1SG280HU2F50E2VGS1"
+      }
+    },
+    {
+      "name": "interface_top",
+      "path": "/output/HT-Deflate-FPGA/designs/interface_top", 
+      "type": "rtl",
+      "platform": "FPGA Shell",
+      "files": 25,
+      "description": "Top-level FPGA interface providing PCIe, AXI bridges, and elastic block storage coordination",
+      "key_files": [
+        "cl_main.sv",
+        "comm_coordinator.v",
+        "comm_reader.v",
+        "comm_writer.v",
+        "interconnects.v",
+        "user_kernel.v"
+      ],
+      "synthesis": {
+        "vivado_script": "support for AWS DK builds",
+        "quartus_script": "support for HARP2 builds"
+      }
+    }
+  ],
+  "testbenches": {
+    "generated": 3,
+    "location": "each design folder contains testbench.v/testbench.sv",
+    "simulation_support": "Verilator, ModelSim, Vivado Simulator"
+  },
+  "repository_structure": {
+    "benchmark": "test data set for deflate compression validation",
+    "design": {
+      "interface": "FPGA shell logic and host coordination", 
+      "kernel": {
+        "aws": "AWS-specific deflate implementation",
+        "harp2": "Intel HARP2-specific deflate implementation"
+      }
+    },
+    "verify": "pre-built design artifacts and host binaries"
+  },
+  "platforms": {
+    "AWS": {
+      "device": "Xilinx VU9P",
+      "shell": "AWS F1 Device Plugin",
+      "docs": "https://github.com/aws/aws-fpga"
+    },
+    "HARP2": {
+      "device": "Intel Stratix-10 GX",
+      "shell": "Intel FPGA DevStack HARP2",
+      "docs": "https://www.intel.com/content/www/us/en/programmable/overview.html"
+    }
+  },
+  "build_instructions": {
+    "aws_vivado": "cd designs/deflate_aws && vivado -mode batch -source synthesis_aws.tcl",
+    "intel_quartus": "cd designs/deflate_harp2 && quartus_sh -t synthesis_harp2.tcl",
+    "simulation": "cd <design_folder> && verilator --cc testbench.v --exe --build"
+  },
+  "validation": {
+    "compile_logs": "Each design folder contains compile_log.txt with syntax verification results",
+    "benchmark_data": "Verification resources available in /verify/ folder"
+  }
+}

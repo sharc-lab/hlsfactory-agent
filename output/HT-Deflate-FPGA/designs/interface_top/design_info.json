@@ -1,0 +1,16 @@
+{
+  "name": "interface_top",
+  "type": "RTL",
+  "platform": "FPGA Shell",
+  "description": "Top-level FPGA interface design for elastic block storage",
+  "files": [
+    "cl_main.sv",
+    "comm_coordinator.v",
+    "comm_reader.v",
+    "comm_writer.v",
+    "interconnects.v",
+    "user_kernel.v"
+  ],
+  "language": ["Verilog", "SystemVerilog"],
+  "target": "FPGA"
+}

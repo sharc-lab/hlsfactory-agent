@@ -1,0 +1,4 @@
+=== Compiling reg_cnn_vitis_hls ===
+Source: kernel.c
+Type: Vitis_HLS
+Compilation check complete

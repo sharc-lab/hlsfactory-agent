@@ -1,0 +1,10 @@
+{
+  "run_id": "f1630b86-af0f-4ca4-b4ea-15ed02d5e0f5",
+  "timestamp": "2026-03-01T05:52:23.821558+00:00",
+  "repo_url": "https://github.com/UCLA-VAST/blaze.git",
+  "model": "moonshotai/kimi-k2.5",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.0788784,
+  "total_api_calls": 107,
+  "traj_file": "blaze_f1630b86-af0f-4ca4-b4ea-15ed02d5e0f5.traj.json"
+}

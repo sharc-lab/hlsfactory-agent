@@ -1,0 +1,21 @@
+Compiling: ArrayTest.cpp
+Command: clang -c -fsyntax-only -I/workspace/stubs -I/workspace/repo/manager/include -I/workspace/repo/manager/include/blaze -std=c++11 /output/blaze/arraytest_acc/ArrayTest.cpp
+Result: FAILED (return code 1)
+STDERR:
+/output/blaze/arraytest_acc/ArrayTest.cpp:4:10: fatal error: 'blaze.h' file not found
+    4 | #include "blaze.h" 
+      |          ^~~~~~~~~
+1 error generated.
+
+--------------------------------------------------
+Compiling: testbench.cpp
+Command: clang -c -fsyntax-only -I/workspace/stubs -I/workspace/repo/manager/include -I/workspace/repo/manager/include/blaze -std=c++11 /output/blaze/arraytest_acc/testbench.cpp
+Result: FAILED (return code 1)
+STDERR:
+In file included from /output/blaze/arraytest_acc/testbench.cpp:16:
+/output/blaze/arraytest_acc/ArrayTest.cpp:4:10: fatal error: 'blaze.h' file not found
+    4 | #include "blaze.h" 
+      |          ^~~~~~~~~
+1 error generated.
+
+--------------------------------------------------

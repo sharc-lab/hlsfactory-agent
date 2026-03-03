@@ -1,0 +1,14 @@
+Compilation Command: clang++ -c -std=c++17 -fsyntax-only -I. -DAP_INT_MAX_W=8192 -DAM_ABCD=3131 -ferror-limit=10 k_buffer_permutation.cpp\nReturn Code: 0\n\nSTDOUT:\n\n\nSTDERR:\nIn file included from k_buffer_permutation.cpp:1:
+In file included from ./internal_types.h:8:
+In file included from ./packed_array.hpp:8:
+./ap_int.h:226:23: warning: shift count >= width of type [-Wshift-count-overflow]
+  226 |         result = (msb << _AP_W) | lsb;
+      |                       ^  ~~~~~
+./split_merge_stream.h:42:53: note: in instantiation of function template specialization 'ap_uint<512>::operator,<512>' requested here
+   42 |         fw_stream_out.write( (D_WIDTH( bit_width )) (packet_1, packet_0) );
+      |                                                     ^
+k_buffer_permutation.cpp:39:9: note: in instantiation of function template specialization 'merge_stream<30, 1024>' requested here
+   39 |         merge_stream<bp_phi * len_d, ucba_pt::bit_width>( ucba_stream_in_0, ucba_stream_in_1, merged_stream );
+      |         ^
+1 warning generated.
+\n\nCompilation completed successfully!\n

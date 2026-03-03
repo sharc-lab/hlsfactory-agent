@@ -1,0 +1,25 @@
+Compiling: ArrayTest.cpp
+Command: clang -c -fsyntax-only -I/workspace/stubs -I/workspace/repo/manager/include -I/workspace/repo/manager/include/blaze -std=c++11 /output/blaze/arrayTest_cpu/ArrayTest.cpp
+Result: FAILED (return code 1)
+STDERR:
+In file included from /output/blaze/arrayTest_cpu/ArrayTest.cpp:4:
+In file included from /workspace/repo/manager/include/blaze/Task.h:4:
+/workspace/repo/manager/include/blaze/Common.h:4:10: fatal error: 'boost/asio.hpp' file not found
+    4 | #include <boost/asio.hpp>
+      |          ^~~~~~~~~~~~~~~~
+1 error generated.
+
+--------------------------------------------------
+Compiling: testbench.cpp
+Command: clang -c -fsyntax-only -I/workspace/stubs -I/workspace/repo/manager/include -I/workspace/repo/manager/include/blaze -std=c++11 /output/blaze/arrayTest_cpu/testbench.cpp
+Result: FAILED (return code 1)
+STDERR:
+In file included from /output/blaze/arrayTest_cpu/testbench.cpp:16:
+In file included from /output/blaze/arrayTest_cpu/ArrayTest.cpp:4:
+In file included from /workspace/repo/manager/include/blaze/Task.h:4:
+/workspace/repo/manager/include/blaze/Common.h:4:10: fatal error: 'boost/asio.hpp' file not found
+    4 | #include <boost/asio.hpp>
+      |          ^~~~~~~~~~~~~~~~
+1 error generated.
+
+--------------------------------------------------

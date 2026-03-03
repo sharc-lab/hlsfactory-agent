@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="940" viewBox="0 0 1160 940">
+  <defs>
+    <style>
+      .ftitle { font: 700 23px 'Arial', sans-serif; fill: #0f172a; }
+      .fsub   { font: 400 12.5px 'Arial', sans-serif; fill: #64748b; }
+      .ftag   { font: 700 12px 'Arial', sans-serif; letter-spacing: 1.2px; }
+      .fhdr   { font: 700 15px 'Arial', sans-serif; fill: #0f172a; }
+      .fhdr-s { font: 700 13px 'Arial', sans-serif; fill: #0f172a; }
+      .fbody  { font: 400 13px 'Arial', sans-serif; fill: #1e293b; }
+      .fbody-b{ font: 700 13px 'Arial', sans-serif; fill: #1e293b; }
+      .fstep  { font: 400 13px 'Arial', sans-serif; fill: #0f172a; }
+      .flbl   { font: 400 11px 'Arial', sans-serif; fill: #64748b; font-style: italic; }
+      .fgrp   { font: 700 12px 'Arial', sans-serif; letter-spacing: 0.5px; }
+    </style>
+    <marker id="ah"   markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#475569"/></marker>
+    <marker id="ah-b" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2563eb"/></marker>
+    <marker id="ah-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#16a34a"/></marker>
+    <marker id="ah-t" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#0d9488"/></marker>
+    <marker id="ah-a" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#92400e"/></marker>
+  </defs>
+
+  <rect width="1160" height="940" fill="#ffffff"/>
+
+  <!-- TITLE -->
+  <text x="580" y="32" text-anchor="middle" class="ftitle">Agentic HLS Design Extraction Pipeline for HLSFactory</text>
+  <text x="580" y="52" text-anchor="middle" class="fsub">LLM-driven agent automatically extracts, validates, and packages HLS designs from open-source GitHub repositories</text>
+  <line x1="20" y1="62" x2="1140" y2="62" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 1. INPUT BOX                                    -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="12" y="70" width="143" height="310" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="12" y="70" width="143" height="26" rx="10" fill="#e2e8f0"/>
+  <rect x="12" y="84" width="143" height="12" fill="#e2e8f0"/>
+  <text x="84" y="87" text-anchor="middle" class="ftag" fill="#475569">INPUT</text>
+
+  <circle cx="84" cy="146" r="28" fill="#1e293b"/>
+  <path transform="translate(60, 122) scale(2)" fill="white" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+
+  <text x="84" y="202" text-anchor="middle" class="fhdr">HLS Repository</text>
+  <line x1="26" y1="212" x2="142" y2="212" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="84" y="234" text-anchor="middle" class="fbody">GitHub URL</text>
+  <text x="84" y="254" text-anchor="middle" class="fbody">or local path</text>
+  <line x1="26" y1="266" x2="142" y2="266" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="84" y="288" text-anchor="middle" class="fbody">Contains:</text>
+  <text x="84" y="308" text-anchor="middle" class="fbody">&#x2022; HLS kernels</text>
+  <text x="84" y="328" text-anchor="middle" class="fbody">&#x2022; Source files</text>
+  <text x="84" y="348" text-anchor="middle" class="fbody">&#x2022; Build configs</text>
+  <text x="84" y="368" text-anchor="middle" class="fbody">&#x2022; Testbenches</text>
+
+  <!-- Arrow INPUT → ORCHESTRATOR -->
+  <path d="M155 225 L168 225" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 2. ORCHESTRATOR BOX                             -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="168" y="66" width="200" height="498" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="168" y="66" width="200" height="26" rx="10" fill="#bfdbfe"/>
+  <rect x="168" y="80" width="200" height="12" fill="#bfdbfe"/>
+  <text x="268" y="83" text-anchor="middle" class="ftag" fill="#1d4ed8">ORCHESTRATOR</text>
+
+  <text x="268" y="116" text-anchor="middle" class="fhdr">main.py</text>
+  <line x1="182" y1="126" x2="354" y2="126" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="268" y="147" text-anchor="middle" class="fbody" fill="#2563eb">mini-SWE-agent v2</text>
+  <line x1="182" y1="158" x2="354" y2="158" stroke="#bfdbfe" stroke-width="1"/>
+
+  <!-- SETUP group -->
+  <rect x="180" y="166" width="174" height="70" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.2"/>
+  <text x="268" y="181" text-anchor="middle" class="fgrp" fill="#1d4ed8">SETUP</text>
+  <text x="185" y="200" class="fstep"><tspan font-weight="700" fill="#1d4ed8">&#x2460;</tspan>  Build Docker image</text>
+  <text x="185" y="220" class="fstep"><tspan font-weight="700" fill="#1d4ed8">&#x2461;</tspan>  Load config &amp; API key</text>
+
+  <!-- AGENT CONFIGURATION group -->
+  <rect x="180" y="244" width="174" height="88" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.2"/>
+  <text x="268" y="259" text-anchor="middle" class="fgrp" fill="#1d4ed8">AGENT CONFIGURATION</text>
+  <text x="185" y="278" class="fstep"><tspan font-weight="700" fill="#1d4ed8">&#x2462;</tspan>  Build task prompt</text>
+  <text x="185" y="297" class="fstep"><tspan font-weight="700" fill="#1d4ed8">&#x2463;</tspan>  Create DockerEnv</text>
+  <text x="185" y="316" class="fstep"><tspan font-weight="700" fill="#1d4ed8">&#x2464;</tspan>  Instantiate agent</text>
+
+  <!-- EXECUTION & RESULTS group -->
+  <rect x="180" y="340" width="174" height="92" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.2"/>
+  <text x="268" y="356" text-anchor="middle" class="fgrp" fill="#1d4ed8">EXECUTION &amp; RESULTS</text>
+  <text x="185" y="375" class="fstep"><tspan font-weight="700" fill="#1d4ed8">&#x2465;</tspan>  Run agent loop</text>
+  <text x="185" y="395" class="fstep"><tspan font-weight="700" fill="#1d4ed8">&#x2466;&#x2013;&#x2468;</tspan>  Save outputs</text>
+  <text x="205" y="413" class="fstep">&amp; benchmark</text>
+
+  <line x1="182" y1="442" x2="354" y2="442" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="268" y="465" text-anchor="middle" class="fhdr-s">Benchmark Metrics</text>
+  <text x="268" y="485" text-anchor="middle" class="fbody">API cost (USD)</text>
+  <text x="268" y="505" text-anchor="middle" class="fbody">LLM call count</text>
+  <text x="268" y="525" text-anchor="middle" class="fbody">Exit status</text>
+  <text x="268" y="545" text-anchor="middle" class="fbody">Trajectory file</text>
+
+  <!-- Zig-zag arrow from Run agent loop to LLM (routed through inter-panel gap) -->
+  <path d="M300 375 L376 375 L376 181 L428 181" stroke="#ffffff" stroke-width="6" fill="none"/>
+  <path d="M300 375 L376 375 L376 181 L428 181" stroke="#1d4ed8" stroke-width="3.2" fill="none" marker-end="url(#ah-b)"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 3. DOCKER SANDBOX (vertical layout)             -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="385" y="62" width="490" height="816" rx="12" fill="#f9fafb" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="10 6"/>
+  <text x="410" y="82" font-family="Arial" font-size="12" font-weight="700" fill="#1e293b" letter-spacing="1">&#x2B21;  ISOLATED DOCKER EXECUTION ENVIRONMENT</text>
+  <text x="410" y="96" font-family="Arial" font-size="11" fill="#64748b" font-style="italic">Orchestrator launches agent below  &#xB7;  git &#xB7; clang &#xB7; HLS stubs</text>
+
+  <!-- ─── MINI-SWE-AGENT REASONING LOOP (top) ─── -->
+  <rect x="403" y="110" width="460" height="260" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="403" y="110" width="460" height="26" rx="10" fill="#bfdbfe"/>
+  <rect x="403" y="124" width="460" height="12" fill="#bfdbfe"/>
+  <text x="633" y="127" text-anchor="middle" class="ftag" fill="#1d4ed8">MINI-SWE-AGENT REASONING LOOP</text>
+
+  <!-- LLM box -->
+  <rect x="428" y="150" width="410" height="62" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="633" y="175" text-anchor="middle" class="fhdr" fill="#1e3a8a">&#x1F9E0;  LLM</text>
+  <text x="633" y="194" text-anchor="middle" class="flbl">Reasons &amp; generates commands</text>
+
+  <!-- LLM to tool -->
+  <path d="M470 212 L470 232" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#ah-b)"/>
+  <text x="487" y="226" class="flbl" fill="#2563eb">1) run command</text>
+
+  <!-- Bash tool box -->
+  <rect x="428" y="232" width="410" height="62" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+  <text x="633" y="257" text-anchor="middle" class="fhdr" fill="#14532d">&#x26A1;  Bash Tool</text>
+  <text x="633" y="276" text-anchor="middle" class="flbl">Executes in Docker shell</text>
+
+  <!-- Tool back to LLM -->
+  <path d="M790 232 L790 212" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#ah-b)"/>
+  <text x="807" y="226" class="flbl" fill="#2563eb">2) read output</text>
+
+  <!-- Iterate note -->
+  <rect x="417" y="306" width="432" height="34" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="633" y="327" text-anchor="middle" class="fbody-b" fill="#15803d">&#x21BA;  Repeat until extraction checks pass</text>
+
+  <!-- Arrow Reasoning Loop → Pipeline (vertical) -->
+  <path d="M633 370 L633 398" stroke="#0d9488" stroke-width="2.5" fill="none" marker-end="url(#ah-t)"/>
+  <!-- EXECUTES pill badge -->
+  <rect x="650" y="374" width="100" height="20" rx="10" fill="#0f766e"/>
+  <text x="700" y="388" text-anchor="middle" font-family="Arial" font-size="11" fill="#f0fdfa" font-weight="700" letter-spacing="0.8">EXECUTES</text>
+
+  <!-- ─── HLS EXTRACTION PIPELINE (below loop) ─── -->
+  <rect x="403" y="398" width="460" height="460" rx="10" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <rect x="403" y="398" width="460" height="26" rx="10" fill="#99f6e4"/>
+  <rect x="403" y="412" width="460" height="12" fill="#99f6e4"/>
+  <text x="633" y="415" text-anchor="middle" class="ftag" fill="#0f766e">HLS EXTRACTION PIPELINE  (agent bash commands)</text>
+
+  <!-- Pipeline Group 1: Repository Ingestion -->
+  <rect x="417" y="440" width="432" height="72" rx="6" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5"/>
+  <text x="432" y="457" class="fgrp" fill="#0f766e">REPOSITORY INGESTION</text>
+  <text x="432" y="477" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2460;</tspan>  Clone repository &#x2192; /workspace/repo</text>
+  <text x="432" y="497" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2461;</tspan>  Analyze structure, identify HLS designs</text>
+
+  <!-- Pipeline Group 2: Per-Design Processing -->
+  <rect x="417" y="522" width="432" height="120" rx="6" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5"/>
+  <text x="432" y="539" class="fgrp" fill="#0f766e">PER-DESIGN PROCESSING</text>
+  <text x="432" y="559" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2462;</tspan>  Extract each design &#x2192; /output/&lt;repo&gt;/</text>
+  <text x="432" y="579" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2463;</tspan>  Find or generate testbenches</text>
+  <text x="432" y="599" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2464;</tspan>  Generate documentation</text>
+  <text x="432" y="619" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2465;</tspan>  Compile with clang &#xB7; validate</text>
+
+  <!-- Pipeline Group 3: Packaging -->
+  <rect x="417" y="652" width="432" height="100" rx="6" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1.5"/>
+  <text x="432" y="669" class="fgrp" fill="#0f766e">PACKAGING</text>
+  <text x="432" y="689" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2466;</tspan>  Generate Vivado HLS TCL synthesis scripts</text>
+  <text x="432" y="709" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2467;</tspan>  Create manifest summarizing all designs</text>
+  <text x="432" y="729" class="fstep"><tspan font-weight="700" fill="#0f766e">&#x2468;</tspan>  Organize under /output/&lt;repo-name&gt;/</text>
+
+  <!-- Arrow Pipeline steps → Artifacts -->
+  <path d="M633 752 L633 774" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#ah-g)"/>
+
+  <!-- Per-Design Artifacts -->
+  <rect x="417" y="774" width="432" height="70" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="633" y="794" text-anchor="middle" class="fhdr-s" fill="#166534">Per-Design Artifacts</text>
+  <line x1="431" y1="802" x2="845" y2="802" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="633" y="820" text-anchor="middle" class="fbody">Source Files &#xB7; Testbench &#xB7; Synthesis Script &#xB7; Documentation</text>
+  <text x="633" y="838" text-anchor="middle" class="fbody">Repository-Level Manifest</text>
+
+  <!-- Arrow DOCKER → OUTPUT -->
+  <path d="M875 220 L898 220" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+  <text x="886" y="212" text-anchor="middle" class="flbl">outputs</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 4. OUTPUT BOX                                   -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="898" y="66" width="240" height="300" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <rect x="898" y="66" width="240" height="26" rx="10" fill="#bbf7d0"/>
+  <rect x="898" y="80" width="240" height="12" fill="#bbf7d0"/>
+  <text x="1018" y="83" text-anchor="middle" class="ftag" fill="#166534">EXTRACTED OUTPUTS</text>
+
+  <text x="1018" y="118" text-anchor="middle" class="fhdr">Structured HLS Package</text>
+  <line x1="912" y1="128" x2="1124" y2="128" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="912" y="152" class="fbody">&#x1F4C1;  /output/&lt;repo-name&gt;/</text>
+  <text x="926" y="173" class="fbody">&#x251C;&#x2500; &lt;design&gt;/</text>
+  <text x="940" y="193" class="fbody">&#x2502;  &#x251C;&#x2500; source + testbench</text>
+  <text x="940" y="213" class="fbody">&#x2502;  &#x2514;&#x2500; synthesize.tcl</text>
+  <text x="926" y="233" class="fbody">&#x2514;&#x2500; manifest.json</text>
+  <line x1="912" y1="246" x2="1124" y2="246" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="912" y="268" class="fbody">&#x1F4CA;  Agent Trajectory &amp; Benchmark</text>
+
+  <!-- Arrow OUTPUT → HLSFACTORY -->
+  <path d="M1018 366 L1018 400" stroke="#92400e" stroke-width="2.5" fill="none" marker-end="url(#ah-a)"/>
+  <!-- Ingest pill badge -->
+  <rect x="1038" y="372" width="92" height="22" rx="11" fill="#92400e"/>
+  <text x="1084" y="387" text-anchor="middle" font-family="Arial" font-size="11" fill="#fef3c7" font-weight="700" letter-spacing="0.8">INGEST</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 5. HLSFACTORY DATASET BOX                       -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="898" y="400" width="240" height="400" rx="10" fill="#fefce8" stroke="#ca8a04" stroke-width="2.5"/>
+  <rect x="898" y="400" width="240" height="26" rx="10" fill="#fde68a"/>
+  <rect x="898" y="414" width="240" height="12" fill="#fde68a"/>
+  <text x="1018" y="417" text-anchor="middle" class="ftag" fill="#92400e">HLSFACTORY DATASET</text>
+
+  <text x="1018" y="454" text-anchor="middle" class="fhdr" fill="#92400e">HLSFactory</text>
+  <line x1="912" y1="466" x2="1124" y2="466" stroke="#fde68a" stroke-width="1"/>
+
+  <text x="912" y="492" class="fbody">&#x2713;  Structured Design Folders</text>
+  <text x="912" y="516" class="fbody">&#x2713;  Verified Compilation</text>
+  <text x="912" y="540" class="fbody">&#x2713;  TCL Synthesis Scripts</text>
+  <text x="912" y="564" class="fbody">&#x2713;  Testbench Coverage</text>
+  <text x="912" y="588" class="fbody">&#x2713;  Manifest Metadata</text>
+  <text x="912" y="612" class="fbody">&#x2713;  Reproducible Pipeline</text>
+  <line x1="912" y1="630" x2="1124" y2="630" stroke="#fde68a" stroke-width="1"/>
+
+  <text x="1018" y="654" text-anchor="middle" class="fhdr-s" fill="#92400e">Ready for Benchmarking</text>
+  <text x="1018" y="674" text-anchor="middle" class="fhdr-s" fill="#92400e">and HLS Synthesis</text>
+  <line x1="912" y1="692" x2="1124" y2="692" stroke="#fde68a" stroke-width="1"/>
+  <text x="1018" y="716" text-anchor="middle" class="flbl">Scalable to any open-source</text>
+  <text x="1018" y="736" text-anchor="middle" class="flbl">HLS GitHub repository</text>
+  <text x="1018" y="756" text-anchor="middle" class="flbl">via single command</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- Section labels                                  -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <text x="84"   y="908" text-anchor="middle" class="flbl">(a) Input</text>
+  <text x="268"  y="908" text-anchor="middle" class="flbl">(b) Orchestration</text>
+  <text x="630"  y="908" text-anchor="middle" class="flbl">(c) Agent Execution (Docker)</text>
+  <text x="1018" y="908" text-anchor="middle" class="flbl">(d) Output / HLSFactory</text>
+
+</svg>

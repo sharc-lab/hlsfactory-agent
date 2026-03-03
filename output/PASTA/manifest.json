@@ -1,713 +1,271 @@
 {
-  "repository": "PASTA",
-  "source_url": "https://github.com/SFU-HiAccel/PASTA",
-  "extraction_date": "2026-02-24T03:31:20.834810",
+  "repository": "https://github.com/SFU-HiAccel/pasta.git",
+  "extraction_date": "2026-03-03T04:25:40+00:00",
   "total_designs": 24,
-  "successful_compiles": 1,
-  "failed_compiles": 23,
   "designs": [
     {
-      "name": "vadd",
-      "category": "pasta-examples",
-      "subcategory": null,
-      "path": "pasta-examples/vadd",
-      "source_files": [
-        "src/add-host.cpp",
-        "src/add.cpp",
-        "src/add.h"
-      ],
-      "kernel_files": [
-        "src/add.cpp"
-      ],
-      "host_files": [
-        "src/add-host.cpp"
-      ],
-      "header_files": [
-        "src/add.h"
-      ],
-      "compile_success": true,
-      "compile_errors": []
+      "name": "apps_bandwidth",
+      "top_function": "Copy",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 2,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "bandwidth.cpp"
     },
     {
-      "name": "vadd-buffers",
-      "category": "pasta-examples",
-      "subcategory": null,
-      "path": "pasta-examples/vadd-buffers",
-      "source_files": [
-        "src/add-host.cpp",
-        "src/add.cpp",
-        "src/add.h"
-      ],
-      "kernel_files": [
-        "src/add.cpp"
-      ],
-      "host_files": [
-        "src/add-host.cpp"
-      ],
-      "header_files": [
-        "src/add.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "add.cpp",
-          "/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:45:18: error: no template named 'ibuffers' in namespace 'tapa'; did you mean 'ibuffer'?\n   45 |            tapa::ibuffers<float[TILE], 4, 2>& buffers_c,\n      |            ~~~~~~^~~~~~~~\n      |                  ibuffer\n/workspace/stubs/tapa.h:148:7: note: 'ibuffer' declared here\n  148 | class ibuffer : public buffer<T, S> {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:45:18: error: too many template arguments for class template 'ibuffer'\n   45 |            tapa::ibuffers<float[TILE], 4, 2>& buffers_c,\n      |                  ^                        ~~\n/workspace/stubs/tapa.h:148:7: note: template is declared here\n  147 | template<typename T, uint64_t S>\n      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  148 | class ibuffer : public buffer<T, S> {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:76:19: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   76 | void VecAdd(tapa::mmaps<const float, 4> vectors_a,\n      |             ~~~~~~^~~~~\n      |                   mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:76:19: error: too many template arguments for class template 'mmap'\n   76 | void VecAdd(tapa::mmaps<const float, 4> vectors_a,\n      |                   ^                  ~~\n/workspace/stubs/tapa.h:53:7: note: template is declared here\n   52 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   53 | class mmap {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:77:19: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   77 |             tapa::mmaps<const float, 4> vectors_b,\n      |             ~~~~~~^~~~~\n      |                   mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:77:19: error: too many template arguments for class template 'mmap'\n   77 |             tapa::mmaps<const float, 4> vectors_b,\n      |                   ^                  ~~\n/workspace/stubs/tapa.h:53:7: note: template is declared here\n   52 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   53 | class mmap {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:79:9: error: no template named 'buffers' in namespace 'tapa'; did you mean 'buffer'?\n   79 |   tapa::buffers<float[TILE], 4, 2> buffers_a;\n      |   ~~~~~~^~~~~~~\n      |         buffer\n/workspace/stubs/tapa.h:115:7: note: 'buffer' declared here\n  115 | class buffer {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:79:9: error: too many template arguments for class template 'buffer'\n   79 |   tapa::buffers<float[TILE], 4, 2> buffers_a;\n      |         ^                       ~~\n/workspace/stubs/tapa.h:115:7: note: template is declared here\n  114 | template<typename T, uint64_t S>\n      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  115 | class buffer {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:80:9: error: no template named 'buffers' in namespace 'tapa'; did you mean 'buffer'?\n   80 |   tapa::buffers<float[TILE], 4, 2> buffers_b;\n      |   ~~~~~~^~~~~~~\n      |         buffer\n/workspace/stubs/tapa.h:115:7: note: 'buffer' declared here\n  115 | class buffer {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:80:9: error: too many template arguments for class template 'buffer'\n   80 |   tapa::buffers<float[TILE], 4, 2> buffers_b;\n      |         ^                       ~~\n/workspace/stubs/tapa.h:115:7: note: template is declared here\n  114 | template<typename T, uint64_t S>\n      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  115 | class buffer {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:81:9: error: no template named 'buffers' in namespace 'tapa'; did you mean 'buffer'?\n   81 |   tapa::buffers<float[TILE], 4, 2> buffers_c;\n      |   ~~~~~~^~~~~~~\n      |         buffer\n/workspace/stubs/tapa.h:115:7: note: 'buffer' declared here\n  115 | class buffer {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:81:9: error: too many template arguments for class template 'buffer'\n   81 |   tapa::buffers<float[TILE], 4, 2> buffers_c;\n      |         ^                       ~~\n/workspace/stubs/tapa.h:115:7: note: template is declared here\n  114 | template<typename T, uint64_t S>\n      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  115 | class buffer {\n      |       ^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:83:19: error: no member named 'join' in namespace 'tapa'\n   83 |     .invoke<tapa::join, 4>(load, vectors_a, buffers_a, n_tiles)\n      |             ~~~~~~^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:84:19: error: no member named 'join' in namespace 'tapa'\n   84 |     .invoke<tapa::join, 4>(load, vectors_b, buffers_b, n_tiles)\n      |             ~~~~~~^\n/output/PASTA/pasta-examples/vadd-buffers/src/add.cpp:85:19: error: no member named 'join' in namespace 'tapa'\n   85 |     .invoke<tapa::join, 4>(vadd, buffers_a, buffers_b, buffers_c, n_tiles)\n      |             ~~~~~~^\n15 errors generated.\n"
-        ]
-      ]
+      "name": "apps_cannon",
+      "top_function": "Scatter",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "cannon.cpp"
     },
     {
-      "name": "vadd-partitioned",
-      "category": "pasta-examples",
-      "subcategory": null,
-      "path": "pasta-examples/vadd-partitioned",
-      "source_files": [
-        "src/add-host.cpp",
-        "src/add.cpp",
-        "src/add.h"
-      ],
-      "kernel_files": [
-        "src/add.cpp"
-      ],
-      "host_files": [
-        "src/add-host.cpp"
-      ],
-      "header_files": [
-        "src/add.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "add.cpp",
-          "/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:6:47: error: no member named 'array_partition' in namespace 'tapa'\n    6 |           tapa::obuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer,\n      |                                         ~~~~~~^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:6:69: error: no member named 'cyclic' in namespace 'tapa'\n    6 |           tapa::obuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer,\n      |                                                               ~~~~~~^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:6:78: error: expected ')'\n    6 |           tapa::obuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer,\n      |                                                                              ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:5:10: note: to match this '('\n    5 | void load(tapa::mmap<const float> vector,\n      |          ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:8:35: error: use of undeclared identifier 'n_tiles'\n    8 |   for (int tile_id = 0; tile_id < n_tiles; tile_id++) {\n      |                                   ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:10:20: error: use of undeclared identifier 'buffer'\n   10 |     auto section = buffer.acquire();\n      |                    ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:19:47: error: no member named 'array_partition' in namespace 'tapa'\n   19 | void vadd(tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer_a,\n      |                                         ~~~~~~^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:19:69: error: no member named 'cyclic' in namespace 'tapa'\n   19 | void vadd(tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer_a,\n      |                                                               ~~~~~~^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:19:78: error: expected ')'\n   19 | void vadd(tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer_a,\n      |                                                                              ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:19:10: note: to match this '('\n   19 | void vadd(tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer_a,\n      |          ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:23:35: error: use of undeclared identifier 'n_tiles'\n   23 |   for (int tile_id = 0; tile_id < n_tiles; tile_id++) {\n      |                                   ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:26:22: error: use of undeclared identifier 'buffer_a'\n   26 |     auto section_a = buffer_a.acquire();\n      |                      ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:27:22: error: use of undeclared identifier 'buffer_b'\n   27 |     auto section_b = buffer_b.acquire();\n      |                      ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:28:22: error: use of undeclared identifier 'buffer_c'\n   28 |     auto section_c = buffer_c.acquire();\n      |                      ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:44:48: error: no member named 'array_partition' in namespace 'tapa'\n   44 |            tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer_c,\n      |                                          ~~~~~~^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:44:70: error: no member named 'cyclic' in namespace 'tapa'\n   44 |            tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer_c,\n      |                                                                ~~~~~~^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:44:79: error: expected ')'\n   44 |            tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>& buffer_c,\n      |                                                                               ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:43:11: note: to match this '('\n   43 | void store(tapa::mmap<float> vector,\n      |           ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:46:35: error: use of undeclared identifier 'n_tiles'\n   46 |   for (int tile_id = 0; tile_id < n_tiles; tile_id++) {\n      |                                   ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:48:20: error: use of undeclared identifier 'buffer_c'\n   48 |     auto section = buffer_c.acquire();\n      |                    ^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:60:38: error: no member named 'array_partition' in namespace 'tapa'\n   60 |   tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>> buffer_a;\n      |                                ~~~~~~^\n/output/PASTA/pasta-examples/vadd-partitioned/src/add.cpp:60:60: error: no member named 'cyclic' in namespace 'tapa'\n   60 |   tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>> buffer_a;\n      |                                                      ~~~~~~^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "apps_graph",
+      "top_function": "Control",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 1,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "graph.cpp"
     },
     {
-      "name": "vadd-using",
-      "category": "pasta-examples",
-      "subcategory": null,
-      "path": "pasta-examples/vadd-using",
-      "source_files": [
-        "src/add-host.cpp",
-        "src/add.cpp",
-        "src/add.h"
-      ],
-      "kernel_files": [
-        "src/add.cpp"
-      ],
-      "host_files": [
-        "src/add-host.cpp"
-      ],
-      "header_files": [
-        "src/add.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "add.cpp",
-          "/output/PASTA/pasta-examples/vadd-using/src/add.cpp:5:53: error: no member named 'array_partition' in namespace 'tapa'\n    5 | using buffer_t = tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                               ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:5:75: error: no member named 'cyclic' in namespace 'tapa'\n    5 | using buffer_t = tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                                     ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:5:85: error: expected ';' after alias declaration\n    5 | using buffer_t = tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                                                     ^\n      |                                                                                     ;\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:6:55: error: no member named 'array_partition' in namespace 'tapa'\n    6 | using ibuffer_t = tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                 ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:6:77: error: no member named 'cyclic' in namespace 'tapa'\n    6 | using ibuffer_t = tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                                       ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:6:87: error: expected ';' after alias declaration\n    6 | using ibuffer_t = tapa::ibuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                                                       ^\n      |                                                                                       ;\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:7:55: error: no member named 'array_partition' in namespace 'tapa'\n    7 | using obuffer_t = tapa::obuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                 ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:7:77: error: no member named 'cyclic' in namespace 'tapa'\n    7 | using obuffer_t = tapa::obuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                                       ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:7:87: error: expected ';' after alias declaration\n    7 | using obuffer_t = tapa::obuffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>>;\n      |                                                                                       ^\n      |                                                                                       ;\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:10:11: error: unknown type name 'obuffer_t'\n   10 |           obuffer_t& buffer,\n      |           ^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:23:11: error: use of undeclared identifier 'ibuffer_t'; did you mean 'tapa::ibuffer'?\n   23 | void vadd(ibuffer_t& buffer_a,\n      |           ^~~~~~~~~\n      |           tapa::ibuffer\n/workspace/stubs/tapa.h:148:7: note: 'tapa::ibuffer' declared here\n  148 | class ibuffer : public buffer<T, S> {\n      |       ^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:23:11: error: unknown type name 'ibuffer_t'\n   23 | void vadd(ibuffer_t& buffer_a,\n      |           ^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:24:11: error: unknown type name 'ibuffer_t'\n   24 |           ibuffer_t& buffer_b,\n      |           ^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:25:11: error: unknown type name 'obuffer_t'\n   25 |           obuffer_t& buffer_c,\n      |           ^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:48:12: error: unknown type name 'ibuffer_t'\n   48 |            ibuffer_t& buffer_c,\n      |            ^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:64:38: error: no member named 'array_partition' in namespace 'tapa'\n   64 |   tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>> buffer_a;\n      |                                ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:64:60: error: no member named 'cyclic' in namespace 'tapa'\n   64 |   tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>> buffer_a;\n      |                                                      ~~~~~~^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:64:69: error: expected unqualified-id\n   64 |   tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>> buffer_a;\n      |                                                                     ^\n/output/PASTA/pasta-examples/vadd-using/src/add.cpp:65:38: error: no member named 'array_partition' in namespace 'tapa'\n   65 |   tapa::buffer<float[TILE], 2, tapa::array_partition<tapa::cyclic<2>>, tapa::memcore<tapa::bram>> buffer_b;\n      |                                ~~~~~~^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "apps_jacobi",
+      "top_function": "Mmap2Stream",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "jacobi.cpp"
     },
     {
-      "name": "cnn",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/cnn",
-      "source_files": [
-        "tapa/src/tapa_kernel.cpp",
-        "vitis_hls/src/kernel_host.cpp",
-        "vitis_hls/src/kernel_kernel.cpp",
-        "vitis_hls/src/kernel.h",
-        "vitis_hls/src/kernel_kernel.h",
-        "vitis_hls/src/kernel_host.hpp"
-      ],
-      "kernel_files": [
-        "tapa/src/tapa_kernel.cpp",
-        "vitis_hls/src/kernel_kernel.cpp"
-      ],
-      "host_files": [
-        "vitis_hls/src/kernel_host.cpp",
-        "vitis_hls/src/kernel_host.hpp"
-      ],
-      "header_files": [
-        "vitis_hls/src/kernel.h",
-        "vitis_hls/src/kernel_kernel.h",
-        "vitis_hls/src/kernel_host.hpp"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "tapa_kernel.cpp",
-          "In file included from /output/PASTA/regression/cnn/tapa/src/tapa_kernel.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/cnn/tapa/src/tapa_kernel.cpp:48:21: error: no viable conversion from 'int' to 'ap_uint<5>'\n   48 |     for( ap_uint<5> c3 = p0; c3 <= 12; c3 += 1 ) {\n      |                     ^    ~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<5> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<5> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/output/PASTA/regression/cnn/tapa/src/tapa_kernel.cpp:48:33: error: invalid operands to binary expression ('ap_uint<5>' and 'int')\n   48 |     for( ap_uint<5> c3 = p0; c3 <= 12; c3 += 1 ) {\n      |                              ~~ ^  ~~\n/output/PASTA/regression/cnn/tapa/src/tapa_kernel.cpp:48:43: error: no viable overloaded '+='\n   48 |     for( ap_uint<5> c3 = p0; c3 <= 12; c3 += 1 ) {\n      |                                        ~~ ^  ~\n/output/PASTA/regression/cnn/tapa/src/tapa_kernel.cpp:49:25: error: no viable conversion from 'int' to 'ap_uint<5>'\n   49 |         for( ap_uint<5> c4 = 0; c4 <= 15; c4 += 1 ) {\n      |                         ^    ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<5> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<5> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ],
-        [
-          "kernel_kernel.cpp",
-          "In file included from /output/PASTA/regression/cnn/vitis_hls/src/kernel_kernel.cpp:1:\nIn file included from /output/PASTA/regression/cnn/vitis_hls/src/kernel_kernel.h:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/cnn/vitis_hls/src/kernel_kernel.cpp:61:21: error: no viable conversion from 'int' to 'ap_uint<5>'\n   61 |     for (ap_uint<5> c3 = p0; c3 <= 12; c3 += 1) {\n      |                     ^    ~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<5> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<5> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/output/PASTA/regression/cnn/vitis_hls/src/kernel_kernel.cpp:61:33: error: invalid operands to binary expression ('ap_uint<5>' and 'int')\n   61 |     for (ap_uint<5> c3 = p0; c3 <= 12; c3 += 1) {\n      |                              ~~ ^  ~~\n/output/PASTA/regression/cnn/vitis_hls/src/kernel_kernel.cpp:61:43: error: no viable overloaded '+='\n   61 |     for (ap_uint<5> c3 = p0; c3 <= 12; c3 += 1) {\n      |                                        ~~ ^  ~\n/output/PASTA/regression/cnn/vitis_hls/src/kernel_kernel.cpp:63:23: error: no viable conversion from 'int' to 'ap_uint<5>'\n   63 |       for (ap_uint<5> c4 = 0; c4 <= 15; c4 += 1) {\n      |                       ^    ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<5> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<5> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "apps_nested-vadd",
+      "top_function": "Add",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "vadd.cpp"
     },
     {
-      "name": "hbm-bandwidth",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/hbm-bandwidth",
-      "source_files": [
-        "src/bandwidth-host.cpp",
-        "src/bandwidth.cpp",
-        "src/bandwidth.h"
-      ],
-      "kernel_files": [
-        "src/bandwidth.cpp"
-      ],
-      "host_files": [
-        "src/bandwidth-host.cpp"
-      ],
-      "header_files": [
-        "src/bandwidth.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "bandwidth.cpp",
-          "In file included from /output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:6:\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.h:3:20: error: no template named 'vec_t' in namespace 'tapa'\n    3 | using Elem = tapa::vec_t<float, 16>;\n      |              ~~~~~~^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:8:28: error: use of undeclared identifier 'Elem'\n    8 | void Copy(tapa::async_mmap<Elem>& mem, uint64_t n, uint64_t flags) {\n      |                            ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:14:3: error: unknown type name 'Elem'\n   14 |   Elem elem;\n      |   ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:28:7: error: use of undeclared identifier 'VLOG'\n   28 |       VLOG(3) << \"RD REQ [\" << std::setw(5) << read_addr << \"]\";\n      |       ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:37:7: error: use of undeclared identifier 'VLOG'\n   37 |       VLOG(3) << \"RD RSP #\" << std::setw(5) << i_rd_resp - 1;\n      |       ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:46:7: error: use of undeclared identifier 'VLOG'\n   46 |       VLOG(3) << \"WR REQ [\" << std::setw(5) << write_addr << \"]\";\n      |       ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:52:7: error: use of undeclared identifier 'VLOG'\n   52 |       VLOG(3) << \"WR RSP #\" << std::setw(5) << i_wr_resp - 1;\n      |       ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:57:22: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   57 | void Bandwidth(tapa::mmaps<Elem, kBankCount> chan, uint64_t n, uint64_t flags) {\n      |                ~~~~~~^~~~~\n      |                      mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:57:28: error: use of undeclared identifier 'Elem'\n   57 | void Bandwidth(tapa::mmaps<Elem, kBankCount> chan, uint64_t n, uint64_t flags) {\n      |                            ^\n/output/PASTA/regression/hbm-bandwidth/src/bandwidth.cpp:58:29: error: no member named 'join' in namespace 'tapa'\n   58 |   tapa::task().invoke<tapa::join, kBankCount>(Copy, chan, n, flags);\n      |                       ~~~~~~^\n10 errors generated.\n"
-        ]
-      ]
+      "name": "apps_network",
+      "top_function": "Switch2x2",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "network.cpp"
     },
     {
-      "name": "hbm-bandwidth-1-ch",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/hbm-bandwidth-1-ch",
-      "source_files": [
-        "src/bandwidth-host.cpp",
-        "src/bandwidth.cpp",
-        "src/bandwidth.h"
-      ],
-      "kernel_files": [
-        "src/bandwidth.cpp"
-      ],
-      "host_files": [
-        "src/bandwidth-host.cpp"
-      ],
-      "header_files": [
-        "src/bandwidth.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "bandwidth.cpp",
-          "In file included from /output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:6:\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.h:3:20: error: no template named 'vec_t' in namespace 'tapa'\n    3 | using Elem = tapa::vec_t<float, 16>;\n      |              ~~~~~~^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:8:28: error: use of undeclared identifier 'Elem'\n    8 | void Copy(tapa::async_mmap<Elem>& mem, uint64_t n, uint64_t flags) {\n      |                            ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:14:3: error: unknown type name 'Elem'\n   14 |   Elem elem;\n      |   ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:28:7: error: use of undeclared identifier 'VLOG'\n   28 |       VLOG(3) << \"RD REQ [\" << std::setw(5) << read_addr << \"]\";\n      |       ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:37:7: error: use of undeclared identifier 'VLOG'\n   37 |       VLOG(3) << \"RD RSP #\" << std::setw(5) << i_rd_resp - 1;\n      |       ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:46:7: error: use of undeclared identifier 'VLOG'\n   46 |       VLOG(3) << \"WR REQ [\" << std::setw(5) << write_addr << \"]\";\n      |       ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:52:7: error: use of undeclared identifier 'VLOG'\n   52 |       VLOG(3) << \"WR RSP #\" << std::setw(5) << i_wr_resp - 1;\n      |       ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:57:22: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   57 | void Bandwidth(tapa::mmaps<Elem, kBankCount> chan, uint64_t n, uint64_t flags) {\n      |                ~~~~~~^~~~~\n      |                      mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:57:28: error: use of undeclared identifier 'Elem'\n   57 | void Bandwidth(tapa::mmaps<Elem, kBankCount> chan, uint64_t n, uint64_t flags) {\n      |                            ^\n/output/PASTA/regression/hbm-bandwidth-1-ch/src/bandwidth.cpp:58:29: error: no member named 'join' in namespace 'tapa'\n   58 |   tapa::task().invoke<tapa::join, kBankCount>(Copy, chan, n, flags);\n      |                       ~~~~~~^\n10 errors generated.\n"
-        ]
-      ]
+      "name": "apps_shared-vadd",
+      "top_function": "Add",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "vadd.cpp"
     },
     {
-      "name": "knn",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/knn",
-      "source_files": [
-        "src/knn-host.cpp",
-        "src/knn.cpp",
-        "src/knn.h"
-      ],
-      "kernel_files": [
-        "src/knn.cpp"
-      ],
-      "host_files": [
-        "src/knn-host.cpp"
-      ],
-      "header_files": [
-        "src/knn.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "knn.cpp",
-          "In file included from /output/PASTA/regression/knn/src/knn.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/knn/src/knn.cpp:50:9: error: too many template arguments for class template 'ap_axiu'\n   50 | typedef ap_axiu<SWIDTH, 0, 0, 0> pkt;\n      |         ^               ~~~~~~~~\n/workspace/stubs/ap_axi_sdata.h:29:8: note: template is declared here\n   28 | template<int D>\n      | ~~~~~~~~~~~~~~~\n   29 | struct ap_axiu {\n      |        ^\n/output/PASTA/regression/knn/src/knn.cpp:51:9: error: too many template arguments for class template 'ap_axiu'\n   51 | typedef ap_axiu<32, 0, 0, 0>    id_pkt;\n      |         ^           ~~~~~~~~\n/workspace/stubs/ap_axi_sdata.h:29:8: note: template is declared here\n   28 | template<int D>\n      | ~~~~~~~~~~~~~~~\n   29 | struct ap_axiu {\n      |        ^\n/output/PASTA/regression/knn/src/knn.cpp:97:52: error: no member named 'read_addr' in 'tapa::async_mmap<ap_uint<256>>'\n   97 |           if (i_req < TILE_LEN_IN_I && searchSpace.read_addr.try_write(addr)) {\n      |                                        ~~~~~~~~~~~ ^\n/output/PASTA/regression/knn/src/knn.cpp:100:28: error: no member named 'read_data' in 'tapa::async_mmap<ap_uint<256>>'\n  100 |           if (!searchSpace.read_data.empty()) {\n      |                ~~~~~~~~~~~ ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "apps_vadd",
+      "top_function": "Add",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "vadd.cpp"
     },
     {
-      "name": "lu_decompose",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/lu_decompose",
-      "source_files": [
-        "hls/src/kernel_host.cpp",
-        "hls/src/kernel_kernel.cpp",
-        "tapa/src/kernel_kernel.cpp",
-        "hls/src/kernel.h",
-        "hls/src/kernel_kernel.h"
-      ],
-      "kernel_files": [
-        "hls/src/kernel_kernel.cpp",
-        "tapa/src/kernel_kernel.cpp"
-      ],
-      "host_files": [
-        "hls/src/kernel_host.cpp"
-      ],
-      "header_files": [
-        "hls/src/kernel.h",
-        "hls/src/kernel_kernel.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "kernel_kernel.cpp",
-          "In file included from /output/PASTA/regression/lu_decompose/hls/src/kernel_kernel.cpp:1:\nIn file included from /output/PASTA/regression/lu_decompose/hls/src/kernel_kernel.h:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/lu_decompose/hls/src/kernel_kernel.cpp:13:21: error: no viable conversion from 'int' to 'ap_uint<6>'\n   13 |     for (ap_uint<6> c2 = 0; c2 <= 31; c2 += 1) {\n      |                     ^    ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<6> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<6> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/output/PASTA/regression/lu_decompose/hls/src/kernel_kernel.cpp:13:32: error: invalid operands to binary expression ('ap_uint<6>' and 'int')\n   13 |     for (ap_uint<6> c2 = 0; c2 <= 31; c2 += 1) {\n      |                             ~~ ^  ~~\n/output/PASTA/regression/lu_decompose/hls/src/kernel_kernel.cpp:13:42: error: no viable overloaded '+='\n   13 |     for (ap_uint<6> c2 = 0; c2 <= 31; c2 += 1) {\n      |                                       ~~ ^  ~\n/output/PASTA/regression/lu_decompose/hls/src/kernel_kernel.cpp:19:28: error: invalid operands to binary expression ('int' and 'ap_uint<6>')\n   19 |         in_data = A[c0 + 32*c2];\n      |                          ~~^~~\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ],
-        [
-          "kernel_kernel.cpp",
-          "In file included from /output/PASTA/regression/lu_decompose/tapa/src/kernel_kernel.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/lu_decompose/tapa/src/kernel_kernel.cpp:115:19: error: no viable conversion from 'int' to 'ap_uint<6>'\n  115 |   for (ap_uint<6> c2 = p0; c2 <= 31; c2 += 1) {\n      |                   ^    ~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<6> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<6> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/output/PASTA/regression/lu_decompose/tapa/src/kernel_kernel.cpp:115:31: error: invalid operands to binary expression ('ap_uint<6>' and 'int')\n  115 |   for (ap_uint<6> c2 = p0; c2 <= 31; c2 += 1) {\n      |                            ~~ ^  ~~\n/output/PASTA/regression/lu_decompose/tapa/src/kernel_kernel.cpp:115:41: error: no viable overloaded '+='\n  115 |   for (ap_uint<6> c2 = p0; c2 <= 31; c2 += 1) {\n      |                                      ~~ ^  ~\n/output/PASTA/regression/lu_decompose/tapa/src/kernel_kernel.cpp:120:21: error: no viable overloaded operator[] for type 'prev_V_t1[32][1]' (aka 'float[32][1]')\n  120 |         local_prev_V[c2][0] = local_A[0][0];\n      |         ~~~~~~~~~~~~^~~\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_cnn_tapa",
+      "top_function": "A_IO_L3_in",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "tapa_kernel.cpp"
     },
     {
-      "name": "page_rank",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/page_rank",
-      "source_files": [
-        "tapa/src/page-rank-host.cpp",
-        "tapa/src/page-rank.cpp",
-        "tapa/src/page-rank-kernel.h",
-        "tapa/src/page-rank.h",
-        "tapa/src/nxgraph.hpp"
-      ],
-      "kernel_files": [
-        "tapa/src/page-rank.cpp"
-      ],
-      "host_files": [
-        "tapa/src/page-rank-host.cpp"
-      ],
-      "header_files": [
-        "tapa/src/page-rank-kernel.h",
-        "tapa/src/page-rank.h",
-        "tapa/src/nxgraph.hpp"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "page-rank.cpp",
-          "In file included from /output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:8:\nIn file included from /output/PASTA/regression/page_rank/tapa/src/page-rank-kernel.h:6:\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:84:24: error: no template named 'vec_t' in namespace 'tapa'\n   84 | using FloatVec = tapa::vec_t<float, kVertexVecLen>;\n      |                  ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:85:23: error: no template named 'vec_t' in namespace 'tapa'\n   85 | using EdgeVec = tapa::vec_t<Edge, kEdgeVecLen>;\n      |                 ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:86:25: error: no template named 'vec_t' in namespace 'tapa'\n   86 | using UpdateVec = tapa::vec_t<Update, kUpdateVecLen>;\n      |                   ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:88:57: error: unknown type name 'UpdateVec'; did you mean 'Update'?\n   88 | inline std::ostream& operator<<(std::ostream& os, const UpdateVec& obj) {\n      |                                                         ^~~~~~~~~\n      |                                                         Update\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:67:8: note: 'Update' declared here\n   67 | struct Update {\n      |        ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:88:22: error: redefinition of 'operator<<'\n   88 | inline std::ostream& operator<<(std::ostream& os, const UpdateVec& obj) {\n      |                      ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:72:22: note: previous definition is here\n   72 | inline std::ostream& operator<<(std::ostream& os, const Update& obj) {\n      |                      ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:91:23: error: use of undeclared identifier 'UpdateVec'; did you mean 'Update'?\n   91 |   for (int i = 0; i < UpdateVec::length; ++i) {\n      |                       ^~~~~~~~~\n      |                       Update\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:67:8: note: 'Update' declared here\n   67 | struct Update {\n      |        ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:91:34: error: no member named 'length' in 'Update'\n   91 |   for (int i = 0; i < UpdateVec::length; ++i) {\n      |                       ~~~~~~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:92:12: error: type 'const Update' does not provide a subscript operator\n   92 |     if (obj[i].dst != 0) {\n      |         ~~~^~\n/output/PASTA/regression/page_rank/tapa/src/page-rank.h:98:37: error: type 'const Update' does not provide a subscript operator\n   98 |       os << \"[\" << i << \"]: \" << obj[i];\n      |                                  ~~~^~\nIn file included from /output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:8:\n/output/PASTA/regression/page_rank/tapa/src/page-rank-kernel.h:21:29: error: no template named 'vec_t' in namespace 'tapa'\n   21 | using VertexAttrVec = tapa::vec_t<VertexAttrKernel, kVertexVecLen>;\n      |                       ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank-kernel.h:72:26: error: no template named 'packet' in namespace 'tapa'\n   72 | using NumUpdates = tapa::packet<Pid, Eid>;\n      |                    ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank-kernel.h:73:31: error: no template named 'packet' in namespace 'tapa'\n   73 | using UpdateVecPacket = tapa::packet<Pid, UpdateVec>;\n      |                         ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank-kernel.h:73:43: error: unknown type name 'UpdateVec'; did you mean 'UpdateReq'?\n   73 | using UpdateVecPacket = tapa::packet<Pid, UpdateVec>;\n      |                                           ^~~~~~~~~\n      |                                           UpdateReq\n/output/PASTA/regression/page_rank/tapa/src/page-rank-kernel.h:57:8: note: 'UpdateReq' declared here\n   57 | struct UpdateReq {\n      |        ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:10:13: error: no member named 'detach' in namespace 'tapa'\n   10 | using tapa::detach;\n      |       ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:11:13: error: no member named 'join' in namespace 'tapa'\n   11 | using tapa::join;\n      |       ~~~~~~^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:25:20: error: no template named 'ostreams' in namespace 'tapa'; did you mean 'ostream'?\n   25 |              tapa::ostreams<Eid, kNumPes>& update_config_q,\n      |              ~~~~~~^~~~~~~~\n      |                    ostream\n/workspace/stubs/tapa.h:196:7: note: 'ostream' declared here\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:25:20: error: too many template arguments for class template 'ostream'\n   25 |              tapa::ostreams<Eid, kNumPes>& update_config_q,\n      |                    ^             ~~~~~~~~\n/workspace/stubs/tapa.h:196:7: note: template is declared here\n  195 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:26:20: error: no template named 'ostreams' in namespace 'tapa'; did you mean 'ostream'?\n   26 |              tapa::ostreams<bool, kNumPes>& update_phase_q,\n      |              ~~~~~~^~~~~~~~\n      |                    ostream\n/workspace/stubs/tapa.h:196:7: note: 'ostream' declared here\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/regression/page_rank/tapa/src/page-rank.cpp:26:20: error: too many template arguments for class template 'ostream'\n   26 |              tapa::ostreams<bool, kNumPes>& update_phase_q,\n      |                    ^              ~~~~~~~~\n/workspace/stubs/tapa.h:196:7: note: template is declared here\n  195 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  196 | class ostream : public stream<T> {\n      |       ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_cnn_vitis_hls",
+      "top_function": "main",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 3,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "kernel.c"
     },
     {
-      "name": "serpens-16ch",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/serpens-16ch",
-      "source_files": [
-        "tapa/src/serpens-host.cpp",
-        "tapa/src/serpens.cpp",
-        "tapa/src/mmio.h",
-        "tapa/src/serpens.h",
-        "tapa/src/sparse_helper.h"
-      ],
-      "kernel_files": [
-        "tapa/src/serpens.cpp"
-      ],
-      "host_files": [
-        "tapa/src/serpens-host.cpp"
-      ],
-      "header_files": [
-        "tapa/src/mmio.h",
-        "tapa/src/serpens.h",
-        "tapa/src/sparse_helper.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "serpens.cpp",
-          "In file included from /output/PASTA/regression/serpens-16ch/tapa/src/serpens.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\nIn file included from /output/PASTA/regression/serpens-16ch/tapa/src/serpens.cpp:8:\n/output/PASTA/regression/serpens-16ch/tapa/src/serpens.h:15:25: error: no template named 'vec_t' in namespace 'tapa'\n   15 | using float_v16 = tapa::vec_t<float, 16>;\n      |                   ~~~~~~^\n/output/PASTA/regression/serpens-16ch/tapa/src/serpens.h:18:20: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   18 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,\n      |              ~~~~~~^~~~~\n      |                    mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\nIn file included from /output/PASTA/regression/serpens-16ch/tapa/src/serpens.cpp:8:\n/output/PASTA/regression/serpens-16ch/tapa/src/serpens.h:18:20: error: too many template arguments for class template 'mmap'\n   18 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,\n      |                    ^                   ~~~~~~~~~~~~~~\n/workspace/stubs/tapa.h:53:7: note: template is declared here\n   52 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   53 | class mmap {\n      |       ^\nIn file included from /output/PASTA/regression/serpens-16ch/tapa/src/serpens.cpp:8:\n/output/PASTA/regression/serpens-16ch/tapa/src/serpens.h:19:25: error: use of undeclared identifier 'float_v16'\n   19 |              tapa::mmap<float_v16> vec_X,\n      |                         ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_hbm-bandwidth-1-ch",
+      "top_function": "Copy",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 1,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "bandwidth.cpp"
     },
     {
-      "name": "serpens-24ch",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/serpens-24ch",
-      "source_files": [
-        "tapa/src/serpens-host.cpp",
-        "tapa/src/serpens.cpp",
-        "tapa/src/mmio.h",
-        "tapa/src/serpens.h",
-        "tapa/src/sparse_helper.h"
-      ],
-      "kernel_files": [
-        "tapa/src/serpens.cpp"
-      ],
-      "host_files": [
-        "tapa/src/serpens-host.cpp"
-      ],
-      "header_files": [
-        "tapa/src/mmio.h",
-        "tapa/src/serpens.h",
-        "tapa/src/sparse_helper.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "serpens.cpp",
-          "In file included from /output/PASTA/regression/serpens-24ch/tapa/src/serpens.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\nIn file included from /output/PASTA/regression/serpens-24ch/tapa/src/serpens.cpp:8:\n/output/PASTA/regression/serpens-24ch/tapa/src/serpens.h:14:25: error: no template named 'vec_t' in namespace 'tapa'\n   14 | using float_v16 = tapa::vec_t<float, 16>;\n      |                   ~~~~~~^\n/output/PASTA/regression/serpens-24ch/tapa/src/serpens.h:17:20: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   17 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,\n      |              ~~~~~~^~~~~\n      |                    mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\nIn file included from /output/PASTA/regression/serpens-24ch/tapa/src/serpens.cpp:8:\n/output/PASTA/regression/serpens-24ch/tapa/src/serpens.h:17:20: error: too many template arguments for class template 'mmap'\n   17 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,\n      |                    ^                   ~~~~~~~~~~~~~~\n/workspace/stubs/tapa.h:53:7: note: template is declared here\n   52 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   53 | class mmap {\n      |       ^\nIn file included from /output/PASTA/regression/serpens-24ch/tapa/src/serpens.cpp:8:\n/output/PASTA/regression/serpens-24ch/tapa/src/serpens.h:18:25: error: use of undeclared identifier 'float_v16'\n   18 |              tapa::mmap<float_v16> vec_X,\n      |                         ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_hbm-bandwidth",
+      "top_function": "Copy",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 1,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "bandwidth.cpp"
     },
     {
-      "name": "serpens-32ch",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/serpens-32ch",
-      "source_files": [
-        "hls/src/host.cpp",
-        "hls/src/serpens.cpp",
-        "tapa/src/serpens_tapa.cpp",
-        "tapa/src/serpens_tapa_mmap.cpp",
-        "hls/src/mmio.h",
-        "hls/src/sparse_helper.h",
-        "tapa/src/mmio.h"
-      ],
-      "kernel_files": [
-        "hls/src/serpens.cpp",
-        "tapa/src/serpens_tapa.cpp",
-        "tapa/src/serpens_tapa_mmap.cpp"
-      ],
-      "host_files": [
-        "hls/src/host.cpp"
-      ],
-      "header_files": [
-        "hls/src/mmio.h",
-        "hls/src/sparse_helper.h",
-        "tapa/src/mmio.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "serpens.cpp",
-          "In file included from /output/PASTA/regression/serpens-32ch/hls/src/serpens.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/serpens-32ch/hls/src/serpens.cpp:53:53: error: invalid operands to binary expression ('ap_uint<32>' and 'int')\n   53 |     const ap_uint<32> P32 = ((ap_uint<32>) rp_time) << 16;\n      |                             ~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~\n/output/PASTA/regression/serpens-32ch/hls/src/serpens.cpp:59:21: error: no viable conversion from 'int' to 'ap_uint<16>'\n   59 |     for(ap_uint<16> rp = 0; rp < rp_time; rp++) {\n      |                     ^    ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<16> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<16> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/output/PASTA/regression/serpens-32ch/hls/src/serpens.cpp:59:45: error: cannot increment value of type 'ap_uint<16>'\n   59 |     for(ap_uint<16> rp = 0; rp < rp_time; rp++) {\n      |                                           ~~^\n/output/PASTA/regression/serpens-32ch/hls/src/serpens.cpp:63:25: error: no viable conversion from 'int' to 'ap_uint<32>'\n   63 |         for(ap_uint<32> i = 0; i < num_ite + 1; i++) {\n      |                         ^   ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<32> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<32> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ],
-        [
-          "serpens_tapa.cpp",
-          "In file included from /output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa.cpp:53:53: error: invalid operands to binary expression ('ap_uint<32>' and 'int')\n   53 |     const ap_uint<32> P32 = ((ap_uint<32>) rp_time) << 16;\n      |                             ~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa.cpp:59:21: error: no viable conversion from 'int' to 'ap_uint<16>'\n   59 |     for(ap_uint<16> rp = 0; rp < rp_time; rp++) {\n      |                     ^    ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<16> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<16> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa.cpp:59:45: error: cannot increment value of type 'ap_uint<16>'\n   59 |     for(ap_uint<16> rp = 0; rp < rp_time; rp++) {\n      |                                           ~~^\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa.cpp:70:27: error: no viable conversion from 'int' to 'ap_uint<32>'\n   70 |                 rd_ptr: for(ap_uint<32> i_req = 0, i_resp = 0; i_resp <= num_ite;) {\n      |                                         ^       ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<32> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<32> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ],
-        [
-          "serpens_tapa_mmap.cpp",
-          "In file included from /output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:53:53: error: invalid operands to binary expression ('ap_uint<32>' and 'int')\n   53 |     const ap_uint<32> P32 = ((ap_uint<32>) rp_time) << 16;\n      |                             ~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:59:21: error: no viable conversion from 'int' to 'ap_uint<16>'\n   59 |     for(ap_uint<16> rp = 0; rp < rp_time; rp++) {\n      |                     ^    ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<16> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<16> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:59:45: error: cannot increment value of type 'ap_uint<16>'\n   59 |     for(ap_uint<16> rp = 0; rp < rp_time; rp++) {\n      |                                           ~~^\n/output/PASTA/regression/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:63:25: error: no viable conversion from 'int' to 'ap_uint<32>'\n   63 |         for(ap_uint<32> i = 0; i < num_ite + 1; i++) {\n      |                         ^   ~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'int' to 'const ap_uint<32> &' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\n/workspace/stubs/ap_int.h:74:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'int' to 'ap_uint<32> &&' for 1st argument\n   74 | class ap_uint {\n      |       ^~~~~~~\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_knn",
+      "top_function": "load",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 1,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "knn.cpp"
     },
     {
-      "name": "spmm/sextans-u280-split-bram-uram",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/spmm/sextans-u280-split-bram-uram",
-      "source_files": [
-        "tapa/src/sextans-host.cpp",
-        "tapa/src/sextans.cpp",
-        "tapa/src/mmio.h",
-        "tapa/src/modules.h",
-        "tapa/src/sextans.h",
-        "tapa/src/sparse_helper.h"
-      ],
-      "kernel_files": [
-        "tapa/src/sextans.cpp"
-      ],
-      "host_files": [
-        "tapa/src/sextans-host.cpp"
-      ],
-      "header_files": [
-        "tapa/src/mmio.h",
-        "tapa/src/modules.h",
-        "tapa/src/sextans.h",
-        "tapa/src/sparse_helper.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "sextans.cpp",
-          "In file included from /output/PASTA/regression/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:1:\n/workspace/stubs/ap_int.h:20:40: error: no type named 'conditional' in namespace 'std'\n   20 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:20:51: error: expected ';' after alias declaration\n   20 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:31:5: error: unknown type name 'storage_type'\n   31 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:38:14: error: unknown type name 'storage_type'\n   38 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:34:37: error: unknown type name 'storage_type'\n   34 |     ap_int(int v) : val(static_cast<storage_type>(v)) {}\n      |                                     ^\n/workspace/stubs/ap_int.h:35:38: error: unknown type name 'storage_type'\n   35 |     ap_int(long v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\n/workspace/stubs/ap_int.h:36:43: error: unknown type name 'storage_type'\n   36 |     ap_int(long long v) : val(static_cast<storage_type>(v)) {}\n      |                                           ^\n/workspace/stubs/ap_int.h:76:40: error: no type named 'conditional' in namespace 'std'\n   76 |     using storage_type = typename std::conditional<\n      |                          ~~~~~~~~~~~~~~^~~~~~~~~~~\n/workspace/stubs/ap_int.h:76:51: error: expected ';' after alias declaration\n   76 |     using storage_type = typename std::conditional<\n      |                                                   ^\n      |                                                   ;\n/workspace/stubs/ap_int.h:87:5: error: unknown type name 'storage_type'\n   87 |     storage_type val;\n      |     ^\n/workspace/stubs/ap_int.h:95:14: error: unknown type name 'storage_type'\n   95 |     operator storage_type() const { return val; }\n      |              ^\n/workspace/stubs/ap_int.h:90:47: error: unknown type name 'storage_type'\n   90 |     ap_uint(unsigned int v) : val(static_cast<storage_type>(v)) {}\n      |                                               ^\n/workspace/stubs/ap_int.h:91:48: error: unknown type name 'storage_type'\n   91 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}\n      |                                                ^\n/workspace/stubs/ap_int.h:92:53: error: unknown type name 'storage_type'\n   92 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}\n      |                                                     ^\n/workspace/stubs/ap_int.h:93:38: error: unknown type name 'storage_type'\n   93 |     ap_uint(int v) : val(static_cast<storage_type>(v)) {}\n      |                                      ^\nIn file included from /output/PASTA/regression/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:\n/output/PASTA/regression/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:17:25: error: no template named 'vec_t' in namespace 'tapa'\n   17 | using float_v16 = tapa::vec_t<float, 16>;\n      |                   ~~~~~~^\n/output/PASTA/regression/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:18:24: error: no template named 'vec_t' in namespace 'tapa'\n   18 | using float_v8 = tapa::vec_t<float, 8>;\n      |                  ~~~~~~^\n/output/PASTA/regression/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:21:20: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   21 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,\n      |              ~~~~~~^~~~~\n      |                    mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\nIn file included from /output/PASTA/regression/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:\n/output/PASTA/regression/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:21:20: error: too many template arguments for class template 'mmap'\n   21 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,\n      |                    ^                   ~~~~~~~~~~~~~~\n/workspace/stubs/tapa.h:53:7: note: template is declared here\n   52 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   53 | class mmap {\n      |       ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_lu_decompose_hls",
+      "top_function": "init_array",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 2,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "kernel.c"
     },
     {
-      "name": "spmv-hisparse-mmap",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/spmv-hisparse-mmap",
-      "source_files": [
-        "hls/src/host.cpp",
-        "hls/src/spmv.cpp",
-        "tapa/src/spmv.cpp",
-        "hls/src/data_formatter.h",
-        "hls/src/data_loader.h",
-        "hls/src/libfpga/common.h",
-        "hls/src/libfpga/pe.h",
-        "hls/src/libfpga/shuffle.h",
-        "hls/src/libfpga/spmv_cluster.h",
-        "hls/src/libfpga/stream_utils.h",
-        "hls/src/libfpga/vecbuf_access_unit.h"
-      ],
-      "kernel_files": [
-        "hls/src/spmv.cpp",
-        "tapa/src/spmv.cpp"
-      ],
-      "host_files": [
-        "hls/src/host.cpp"
-      ],
-      "header_files": [
-        "hls/src/data_formatter.h",
-        "hls/src/data_loader.h",
-        "hls/src/libfpga/common.h",
-        "hls/src/libfpga/pe.h",
-        "hls/src/libfpga/shuffle.h",
-        "hls/src/libfpga/spmv_cluster.h",
-        "hls/src/libfpga/stream_utils.h",
-        "hls/src/libfpga/vecbuf_access_unit.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "spmv.cpp",
-          "/output/PASTA/regression/spmv-hisparse-mmap/hls/src/spmv.cpp:5:10: fatal error: 'common.h' file not found\n    5 | #include \"common.h\"\n      |          ^~~~~~~~~~\n1 error generated.\n"
-        ],
-        [
-          "spmv.cpp",
-          "/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:53:13: error: no template named 'ap_uint'\n   53 |     typedef ap_uint<2> INST_T;\n      |             ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:134:9: error: no template named 'ap_uint'\n  134 |         ap_uint<32 * (PACK_SIZE + 1)> data;\n      |         ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:135:9: error: no template named 'ap_uint'\n  135 |         ap_uint<2> user; // same as INST_T\n      |         ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:191:15: error: no template named 'ostreams' in namespace 'tapa'; did you mean 'ostream'?\n  191 |         tapa::ostreams<EDGE_PLD_T, PACK_SIZE> &ML_to_SF_1_stream  // out\n      |         ~~~~~~^~~~~~~~\n      |               ostream\n/workspace/stubs/tapa.h:196:7: note: 'ostream' declared here\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:191:15: error: too many template arguments for class template 'ostream'\n  191 |         tapa::ostreams<EDGE_PLD_T, PACK_SIZE> &ML_to_SF_1_stream  // out\n      |               ^                    ~~~~~~~~~~\n/workspace/stubs/tapa.h:196:7: note: template is declared here\n  195 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:234:56: error: type 'VAL_T' (aka 'ap_ufixed<32, IBITS, 1, 1>') does not provide a call operator\n  234 |                             row_idx[k] += (PACK_SIZE * mat_pkt.vals.data[k](31, 32-IBITS));\n      |                                                        ^~~~~~~~~~~~~~~~~~~~\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:268:15: error: no template named 'ostreams' in namespace 'tapa'; did you mean 'ostream'?\n  268 |         tapa::ostreams<VEC_PLD_T, PACK_SIZE> &vec_out\n      |         ~~~~~~^~~~~~~~\n      |               ostream\n/workspace/stubs/tapa.h:196:7: note: 'ostream' declared here\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:268:15: error: too many template arguments for class template 'ostream'\n  268 |         tapa::ostreams<VEC_PLD_T, PACK_SIZE> &vec_out\n      |               ^                   ~~~~~~~~~~\n/workspace/stubs/tapa.h:196:7: note: template is declared here\n  195 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:277:31: error: type 'VAL_T' (aka 'ap_ufixed<32, IBITS, 1, 1>') does not provide a call operator\n  277 |                 VAL_T_BITCAST(p.val) = VEC_AXIS_VAL(pkt, k);\n      |                               ^~~~~\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:32:31: note: expanded from macro 'VAL_T_BITCAST'\n   32 |     #define VAL_T_BITCAST(v) (v(31,0))\n      |                               ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:288:15: error: no template named 'istreams' in namespace 'tapa'; did you mean 'istream'?\n  288 |         tapa::istreams<VEC_PLD_T, PACK_SIZE> &res_in,\n      |         ~~~~~~^~~~~~~~\n      |               istream\n/workspace/stubs/tapa.h:183:7: note: 'istream' declared here\n  183 | class istream : public stream<T> {\n      |       ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:288:15: error: too many template arguments for class template 'istream'\n  288 |         tapa::istreams<VEC_PLD_T, PACK_SIZE> &res_in,\n      |               ^                   ~~~~~~~~~~\n/workspace/stubs/tapa.h:183:7: note: template is declared here\n  182 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  183 | class istream : public stream<T> {\n      |       ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:295:13: error: no template named 'ap_uint'\n  295 |             ap_uint<PACK_SIZE> got_SOD = 0;\n      |             ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:296:32: error: use of undeclared identifier 'got_EOD'; did you mean 'got_SOD'?\n  296 |             ap_uint<PACK_SIZE> got_EOD = 0;\n      |                                ^~~~~~~\n      |                                got_SOD\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:295:32: note: 'got_SOD' declared here\n  295 |             ap_uint<PACK_SIZE> got_SOD = 0;\n      |                                ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:296:31: error: expected ';' after expression\n  296 |             ap_uint<PACK_SIZE> got_EOD = 0;\n      |                               ^\n      |                               ;\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:296:13: error: use of undeclared identifier 'ap_uint'\n  296 |             ap_uint<PACK_SIZE> got_EOD = 0;\n      |             ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:297:32: error: use of undeclared identifier 'got_EOS'; did you mean 'got_SOD'?\n  297 |             ap_uint<PACK_SIZE> got_EOS = 0;\n      |                                ^~~~~~~\n      |                                got_SOD\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:295:32: note: 'got_SOD' declared here\n  295 |             ap_uint<PACK_SIZE> got_SOD = 0;\n      |                                ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:297:31: error: expected ';' after expression\n  297 |             ap_uint<PACK_SIZE> got_EOS = 0;\n      |                               ^\n      |                               ;\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:297:13: error: use of undeclared identifier 'ap_uint'\n  297 |             ap_uint<PACK_SIZE> got_EOS = 0;\n      |             ^\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:302:54: error: type 'VAL_T' (aka 'ap_ufixed<32, IBITS, 1, 1>') does not provide a call operator\n  302 |                 VEC_AXIS_VAL(pkt, k) = VAL_T_BITCAST(p.val);\n      |                                                      ^~~~~\n/output/PASTA/regression/spmv-hisparse-mmap/tapa/src/spmv.cpp:32:31: note: expanded from macro 'VAL_T_BITCAST'\n   32 |     #define VAL_T_BITCAST(v) (v(31,0))\n      |                               ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_lu_decompose_tapa",
+      "top_function": "PE_non_zero_non_diag",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "kernel_kernel.cpp"
     },
     {
-      "name": "stencil-dilate",
-      "category": "regression",
-      "subcategory": null,
-      "path": "regression/stencil-dilate",
-      "source_files": [
-        "tapa/src/main.cpp",
-        "tapa/src/unikernel.cpp",
-        "tapa/src/DILATE.h"
-      ],
-      "kernel_files": [
-        "tapa/src/main.cpp",
-        "tapa/src/unikernel.cpp"
-      ],
-      "host_files": [],
-      "header_files": [
-        "tapa/src/DILATE.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "main.cpp",
-          "/output/PASTA/regression/stencil-dilate/tapa/src/main.cpp:6:10: fatal error: 'gflags/gflags.h' file not found\n    6 | #include <gflags/gflags.h>\n      |          ^~~~~~~~~~~~~~~~~\n1 error generated.\n"
-        ],
-        [
-          "unikernel.cpp",
-          "/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:40:10: error: too many template arguments for class template 'stream'\n   40 |     hls::stream<INTERFACE_WIDTH, 255> s_stream_2_to_255;\n      |          ^                       ~~~~\n/workspace/stubs/hls_stream.h:18:7: note: template is declared here\n   17 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   18 | class stream {\n      |       ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:43:10: error: too many template arguments for class template 'stream'\n   43 |     hls::stream<INTERFACE_WIDTH, 255> s_stream_258_to_511;\n      |          ^                       ~~~~\n/workspace/stubs/hls_stream.h:18:7: note: template is declared here\n   17 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   18 | class stream {\n      |       ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:46:10: error: too many template arguments for class template 'stream'\n   46 |     hls::stream<INTERFACE_WIDTH, 255> s_stream_514_to_767;\n      |          ^                       ~~~~\n/workspace/stubs/hls_stream.h:18:7: note: template is declared here\n   17 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   18 | class stream {\n      |       ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:49:10: error: too many template arguments for class template 'stream'\n   49 |     hls::stream<INTERFACE_WIDTH, 255> s_stream_770_to_1023;\n      |          ^                       ~~~~\n/workspace/stubs/hls_stream.h:18:7: note: template is declared here\n   17 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n   18 | class stream {\n      |       ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:182:36: error: no member named 'read_addr' in 'tapa::async_mmap<ap_uint<512>>'\n  182 |     if (k_rd_req < loop_bound && a.read_addr.try_write(k_rd_req)) {\n      |                                  ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:185:38: error: no member named 'read_data' in 'tapa::async_mmap<ap_uint<512>>'\n  185 |     if (k_rd_resp < loop_bound && !a.read_data.empty() && !stream_out.full()) {\n      |                                    ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:186:32: error: no member named 'read_data' in 'tapa::async_mmap<ap_uint<512>>'\n  186 |       INTERFACE_WIDTH temp = a.read_data.read(nullptr);\n      |                              ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:192:37: error: no member named 'write_addr' in 'tapa::async_mmap<ap_uint<512>>'\n  192 |     if (k_wr_req < loop_bound && !b.write_addr.full() && !b.write_data.full() && !stream_in.empty()) {\n      |                                   ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:192:61: error: no member named 'write_data' in 'tapa::async_mmap<ap_uint<512>>'\n  192 |     if (k_wr_req < loop_bound && !b.write_addr.full() && !b.write_data.full() && !stream_in.empty()) {\n      |                                                           ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:193:9: error: no member named 'write_addr' in 'tapa::async_mmap<ap_uint<512>>'\n  193 |       b.write_addr.write(k_wr_req);\n      |       ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:194:9: error: no member named 'write_data' in 'tapa::async_mmap<ap_uint<512>>'\n  194 |       b.write_data.write(stream_in.read());\n      |       ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:197:12: error: no member named 'write_resp' in 'tapa::async_mmap<ap_uint<512>>'\n  197 |     if (!b.write_resp.empty()) {\n      |          ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:198:37: error: no member named 'write_resp' in 'tapa::async_mmap<ap_uint<512>>'\n  198 |       k_wr_resp += (unsigned int)(b.write_resp.read()) + 1;\n      |                                   ~ ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:234:9: error: no template named 'streams' in namespace 'tapa'; did you mean 'stream'?\n  234 |   tapa::streams<INTERFACE_WIDTH, 15, 3> k_wr;\n      |   ~~~~~~^~~~~~~\n      |         stream\n/workspace/stubs/tapa.h:165:7: note: 'stream' declared here\n  165 | class stream {\n      |       ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:234:9: error: too many template arguments for class template 'stream'\n  234 |   tapa::streams<INTERFACE_WIDTH, 15, 3> k_wr;\n      |         ^                        ~~~~~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:235:9: error: no template named 'streams' in namespace 'tapa'; did you mean 'stream'?\n  235 |   tapa::streams<INTERFACE_WIDTH, 15, 3> k_rd;\n      |   ~~~~~~^~~~~~~\n      |         stream\n/workspace/stubs/tapa.h:165:7: note: 'stream' declared here\n  165 | class stream {\n      |       ^\n/output/PASTA/regression/stencil-dilate/tapa/src/unikernel.cpp:235:9: error: too many template arguments for class template 'stream'\n  235 |   tapa::streams<INTERFACE_WIDTH, 15, 3> k_rd;\n      |         ^                        ~~~~~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n17 errors generated.\n"
-        ]
-      ]
+      "name": "reg_page_rank_tapa",
+      "top_function": "Control",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 3,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "page-rank.cpp"
     },
     {
-      "name": "vadd",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/vadd",
-      "source_files": [
-        "vadd-host.cpp",
-        "vadd.cpp"
-      ],
-      "kernel_files": [
-        "vadd.cpp"
-      ],
-      "host_files": [
-        "vadd-host.cpp"
-      ],
-      "header_files": [],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "vadd.cpp",
-          "/output/PASTA/apps/vadd/vadd.cpp:8:7: error: invalid operands to binary expression ('tapa::ostream<float>' and 'float')\n    8 |     c << (a.read() + b.read());\n      |     ~ ^  ~~~~~~~~~~~~~~~~~~~~~\n/output/PASTA/apps/vadd/vadd.cpp:15:12: error: invalid operands to binary expression ('tapa::ostream<float>' and 'const float')\n   15 |     stream << mmap[i];\n      |     ~~~~~~ ^  ~~~~~~~\n/output/PASTA/apps/vadd/vadd.cpp:22:12: error: invalid operands to binary expression ('tapa::istream<float>' and 'float')\n   22 |     stream >> mmap[i];\n      |     ~~~~~~ ^  ~~~~~~~\n/output/PASTA/apps/vadd/vadd.cpp:28:23: error: no matching constructor for initialization of 'tapa::stream<float>'\n   28 |   tapa::stream<float> a_q(\"a\");\n      |                       ^   ~~~\n/workspace/stubs/tapa.h:165:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'const char[2]' to 'const stream<float>' for 1st argument\n  165 | class stream {\n      |       ^~~~~~\n/workspace/stubs/tapa.h:165:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'const char[2]' to 'stream<float>' for 1st argument\n  165 | class stream {\n      |       ^~~~~~\n/workspace/stubs/tapa.h:168:5: note: candidate constructor not viable: requires 0 arguments, but 1 was provided\n  168 |     stream() = default;\n      |     ^\n/output/PASTA/apps/vadd/vadd.cpp:29:23: error: no matching constructor for initialization of 'tapa::stream<float>'\n   29 |   tapa::stream<float> b_q(\"b\");\n      |                       ^   ~~~\n/workspace/stubs/tapa.h:165:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'const char[2]' to 'const stream<float>' for 1st argument\n  165 | class stream {\n      |       ^~~~~~\n/workspace/stubs/tapa.h:165:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'const char[2]' to 'stream<float>' for 1st argument\n  165 | class stream {\n      |       ^~~~~~\n/workspace/stubs/tapa.h:168:5: note: candidate constructor not viable: requires 0 arguments, but 1 was provided\n  168 |     stream() = default;\n      |     ^\n/output/PASTA/apps/vadd/vadd.cpp:30:23: error: no matching constructor for initialization of 'tapa::stream<float>'\n   30 |   tapa::stream<float> c_q(\"c\");\n      |                       ^   ~~~\n/workspace/stubs/tapa.h:165:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'const char[2]' to 'const stream<float>' for 1st argument\n  165 | class stream {\n      |       ^~~~~~\n/workspace/stubs/tapa.h:165:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'const char[2]' to 'stream<float>' for 1st argument\n  165 | class stream {\n      |       ^~~~~~\n/workspace/stubs/tapa.h:168:5: note: candidate constructor not viable: requires 0 arguments, but 1 was provided\n  168 |     stream() = default;\n      |     ^\n/workspace/stubs/tapa.h:263:14: error: non-const lvalue reference to type 'tapa::ostream<float>' cannot bind to a value of unrelated type 'tapa::stream<float>'\n  263 |         func(args...);\n      |              ^~~~\n/output/PASTA/apps/vadd/vadd.cpp:33:8: note: in instantiation of function template specialization 'tapa::task::invoke<void (&)(tapa::mmap<const float>, unsigned long, tapa::ostream<float> &), tapa::mmap<const float> &, unsigned long &, tapa::stream<float> &>' requested here\n   33 |       .invoke(Mmap2Stream, a, n, a_q)\n      |        ^\nIn file included from /output/PASTA/apps/vadd/vadd.cpp:3:\n/workspace/stubs/tapa.h:263:14: error: non-const lvalue reference to type 'tapa::istream<float>' cannot bind to a value of unrelated type 'tapa::stream<float>'\n  263 |         func(args...);\n      |              ^~~~\n/output/PASTA/apps/vadd/vadd.cpp:35:8: note: in instantiation of function template specialization 'tapa::task::invoke<void (&)(tapa::istream<float> &, tapa::istream<float> &, tapa::ostream<float> &, unsigned long), tapa::stream<float> &, tapa::stream<float> &, tapa::stream<float> &, unsigned long &>' requested here\n   35 |       .invoke(Add, a_q, b_q, c_q, n)\n      |        ^\nIn file included from /output/PASTA/apps/vadd/vadd.cpp:3:\n/workspace/stubs/tapa.h:263:14: error: non-const lvalue reference to type 'tapa::istream<float>' cannot bind to a value of unrelated type 'tapa::stream<float>'\n  263 |         func(args...);\n      |              ^~~~\n/output/PASTA/apps/vadd/vadd.cpp:36:8: note: in instantiation of function template specialization 'tapa::task::invoke<void (&)(tapa::istream<float> &, tapa::mmap<float>, unsigned long), tapa::stream<float> &, tapa::mmap<float> &, unsigned long &>' requested here\n   36 |       .invoke(Stream2Mmap, c_q, c, n);\n      |        ^\n9 errors generated.\n"
-        ]
-      ]
+      "name": "reg_serpens-16ch_tapa",
+      "top_function": "read_edge_list_ptr",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 3,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "serpens.cpp"
     },
     {
-      "name": "shared-vadd",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/shared-vadd",
-      "source_files": [
-        "vadd-host.cpp",
-        "vadd.cpp"
-      ],
-      "kernel_files": [
-        "vadd.cpp"
-      ],
-      "host_files": [
-        "vadd-host.cpp"
-      ],
-      "header_files": [],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "vadd.cpp",
-          "/output/PASTA/apps/shared-vadd/vadd.cpp:12:3: error: use of undeclared identifier 'TAPA_WHILE_NEITHER_EOT'\n   12 |   TAPA_WHILE_NEITHER_EOT(a, b) { c.write(a.read(nullptr) + b.read(nullptr)); }\n      |   ^\n/output/PASTA/apps/shared-vadd/vadd.cpp:12:31: error: expected ';' after expression\n   12 |   TAPA_WHILE_NEITHER_EOT(a, b) { c.write(a.read(nullptr) + b.read(nullptr)); }\n      |                               ^\n      |                               ;\n/output/PASTA/apps/shared-vadd/vadd.cpp:12:49: error: too many arguments to function call, expected 0, have 1\n   12 |   TAPA_WHILE_NEITHER_EOT(a, b) { c.write(a.read(nullptr) + b.read(nullptr)); }\n      |                                          ~~~~~~ ^~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/shared-vadd/vadd.cpp:12:67: error: too many arguments to function call, expected 0, have 1\n   12 |   TAPA_WHILE_NEITHER_EOT(a, b) { c.write(a.read(nullptr) + b.read(nullptr)); }\n      |                                                            ~~~~~~ ^~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/shared-vadd/vadd.cpp:40:3: error: too many template arguments for class template 'stream'\n   40 |   stream<float, 8> a(\"a\");\n      |   ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/shared-vadd/vadd.cpp:41:3: error: too many template arguments for class template 'stream'\n   41 |   stream<float, 8> b(\"b\");\n      |   ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/shared-vadd/vadd.cpp:42:3: error: too many template arguments for class template 'stream'\n   42 |   stream<float, 8> c(\"c\");\n      |   ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n7 errors generated.\n"
-        ]
-      ]
+      "name": "reg_serpens-24ch_tapa",
+      "top_function": "read_edge_list_ptr",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 3,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "serpens.cpp"
     },
     {
-      "name": "network",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/network",
-      "source_files": [
-        "network-host.cpp",
-        "network.cpp"
-      ],
-      "kernel_files": [
-        "network.cpp"
-      ],
-      "host_files": [
-        "network-host.cpp"
-      ],
-      "header_files": [],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "network.cpp",
-          "/output/PASTA/apps/network/network.cpp:3:13: error: no member named 'detach' in namespace 'tapa'\n    3 | using tapa::detach;\n      |       ~~~~~~^\n/output/PASTA/apps/network/network.cpp:5:13: error: no member named 'istreams' in namespace 'tapa'; did you mean 'istream'?\n    5 | using tapa::istreams;\n      |       ~~~~~~^~~~~~~~\n      |             istream\n/workspace/stubs/tapa.h:183:7: note: 'istream' declared here\n  183 | class istream : public stream<T> {\n      |       ^\n/output/PASTA/apps/network/network.cpp:7:13: error: no member named 'ostreams' in namespace 'tapa'; did you mean 'ostream'?\n    7 | using tapa::ostreams;\n      |       ~~~~~~^~~~~~~~\n      |             ostream\n/workspace/stubs/tapa.h:196:7: note: 'ostream' declared here\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/apps/network/network.cpp:8:13: error: no member named 'streams' in namespace 'tapa'; did you mean 'stream'?\n    8 | using tapa::streams;\n      |       ~~~~~~^~~~~~~\n      |             stream\n/workspace/stubs/tapa.h:165:7: note: 'stream' declared here\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/network/network.cpp:10:13: error: no member named 'vec_t' in namespace 'tapa'\n   10 | using tapa::vec_t;\n      |       ~~~~~~^\n/output/PASTA/apps/network/network.cpp:18:16: error: no template named 'ostreams'; did you mean 'ostream'?\n   18 |                ostreams<pkt_t, 2>& pkt_out_q) {\n      |                ^~~~~~~~\n      |                ostream\n/output/PASTA/apps/network/network.cpp:7:13: note: 'ostream' declared here\n    7 | using tapa::ostreams;\n      |             ^\n/output/PASTA/apps/network/network.cpp:18:16: error: too many template arguments for class template 'ostream'\n   18 |                ostreams<pkt_t, 2>& pkt_out_q) {\n      |                ^               ~~\n/workspace/stubs/tapa.h:196:7: note: template is declared here\n  195 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/apps/network/network.cpp:25:28: error: no member named 'peek' in 'tapa::istream<unsigned long>'\n   25 |     auto pkt_0 = pkt_in_q0.peek(valid_0);\n      |                  ~~~~~~~~~ ^\n/output/PASTA/apps/network/network.cpp:26:28: error: no member named 'peek' in 'tapa::istream<unsigned long>'\n   26 |     auto pkt_1 = pkt_in_q1.peek(valid_1);\n      |                  ~~~~~~~~~ ^\n/output/PASTA/apps/network/network.cpp:53:22: error: too many arguments to function call, expected 0, have 1\n   53 |       pkt_in_q0.read(nullptr);\n      |       ~~~~~~~~~~~~~~ ^~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/network/network.cpp:56:22: error: too many arguments to function call, expected 0, have 1\n   56 |       pkt_in_q1.read(nullptr);\n      |       ~~~~~~~~~~~~~~ ^~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/network/network.cpp:23:5: warning: unknown attribute 'pipeline' ignored [-Wunknown-attributes]\n   23 |   [[tapa::pipeline(1)]] for (bool valid_0, valid_1;;) {\n      |     ^~~~~~~~~~~~~~\n/output/PASTA/apps/network/network.cpp:63:24: error: no template named 'istreams'; did you mean 'istream'?\n   63 | void InnerStage(int b, istreams<pkt_t, kN / 2>& in_q0,\n      |                        ^~~~~~~~\n      |                        istream\n/output/PASTA/apps/network/network.cpp:5:13: note: 'istream' declared here\n    5 | using tapa::istreams;\n      |             ^\n/output/PASTA/apps/network/network.cpp:63:24: error: too many template arguments for class template 'istream'\n   63 | void InnerStage(int b, istreams<pkt_t, kN / 2>& in_q0,\n      |                        ^               ~~~~~~~\n/workspace/stubs/tapa.h:183:7: note: template is declared here\n  182 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  183 | class istream : public stream<T> {\n      |       ^\n/output/PASTA/apps/network/network.cpp:64:17: error: no template named 'istreams'; did you mean 'istream'?\n   64 |                 istreams<pkt_t, kN / 2>& in_q1, ostreams<pkt_t, kN> out_q) {\n      |                 ^~~~~~~~\n      |                 istream\n/output/PASTA/apps/network/network.cpp:5:13: note: 'istream' declared here\n    5 | using tapa::istreams;\n      |             ^\n/output/PASTA/apps/network/network.cpp:64:17: error: too many template arguments for class template 'istream'\n   64 |                 istreams<pkt_t, kN / 2>& in_q1, ostreams<pkt_t, kN> out_q) {\n      |                 ^               ~~~~~~~\n/workspace/stubs/tapa.h:183:7: note: template is declared here\n  182 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  183 | class istream : public stream<T> {\n      |       ^\n/output/PASTA/apps/network/network.cpp:64:49: error: no template named 'ostreams'; did you mean 'ostream'?\n   64 |                 istreams<pkt_t, kN / 2>& in_q1, ostreams<pkt_t, kN> out_q) {\n      |                                                 ^~~~~~~~\n      |                                                 ostream\n/output/PASTA/apps/network/network.cpp:7:13: note: 'ostream' declared here\n    7 | using tapa::ostreams;\n      |             ^\n/output/PASTA/apps/network/network.cpp:64:49: error: too many template arguments for class template 'ostream'\n   64 |                 istreams<pkt_t, kN / 2>& in_q1, ostreams<pkt_t, kN> out_q) {\n      |                                                 ^               ~~~\n/workspace/stubs/tapa.h:196:7: note: template is declared here\n  195 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  196 | class ostream : public stream<T> {\n      |       ^\n/output/PASTA/apps/network/network.cpp:65:17: error: use of undeclared identifier 'detach'\n   65 |   task().invoke<detach, kN / 2>(Switch2x2, b, in_q0, in_q1, out_q);\n      |                 ^\n/output/PASTA/apps/network/network.cpp:68:19: error: no template named 'istreams'; did you mean 'istream'?\n   68 | void Stage(int b, istreams<pkt_t, kN>& in_q, ostreams<pkt_t, kN> out_q) {\n      |                   ^~~~~~~~\n      |                   istream\n/output/PASTA/apps/network/network.cpp:5:13: note: 'istream' declared here\n    5 | using tapa::istreams;\n      |             ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n1 warning and 20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_serpens-32ch_hls",
+      "top_function": "read_edge_list_ptr",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 2,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "serpens.cpp"
     },
     {
-      "name": "cannon",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/cannon",
-      "source_files": [
-        "cannon-host.cpp",
-        "cannon.cpp"
-      ],
-      "kernel_files": [
-        "cannon.cpp"
-      ],
-      "host_files": [
-        "cannon-host.cpp"
-      ],
-      "header_files": [],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "cannon.cpp",
-          "/output/PASTA/apps/cannon/cannon.cpp:18:20: error: indirection requires pointer operand ('tapa::mmap<const float>' invalid)\n   18 |     block_00.write(*matrix_ptr);\n      |                    ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:19:5: error: cannot increment value of type 'tapa::mmap<const float>'\n   19 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:22:20: error: indirection requires pointer operand ('tapa::mmap<const float>' invalid)\n   22 |     block_01.write(*matrix_ptr);\n      |                    ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:23:5: error: cannot increment value of type 'tapa::mmap<const float>'\n   23 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:26:20: error: indirection requires pointer operand ('tapa::mmap<const float>' invalid)\n   26 |     block_10.write(*matrix_ptr);\n      |                    ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:27:5: error: cannot increment value of type 'tapa::mmap<const float>'\n   27 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:30:20: error: indirection requires pointer operand ('tapa::mmap<const float>' invalid)\n   30 |     block_11.write(*matrix_ptr);\n      |                    ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:31:5: error: cannot increment value of type 'tapa::mmap<const float>'\n   31 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:40:5: error: indirection requires pointer operand ('tapa::mmap<float>' invalid)\n   40 |     *matrix_ptr = block_00.read();\n      |     ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:41:5: error: cannot increment value of type 'tapa::mmap<float>'\n   41 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:44:5: error: indirection requires pointer operand ('tapa::mmap<float>' invalid)\n   44 |     *matrix_ptr = block_01.read();\n      |     ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:45:5: error: cannot increment value of type 'tapa::mmap<float>'\n   45 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:48:5: error: indirection requires pointer operand ('tapa::mmap<float>' invalid)\n   48 |     *matrix_ptr = block_10.read();\n      |     ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:49:5: error: cannot increment value of type 'tapa::mmap<float>'\n   49 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:52:5: error: indirection requires pointer operand ('tapa::mmap<float>' invalid)\n   52 |     *matrix_ptr = block_11.read();\n      |     ^~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:53:5: error: cannot increment value of type 'tapa::mmap<float>'\n   53 |     ++matrix_ptr;\n      |     ^ ~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:79:9: warning: unknown attribute 'pipeline' ignored [-Wunknown-attributes]\n   79 |       [[tapa::pipeline(1)]] for (uint64_t j = 0; j < kN / p; ++j) {\n      |         ^~~~~~~~~~~~~~\n/output/PASTA/apps/cannon/cannon.cpp:111:9: error: too many template arguments for class template 'stream'\n  111 |   tapa::stream<float, 2> a_00(\"a->PE00\");\n      |         ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/cannon/cannon.cpp:112:9: error: too many template arguments for class template 'stream'\n  112 |   tapa::stream<float, 2> a_01(\"a->PE01\");\n      |         ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/cannon/cannon.cpp:113:9: error: too many template arguments for class template 'stream'\n  113 |   tapa::stream<float, 2> a_10(\"a->PE10\");\n      |         ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n1 warning and 20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_serpens-32ch_tapa",
+      "top_function": "read_edge_list_ptr",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 1,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "serpens_tapa.cpp"
     },
     {
-      "name": "graph",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/graph",
-      "source_files": [
-        "graph-host.cpp",
-        "graph.cpp",
-        "nxgraph.hpp"
-      ],
-      "kernel_files": [
-        "graph.cpp"
-      ],
-      "host_files": [
-        "graph-host.cpp"
-      ],
-      "header_files": [
-        "nxgraph.hpp"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "graph.cpp",
-          "/output/PASTA/apps/graph/graph.cpp:136:5: warning: unknown attribute 'pipeline' ignored [-Wunknown-attributes]\n  136 |   [[tapa::pipeline(1)]] for (Pid pid = 0; pid < num_partitions; ++pid) {\n      |     ^~~~~~~~~~~~~~\n/output/PASTA/apps/graph/graph.cpp:156:5: error: use of undeclared identifier 'VLOG'\n  156 |     VLOG(8) << \"info@Control: eid offset[\" << pid\n      |     ^\n/output/PASTA/apps/graph/graph.cpp:182:37: error: too many arguments to function call, expected 0, have 1\n  182 |         TaskResp resp = resp_q.read(succeeded);\n      |                         ~~~~~~~~~~~ ^~~~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/graph/graph.cpp:204:35: error: too many arguments to function call, expected 0, have 1\n  204 |       TaskResp resp = resp_q.read(succeeded);\n      |                       ~~~~~~~~~~~ ^~~~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/graph/graph.cpp:207:9: error: use of undeclared identifier 'VLOG'\n  207 |         VLOG(3) << \"recv@Control: \" << resp;\n      |         ^\n/output/PASTA/apps/graph/graph.cpp:216:5: error: use of undeclared identifier 'VLOG'\n  216 |     VLOG(3) << \"info@Control: \" << (all_done ? \"\" : \"not \") << \"all done\";\n      |     ^\n/output/PASTA/apps/graph/graph.cpp:232:3: error: use of undeclared identifier 'ap_wait'\n  232 |   ap_wait();\n      |   ^\n/output/PASTA/apps/graph/graph.cpp:234:15: error: no member named 'open' in 'tapa::istream<Update>'\n  234 |   update_in_q.open();\n      |   ~~~~~~~~~~~ ^\n/output/PASTA/apps/graph/graph.cpp:247:3: error: use of undeclared identifier 'TAPA_WHILE_NOT_EOT'\n  247 |   TAPA_WHILE_NOT_EOT(update_config_q) {\n      |   ^\n/output/PASTA/apps/graph/graph.cpp:247:38: error: expected ';' after expression\n  247 |   TAPA_WHILE_NOT_EOT(update_config_q) {\n      |                                      ^\n      |                                      ;\n/output/PASTA/apps/graph/graph.cpp:248:40: error: too many arguments to function call, expected 0, have 1\n  248 |     auto config = update_config_q.read(nullptr);\n      |                   ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/graph/graph.cpp:249:5: error: use of undeclared identifier 'VLOG'\n  249 |     VLOG(5) << \"recv@UpdateHandler: UpdateConfig: \" << config;\n      |     ^\n/output/PASTA/apps/graph/graph.cpp:264:3: error: use of undeclared identifier 'TAPA_WHILE_NOT_EOT'\n  264 |   TAPA_WHILE_NOT_EOT(update_req_q) {\n      |   ^\n/output/PASTA/apps/graph/graph.cpp:264:35: error: expected ';' after expression\n  264 |   TAPA_WHILE_NOT_EOT(update_req_q) {\n      |                                   ^\n      |                                   ;\n/output/PASTA/apps/graph/graph.cpp:269:5: error: use of undeclared identifier 'VLOG'\n  269 |     VLOG(5) << \"recv@UpdateHandler: UpdateReq: \" << update_req;\n      |     ^\n/output/PASTA/apps/graph/graph.cpp:271:7: error: use of undeclared identifier 'TAPA_WHILE_NOT_EOT'\n  271 |       TAPA_WHILE_NOT_EOT(update_in_q) {\n      |       ^\n/output/PASTA/apps/graph/graph.cpp:271:38: error: expected ';' after expression\n  271 |       TAPA_WHILE_NOT_EOT(update_in_q) {\n      |                                      ^\n      |                                      ;\n/output/PASTA/apps/graph/graph.cpp:272:42: error: too many arguments to function call, expected 0, have 1\n  272 |         Update update = update_in_q.read(nullptr);\n      |                         ~~~~~~~~~~~~~~~~ ^~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/graph/graph.cpp:273:9: error: use of undeclared identifier 'VLOG'\n  273 |         VLOG(5) << \"recv@UpdateHandler: Update: \" << update;\n      |         ^\n/output/PASTA/apps/graph/graph.cpp:275:9: error: use of undeclared identifier 'VLOG'\n  275 |         VLOG(5) << \"info@UpdateHandler: dst partition id: \" << pid;\n      |         ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n1 warning and 20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_spmm_sextans-u280-split-bram-uram_tapa",
+      "top_function": "async_read",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 4,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "sextans.cpp"
     },
     {
-      "name": "bandwidth",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/bandwidth",
-      "source_files": [
-        "bandwidth-host.cpp",
-        "bandwidth.cpp",
-        "bandwidth.h",
-        "lfsr.h"
-      ],
-      "kernel_files": [
-        "bandwidth.cpp"
-      ],
-      "host_files": [
-        "bandwidth-host.cpp"
-      ],
-      "header_files": [
-        "bandwidth.h",
-        "lfsr.h"
-      ],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "bandwidth.cpp",
-          "In file included from /output/PASTA/apps/bandwidth/bandwidth.cpp:6:\n/output/PASTA/apps/bandwidth/bandwidth.h:3:20: error: no template named 'vec_t' in namespace 'tapa'\n    3 | using Elem = tapa::vec_t<float, 16>;\n      |              ~~~~~~^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:9:28: error: use of undeclared identifier 'Elem'\n    9 | void Copy(tapa::async_mmap<Elem>& mem, uint64_t n, uint64_t flags) {\n      |                            ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:17:5: warning: unknown attribute 'unroll' ignored [-Wunknown-attributes]\n   17 |   [[tapa::unroll]]  //\n      |     ^~~~~~~~~~~~\n/output/PASTA/apps/bandwidth/bandwidth.cpp:26:3: error: unknown type name 'Elem'\n   26 |   Elem elem;\n      |   ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: error: use of overloaded operator '&' is ambiguous (with operand types 'Lfsr<16>' and 'uint16_t' (aka 'unsigned short'))\n   33 |     int64_t read_addr = random ? uint64_t(lfsr_rd & mask) : i_rd_req;\n      |                                           ~~~~~~~ ^ ~~~~\n/workspace/stubs/ap_int.h:102:13: note: candidate function\n  102 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }\n      |             ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, int)\n   33 |     int64_t read_addr = random ? uint64_t(lfsr_rd & mask) : i_rd_req;\n      |                                                   ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(int, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(long long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(__int128, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned int, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned long long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:33:51: note: built-in candidate operator&(unsigned __int128, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: error: use of overloaded operator '&' is ambiguous (with operand types 'Lfsr<16>' and 'uint16_t' (aka 'unsigned short'))\n   34 |     int64_t write_addr = random ? uint64_t(lfsr_wr & mask) : i_wr_req;\n      |                                            ~~~~~~~ ^ ~~~~\n/workspace/stubs/ap_int.h:102:13: note: candidate function\n  102 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }\n      |             ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, int)\n   34 |     int64_t write_addr = random ? uint64_t(lfsr_wr & mask) : i_wr_req;\n      |                                                    ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(int, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(long long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(__int128, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned int, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned long long, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, unsigned int)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, unsigned long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, unsigned long long)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:34:52: note: built-in candidate operator&(unsigned __int128, unsigned __int128)\n/output/PASTA/apps/bandwidth/bandwidth.cpp:44:7: error: use of undeclared identifier 'VLOG'\n   44 |       VLOG(3) << \"RD REQ [\" << std::setw(5) << read_addr << \"]\";\n      |       ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:50:7: error: use of undeclared identifier 'VLOG'\n   50 |       VLOG(3) << \"RD RSP #\" << std::setw(5) << i_rd_resp - 1;\n      |       ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:58:7: error: use of undeclared identifier 'VLOG'\n   58 |       VLOG(3) << \"WR REQ [\" << std::setw(5) << write_addr << \"]\";\n      |       ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:63:7: error: use of undeclared identifier 'VLOG'\n   63 |       VLOG(3) << \"WR RSP #\" << std::setw(5) << i_wr_resp - 1;\n      |       ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:28:5: warning: unknown attribute 'pipeline' ignored [-Wunknown-attributes]\n   28 |   [[tapa::pipeline(1)]]  //\n      |     ^~~~~~~~~~~~~~\n/output/PASTA/apps/bandwidth/bandwidth.cpp:68:22: error: no template named 'mmaps' in namespace 'tapa'; did you mean 'mmap'?\n   68 | void Bandwidth(tapa::mmaps<Elem, kBankCount> chan, uint64_t n, uint64_t flags) {\n      |                ~~~~~~^~~~~\n      |                      mmap\n/workspace/stubs/tapa.h:53:7: note: 'mmap' declared here\n   53 | class mmap {\n      |       ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:68:28: error: use of undeclared identifier 'Elem'\n   68 | void Bandwidth(tapa::mmaps<Elem, kBankCount> chan, uint64_t n, uint64_t flags) {\n      |                            ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:69:29: error: no member named 'join' in namespace 'tapa'\n   69 |   tapa::task().invoke<tapa::join, kBankCount>(Copy, chan, n, flags);\n      |                       ~~~~~~^\nIn file included from /output/PASTA/apps/bandwidth/bandwidth.cpp:7:\n/output/PASTA/apps/bandwidth/lfsr.h:22:5: error: use of undeclared identifier 'CHECK_NE'\n   22 |     CHECK_NE(*this, 0);\n      |     ^\n/output/PASTA/apps/bandwidth/bandwidth.cpp:43:7: note: in instantiation of member function 'Lfsr<16>::operator++' requested here\n   43 |       ++lfsr_rd;\n      |       ^\nIn file included from /output/PASTA/apps/bandwidth/bandwidth.cpp:7:\n/output/PASTA/apps/bandwidth/lfsr.h:23:11: error: no member named 'set_bit' in 'Lfsr<16>'\n   23 |     this->set_bit(0, (*this & LfsrTaps<width>::Value()).xor_reduce());\n      |     ~~~~  ^\n/output/PASTA/apps/bandwidth/lfsr.h:24:11: error: no member named 'rrotate' in 'Lfsr<16>'\n   24 |     this->rrotate(1);\n      |     ~~~~  ^\n2 warnings and 15 errors generated.\n"
-        ]
-      ]
+      "name": "reg_spmv-hisparse-mmap_hls",
+      "top_function": "CPSR_matrix_loader",
+      "type": "HLS",
+      "source_files": 2,
+      "header_files": 2,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "spmv.cpp"
     },
     {
-      "name": "jacobi",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/jacobi",
-      "source_files": [
-        "jacobi-host.cpp",
-        "jacobi.cpp"
-      ],
-      "kernel_files": [
-        "jacobi.cpp"
-      ],
-      "host_files": [
-        "jacobi-host.cpp"
-      ],
-      "header_files": [],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "jacobi.cpp",
-          "/output/PASTA/apps/jacobi/jacobi.cpp:4:38: error: no member named 'vec_t' in namespace 'tapa'\n    4 |                  tapa::ostream<tapa::vec_t<float, 2>>& stream) {\n      |                                ~~~~~~^\n/output/PASTA/apps/jacobi/jacobi.cpp:4:49: error: expected '(' for function-style cast or type construction\n    4 |                  tapa::ostream<tapa::vec_t<float, 2>>& stream) {\n      |                                            ~~~~~^\n/output/PASTA/apps/jacobi/jacobi.cpp:4:53: error: expected ')'\n    4 |                  tapa::ostream<tapa::vec_t<float, 2>>& stream) {\n      |                                                     ^\n/output/PASTA/apps/jacobi/jacobi.cpp:3:17: note: to match this '('\n    3 | void Mmap2Stream(tapa::mmap<const float> mmap, uint64_t n,\n      |                 ^\n/output/PASTA/apps/jacobi/jacobi.cpp:6:11: error: no member named 'vec_t' in namespace 'tapa'\n    6 |     tapa::vec_t<float, 2> tmp;\n      |     ~~~~~~^\n/output/PASTA/apps/jacobi/jacobi.cpp:6:22: error: expected '(' for function-style cast or type construction\n    6 |     tapa::vec_t<float, 2> tmp;\n      |                 ~~~~~^\n/output/PASTA/apps/jacobi/jacobi.cpp:6:27: error: use of undeclared identifier 'tmp'\n    6 |     tapa::vec_t<float, 2> tmp;\n      |                           ^\n/output/PASTA/apps/jacobi/jacobi.cpp:7:5: error: use of undeclared identifier 'tmp'\n    7 |     tmp.set(0, mmap[i * 2]);\n      |     ^\n/output/PASTA/apps/jacobi/jacobi.cpp:8:5: error: use of undeclared identifier 'tmp'\n    8 |     tmp.set(1, mmap[i * 2 + 1]);\n      |     ^\n/output/PASTA/apps/jacobi/jacobi.cpp:9:5: error: use of undeclared identifier 'stream'; did you mean 'tapa::stream'?\n    9 |     stream.write(tmp);\n      |     ^~~~~~\n      |     tapa::stream\n/workspace/stubs/tapa.h:165:7: note: 'tapa::stream' declared here\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/jacobi/jacobi.cpp:9:5: error: use of undeclared identifier 'stream'; did you mean 'tapa::stream'?\n    9 |     stream.write(tmp);\n      |     ^~~~~~\n      |     tapa::stream\n/workspace/stubs/tapa.h:165:7: note: 'tapa::stream' declared here\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/jacobi/jacobi.cpp:9:5: error: unknown type name 'stream'\n    9 |     stream.write(tmp);\n      |     ^\n/output/PASTA/apps/jacobi/jacobi.cpp:9:11: error: cannot use dot operator on a type\n    9 |     stream.write(tmp);\n      |           ^\n/output/PASTA/apps/jacobi/jacobi.cpp:5:5: warning: unknown attribute 'pipeline' ignored [-Wunknown-attributes]\n    5 |   [[tapa::pipeline(2)]] for (uint64_t i = 0; i < n; ++i) {\n      |     ^~~~~~~~~~~~~~\n/output/PASTA/apps/jacobi/jacobi.cpp:11:3: error: use of undeclared identifier 'stream'; did you mean 'tapa::stream'?\n   11 |   stream.close();\n      |   ^~~~~~\n      |   tapa::stream\n/workspace/stubs/tapa.h:165:7: note: 'tapa::stream' declared here\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/jacobi/jacobi.cpp:11:3: error: use of undeclared identifier 'stream'; did you mean 'tapa::stream'?\n   11 |   stream.close();\n      |   ^~~~~~\n      |   tapa::stream\n/workspace/stubs/tapa.h:165:7: note: 'tapa::stream' declared here\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/jacobi/jacobi.cpp:11:3: error: unknown type name 'stream'\n   11 |   stream.close();\n      |   ^\n/output/PASTA/apps/jacobi/jacobi.cpp:11:9: error: cannot use dot operator on a type\n   11 |   stream.close();\n      |         ^\n/output/PASTA/apps/jacobi/jacobi.cpp:14:38: error: no member named 'vec_t' in namespace 'tapa'\n   14 | void Stream2Mmap(tapa::istream<tapa::vec_t<float, 2>>& stream,\n      |                                ~~~~~~^\n/output/PASTA/apps/jacobi/jacobi.cpp:14:49: error: expected '(' for function-style cast or type construction\n   14 | void Stream2Mmap(tapa::istream<tapa::vec_t<float, 2>>& stream,\n      |                                            ~~~~~^\n/output/PASTA/apps/jacobi/jacobi.cpp:14:53: error: expected ')'\n   14 | void Stream2Mmap(tapa::istream<tapa::vec_t<float, 2>>& stream,\n      |                                                     ^\n/output/PASTA/apps/jacobi/jacobi.cpp:14:17: note: to match this '('\n   14 | void Stream2Mmap(tapa::istream<tapa::vec_t<float, 2>>& stream,\n      |                 ^\nfatal error: too many errors emitted, stopping now [-ferror-limit=]\n1 warning and 20 errors generated.\n"
-        ]
-      ]
+      "name": "reg_spmv-hisparse-mmap_tapa",
+      "top_function": "spmv",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 0,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "spmv.cpp"
     },
     {
-      "name": "nested-vadd",
-      "category": "apps",
-      "subcategory": null,
-      "path": "apps/nested-vadd",
-      "source_files": [
-        "vadd-host.cpp",
-        "vadd.cpp"
-      ],
-      "kernel_files": [
-        "vadd.cpp"
-      ],
-      "host_files": [
-        "vadd-host.cpp"
-      ],
-      "header_files": [],
-      "compile_success": false,
-      "compile_errors": [
-        [
-          "vadd.cpp",
-          "/output/PASTA/apps/nested-vadd/vadd.cpp:13:22: error: too many arguments to function call, expected 0, have 1\n   13 |       a = a_int.read(a_succeed);\n      |           ~~~~~~~~~~ ^~~~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:16:22: error: too many arguments to function call, expected 0, have 1\n   16 |       b = b_int.read(b_succeed);\n      |           ~~~~~~~~~~ ^~~~~~~~~\n/workspace/stubs/tapa.h:185:7: note: 'read' declared here\n  185 |     T read() { return stream<T>::read(); }\n      |       ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:11:5: warning: unknown attribute 'pipeline' ignored [-Wunknown-attributes]\n   11 |   [[tapa::pipeline(1)]] while (read < n_int) {\n      |     ^~~~~~~~~~~~~~\n/output/PASTA/apps/nested-vadd/vadd.cpp:27:9: error: no member named 'open' in 'tapa::istream<float>'\n   27 |   a_int.open();\n      |   ~~~~~ ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:28:9: error: no member named 'open' in 'tapa::istream<float>'\n   28 |   b_int.open();\n      |   ~~~~~ ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:42:18: error: no member named 'read_addr' in 'tapa::async_mmap<float>'\n   42 |         mmap_int.read_addr.try_write(rq_i))\n      |         ~~~~~~~~ ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:44:18: error: no member named 'read_data' in 'tapa::async_mmap<float>'\n   44 |     if (mmap_int.read_data.try_read(elem)) {\n      |         ~~~~~~~~ ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:38:5: warning: unknown attribute 'pipeline' ignored [-Wunknown-attributes]\n   38 |   [[tapa::pipeline(1)]] for (uint64_t rq_i = 0, rs_i = 0; rs_i < n_int;) {\n      |     ^~~~~~~~~~~~~~\n/output/PASTA/apps/nested-vadd/vadd.cpp:72:10: error: no member named 'open' in 'tapa::istream<float>'\n   72 |   stream.open();\n      |   ~~~~~~ ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:77:9: error: too many template arguments for class template 'stream'\n   77 |   tapa::stream<float, 8> a_stream(\"a\");\n      |         ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:78:9: error: too many template arguments for class template 'stream'\n   78 |   tapa::stream<float, 8> b_stream(\"b\");\n      |         ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/output/PASTA/apps/nested-vadd/vadd.cpp:79:9: error: too many template arguments for class template 'stream'\n   79 |   tapa::stream<float, 8> c_stream(\"c\");\n      |         ^             ~~\n/workspace/stubs/tapa.h:165:7: note: template is declared here\n  164 | template<typename T>\n      | ~~~~~~~~~~~~~~~~~~~~\n  165 | class stream {\n      |       ^\n/workspace/stubs/tapa.h:263:14: error: non-const lvalue reference to type 'tapa::async_mmap<float>' cannot bind to a value of unrelated type 'tapa::mmap<float>'\n  263 |         func(args...);\n      |              ^~~~\n/output/PASTA/apps/nested-vadd/vadd.cpp:55:16: note: in instantiation of function template specialization 'tapa::task::invoke<void (&)(tapa::async_mmap<float> &, unsigned long, tapa::ostream<float> &), tapa::mmap<float> &, unsigned long &, tapa::ostream<float> &>' requested here\n   55 |   tapa::task().invoke(Mmap2Stream_internal, mmap_ext, n_ext, stream_ext);\n      |                ^\n2 warnings and 11 errors generated.\n"
-        ]
-      ]
+      "name": "reg_stencil-dilate_tapa",
+      "top_function": "DILATE",
+      "type": "TAPA",
+      "source_files": 2,
+      "header_files": 1,
+      "has_testbench": false,
+      "has_compile_log": true,
+      "has_tcl_script": true,
+      "main_source": "unikernel.cpp"
     }
   ]
 }

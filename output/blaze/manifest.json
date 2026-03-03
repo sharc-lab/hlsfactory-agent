@@ -1,0 +1,102 @@
+{
+  "repository": {
+    "url": "https://github.com/UCLA-VAST/blaze.git",
+    "name": "blaze",
+    "path": "/workspace/repo"
+  },
+  "output_path": "/output/blaze",
+  "total_designs": 8,
+  "designs": [
+    {
+      "name": "pi_cpu",
+      "type": "cpu_task",
+      "files": [
+        "Pi.cpp",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    },
+    {
+      "name": "arrayTest_cpu",
+      "type": "cpu_task",
+      "files": [
+        "ArrayTest.cpp",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    },
+    {
+      "name": "arrayTest_gpu",
+      "type": "gpu_task",
+      "files": [
+        "ArrayTest.cpp",
+        "ArrayTest.cl",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    },
+    {
+      "name": "loopback_nlb",
+      "type": "aal_task",
+      "files": [
+        "NLB.cpp",
+        "NLBApp.h",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    },
+    {
+      "name": "arraytest_acc",
+      "type": "acc_task",
+      "files": [
+        "ArrayTest.cpp",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    },
+    {
+      "name": "arraytest_ocl",
+      "type": "ocl_task",
+      "files": [
+        "ArrayTest.cpp",
+        "ArrayTest.cl",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    },
+    {
+      "name": "masktest_acc",
+      "type": "acc_task",
+      "files": [
+        "MaskTest.cpp",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    },
+    {
+      "name": "tuple2test_acc",
+      "type": "acc_task",
+      "files": [
+        "Tuple2Test.cpp",
+        "testbench.cpp",
+        "README.md",
+        "compile_log.txt",
+        "synthesize.tcl"
+      ]
+    }
+  ]
+}

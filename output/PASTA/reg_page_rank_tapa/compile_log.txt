@@ -1,0 +1,5 @@
+=== Compiling reg_page_rank_tapa ===
+Source: page-rank.cpp
+Type: TAPA
+Compilation failed (expected for TAPA designs)
+Compilation check complete
