@@ -1,0 +1,4 @@
+Compilation: SUCCESS
+Command: clang -c -fsyntax-only -I/workspace/stubs /output/HARP/3mm/3mm_kernel.c
+
+No errors found.

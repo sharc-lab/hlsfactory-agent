@@ -1,0 +1,76 @@
+=== COMPILATION ERRORS ===
+Errors in cnn-4L-sequential-kernel.cpp:
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:36:61: error: no template named 'mmap' in namespace 'tapa'
+   36 | void measure_cycle(tapa::istreams<bool, 1>& fifo_fin, tapa::mmap<int> cycle_count){
+      |                                                       ~~~~~~^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:44:34: error: too many arguments to function call, expected 0, have 1
+   44 |                 fifo_fin[i].read(nullptr);
+      |                 ~~~~~~~~~~~~~~~~ ^~~~~~~
+/output/InTAR/cnn-4L-sequential/src/tapa.h:36:7: note: 'read' declared here
+   36 |     T read() { return T(); }
+      |       ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:129:34: error: no member named 'empty' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  129 |                 if (!X.read_data.empty()) {
+      |                      ~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:130:49: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  130 |                     int16_v16 tmp = X.read_data.read(nullptr);
+      |                                     ~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:169:42: error: non-const lvalue reference to type 'bool' cannot bind to a temporary of type 'std::nullptr_t'
+  169 |                 offchip1.write_resp.read(nullptr);
+      |                                          ^~~~~~~
+/output/InTAR/cnn-4L-sequential/src/tapa.h:85:24: note: passing argument to parameter 'success' here
+   85 |         int read(bool& success) { success = true; return 0; }
+      |                        ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:187:41: error: no member named 'empty' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  187 |                 if (!offchip1.read_data.empty()) {
+      |                      ~~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:188:56: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  188 |                     int16_v16 tmp = offchip1.read_data.read(nullptr);
+      |                                     ~~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:233:46: error: non-const lvalue reference to type 'bool' cannot bind to a temporary of type 'std::nullptr_t'
+  233 |                     offchip2.write_resp.read(nullptr);
+      |                                              ^~~~~~~
+/output/InTAR/cnn-4L-sequential/src/tapa.h:85:24: note: passing argument to parameter 'success' here
+   85 |         int read(bool& success) { success = true; return 0; }
+      |                        ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:252:41: error: no member named 'empty' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  252 |                 if (!offchip2.read_data.empty()) {
+      |                      ~~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:253:56: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  253 |                     int16_v16 tmp = offchip2.read_data.read(nullptr);
+      |                                     ~~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:304:46: error: non-const lvalue reference to type 'bool' cannot bind to a temporary of type 'std::nullptr_t'
+  304 |                     offchip3.write_resp.read(nullptr);
+      |                                              ^~~~~~~
+/output/InTAR/cnn-4L-sequential/src/tapa.h:85:24: note: passing argument to parameter 'success' here
+   85 |         int read(bool& success) { success = true; return 0; }
+      |                        ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:329:45: error: no member named 'empty' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  329 |                     if (!offchip3.read_data.empty()) {
+      |                          ~~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:330:60: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  330 |                         int16_v16 tmp = offchip3.read_data.read(nullptr);
+      |                                         ~~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:378:46: error: non-const lvalue reference to type 'bool' cannot bind to a temporary of type 'std::nullptr_t'
+  378 |                     data_out.write_resp.read(nullptr);
+      |                                              ^~~~~~~
+/output/InTAR/cnn-4L-sequential/src/tapa.h:85:24: note: passing argument to parameter 'success' here
+   85 |         int read(bool& success) { success = true; return 0; }
+      |                        ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:392:6: error: variable has incomplete type 'void'
+  392 | void CNN4L(
+      |      ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:393:11: error: no member named 'mmap' in namespace 'tapa'
+  393 |     tapa::mmap<int16_v16> X,
+      |     ~~~~~~^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:393:16: error: unexpected type name 'int16_v16': expected expression
+  393 |     tapa::mmap<int16_v16> X,
+      |                ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:393:27: error: use of undeclared identifier 'X'
+  393 |     tapa::mmap<int16_v16> X,
+      |                           ^
+/output/InTAR/cnn-4L-sequential/src/cnn-4L-sequential-kernel.cpp:394:11: error: no member named 'mmap' in namespace 'tapa'
+  394 |     tapa::mmap<int16_v16> kernel1,
+      |     ~~~~~~^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,4 @@
+Compilation: SUCCESS
+Command: clang -c -fsyntax-only -I/workspace/stubs /output/HARP/spmv-ellpack/spmv-ellpack_kernel.c
+
+No errors found.

@@ -1,0 +1,136 @@
+=== COMPILATION ERRORS ===
+Errors in mlp-intrra-kernel.cpp:
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:31:22: error: ambiguous conversion for functional-style cast from 'int' to 'ap_uint<2>'
+   31 |         inst.stage = ap_uint<2>(stage);
+      |                      ^~~~~~~~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:100:5: note: candidate constructor
+  100 |     ap_uint(unsigned v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:101:5: note: candidate constructor
+  101 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:102:5: note: candidate constructor
+  102 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:50:22: error: ambiguous conversion for functional-style cast from 'int' to 'ap_uint<2>'
+   50 |         inst.stage = ap_uint<2>(stage);
+      |                      ^~~~~~~~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:100:5: note: candidate constructor
+  100 |     ap_uint(unsigned v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:101:5: note: candidate constructor
+  101 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:102:5: note: candidate constructor
+  102 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:157:19: error: conversion from 'ap_uint<2>' to 'const int' is ambiguous
+  157 |         const int stage = inst.stage;
+      |                   ^       ~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:158:19: error: conversion from 'ap_uint<11>' to 'const int' is ambiguous
+  158 |         const int i_bound = inst.i_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:159:19: error: conversion from 'ap_uint<11>' to 'const int' is ambiguous
+  159 |         const int j_bound = inst.j_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:235:19: error: conversion from 'ap_uint<2>' to 'const int' is ambiguous
+  235 |         const int stage = inst.stage;
+      |                   ^       ~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:236:19: error: conversion from 'ap_uint<11>' to 'const int' is ambiguous
+  236 |         const int i_bound = inst.i_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:237:19: error: conversion from 'ap_uint<11>' to 'const int' is ambiguous
+  237 |         const int j_bound = inst.j_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/mlp-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:333:57: error: no template named 'mmap' in namespace 'tapa'
+  333 | void measure_cycle(tapa::istream<bool>& fifo_fin, tapa::mmap<int> cycle_count){
+      |                                                   ~~~~~~^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:336:27: error: too many arguments to function call, expected 0, have 1
+  336 |             fifo_fin.read(nullptr);
+      |             ~~~~~~~~~~~~~ ^~~~~~~
+/output/InTAR/mlp-intrra/src/tapa.h:36:7: note: 'read' declared here
+   36 |     T read() { return T(); }
+      |       ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:344:6: error: variable has incomplete type 'void'
+  344 | void MLP(
+      |      ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:345:11: error: no member named 'mmap' in namespace 'tapa'
+  345 |     tapa::mmap<int16_v16> X_acc0,
+      |     ~~~~~~^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:345:16: error: unexpected type name 'int16_v16': expected expression
+  345 |     tapa::mmap<int16_v16> X_acc0,
+      |                ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:345:27: error: use of undeclared identifier 'X_acc0'
+  345 |     tapa::mmap<int16_v16> X_acc0,
+      |                           ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:346:11: error: no member named 'mmap' in namespace 'tapa'
+  346 |     tapa::mmap<int16_v16> X_acc1,
+      |     ~~~~~~^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:346:16: error: unexpected type name 'int16_v16': expected expression
+  346 |     tapa::mmap<int16_v16> X_acc1,
+      |                ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:346:27: error: use of undeclared identifier 'X_acc1'
+  346 |     tapa::mmap<int16_v16> X_acc1,
+      |                           ^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:347:11: error: no member named 'mmap' in namespace 'tapa'
+  347 |     tapa::mmap<int16_v16> W_acc0,
+      |     ~~~~~~^
+/output/InTAR/mlp-intrra/src/mlp-intrra-kernel.cpp:347:16: error: unexpected type name 'int16_v16': expected expression
+  347 |     tapa::mmap<int16_v16> W_acc0,
+      |                ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

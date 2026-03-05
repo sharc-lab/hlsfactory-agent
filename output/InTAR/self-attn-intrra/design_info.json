@@ -1,0 +1,10 @@
+{
+  "name": "self-attn-intrra",
+  "top_function": "send_inst_cc0",
+  "files": [
+    "self-attn-intrra-kernel.cpp",
+    "self-attn-intrra-host.cpp",
+    "self-attn.cpp"
+  ],
+  "description": "Self-attention with InTAR optimization"
+}

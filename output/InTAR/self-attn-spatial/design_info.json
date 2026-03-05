@@ -1,0 +1,9 @@
+{
+  "name": "self-attn-spatial",
+  "top_function": "measure_cycle",
+  "files": [
+    "self-attn-spatial-kernel.cpp",
+    "self-attn-spatial-host.cpp"
+  ],
+  "description": "Self-attention spatial implementation"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "self-attn-sequential",
+  "top_function": "measure_cycle",
+  "files": [
+    "self-attn-sequential-kernel.cpp",
+    "self-attn-sequential-host.cpp"
+  ],
+  "description": "Self-attention sequential implementation"
+}

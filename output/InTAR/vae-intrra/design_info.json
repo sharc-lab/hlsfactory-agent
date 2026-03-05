@@ -1,0 +1,10 @@
+{
+  "name": "vae-intrra",
+  "top_function": "CC0_Encoder_Decoder_Conv1",
+  "files": [
+    "vae-intrra-kernel.cpp",
+    "vae-intrra-host.cpp",
+    "vae.cpp"
+  ],
+  "description": "VAE with InTAR optimization"
+}

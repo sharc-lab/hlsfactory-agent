@@ -1,0 +1,9 @@
+{
+  "name": "mlp-spatial",
+  "top_function": "black_hole_int16_v16",
+  "files": [
+    "mlp-spatial-kernel.cpp",
+    "mlp-spatial-host.cpp"
+  ],
+  "description": "MLP spatial implementation"
+}

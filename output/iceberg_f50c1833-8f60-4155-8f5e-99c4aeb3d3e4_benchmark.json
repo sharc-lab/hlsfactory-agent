@@ -1,0 +1,10 @@
+{
+  "run_id": "f50c1833-8f60-4155-8f5e-99c4aeb3d3e4",
+  "timestamp": "2026-03-05T07:09:23.873434+00:00",
+  "repo_url": "https://github.com/UCLA-VAST/iceberg.git",
+  "model": "moonshotai/kimi-k2.5",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.14077657,
+  "total_api_calls": 225,
+  "traj_file": "iceberg_f50c1833-8f60-4155-8f5e-99c4aeb3d3e4.traj.json"
+}
