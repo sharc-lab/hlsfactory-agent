@@ -1,0 +1,327 @@
+=== COMPILATION ERRORS ===
+Errors in self-attn-sequential-kernel.cpp:
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:17:61: error: no template named 'mmap' in namespace 'tapa'
+   17 | void measure_cycle(tapa::istreams<bool, 1>& fifo_fin, tapa::mmap<int> cycle_count){
+      |                                                       ~~~~~~^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:25:34: error: too many arguments to function call, expected 0, have 1
+   25 |                 fifo_fin[i].read(nullptr);
+      |                 ~~~~~~~~~~~~~~~~ ^~~~~~~
+/output/InTAR/self-attn-sequential/src/tapa.h:36:7: note: 'read' declared here
+   36 |     T read() { return T(); }
+      |       ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:250:33: error: use of undeclared identifier 'sqrt'
+  250 |             S[i][j] = S[i][j] / sqrt(D); // scaled attention
+      |                                 ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:259:32: error: use of undeclared identifier 'exp'
+  259 |             S[i][j] = (type_t) exp(float(S[i][j]));
+      |                                ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: error: use of overloaded operator '+=' is ambiguous (with operand types 'float' and 'type_t' (aka 'ap_int<16>'))
+  260 |             sum += S[i][j];
+      |             ~~~ ^  ~~~~~~~
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:260:17: note: built-in candidate operator+=(float &, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: error: use of overloaded operator '/' is ambiguous (with operand types 'type_t' (aka 'ap_int<16>') and 'float')
+  263 |             S[i][j] = S[i][j] / sum * SCALE_FACTOR;
+      |                       ~~~~~~~ ^ ~~~
+/output/InTAR/self-attn-sequential/src/ap_int.h:41:12: note: candidate function
+   41 |     ap_int operator/(const ap_int& other) const { return ap_int(static_cast<int>(val / other.val)); }
+      |            ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, float)
+  263 |             S[i][j] = S[i][j] / sum * SCALE_FACTOR;
+      |                               ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(float, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(double, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long double, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(int, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(long long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(__int128, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned int, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned long long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:263:31: note: built-in candidate operator/(unsigned __int128, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: error: use of overloaded operator '/' is ambiguous (with operand types 'ap_int<16>' and 'int')
+  290 |                 tmp_out[i][j] = tmp_out[i][j] / SCALE_FACTOR;  // add back the scaling in the softmax
+      |                                 ~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~
+/output/InTAR/self-attn-sequential/src/ap_int.h:41:12: note: candidate function
+   41 |     ap_int operator/(const ap_int& other) const { return ap_int(static_cast<int>(val / other.val)); }
+      |            ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, int)
+  290 |                 tmp_out[i][j] = tmp_out[i][j] / SCALE_FACTOR;  // add back the scaling in the softmax
+      |                                               ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(float, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(double, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long double, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(int, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(long long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(__int128, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned int, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned long long, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, float)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, long double)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, unsigned int)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, unsigned long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, unsigned long long)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:290:47: note: built-in candidate operator/(unsigned __int128, unsigned __int128)
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:317:6: error: variable has incomplete type 'void'
+  317 | void selfAttention(
+      |      ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:318:11: error: no member named 'mmap' in namespace 'tapa'
+  318 |     tapa::mmap<vec_t> in_glb,
+      |     ~~~~~~^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:318:16: error: unexpected type name 'vec_t': expected expression
+  318 |     tapa::mmap<vec_t> in_glb,
+      |                ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:318:23: error: use of undeclared identifier 'in_glb'
+  318 |     tapa::mmap<vec_t> in_glb,
+      |                       ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:319:11: error: no member named 'mmap' in namespace 'tapa'
+  319 |     tapa::mmap<vec_t> WQ_glb,
+      |     ~~~~~~^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:319:16: error: unexpected type name 'vec_t': expected expression
+  319 |     tapa::mmap<vec_t> WQ_glb,
+      |                ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:319:23: error: use of undeclared identifier 'WQ_glb'
+  319 |     tapa::mmap<vec_t> WQ_glb,
+      |                       ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:320:11: error: no member named 'mmap' in namespace 'tapa'
+  320 |     tapa::mmap<vec_t> WK_glb,
+      |     ~~~~~~^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:320:16: error: unexpected type name 'vec_t': expected expression
+  320 |     tapa::mmap<vec_t> WK_glb,
+      |                ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:320:23: error: use of undeclared identifier 'WK_glb'
+  320 |     tapa::mmap<vec_t> WK_glb,
+      |                       ^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:321:11: error: no member named 'mmap' in namespace 'tapa'
+  321 |     tapa::mmap<vec_t> WV_glb,
+      |     ~~~~~~^
+/output/InTAR/self-attn-sequential/src/self-attn-sequential-kernel.cpp:321:16: error: unexpected type name 'vec_t': expected expression
+  321 |     tapa::mmap<vec_t> WV_glb,
+      |                ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

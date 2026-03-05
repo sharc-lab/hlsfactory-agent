@@ -1,0 +1,4 @@
+Compilation: SUCCESS
+Command: clang -c -fsyntax-only -I/workspace/stubs /output/HARP/jacobi-2d/jacobi-2d_kernel.c
+
+No errors found.

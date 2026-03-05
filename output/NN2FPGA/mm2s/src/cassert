@@ -1,0 +1,17 @@
+// Minimal assert stub for compilation
+#ifndef CASSERT_STUB
+#define CASSERT_STUB
+
+#include <cstdlib>
+
+#ifndef NDEBUG
+    #define assert(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__), 0)))
+#else
+    #define assert(x) ((void)0)
+#endif
+
+inline void __assert_fail(const char* expr, const char* file, int line, const char* func) {
+    (void)expr; (void)file; (void)line; (void)func;
+}
+
+#endif

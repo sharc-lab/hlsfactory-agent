@@ -128,16 +128,13 @@ def main():
     print(f"Benchmark:  {benchmark_path}")
 
     # 7. copy /output from the container to the host
-    container_id = subprocess.run(
-        ["docker", "ps", "-lq"],
-        capture_output=True, text=True, check=True,
-    ).stdout.strip()
+    container_id = env.container_id
 
     if not container_id:
         print("Warning: could not find container ID, skipping output copy.", file=sys.stderr)
     else:
         subprocess.run(["docker", "cp", f"{container_id}:/output/.", str(output_dir)], check=True)
-        subprocess.run(["docker", "rm", container_id], check=True)
+        env.cleanup()
         print(f"HLS results copied to {output_dir}")
 
 

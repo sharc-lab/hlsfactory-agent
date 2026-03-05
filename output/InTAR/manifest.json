@@ -1,0 +1,138 @@
+{
+  "repository": "InTAR",
+  "source": "https://github.com/OswaldHe/InTAR.git",
+  "designs": [
+    {
+      "name": "gating-net-sequential",
+      "top_function": "measure_cycle",
+      "files": [
+        "gating-net-sequential-kernel.cpp",
+        "gating-net-sequential-host.cpp"
+      ],
+      "description": "Gating network sequential implementation"
+    },
+    {
+      "name": "cnn-4L-spatial",
+      "top_function": "black_hole_int16_v16",
+      "files": [
+        "cnn-4L-spatial-kernel.cpp",
+        "cnn-4L-spatial-host.cpp",
+        "cnn-4L.cpp"
+      ],
+      "description": "CNN 4-Layer spatial implementation"
+    },
+    {
+      "name": "cnn-4L-sequential",
+      "top_function": "measure_cycle",
+      "files": [
+        "cnn-4L-sequential-kernel.cpp",
+        "cnn-4L-sequential-host.cpp",
+        "cnn-4L.cpp"
+      ],
+      "description": "CNN 4-Layer sequential implementation"
+    },
+    {
+      "name": "gating-net-spatial",
+      "top_function": "measure_cycle",
+      "files": [
+        "gating-net-spatial-kernel.cpp",
+        "gating-net-spatial-host.cpp"
+      ],
+      "description": "Gating network spatial implementation"
+    },
+    {
+      "name": "vae-spatial",
+      "top_function": "Encoder_Conv1",
+      "files": [
+        "vae-spatial-kernel.cpp",
+        "vae-spatial-host.cpp"
+      ],
+      "description": "VAE spatial implementation"
+    },
+    {
+      "name": "cnn-4L-intrra",
+      "top_function": "CC0_Conv1_Conv4",
+      "files": [
+        "cnn-4L-intrra-kernel.cpp",
+        "cnn-4L-intrra-host.cpp"
+      ],
+      "description": "CNN 4-Layer with InTAR optimization"
+    },
+    {
+      "name": "self-attn-spatial",
+      "top_function": "measure_cycle",
+      "files": [
+        "self-attn-spatial-kernel.cpp",
+        "self-attn-spatial-host.cpp"
+      ],
+      "description": "Self-attention spatial implementation"
+    },
+    {
+      "name": "self-attn-intrra",
+      "top_function": "send_inst_cc0",
+      "files": [
+        "self-attn-intrra-kernel.cpp",
+        "self-attn-intrra-host.cpp",
+        "self-attn.cpp"
+      ],
+      "description": "Self-attention with InTAR optimization"
+    },
+    {
+      "name": "mlp-sequential",
+      "top_function": "measure_cycle",
+      "files": [
+        "mlp-sequential-kernel.cpp",
+        "mlp-sequential-host.cpp"
+      ],
+      "description": "MLP sequential implementation"
+    },
+    {
+      "name": "vae-intrra",
+      "top_function": "CC0_Encoder_Decoder_Conv1",
+      "files": [
+        "vae-intrra-kernel.cpp",
+        "vae-intrra-host.cpp",
+        "vae.cpp"
+      ],
+      "description": "VAE with InTAR optimization"
+    },
+    {
+      "name": "mlp-intrra",
+      "top_function": "send_inst_cc0",
+      "files": [
+        "mlp-intrra-kernel.cpp",
+        "mlp-intrra-host.cpp",
+        "mlp.cpp"
+      ],
+      "description": "MLP with InTAR optimization"
+    },
+    {
+      "name": "mlp-spatial",
+      "top_function": "black_hole_int16_v16",
+      "files": [
+        "mlp-spatial-kernel.cpp",
+        "mlp-spatial-host.cpp"
+      ],
+      "description": "MLP spatial implementation"
+    },
+    {
+      "name": "self-attn-sequential",
+      "top_function": "measure_cycle",
+      "files": [
+        "self-attn-sequential-kernel.cpp",
+        "self-attn-sequential-host.cpp"
+      ],
+      "description": "Self-attention sequential implementation"
+    },
+    {
+      "name": "vae-sequential",
+      "top_function": "measure_cycle",
+      "files": [
+        "vae-sequential-kernel.cpp",
+        "vae-sequential-host.cpp",
+        "vae.cpp"
+      ],
+      "description": "VAE sequential implementation"
+    }
+  ]
+}

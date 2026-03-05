@@ -1,0 +1,9 @@
+{
+  "name": "mlp-sequential",
+  "top_function": "measure_cycle",
+  "files": [
+    "mlp-sequential-kernel.cpp",
+    "mlp-sequential-host.cpp"
+  ],
+  "description": "MLP sequential implementation"
+}

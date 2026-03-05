@@ -1,0 +1,11 @@
+Compilation log for n256_no_StagePipeline
+================================
+
+Compiling FFT.cpp...
+FFT.cpp exit code: 0
+
+Compiling testbench.cpp...
+testbench.cpp exit code: 0
+
+Linking...
+Link exit code: 0

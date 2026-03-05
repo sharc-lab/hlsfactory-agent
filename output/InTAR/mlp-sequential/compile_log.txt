@@ -1,0 +1,70 @@
+=== COMPILATION ERRORS ===
+Errors in mlp-sequential-kernel.cpp:
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:20:57: error: no template named 'mmap' in namespace 'tapa'
+   20 | void measure_cycle(tapa::istream<bool>& fifo_fin, tapa::mmap<int> cycle_count){
+      |                                                   ~~~~~~^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:23:27: error: too many arguments to function call, expected 0, have 1
+   23 |             fifo_fin.read(nullptr);
+      |             ~~~~~~~~~~~~~ ^~~~~~~
+/output/InTAR/mlp-sequential/src/tapa.h:36:7: note: 'read' declared here
+   36 |     T read() { return T(); }
+      |       ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:81:44: error: no member named 'empty' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+   81 |                     if (!offchip.read_data.empty()) {
+      |                          ~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:82:49: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+   82 |                         op1 = offchip.read_data.read(nullptr);
+      |                               ~~~~~~~~~~~~~~~~~ ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:101:53: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  101 |                             op2[jjj] = W1.read_data.read(nullptr);
+      |                                        ~~~~~~~~~~~~ ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:104:53: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  104 |                             op2[jjj] = W2.read_data.read(nullptr);
+      |                                        ~~~~~~~~~~~~ ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:107:53: error: no member named 'read' in 'tapa::async_mmap<tapa::vec_t<ap_int<16>, 16>>::data_stream'
+  107 |                             op2[jjj] = W3.read_data.read(nullptr);
+      |                                        ~~~~~~~~~~~~ ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:132:45: error: non-const lvalue reference to type 'bool' cannot bind to a temporary of type 'std::nullptr_t'
+  132 |                     offchip.write_resp.read(nullptr);
+      |                                             ^~~~~~~
+/output/InTAR/mlp-sequential/src/tapa.h:85:24: note: passing argument to parameter 'success' here
+   85 |         int read(bool& success) { success = true; return 0; }
+      |                        ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:141:46: error: non-const lvalue reference to type 'bool' cannot bind to a temporary of type 'std::nullptr_t'
+  141 |                     data_out.write_resp.read(nullptr);
+      |                                              ^~~~~~~
+/output/InTAR/mlp-sequential/src/tapa.h:85:24: note: passing argument to parameter 'success' here
+   85 |         int read(bool& success) { success = true; return 0; }
+      |                        ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:150:6: error: variable has incomplete type 'void'
+  150 | void MLP(
+      |      ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:151:11: error: no member named 'mmap' in namespace 'tapa'
+  151 |     tapa::mmap<int16_v16> X,
+      |     ~~~~~~^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:151:16: error: unexpected type name 'int16_v16': expected expression
+  151 |     tapa::mmap<int16_v16> X,
+      |                ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:151:27: error: use of undeclared identifier 'X'
+  151 |     tapa::mmap<int16_v16> X,
+      |                           ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:152:11: error: no member named 'mmap' in namespace 'tapa'
+  152 |     tapa::mmap<int16_v16> W1,
+      |     ~~~~~~^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:152:16: error: unexpected type name 'int16_v16': expected expression
+  152 |     tapa::mmap<int16_v16> W1,
+      |                ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:152:27: error: use of undeclared identifier 'W1'
+  152 |     tapa::mmap<int16_v16> W1,
+      |                           ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:153:11: error: no member named 'mmap' in namespace 'tapa'
+  153 |     tapa::mmap<int16_v16> W2,
+      |     ~~~~~~^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:153:16: error: unexpected type name 'int16_v16': expected expression
+  153 |     tapa::mmap<int16_v16> W2,
+      |                ^
+/output/InTAR/mlp-sequential/src/mlp-sequential-kernel.cpp:153:27: error: use of undeclared identifier 'W2'
+  153 |     tapa::mmap<int16_v16> W2,
+      |                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

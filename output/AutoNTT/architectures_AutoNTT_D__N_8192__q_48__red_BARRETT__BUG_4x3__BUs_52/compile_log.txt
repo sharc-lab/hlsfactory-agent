@@ -1,0 +1,561 @@
+Compilation log for architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52
+=====================================
+
+Attempting compilation with clang++...
+Command: clang++ -std=c++11 -fsyntax-only -I/workspace/stubs -D__SYNTHESIS__ ntt_kernel.cpp
+
+In file included from /output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:4:
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: error: use of overloaded operator '<<' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'const uint32_t' (aka 'const unsigned int'))
+   40 | const WORD WORD_SIZE_MASK=(WORD)(((WORD_PLUS1)1<<WORD_SIZE)-1);
+      |                                   ~~~~~~~~~~~~~^ ~~~~~~~~~
+/workspace/stubs/ap_int.h:78:13: note: candidate function
+   78 |     ap_uint operator<<(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:179:28: note: candidate function [with W = 49]
+  179 | template<int W> ap_uint<W> operator<<(const ap_uint<W>& a, int b) { return a << b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(int, unsigned int)
+   40 | const WORD WORD_SIZE_MASK=(WORD)(((WORD_PLUS1)1<<WORD_SIZE)-1);
+      |                                                ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:40:48: note: built-in candidate operator<<(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: error: use of overloaded operator '<<' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 3>' and 'uint32_t' (aka 'unsigned int'))
+   41 | const WORD_PLUS2 WORD_SIZE_PLUS2_MASK=(WORD_PLUS2)((WORD_PLUS3(1)<<(WORD_SIZE+2)) - 1);
+      |                                                     ~~~~~~~~~~~~~^ ~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:78:13: note: candidate function
+   78 |     ap_uint operator<<(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:179:28: note: candidate function [with W = 51]
+  179 | template<int W> ap_uint<W> operator<<(const ap_uint<W>& a, int b) { return a << b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(int, unsigned int)
+   41 | const WORD_PLUS2 WORD_SIZE_PLUS2_MASK=(WORD_PLUS2)((WORD_PLUS3(1)<<(WORD_SIZE+2)) - 1);
+      |                                                                  ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt.h:41:66: note: built-in candidate operator<<(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: error: use of overloaded operator '<<' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'const uint32_t' (aka 'const unsigned int'))
+   31 |                     WORD v0 = (val & ((((WORD_PLUS1)1)<<WORD_SIZE)-1));
+      |                                        ~~~~~~~~~~~~~~~^ ~~~~~~~~~
+/workspace/stubs/ap_int.h:78:13: note: candidate function
+   78 |     ap_uint operator<<(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:179:28: note: candidate function [with W = 49]
+  179 | template<int W> ap_uint<W> operator<<(const ap_uint<W>& a, int b) { return a << b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(int, unsigned int)
+   31 |                     WORD v0 = (val & ((((WORD_PLUS1)1)<<WORD_SIZE)-1));
+      |                                                       ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:31:55: note: built-in candidate operator<<(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: error: use of overloaded operator '<<' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'const uint32_t' (aka 'const unsigned int'))
+  133 |                     WORD v0 = (val & ((((WORD_PLUS1)1)<<WORD_SIZE)-1));
+      |                                        ~~~~~~~~~~~~~~~^ ~~~~~~~~~
+/workspace/stubs/ap_int.h:78:13: note: candidate function
+   78 |     ap_uint operator<<(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:179:28: note: candidate function [with W = 49]
+  179 | template<int W> ap_uint<W> operator<<(const ap_uint<W>& a, int b) { return a << b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(int, unsigned int)
+  133 |                     WORD v0 = (val & ((((WORD_PLUS1)1)<<WORD_SIZE)-1));
+      |                                                       ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:133:55: note: built-in candidate operator<<(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:173:27: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<DEFAULT_DRAM_PORT_WIDTH>' and 'ap_uint<513>')
+  173 |             val = readVal & ((((TF_WIDE_DATA_PLUS1)1)<<TF_WIDE_DATA_SIZE_PER_PARA_LIMB) - 1);
+      |                   ~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:114:13: note: candidate function
+  114 |     ap_uint operator&(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:175:28: note: candidate function [with W = 512]
+  175 | template<int W> ap_uint<W> operator&(const ap_uint<W>& a, int b) { return a & ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:188:28: note: candidate function [with W = 512]
+  188 | template<int W> ap_uint<W> operator&(const ap_uint<W>& a, unsigned int b) { return a & ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:176:28: note: candidate function [with W = 513]
+  176 | template<int W> ap_uint<W> operator&(int a, const ap_uint<W>& b) { return ap_uint<W>(a) & b; }
+      |                            ^
+/workspace/stubs/ap_int.h:189:28: note: candidate function [with W = 513]
+  189 | template<int W> ap_uint<W> operator&(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) & b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: error: use of overloaded operator '<<' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'const uint32_t' (aka 'const unsigned int'))
+  194 |                 WORD v0 = (val0 & ((((WORD_PLUS1)1)<<WORD_SIZE)-1));
+      |                                     ~~~~~~~~~~~~~~~^ ~~~~~~~~~
+/workspace/stubs/ap_int.h:78:13: note: candidate function
+   78 |     ap_uint operator<<(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:179:28: note: candidate function [with W = 49]
+  179 | template<int W> ap_uint<W> operator<<(const ap_uint<W>& a, int b) { return a << b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(int, unsigned int)
+  194 |                 WORD v0 = (val0 & ((((WORD_PLUS1)1)<<WORD_SIZE)-1));
+      |                                                    ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:194:52: note: built-in candidate operator<<(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:229:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  229 |   ap_uint<44> mul_0 = ((ap_uint<44>)(u_0) * v_0); //<<0
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:231:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  231 |   ap_uint<44> mul_1 = ((ap_uint<44>)(u_1) * v_0); //<<17
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:233:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<41>' and 'ap_uint<27>')
+  233 |   ap_uint<41> mul_2 = ((ap_uint<41>)(u_2) * v_0); //<<34
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 41]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 41]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:236:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  236 |   ap_uint<38> mul_3 = ((ap_uint<38>)(u_0) * v_1); //<<27
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:238:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  238 |   ap_uint<38> mul_4 = ((ap_uint<38>)(u_1) * v_1); //<<44
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:240:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<35>' and 'ap_uint<21>')
+  240 |   ap_uint<35> mul_5 = ((ap_uint<35>)(u_2) * v_1); //<<61
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 35]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 35]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:261:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  261 |   ap_uint<44> mul_0 = ((ap_uint<44>)(u_0) * v_0); //<<0
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:263:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  263 |   ap_uint<44> mul_1 = ((ap_uint<44>)(u_1) * v_0); //<<17
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:265:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  265 |   ap_uint<44> mul_2 = ((ap_uint<44>)(u_2) * v_0); //<<34
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:268:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  268 |   ap_uint<38> mul_3 = ((ap_uint<38>)(u_0) * v_1); //<<27
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:270:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  270 |   ap_uint<38> mul_4 = ((ap_uint<38>)(u_1) * v_1); //<<44
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:272:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  272 |   ap_uint<38> mul_5 = ((ap_uint<38>)(u_2) * v_1); //<<61
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: error: use of overloaded operator '>>' is ambiguous (with operand types 'ap_uint<99>' and 'uint32_t' (aka 'unsigned int'))
+  276 |   ap_uint<49> res = ( (((ap_uint<99>)mul_0)<<0) + (((ap_uint<99>)mul_1)<<17) + (((ap_uint<99>)mul_2)<<34) + (((ap_uint<99>)mul_3)<<27) + (((ap_uint<99>)mul_4)<<44) + (((ap_uint<99>)mul_5)<<61) ) >> (WORD_SIZE+2);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:93:13: note: candidate function
+   93 |     ap_uint operator>>(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:180:28: note: candidate function [with W = 99]
+  180 | template<int W> ap_uint<W> operator>>(const ap_uint<W>& a, int b) { return a >> b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(int, unsigned int)
+  276 |   ap_uint<49> res = ( (((ap_uint<99>)mul_0)<<0) + (((ap_uint<99>)mul_1)<<17) + (((ap_uint<99>)mul_2)<<34) + (((ap_uint<99>)mul_3)<<27) + (((ap_uint<99>)mul_4)<<44) + (((ap_uint<99>)mul_5)<<61) ) >> (WORD_SIZE+2);
+      |                                                                                                                                                                                                    ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:276:196: note: built-in candidate operator>>(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:293:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  293 |   ap_uint<44> mul_0 = ((ap_uint<44>)(u_0) * v_0); //<<0
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:295:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  295 |   ap_uint<44> mul_1 = ((ap_uint<44>)(u_1) * v_0); //<<17
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:297:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<42>' and 'ap_uint<27>')
+  297 |   ap_uint<42> mul_2 = ((ap_uint<42>)(u_2) * v_0); //<<34
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 42]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 42]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:300:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  300 |   ap_uint<38> mul_3 = ((ap_uint<38>)(u_0) * v_1); //<<27
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:302:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  302 |   ap_uint<38> mul_4 = ((ap_uint<38>)(u_1) * v_1); //<<44
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:315:22: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<WORD_SIZE * 2>' and 'const ap_uint<WORD_SIZE + 2>')
+  315 |   WORD_PLUS2 Y = (U) & WORD_SIZE_PLUS2_MASK;
+      |                  ~~~ ^ ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:114:13: note: candidate function
+  114 |     ap_uint operator&(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:175:28: note: candidate function [with W = 96]
+  175 | template<int W> ap_uint<W> operator&(const ap_uint<W>& a, int b) { return a & ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:188:28: note: candidate function [with W = 96]
+  188 | template<int W> ap_uint<W> operator&(const ap_uint<W>& a, unsigned int b) { return a & ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:176:28: note: candidate function [with W = 50]
+  176 | template<int W> ap_uint<W> operator&(int a, const ap_uint<W>& b) { return ap_uint<W>(a) & b; }
+      |                            ^
+/workspace/stubs/ap_int.h:189:28: note: candidate function [with W = 50]
+  189 | template<int W> ap_uint<W> operator&(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) & b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: error: use of overloaded operator '>>' is ambiguous (with operand types 'ap_uint<WORD_SIZE * 2>' and 'const uint32_t' (aka 'const unsigned int'))
+  317 |   WORD V = U >> WORD_SIZE;
+      |            ~ ^  ~~~~~~~~~
+/workspace/stubs/ap_int.h:93:13: note: candidate function
+   93 |     ap_uint operator>>(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:180:28: note: candidate function [with W = 96]
+  180 | template<int W> ap_uint<W> operator>>(const ap_uint<W>& a, int b) { return a >> b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(int, unsigned int)
+  317 |   WORD V = U >> WORD_SIZE;
+      |              ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:317:14: note: built-in candidate operator>>(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: error: use of overloaded operator '<<' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 3>' and 'uint32_t' (aka 'unsigned int'))
+  327 |     Z = (WORD_PLUS3(1)<<(WORD_SIZE+2)) - X_1 + Y;
+      |          ~~~~~~~~~~~~~^ ~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:78:13: note: candidate function
+   78 |     ap_uint operator<<(int s) const {
+      |             ^
+/workspace/stubs/ap_int.h:179:28: note: candidate function [with W = 51]
+  179 | template<int W> ap_uint<W> operator<<(const ap_uint<W>& a, int b) { return a << b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(int, unsigned int)
+  327 |     Z = (WORD_PLUS3(1)<<(WORD_SIZE+2)) - X_1 + Y;
+      |                       ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(__int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(unsigned int, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(unsigned long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(unsigned long long, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:327:23: note: built-in candidate operator<<(unsigned __int128, unsigned int)
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:331:11: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'ap_uint<48>')
+  331 |     Z = Z - 3*mod;
+      |         ~ ^ ~~~~~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 49]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 49]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 48]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 48]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:334:11: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'ap_uint<48>')
+  334 |     Z = Z - 2*mod;
+      |         ~ ^ ~~~~~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 49]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 49]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 48]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 48]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/output/AutoNTT/architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_kernel.cpp:337:11: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'ap_uint<WORD_SIZE>')
+  337 |     Z = Z - mod;
+      |         ~ ^ ~~~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 49]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 49]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 48]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 48]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+31 errors generated.
+
+Compilation attempt completed for architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52
+Note: Compilation errors are expected due to Xilinx-specific types and TAPA library constructs.
+The design is intended for synthesis with Xilinx Vitis HLS, not standard C++ compilation.

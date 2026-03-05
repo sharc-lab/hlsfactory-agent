@@ -1,0 +1,9 @@
+{
+  "name": "cnn-4L-intrra",
+  "top_function": "CC0_Conv1_Conv4",
+  "files": [
+    "cnn-4L-intrra-kernel.cpp",
+    "cnn-4L-intrra-host.cpp"
+  ],
+  "description": "CNN 4-Layer with InTAR optimization"
+}

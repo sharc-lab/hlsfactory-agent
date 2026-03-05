@@ -1,0 +1,10 @@
+{
+  "name": "vae-sequential",
+  "top_function": "measure_cycle",
+  "files": [
+    "vae-sequential-kernel.cpp",
+    "vae-sequential-host.cpp",
+    "vae.cpp"
+  ],
+  "description": "VAE sequential implementation"
+}

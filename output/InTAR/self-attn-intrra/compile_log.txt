@@ -1,0 +1,178 @@
+=== COMPILATION ERRORS ===
+Errors in self-attn-intrra-kernel.cpp:
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:39:22: error: ambiguous conversion for functional-style cast from 'int' to 'ap_uint<3>'
+   39 |         inst.stage = ap_uint<3>(stage);
+      |                      ^~~~~~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:100:5: note: candidate constructor
+  100 |     ap_uint(unsigned v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:101:5: note: candidate constructor
+  101 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:102:5: note: candidate constructor
+  102 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:64:22: error: ambiguous conversion for functional-style cast from 'int' to 'ap_uint<3>'
+   64 |         inst.stage = ap_uint<3>(stage);
+      |                      ^~~~~~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:100:5: note: candidate constructor
+  100 |     ap_uint(unsigned v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:101:5: note: candidate constructor
+  101 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:102:5: note: candidate constructor
+  102 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:182:19: error: conversion from 'ap_uint<3>' to 'const int' is ambiguous
+  182 |         const int stage = inst.stage;
+      |                   ^       ~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:183:19: error: conversion from 'ap_uint<9>' to 'const int' is ambiguous
+  183 |         const int i_bound = inst.i_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:184:19: error: conversion from 'ap_uint<9>' to 'const int' is ambiguous
+  184 |         const int j_bound = inst.j_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:185:19: error: conversion from 'ap_uint<11>' to 'const int' is ambiguous
+  185 |         const int k_bound = inst.k_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:251:53: error: type 'ap_uint<64>' does not provide a call operator
+  251 |                             op2_mtx[l] = ap_int<16>(scratchpad[j][k*4+l/4]((l%4)*16+15, (l%4)*16));
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:254:53: error: type 'ap_uint<64>' does not provide a call operator
+  254 |                             op2_mtx[l] = ap_int<16>(scratchpad[j][k*4+l/4]((l%4)*16+15, (l%4)*16));
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:282:37: error: conversion from 'int' to 'ap_uint<64>' is ambiguous
+  282 |                         ap_uint<64> tmp_a = 0;
+      |                                     ^       ~
+/output/InTAR/self-attn-intrra/src/ap_int.h:100:5: note: candidate constructor
+  100 |     ap_uint(unsigned v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:101:5: note: candidate constructor
+  101 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:102:5: note: candidate constructor
+  102 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:283:37: error: conversion from 'int' to 'ap_uint<64>' is ambiguous
+  283 |                         ap_uint<64> tmp_b = 0;
+      |                                     ^       ~
+/output/InTAR/self-attn-intrra/src/ap_int.h:100:5: note: candidate constructor
+  100 |     ap_uint(unsigned v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:101:5: note: candidate constructor
+  101 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:102:5: note: candidate constructor
+  102 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:286:29: error: type 'ap_uint<64>' does not provide a call operator
+  286 |                             tmp_a(l*16+15, l*16) = sum[k*4+l];
+      |                             ^~~~~
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:287:29: error: type 'ap_uint<64>' does not provide a call operator
+  287 |                             tmp_b(l*16+15, l*16) = tmp_acc1[k*4+l];
+      |                             ^~~~~
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:297:37: error: conversion from 'int' to 'ap_uint<64>' is ambiguous
+  297 |                         ap_uint<64> tmp = 0;
+      |                                     ^     ~
+/output/InTAR/self-attn-intrra/src/ap_int.h:100:5: note: candidate constructor
+  100 |     ap_uint(unsigned v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:101:5: note: candidate constructor
+  101 |     ap_uint(unsigned long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:102:5: note: candidate constructor
+  102 |     ap_uint(unsigned long long v) : val(static_cast<storage_type>(v)) {}
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:300:29: error: type 'ap_uint<64>' does not provide a call operator
+  300 |                             tmp(l*16+15, l*16) = sum[k*4+l];
+      |                             ^~~
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:346:19: error: conversion from 'ap_uint<3>' to 'const int' is ambiguous
+  346 |         const int stage = inst.stage;
+      |                   ^       ~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:347:19: error: conversion from 'ap_uint<9>' to 'const int' is ambiguous
+  347 |         const int i_bound = inst.i_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:348:19: error: conversion from 'ap_uint<9>' to 'const int' is ambiguous
+  348 |         const int j_bound = inst.j_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:349:19: error: conversion from 'ap_uint<11>' to 'const int' is ambiguous
+  349 |         const int k_bound = inst.k_bound;
+      |                   ^         ~~~~~~~~~~~~
+/output/InTAR/self-attn-intrra/src/ap_int.h:147:5: note: candidate function
+  147 |     operator unsigned() const { return static_cast<unsigned>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:148:5: note: candidate function
+  148 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/ap_int.h:149:5: note: candidate function
+  149 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/output/InTAR/self-attn-intrra/src/self-attn-intrra-kernel.cpp:398:53: error: type 'ap_uint<64>' does not provide a call operator
+  398 |                             op2_mtx[l] = ap_int<16>(scratchpad[j][k*4+l/4]((l%4)*16+15, (l%4)*16));
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

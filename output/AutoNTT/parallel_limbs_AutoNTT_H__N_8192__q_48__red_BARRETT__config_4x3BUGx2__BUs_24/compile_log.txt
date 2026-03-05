@@ -1,0 +1,660 @@
+Compilation log for parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24
+=====================================
+
+Attempting compilation with clang++...
+Command: clang++ -std=c++11 -fsyntax-only -I/workspace/stubs -D__SYNTHESIS__ ntt_kernel.cpp
+
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:696:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  696 |   ap_uint<44> mul_0 = ((ap_uint<44>)(u_0) * v_0); //<<0
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:698:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  698 |   ap_uint<44> mul_1 = ((ap_uint<44>)(u_1) * v_0); //<<17
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:700:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<41>' and 'ap_uint<27>')
+  700 |   ap_uint<41> mul_2 = ((ap_uint<41>)(u_2) * v_0); //<<34
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 41]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 41]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:703:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  703 |   ap_uint<38> mul_3 = ((ap_uint<38>)(u_0) * v_1); //<<27
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:705:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  705 |   ap_uint<38> mul_4 = ((ap_uint<38>)(u_1) * v_1); //<<44
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:707:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<35>' and 'ap_uint<21>')
+  707 |   ap_uint<35> mul_5 = ((ap_uint<35>)(u_2) * v_1); //<<61
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 35]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 35]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:728:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  728 |   ap_uint<44> mul_0 = ((ap_uint<44>)(u_0) * v_0); //<<0
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:730:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  730 |   ap_uint<44> mul_1 = ((ap_uint<44>)(u_1) * v_0); //<<17
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:732:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  732 |   ap_uint<44> mul_2 = ((ap_uint<44>)(u_2) * v_0); //<<34
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:735:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  735 |   ap_uint<38> mul_3 = ((ap_uint<38>)(u_0) * v_1); //<<27
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:737:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  737 |   ap_uint<38> mul_4 = ((ap_uint<38>)(u_1) * v_1); //<<44
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:739:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  739 |   ap_uint<38> mul_5 = ((ap_uint<38>)(u_2) * v_1); //<<61
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:760:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  760 |   ap_uint<44> mul_0 = ((ap_uint<44>)(u_0) * v_0); //<<0
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:762:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  762 |   ap_uint<44> mul_1 = ((ap_uint<44>)(u_1) * v_0); //<<17
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 44]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 44]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:764:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<42>' and 'ap_uint<27>')
+  764 |   ap_uint<42> mul_2 = ((ap_uint<42>)(u_2) * v_0); //<<34
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 42]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 42]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 27]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 27]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:767:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  767 |   ap_uint<38> mul_3 = ((ap_uint<38>)(u_0) * v_1); //<<27
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:769:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  769 |   ap_uint<38> mul_4 = ((ap_uint<38>)(u_1) * v_1); //<<44
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:64:13: note: candidate function
+   64 |     ap_uint operator*(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:173:28: note: candidate function [with W = 38]
+  173 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:186:28: note: candidate function [with W = 38]
+  186 | template<int W> ap_uint<W> operator*(const ap_uint<W>& a, unsigned int b) { return a * ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:174:28: note: candidate function [with W = 21]
+  174 | template<int W> ap_uint<W> operator*(int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/workspace/stubs/ap_int.h:187:28: note: candidate function [with W = 21]
+  187 | template<int W> ap_uint<W> operator*(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) * b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:782:22: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<WORD_SIZE * 2>' and 'const ap_uint<WORD_SIZE + 2>')
+  782 |   WORD_PLUS2 Y = (U) & WORD_SIZE_PLUS2_MASK;
+      |                  ~~~ ^ ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:114:13: note: candidate function
+  114 |     ap_uint operator&(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:175:28: note: candidate function [with W = 96]
+  175 | template<int W> ap_uint<W> operator&(const ap_uint<W>& a, int b) { return a & ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:188:28: note: candidate function [with W = 96]
+  188 | template<int W> ap_uint<W> operator&(const ap_uint<W>& a, unsigned int b) { return a & ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:176:28: note: candidate function [with W = 50]
+  176 | template<int W> ap_uint<W> operator&(int a, const ap_uint<W>& b) { return ap_uint<W>(a) & b; }
+      |                            ^
+/workspace/stubs/ap_int.h:189:28: note: candidate function [with W = 50]
+  189 | template<int W> ap_uint<W> operator&(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) & b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:794:40: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<51>' and 'ap_uint<WORD_SIZE + 2>')
+  794 |     Z = (WORD_PLUS3(1)<<(WORD_SIZE+2)) - X_1 + Y;
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 51]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 51]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 50]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 50]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:798:11: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'ap_uint<48>')
+  798 |     Z = Z - 3*mod;
+      |         ~ ^ ~~~~~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 49]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 49]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 48]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 48]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:801:11: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'ap_uint<48>')
+  801 |     Z = Z - 2*mod;
+      |         ~ ^ ~~~~~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 49]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 49]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 48]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 48]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:804:11: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'ap_uint<WORD_SIZE>')
+  804 |     Z = Z - mod;
+      |         ~ ^ ~~~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 49]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 49]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 48]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 48]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:864:32: error: use of overloaded operator '-' is ambiguous (with operand types 'ap_uint<WORD_SIZE + 1>' and 'ap_uint<WORD_SIZE>')
+  864 |         updatedLeft = intemAdd - q;
+      |                       ~~~~~~~~ ^ ~
+/workspace/stubs/ap_int.h:53:13: note: candidate function
+   53 |     ap_uint operator-(const ap_uint& o) const {
+      |             ^
+/workspace/stubs/ap_int.h:171:28: note: candidate function [with W = 49]
+  171 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:184:28: note: candidate function [with W = 49]
+  184 | template<int W> ap_uint<W> operator-(const ap_uint<W>& a, unsigned int b) { return a - ap_uint<W>(b); }
+      |                            ^
+/workspace/stubs/ap_int.h:172:28: note: candidate function [with W = 48]
+  172 | template<int W> ap_uint<W> operator-(int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/workspace/stubs/ap_int.h:185:28: note: candidate function [with W = 48]
+  185 | template<int W> ap_uint<W> operator-(unsigned int a, const ap_uint<W>& b) { return ap_uint<W>(a) - b; }
+      |                            ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:2260:10: error: no matching member function for call to 'invoke'
+ 2244 |         //polynomial loading/storing tasks: FWD loading and INV storing
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2245 |         .invoke(fwd_load_inv_store_poly_2_limbs, polyVectorInOut_G0, inv_poly_DIF_to_store_L0_BUG0_0, inv_poly_DIF_to_store_L0_BUG0_1, inv_poly_DIF_to_store_L0_BUG1_0, inv_poly_DIF_to_store_L0_BUG1_1, inv_poly_DIF_to_store_L1_BUG0_0, inv_poly_DIF_to_store_L1_BUG0_1, inv_poly_DIF_to_store_L1_BUG1_0, inv_poly_DIF_to_store_L1_BUG1_1, fwd_poly_load_to_DIF_L0_BUG0_0, fwd_poly_load_to_DIF_L0_BUG0_1, fwd_poly_load_to_DIF_L0_BUG1_0, fwd_poly_load_to_DIF_L0_BUG1_1, fwd_poly_load_to_DIF_L1_BUG0_0, fwd_poly_load_to_DIF_L1_BUG0_1, fwd_poly_load_to_DIF_L1_BUG1_0, fwd_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2246 |         .invoke(fwd_load_inv_store_poly_1_limbs, polyVectorInOut_G1, inv_poly_DIF_to_store_L2_BUG0_0, inv_poly_DIF_to_store_L2_BUG0_1, inv_poly_DIF_to_store_L2_BUG1_0, inv_poly_DIF_to_store_L2_BUG1_1, fwd_poly_load_to_DIF_L2_BUG0_0, fwd_poly_load_to_DIF_L2_BUG0_1, fwd_poly_load_to_DIF_L2_BUG1_0, fwd_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2247 | 
+ 2248 |         //polynomial loading/storing tasks: FWD storing and INV loading
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2249 |         .invoke(fwd_store_inv_load_poly_2_limbs, polyVectorInOut_G2, fwd_poly_DIF_to_store_L0_BUG0_0, fwd_poly_DIF_to_store_L0_BUG0_1, fwd_poly_DIF_to_store_L0_BUG1_0, fwd_poly_DIF_to_store_L0_BUG1_1, fwd_poly_DIF_to_store_L1_BUG0_0, fwd_poly_DIF_to_store_L1_BUG0_1, fwd_poly_DIF_to_store_L1_BUG1_0, fwd_poly_DIF_to_store_L1_BUG1_1, inv_poly_load_to_DIF_L0_BUG0_0, inv_poly_load_to_DIF_L0_BUG0_1, inv_poly_load_to_DIF_L0_BUG1_0, inv_poly_load_to_DIF_L0_BUG1_1, inv_poly_load_to_DIF_L1_BUG0_0, inv_poly_load_to_DIF_L1_BUG0_1, inv_poly_load_to_DIF_L1_BUG1_0, inv_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2250 |         .invoke(fwd_store_inv_load_poly_1_limbs, polyVectorInOut_G3, fwd_poly_DIF_to_store_L2_BUG0_0, fwd_poly_DIF_to_store_L2_BUG0_1, fwd_poly_DIF_to_store_L2_BUG1_0, fwd_poly_DIF_to_store_L2_BUG1_1, inv_poly_load_to_DIF_L2_BUG0_0, inv_poly_load_to_DIF_L2_BUG0_1, inv_poly_load_to_DIF_L2_BUG1_0, inv_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2251 | 
+ 2252 |         //TF loading tasks
+      |         ~~~~~~~~~~~~~~~~~~
+ 2253 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G0, tf_load_to_TFBuf_L0_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2254 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G1, tf_load_to_TFBuf_L1_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2255 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G2, tf_load_to_TFBuf_L2_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2256 | 
+ 2257 |         /* Limb0 */
+      |         ~~~~~~~~~~~
+ 2258 |         //Dual Interface FIFO (DIF) tasks from FWD in side
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2259 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[0], inv_poly_inSel_to_DIF_L0_BUG0[0], poly_inFIFO_L0_BUG0[0], direction)
+      |         ~^~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:142:11: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'Func'
+  142 |     task& invoke(Func&& f, Args&&... args) {
+      |           ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:2261:10: error: no matching member function for call to 'invoke'
+ 2244 |         .invoke(fwd_load_inv_store_poly_2_limbs, polyVectorInOut_G0, inv_poly_DIF_to_store_L0_BUG0_0, inv_poly_DIF_to_store_L0_BUG0_1, inv_poly_DIF_to_store_L0_BUG1_0, inv_poly_DIF_to_store_L0_BUG1_1, inv_poly_DIF_to_store_L1_BUG0_0, inv_poly_DIF_to_store_L1_BUG0_1, inv_poly_DIF_to_store_L1_BUG1_0, inv_poly_DIF_to_store_L1_BUG1_1, fwd_poly_load_to_DIF_L0_BUG0_0, fwd_poly_load_to_DIF_L0_BUG0_1, fwd_poly_load_to_DIF_L0_BUG1_0, fwd_poly_load_to_DIF_L0_BUG1_1, fwd_poly_load_to_DIF_L1_BUG0_0, fwd_poly_load_to_DIF_L1_BUG0_1, fwd_poly_load_to_DIF_L1_BUG1_0, fwd_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2245 |         .invoke(fwd_load_inv_store_poly_1_limbs, polyVectorInOut_G1, inv_poly_DIF_to_store_L2_BUG0_0, inv_poly_DIF_to_store_L2_BUG0_1, inv_poly_DIF_to_store_L2_BUG1_0, inv_poly_DIF_to_store_L2_BUG1_1, fwd_poly_load_to_DIF_L2_BUG0_0, fwd_poly_load_to_DIF_L2_BUG0_1, fwd_poly_load_to_DIF_L2_BUG1_0, fwd_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2246 | 
+ 2247 |         //polynomial loading/storing tasks: FWD storing and INV loading
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2248 |         .invoke(fwd_store_inv_load_poly_2_limbs, polyVectorInOut_G2, fwd_poly_DIF_to_store_L0_BUG0_0, fwd_poly_DIF_to_store_L0_BUG0_1, fwd_poly_DIF_to_store_L0_BUG1_0, fwd_poly_DIF_to_store_L0_BUG1_1, fwd_poly_DIF_to_store_L1_BUG0_0, fwd_poly_DIF_to_store_L1_BUG0_1, fwd_poly_DIF_to_store_L1_BUG1_0, fwd_poly_DIF_to_store_L1_BUG1_1, inv_poly_load_to_DIF_L0_BUG0_0, inv_poly_load_to_DIF_L0_BUG0_1, inv_poly_load_to_DIF_L0_BUG1_0, inv_poly_load_to_DIF_L0_BUG1_1, inv_poly_load_to_DIF_L1_BUG0_0, inv_poly_load_to_DIF_L1_BUG0_1, inv_poly_load_to_DIF_L1_BUG1_0, inv_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2249 |         .invoke(fwd_store_inv_load_poly_1_limbs, polyVectorInOut_G3, fwd_poly_DIF_to_store_L2_BUG0_0, fwd_poly_DIF_to_store_L2_BUG0_1, fwd_poly_DIF_to_store_L2_BUG1_0, fwd_poly_DIF_to_store_L2_BUG1_1, inv_poly_load_to_DIF_L2_BUG0_0, inv_poly_load_to_DIF_L2_BUG0_1, inv_poly_load_to_DIF_L2_BUG1_0, inv_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2250 | 
+ 2251 |         //TF loading tasks
+      |         ~~~~~~~~~~~~~~~~~~
+ 2252 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G0, tf_load_to_TFBuf_L0_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2253 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G1, tf_load_to_TFBuf_L1_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2254 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G2, tf_load_to_TFBuf_L2_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2255 | 
+ 2256 |         /* Limb0 */
+      |         ~~~~~~~~~~~
+ 2257 |         //Dual Interface FIFO (DIF) tasks from FWD in side
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2258 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[0], inv_poly_inSel_to_DIF_L0_BUG0[0], poly_inFIFO_L0_BUG0[0], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2259 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[1], inv_poly_inSel_to_DIF_L0_BUG0[1], poly_inFIFO_L0_BUG0[1], direction)
+      |         ~^~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:142:11: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'Func'
+  142 |     task& invoke(Func&& f, Args&&... args) {
+      |           ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:2262:10: error: no matching member function for call to 'invoke'
+ 2244 |         .invoke(fwd_load_inv_store_poly_1_limbs, polyVectorInOut_G1, inv_poly_DIF_to_store_L2_BUG0_0, inv_poly_DIF_to_store_L2_BUG0_1, inv_poly_DIF_to_store_L2_BUG1_0, inv_poly_DIF_to_store_L2_BUG1_1, fwd_poly_load_to_DIF_L2_BUG0_0, fwd_poly_load_to_DIF_L2_BUG0_1, fwd_poly_load_to_DIF_L2_BUG1_0, fwd_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2245 | 
+ 2246 |         //polynomial loading/storing tasks: FWD storing and INV loading
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2247 |         .invoke(fwd_store_inv_load_poly_2_limbs, polyVectorInOut_G2, fwd_poly_DIF_to_store_L0_BUG0_0, fwd_poly_DIF_to_store_L0_BUG0_1, fwd_poly_DIF_to_store_L0_BUG1_0, fwd_poly_DIF_to_store_L0_BUG1_1, fwd_poly_DIF_to_store_L1_BUG0_0, fwd_poly_DIF_to_store_L1_BUG0_1, fwd_poly_DIF_to_store_L1_BUG1_0, fwd_poly_DIF_to_store_L1_BUG1_1, inv_poly_load_to_DIF_L0_BUG0_0, inv_poly_load_to_DIF_L0_BUG0_1, inv_poly_load_to_DIF_L0_BUG1_0, inv_poly_load_to_DIF_L0_BUG1_1, inv_poly_load_to_DIF_L1_BUG0_0, inv_poly_load_to_DIF_L1_BUG0_1, inv_poly_load_to_DIF_L1_BUG1_0, inv_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2248 |         .invoke(fwd_store_inv_load_poly_1_limbs, polyVectorInOut_G3, fwd_poly_DIF_to_store_L2_BUG0_0, fwd_poly_DIF_to_store_L2_BUG0_1, fwd_poly_DIF_to_store_L2_BUG1_0, fwd_poly_DIF_to_store_L2_BUG1_1, inv_poly_load_to_DIF_L2_BUG0_0, inv_poly_load_to_DIF_L2_BUG0_1, inv_poly_load_to_DIF_L2_BUG1_0, inv_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2249 | 
+ 2250 |         //TF loading tasks
+      |         ~~~~~~~~~~~~~~~~~~
+ 2251 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G0, tf_load_to_TFBuf_L0_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2252 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G1, tf_load_to_TFBuf_L1_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2253 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G2, tf_load_to_TFBuf_L2_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2254 | 
+ 2255 |         /* Limb0 */
+      |         ~~~~~~~~~~~
+ 2256 |         //Dual Interface FIFO (DIF) tasks from FWD in side
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2257 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[0], inv_poly_inSel_to_DIF_L0_BUG0[0], poly_inFIFO_L0_BUG0[0], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2258 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[1], inv_poly_inSel_to_DIF_L0_BUG0[1], poly_inFIFO_L0_BUG0[1], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2259 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[2], inv_poly_inSel_to_DIF_L0_BUG0[2], poly_inFIFO_L0_BUG0[2], direction)
+      |         ~^~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:142:11: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'Func'
+  142 |     task& invoke(Func&& f, Args&&... args) {
+      |           ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:2263:10: error: no matching member function for call to 'invoke'
+ 2244 | 
+ 2245 |         //polynomial loading/storing tasks: FWD storing and INV loading
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2246 |         .invoke(fwd_store_inv_load_poly_2_limbs, polyVectorInOut_G2, fwd_poly_DIF_to_store_L0_BUG0_0, fwd_poly_DIF_to_store_L0_BUG0_1, fwd_poly_DIF_to_store_L0_BUG1_0, fwd_poly_DIF_to_store_L0_BUG1_1, fwd_poly_DIF_to_store_L1_BUG0_0, fwd_poly_DIF_to_store_L1_BUG0_1, fwd_poly_DIF_to_store_L1_BUG1_0, fwd_poly_DIF_to_store_L1_BUG1_1, inv_poly_load_to_DIF_L0_BUG0_0, inv_poly_load_to_DIF_L0_BUG0_1, inv_poly_load_to_DIF_L0_BUG1_0, inv_poly_load_to_DIF_L0_BUG1_1, inv_poly_load_to_DIF_L1_BUG0_0, inv_poly_load_to_DIF_L1_BUG0_1, inv_poly_load_to_DIF_L1_BUG1_0, inv_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2247 |         .invoke(fwd_store_inv_load_poly_1_limbs, polyVectorInOut_G3, fwd_poly_DIF_to_store_L2_BUG0_0, fwd_poly_DIF_to_store_L2_BUG0_1, fwd_poly_DIF_to_store_L2_BUG1_0, fwd_poly_DIF_to_store_L2_BUG1_1, inv_poly_load_to_DIF_L2_BUG0_0, inv_poly_load_to_DIF_L2_BUG0_1, inv_poly_load_to_DIF_L2_BUG1_0, inv_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2248 | 
+ 2249 |         //TF loading tasks
+      |         ~~~~~~~~~~~~~~~~~~
+ 2250 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G0, tf_load_to_TFBuf_L0_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2251 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G1, tf_load_to_TFBuf_L1_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2252 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G2, tf_load_to_TFBuf_L2_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2253 | 
+ 2254 |         /* Limb0 */
+      |         ~~~~~~~~~~~
+ 2255 |         //Dual Interface FIFO (DIF) tasks from FWD in side
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2256 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[0], inv_poly_inSel_to_DIF_L0_BUG0[0], poly_inFIFO_L0_BUG0[0], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2257 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[1], inv_poly_inSel_to_DIF_L0_BUG0[1], poly_inFIFO_L0_BUG0[1], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2258 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[2], inv_poly_inSel_to_DIF_L0_BUG0[2], poly_inFIFO_L0_BUG0[2], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2259 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[3], inv_poly_inSel_to_DIF_L0_BUG0[3], poly_inFIFO_L0_BUG0[3], direction)
+      |         ~^~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:142:11: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'Func'
+  142 |     task& invoke(Func&& f, Args&&... args) {
+      |           ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:2264:10: error: no matching member function for call to 'invoke'
+ 2244 |         //polynomial loading/storing tasks: FWD storing and INV loading
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2245 |         .invoke(fwd_store_inv_load_poly_2_limbs, polyVectorInOut_G2, fwd_poly_DIF_to_store_L0_BUG0_0, fwd_poly_DIF_to_store_L0_BUG0_1, fwd_poly_DIF_to_store_L0_BUG1_0, fwd_poly_DIF_to_store_L0_BUG1_1, fwd_poly_DIF_to_store_L1_BUG0_0, fwd_poly_DIF_to_store_L1_BUG0_1, fwd_poly_DIF_to_store_L1_BUG1_0, fwd_poly_DIF_to_store_L1_BUG1_1, inv_poly_load_to_DIF_L0_BUG0_0, inv_poly_load_to_DIF_L0_BUG0_1, inv_poly_load_to_DIF_L0_BUG1_0, inv_poly_load_to_DIF_L0_BUG1_1, inv_poly_load_to_DIF_L1_BUG0_0, inv_poly_load_to_DIF_L1_BUG0_1, inv_poly_load_to_DIF_L1_BUG1_0, inv_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2246 |         .invoke(fwd_store_inv_load_poly_1_limbs, polyVectorInOut_G3, fwd_poly_DIF_to_store_L2_BUG0_0, fwd_poly_DIF_to_store_L2_BUG0_1, fwd_poly_DIF_to_store_L2_BUG1_0, fwd_poly_DIF_to_store_L2_BUG1_1, inv_poly_load_to_DIF_L2_BUG0_0, inv_poly_load_to_DIF_L2_BUG0_1, inv_poly_load_to_DIF_L2_BUG1_0, inv_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2247 | 
+ 2248 |         //TF loading tasks
+      |         ~~~~~~~~~~~~~~~~~~
+ 2249 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G0, tf_load_to_TFBuf_L0_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2250 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G1, tf_load_to_TFBuf_L1_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2251 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G2, tf_load_to_TFBuf_L2_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2252 | 
+ 2253 |         /* Limb0 */
+      |         ~~~~~~~~~~~
+ 2254 |         //Dual Interface FIFO (DIF) tasks from FWD in side
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2255 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[0], inv_poly_inSel_to_DIF_L0_BUG0[0], poly_inFIFO_L0_BUG0[0], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2256 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[1], inv_poly_inSel_to_DIF_L0_BUG0[1], poly_inFIFO_L0_BUG0[1], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2257 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[2], inv_poly_inSel_to_DIF_L0_BUG0[2], poly_inFIFO_L0_BUG0[2], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2258 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[3], inv_poly_inSel_to_DIF_L0_BUG0[3], poly_inFIFO_L0_BUG0[3], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2259 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_1[0], inv_poly_inSel_to_DIF_L0_BUG0[4], poly_inFIFO_L0_BUG0[4], direction)
+      |         ~^~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:142:11: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'Func'
+  142 |     task& invoke(Func&& f, Args&&... args) {
+      |           ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:2265:10: error: no matching member function for call to 'invoke'
+ 2244 |         .invoke(fwd_store_inv_load_poly_2_limbs, polyVectorInOut_G2, fwd_poly_DIF_to_store_L0_BUG0_0, fwd_poly_DIF_to_store_L0_BUG0_1, fwd_poly_DIF_to_store_L0_BUG1_0, fwd_poly_DIF_to_store_L0_BUG1_1, fwd_poly_DIF_to_store_L1_BUG0_0, fwd_poly_DIF_to_store_L1_BUG0_1, fwd_poly_DIF_to_store_L1_BUG1_0, fwd_poly_DIF_to_store_L1_BUG1_1, inv_poly_load_to_DIF_L0_BUG0_0, inv_poly_load_to_DIF_L0_BUG0_1, inv_poly_load_to_DIF_L0_BUG1_0, inv_poly_load_to_DIF_L0_BUG1_1, inv_poly_load_to_DIF_L1_BUG0_0, inv_poly_load_to_DIF_L1_BUG0_1, inv_poly_load_to_DIF_L1_BUG1_0, inv_poly_load_to_DIF_L1_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2245 |         .invoke(fwd_store_inv_load_poly_1_limbs, polyVectorInOut_G3, fwd_poly_DIF_to_store_L2_BUG0_0, fwd_poly_DIF_to_store_L2_BUG0_1, fwd_poly_DIF_to_store_L2_BUG1_0, fwd_poly_DIF_to_store_L2_BUG1_1, inv_poly_load_to_DIF_L2_BUG0_0, inv_poly_load_to_DIF_L2_BUG0_1, inv_poly_load_to_DIF_L2_BUG1_0, inv_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2246 | 
+ 2247 |         //TF loading tasks
+      |         ~~~~~~~~~~~~~~~~~~
+ 2248 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G0, tf_load_to_TFBuf_L0_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2249 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G1, tf_load_to_TFBuf_L1_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2250 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G2, tf_load_to_TFBuf_L2_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2251 | 
+ 2252 |         /* Limb0 */
+      |         ~~~~~~~~~~~
+ 2253 |         //Dual Interface FIFO (DIF) tasks from FWD in side
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2254 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[0], inv_poly_inSel_to_DIF_L0_BUG0[0], poly_inFIFO_L0_BUG0[0], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2255 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[1], inv_poly_inSel_to_DIF_L0_BUG0[1], poly_inFIFO_L0_BUG0[1], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2256 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[2], inv_poly_inSel_to_DIF_L0_BUG0[2], poly_inFIFO_L0_BUG0[2], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2257 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[3], inv_poly_inSel_to_DIF_L0_BUG0[3], poly_inFIFO_L0_BUG0[3], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2258 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_1[0], inv_poly_inSel_to_DIF_L0_BUG0[4], poly_inFIFO_L0_BUG0[4], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2259 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_1[1], inv_poly_inSel_to_DIF_L0_BUG0[5], poly_inFIFO_L0_BUG0[5], direction)
+      |         ~^~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:142:11: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'Func'
+  142 |     task& invoke(Func&& f, Args&&... args) {
+      |           ^
+/output/AutoNTT/parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:2266:10: error: no matching member function for call to 'invoke'
+ 2244 |         .invoke(fwd_store_inv_load_poly_1_limbs, polyVectorInOut_G3, fwd_poly_DIF_to_store_L2_BUG0_0, fwd_poly_DIF_to_store_L2_BUG0_1, fwd_poly_DIF_to_store_L2_BUG1_0, fwd_poly_DIF_to_store_L2_BUG1_1, inv_poly_load_to_DIF_L2_BUG0_0, inv_poly_load_to_DIF_L2_BUG0_1, inv_poly_load_to_DIF_L2_BUG1_0, inv_poly_load_to_DIF_L2_BUG1_1, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2245 | 
+ 2246 |         //TF loading tasks
+      |         ~~~~~~~~~~~~~~~~~~
+ 2247 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G0, tf_load_to_TFBuf_L0_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2248 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G1, tf_load_to_TFBuf_L1_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2249 |         .invoke(Mmap2Stream_tf_0_1_limbs, TFArr_G2, tf_load_to_TFBuf_L2_G0_0, direction, iter)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2250 | 
+ 2251 |         /* Limb0 */
+      |         ~~~~~~~~~~~
+ 2252 |         //Dual Interface FIFO (DIF) tasks from FWD in side
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2253 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[0], inv_poly_inSel_to_DIF_L0_BUG0[0], poly_inFIFO_L0_BUG0[0], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2254 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[1], inv_poly_inSel_to_DIF_L0_BUG0[1], poly_inFIFO_L0_BUG0[1], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2255 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[2], inv_poly_inSel_to_DIF_L0_BUG0[2], poly_inFIFO_L0_BUG0[2], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2256 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_0[3], inv_poly_inSel_to_DIF_L0_BUG0[3], poly_inFIFO_L0_BUG0[3], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2257 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_1[0], inv_poly_inSel_to_DIF_L0_BUG0[4], poly_inFIFO_L0_BUG0[4], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2258 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_1[1], inv_poly_inSel_to_DIF_L0_BUG0[5], poly_inFIFO_L0_BUG0[5], direction)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2259 |         .invoke<tapa::detach>(dual_interface_FIFO_receive, fwd_poly_load_to_DIF_L0_BUG0_1[2], inv_poly_inSel_to_DIF_L0_BUG0[6], poly_inFIFO_L0_BUG0[6], direction)
+      |         ~^~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:142:11: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'Func'
+  142 |     task& invoke(Func&& f, Args&&... args) {
+      |           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+31 errors generated.
+
+Compilation attempt completed for parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24
+Note: Compilation errors are expected due to Xilinx-specific types and TAPA library constructs.
+The design is intended for synthesis with Xilinx Vitis HLS, not standard C++ compilation.

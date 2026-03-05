@@ -1,0 +1,81 @@
+{
+  "repository": "https://github.com/robertoBosio/NN2FPGA.git",
+  "framework": "NN2FPGA",
+  "description": "Quantized Neural Network Accelerators for AMD FPGAs",
+  "designs": [
+    {
+      "name": "detect_utils",
+      "compiled": true
+    },
+    {
+      "name": "activations_utils",
+      "compiled": true
+    },
+    {
+      "name": "utils",
+      "compiled": true
+    },
+    {
+      "name": "stream_utils",
+      "compiled": true
+    },
+    {
+      "name": "line_buffer",
+      "compiled": true
+    },
+    {
+      "name": "mm2s",
+      "compiled": true
+    },
+    {
+      "name": "quantisation",
+      "compiled": true
+    },
+    {
+      "name": "block_interface",
+      "compiled": true
+    },
+    {
+      "name": "s2mm",
+      "compiled": true
+    },
+    {
+      "name": "packed_conv",
+      "compiled": true
+    },
+    {
+      "name": "non_max_suppression",
+      "compiled": true
+    },
+    {
+      "name": "line_buffer_utils",
+      "compiled": true
+    },
+    {
+      "name": "pool_streams",
+      "compiled": true
+    },
+    {
+      "name": "adder2d",
+      "compiled": true
+    },
+    {
+      "name": "mem_utils",
+      "compiled": true
+    },
+    {
+      "name": "weights_utils",
+      "compiled": true
+    },
+    {
+      "name": "debug",
+      "compiled": true
+    }
+  ],
+  "total_designs": 17,
+  "compiled_successfully": 17,
+  "extraction_complete": true,
+  "testbenches_created": true,
+  "documentation_created": true,
+  "tcl_scripts_created": true
+}

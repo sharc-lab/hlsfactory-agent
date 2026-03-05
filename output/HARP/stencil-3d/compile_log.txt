@@ -1,0 +1,4 @@
+Compilation: SUCCESS
+Command: clang -c -fsyntax-only -I/workspace/stubs /output/HARP/stencil-3d/stencil-3d_kernel.c
+
+No errors found.
