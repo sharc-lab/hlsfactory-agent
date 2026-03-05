@@ -14,7 +14,8 @@
 
 namespace hls {
 
-template<typename T>
+// DEPTH template parameter is used by some designs for FIFO sizing
+template<typename T, int DEPTH = 0>
 class stream {
 private:
     std::queue<T> data;
@@ -35,6 +36,12 @@ public:
         T val = data.front();
         data.pop();
         return val;
+    }
+
+    // Read with output parameter
+    void read(T& val) {
+        val = data.front();
+        data.pop();
     }
 
     // Non-blocking read
