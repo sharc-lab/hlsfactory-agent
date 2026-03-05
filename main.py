@@ -285,16 +285,6 @@ def main():
           f"Compile pass/fail/skip: {quality_stats['compile_pass']}/{quality_stats['compile_fail']}/{quality_stats['compile_skip']}, "
           f"Format errors: {format_errors}")
 
-    # 7. copy /output from the container to the host
-    container_id = env.container_id
-
-    if not container_id:
-        print("Warning: could not find container ID, skipping output copy.", file=sys.stderr)
-    else:
-        subprocess.run(["docker", "cp", f"{container_id}:/output/.", str(output_dir)], check=True)
-        env.cleanup()
-        print(f"HLS results copied to {output_dir}")
-
 
 if __name__ == "__main__":
     main()
