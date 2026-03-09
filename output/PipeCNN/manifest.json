@@ -1,0 +1,56 @@
+{
+  "repo_name": "PipeCNN",
+  "repo_url": "https://github.com/doonny/PipeCNN.git",
+  "framework": "vitis_hls",
+  "total_designs": 6,
+  "designs": [
+    {
+      "name": "memRead",
+      "top_function": "memRead",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["memRead.cpp", "hw_param.h"]
+    },
+    {
+      "name": "coreConv",
+      "top_function": "coreConv",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["coreConv.cpp", "hw_param.h"]
+    },
+    {
+      "name": "batchNorm",
+      "top_function": "batchNorm",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["batchNorm.cpp", "hw_param.h"]
+    },
+    {
+      "name": "maxPool",
+      "top_function": "maxPool",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["maxPool.cpp", "hw_param.h"]
+    },
+    {
+      "name": "eltwise",
+      "top_function": "eltwise",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["eltwise.cpp", "hw_param.h"]
+    },
+    {
+      "name": "memWrite",
+      "top_function": "memWrite",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["memWrite.cpp", "hw_param.h"]
+    }
+  ]
+}

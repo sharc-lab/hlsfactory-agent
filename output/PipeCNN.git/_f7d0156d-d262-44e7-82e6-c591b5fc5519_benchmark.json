@@ -1,0 +1,21 @@
+{
+  "run_id": "f7d0156d-d262-44e7-82e6-c591b5fc5519",
+  "timestamp": "2026-03-06T17:48:54.948076+00:00",
+  "repo_url": "https://github.com/doonny/PipeCNN.git\\",
+  "model": "moonshotai/kimi-k2.5",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.23444455599999997,
+  "total_api_calls": 56,
+  "format_errors": 0,
+  "traj_file": "_f7d0156d-d262-44e7-82e6-c591b5fc5519.traj.json",
+  "quality": {
+    "designs_found": 0,
+    "compile_pass": 0,
+    "compile_fail": 0,
+    "compile_skip": 0,
+    "has_manifest": false,
+    "manifest_valid_json": false,
+    "designs_with_testbench": 0,
+    "designs_with_tcl": 0
+  }
+}

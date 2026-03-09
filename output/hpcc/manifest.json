@@ -1,0 +1,40 @@
+{
+  "repo_name": "hpcc",
+  "repo_url": "https://github.com/icl-utk-edu/hpcc.git",
+  "framework": "unknown",
+  "total_designs": 4,
+  "designs": [
+    {
+      "name": "FFT",
+      "top_function": "HPCC_fft235",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["fft235.c", "zfft1d.c", "hpccfft.h", "wrapfftw.h", "wrapfftw.c", "bcnrand.c"]
+    },
+    {
+      "name": "STREAM",
+      "top_function": "main",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["stream.c"]
+    },
+    {
+      "name": "DGEMM",
+      "top_function": "dgemm_kernel",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["tstdgemm.c"]
+    },
+    {
+      "name": "RandomAccess",
+      "top_function": "RandomAccessUpdate",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["core_single_cpu.c", "single_cpu.c", "RandomAccess.h"]
+    }
+  ]
+}
