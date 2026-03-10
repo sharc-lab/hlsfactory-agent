@@ -1,0 +1,5 @@
+In file included from /workspace/repo/BitBlender_HLS/krnl_includes/common/includes/oclHelper/oclHelper.cpp:35:
+/workspace/repo/BitBlender_HLS/krnl_includes/common/includes/oclHelper/oclHelper.h:38:10: fatal error: 'CL/cl.h' file not found
+   38 | #include <CL/cl.h>
+      |          ^~~~~~~~~
+1 error generated.

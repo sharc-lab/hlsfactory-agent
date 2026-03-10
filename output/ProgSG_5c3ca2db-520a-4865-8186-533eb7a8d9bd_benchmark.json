@@ -1,0 +1,21 @@
+{
+  "run_id": "5c3ca2db-520a-4865-8186-533eb7a8d9bd",
+  "timestamp": "2026-03-10T15:57:37.808503+00:00",
+  "repo_url": "https://github.com/ZongyueQin/ProgSG.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.00457035,
+  "total_api_calls": 6,
+  "format_errors": 0,
+  "traj_file": "ProgSG_5c3ca2db-520a-4865-8186-533eb7a8d9bd.traj.json",
+  "quality": {
+    "designs_found": 63,
+    "compile_pass": 41,
+    "compile_fail": 22,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 63,
+    "designs_with_tcl": 63
+  }
+}

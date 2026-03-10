@@ -1,0 +1,4 @@
+/workspace/repo/dse_database/poly/sources/2mm_kernel.c:1:10: fatal error: 'merlin_type_define.h' file not found
+    1 | #include "merlin_type_define.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

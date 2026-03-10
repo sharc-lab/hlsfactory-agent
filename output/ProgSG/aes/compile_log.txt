@@ -1,0 +1,37 @@
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:24:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   24 |   register unsigned char i;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:45:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   45 |   register unsigned char i = (unsigned char )16;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:54:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   54 |   register unsigned char i = (unsigned char )16;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:64:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   64 |   register unsigned char i;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:65:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   65 |   register unsigned char j;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:93:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   93 |   register unsigned char i;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:94:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   94 |   register unsigned char a;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:95:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   95 |   register unsigned char b;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:96:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   96 |   register unsigned char c;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:97:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   97 |   register unsigned char d;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:98:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   98 |   register unsigned char e;
+      |   ^~~~~~~~
+/workspace/repo/dse_database/generated_graphs/machsuite/aes/aes.c:122:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+  122 |   register unsigned char i = (unsigned char )16;
+      |   ^~~~~~~~
+12 errors generated.

@@ -1,0 +1,18 @@
+In file included from /output/S2CBench/idct/idct.cpp:45:
+In file included from /output/S2CBench/idct/idct.h:22:
+/output/S2CBench/idct/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/idct/main.cpp:20:
+In file included from /output/S2CBench/idct/idct.h:22:
+/output/S2CBench/idct/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/idct/tb_idct.cpp:17:
+In file included from /output/S2CBench/idct/tb_idct.h:19:
+/output/S2CBench/idct/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.

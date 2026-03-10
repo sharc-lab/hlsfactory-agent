@@ -1,0 +1,17 @@
+In file included from /output/S2CBench/aes_cipher/aes.cpp:1:
+/output/S2CBench/aes_cipher/define.h:20:10: fatal error: 'systemc.h' file not found
+   20 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/aes_cipher/main.cpp:20:
+In file included from /output/S2CBench/aes_cipher/aes.h:20:
+/output/S2CBench/aes_cipher/define.h:20:10: fatal error: 'systemc.h' file not found
+   20 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/aes_cipher/tb_aes.cpp:18:
+In file included from /output/S2CBench/aes_cipher/tb_aes.h:21:
+/output/S2CBench/aes_cipher/define.h:20:10: fatal error: 'systemc.h' file not found
+   20 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.

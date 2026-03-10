@@ -1,0 +1,16 @@
+In file included from /output/S2CBench/disparity/disparity.cpp:17:
+In file included from /output/S2CBench/disparity/disparity.h:20:
+/output/S2CBench/disparity/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/disparity/main.cpp:18:
+/output/S2CBench/disparity/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/disparity/tb_disparity.cpp:22:
+/output/S2CBench/disparity/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.

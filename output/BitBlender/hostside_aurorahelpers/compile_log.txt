@@ -1,0 +1,5 @@
+In file included from /workspace/repo/BitBlender_HLS/BitBlender_samplecode/5-9-8-16-10_n0/src/hostside_aurorahelpers.cpp:18:
+/workspace/repo/BitBlender_HLS/BitBlender_samplecode/5-9-8-16-10_n0/src/Aurora.hpp:20:10: fatal error: 'experimental/xrt_kernel.h' file not found
+   20 | #include "experimental/xrt_kernel.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

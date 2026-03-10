@@ -1,0 +1,56 @@
+
+Compiling /output/HLS-CNN/cnn/activ_fun.c
+In file included from /output/HLS-CNN/cnn/activ_fun.c:1:
+/output/HLS-CNN/cnn/activ_fun.h:3:10: fatal error: 'definitions.h' file not found
+    3 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/activ_fun.c
+Compiling /output/HLS-CNN/cnn/cnn.c
+In file included from /output/HLS-CNN/cnn/cnn.c:1:
+/output/HLS-CNN/cnn/cnn.h:3:10: fatal error: 'definitions.h' file not found
+    3 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/cnn.c
+Compiling /output/HLS-CNN/cnn/cnn_tb.c
+In file included from /output/HLS-CNN/cnn/cnn_tb.c:1:
+/output/HLS-CNN/cnn/cnn.h:3:10: fatal error: 'definitions.h' file not found
+    3 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/cnn_tb.c
+Compiling /output/HLS-CNN/cnn/conv.c
+In file included from /output/HLS-CNN/cnn/conv.c:1:
+/output/HLS-CNN/cnn/conv.h:3:10: fatal error: 'definitions.h' file not found
+    3 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/conv.c
+Compiling /output/HLS-CNN/cnn/dense.c
+In file included from /output/HLS-CNN/cnn/dense.c:1:
+/output/HLS-CNN/cnn/dense.h:3:10: fatal error: 'definitions.h' file not found
+    3 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/dense.c
+Compiling /output/HLS-CNN/cnn/flat.c
+In file included from /output/HLS-CNN/cnn/flat.c:1:
+/output/HLS-CNN/cnn/flat.h:3:10: fatal error: 'definitions.h' file not found
+    3 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/flat.c
+Compiling /output/HLS-CNN/cnn/pool.c
+In file included from /output/HLS-CNN/cnn/pool.c:1:
+/output/HLS-CNN/cnn/pool.h:3:10: fatal error: 'definitions.h' file not found
+    3 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/pool.c
+Compiling /output/HLS-CNN/cnn/utils.c
+/output/HLS-CNN/cnn/utils.c:1:10: fatal error: 'definitions.h' file not found
+    1 | #include "definitions.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+FAIL: /output/HLS-CNN/cnn/utils.c

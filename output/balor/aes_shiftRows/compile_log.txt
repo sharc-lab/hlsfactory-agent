@@ -1,0 +1,7 @@
+/output/balor/aes_shiftRows/aes_shiftRows.cpp:19:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   19 |     register uint8_t i, j; /* to make it potentially parallelable :) */
+      |     ^~~~~~~~
+/output/balor/aes_shiftRows/aes_shiftRows.cpp:19:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   19 |     register uint8_t i, j; /* to make it potentially parallelable :) */
+      |     ^~~~~~~~
+2 errors generated.

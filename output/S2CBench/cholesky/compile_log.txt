@@ -1,0 +1,18 @@
+In file included from /output/S2CBench/cholesky/cholesky.cpp:16:
+In file included from /output/S2CBench/cholesky/cholesky.h:20:
+/output/S2CBench/cholesky/define.h:22:10: fatal error: 'systemc.h' file not found
+   22 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/cholesky/main.cpp:19:
+In file included from /output/S2CBench/cholesky/cholesky.h:20:
+/output/S2CBench/cholesky/define.h:22:10: fatal error: 'systemc.h' file not found
+   22 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/cholesky/tb_cholesky.cpp:16:
+In file included from /output/S2CBench/cholesky/tb_cholesky.h:17:
+/output/S2CBench/cholesky/define.h:22:10: fatal error: 'systemc.h' file not found
+   22 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.

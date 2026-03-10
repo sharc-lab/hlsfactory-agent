@@ -1,0 +1,18 @@
+In file included from /output/S2CBench/adpcm/adpcm_encoder.cpp:39:
+In file included from /output/S2CBench/adpcm/adpcm_encoder.h:17:
+/output/S2CBench/adpcm/define.h:20:10: fatal error: 'systemc.h' file not found
+   20 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/adpcm/main.cpp:20:
+In file included from /output/S2CBench/adpcm/adpcm_encoder.h:17:
+/output/S2CBench/adpcm/define.h:20:10: fatal error: 'systemc.h' file not found
+   20 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/adpcm/tb_adpcm_encoder.cpp:16:
+In file included from /output/S2CBench/adpcm/tb_adpcm_encoder.h:19:
+/output/S2CBench/adpcm/define.h:20:10: fatal error: 'systemc.h' file not found
+   20 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.

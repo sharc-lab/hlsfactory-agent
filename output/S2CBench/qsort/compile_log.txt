@@ -1,0 +1,18 @@
+In file included from /output/S2CBench/qsort/main.cpp:20:
+In file included from /output/S2CBench/qsort/qsort.h:21:
+/output/S2CBench/qsort/define.h:21:10: fatal error: 'systemc.h' file not found
+   21 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/qsort/qsort.cpp:17:
+In file included from /output/S2CBench/qsort/qsort.h:21:
+/output/S2CBench/qsort/define.h:21:10: fatal error: 'systemc.h' file not found
+   21 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/qsort/tb_qsort.cpp:18:
+In file included from /output/S2CBench/qsort/tb_qsort.h:21:
+/output/S2CBench/qsort/define.h:21:10: fatal error: 'systemc.h' file not found
+   21 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.

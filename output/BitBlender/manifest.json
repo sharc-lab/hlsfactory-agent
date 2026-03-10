@@ -1,0 +1,7 @@
+{
+  "repo_name": "BitBlender",
+  "repo_url": "https://github.com/SFU-HiAccel/BitBlender.git",
+  "framework": "vivado_hls",
+  "total_designs": 0,
+  "designs": []
+}

@@ -1,0 +1,21 @@
+{
+  "run_id": "838a1ecb-2b7b-4190-a1f3-193204f13b65",
+  "timestamp": "2026-03-10T18:47:21.355953+00:00",
+  "repo_url": "https://github.com/UIUC-ChenLab/ScaleHLS-HIDA.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.010197275,
+  "total_api_calls": 20,
+  "format_errors": 0,
+  "traj_file": "ScaleHLS-HIDA_838a1ecb-2b7b-4190-a1f3-193204f13b65.traj.json",
+  "quality": {
+    "designs_found": 16,
+    "compile_pass": 0,
+    "compile_fail": 0,
+    "compile_skip": 0,
+    "has_manifest": false,
+    "manifest_valid_json": false,
+    "designs_with_testbench": 16,
+    "designs_with_tcl": 16
+  }
+}

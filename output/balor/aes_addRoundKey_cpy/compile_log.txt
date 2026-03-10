@@ -1,0 +1,4 @@
+/output/balor/aes_addRoundKey_cpy/aes_addRoundKey_cpy.cpp:20:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   20 |     register uint8_t i = 16;
+      |     ^~~~~~~~
+1 error generated.

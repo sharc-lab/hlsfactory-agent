@@ -1,0 +1,19 @@
+/output/balor/aes_mixColumns/aes_mixColumns.cpp:23:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   23 |     register uint8_t i, a, b, c, d, e;
+      |     ^~~~~~~~
+/output/balor/aes_mixColumns/aes_mixColumns.cpp:23:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   23 |     register uint8_t i, a, b, c, d, e;
+      |     ^~~~~~~~
+/output/balor/aes_mixColumns/aes_mixColumns.cpp:23:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   23 |     register uint8_t i, a, b, c, d, e;
+      |     ^~~~~~~~
+/output/balor/aes_mixColumns/aes_mixColumns.cpp:23:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   23 |     register uint8_t i, a, b, c, d, e;
+      |     ^~~~~~~~
+/output/balor/aes_mixColumns/aes_mixColumns.cpp:23:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   23 |     register uint8_t i, a, b, c, d, e;
+      |     ^~~~~~~~
+/output/balor/aes_mixColumns/aes_mixColumns.cpp:23:5: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   23 |     register uint8_t i, a, b, c, d, e;
+      |     ^~~~~~~~
+6 errors generated.

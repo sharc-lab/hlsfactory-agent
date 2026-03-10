@@ -1,0 +1,21 @@
+{
+  "run_id": "0efedd43-eae2-4b6b-ab68-fe120e6f2013",
+  "timestamp": "2026-03-10T19:23:53.468026+00:00",
+  "repo_url": "https://github.com/lsq314/SpMM_TCAD.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.0016592109999999998,
+  "total_api_calls": 6,
+  "format_errors": 0,
+  "traj_file": "SpMM_TCAD_0efedd43-eae2-4b6b-ab68-fe120e6f2013.traj.json",
+  "quality": {
+    "designs_found": 6,
+    "compile_pass": 0,
+    "compile_fail": 6,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 6,
+    "designs_with_tcl": 6
+  }
+}

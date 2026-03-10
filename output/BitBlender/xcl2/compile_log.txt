@@ -1,0 +1,11 @@
+In file included from /workspace/repo/BitBlender_HLS/krnl_includes/common/includes/xcl2/xcl2.cpp:36:
+/workspace/repo/BitBlender_HLS/krnl_includes/common/includes/xcl2/xcl2.hpp:53:10: error: 'CL/cl2.hpp' file not found with <angled> include; use "quotes" instead
+   53 | #include <CL/cl2.hpp>
+      |          ^~~~~~~~~~~~
+      |          "CL/cl2.hpp"
+In file included from /workspace/repo/BitBlender_HLS/krnl_includes/common/includes/xcl2/xcl2.cpp:36:
+In file included from /workspace/repo/BitBlender_HLS/krnl_includes/common/includes/xcl2/xcl2.hpp:53:
+/workspace/repo/BitBlender_HLS/krnl_includes/common/includes/xcl2/CL/cl2.hpp:531:10: fatal error: 'CL/opencl.h' file not found
+  531 | #include <CL/opencl.h>
+      |          ^~~~~~~~~~~~~
+2 errors generated.

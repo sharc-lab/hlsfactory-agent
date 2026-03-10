@@ -1,0 +1,18 @@
+In file included from /output/S2CBench/interpolation/filter_interp.cpp:17:
+In file included from /output/S2CBench/interpolation/filter_interp.h:22:
+/output/S2CBench/interpolation/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/interpolation/main.cpp:17:
+In file included from /output/S2CBench/interpolation/tb_interp.h:22:
+/output/S2CBench/interpolation/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.
+In file included from /output/S2CBench/interpolation/tb_interp.cpp:17:
+In file included from /output/S2CBench/interpolation/tb_interp.h:22:
+/output/S2CBench/interpolation/define.h:19:10: fatal error: 'systemc.h' file not found
+   19 | #include "systemc.h"
+      |          ^~~~~~~~~~~
+1 error generated.

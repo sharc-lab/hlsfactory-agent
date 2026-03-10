@@ -56,8 +56,9 @@ def build_prompt(repo_url: str) -> str:
         "### Step 4: Find or generate testbenches\n"
         "For each design:\n"
         "- If a testbench already exists in the repo, copy it into the design folder\n"
-        "- If not, generate a testbench that actually instantiates and calls the top-level function\n"
-        "  with sample inputs and checks outputs — NOT a placeholder with TODO comments\n"
+        "- If not, generate a comprehensive testbench that actually instantiates and calls the top-level function\n"
+        "  with sample inputs and checks outputs — NOT a placeholder with TODO comments. Also don't generate a testbench that only returns \n"
+        "0. Analyze the design's components and purpose to write a testbench that tests all core functionality."
         "\n"
         "### Step 5: Compile each design\n"
         "Use this exact compilation command for each C/C++ source file:\n"
@@ -231,7 +232,7 @@ def main():
     # 3. instantiate the agent
     agent_config = get_config_from_spec("default")["agent"]
     agent = DefaultAgent(
-        OpenRouterTextbasedModel(model_name="moonshotai/kimi-k2.5"),
+        OpenRouterTextbasedModel(model_name="openai/gpt-oss-120b"),
         env,
         **agent_config,
     )
@@ -267,7 +268,7 @@ def main():
           "run_id": run_id,
           "timestamp": datetime.now(timezone.utc).isoformat(),
           "repo_url": repo_url,
-          "model": "moonshotai/kimi-k2.5",
+          "model": "openai/gpt-oss-120b",
           "exit_status": result.get("exit_status"),
           "total_cost_usd": agent.cost,
           "total_api_calls": agent.n_calls,
