@@ -1,0 +1,10 @@
+In file included from /output/Spector-HLS/template_matching_catapult_src/fpga_temp_match.cpp:1:
+/output/Spector-HLS/template_matching_catapult_src/fpga_temp_matching.h:2:10: fatal error: 'ac_int.h' file not found
+    2 | #include "ac_int.h"
+      |          ^~~~~~~~~~
+1 error generated.
+In file included from /output/Spector-HLS/template_matching_catapult_src/testbench.cpp:1:
+/output/Spector-HLS/template_matching_catapult_src/fpga_temp_matching.h:2:10: fatal error: 'ac_int.h' file not found
+    2 | #include "ac_int.h"
+      |          ^~~~~~~~~~
+1 error generated.

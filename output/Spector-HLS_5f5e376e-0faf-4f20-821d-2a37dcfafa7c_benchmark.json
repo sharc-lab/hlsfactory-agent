@@ -1,0 +1,21 @@
+{
+  "run_id": "5f5e376e-0faf-4f20-821d-2a37dcfafa7c",
+  "timestamp": "2026-03-17T23:37:18.582474+00:00",
+  "repo_url": "https://github.com/KastnerRG/Spector-HLS",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.008544850000000001,
+  "total_api_calls": 13,
+  "format_errors": 0,
+  "traj_file": "Spector-HLS_5f5e376e-0faf-4f20-821d-2a37dcfafa7c.traj.json",
+  "quality": {
+    "designs_found": 36,
+    "compile_pass": 12,
+    "compile_fail": 13,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 36,
+    "designs_with_tcl": 25
+  }
+}

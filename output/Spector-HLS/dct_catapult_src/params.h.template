@@ -1,0 +1,19 @@
+#ifndef PARAMS_H_
+#define PARAMS_H_
+#define PRAGMA_SUB(x) _Pragma(#x)
+#define PRAGMA_HLS(x) PRAGMA_SUB(x)
+
+#define blockdim_x %1
+#define blockdim_y %2
+#define unroll_dct %3
+#define unroll_width %4
+#define unroll_height %5
+#define partition_factor %6
+
+
+//#define C_norm 0.35355339059327376220042218105242f
+#define imageW 2048
+#define imageH 2048
+#define stride 2048
+#define size_im 2048*2048
+#endif

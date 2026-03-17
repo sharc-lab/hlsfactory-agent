@@ -1,0 +1,232 @@
+{
+  "repo_name": "Spector-HLS",
+  "repo_url": "https://github.com/KastnerRG/Spector-HLS",
+  "framework": "unknown",
+  "total_designs": 25,
+  "designs": [
+    {
+      "name": "mergesort_vivado_src",
+      "top_function": "mergesort_test",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["mergesort_test.cpp","mergesort.cpp"]
+    }
+,
+    {
+      "name": "dct_vivado_int_src",
+      "top_function": "dct",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["dct.cpp","dct_test.cpp"]
+    }
+,
+    {
+      "name": "normals_catapult_src",
+      "top_function": "normals",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["normals.cpp","normals_test.cpp"]
+    }
+,
+    {
+      "name": "mergesort_catapult_src",
+      "top_function": "mergesort_test",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["mergesort_test.cpp","mergesort.cpp"]
+    }
+,
+    {
+      "name": "spmv_catapult_src",
+      "top_function": "spmv",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["spmv.cpp","spmv_test.cpp"]
+    }
+,
+    {
+      "name": "dct_vivado_float_src",
+      "top_function": "dct",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["dct.cpp","dct_test.cpp"]
+    }
+,
+    {
+      "name": "histogram_catapult_src",
+      "top_function": "hist_test",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["hist_test.cpp","histogram_hls.cpp"]
+    }
+,
+    {
+      "name": "miscellaneous_fir_src",
+      "top_function": "fir_hls",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["fir_hls.cpp","main_test.cpp"]
+    }
+,
+    {
+      "name": "sobel_filter_vivado_subdimx_src",
+      "top_function": "sobel_test_subdimx",
+      "compile_status": "fail",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["sobel_test_subdimx.cpp","sobel_subdimx.cpp"]
+    }
+,
+    {
+      "name": "spmv_vivado_int_src",
+      "top_function": "spmv",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["spmv.cpp","spmv_test.cpp"]
+    }
+,
+    {
+      "name": "matrix_multiplication_vivado_int_src",
+      "top_function": "matrix_mul",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["matrix_mul.cpp","matrix_mul_test.cpp"]
+    }
+,
+    {
+      "name": "matrix_multiplication_catapult_src",
+      "top_function": "matrix_mul",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["matrix_mul.cpp","matrix_mul_test.cpp"]
+    }
+,
+    {
+      "name": "histogram_vivado_src",
+      "top_function": "main_test",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["main_test.cpp","histogram_hls.cpp","histogram_main.cpp"]
+    }
+,
+    {
+      "name": "normals_vivado_int_src",
+      "top_function": "normals",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["normals.cpp","normals_test.cpp"]
+    }
+,
+    {
+      "name": "template_matching_catapult_src",
+      "top_function": "fpga_temp_match",
+      "compile_status": "fail",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["fpga_temp_match.cpp","testbench.cpp"]
+    }
+,
+    {
+      "name": "miscellaneous_fir_fir_new",
+      "top_function": "fir",
+      "compile_status": "pass",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["fir.cpp"]
+    }
+,
+    {
+      "name": "spmv_vivado_float_src",
+      "top_function": "spmv",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["spmv.cpp","spmv_test.cpp"]
+    }
+,
+    {
+      "name": "sobel_filter_vivado_subdimy_src",
+      "top_function": "sobel_test_subdimy",
+      "compile_status": "fail",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["sobel_test_subdimy.cpp","sobel_subdimy.cpp"]
+    }
+,
+    {
+      "name": "matrix_multiplication_vivado_float_src",
+      "top_function": "matrix_mul",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["matrix_mul.cpp","matrix_mul_test.cpp"]
+    }
+,
+    {
+      "name": "normals_vivado_float_src",
+      "top_function": "normals",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["normals.cpp","normals_test.cpp"]
+    }
+,
+    {
+      "name": "dct_catapult_src",
+      "top_function": "dct",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["dct.cpp","dct_test.cpp"]
+    }
+,
+    {
+      "name": "template_matching_vivado_src",
+      "top_function": "fpga_temp_match",
+      "compile_status": "fail",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["fpga_temp_match.cpp","testbench.cpp"]
+    }
+,
+    {
+      "name": "sobel_filter_catapult_subdim_y_src",
+      "top_function": "sobel_test_subdimy",
+      "compile_status": "fail",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["sobel_test_subdimy.cpp","sobel_subdimy.cpp"]
+    }
+,
+    {
+      "name": "miscellaneous_tempmatch_pipeline_src",
+      "top_function": "fpga_temp_match",
+      "compile_status": "fail",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["fpga_temp_match.cpp","testbench.cpp"]
+    }
+,
+    {
+      "name": "sobel_filter_catapult_subdim_x_src",
+      "top_function": "sobel_test_subdimx",
+      "compile_status": "fail",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["sobel_test_subdimx.cpp","sobel_subdimx.cpp"]
+    }
+  ]
+}
