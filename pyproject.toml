@@ -2,7 +2,7 @@
 name = "hlsfactory-agent"
 version = "0.1.0"
 description = "Add your description here"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 dependencies = [
     "mini-swe-agent>=2.2.4",
 ]
