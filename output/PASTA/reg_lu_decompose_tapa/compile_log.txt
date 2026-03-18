@@ -1,5 +1,0 @@
-=== Compiling reg_lu_decompose_tapa ===
-Source: kernel_kernel.cpp
-Type: TAPA
-Compilation failed (expected for TAPA designs)
-Compilation check complete

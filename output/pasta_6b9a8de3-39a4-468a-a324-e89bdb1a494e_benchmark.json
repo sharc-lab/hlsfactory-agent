@@ -1,0 +1,21 @@
+{
+  "run_id": "6b9a8de3-39a4-468a-a324-e89bdb1a494e",
+  "timestamp": "2026-03-18T17:38:34.047041+00:00",
+  "repo_url": "https://github.com/SFU-HiAccel/pasta.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.00470795,
+  "total_api_calls": 13,
+  "format_errors": 0,
+  "traj_file": "pasta_6b9a8de3-39a4-468a-a324-e89bdb1a494e.traj.json",
+  "quality": {
+    "designs_found": 12,
+    "compile_pass": 0,
+    "compile_fail": 12,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 12,
+    "designs_with_tcl": 12
+  }
+}

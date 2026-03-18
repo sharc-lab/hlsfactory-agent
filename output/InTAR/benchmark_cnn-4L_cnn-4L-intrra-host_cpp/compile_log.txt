@@ -1,0 +1,102 @@
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:31:25: error: no template named 'vec_t' in namespace 'tapa'
+   31 | using int16_v16 = tapa::vec_t<ap_int<16>, 16>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:32:25: error: no template named 'vec_t' in namespace 'tapa'
+   32 | using int16_v32 = tapa::vec_t<ap_int<16>, 32>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:35:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   35 |     tapa::mmap<int16_v16> X,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:36:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   36 |     tapa::mmap<int16_v16> kernel1,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:37:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   37 |     tapa::mmap<int16_v16> kernel2,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:38:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   38 |     tapa::mmap<int16_v16> kernel3,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:39:17: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   39 |     tapa::mmaps<int16_v16, 3> data_out,
+      |                 ^~~~~~~~~
+      |                 int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:39:11: error: too many template arguments for class template 'mmaps'
+   39 |     tapa::mmaps<int16_v16, 3> data_out,
+      |           ^                ~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:44:63: error: 'T' does not refer to a value
+   44 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                                               ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:43:20: note: declared here
+   43 | template <typename T>
+      |                    ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:44:39: error: no member named 'aligned_allocator' in namespace 'tapa'; did you mean 'aligned_alloc'?
+   44 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~
+      |                                       aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:44:66: error: expected ';' after alias declaration
+   44 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                                                  ^
+      |                                                                  ;
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:46:1: error: a type specifier is required for all declarations
+   46 | DEFINE_string(bitstream, "", "path to bitstream file");
+      | ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:46:15: error: use of undeclared identifier 'bitstream'
+   46 | DEFINE_string(bitstream, "", "path to bitstream file");
+      |               ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:49:5: error: use of undeclared identifier 'gflags'
+   49 |     gflags::ParseCommandLineFlags(&argc, &argv, true);
+      |     ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:57:31: error: expected ';' after expression
+   57 |     aligned_vector<ap_int<16>> input1(image_size);
+      |                               ^
+      |                               ;
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:57:5: error: use of undeclared identifier 'aligned_vector'; did you mean 'aligned_alloc'?
+   57 |     aligned_vector<ap_int<16>> input1(image_size);
+      |     ^~~~~~~~~~~~~~
+      |     aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:57:32: error: use of undeclared identifier 'input1'
+   57 |     aligned_vector<ap_int<16>> input1(image_size);
+      |                                ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:58:31: error: expected ';' after expression
+   58 |     aligned_vector<ap_int<16>> weight_cc0(32);
+      |                               ^
+      |                               ;
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-host_cpp/cnn-4L-intrra-host.cpp:58:5: error: use of undeclared identifier 'aligned_vector'; did you mean 'aligned_alloc'?
+   58 |     aligned_vector<ap_int<16>> weight_cc0(32);
+      |     ^~~~~~~~~~~~~~
+      |     aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

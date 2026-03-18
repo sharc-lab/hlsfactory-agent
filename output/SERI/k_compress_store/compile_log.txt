@@ -1,27 +1,17 @@
-Compilation Command: clang++ -c -std=c++17 -fsyntax-only -I. -DAP_INT_MAX_W=8192 -DAM_ABCD=3131 -ferror-limit=10 k_compress_store.cpp\nReturn Code: 1\n\nSTDOUT:\n\n\nSTDERR:\nIn file included from k_compress_store.cpp:2:
-./compress_store_split.h:45:25: error: ambiguous conversion for C-style cast from 'ap_ufixed<16, 16, 6, 0>' to 'short'
-   45 |         p_eri.data[i] = (short) r;
-      |                         ^~~~~~~~~
-./ap_fixed.h:71:5: note: candidate function
-   71 |     operator double() const { return val; }
-      |     ^
-./ap_fixed.h:72:5: note: candidate function
-   72 |     operator float() const { return static_cast<float>(val); }
-      |     ^
-./ap_fixed.h:73:5: note: candidate function
-   73 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
-      |     ^
-./ap_fixed.h:74:5: note: candidate function
-   74 |     operator unsigned short() const { return static_cast<unsigned short>(val); }
-      |     ^
-In file included from k_compress_store.cpp:1:
-In file included from ./internal_types.h:8:
-In file included from ./packed_array.hpp:8:
-./ap_int.h:226:23: warning: shift count >= width of type [-Wshift-count-overflow]
-  226 |         result = (msb << _AP_W) | lsb;
-      |                       ^  ~~~~~
-k_compress_store.cpp:46:65: note: in instantiation of function template specialization 'ap_uint<480>::operator,<480>' requested here
-   46 |             auto uint = (D_WIDTH( ba_cart_eris_pt::bit_width )) (cart_eris_stream_in_1.read(), cart_eris_stream_in_0.read());
-      |                                                                 ^
-1 warning and 1 error generated.
-\n\nCompilation completed with errors (see above).\nNote: Some errors are due to design-specific configurations and Xilinx HLS-specific constructs.\nThe design can still be synthesized with Vitis HLS.\n
+Compiling /output/SERI/k_compress_store/testbench.cpp
+/output/SERI/k_compress_store/testbench.cpp:1:10: fatal error: 'rys_testbench.h' file not found
+    1 | #include "rys_testbench.h"
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.
+Compilation FAIL on attempt 0. Attempting simple fix...
+/output/SERI/k_compress_store/testbench.cpp:2:10: fatal error: 'rys_testbench.h' file not found
+    2 | #include "rys_testbench.h"
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.
+Compilation FAIL on attempt 1. Attempting simple fix...
+/output/SERI/k_compress_store/testbench.cpp:2:10: fatal error: 'rys_testbench.h' file not found
+    2 | #include "rys_testbench.h"
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.
+Compilation FAIL on attempt 2. Attempting simple fix...
+Compilation FAIL after maximum attempts.

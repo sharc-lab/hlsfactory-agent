@@ -1,0 +1,4 @@
+/output/AutoNTT/Montgomery/AutoNTT_I__N_8192__q_48__red_MONTGOMERY__BUs_4/ntt_test.cpp:4:10: fatal error: 'gflags/gflags.h' file not found
+    4 | #include <gflags/gflags.h>
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.

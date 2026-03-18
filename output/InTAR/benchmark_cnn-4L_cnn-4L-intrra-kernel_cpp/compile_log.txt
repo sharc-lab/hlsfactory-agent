@@ -1,0 +1,122 @@
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:30:25: error: no template named 'vec_t' in namespace 'tapa'
+   30 | using int16_v16 = tapa::vec_t<ap_int<16>, 16>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:31:25: error: no template named 'vec_t' in namespace 'tapa'
+   31 | using int16_v32 = tapa::vec_t<ap_int<16>, 32>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:35:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   35 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:36:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   36 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:44:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   44 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:54:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   54 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:55:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   55 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:63:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   63 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:73:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   73 |     tapa::async_mmap<int16_v16>& output_mtx,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:74:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   74 |     tapa::istream<int16_v16>& fifo_in,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:82:13: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   82 |             int16_v16 tmp; fifo_in.try_read(tmp);
+      |             ^~~~~~~~~
+      |             int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:87:48: error: too many arguments to function call, expected 0, have 1
+   87 |         auto resp = output_mtx.write_resp.read(success);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:97:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   97 |     tapa::istream<int16_v16>& fifo_input,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:98:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   98 |     tapa::istream<int16_v16>& fifo_kernel,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:99:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   99 |     tapa::ostream<int16_v16>& fifo_to_CC1,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:100:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  100 |     tapa::istream<int16_v16>& fifo_from_ctrl,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:101:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  101 |     tapa::ostream<int16_v16>& fifo_output
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:115:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  115 |         int16_v16 tmp = fifo_kernel.read();
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_cnn-4L_cnn-4L-intrra-kernel_cpp/cnn-4L-intrra-kernel.cpp:118:28: error: subscripted value is not an array, pointer, or vector
+  118 |             kernel[j] = tmp[j];
+      |                         ~~~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

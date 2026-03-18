@@ -1,0 +1,4 @@
+/output/InTAR/benchmark_mlp_mlp-intrra-host_cpp/mlp-intrra-host.cpp:8:10: fatal error: 'gflags/gflags.h' file not found
+    8 | #include <gflags/gflags.h>
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.

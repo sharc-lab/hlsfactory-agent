@@ -1,0 +1,570 @@
+In file included from /output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:3:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:25:55: error: too many arguments to function call, expected 0, have 1
+   25 |         POLY_WIDE_DATA val = poly_mmap.read_data.read(nullptr);
+      |                              ~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:40:3: error: use of undeclared identifier 'printf'
+   40 |   printf("[Mmap2Stream_poly %d]: Polynomial loading done\n", (int)port_idx);
+      |   ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:85:54: error: too many arguments to function call, expected 0, have 1
+   85 |         i_resp += unsigned(poly_mmap.write_resp.read(nullptr)) + 1;
+      |                            ~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:91:3: error: use of undeclared identifier 'printf'
+   91 |   printf("[Stream2Mmap_poly %d]: Polynomial storing done\n", (int)port_idx);
+      |   ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:142:3: error: use of undeclared identifier 'printf'
+  142 |   printf("[Mmap2Stream_tf %d]: TF loading done\n", (int)port_idx);
+      |   ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<WORD_SIZE>' and 'int')
+  152 |   *val = (*val>>1) + (*val & 1)*(*twoInverse);
+      |                       ~~~~ ^ ~
+/workspace/stubs/ap_int.h:256:13: note: candidate function
+  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+      |             ^
+/workspace/stubs/ap_int.h:241:13: note: candidate function
+  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+      |             ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, int)
+  152 |   *val = (*val>>1) + (*val & 1)*(*twoInverse);
+      |                            ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(__int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:152:28: note: built-in candidate operator&(unsigned __int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<48>' and 'int')
+  162 |   ap_uint<17> u_0 = u & ((1<<17)-1);
+      |                     ~ ^ ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:256:13: note: candidate function
+  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+      |             ^
+/workspace/stubs/ap_int.h:241:13: note: candidate function
+  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+      |             ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, int)
+  162 |   ap_uint<17> u_0 = u & ((1<<17)-1);
+      |                       ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(__int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:162:23: note: built-in candidate operator&(unsigned __int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<48>' and 'int')
+  164 |   ap_uint<17> u_1 = u & ((1<<17)-1);
+      |                     ~ ^ ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:256:13: note: candidate function
+  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+      |             ^
+/workspace/stubs/ap_int.h:241:13: note: candidate function
+  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+      |             ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, int)
+  164 |   ap_uint<17> u_1 = u & ((1<<17)-1);
+      |                       ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(__int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:164:23: note: built-in candidate operator&(unsigned __int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<48>' and 'int')
+  166 |   ap_uint<14> u_2 = u & ((1<<14)-1);
+      |                     ~ ^ ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:256:13: note: candidate function
+  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+      |             ^
+/workspace/stubs/ap_int.h:241:13: note: candidate function
+  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+      |             ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, int)
+  166 |   ap_uint<14> u_2 = u & ((1<<14)-1);
+      |                       ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(__int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:166:23: note: built-in candidate operator&(unsigned __int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<48>' and 'int')
+  168 |   ap_uint<27> v_0 = v & ((1<<27)-1);
+      |                     ~ ^ ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:256:13: note: candidate function
+  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+      |             ^
+/workspace/stubs/ap_int.h:241:13: note: candidate function
+  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+      |             ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, int)
+  168 |   ap_uint<27> v_0 = v & ((1<<27)-1);
+      |                       ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(__int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:168:23: note: built-in candidate operator&(unsigned __int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<48>' and 'int')
+  170 |   ap_uint<21> v_1 = v & ((1<<21)-1);
+      |                     ~ ^ ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:256:13: note: candidate function
+  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+      |             ^
+/workspace/stubs/ap_int.h:241:13: note: candidate function
+  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+      |             ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, int)
+  170 |   ap_uint<21> v_1 = v & ((1<<21)-1);
+      |                       ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(__int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned int, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned long long, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, unsigned int)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, unsigned long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, unsigned long long)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:170:23: note: built-in candidate operator&(unsigned __int128, unsigned __int128)
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:172:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  172 |   ap_uint<44> mul_0 = ((ap_uint<44>)(u_0) * v_0); //<<0
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:238:13: note: candidate function
+  238 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
+      |             ^
+/workspace/stubs/ap_int.h:253:13: note: candidate function
+  253 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:260:13: note: candidate function
+  260 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 27]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:174:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<44>' and 'ap_uint<27>')
+  174 |   ap_uint<44> mul_1 = ((ap_uint<44>)(u_1) * v_0); //<<17
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:238:13: note: candidate function
+  238 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
+      |             ^
+/workspace/stubs/ap_int.h:253:13: note: candidate function
+  253 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:260:13: note: candidate function
+  260 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 27]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:176:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<41>' and 'ap_uint<27>')
+  176 |   ap_uint<41> mul_2 = ((ap_uint<41>)(u_2) * v_0); //<<34
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:238:13: note: candidate function
+  238 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
+      |             ^
+/workspace/stubs/ap_int.h:253:13: note: candidate function
+  253 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:260:13: note: candidate function
+  260 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 27]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:179:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  179 |   ap_uint<38> mul_3 = ((ap_uint<38>)(u_0) * v_1); //<<27
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:238:13: note: candidate function
+  238 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
+      |             ^
+/workspace/stubs/ap_int.h:253:13: note: candidate function
+  253 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:260:13: note: candidate function
+  260 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 21]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:181:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<38>' and 'ap_uint<21>')
+  181 |   ap_uint<38> mul_4 = ((ap_uint<38>)(u_1) * v_1); //<<44
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:238:13: note: candidate function
+  238 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
+      |             ^
+/workspace/stubs/ap_int.h:253:13: note: candidate function
+  253 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:260:13: note: candidate function
+  260 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 21]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/AutoNTT/AutoNTT_I__N_8192__q_48__red_WLM__BUs_4/ntt_kernel.cpp:183:43: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_uint<35>' and 'ap_uint<21>')
+  183 |   ap_uint<35> mul_5 = ((ap_uint<35>)(u_2) * v_1); //<<61
+      |                        ~~~~~~~~~~~~~~~~~~ ^ ~~~
+/workspace/stubs/ap_int.h:238:13: note: candidate function
+  238 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
+      |             ^
+/workspace/stubs/ap_int.h:253:13: note: candidate function
+  253 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:260:13: note: candidate function
+  260 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
+      |             ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 21]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

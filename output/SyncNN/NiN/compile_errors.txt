@@ -1,0 +1,1 @@
+1:/output/SyncNN/NiN/tb.cpp:7:10: fatal error: 'includes/cifar10_new/16/kernel_1.h' file not found

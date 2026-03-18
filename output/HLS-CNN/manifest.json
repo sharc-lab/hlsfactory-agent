@@ -1,16 +1,35 @@
 {
   "repo_name": "HLS-CNN",
   "repo_url": "https://github.com/FedericoSerafini/HLS-CNN.git",
-  "framework": "unknown",
+  "framework": "vitis_hls",
   "total_designs": 1,
   "designs": [
     {
       "name": "cnn",
       "top_function": "cnn",
-      "compile_status": "fail",
+      "compile_status": "pass",
       "has_testbench": true,
       "has_tcl": true,
-      "source_files": ["activ_fun.c","cnn.c","cnn_tb.c","conv.c","dense.c","flat.c","pool.c","utils.c"]
+      "source_files": [
+        "activ_fun.c",
+        "cnn.c",
+        "cnn_tb.c",
+        "conv.c",
+        "dense.c",
+        "flat.c",
+        "pool.c",
+        "utils.c",
+        "activ_fun.h",
+        "cnn.h",
+        "conv.h",
+        "conv_weights.h",
+        "definitions.h",
+        "dense.h",
+        "dense_weights.h",
+        "flat.h",
+        "pool.h",
+        "utils.h"
+      ]
     }
   ]
 }

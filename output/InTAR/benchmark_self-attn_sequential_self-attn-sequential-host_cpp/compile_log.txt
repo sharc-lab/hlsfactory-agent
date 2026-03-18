@@ -1,0 +1,4 @@
+/output/InTAR/benchmark_self-attn_sequential_self-attn-sequential-host_cpp/self-attn-sequential-host.cpp:12:10: fatal error: 'gflags/gflags.h' file not found
+   12 | #include <gflags/gflags.h>
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.

@@ -1,0 +1,34 @@
+Compilation results for design stencil-dilate:
+Compiling unikernel.cpp ...
+/output/pasta/stencil-dilate/tapa/src/unikernel.cpp:186:47: error: too many arguments to function call, expected 0, have 1
+  186 |       INTERFACE_WIDTH temp = a.read_data.read(nullptr);
+      |                              ~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/pasta/stencil-dilate/tapa/src/unikernel.cpp:234:9: error: too many template arguments for class template 'streams'
+  234 |   tapa::streams<INTERFACE_WIDTH, 15, 3> k_wr;
+      |         ^                            ~~
+/workspace/stubs/tapa.h:175:7: note: template is declared here
+  174 | template<typename T, int N>
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  175 | class streams {
+      |       ^
+/output/pasta/stencil-dilate/tapa/src/unikernel.cpp:235:9: error: too many template arguments for class template 'streams'
+  235 |   tapa::streams<INTERFACE_WIDTH, 15, 3> k_rd;
+      |         ^                            ~~
+/workspace/stubs/tapa.h:175:7: note: template is declared here
+  174 | template<typename T, int N>
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  175 | class streams {
+      |       ^
+3 errors generated.
+Status: FAIL
+
+Compiling main.cpp ...
+/output/pasta/stencil-dilate/tapa/src/main.cpp:6:10: fatal error: 'gflags/gflags.h' file not found
+    6 | #include <gflags/gflags.h>
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.
+Status: FAIL
+

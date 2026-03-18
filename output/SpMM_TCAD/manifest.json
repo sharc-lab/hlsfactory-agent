@@ -1,9 +1,0 @@
-{
-  "repo_name": "SpMM_TCAD",
-  "repo_url": "https://github.com/lsq314/SpMM_TCAD.git",
-  "framework": "unknown",
-  "total_designs": 37,
-  "designs": [
-    {"name":"core","top_function":"x","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["core.cpp"]},{"name":"pe","top_function":"e","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["pe.cpp"]},{"name":"rcache","top_function":"r","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["rcache.cpp"]},{"name":"row_wise","top_function":"w","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["row_wise.cpp"]},{"name":"util","top_function":"t","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["util.cpp"]},{"name":"vccache","top_function":"r","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["vccache.cpp"]}
-  ]
-}

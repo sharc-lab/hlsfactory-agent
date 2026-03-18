@@ -1,271 +1,115 @@
 {
-  "repository": "https://github.com/SFU-HiAccel/pasta.git",
-  "extraction_date": "2026-03-03T04:25:40+00:00",
-  "total_designs": 24,
+  "repo_name": "pasta",
+  "repo_url": "https://github.com/SFU-HiAccel/pasta.git",
+  "framework": "tapa",
+  "total_designs": 12,
   "designs": [
     {
-      "name": "apps_bandwidth",
-      "top_function": "Copy",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 2,
+      "name": "hbm-bandwidth",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "bandwidth.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["src/bandwidth.cpp","src/bandwidth-host.cpp","src/bandwidth.h"]
+    }
+    ,
     {
-      "name": "apps_cannon",
-      "top_function": "Scatter",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 0,
+      "name": "serpens-16ch",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "cannon.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["tapa/src/serpens.cpp","tapa/src/serpens-host.cpp","tapa/src/serpens.h","tapa/src/sparse_helper.h","tapa/src/mmio.h"]
+    }
+    ,
     {
-      "name": "apps_graph",
-      "top_function": "Control",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 1,
+      "name": "spmv-hisparse-mmap",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "graph.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["hls/src/host.cpp","hls/src/spmv.cpp","tapa/src/spmv.cpp","hls/src/data_formatter.h","hls/src/data_loader.h","hls/src/libfpga/vecbuf_access_unit.h","hls/src/libfpga/stream_utils.h","hls/src/libfpga/common.h","hls/src/libfpga/spmv_cluster.h","hls/src/libfpga/shuffle.h","hls/src/libfpga/pe.h"]
+    }
+    ,
     {
-      "name": "apps_jacobi",
-      "top_function": "Mmap2Stream",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 0,
+      "name": "serpens-24ch",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "jacobi.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["tapa/src/serpens.cpp","tapa/src/serpens-host.cpp","tapa/src/serpens.h","tapa/src/sparse_helper.h","tapa/src/mmio.h"]
+    }
+    ,
     {
-      "name": "apps_nested-vadd",
-      "top_function": "Add",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 0,
+      "name": "stencil-dilate",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "vadd.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["tapa/src/unikernel.cpp","tapa/src/main.cpp","tapa/src/DILATE.h"]
+    }
+    ,
     {
-      "name": "apps_network",
-      "top_function": "Switch2x2",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 0,
+      "name": "hbm-bandwidth-1-ch",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "network.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["src/bandwidth.cpp","src/bandwidth-host.cpp","src/bandwidth.h"]
+    }
+    ,
     {
-      "name": "apps_shared-vadd",
-      "top_function": "Add",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 0,
+      "name": "spmm",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "vadd.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp","sextans-u280-split-bram-uram/tapa/src/sextans.cpp","sextans-u280-split-bram-uram/tapa/src/sparse_helper.h","sextans-u280-split-bram-uram/tapa/src/modules.h","sextans-u280-split-bram-uram/tapa/src/sextans.h","sextans-u280-split-bram-uram/tapa/src/mmio.h"]
+    }
+    ,
     {
-      "name": "apps_vadd",
-      "top_function": "Add",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 0,
+      "name": "knn",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "vadd.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["src/knn.cpp","src/knn-host.cpp","src/knn.h"]
+    }
+    ,
     {
-      "name": "reg_cnn_tapa",
-      "top_function": "A_IO_L3_in",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 0,
+      "name": "serpens-32ch",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "tapa_kernel.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["hls/src/host.cpp","hls/src/serpens.cpp","tapa/src/serpens_tapa.cpp","tapa/src/serpens_tapa_mmap.cpp","hls/src/sparse_helper.h","hls/src/mmio.h","tapa/src/mmio.h"]
+    }
+    ,
     {
-      "name": "reg_cnn_vitis_hls",
-      "top_function": "main",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 3,
+      "name": "page_rank",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "kernel.c"
-    },
+      "has_tcl": true,
+      "source_files": ["tapa/src/page-rank-host.cpp","tapa/src/page-rank.cpp","tapa/src/page-rank.h","tapa/src/page-rank-kernel.h","tapa/src/nxgraph.hpp"]
+    }
+    ,
     {
-      "name": "reg_hbm-bandwidth-1-ch",
-      "top_function": "Copy",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 1,
+      "name": "cnn",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "bandwidth.cpp"
-    },
+      "has_tcl": true,
+      "source_files": ["vitis_hls/src/kernel_host.cpp","vitis_hls/src/kernel_kernel.cpp","tapa/src/tapa_kernel.cpp","vitis_hls/src/kernel.c","vitis_hls/src/kernel_kernel.h","vitis_hls/src/kernel.h","vitis_hls/src/kernel_host.hpp"]
+    }
+    ,
     {
-      "name": "reg_hbm-bandwidth",
-      "top_function": "Copy",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 1,
+      "name": "lu_decompose",
+      "top_function": "top",
+      "compile_status": "fail",
       "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "bandwidth.cpp"
-    },
-    {
-      "name": "reg_knn",
-      "top_function": "load",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 1,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "knn.cpp"
-    },
-    {
-      "name": "reg_lu_decompose_hls",
-      "top_function": "init_array",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 2,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "kernel.c"
-    },
-    {
-      "name": "reg_lu_decompose_tapa",
-      "top_function": "PE_non_zero_non_diag",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 0,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "kernel_kernel.cpp"
-    },
-    {
-      "name": "reg_page_rank_tapa",
-      "top_function": "Control",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 3,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "page-rank.cpp"
-    },
-    {
-      "name": "reg_serpens-16ch_tapa",
-      "top_function": "read_edge_list_ptr",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 3,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "serpens.cpp"
-    },
-    {
-      "name": "reg_serpens-24ch_tapa",
-      "top_function": "read_edge_list_ptr",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 3,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "serpens.cpp"
-    },
-    {
-      "name": "reg_serpens-32ch_hls",
-      "top_function": "read_edge_list_ptr",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 2,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "serpens.cpp"
-    },
-    {
-      "name": "reg_serpens-32ch_tapa",
-      "top_function": "read_edge_list_ptr",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 1,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "serpens_tapa.cpp"
-    },
-    {
-      "name": "reg_spmm_sextans-u280-split-bram-uram_tapa",
-      "top_function": "async_read",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 4,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "sextans.cpp"
-    },
-    {
-      "name": "reg_spmv-hisparse-mmap_hls",
-      "top_function": "CPSR_matrix_loader",
-      "type": "HLS",
-      "source_files": 2,
-      "header_files": 2,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "spmv.cpp"
-    },
-    {
-      "name": "reg_spmv-hisparse-mmap_tapa",
-      "top_function": "spmv",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 0,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "spmv.cpp"
-    },
-    {
-      "name": "reg_stencil-dilate_tapa",
-      "top_function": "DILATE",
-      "type": "TAPA",
-      "source_files": 2,
-      "header_files": 1,
-      "has_testbench": false,
-      "has_compile_log": true,
-      "has_tcl_script": true,
-      "main_source": "unikernel.cpp"
+      "has_tcl": true,
+      "source_files": ["hls/src/kernel_host.cpp","hls/src/kernel_kernel.cpp","tapa/src/kernel_kernel.cpp","hls/src/kernel.c","hls/src/kernel_kernel.h","hls/src/kernel.h"]
     }
   ]
 }

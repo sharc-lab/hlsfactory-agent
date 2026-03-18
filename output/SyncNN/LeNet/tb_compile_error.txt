@@ -1,0 +1,4 @@
+/output/SyncNN/LeNet/tb.cpp:40:10: fatal error: 'includes/mnist_2/4/kernel_1.h' file not found
+   40 | #include "includes/mnist_2/4/kernel_1.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

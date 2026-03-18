@@ -1,102 +1,24 @@
 {
-  "repository": {
-    "url": "https://github.com/UCLA-VAST/blaze.git",
-    "name": "blaze",
-    "path": "/workspace/repo"
-  },
-  "output_path": "/output/blaze",
-  "total_designs": 8,
+  "repo_name": "blaze",
+  "repo_url": "https://github.com/SFU-HiAccel/blaze.git",
+  "framework": "unknown",
+  "total_designs": 2,
   "designs": [
     {
-      "name": "pi_cpu",
-      "type": "cpu_task",
-      "files": [
-        "Pi.cpp",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
+      "name": "Pi",
+      "top_function": "Pi",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["Pi.cpp"]
     },
     {
-      "name": "arrayTest_cpu",
-      "type": "cpu_task",
-      "files": [
-        "ArrayTest.cpp",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
-    },
-    {
-      "name": "arrayTest_gpu",
-      "type": "gpu_task",
-      "files": [
-        "ArrayTest.cpp",
-        "ArrayTest.cl",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
-    },
-    {
-      "name": "loopback_nlb",
-      "type": "aal_task",
-      "files": [
-        "NLB.cpp",
-        "NLBApp.h",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
-    },
-    {
-      "name": "arraytest_acc",
-      "type": "acc_task",
-      "files": [
-        "ArrayTest.cpp",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
-    },
-    {
-      "name": "arraytest_ocl",
-      "type": "ocl_task",
-      "files": [
-        "ArrayTest.cpp",
-        "ArrayTest.cl",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
-    },
-    {
-      "name": "masktest_acc",
-      "type": "acc_task",
-      "files": [
-        "MaskTest.cpp",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
-    },
-    {
-      "name": "tuple2test_acc",
-      "type": "acc_task",
-      "files": [
-        "Tuple2Test.cpp",
-        "testbench.cpp",
-        "README.md",
-        "compile_log.txt",
-        "synthesize.tcl"
-      ]
+      "name": "ArrayTest_gpu",
+      "top_function": "ArrayTest",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["ArrayTest.cpp"]
     }
   ]
 }

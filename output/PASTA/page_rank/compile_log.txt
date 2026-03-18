@@ -1,0 +1,99 @@
+Compilation results for design page_rank:
+Compiling page-rank-host.cpp ...
+In file included from /output/pasta/page_rank/tapa/src/page-rank-host.cpp:20:
+/output/pasta/page_rank/tapa/src/nxgraph.hpp:19:10: fatal error: 'glog/logging.h' file not found
+   19 | #include <glog/logging.h>
+      |          ^~~~~~~~~~~~~~~~
+1 error generated.
+Status: FAIL
+
+Compiling page-rank.cpp ...
+In file included from /output/pasta/page_rank/tapa/src/page-rank.cpp:6:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+In file included from /output/pasta/page_rank/tapa/src/page-rank.cpp:8:
+In file included from /output/pasta/page_rank/tapa/src/page-rank-kernel.h:6:
+/output/pasta/page_rank/tapa/src/page-rank.h:84:24: error: no template named 'vec_t' in namespace 'tapa'
+   84 | using FloatVec = tapa::vec_t<float, kVertexVecLen>;
+      |                  ~~~~~~^
+/output/pasta/page_rank/tapa/src/page-rank.h:85:23: error: no template named 'vec_t' in namespace 'tapa'
+   85 | using EdgeVec = tapa::vec_t<Edge, kEdgeVecLen>;
+      |                 ~~~~~~^
+/output/pasta/page_rank/tapa/src/page-rank.h:86:25: error: no template named 'vec_t' in namespace 'tapa'
+   86 | using UpdateVec = tapa::vec_t<Update, kUpdateVecLen>;
+      |                   ~~~~~~^
+/output/pasta/page_rank/tapa/src/page-rank.h:88:57: error: unknown type name 'UpdateVec'; did you mean 'Update'?
+   88 | inline std::ostream& operator<<(std::ostream& os, const UpdateVec& obj) {
+      |                                                         ^~~~~~~~~
+      |                                                         Update
+/output/pasta/page_rank/tapa/src/page-rank.h:67:8: note: 'Update' declared here
+   67 | struct Update {
+      |        ^
+/output/pasta/page_rank/tapa/src/page-rank.h:88:22: error: redefinition of 'operator<<'
+   88 | inline std::ostream& operator<<(std::ostream& os, const UpdateVec& obj) {
+      |                      ^
+/output/pasta/page_rank/tapa/src/page-rank.h:72:22: note: previous definition is here
+   72 | inline std::ostream& operator<<(std::ostream& os, const Update& obj) {
+      |                      ^
+/output/pasta/page_rank/tapa/src/page-rank.h:91:23: error: use of undeclared identifier 'UpdateVec'; did you mean 'Update'?
+   91 |   for (int i = 0; i < UpdateVec::length; ++i) {
+      |                       ^~~~~~~~~
+      |                       Update
+/output/pasta/page_rank/tapa/src/page-rank.h:67:8: note: 'Update' declared here
+   67 | struct Update {
+      |        ^
+/output/pasta/page_rank/tapa/src/page-rank.h:91:34: error: no member named 'length' in 'Update'
+   91 |   for (int i = 0; i < UpdateVec::length; ++i) {
+      |                       ~~~~~~~~~~~^
+/output/pasta/page_rank/tapa/src/page-rank.h:92:12: error: type 'const Update' does not provide a subscript operator
+   92 |     if (obj[i].dst != 0) {
+      |         ~~~^~
+/output/pasta/page_rank/tapa/src/page-rank.h:98:37: error: type 'const Update' does not provide a subscript operator
+   98 |       os << "[" << i << "]: " << obj[i];
+      |                                  ~~~^~
+In file included from /output/pasta/page_rank/tapa/src/page-rank.cpp:8:
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:21:29: error: no template named 'vec_t' in namespace 'tapa'
+   21 | using VertexAttrVec = tapa::vec_t<VertexAttrKernel, kVertexVecLen>;
+      |                       ~~~~~~^
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:72:26: error: no template named 'packet' in namespace 'tapa'
+   72 | using NumUpdates = tapa::packet<Pid, Eid>;
+      |                    ~~~~~~^
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:73:31: error: no template named 'packet' in namespace 'tapa'
+   73 | using UpdateVecPacket = tapa::packet<Pid, UpdateVec>;
+      |                         ~~~~~~^
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:73:43: error: unknown type name 'UpdateVec'; did you mean 'UpdateReq'?
+   73 | using UpdateVecPacket = tapa::packet<Pid, UpdateVec>;
+      |                                           ^~~~~~~~~
+      |                                           UpdateReq
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:57:8: note: 'UpdateReq' declared here
+   57 | struct UpdateReq {
+      |        ^
+/output/pasta/page_rank/tapa/src/page-rank.cpp:28:29: error: use of undeclared identifier 'NumUpdates'
+   28 |              tapa::istreams<NumUpdates, kNumPes>& num_updates_q,
+      |                             ^
+/output/pasta/page_rank/tapa/src/page-rank.cpp:73:5: error: use of undeclared identifier 'VLOG'
+   73 |     VLOG_F(8, info) << "update offset[" << pid << "]: " << update_offset;
+      |     ^
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:8:28: note: expanded from macro 'VLOG_F'
+    8 | #define VLOG_F(level, tag) VLOG(level) << #tag << "@" << __FUNCTION__ << ": "
+      |                            ^
+/output/pasta/page_rank/tapa/src/page-rank.cpp:90:5: error: use of undeclared identifier 'VLOG'
+   90 |     VLOG_F(5, info) << "Phase: " << TaskReq::kScatter;
+      |     ^
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:8:28: note: expanded from macro 'VLOG_F'
+    8 | #define VLOG_F(level, tag) VLOG(level) << #tag << "@" << __FUNCTION__ << ": "
+      |                            ^
+/output/pasta/page_rank/tapa/src/page-rank.cpp:136:5: error: use of undeclared identifier 'VLOG'
+  136 |     VLOG_F(5, info) << "Phase: " << TaskReq::kGather;
+      |     ^
+/output/pasta/page_rank/tapa/src/page-rank-kernel.h:8:28: note: expanded from macro 'VLOG_F'
+    8 | #define VLOG_F(level, tag) VLOG(level) << #tag << "@" << __FUNCTION__ << ": "
+      |                            ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+Status: FAIL
+

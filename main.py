@@ -36,10 +36,25 @@ def build_prompt(repo_url: str) -> str:
         f"git clone '{repo_url}' /workspace/repo\n"
         f"```\n"
         "\n"
+        "### Step 1.5: Detect and convert CUDA kernels\n"
+        "Check if the repo has CUDA files:\n"
+        "```\n"
+        "grep -r '__global__' /workspace/repo --include='*.cu' -l\n"
+        "```\n"
+        "If found, run the converter:\n"
+        "```\n"
+        "python /workspace/cuda2hls.py /workspace/repo -o /workspace/cuda_converted\n"
+        "```\n"
+        "This converts CUDA kernels to HLS C++ (strips CUDA qualifiers, wraps in loops, adds HLS pragmas).\n"
+        "Use the converted files in `/workspace/cuda_converted/` as the designs.\n"
+        "The converter output will have compile errors — fix them in Step 5.\n"
+        "If no CUDA files found, skip this step.\n"
+        "\n"
         "### Step 2: Analyze the repository\n"
         "Explore the cloned repo and identify ALL HLS designs. Each design is typically:\n"
         "- A C/C++ source file (or set of files) containing a top-level HLS function\n"
-        "- May use frameworks: Vitis HLS, Vivado HLS, TAPA, Intel HLS, or LegUp\n"
+        "- May use frameworks: Vitis HLS, Vivado HLS, TAPA, Intel HLS, LegUp\n"
+        "- If CUDA conversion was done in Step 1.5, use the converted files\n"
         "\n"
         "**RTL detection:** If the repository contains ONLY Verilog (.v) / SystemVerilog (.sv) / VHDL (.vhd/.vhdl) files\n"
         "with NO C/C++ HLS source code, then this is a pure RTL repository. In that case:\n"
@@ -74,8 +89,12 @@ def build_prompt(repo_url: str) -> str:
         "`#include <tapa.h>` and types like `tapa::mmap<T>`, `tapa::stream<T>`, `tapa::task`.\n"
         "These designs SHOULD be compiled with the stubs — do NOT skip them.\n"
         "\n"
-        "**If compilation fails**, try to fix obvious include path issues before recording as failed.\n"
-        "For example, add `-I` flags for subdirectories that contain referenced headers.\n"
+        "**If compilation fails**, you MUST attempt to fix the errors before recording as failed.\n"
+        "For each failing design, follow this loop (up to 3 attempts per design):\n"
+        "1. Read the error messages from the compile output\n"
+        "2. Diagnose the root cause and fix the source file(s)\n"
+        "3. Re-compile and check if it passes\n"
+        "Only record a design as 'fail' after exhausting your fix attempts.\n"
         "\n"
         "### Step 6: Generate TCL synthesis scripts\n"
         "For each design, generate a TCL script (synth.tcl) for Vivado HLS / Vitis HLS:\n"
@@ -206,7 +225,13 @@ def main():
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Print commands without executing them",
+        help="Print the prompt and configuration without executing",
+    )
+    parser.add_argument(
+        "--timeout",
+        type=int,
+        default=300,
+        help="Per-command timeout in seconds for the Docker environment (default: 300)",
     )
     args = parser.parse_args()
 
@@ -214,7 +239,18 @@ def main():
     output_dir = Path(args.output_dir)
     repo_url = args.source_repo
     repo_name = repo_url.rstrip("/").split("/")[-1].removesuffix(".git")
+    prompt = build_prompt(repo_url)
 
+    # --- Feature 3: dry-run prints config and exits ---
+    if args.dry_run:
+        print("=== DRY RUN ===")
+        print(f"Repo URL:   {repo_url}")
+        print(f"Repo name:  {repo_name}")
+        print(f"Output dir: {output_dir}")
+        print(f"Model:      openai/gpt-oss-120b")
+        print(f"Timeout:    {args.timeout}s")
+        print(f"\n--- Agent Prompt ---\n{prompt}")
+        return
 
     # 1. build docker image
     print("Building Docker image...")
@@ -225,7 +261,7 @@ def main():
         image="hlsfactory",
         cwd="/workspace",
         forward_env=["OPENROUTER_API_KEY"],
-        timeout=120,
+        timeout=args.timeout,
         run_args=[],
     )
 
@@ -237,54 +273,65 @@ def main():
         **agent_config,
     )
 
-    # 4. run the agent
-    result = agent.run(build_prompt(repo_url))
+    # --- Feature 2: try/finally ensures container cleanup ---
+    try:
+        # 4. run the agent
+        result = agent.run(build_prompt(repo_url))
 
-    # 5. save agent results in trajectory file
-    run_id = str(uuid.uuid4())
-    output_dir.mkdir(parents=True, exist_ok=True)
+        # 5. save agent results in trajectory file
+        run_id = str(uuid.uuid4())
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-    # creates the mini swe agent raw json file - we must provide a path
-    traj_path = output_dir / f"{repo_name}_{run_id}.traj.json"
-    agent.save(traj_path)
+        # creates the mini swe agent raw json file - we must provide a path
+        traj_path = output_dir / f"{repo_name}_{run_id}.traj.json"
+        agent.save(traj_path)
 
-    # 6. copy /output from the container to the host
-    container_id = env.container_id
-    if not container_id:
-        print("Warning: could not find container ID, skipping output copy.", file=sys.stderr)
-    else:
-        subprocess.run(["docker", "cp", f"{container_id}:/output/.", str(output_dir)], check=True)
-        subprocess.run(["docker", "rm", "-f", container_id], check=True)
-        print(f"HLS results copied to {output_dir}")
-        # Prevent double-cleanup since we already removed the container
-        env.container_id = None
+        # 6. copy /output from the container to the host
+        container_id = env.container_id
+        if not container_id:
+            print("Warning: could not find container ID, skipping output copy.", file=sys.stderr)
+        else:
+            subprocess.run(["docker", "cp", f"{container_id}:/output/.", str(output_dir)], check=True)
+            subprocess.run(["docker", "rm", "-f", container_id], check=True)
+            print(f"HLS results copied to {output_dir}")
+            # Prevent double-cleanup since we already removed the container
+            env.container_id = None
 
-    # 7. compute benchmark stats from output
-    quality_stats = compute_benchmark_stats(output_dir, repo_name)
-    format_errors = count_format_errors(traj_path)
+        # 7. compute benchmark stats from output
+        quality_stats = compute_benchmark_stats(output_dir, repo_name)
+        format_errors = count_format_errors(traj_path)
 
-    # 8. our benchmark json
-    benchmark = {
-          "run_id": run_id,
-          "timestamp": datetime.now(timezone.utc).isoformat(),
-          "repo_url": repo_url,
-          "model": "openai/gpt-oss-120b",
-          "exit_status": result.get("exit_status"),
-          "total_cost_usd": agent.cost,
-          "total_api_calls": agent.n_calls,
-          "format_errors": format_errors,
-          "traj_file": traj_path.name,
-          "quality": quality_stats,
-    }
+        # 8. our benchmark json
+        benchmark = {
+              "run_id": run_id,
+              "timestamp": datetime.now(timezone.utc).isoformat(),
+              "repo_url": repo_url,
+              "model": "openai/gpt-oss-120b",
+              "exit_status": result.get("exit_status"),
+              "total_cost_usd": agent.cost,
+              "total_api_calls": agent.n_calls,
+              "format_errors": format_errors,
+              "traj_file": traj_path.name,
+              "quality": quality_stats,
+        }
 
-    benchmark_path = output_dir / f"{repo_name}_{run_id}_benchmark.json"
-    benchmark_path.write_text(json.dumps(benchmark, indent=2))
+        benchmark_path = output_dir / f"{repo_name}_{run_id}_benchmark.json"
+        benchmark_path.write_text(json.dumps(benchmark, indent=2))
 
-    print(f"Trajectory: {traj_path}")
-    print(f"Benchmark:  {benchmark_path}")
-    print(f"Designs found: {quality_stats['designs_found']}, "
-          f"Compile pass/fail/skip: {quality_stats['compile_pass']}/{quality_stats['compile_fail']}/{quality_stats['compile_skip']}, "
-          f"Format errors: {format_errors}")
+        print(f"Trajectory: {traj_path}")
+        print(f"Benchmark:  {benchmark_path}")
+        print(f"Designs found: {quality_stats['designs_found']}, "
+              f"Compile pass/fail/skip: {quality_stats['compile_pass']}/{quality_stats['compile_fail']}/{quality_stats['compile_skip']}, "
+              f"Format errors: {format_errors}")
+
+    finally:
+        # Clean up the Docker container if it's still running
+        container_id = getattr(env, "container_id", None)
+        if container_id:
+            print(f"Cleaning up container {container_id}...", file=sys.stderr)
+            subprocess.run(["docker", "rm", "-f", container_id],
+                           capture_output=True)
+            env.container_id = None
 
 
 if __name__ == "__main__":

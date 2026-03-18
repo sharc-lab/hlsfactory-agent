@@ -1,5 +1,0 @@
-=== Compiling reg_spmv-hisparse-mmap_tapa ===
-Source: spmv.cpp
-Type: TAPA
-Compilation failed (expected for TAPA designs)
-Compilation check complete

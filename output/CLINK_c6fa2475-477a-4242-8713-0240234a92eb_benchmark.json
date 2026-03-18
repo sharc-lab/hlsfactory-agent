@@ -1,0 +1,21 @@
+{
+  "run_id": "c6fa2475-477a-4242-8713-0240234a92eb",
+  "timestamp": "2026-03-18T17:33:04.165978+00:00",
+  "repo_url": "https://github.com/UCLA-VAST/CLINK.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.00732292,
+  "total_api_calls": 22,
+  "format_errors": 0,
+  "traj_file": "CLINK_c6fa2475-477a-4242-8713-0240234a92eb.traj.json",
+  "quality": {
+    "designs_found": 4,
+    "compile_pass": 4,
+    "compile_fail": 0,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 4,
+    "designs_with_tcl": 1
+  }
+}

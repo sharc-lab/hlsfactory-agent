@@ -1,6 +1,0 @@
-=== COMPILATION ERRORS ===
-Errors in self-attn-spatial-kernel.cpp:
-/output/InTAR/self-attn-spatial/src/self-attn-spatial-kernel.cpp:7:10: fatal error: 'hls_vector.h' file not found
-    7 | #include <hls_vector.h>
-      |          ^~~~~~~~~~~~~~
-1 error generated.

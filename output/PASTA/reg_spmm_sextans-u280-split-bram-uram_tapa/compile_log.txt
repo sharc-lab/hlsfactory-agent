@@ -1,5 +1,0 @@
-=== Compiling reg_spmm_sextans-u280-split-bram-uram_tapa ===
-Source: sextans.cpp
-Type: TAPA
-Compilation failed (expected for TAPA designs)
-Compilation check complete

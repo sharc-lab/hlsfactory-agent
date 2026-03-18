@@ -1,0 +1,153 @@
+{
+  "repo_name": "gpu-rodinia",
+  "repo_url": "https://github.com/yuhc/gpu-rodinia",
+  "framework": "unknown",
+  "total_designs": 15,
+  "designs": [
+    {
+      "name": "backprop",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "bfs",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "cfd",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "dwt2d",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "gaussian",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "heartwall",
+      "top_function": "kernel",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "hotspot",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "hotspot3D",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "kmeans",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "myocyte",
+      "top_function": "if
+if
+if
+if
+if
+if
+if
+if
+if
+if
+if
+if
+if
+if
+if",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "nn",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "nw",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "particlefilter",
+      "top_function": "cdfCalc
+d_randu
+d_randn
+updateWeights
+findIndexBin
+if
+dev_round_double
+find_index_kernel
+normalize_weights_kernel
+sum_kernel
+likelihood_kernel
+kernel",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "pathfinder",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    },
+    {
+      "name": "streamcluster",
+      "top_function": "top_function",
+      "compile_status": "skip",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": ["kernel.cpp"]
+    }
+  ]
+}

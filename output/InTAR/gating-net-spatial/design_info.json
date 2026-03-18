@@ -1,9 +1,0 @@
-{
-  "name": "gating-net-spatial",
-  "top_function": "measure_cycle",
-  "files": [
-    "gating-net-spatial-kernel.cpp",
-    "gating-net-spatial-host.cpp"
-  ],
-  "description": "Gating network spatial implementation"
-}

@@ -1,107 +1,88 @@
 {
-  "repository": "https://github.com/SFU-HiAccel/SERI.git",
-  "project_name": "SERI",
-  "description": "Streaming Accelerator for Electron Repulsion Integrals - High-Throughput FPGA Accelerator for Quantum Chemistry",
+  "repo_name": "SERI",
+  "repo_url": "https://github.com/SFU-HiAccel/SERI.git",
+  "framework": "vitis_hls",
+  "total_designs": 10,
   "designs": [
     {
-      "name": "k_buffer_permutation",
-      "source_file": "k_buffer_permutation.cpp",
-      "path": "k_buffer_permutation",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": true
-    },
-    {
-      "name": "k_compress_store",
-      "source_file": "k_compress_store.cpp",
-      "path": "k_compress_store",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": false
-    },
-    {
-      "name": "k_find_bmax",
-      "source_file": "k_find_bmax.cpp",
-      "path": "k_find_bmax",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": true
-    },
-    {
-      "name": "k_gaussian_quadrature_a",
-      "source_file": "k_gaussian_quadrature_a.cpp",
-      "path": "k_gaussian_quadrature_a",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": true
-    },
-    {
       "name": "k_gaussian_quadrature_b",
-      "source_file": "k_gaussian_quadrature_b.cpp",
-      "path": "k_gaussian_quadrature_b",
+      "top_function": "/output/SERI/k_gaussian_quadrature_b/k_gaussian_quadrature_b.cpp:k_gaussian_quadrature_b",
+      "compile_status": "fail",
       "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": true
-    },
-    {
-      "name": "k_preparation",
-      "source_file": "k_preparation.cpp",
-      "path": "k_preparation",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": true
-    },
-    {
-      "name": "k_recurrence_relations",
-      "source_file": "k_recurrence_relations.cpp",
-      "path": "k_recurrence_relations",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": true
-    },
-    {
-      "name": "k_rr_a",
-      "source_file": "k_rr_a.cpp",
-      "path": "k_rr_a",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": false
-    },
-    {
-      "name": "k_rr_b",
-      "source_file": "k_rr_b.cpp",
-      "path": "k_rr_b",
-      "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": false
+      "has_tcl": true,
+      "source_files": ["k_gaussian_quadrature_b.cpp", "testbench.cpp"]
     },
     {
       "name": "tapa_qcf",
-      "source_file": "tapa_qcf.cpp",
-      "path": "tapa_qcf",
+      "top_function": "/output/SERI/tapa_qcf/tapa_qcf.cpp:t_preparation",
+      "compile_status": "pass",
       "has_testbench": true,
-      "has_documentation": true,
-      "has_tcl_script": true,
-      "compilation_log": "compile_log.txt",
-      "compilation_success": true
+      "has_tcl": true,
+      "source_files": ["tapa_qcf.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_rr_b",
+      "top_function": "/output/SERI/k_rr_b/k_rr_b.cpp:k_rr_b",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_rr_b.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_compress_store",
+      "top_function": "/output/SERI/k_compress_store/k_compress_store.cpp:k_compress_store",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_compress_store.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_recurrence_relations",
+      "top_function": "/output/SERI/k_recurrence_relations/k_recurrence_relations.cpp:k_recurrence_relations",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_recurrence_relations.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_rr_a",
+      "top_function": "/output/SERI/k_rr_a/k_rr_a.cpp:k_rr_a",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_rr_a.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_buffer_permutation",
+      "top_function": "/output/SERI/k_buffer_permutation/k_buffer_permutation.cpp:k_buffer_permutation",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_buffer_permutation.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_preparation",
+      "top_function": "/output/SERI/k_preparation/k_preparation.cpp:k_preparation",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_preparation.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_gaussian_quadrature_a",
+      "top_function": "/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:k_gaussian_quadrature_a",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_gaussian_quadrature_a.cpp", "testbench.cpp"]
+    },
+    {
+      "name": "k_find_bmax",
+      "top_function": "/output/SERI/k_find_bmax/k_find_bmax.cpp:k_find_bmax",
+      "compile_status": "fail",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["k_find_bmax.cpp", "testbench.cpp"]
     }
   ]
 }

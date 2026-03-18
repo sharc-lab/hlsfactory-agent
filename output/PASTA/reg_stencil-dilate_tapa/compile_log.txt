@@ -1,5 +1,0 @@
-=== Compiling reg_stencil-dilate_tapa ===
-Source: unikernel.cpp
-Type: TAPA
-Compilation failed (expected for TAPA designs)
-Compilation check complete

@@ -1,1 +1,176 @@
-{"repo_name":"S2CBench","repo_url":"https://github.com/DARClab-UTD/S2CBench.git","framework":"unknown","total_designs":23,"designs":[{"name":"adpcm","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["adpcm_encoder.cpp","adpcm_encoder.h","define.h","main.cpp","tb_adpcm_encoder.cpp","tb_adpcm_encoder.h"]},{"name":"aes/aes_cipher","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["aes.cpp","aes.h","aes_cipher.cpp","define.h","main.cpp","tb_aes.cpp","tb_aes.h"]},{"name":"aes/aes_combined","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["aes.cpp","aes.h","define.h","main.cpp","tb_aes.cpp","tb_aes.h"]},{"name":"aes/aes_invchipher","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["aes.cpp","aes.h","aes_inv_cipher.cpp","define.h","main.cpp","tb_aes.cpp","tb_aes.h"]},{"name":"aes_cipher","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["aes.cpp","aes.h","define.h","main.cpp","tb_aes.cpp","tb_aes.h"]},{"name":"ann","top_function":"main","compile_status":"fail","has_testbench":false,"has_tcl":true,"source_files":["ann.cpp","ann.h","ann_tb.cpp","ann_tb.h","config.h","image_parameters.h","layer.cpp","layer.h","main.cpp","synth_param.h","train_parameters.h"]},{"name":"ave8","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["ave8.cpp","ave8.h","define.h","main.cpp","tb_ave8.cpp","tb_ave8.h"]},{"name":"cholesky","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["cholesky.cpp","cholesky.h","define.h","main.cpp","square_root_lut.h","tb_cholesky.cpp","tb_cholesky.h"]},{"name":"decimation","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","filt_decim.cpp","filt_decim.h","main.cpp","tb_decim.cpp","tb_decim.h"]},{"name":"disparity","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","disparity.cpp","disparity.h","main.cpp","tb_disparity.cpp","tb_disparity.h"]},{"name":"fft_fixed","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","fft.cpp","fft.h","main.cpp","tb_fft.cpp","tb_fft.h"]},{"name":"fir","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","fir.cpp","fir.h","main.cpp","tb_fir.cpp","tb_fir.h"]},{"name":"idct","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","idct.cpp","idct.h","main.cpp","tb_idct.cpp","tb_idct.h"]},{"name":"interpolation","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","filter_interp.cpp","filter_interp.h","main.cpp","tb_interp.cpp","tb_interp.h"]},{"name":"jpeg_decoder","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["bmp.h","common.h","config_tb.h","decoder.cpp","decoder.h","jpeg_decoder.cpp","jpeg_decoder.h","main.cpp","tb_jpeg_decoder.cpp","tb_jpeg_decoder.h"]},{"name":"jpeg_encoder","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["dct.cpp","dct.h","define.h","huffman.cpp","huffman.h","jpeg_encoder.cpp","jpeg_encoder.h","main.cpp","quantization.cpp","quantization.h","rle.cpp","rle.h","tb_jpeg_encoder.cpp","tb_jpeg_encoder.h"]},{"name":"kasumi","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","kasumi.cpp","kasumi.h","main.cpp","tb_kasumi.cpp","tb_kasumi.h"]},{"name":"md5c","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","main.cpp","md5c.cpp","md5c.h","tb_md5c.cpp","tb_md5c.h"]},{"name":"qsort","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","main.cpp","qsort.cpp","qsort.h","tb_qsort.cpp","tb_qsort.h"]},{"name":"snow3G","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","main.cpp","snow_3G.cpp","snow_3G.h","tb_snow_3G.cpp","tb_snow_3G.h"]},{"name":"sobel","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","main.cpp","sobel.cpp","sobel.h","tb_sobel.cpp","tb_sobel.h"]},{"name":"uart","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","main.cpp","tb_uart.cpp","tb_uart.h","uart.cpp","uart.h"]},{"name":"vga","top_function":"main","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["define.h","image.cpp","image.h","main.cpp","tb_top.cpp","tb_top.h","tb_vga.cpp","tb_vga.h","top_vga.cpp","top_vga.h","vga.cpp","vga.h"]}]}
+{
+  "repo_name": "S2CBench",
+  "repo_url": "https://github.com/DARClab-UTD/S2CBench.git",
+  "framework": "unknown",
+  "total_designs": 21,
+  "designs": [
+    {
+      "name": "md5c",
+      "top_function": "md5c",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/md5c.cpp\",\"src/md5c.h\",\"src/main.cpp\"]
+    },
+    {
+      "name": "qsort",
+      "top_function": "qsort",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/qsort.h\",\"src/qsort.cpp\",\"src/main.cpp\"]
+    },
+    {
+      "name": "vga",
+      "top_function": "vga",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/vga.cpp\",\"src/top_vga.cpp\",\"src/main.cpp\",\"src/image.cpp\",\"src/vga.h\",\"src/top_vga.h\",\"src/image.h\"]
+    },
+    {
+      "name": "disparity",
+      "top_function": "disparity",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/disparity.cpp\",\"src/main.cpp\",\"src/disparity.h\"]
+    },
+    {
+      "name": "aes",
+      "top_function": "",
+      "compile_status": "pass",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": []
+    },
+    {
+      "name": "kasumi",
+      "top_function": "kasumi",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/kasumi.cpp\",\"src/main.cpp\",\"src/kasumi.h\"]
+    },
+    {
+      "name": "jpeg_decoder",
+      "top_function": "decoder",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/config_tb.h\",\"src/common.h\",\"src/decoder.cpp\",\"src/decoder.h\",\"src/bmp.h\",\"src/main.cpp\",\"src/jpeg_decoder.h\",\"src/jpeg_decoder.cpp\"]
+    },
+    {
+      "name": "aes_cipher",
+      "top_function": "aes",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/aes.cpp\",\"src/aes.h\",\"src/main.cpp\"]
+    },
+    {
+      "name": "snow3G",
+      "top_function": "snow_3G",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/snow_3G.h\",\"src/snow_3G.cpp\",\"src/main.cpp\"]
+    },
+    {
+      "name": "interpolation",
+      "top_function": "filter_interp",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/filter_interp.cpp\",\"src/main.cpp\",\"src/filter_interp.h\"]
+    },
+    {
+      "name": "fir",
+      "top_function": "fir",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/fir.cpp\",\"src/main.cpp\",\"src/fir.h\"]
+    },
+    {
+      "name": "ann",
+      "top_function": "layer",
+      "compile_status": "pass",
+      "has_testbench": false,
+      "has_tcl": true,
+      "source_files": [\"src/layer.h\",\"src/train_parameters.h\",\"src/layer.cpp\",\"src/ann.h\",\"src/image_parameters.h\",\"src/synth_param.h\",\"src/config.h\",\"src/ann_tb.h\",\"src/ann_tb.cpp\",\"src/main.cpp\",\"src/ann.cpp\"]
+    },
+    {
+      "name": "fft_fixed",
+      "top_function": "main",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/fft.h\",\"src/main.cpp\",\"src/fft.cpp\"]
+    },
+    {
+      "name": "ave8",
+      "top_function": "ave8",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/ave8.cpp\",\"src/main.cpp\",\"src/ave8.h\"]
+    },
+    {
+      "name": "cholesky",
+      "top_function": "main",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/cholesky.h\",\"src/main.cpp\",\"src/cholesky.cpp\",\"src/square_root_lut.h\"]
+    },
+    {
+      "name": "uart",
+      "top_function": "uart",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/uart.h\",\"src/uart.cpp\",\"src/main.cpp\"]
+    },
+    {
+      "name": "adpcm",
+      "top_function": "main",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/adpcm_encoder.h\",\"src/main.cpp\",\"src/adpcm_encoder.cpp\"]
+    },
+    {
+      "name": "decimation",
+      "top_function": "filt_decim",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/filt_decim.h\",\"src/filt_decim.cpp\",\"src/main.cpp\"]
+    },
+    {
+      "name": "jpeg_encoder",
+      "top_function": "dct",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/rle.h\",\"src/dct.cpp\",\"src/dct.h\",\"src/quantization.h\",\"src/rle.cpp\",\"src/main.cpp\",\"src/jpeg_encoder.cpp\",\"src/huffman.h\",\"src/jpeg_encoder.h\",\"src/huffman.cpp\",\"src/quantization.cpp\"]
+    },
+    {
+      "name": "idct",
+      "top_function": "idct",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/idct.cpp\",\"src/main.cpp\",\"src/idct.h\"]
+    },
+    {
+      "name": "sobel",
+      "top_function": "main",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [\"src/define.h\",\"src/sobel.h\",\"src/main.cpp\",\"src/sobel.cpp\"]
+    }
+  ]
+}

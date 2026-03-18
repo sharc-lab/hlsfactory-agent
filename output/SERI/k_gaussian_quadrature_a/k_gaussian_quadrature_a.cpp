@@ -1,5 +1,5 @@
 #include "internal_types.h"
-#include "qc_util_advanced.h"
+#include "common/qc_util_advanced.h"
 #include <hls_stream.h>
 #include "gaussian_qaudrature_opt.h"
 #include "split_merge_stream.h"

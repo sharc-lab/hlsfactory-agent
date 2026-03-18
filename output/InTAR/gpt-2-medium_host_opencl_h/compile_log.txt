@@ -1,0 +1,4 @@
+/output/InTAR/gpt-2-medium_host_opencl_h/host_opencl.h:53:10: fatal error: 'CL/cl2.hpp' file not found
+   53 | #include <CL/cl2.hpp>
+      |          ^~~~~~~~~~~~
+1 error generated.

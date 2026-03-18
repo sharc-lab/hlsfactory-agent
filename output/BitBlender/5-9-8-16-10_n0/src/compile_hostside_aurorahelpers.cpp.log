@@ -1,0 +1,5 @@
+In file included from hostside_aurorahelpers.cpp:18:
+./Aurora.hpp:20:10: fatal error: 'experimental/xrt_kernel.h' file not found
+   20 | #include "experimental/xrt_kernel.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

@@ -1,125 +1,88 @@
 {
-  "repository": "AutoNTT",
-  "url": "https://github.com/SFU-HiAccel/AutoNTT.git",
-  "description": "AutoNTT: Automatic Generation of NTT (Number Theoretic Transform) Kernels for FPGAs",
-  "extraction_date": "2024-03-05T05:33:00Z",
+  "repo_name": "AutoNTT",
+  "repo_url": "https://github.com/SFU-HiAccel/AutoNTT.git",
+  "framework": "unknown",
   "total_designs": 10,
   "designs": [
-    {
-      "name": "architectures_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52",
-      "category": "architectures",
-      "type": "Type D Architecture",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Barrett",
-      "butterfly_units": 52,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "architectures_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24",
-      "category": "architectures",
-      "type": "Type H Architecture",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Barrett",
-      "butterfly_units": 24,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "architectures_AutoNTT_I__N_8192__q_48__red_BARRETT__BUs_8",
-      "category": "architectures",
-      "type": "Type I Architecture",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Barrett",
-      "butterfly_units": 8,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "modmul_types_Barrett_AutoNTT_I__N_8192__q_48__red_BARRETT__BUs_4",
-      "category": "modmul_types/Barrett",
-      "type": "Barrett Reduction",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Barrett",
-      "butterfly_units": 4,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "modmul_types_Montgomery_AutoNTT_I__N_8192__q_48__red_MONTGOMERY__BUs_4",
-      "category": "modmul_types/Montgomery",
-      "type": "Montgomery Reduction",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Montgomery",
-      "butterfly_units": 4,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "modmul_types_Naive_AutoNTT_I__N_8192__q_48__red_NAIVE_RED__BUs_4",
-      "category": "modmul_types/Naive",
-      "type": "Naive Reduction",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Naive",
-      "butterfly_units": 4,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "modmul_types_WLM_AutoNTT_I__N_8192__q_48__red_WLM__BUs_4",
-      "category": "modmul_types/WLM",
-      "type": "WLM (Word-Level Montgomery) Reduction",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "WLM",
-      "butterfly_units": 4,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "parallel_limbs_AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52",
-      "category": "parallel_limbs",
-      "type": "Type D with Parallel Limbs",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Barrett",
-      "butterfly_units": 52,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "parallel_limbs_AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24",
-      "category": "parallel_limbs",
-      "type": "Type H with Parallel Limbs",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Barrett",
-      "butterfly_units": 24,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    },
-    {
-      "name": "parallel_limbs_AutoNTT_I__N_8192__q_48__red_BARRETT__BUs_16",
-      "category": "parallel_limbs",
-      "type": "Type I with Parallel Limbs",
-      "top_function": "NTT_kernel",
-      "polynomial_size": 8192,
-      "word_size": 48,
-      "reduction": "Barrett",
-      "butterfly_units": 16,
-      "files": ["ntt_kernel.cpp", "ntt.h", "ntt_test.cpp", "synthesis.tcl", "README.md", "compile_log.txt"]
-    }
-  ],
-  "common_parameters": {
-    "library": "TAPA (Task-Parallel Programming for Accelerators)",
-    "target_platform": "Xilinx FPGA (U250/U280)",
-    "target_clock": "300MHz"
+{
+    "name": "AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
   },
-  "compilation_notes": "Designs use Xilinx-specific HLS types (ap_int, ap_uint) and TAPA library constructs. Standard C++ compilation requires stub headers. Compilation errors in compile_log.txt are due to limitations of stub headers, not design issues."
+{
+    "name": "AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_I__N_8192__q_48__red_BARRETT__BUs_8",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_I__N_8192__q_48__red_BARRETT__BUs_4",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_I__N_8192__q_48__red_MONTGOMERY__BUs_4",
+    "top_function": "hardcoded_fullMul_48x48",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_I__N_8192__q_48__red_NAIVE_RED__BUs_4",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_I__N_8192__q_48__red_WLM__BUs_4",
+    "top_function": "hardcoded_fullMul_48x48",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  },
+{
+    "name": "AutoNTT_I__N_8192__q_48__red_BARRETT__BUs_16",
+    "top_function": "hardcoded_fullMul_0",
+    "compile_status": "fail",
+    "has_testbench": true,
+    "has_tcl": true,
+    "source_files": ["ntt_test.cpp","ntt_kernel.cpp"]
+  }
+  ]
 }

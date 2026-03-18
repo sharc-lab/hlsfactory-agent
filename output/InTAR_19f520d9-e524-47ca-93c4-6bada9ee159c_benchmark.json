@@ -1,0 +1,21 @@
+{
+  "run_id": "19f520d9-e524-47ca-93c4-6bada9ee159c",
+  "timestamp": "2026-03-18T16:21:12.667695+00:00",
+  "repo_url": "https://github.com/OswaldHe/InTAR.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.010861192999999998,
+  "total_api_calls": 17,
+  "format_errors": 0,
+  "traj_file": "InTAR_19f520d9-e524-47ca-93c4-6bada9ee159c.traj.json",
+  "quality": {
+    "designs_found": 43,
+    "compile_pass": 7,
+    "compile_fail": 36,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 43,
+    "designs_with_tcl": 43
+  }
+}

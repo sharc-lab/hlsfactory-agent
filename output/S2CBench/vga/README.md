@@ -1,1 +1,3 @@
-# Design: vga
+# vga Design
+
+This folder contains the source files and testbench for the **vga** design extracted from the S2CBench repository.

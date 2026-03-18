@@ -1,0 +1,129 @@
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:18:25: error: no template named 'vec_t' in namespace 'tapa'
+   18 | using int16_v16 = tapa::vec_t<ap_int<16>, 16>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:23:22: error: no matching member function for call to 'read'
+   23 |             fifo_fin.read(nullptr);
+      |             ~~~~~~~~~^~~~
+/workspace/stubs/tapa.h:134:10: note: candidate function not viable: no known conversion from 'std::nullptr_t' to 'bool &' for 1st argument
+  134 |     void read(T& val) { val = read(); }
+      |          ^    ~~~~~~
+/workspace/stubs/tapa.h:128:7: note: candidate function not viable: requires 0 arguments, but 1 was provided
+  128 |     T read() {
+      |       ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:31:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   31 |     tapa::async_mmap<int16_v16>& data_in,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:32:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   32 |     tapa::async_mmap<int16_v16>& W1,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:33:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   33 |     tapa::async_mmap<int16_v16>& W2,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:34:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   34 |     tapa::async_mmap<int16_v16>& W3,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:35:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   35 |     tapa::async_mmap<int16_v16>& offchip,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:36:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   36 |     tapa::async_mmap<int16_v16>& data_out,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:39:5: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   39 |     int16_v16 X[(input_size >> 4)];
+      |     ^~~~~~~~~
+      |     int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:40:5: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   40 |     int16_v16 scratchpad[(hidden_size1 >> 4)];
+      |     ^~~~~~~~~
+      |     int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:44:5: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   44 |     int16_v16 pkt;
+      |     ^~~~~~~~~
+      |     int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:53:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   53 |         int16_v16 tmp_o;
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:71:13: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   71 |             int16_v16 sum;
+      |             ^~~~~~~~~
+      |             int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:74:17: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   74 |                 int16_v16 op1;
+      |                 ^~~~~~~~~
+      |                 int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:82:54: error: too many arguments to function call, expected 0, have 1
+   82 |                         op1 = offchip.read_data.read(nullptr);
+      |                               ~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:90:21: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   90 |                     int16_v16 op2[2];
+      |                     ^~~~~~~~~
+      |                     int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:101:58: error: too many arguments to function call, expected 0, have 1
+  101 |                             op2[jjj] = W1.read_data.read(nullptr);
+      |                                        ~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:104:58: error: too many arguments to function call, expected 0, have 1
+  104 |                             op2[jjj] = W2.read_data.read(nullptr);
+      |                                        ~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/InTAR/benchmark_mlp_sequential_mlp-sequential-kernel/mlp-sequential-kernel.cpp:107:58: error: too many arguments to function call, expected 0, have 1
+  107 |                             op2[jjj] = W3.read_data.read(nullptr);
+      |                                        ~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

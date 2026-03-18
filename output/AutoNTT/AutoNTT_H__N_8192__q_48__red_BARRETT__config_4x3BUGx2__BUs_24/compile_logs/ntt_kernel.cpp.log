@@ -1,0 +1,84 @@
+In file included from /output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:3:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:44:57: error: too many arguments to function call, expected 0, have 1
+   44 |           POLY_WIDE_DATA val = poly_mmap.read_data.read(nullptr);
+      |                                ~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:171:56: error: too many arguments to function call, expected 0, have 1
+  171 |           i_resp += unsigned(poly_mmap.write_resp.read(nullptr)) + 1;
+      |                              ~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:178:5: error: use of undeclared identifier 'printf'
+  178 |     printf("[fwd_load_inv_store_poly]: Polynomial loading done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:181:5: error: use of undeclared identifier 'printf'
+  181 |     printf("[fwd_load_inv_store_poly]: Polynomial storing done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:212:57: error: too many arguments to function call, expected 0, have 1
+  212 |           POLY_WIDE_DATA val = poly_mmap.read_data.read(nullptr);
+      |                                ~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:299:56: error: too many arguments to function call, expected 0, have 1
+  299 |           i_resp += unsigned(poly_mmap.write_resp.read(nullptr)) + 1;
+      |                              ~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:306:5: error: use of undeclared identifier 'printf'
+  306 |     printf("[fwd_load_inv_store_poly]: Polynomial loading done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:309:5: error: use of undeclared identifier 'printf'
+  309 |     printf("[fwd_load_inv_store_poly]: Polynomial storing done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:349:57: error: too many arguments to function call, expected 0, have 1
+  349 |           POLY_WIDE_DATA val = poly_mmap.read_data.read(nullptr);
+      |                                ~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:476:56: error: too many arguments to function call, expected 0, have 1
+  476 |           i_resp += unsigned(poly_mmap.write_resp.read(nullptr)) + 1;
+      |                              ~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:483:5: error: use of undeclared identifier 'printf'
+  483 |     printf("[fwd_store_inv_load_poly]: Polynomial storing done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:486:5: error: use of undeclared identifier 'printf'
+  486 |     printf("[fwd_store_inv_load_poly]: Polynomial loading done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:517:57: error: too many arguments to function call, expected 0, have 1
+  517 |           POLY_WIDE_DATA val = poly_mmap.read_data.read(nullptr);
+      |                                ~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:604:56: error: too many arguments to function call, expected 0, have 1
+  604 |           i_resp += unsigned(poly_mmap.write_resp.read(nullptr)) + 1;
+      |                              ~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:611:5: error: use of undeclared identifier 'printf'
+  611 |     printf("[fwd_store_inv_load_poly]: Polynomial storing done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:614:5: error: use of undeclared identifier 'printf'
+  614 |     printf("[fwd_store_inv_load_poly]: Polynomial loading done\n");
+      |     ^
+/output/AutoNTT/AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24/ntt_kernel.cpp:665:3: error: use of undeclared identifier 'printf'
+  665 |   printf("[Mmap2Stream_tf]: TF loading done\n");
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

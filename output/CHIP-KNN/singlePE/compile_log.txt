@@ -1,0 +1,138 @@
+In file included from /output/CHIP-KNN/singlePE/knn.cpp:1:
+In file included from /output/CHIP-KNN/singlePE/knn.h:5:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+/output/CHIP-KNN/singlePE/knn.cpp:46:55: error: too many arguments to function call, expected 0, have 1
+   46 |             loaded_value = searchSpace.read_data.read(nullptr);
+      |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/CHIP-KNN/singlePE/knn.cpp:56:60: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   56 |                     = loaded_value(i*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ - 1),
+      |                                                            ^
+/output/CHIP-KNN/singlePE/knn.cpp:56:38: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   56 |                     = loaded_value(i*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ - 1),
+      |                                      ^
+/output/CHIP-KNN/singlePE/knn.cpp:57:39: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   57 |                                     i*DATA_TYPE_TOTAL_SZ);
+      |                                       ^
+/output/CHIP-KNN/singlePE/knn.cpp:55:27: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   55 |                 tmp.range(DATA_TYPE_TOTAL_SZ - 1, 0)
+      |                           ^
+/output/CHIP-KNN/singlePE/knn.cpp:82:55: error: too many arguments to function call, expected 0, have 1
+   82 |             loaded_value = searchSpace.read_data.read(nullptr);
+      |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/CHIP-KNN/singlePE/knn.cpp:153:58: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  153 |                 = cur_data.range(j*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ-1),
+      |                                                          ^
+/output/CHIP-KNN/singlePE/knn.cpp:153:36: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  153 |                 = cur_data.range(j*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ-1),
+      |                                    ^
+/output/CHIP-KNN/singlePE/knn.cpp:154:36: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  154 |                                  j*DATA_TYPE_TOTAL_SZ);
+      |                                    ^
+/output/CHIP-KNN/singlePE/knn.cpp:152:23: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  152 |             tmp.range(DATA_TYPE_TOTAL_SZ-1, 0)
+      |                       ^
+/output/CHIP-KNN/singlePE/knn.cpp:161:27: error: use of undeclared identifier 'SEGMENT_SIZE_IN_I'
+  161 |     for (int jj = 0; jj < SEGMENT_SIZE_IN_I; ++jj){
+      |                           ^
+/output/CHIP-KNN/singlePE/knn.cpp:177:37: error: use of undeclared identifier 'L2I_FACTOR_W'
+  177 |             for (int l2i = 0; l2i < L2I_FACTOR_W; ++l2i)
+      |                                     ^
+/output/CHIP-KNN/singlePE/knn.cpp:180:41: error: use of undeclared identifier 'D2L_FACTOR_W'
+  180 |                 for (int d2l = 0; d2l < D2L_FACTOR_W; ++d2l){
+      |                                         ^
+/output/CHIP-KNN/singlePE/knn.cpp:182:37: error: use of undeclared identifier 'D2L_FACTOR_W'
+  182 |                     int d2i = d2l + D2L_FACTOR_W*l2i;
+      |                                     ^
+/output/CHIP-KNN/singlePE/knn.cpp:188:72: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  188 |                         unsigned int sp_range_idx = (start_idx + ll) * DATA_TYPE_TOTAL_SZ;
+      |                                                                        ^
+/output/CHIP-KNN/singlePE/knn.cpp:193:60: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  193 |                             cur_data.range(sp_range_idx + (DATA_TYPE_TOTAL_SZ-1), 
+      |                                                            ^
+/output/CHIP-KNN/singlePE/knn.cpp:192:35: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  192 |                         tmp.range(DATA_TYPE_TOTAL_SZ-1, 0) = 
+      |                                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+In file included from /output/CHIP-KNN/singlePE/testbench.cpp:1:
+In file included from /output/CHIP-KNN/singlePE/knn.cpp:1:
+In file included from /output/CHIP-KNN/singlePE/knn.h:5:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+In file included from /output/CHIP-KNN/singlePE/testbench.cpp:1:
+/output/CHIP-KNN/singlePE/knn.cpp:46:55: error: too many arguments to function call, expected 0, have 1
+   46 |             loaded_value = searchSpace.read_data.read(nullptr);
+      |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+In file included from /output/CHIP-KNN/singlePE/testbench.cpp:1:
+/output/CHIP-KNN/singlePE/knn.cpp:56:60: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   56 |                     = loaded_value(i*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ - 1),
+      |                                                            ^
+/output/CHIP-KNN/singlePE/knn.cpp:56:38: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   56 |                     = loaded_value(i*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ - 1),
+      |                                      ^
+/output/CHIP-KNN/singlePE/knn.cpp:57:39: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   57 |                                     i*DATA_TYPE_TOTAL_SZ);
+      |                                       ^
+/output/CHIP-KNN/singlePE/knn.cpp:55:27: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+   55 |                 tmp.range(DATA_TYPE_TOTAL_SZ - 1, 0)
+      |                           ^
+/output/CHIP-KNN/singlePE/knn.cpp:82:55: error: too many arguments to function call, expected 0, have 1
+   82 |             loaded_value = searchSpace.read_data.read(nullptr);
+      |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+In file included from /output/CHIP-KNN/singlePE/testbench.cpp:1:
+/output/CHIP-KNN/singlePE/knn.cpp:153:58: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  153 |                 = cur_data.range(j*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ-1),
+      |                                                          ^
+/output/CHIP-KNN/singlePE/knn.cpp:153:36: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  153 |                 = cur_data.range(j*DATA_TYPE_TOTAL_SZ + (DATA_TYPE_TOTAL_SZ-1),
+      |                                    ^
+/output/CHIP-KNN/singlePE/knn.cpp:154:36: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  154 |                                  j*DATA_TYPE_TOTAL_SZ);
+      |                                    ^
+/output/CHIP-KNN/singlePE/knn.cpp:152:23: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  152 |             tmp.range(DATA_TYPE_TOTAL_SZ-1, 0)
+      |                       ^
+/output/CHIP-KNN/singlePE/knn.cpp:161:27: error: use of undeclared identifier 'SEGMENT_SIZE_IN_I'
+  161 |     for (int jj = 0; jj < SEGMENT_SIZE_IN_I; ++jj){
+      |                           ^
+/output/CHIP-KNN/singlePE/knn.cpp:177:37: error: use of undeclared identifier 'L2I_FACTOR_W'
+  177 |             for (int l2i = 0; l2i < L2I_FACTOR_W; ++l2i)
+      |                                     ^
+/output/CHIP-KNN/singlePE/knn.cpp:180:41: error: use of undeclared identifier 'D2L_FACTOR_W'
+  180 |                 for (int d2l = 0; d2l < D2L_FACTOR_W; ++d2l){
+      |                                         ^
+/output/CHIP-KNN/singlePE/knn.cpp:182:37: error: use of undeclared identifier 'D2L_FACTOR_W'
+  182 |                     int d2i = d2l + D2L_FACTOR_W*l2i;
+      |                                     ^
+/output/CHIP-KNN/singlePE/knn.cpp:188:72: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  188 |                         unsigned int sp_range_idx = (start_idx + ll) * DATA_TYPE_TOTAL_SZ;
+      |                                                                        ^
+/output/CHIP-KNN/singlePE/knn.cpp:193:60: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  193 |                             cur_data.range(sp_range_idx + (DATA_TYPE_TOTAL_SZ-1), 
+      |                                                            ^
+/output/CHIP-KNN/singlePE/knn.cpp:192:35: error: use of undeclared identifier 'DATA_TYPE_TOTAL_SZ'
+  192 |                         tmp.range(DATA_TYPE_TOTAL_SZ-1, 0) = 
+      |                                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

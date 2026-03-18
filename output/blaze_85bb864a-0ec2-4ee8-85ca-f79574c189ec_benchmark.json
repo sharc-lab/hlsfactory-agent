@@ -1,0 +1,21 @@
+{
+  "run_id": "85bb864a-0ec2-4ee8-85ca-f79574c189ec",
+  "timestamp": "2026-03-18T16:59:15.497324+00:00",
+  "repo_url": "https://github.com/SFU-HiAccel/blaze.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.01267655,
+  "total_api_calls": 38,
+  "format_errors": 0,
+  "traj_file": "blaze_85bb864a-0ec2-4ee8-85ca-f79574c189ec.traj.json",
+  "quality": {
+    "designs_found": 3,
+    "compile_pass": 2,
+    "compile_fail": 0,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 3,
+    "designs_with_tcl": 3
+  }
+}

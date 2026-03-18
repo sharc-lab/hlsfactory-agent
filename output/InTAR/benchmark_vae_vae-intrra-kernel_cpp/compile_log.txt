@@ -1,0 +1,114 @@
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:31:25: error: no template named 'vec_t' in namespace 'tapa'
+   31 | using int16_v16 = tapa::vec_t<ap_int<16>, 16>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:32:25: error: no template named 'vec_t' in namespace 'tapa'
+   32 | using int16_v32 = tapa::vec_t<ap_int<16>, 32>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:33:25: error: no template named 'vec_t' in namespace 'tapa'
+   33 | using int16_v64 = tapa::vec_t<ap_int<16>, 64>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:46:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   46 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:47:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   47 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:55:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   55 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:65:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   65 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:66:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   66 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:74:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   74 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:99:48: error: too many arguments to function call, expected 0, have 1
+   99 |         auto resp = output_mtx.write_resp.read(success);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:112:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  112 |     tapa::istream<int16_v16>& fifo_input,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:113:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  113 |     tapa::istream<int16_v16>& fifo_weight,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:115:19: error: unknown type name 'int16_v32'; did you mean 'int16_t'?
+  115 |     tapa::istream<int16_v32>& fifo_from_ctr_mem,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:117:19: error: unknown type name 'int16_v64'; did you mean 'int16_t'?
+  117 |     tapa::istream<int16_v64>& fifo_from_latent_sample,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:135:21: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  135 |                     int16_v16 tmp = fifo_weight.read();
+      |                     ^~~~~~~~~
+      |                     int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:138:52: error: subscripted value is not an array, pointer, or vector
+  138 |                         kernel1[c][0][i*16+j] = tmp[j];
+      |                                                 ~~~^~
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:146:21: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  146 |                     int16_v16 tmp = fifo_weight.read();
+      |                     ^~~~~~~~~
+      |                     int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:149:49: error: subscripted value is not an array, pointer, or vector
+  149 |                         kernel2[c][i*16+j] = tmp[j];
+      |                                              ~~~^~
+/output/InTAR/benchmark_vae_vae-intrra-kernel_cpp/vae-intrra-kernel.cpp:159:25: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  159 |                         int16_v16 tmp = fifo_weight.read();
+      |                         ^~~~~~~~~
+      |                         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

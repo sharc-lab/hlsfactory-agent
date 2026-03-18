@@ -1,0 +1,97 @@
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:30:25: error: no template named 'vec_t' in namespace 'tapa'
+   30 | using int16_v16 = tapa::vec_t<ap_int<16>, 16>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:31:25: error: no template named 'vec_t' in namespace 'tapa'
+   31 | using int16_v32 = tapa::vec_t<ap_int<16>, 32>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:32:25: error: no template named 'vec_t' in namespace 'tapa'
+   32 | using int16_v64 = tapa::vec_t<ap_int<16>, 64>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:35:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   35 |     tapa::mmap<int16_v16> X,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:36:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   36 |     tapa::mmap<int16_v16> W1,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:37:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   37 |     tapa::mmap<int16_v16> W2,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:38:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   38 |     tapa::mmap<int16_v16> W3,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:39:16: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   39 |     tapa::mmap<int16_v16> W4,
+      |                ^~~~~~~~~
+      |                int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:45:63: error: 'T' does not refer to a value
+   45 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                                               ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:44:20: note: declared here
+   44 | template <typename T>
+      |                    ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:45:39: error: no member named 'aligned_allocator' in namespace 'tapa'; did you mean 'aligned_alloc'?
+   45 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~
+      |                                       aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:45:66: error: expected ';' after alias declaration
+   45 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                                                  ^
+      |                                                                  ;
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:47:1: error: a type specifier is required for all declarations
+   47 | DEFINE_string(bitstream, "", "path to bitstream file");
+      | ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:47:15: error: use of undeclared identifier 'bitstream'
+   47 | DEFINE_string(bitstream, "", "path to bitstream file");
+      |               ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:50:5: error: use of undeclared identifier 'gflags'
+   50 |     gflags::ParseCommandLineFlags(&argc, &argv, true);
+      |     ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:58:31: error: expected ';' after expression
+   58 |     aligned_vector<ap_int<16>> input(input_size);
+      |                               ^
+      |                               ;
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:58:5: error: use of undeclared identifier 'aligned_vector'; did you mean 'aligned_alloc'?
+   58 |     aligned_vector<ap_int<16>> input(input_size);
+      |     ^~~~~~~~~~~~~~
+      |     aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:58:32: error: use of undeclared identifier 'input'
+   58 |     aligned_vector<ap_int<16>> input(input_size);
+      |                                ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:59:31: error: expected ';' after expression
+   59 |     aligned_vector<ap_int<16>> weight1(weight_size_kernel1*16);
+      |                               ^
+      |                               ;
+/output/InTAR/benchmark_vae_spatial_vae-spatial-host_cpp/vae-spatial-host.cpp:59:5: error: use of undeclared identifier 'aligned_vector'; did you mean 'aligned_alloc'?
+   59 |     aligned_vector<ap_int<16>> weight1(weight_size_kernel1*16);
+      |     ^~~~~~~~~~~~~~
+      |     aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

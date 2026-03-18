@@ -1,0 +1,4 @@
+/output/InTAR/benchmark_gating-net_sequential_gating-net-sequential-host_cpp/gating-net-sequential-host.cpp:8:10: fatal error: 'gflags/gflags.h' file not found
+    8 | #include <gflags/gflags.h>
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.

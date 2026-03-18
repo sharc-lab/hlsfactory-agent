@@ -1,12 +1,15 @@
-open_project /output/HLS-CNN/cnn/project
+open_project Project
 set_top cnn
-add_files {
-/output/HLS-CNN/cnn/activ_fun.c /output/HLS-CNN/cnn/cnn.c /output/HLS-CNN/cnn/cnn_tb.c /output/HLS-CNN/cnn/conv.c /output/HLS-CNN/cnn/dense.c /output/HLS-CNN/cnn/flat.c /output/HLS-CNN/cnn/pool.c /output/HLS-CNN/cnn/utils.c 
-}
-add_files -tb {
-/output/HLS-CNN/cnn/cnn_tb.c
-}
+add_files cnn.c
+add_files conv.c
+add_files dense.c
+add_files flat.c
+add_files pool.c
+add_files utils.c
+add_files -tb cnn_tb.c
 open_solution "solution1" -flow_target vivado
-set_part xcu250-figd2104-2L-e
+set_part {xc7a200tfbg484-1}
+create_clock -period 10 -name default
+source "directives.tcl"
 csynth_design
 exit

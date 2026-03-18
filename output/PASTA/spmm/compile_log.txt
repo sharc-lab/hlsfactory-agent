@@ -1,0 +1,255 @@
+Compilation results for design spmm:
+Compiling sextans-host.cpp ...
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:12:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:17:25: error: no template named 'vec_t' in namespace 'tapa'
+   17 | using float_v16 = tapa::vec_t<float, 16>;
+      |                   ~~~~~~^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:18:24: error: no template named 'vec_t' in namespace 'tapa'
+   18 | using float_v8 = tapa::vec_t<float, 8>;
+      |                  ~~~~~~^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:21:20: error: too many template arguments for class template 'mmaps'
+   21 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,
+      |                    ^                   ~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:12:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:22:26: error: unknown type name 'float_v16'; did you mean 'float_t'?
+   22 |              tapa::mmaps<float_v16, NUM_CH_B> mat_B_ch,
+      |                          ^~~~~~~~~
+      |                          float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:12:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:22:20: error: too many template arguments for class template 'mmaps'
+   22 |              tapa::mmaps<float_v16, NUM_CH_B> mat_B_ch,
+      |                    ^                ~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:12:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:23:26: error: unknown type name 'float_v16'; did you mean 'float_t'?
+   23 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch_in,
+      |                          ^~~~~~~~~
+      |                          float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:12:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:23:20: error: too many template arguments for class template 'mmaps'
+   23 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch_in,
+      |                    ^                ~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:12:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:24:26: error: unknown type name 'float_v16'; did you mean 'float_t'?
+   24 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch,
+      |                          ^~~~~~~~~
+      |                          float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:12:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:24:20: error: too many template arguments for class template 'mmaps'
+   24 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch,
+      |                    ^                ~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:13:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:409:67: error: expected '(' for function-style cast or type construction
+  409 |     vector<vector<unsigned long, tapa::aligned_allocator<unsigned long> > > & sparse_A_fpga_vec,
+      |                                                          ~~~~~~~~ ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:409:34: error: no member named 'aligned_allocator' in namespace 'tapa'; did you mean 'aligned_alloc'?
+  409 |     vector<vector<unsigned long, tapa::aligned_allocator<unsigned long> > > & sparse_A_fpga_vec,
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~
+      |                                  aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:13:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:409:75: error: expected ')'
+  409 |     vector<vector<unsigned long, tapa::aligned_allocator<unsigned long> > > & sparse_A_fpga_vec,
+      |                                                                           ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:406:21: note: to match this '('
+  406 | void edge_list_64bit(
+      |                     ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:416:9: error: use of undeclared identifier 'sparse_A_fpga_vec'
+  416 |         sparse_A_fpga_vec[cc].resize(sparse_A_fpga_chunk_size, 0);
+      |         ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:450:21: error: use of undeclared identifier 'sparse_A_fpga_vec'
+  450 |                     sparse_A_fpga_vec[cc][j + i * 8] = x;
+      |                     ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:464:21: error: use of undeclared identifier 'sparse_A_fpga_vec'
+  464 |                     sparse_A_fpga_vec[ch_idx][j_new + i * 8] = x;
+      |                     ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sparse_helper.h:467:21: error: use of undeclared identifier 'sparse_A_fpga_vec'
+  467 |                     sparse_A_fpga_vec[(pe_idx / 4) % 4][pe_idx % 4 + (pe_idx / 16) * 4 + i * 8] = x;
+      |                     ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:24:63: error: 'T' does not refer to a value
+   24 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                                               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:23:20: note: declared here
+   23 | template <typename T>
+      |                    ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:24:39: error: no member named 'aligned_allocator' in namespace 'tapa'; did you mean 'aligned_alloc'?
+   24 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~
+      |                                       aligned_alloc
+/usr/include/stdlib.h:724:14: note: 'aligned_alloc' declared here
+  724 | extern void *aligned_alloc (size_t __alignment, size_t __size)
+      |              ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans-host.cpp:24:66: error: expected ';' after alias declaration
+   24 | using aligned_vector = std::vector<T, tapa::aligned_allocator<T>>;
+      |                                                                  ^
+      |                                                                  ;
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+Status: FAIL
+
+Compiling sextans.cpp ...
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:6:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:17:25: error: no template named 'vec_t' in namespace 'tapa'
+   17 | using float_v16 = tapa::vec_t<float, 16>;
+      |                   ~~~~~~^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:18:24: error: no template named 'vec_t' in namespace 'tapa'
+   18 | using float_v8 = tapa::vec_t<float, 8>;
+      |                  ~~~~~~^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:21:20: error: too many template arguments for class template 'mmaps'
+   21 |              tapa::mmaps<ap_uint<512>, NUM_CH_SPARSE> edge_list_ch,
+      |                    ^                   ~~~~~~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:22:26: error: unknown type name 'float_v16'; did you mean 'float_t'?
+   22 |              tapa::mmaps<float_v16, NUM_CH_B> mat_B_ch,
+      |                          ^~~~~~~~~
+      |                          float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:22:20: error: too many template arguments for class template 'mmaps'
+   22 |              tapa::mmaps<float_v16, NUM_CH_B> mat_B_ch,
+      |                    ^                ~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:23:26: error: unknown type name 'float_v16'; did you mean 'float_t'?
+   23 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch_in,
+      |                          ^~~~~~~~~
+      |                          float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:23:20: error: too many template arguments for class template 'mmaps'
+   23 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch_in,
+      |                    ^                ~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:24:26: error: unknown type name 'float_v16'; did you mean 'float_t'?
+   24 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch,
+      |                          ^~~~~~~~~
+      |                          float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+In file included from /output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:8:
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.h:24:20: error: too many template arguments for class template 'mmaps'
+   24 |              tapa::mmaps<float_v16, NUM_CH_C> mat_C_ch,
+      |                    ^                ~~~~~~~~~
+/workspace/stubs/tapa.h:105:7: note: template is declared here
+  104 | template<typename T>
+      | ~~~~~~~~~~~~~~~~~~~~
+  105 | class mmaps {
+      |       ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:16:5: error: unknown type name 'float_v8'; did you mean 'float_t'?
+   16 |     float_v8 abvec;
+      |     ^~~~~~~~
+      |     float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:100:30: error: unknown type name 'float_v16'; did you mean 'float_t'?
+  100 | void read_B(tapa::async_mmap<float_v16> &  B,
+      |                              ^~~~~~~~~
+      |                              float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:101:27: error: unknown type name 'float_v16'; did you mean 'float_t'?
+  101 |             tapa::ostream<float_v16> & fifo_B,
+      |                           ^~~~~~~~~
+      |                           float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:126:30: error: unknown type name 'float_v16'; did you mean 'float_t'?
+  126 | void read_C(tapa::async_mmap<float_v16> &  C,
+      |                              ^~~~~~~~~
+      |                              float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:127:27: error: unknown type name 'float_v16'; did you mean 'float_t'?
+  127 |             tapa::ostream<float_v16> & fifo_C,
+      |                           ^~~~~~~~~
+      |                           float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:157:28: error: unknown type name 'float_v16'; did you mean 'float_t'?
+  157 |              tapa::istream<float_v16> & fifo_C,
+      |                            ^~~~~~~~~
+      |                            float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:158:31: error: unknown type name 'float_v16'; did you mean 'float_t'?
+  158 |              tapa::async_mmap<float_v16> & C_out
+      |                               ^~~~~~~~~
+      |                               float_t
+/usr/include/math.h:167:15: note: 'float_t' declared here
+  167 | typedef float float_t;
+      |               ^
+/output/pasta/spmm/sextans-u280-split-bram-uram/tapa/src/sextans.cpp:182:51: error: no matching member function for call to 'read'
+  182 |                 C_out.write_data.try_write(fifo_C.read(nullptr));
+      |                                            ~~~~~~~^~~~
+/workspace/stubs/tapa.h:134:10: note: candidate function not viable: no known conversion from 'std::nullptr_t' to 'float &' for 1st argument
+  134 |     void read(T& val) { val = read(); }
+      |          ^    ~~~~~~
+/workspace/stubs/tapa.h:128:7: note: candidate function not viable: requires 0 arguments, but 1 was provided
+  128 |     T read() {
+      |       ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+Status: FAIL
+

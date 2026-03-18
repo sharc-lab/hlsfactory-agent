@@ -15,5 +15,8 @@ WORKDIR /workspace
 # copy HLS stubs
 COPY stubs /workspace/stubs
 
+# copy CUDA-to-HLS converter
+COPY cuda2hls.py /workspace/cuda2hls.py
+
 # create output directory
 RUN mkdir -p /output

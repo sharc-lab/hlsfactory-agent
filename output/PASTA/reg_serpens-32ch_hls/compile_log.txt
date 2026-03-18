@@ -1,5 +1,0 @@
-=== Compiling reg_serpens-32ch_hls ===
-Source: serpens.cpp
-Type: Vitis_HLS
-Compilation issues detected
-Compilation check complete

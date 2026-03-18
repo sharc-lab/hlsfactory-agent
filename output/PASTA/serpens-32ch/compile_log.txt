@@ -1,0 +1,1649 @@
+Compilation results for design serpens-32ch:
+Compiling host.cpp ...
+/output/pasta/serpens-32ch/hls/src/host.cpp:31:10: fatal error: 'xcl2.hpp' file not found
+   31 | #include "xcl2.hpp"
+      |          ^~~~~~~~~~
+1 error generated.
+Status: FAIL
+
+Compiling serpens.cpp ...
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:66:45: error: conversion from 'ap_uint<32>' to 'long' is ambiguous
+   66 |             ap_uint<32> tmp = edge_list_ptr[i];
+      |                                             ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:87:36: error: conversion from 'ap_uint<32>' to 'long' is ambiguous
+   87 |             ap_uint<512> tmp_A = A[i];
+      |                                    ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:110:36: error: conversion from 'ap_uint<32>' to 'long' is ambiguous
+  110 |             ap_uint<512> tmp_X = X[i];
+      |                                    ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:123:41: error: type 'ap_uint<18>' does not provide a call operator
+  123 |     ap_uint<64> c_val_u64 = local_C_pe0[addr_c(17, 1)];
+      |                                         ^~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:125:30: error: type 'ap_uint<64>' does not provide a call operator
+  125 |     ap_uint<32> c_val_d0_u = c_val_u64(31,  0);
+      |                              ^~~~~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:126:30: error: type 'ap_uint<64>' does not provide a call operator
+  126 |     ap_uint<32> c_val_d1_u = c_val_u64(63, 32);
+      |                              ^~~~~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:138:5: error: type 'ap_uint<64>' does not provide a call operator
+  138 |     c_val_u64(63, 32) = c_val_d1_u;
+      |     ^~~~~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:139:5: error: type 'ap_uint<64>' does not provide a call operator
+  139 |     c_val_u64(31,  0) = c_val_d0_u;
+      |     ^~~~~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:140:17: error: type 'ap_uint<18>' does not provide a call operator
+  140 |     local_C_pe0[addr_c(17, 1)] = c_val_u64;
+      |                 ^~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:155:47: error: conversion from 'ap_uint<14>' to 'long' is ambiguous
+  155 |         ap_uint<32> b_val_u = local_B_pe0_pe1[addr_b];
+      |                                               ^~~~~~
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: error: use of overloaded operator '<' is ambiguous (with operand types 'ap_uint<2>' and 'int')
+  181 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                           ~ ^ ~
+/workspace/stubs/ap_int.h:283:10: note: candidate function
+  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+      |          ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+  181 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                             ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, int)
+  181 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                             ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(float, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(double, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long double, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__float128, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(int, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(long long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(__int128, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:14: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  182 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |              ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: error: use of overloaded operator '+' is ambiguous (with operand types 'int' and 'ap_uint<2>')
+  182 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |                                              ~~ ^ ~~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, float)
+  182 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |                                                 ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:182:49: note: built-in candidate operator+(int, unsigned __int128)
+/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 2]
+  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+      |            ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:183:19: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  183 |         op_result[p] = HLS_REG(alpha_f) * op_a[p];
+      |                   ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:183:48: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  183 |         op_result[p] = HLS_REG(alpha_f) * op_a[p];
+      |                                                ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: error: use of overloaded operator '+' is ambiguous (with operand types 'int' and 'ap_uint<2>')
+  184 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |               ~~ ^ ~~~~~~
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, float)
+  184 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |                  ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:18: note: built-in candidate operator+(int, unsigned __int128)
+/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 2]
+  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+      |            ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:184:64: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  184 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |                                                                ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: error: use of overloaded operator '<' is ambiguous (with operand types 'ap_uint<3>' and 'int')
+  207 |     for (ap_uint<3> i = 0; i < 5; ) {
+      |                            ~ ^ ~
+/workspace/stubs/ap_int.h:283:10: note: candidate function
+  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+      |          ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: because of ambiguity in conversion of 'ap_uint<3>' to 'float'
+  207 |     for (ap_uint<3> i = 0; i < 5; ) {
+      |                              ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, int)
+  207 |     for (ap_uint<3> i = 0; i < 5; ) {
+      |                              ^
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(float, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(double, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long double, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__float128, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(int, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(long long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(__int128, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, float)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, long double)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, __float128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned int)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned long long)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned __int128)
+/output/pasta/serpens-32ch/hls/src/serpens.cpp:213:13: error: multiple conversions from switch condition type 'ap_uint<3>' to an integral or enumeration type
+  213 |             switch (i) {
+      |             ^       ~
+/workspace/stubs/ap_int.h:220:5: note: conversion to integral type 'unsigned int'
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: conversion to integral type 'unsigned long'
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: conversion to integral type 'unsigned long long'
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: conversion to integral type 'int'
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: conversion to integral type 'long long'
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: conversion to integral type 'bool'
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+Status: FAIL
+
+Compiling serpens_tapa.cpp ...
+In file included from /output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:5:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:79:63: error: too many arguments to function call, expected 0, have 1
+   79 |                                 fifo_edge_list_ptr.try_write(edge_list_ptr.read_data.read(nullptr));
+      |                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:113:39: error: too many arguments to function call, expected 0, have 1
+  113 |                                 fifo_A.try_write(A.read_data.read(nullptr));
+      |                                                  ~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:150:39: error: too many arguments to function call, expected 0, have 1
+  150 |                                 fifo_X.try_write(X.read_data.read(nullptr));
+      |                                                  ~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:71:11: note: 'read' declared here
+   71 |         T read() { return T{}; }
+      |           ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:164:41: error: type 'ap_uint<18>' does not provide a call operator
+  164 |     ap_uint<64> c_val_u64 = local_C_pe0[addr_c(17, 1)];
+      |                                         ^~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:166:30: error: type 'ap_uint<64>' does not provide a call operator
+  166 |     ap_uint<32> c_val_d0_u = c_val_u64(31,  0);
+      |                              ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:167:30: error: type 'ap_uint<64>' does not provide a call operator
+  167 |     ap_uint<32> c_val_d1_u = c_val_u64(63, 32);
+      |                              ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:179:5: error: type 'ap_uint<64>' does not provide a call operator
+  179 |     c_val_u64(63, 32) = c_val_d1_u;
+      |     ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:180:5: error: type 'ap_uint<64>' does not provide a call operator
+  180 |     c_val_u64(31,  0) = c_val_d0_u;
+      |     ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:181:17: error: type 'ap_uint<18>' does not provide a call operator
+  181 |     local_C_pe0[addr_c(17, 1)] = c_val_u64;
+      |                 ^~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:196:47: error: conversion from 'ap_uint<14>' to 'long' is ambiguous
+  196 |         ap_uint<32> b_val_u = local_B_pe0_pe1[addr_b];
+      |                                               ^~~~~~
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: error: use of overloaded operator '<' is ambiguous (with operand types 'ap_uint<2>' and 'int')
+  222 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                           ~ ^ ~
+/workspace/stubs/ap_int.h:283:10: note: candidate function
+  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+      |          ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+  222 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                             ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, int)
+  222 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                             ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(float, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(double, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long double, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__float128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(int, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(long long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(__int128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned int, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned long long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:222:29: note: built-in candidate operator<(unsigned __int128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:14: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  223 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |              ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: error: use of overloaded operator '+' is ambiguous (with operand types 'int' and 'ap_uint<2>')
+  223 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |                                              ~~ ^ ~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, float)
+  223 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |                                                 ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:223:49: note: built-in candidate operator+(int, unsigned __int128)
+/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 2]
+  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+      |            ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:224:19: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  224 |         op_result[p] = HLS_REG(alpha_f) * op_a[p];
+      |                   ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:224:48: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  224 |         op_result[p] = HLS_REG(alpha_f) * op_a[p];
+      |                                                ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: error: use of overloaded operator '+' is ambiguous (with operand types 'int' and 'ap_uint<2>')
+  225 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |               ~~ ^ ~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, float)
+  225 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |                  ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:18: note: built-in candidate operator+(int, unsigned __int128)
+/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 2]
+  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+      |            ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa.cpp:225:64: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  225 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |                                                                ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+Status: FAIL
+
+Compiling serpens_tapa_mmap.cpp ...
+In file included from /output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:5:
+/workspace/stubs/tapa.h:121:10: error: no type named 'string' in namespace 'std'
+  121 |     std::string name_;
+      |     ~~~~~^
+/workspace/stubs/tapa.h:125:23: error: no type named 'string' in namespace 'std'
+  125 |     stream(const std::string& name) : name_(name) {}
+      |                  ~~~~~^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:110:36: error: conversion from 'ap_uint<32>' to 'long' is ambiguous
+  110 |             ap_uint<512> tmp_X = X[i];
+      |                                    ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:123:41: error: type 'ap_uint<18>' does not provide a call operator
+  123 |     ap_uint<64> c_val_u64 = local_C_pe0[addr_c(17, 1)];
+      |                                         ^~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:125:30: error: type 'ap_uint<64>' does not provide a call operator
+  125 |     ap_uint<32> c_val_d0_u = c_val_u64(31,  0);
+      |                              ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:126:30: error: type 'ap_uint<64>' does not provide a call operator
+  126 |     ap_uint<32> c_val_d1_u = c_val_u64(63, 32);
+      |                              ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:138:5: error: type 'ap_uint<64>' does not provide a call operator
+  138 |     c_val_u64(63, 32) = c_val_d1_u;
+      |     ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:139:5: error: type 'ap_uint<64>' does not provide a call operator
+  139 |     c_val_u64(31,  0) = c_val_d0_u;
+      |     ^~~~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:140:17: error: type 'ap_uint<18>' does not provide a call operator
+  140 |     local_C_pe0[addr_c(17, 1)] = c_val_u64;
+      |                 ^~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:155:47: error: conversion from 'ap_uint<14>' to 'long' is ambiguous
+  155 |         ap_uint<32> b_val_u = local_B_pe0_pe1[addr_b];
+      |                                               ^~~~~~
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: error: use of overloaded operator '<' is ambiguous (with operand types 'ap_uint<2>' and 'int')
+  181 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                           ~ ^ ~
+/workspace/stubs/ap_int.h:283:10: note: candidate function
+  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+      |          ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+  181 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                             ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, int)
+  181 |     for(ap_uint<2> p = 0; p < 2; ++p) {
+      |                             ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(float, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(double, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long double, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__float128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(int, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(long long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(__int128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned int, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned long long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:181:29: note: built-in candidate operator<(unsigned __int128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:14: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  182 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |              ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: error: use of overloaded operator '+' is ambiguous (with operand types 'int' and 'ap_uint<2>')
+  182 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |                                              ~~ ^ ~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, float)
+  182 |         op_a[p]      = uint32_to_float(opa64(31 + p * 32, p * 32));
+      |                                                 ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:182:49: note: built-in candidate operator+(int, unsigned __int128)
+/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 2]
+  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+      |            ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:183:19: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  183 |         op_result[p] = HLS_REG(alpha_f) * op_a[p];
+      |                   ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:183:48: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  183 |         op_result[p] = HLS_REG(alpha_f) * op_a[p];
+      |                                                ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: error: use of overloaded operator '+' is ambiguous (with operand types 'int' and 'ap_uint<2>')
+  184 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |               ~~ ^ ~~~~~~
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: because of ambiguity in conversion of 'ap_uint<2>' to 'float'
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, float)
+  184 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |                  ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:18: note: built-in candidate operator+(int, unsigned __int128)
+/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 2]
+  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+      |            ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:184:64: error: conversion from 'ap_uint<2>' to 'long' is ambiguous
+  184 |         c_out(31 + p * 32, p * 32) = float_to_uint32(op_result[p]);
+      |                                                                ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: error: use of overloaded operator '<' is ambiguous (with operand types 'ap_uint<3>' and 'int')
+  207 |     for (ap_uint<3> i = 0; i < 5; ) {
+      |                            ~ ^ ~
+/workspace/stubs/ap_int.h:283:10: note: candidate function
+  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+      |          ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: because of ambiguity in conversion of 'ap_uint<3>' to 'float'
+  207 |     for (ap_uint<3> i = 0; i < 5; ) {
+      |                              ^
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, int)
+  207 |     for (ap_uint<3> i = 0; i < 5; ) {
+      |                              ^
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(float, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(double, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long double, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__float128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(int, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(long long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(__int128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned int, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned long long, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, float)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, long double)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, __float128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned int)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned long long)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:207:30: note: built-in candidate operator<(unsigned __int128, unsigned __int128)
+/output/pasta/serpens-32ch/tapa/src/serpens_tapa_mmap.cpp:213:13: error: multiple conversions from switch condition type 'ap_uint<3>' to an integral or enumeration type
+  213 |             switch (i) {
+      |             ^       ~
+/workspace/stubs/ap_int.h:220:5: note: conversion to integral type 'unsigned int'
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: conversion to integral type 'unsigned long'
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: conversion to integral type 'unsigned long long'
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: conversion to integral type 'int'
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: conversion to integral type 'long long'
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: conversion to integral type 'bool'
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+Status: FAIL
+

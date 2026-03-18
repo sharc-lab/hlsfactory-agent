@@ -1,18 +1,4 @@
-=== NiN Compilation Log ===
-
-Source File: src.cpp
-Result: SUCCESS
-Warnings: 
-  - implicit conversion from 'double' to 'int' changes value from 0.5 to 0 in cifar10_1.h:132
-Object file created: src.o
-
-Testbench File: tb.cpp
-Result: FAILED
-Error: Missing weight header files (includes/cifar10_new/16/kernel_1.h, etc.)
-Note: Testbench requires pre-trained weight files that are not included in the repository.
-The source code (src.cpp) compiles successfully. Testbench compilation requires
-weight data files from trained models.
-
-Compilation Command Used:
-clang++ -c src.cpp -I./includes -I/workspace/stubs -std=c++11 -Wno-c++11-narrowing
-
+/output/SyncNN/NiN/tb.cpp:7:10: fatal error: 'includes/cifar10_new/16/kernel_1.h' file not found
+    7 | #include "includes/cifar10_new/16/kernel_1.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

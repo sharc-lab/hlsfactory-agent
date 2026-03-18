@@ -1,0 +1,132 @@
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:18:25: error: no template named 'vec_t' in namespace 'tapa'
+   18 | using int16_v16 = tapa::vec_t<ap_int<16>, 16>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:29:41: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   29 | void black_hole_int16_v16(tapa::istream<int16_v16>& fifo_in) {
+      |                                         ^~~~~~~~~
+      |                                         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:36:22: error: no matching member function for call to 'read'
+   36 |             fifo_fin.read(nullptr);
+      |             ~~~~~~~~~^~~~
+/workspace/stubs/tapa.h:134:10: note: candidate function not viable: no known conversion from 'std::nullptr_t' to 'bool &' for 1st argument
+  134 |     void read(T& val) { val = read(); }
+      |          ^    ~~~~~~
+/workspace/stubs/tapa.h:128:7: note: candidate function not viable: requires 0 arguments, but 1 was provided
+  128 |     T read() {
+      |       ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:45:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   45 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:46:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   46 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:54:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   54 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:64:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   64 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:65:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   65 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:73:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   73 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:83:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   83 |     tapa::async_mmap<int16_v16>& output_mtx,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:84:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   84 |     tapa::istream<int16_v16>& fifo_in,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:92:13: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   92 |             int16_v16 tmp; fifo_in.try_read(tmp);
+      |             ^~~~~~~~~
+      |             int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:97:48: error: too many arguments to function call, expected 0, have 1
+   97 |         auto resp = output_mtx.write_resp.read(success);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:107:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  107 |     tapa::istream<int16_v16>& fifo_input1,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:108:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  108 |     tapa::istream<int16_v16>& fifo_input2,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:109:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  109 |     tapa::istream<int16_v16>& fifo_weight1,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:110:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  110 |     tapa::istream<int16_v16>& fifo_weight2,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:111:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  111 |     tapa::ostream<int16_v16>& fifo_output1,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_mlp_spatial_mlp-spatial-kernel/mlp-spatial-kernel.cpp:112:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  112 |     tapa::ostream<int16_v16>& fifo_output2
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,280 @@
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:31:25: error: no template named 'vec_t' in namespace 'tapa'
+   31 | using int16_v16 = tapa::vec_t<ap_int<16>, 16>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:32:25: error: no template named 'vec_t' in namespace 'tapa'
+   32 | using int16_v32 = tapa::vec_t<ap_int<16>, 32>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:33:25: error: no template named 'vec_t' in namespace 'tapa'
+   33 | using int16_v64 = tapa::vec_t<ap_int<16>, 64>;
+      |                   ~~~~~~^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:46:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   46 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:47:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   47 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:55:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   55 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:65:22: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   65 |     tapa::async_mmap<int16_v16>& vec,
+      |                      ^~~~~~~~~
+      |                      int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:66:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   66 |     tapa::ostream<int16_v16>& fifo_out
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:74:9: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+   74 |         int16_v16 tmp_o; 
+      |         ^~~~~~~~~
+      |         int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:99:48: error: too many arguments to function call, expected 0, have 1
+   99 |         auto resp = output_mtx.write_resp.read(success);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:110:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  110 |     tapa::istream<int16_v16>& fifo_input,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:111:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  111 |     tapa::istream<int16_v16>& fifo_weight,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:121:17: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  121 |                 int16_v16 tmp = fifo_weight.read();
+      |                 ^~~~~~~~~
+      |                 int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:124:48: error: subscripted value is not an array, pointer, or vector
+  124 |                     kernel1[c][r][i*16+j] = tmp[j];
+      |                                             ~~~^~
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:141:21: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  141 |                     int16_v16 tmp = fifo_input.read();
+      |                     ^~~~~~~~~
+      |                     int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:146:51: error: subscripted value is not an array, pointer, or vector
+  146 |                             X[i*4+k][j*4+kk] = tmp[k*4+kk];
+      |                                                ~~~^~~~~~~
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: error: use of overloaded operator '>' is ambiguous (with operand types 'ap_int<16>' and 'int')
+  186 |                 ap_int<16> total_pos = (total > 0) ? total : ap_int<16>(0);
+      |                                         ~~~~~ ^ ~
+/workspace/stubs/ap_int.h:168:10: note: candidate function
+  168 |     bool operator>(const ap_int& other) const { return val > other.val; }
+      |          ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: because of ambiguity in conversion of 'ap_int<16>' to 'float'
+  186 |                 ap_int<16> total_pos = (total > 0) ? total : ap_int<16>(0);
+      |                                               ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, int)
+  186 |                 ap_int<16> total_pos = (total > 0) ? total : ap_int<16>(0);
+      |                                               ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(float, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(double, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long double, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__float128, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(int, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(long long, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(__int128, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned int, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned long long, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, float)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, long double)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, __float128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, unsigned int)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, unsigned long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, unsigned long long)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:186:47: note: built-in candidate operator>(unsigned __int128, unsigned __int128)
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:195:19: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  195 |     tapa::istream<int16_v16>& fifo_weight,
+      |                   ^~~~~~~~~
+      |                   int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+/output/InTAR/benchmark_vae_spatial_vae-spatial-kernel_cpp/vae-spatial-kernel.cpp:205:17: error: unknown type name 'int16_v16'; did you mean 'int16_t'?
+  205 |                 int16_v16 tmp = fifo_weight.read();
+      |                 ^~~~~~~~~
+      |                 int16_t
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:25:19: note: 'int16_t' declared here
+   25 | typedef __int16_t int16_t;
+      |                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

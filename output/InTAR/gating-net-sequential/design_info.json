@@ -1,9 +1,0 @@
-{
-  "name": "gating-net-sequential",
-  "top_function": "measure_cycle",
-  "files": [
-    "gating-net-sequential-kernel.cpp",
-    "gating-net-sequential-host.cpp"
-  ],
-  "description": "Gating network sequential implementation"
-}

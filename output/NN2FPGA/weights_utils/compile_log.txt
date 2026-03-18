@@ -1,13 +1,1 @@
-Final Compilation Log for weights_utils
-==================================================
-Date: Thu Mar  5 09:26:35 UTC 2026
-Compiler: clang++
-Standard: C++17
-
-Compilation Command:
-  clang++ -fsyntax-only -std=c++17 -I/output/NN2FPGA/weights_utils /output/NN2FPGA/weights_utils/compile_test.cpp
-
-Output:
-  SUCCESS - Design compiles without errors
-
-Result: SUCCESS
+Compilation skipped (no valid HLS source).

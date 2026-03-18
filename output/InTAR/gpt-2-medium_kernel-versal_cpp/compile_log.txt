@@ -1,0 +1,71 @@
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:37:23: error: no template named 'vec_t' in namespace 'tapa'
+   37 | using int_v16 = tapa::vec_t<int, 16>;
+      |                 ~~~~~~^
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:38:25: error: no template named 'vec_t' in namespace 'tapa'
+   38 | using int4_v128 = tapa::vec_t<ap_int<4>, 128>;
+      |                   ~~~~~~^
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:39:24: error: no template named 'vec_t' in namespace 'tapa'
+   39 | using int8_v64 = tapa::vec_t<ap_int<8>, 64>;
+      |                  ~~~~~~^
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:66:39: error: use of undeclared identifier 'int_v16'
+   66 | void black_hole_int_v16(tapa::istream<int_v16> & fifo_in) {
+      |                                       ^
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:70:33: error: use of undeclared identifier 'int8_v64'
+   70 | void black_hole_x(tapa::istream<int8_v64> & fifo_in) {
+      |                                 ^
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:74:33: error: use of undeclared identifier 'int4_v128'
+   74 | void black_hole_w(tapa::istream<int4_v128> & fifo_in) {
+      |                                 ^
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:224:48: error: too many arguments to function call, expected 0, have 1
+  224 |         auto resp = output_mtx.write_resp.read(success);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~
+/workspace/stubs/tapa.h:90:17: note: 'read' declared here
+   90 |         uint8_t read() { return 0; }
+      |                 ^
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:296:39: error: type 'ap_uint<576>' does not provide a call operator
+  296 |                     ap_uint<72> op1 = tmp_x(l*72+71, l*72);
+      |                                       ^~~~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:297:39: error: type 'ap_uint<576>' does not provide a call operator
+  297 |                     ap_uint<72> op2 = tmp_y(kk*72+71, kk*72);
+      |                                       ^~~~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:312:40: error: type 'ap_uint<72>' does not provide a call operator
+  312 |                         b0 = ap_int<4>(op1(3, 0));
+      |                                        ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:313:40: error: type 'ap_uint<72>' does not provide a call operator
+  313 |                         b1 = ap_int<4>(op1(7, 4));
+      |                                        ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:314:40: error: type 'ap_uint<72>' does not provide a call operator
+  314 |                         b2 = ap_int<4>(op1(11, 8));
+      |                                        ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:315:42: error: type 'ap_uint<72>' does not provide a call operator
+  315 |                         b0_1 = ap_int<4>(op1(15, 12));
+      |                                          ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:316:42: error: type 'ap_uint<72>' does not provide a call operator
+  316 |                         b1_1 = ap_int<4>(op1(19, 16));
+      |                                          ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:317:42: error: type 'ap_uint<72>' does not provide a call operator
+  317 |                         b2_1 = ap_int<4>(op1(23, 20));
+      |                                          ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:318:42: error: type 'ap_uint<72>' does not provide a call operator
+  318 |                         b0_2 = ap_int<4>(op1(27, 24));
+      |                                          ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:319:42: error: type 'ap_uint<72>' does not provide a call operator
+  319 |                         b1_2 = ap_int<4>(op1(31, 28));
+      |                                          ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:320:42: error: type 'ap_uint<72>' does not provide a call operator
+  320 |                         b2_2 = ap_int<4>(op1(35, 32));
+      |                                          ^~~
+/output/InTAR/gpt-2-medium_kernel-versal_cpp/kernel-versal.cpp:322:66: error: use of overloaded operator '+' is ambiguous (with operand types 'ap_int<8>' and 'ap_int<22>')
+  322 |                     res0 = (((a0 * b0) + (a1 * b1)) + (a2 * b2)) + res0;
+      |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~
+/workspace/stubs/ap_int.h:122:12: note: candidate function
+  122 |     ap_int operator+(const ap_int& other) const { return ap_int(val + other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:138:12: note: candidate function
+  138 |     ap_int operator+(int other) const { return ap_int(val + other); }
+      |            ^
+/workspace/stubs/ap_int.h:189:11: note: candidate function [with W = 22]
+  189 | ap_int<W> operator+(int lhs, const ap_int<W>& rhs) { return ap_int<W>(lhs + rhs.val); }
+      |           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

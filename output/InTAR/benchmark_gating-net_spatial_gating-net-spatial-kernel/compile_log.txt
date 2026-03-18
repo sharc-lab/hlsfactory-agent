@@ -1,0 +1,4 @@
+/output/InTAR/benchmark_gating-net_spatial_gating-net-spatial-kernel/gating-net-spatial-kernel.cpp:7:10: fatal error: 'hls_vector.h' file not found
+    7 | #include <hls_vector.h>
+      |          ^~~~~~~~~~~~~~
+1 error generated.

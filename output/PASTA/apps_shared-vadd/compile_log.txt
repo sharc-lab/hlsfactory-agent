@@ -1,5 +1,0 @@
-=== Compiling apps_shared-vadd ===
-Source: vadd.cpp
-Type: TAPA
-Compilation failed (expected for TAPA designs)
-Compilation check complete

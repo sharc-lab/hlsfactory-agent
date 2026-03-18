@@ -1,0 +1,4 @@
+/output/InTAR/benchmark_cnn-4L_sequential_cnn-4L-sequential-host_cpp/cnn-4L-sequential-host.cpp:8:10: fatal error: 'gflags/gflags.h' file not found
+    8 | #include <gflags/gflags.h>
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.

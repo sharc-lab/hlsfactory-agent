@@ -1,5 +1,0 @@
-=== Compiling reg_spmv-hisparse-mmap_hls ===
-Source: spmv.cpp
-Type: Vitis_HLS
-Compilation issues detected
-Compilation check complete
