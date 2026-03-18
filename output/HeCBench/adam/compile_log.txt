@@ -1,0 +1,23 @@
+/output/HeCBench/adam/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+1 error generated.
+/output/HeCBench/adam/reference.cpp:19:9: error: unknown type name 'size_t'
+   19 |   const size_t vector_size,
+      |         ^
+/output/HeCBench/adam/reference.cpp:24:10: error: unknown type name 'size_t'
+   24 |     for (size_t j = 0; j < vector_size; j++) {
+      |          ^
+/output/HeCBench/adam/reference.cpp:29:41: error: use of undeclared identifier 'powf'
+   29 |         float m_corrected = m[j] / (1.f-powf(b1, t));
+      |                                         ^
+/output/HeCBench/adam/reference.cpp:30:41: error: use of undeclared identifier 'powf'
+   30 |         float v_corrected = v[j] / (1.f-powf(b2, t));
+      |                                         ^
+/output/HeCBench/adam/reference.cpp:33:19: error: use of undeclared identifier 'sqrtf'
+   33 |           denom = sqrtf(v_corrected + eps);
+      |                   ^
+/output/HeCBench/adam/reference.cpp:35:19: error: use of undeclared identifier 'sqrtf'
+   35 |           denom = sqrtf(v_corrected) + eps;
+      |                   ^
+6 errors generated.

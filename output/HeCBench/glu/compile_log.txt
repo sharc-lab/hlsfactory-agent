@@ -1,0 +1,29 @@
+PASS: kernel.cpp
+/output/HeCBench/glu/reference.cpp:2:8: error: unknown type name 'int64_t'
+    2 | inline int64_t size_from_dim(int k, std::vector<int> &dims) {
+      |        ^
+/output/HeCBench/glu/reference.cpp:2:37: error: use of undeclared identifier 'std'
+    2 | inline int64_t size_from_dim(int k, std::vector<int> &dims) {
+      |                                     ^
+/output/HeCBench/glu/reference.cpp:3:3: error: unknown type name 'int64_t'
+    3 |   int64_t r = 1;
+      |   ^
+/output/HeCBench/glu/reference.cpp:4:8: error: unknown type name 'uint64_t'
+    4 |   for (uint64_t i = k; i < dims.size(); i++) {
+      |        ^
+/output/HeCBench/glu/reference.cpp:11:8: error: unknown type name 'int64_t'
+   11 | inline int64_t size_to_dim(int k, std::vector<int> &dims) {
+      |        ^
+/output/HeCBench/glu/reference.cpp:11:35: error: use of undeclared identifier 'std'
+   11 | inline int64_t size_to_dim(int k, std::vector<int> &dims) {
+      |                                   ^
+/output/HeCBench/glu/reference.cpp:12:3: error: unknown type name 'int64_t'
+   12 |   int64_t r = 1;
+      |   ^
+/output/HeCBench/glu/reference.cpp:21:25: error: use of undeclared identifier 'expf'
+   21 |     return 1.f / (1.f + expf(-x));
+      |                         ^
+/output/HeCBench/glu/reference.cpp:23:25: error: use of undeclared identifier 'expf'
+   23 |     const float exp_x = expf(x);
+      |                         ^
+9 errors generated.

@@ -1,0 +1,4 @@
+/output/HeCBench/pitch/kernel.cpp:71:31: error: unknown type name 'cudaPitchedPtr'
+   71 | void parallelPitched3DAccess (cudaPitchedPtr devPitchedPtr, int width, int height, int depth)
+      |                               ^
+1 error generated.

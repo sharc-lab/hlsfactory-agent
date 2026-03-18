@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/shuffle-hip/kernel.cpp:1:
+/output/HeCBench/shuffle-hip/kernel.h:40:10: fatal error: 'hip/hip_runtime.h' file not found
+   40 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.

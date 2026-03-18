@@ -1,0 +1,67 @@
+In file included from /output/HeCBench/wmma/kernel.cpp:1:
+/output/HeCBench/wmma/kernel.h:54:10: fatal error: 'mma.h' file not found
+   54 | #include <mma.h>
+      |          ^~~~~~~
+1 error generated.
+/output/HeCBench/wmma/reference.cpp:3:43: error: unknown type name 'uint32_t'
+    3 | void compareEqual(T const *a, T const *b, uint32_t size,
+      |                                           ^
+/output/HeCBench/wmma/reference.cpp:7:8: error: unknown type name 'uint32_t'
+    7 |   for (uint32_t i = 0; i < size; i++) {
+      |        ^
+/output/HeCBench/wmma/reference.cpp:17:14: error: use of undeclared identifier 'std'
+   17 |   auto eps = std::numeric_limits<T>::epsilon();
+      |              ^
+/output/HeCBench/wmma/reference.cpp:17:34: error: 'T' does not refer to a value
+   17 |   auto eps = std::numeric_limits<T>::epsilon();
+      |                                  ^
+/output/HeCBench/wmma/reference.cpp:2:20: note: declared here
+    2 | template <typename T>
+      |                    ^
+/output/HeCBench/wmma/reference.cpp:17:38: error: no member named 'epsilon' in the global namespace
+   17 |   auto eps = std::numeric_limits<T>::epsilon();
+      |                                    ~~^
+/output/HeCBench/wmma/reference.cpp:20:5: error: use of undeclared identifier 'std'
+   20 |     std::cout << "FAILED\n";
+      |     ^
+/output/HeCBench/wmma/reference.cpp:22:5: error: use of undeclared identifier 'std'
+   22 |     std::cout << "PASSED\n";
+      |     ^
+/output/HeCBench/wmma/reference.cpp:25:3: error: use of undeclared identifier 'std'
+   25 |   std::cout << "Max relative error: " << max_relative_error << std::endl;
+      |   ^
+/output/HeCBench/wmma/reference.cpp:25:64: error: use of undeclared identifier 'std'
+   25 |   std::cout << "Max relative error: " << max_relative_error << std::endl;
+      |                                                                ^
+/output/HeCBench/wmma/reference.cpp:29:17: error: unknown type name 'uint32_t'
+   29 | void gemm_cpu_h(uint32_t m, uint32_t n, uint32_t k, fp16 const *a,
+      |                 ^
+/output/HeCBench/wmma/reference.cpp:29:29: error: unknown type name 'uint32_t'
+   29 | void gemm_cpu_h(uint32_t m, uint32_t n, uint32_t k, fp16 const *a,
+      |                             ^
+/output/HeCBench/wmma/reference.cpp:29:41: error: unknown type name 'uint32_t'
+   29 | void gemm_cpu_h(uint32_t m, uint32_t n, uint32_t k, fp16 const *a,
+      |                                         ^
+/output/HeCBench/wmma/reference.cpp:29:53: error: unknown type name 'fp16'
+   29 | void gemm_cpu_h(uint32_t m, uint32_t n, uint32_t k, fp16 const *a,
+      |                                                     ^
+/output/HeCBench/wmma/reference.cpp:30:17: error: unknown type name 'fp16'
+   30 |                 fp16 const *b, fp32 const *c, fp32 *d,
+      |                 ^
+/output/HeCBench/wmma/reference.cpp:30:32: error: unknown type name 'fp32'
+   30 |                 fp16 const *b, fp32 const *c, fp32 *d,
+      |                                ^
+/output/HeCBench/wmma/reference.cpp:30:47: error: unknown type name 'fp32'
+   30 |                 fp16 const *b, fp32 const *c, fp32 *d,
+      |                                               ^
+/output/HeCBench/wmma/reference.cpp:31:17: error: unknown type name 'uint32_t'
+   31 |                 uint32_t lda, uint32_t ldb, uint32_t ldc, uint32_t ldd,
+      |                 ^
+/output/HeCBench/wmma/reference.cpp:31:31: error: unknown type name 'uint32_t'
+   31 |                 uint32_t lda, uint32_t ldb, uint32_t ldc, uint32_t ldd,
+      |                               ^
+/output/HeCBench/wmma/reference.cpp:31:45: error: unknown type name 'uint32_t'
+   31 |                 uint32_t lda, uint32_t ldb, uint32_t ldc, uint32_t ldd,
+      |                                             ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,5 @@
+/output/HeCBench/concat/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+1 error generated.
+PASS: reference.cpp

@@ -1,0 +1,68 @@
+In file included from /output/HeCBench/convolution1D/kernel.cpp:1:
+/output/HeCBench/convolution1D/kernel.h:41:19: error: declaration of 'T' shadows template parameter
+   41 | template<typename T>
+      |                   ^
+/output/HeCBench/convolution1D/kernel.h:39:19: note: template parameter is declared here
+   39 | template<typename T>
+      |                   ^
+/output/HeCBench/convolution1D/kernel.h:43:19: error: declaration of 'T' shadows template parameter
+   43 | template<typename T>
+      |                   ^
+/output/HeCBench/convolution1D/kernel.h:41:19: note: template parameter is declared here
+   41 | template<typename T>
+      |                   ^
+/output/HeCBench/convolution1D/kernel.h:45:20: error: declaration of 'T' shadows template parameter
+   45 | template <typename T>
+      |                    ^
+/output/HeCBench/convolution1D/kernel.h:43:19: note: template parameter is declared here
+   43 | template<typename T>
+      |                   ^
+/output/HeCBench/convolution1D/kernel.h:47:20: error: declaration of 'T' shadows template parameter
+   47 | template <typename T>
+      |                    ^
+/output/HeCBench/convolution1D/kernel.h:45:20: note: template parameter is declared here
+   45 | template <typename T>
+      |                    ^
+/output/HeCBench/convolution1D/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/convolution1D/kernel.cpp:35:25: error: unknown type name 'T'
+   35 | void conv1d_tiled(const T * in,
+      |                         ^
+/output/HeCBench/convolution1D/kernel.cpp:36:25: error: unknown type name 'T'
+   36 |                         T * out,
+      |                         ^
+/output/HeCBench/convolution1D/kernel.cpp:53:13: error: unknown type name 'T'
+   53 |             T *tile = reinterpret_cast<T*>(smem);
+      |             ^
+/output/HeCBench/convolution1D/kernel.cpp:53:40: error: unknown type name 'T'
+   53 |             T *tile = reinterpret_cast<T*>(smem);
+      |                                        ^
+/output/HeCBench/convolution1D/kernel.cpp:71:13: error: unknown type name 'T'
+   71 |             T s = 0;
+      |             ^
+/output/HeCBench/convolution1D/kernel.cpp:73:42: error: use of undeclared identifier 'T'
+   73 |             s += tile[_tid_x + j] * mask<T>[j];
+      |                                          ^
+/output/HeCBench/convolution1D/kernel.cpp:82:33: error: unknown type name 'T'
+   82 | void conv1d_tiled_caching(const T * in,
+      |                                 ^
+/output/HeCBench/convolution1D/kernel.cpp:83:33: error: unknown type name 'T'
+   83 |                                 T * out,
+      |                                 ^
+/output/HeCBench/convolution1D/kernel.cpp:100:13: error: unknown type name 'T'
+  100 |             T *tile = reinterpret_cast<T*>(smem);
+      |             ^
+/output/HeCBench/convolution1D/kernel.cpp:100:40: error: unknown type name 'T'
+  100 |             T *tile = reinterpret_cast<T*>(smem);
+      |                                        ^
+/output/HeCBench/convolution1D/kernel.cpp:108:13: error: unknown type name 'T'
+  108 |             T s = 0;
+      |             ^
+/output/HeCBench/convolution1D/kernel.cpp:115:61: error: use of undeclared identifier 'T'
+  115 |             s += tile[_tid_x + j - (mask_width / 2)] * mask<T>[j];
+      |                                                             ^
+/output/HeCBench/convolution1D/kernel.cpp:117:38: error: use of undeclared identifier 'T'
+  117 |             s += in[in_index] * mask<T>[j];
+      |                                      ^
+18 errors generated.

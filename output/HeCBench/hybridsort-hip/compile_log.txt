@@ -1,0 +1,17 @@
+In file included from /output/HeCBench/hybridsort-hip/kernel.cpp:1:
+/output/HeCBench/hybridsort-hip/kernel.h:81:1: error: unknown type name 'float4'; did you mean 'float'?
+   81 | float4* runMergeSort(int listsize, int divisions,
+      | ^~~~~~
+      | float
+/output/HeCBench/hybridsort-hip/kernel.h:82:5: error: unknown type name 'float4'; did you mean 'float'?
+   82 |     float4 *d_origList, float4 *d_resultList,
+      |     ^~~~~~
+      |     float
+/output/HeCBench/hybridsort-hip/kernel.h:82:25: error: unknown type name 'float4'; did you mean 'float'?
+   82 |     float4 *d_origList, float4 *d_resultList,
+      |                         ^~~~~~
+      |                         float
+/output/HeCBench/hybridsort-hip/kernel.h:90:10: fatal error: 'hip/hip_runtime.h' file not found
+   90 | #include "hip/hip_runtime.h"
+      |          ^~~~~~~~~~~~~~~~~~~
+4 errors generated.

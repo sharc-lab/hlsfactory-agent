@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/black-scholes/kernel.cpp:1:
+/output/HeCBench/black-scholes/kernel.h:26:10: fatal error: 'blackScholesAnalyticEngineStructs.cuh' file not found
+   26 | #include "blackScholesAnalyticEngineStructs.cuh"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

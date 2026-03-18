@@ -1,0 +1,39 @@
+In file included from /output/HeCBench/extrema/kernel.cpp:1:
+/output/HeCBench/extrema/kernel.h:42:20: error: declaration of 'T' shadows template parameter
+   42 | template <typename T>
+      |                    ^
+/output/HeCBench/extrema/kernel.h:40:20: note: template parameter is declared here
+   40 | template <typename T>
+      |                    ^
+/output/HeCBench/extrema/kernel.h:40:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   40 | template <typename T>
+      | ^~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/extrema/kernel.h:69:18: error: use of undeclared identifier '_bid_x'
+   69 |   const int tx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                  ^
+/output/HeCBench/extrema/kernel.h:69:41: error: use of undeclared identifier '_tid_x'
+   69 |   const int tx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                         ^
+/output/HeCBench/extrema/kernel.h:81:7: error: no matching function for call to 'clip_plus'
+   81 |       clip_plus( clip, n, plus );
+      |       ^~~~~~~~~
+/output/HeCBench/extrema/kernel.h:101:18: error: use of undeclared identifier '_bid_x'
+  101 |   const int ty = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                  ^
+/output/HeCBench/extrema/kernel.h:101:41: error: use of undeclared identifier '_tid_x'
+  101 |   const int ty = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                         ^
+/output/HeCBench/extrema/kernel.h:102:18: error: use of undeclared identifier '_bid_y'
+  102 |   const int tx = _bid_y * BLOCK_DIM_Y + _tid_y;
+      |                  ^
+/output/HeCBench/extrema/kernel.h:102:41: error: use of undeclared identifier '_tid_y'
+  102 |   const int tx = _bid_y * BLOCK_DIM_Y + _tid_y;
+      |                                         ^
+/output/HeCBench/extrema/kernel.h:119:9: error: no matching function for call to 'clip_plus'
+  119 |         clip_plus( clip, in_y, plus );
+      |         ^~~~~~~~~
+/output/HeCBench/extrema/kernel.h:128:9: error: no matching function for call to 'clip_plus'
+  128 |         clip_plus( clip, in_x, plus );
+      |         ^~~~~~~~~
+11 errors generated.
+PASS: reference.cpp

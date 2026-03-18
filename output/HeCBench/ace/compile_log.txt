@@ -1,0 +1,60 @@
+PASS: kernel.cpp
+/output/HeCBench/ace/reference.cpp:7:35: error: use of undeclared identifier 'DATAYSIZE'
+    7 | double GradientX_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                   ^
+/output/HeCBench/ace/reference.cpp:7:46: error: use of undeclared identifier 'DATAZSIZE'
+    7 | double GradientX_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                              ^
+/output/HeCBench/ace/reference.cpp:13:35: error: use of undeclared identifier 'DATAYSIZE'
+   13 | double GradientY_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                   ^
+/output/HeCBench/ace/reference.cpp:13:46: error: use of undeclared identifier 'DATAZSIZE'
+   13 | double GradientY_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                              ^
+/output/HeCBench/ace/reference.cpp:19:35: error: use of undeclared identifier 'DATAYSIZE'
+   19 | double GradientZ_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                   ^
+/output/HeCBench/ace/reference.cpp:19:46: error: use of undeclared identifier 'DATAZSIZE'
+   19 | double GradientZ_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                              ^
+/output/HeCBench/ace/reference.cpp:25:37: error: use of undeclared identifier 'DATAYSIZE'
+   25 | double Divergence_ref(double phix[][DATAYSIZE][DATAZSIZE],
+      |                                     ^
+/output/HeCBench/ace/reference.cpp:25:48: error: use of undeclared identifier 'DATAZSIZE'
+   25 | double Divergence_ref(double phix[][DATAYSIZE][DATAZSIZE],
+      |                                                ^
+/output/HeCBench/ace/reference.cpp:26:37: error: use of undeclared identifier 'DATAYSIZE'
+   26 |                       double phiy[][DATAYSIZE][DATAZSIZE],
+      |                                     ^
+/output/HeCBench/ace/reference.cpp:26:48: error: use of undeclared identifier 'DATAZSIZE'
+   26 |                       double phiy[][DATAYSIZE][DATAZSIZE],
+      |                                                ^
+/output/HeCBench/ace/reference.cpp:27:37: error: use of undeclared identifier 'DATAYSIZE'
+   27 |                       double phiz[][DATAYSIZE][DATAZSIZE],
+      |                                     ^
+/output/HeCBench/ace/reference.cpp:27:48: error: use of undeclared identifier 'DATAZSIZE'
+   27 |                       double phiz[][DATAYSIZE][DATAZSIZE],
+      |                                                ^
+/output/HeCBench/ace/reference.cpp:35:35: error: use of undeclared identifier 'DATAYSIZE'
+   35 | double Laplacian_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                   ^
+/output/HeCBench/ace/reference.cpp:35:46: error: use of undeclared identifier 'DATAZSIZE'
+   35 | double Laplacian_ref(double phi[][DATAYSIZE][DATAZSIZE],
+      |                                              ^
+/output/HeCBench/ace/reference.cpp:38:75: error: use of undeclared identifier 'SQ'
+   38 |   double phixx = (phi[x+1][y][z] + phi[x-1][y][z] - 2.0 * phi[x][y][z]) / SQ(dx);
+      |                                                                           ^
+/output/HeCBench/ace/reference.cpp:39:75: error: use of undeclared identifier 'SQ'
+   39 |   double phiyy = (phi[x][y+1][z] + phi[x][y-1][z] - 2.0 * phi[x][y][z]) / SQ(dy);
+      |                                                                           ^
+/output/HeCBench/ace/reference.cpp:40:75: error: use of undeclared identifier 'SQ'
+   40 |   double phizz = (phi[x][y][z+1] + phi[x][y][z-1] - 2.0 * phi[x][y][z]) / SQ(dz);
+      |                                                                           ^
+/output/HeCBench/ace/reference.cpp:48:14: error: use of undeclared identifier 'SQ'
+   48 |            ((SQ(phix)*SQ(phix)+SQ(phiy)*SQ(phiy)+SQ(phiz)*SQ(phiz)) /
+      |              ^
+/output/HeCBench/ace/reference.cpp:48:23: error: use of undeclared identifier 'SQ'
+   48 |            ((SQ(phix)*SQ(phix)+SQ(phiy)*SQ(phiy)+SQ(phiz)*SQ(phiz)) /
+      |                       ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

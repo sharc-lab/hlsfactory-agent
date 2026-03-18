@@ -1,0 +1,61 @@
+In file included from /output/HeCBench/word2vec/kernel.cpp:1:
+/output/HeCBench/word2vec/kernel.h:20:1: error: unknown type name 'real'
+   20 | real expTable[EXP_TABLE_SIZE];
+      | ^
+/output/HeCBench/word2vec/kernel.h:20:15: error: use of undeclared identifier 'EXP_TABLE_SIZE'
+   20 | real expTable[EXP_TABLE_SIZE];
+      |               ^
+/output/HeCBench/word2vec/kernel.h:22:8: error: unknown type name 'real'
+   22 | extern real *syn0;
+      |        ^
+/output/HeCBench/word2vec/kernel.h:32:1: error: unknown type name 'real'
+   32 | real * d_syn0 = NULL;
+      | ^
+/output/HeCBench/word2vec/kernel.h:33:1: error: unknown type name 'real'
+   33 | real * d_syn1neg = NULL;
+      | ^
+/output/HeCBench/word2vec/kernel.h:84:17: error: use of undeclared identifier 'MAX_STRING'
+   84 | char train_file[MAX_STRING], output_file[MAX_STRING];
+      |                 ^
+/output/HeCBench/word2vec/kernel.h:84:42: error: use of undeclared identifier 'MAX_STRING'
+   84 | char train_file[MAX_STRING], output_file[MAX_STRING];
+      |                                          ^
+/output/HeCBench/word2vec/kernel.h:85:22: error: use of undeclared identifier 'MAX_STRING'
+   85 | char save_vocab_file[MAX_STRING], read_vocab_file[MAX_STRING];
+      |                      ^
+/output/HeCBench/word2vec/kernel.h:85:51: error: use of undeclared identifier 'MAX_STRING'
+   85 | char save_vocab_file[MAX_STRING], read_vocab_file[MAX_STRING];
+      |                                                   ^
+/output/HeCBench/word2vec/kernel.h:92:1: error: unknown type name 'real'
+   92 | real alpha = 0.025, starting_alpha, sample = 1e-3;
+      | ^
+/output/HeCBench/word2vec/kernel.h:92:43: error: expected ';' after top level declarator
+   92 | real alpha = 0.025, starting_alpha, sample = 1e-3;
+      |                                           ^
+      |                                           ;
+/output/HeCBench/word2vec/kernel.h:93:1: error: unknown type name 'real'
+   93 | real *syn0;
+      | ^
+/output/HeCBench/word2vec/kernel.h:131:3: error: unknown type name 'real'
+  131 |   real * alpha_ptr = (float *) sen + MAX_SENTENCE_NUM * MAX_SENTENCE_LENGTH;
+      |   ^
+/output/HeCBench/word2vec/kernel.h:131:38: error: use of undeclared identifier 'MAX_SENTENCE_NUM'
+  131 |   real * alpha_ptr = (float *) sen + MAX_SENTENCE_NUM * MAX_SENTENCE_LENGTH;
+      |                                      ^
+/output/HeCBench/word2vec/kernel.h:131:57: error: use of undeclared identifier 'MAX_SENTENCE_LENGTH'
+  131 |   real * alpha_ptr = (float *) sen + MAX_SENTENCE_NUM * MAX_SENTENCE_LENGTH;
+      |                                                         ^
+/output/HeCBench/word2vec/kernel.h:138:3: error: use of undeclared identifier 'GetResultFromGPU'
+  138 |   GetResultFromGPU();
+      |   ^
+/output/HeCBench/word2vec/kernel.h:142:7: error: use of undeclared identifier 'output_file'
+  142 |   if (output_file[0] == 0) return;
+      |       ^
+/output/HeCBench/word2vec/kernel.h:142:28: error: non-void function 'TrainModelThread' should return a value [-Wreturn-mismatch]
+  142 |   if (output_file[0] == 0) return;
+      |                            ^
+/output/HeCBench/word2vec/kernel.h:143:20: error: use of undeclared identifier 'output_file'
+  143 |   FILE *fo = fopen(output_file, "wb");
+      |                    ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,74 @@
+In file included from /output/HeCBench/addBiasResidualLayerNorm/kernel.cpp:1:
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:40:19: error: declaration of 'T' shadows template parameter
+   40 | template<typename T, int V>
+      |                   ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:38:19: note: template parameter is declared here
+   38 | template<typename T, int V>
+      |                   ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:40:26: error: declaration of 'V' shadows template parameter
+   40 | template<typename T, int V>
+      |                          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:38:26: note: template parameter is declared here
+   38 | template<typename T, int V>
+      |                          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:61:19: error: declaration of 'T' shadows template parameter
+   61 | template<typename T>
+      |                   ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:40:19: note: template parameter is declared here
+   40 | template<typename T, int V>
+      |                   ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:38:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   38 | template<typename T, int V>
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+   39 | 
+   40 | template<typename T, int V>
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:65:26: error: unknown type name '__nv_bfloat16'
+   65 | inline float typeToFloat(__nv_bfloat16 a) {
+      |                          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:70:26: error: unknown type name 'half'
+   70 | inline float typeToFloat(half a) {
+      |                          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:78:8: error: unknown type name 'half'
+   78 | inline half floatToType(float a) {
+      |        ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:79:10: error: use of undeclared identifier '__float2half_rn'
+   79 |   return __float2half_rn(a);
+      |          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:83:8: error: unknown type name '__nv_bfloat16'
+   83 | inline __nv_bfloat16 floatToType(float a) {
+      |        ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:84:10: error: use of undeclared identifier '__float2bfloat16'
+   84 |   return __float2bfloat16(a);
+      |          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:93:8: error: unknown type name 'half2'
+   93 | inline half2 floatToType2(float a) {
+      |        ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:94:10: error: use of undeclared identifier '__float2half2_rn'
+   94 |   return __float2half2_rn(a);
+      |          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:98:8: error: unknown type name '__nv_bfloat162'
+   98 | inline __nv_bfloat162 floatToType2(float a) {
+      |        ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:99:10: error: use of undeclared identifier '__float2bfloat162_rn'
+   99 |   return __float2bfloat162_rn(a);
+      |          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:103:24: error: unknown type name 'float2'; did you mean 'float'?
+  103 | inline T float2ToType2(float2 a) {
+      |                        ^~~~~~
+      |                        float
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:110:8: error: unknown type name 'half2'
+  110 | inline half2 float2ToType2(float2 a) {
+      |        ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:110:28: error: unknown type name 'float2'; did you mean 'float'?
+  110 | inline half2 float2ToType2(float2 a) {
+      |                            ^~~~~~
+      |                            float
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:111:10: error: use of undeclared identifier '__float22half2_rn'
+  111 |   return __float22half2_rn(a);
+      |          ^
+/output/HeCBench/addBiasResidualLayerNorm/kernel.h:115:8: error: unknown type name '__nv_bfloat162'
+  115 | inline __nv_bfloat162 float2ToType2(float2 a) {
+      |        ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

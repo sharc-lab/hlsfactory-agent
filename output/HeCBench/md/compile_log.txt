@@ -1,0 +1,106 @@
+/output/HeCBench/md/kernel.cpp:6:9: error: unknown type name 'double4'; did you mean 'double'?
+    6 |   const POSVECTYPE*  position,
+      |         ^~~~~~~~~~
+      |         double
+/output/HeCBench/md/kernel.h:42:20: note: expanded from macro 'POSVECTYPE'
+   42 | #define POSVECTYPE double4
+      |                    ^
+/output/HeCBench/md/kernel.cpp:7:9: error: unknown type name 'double4'; did you mean 'double'?
+    7 |         FORCEVECTYPE*  force,
+      |         ^~~~~~~~~~~~
+      |         double
+/output/HeCBench/md/kernel.h:43:22: note: expanded from macro 'FORCEVECTYPE'
+   43 | #define FORCEVECTYPE double4
+      |                      ^
+/output/HeCBench/md/kernel.cpp:32:13: error: use of undeclared identifier 'double4'; did you mean 'double'?
+   32 |             POSVECTYPE ipos = position[idx];
+      |             ^~~~~~~~~~
+      |             double
+/output/HeCBench/md/kernel.h:42:20: note: expanded from macro 'POSVECTYPE'
+   42 | #define POSVECTYPE double4
+      |                    ^
+/output/HeCBench/md/kernel.cpp:33:13: error: use of undeclared identifier 'double4'; did you mean 'double'?
+   33 |             FORCEVECTYPE f = zero;
+      |             ^~~~~~~~~~~~
+      |             double
+/output/HeCBench/md/kernel.h:43:22: note: expanded from macro 'FORCEVECTYPE'
+   43 | #define FORCEVECTYPE double4
+      |                      ^
+/output/HeCBench/md/kernel.cpp:33:30: error: use of undeclared identifier 'make_double4'
+   33 |             FORCEVECTYPE f = zero;
+      |                              ^
+/output/HeCBench/md/kernel.h:44:14: note: expanded from macro 'zero'
+   44 | #define zero make_double4(0.0,0.0,0.0,0.0)
+      |              ^
+/output/HeCBench/md/kernel.cpp:41:13: error: use of undeclared identifier 'double4'; did you mean 'double'?
+   41 |             POSVECTYPE jpos = position[jidx];
+      |             ^~~~~~~~~~
+      |             double
+/output/HeCBench/md/kernel.h:42:20: note: expanded from macro 'POSVECTYPE'
+   42 | #define POSVECTYPE double4
+      |                    ^
+/output/HeCBench/md/kernel.cpp:44:31: error: member reference base type 'double' is not a structure or union
+   44 |             FPTYPE delx = ipos.x - jpos.x;
+      |                           ~~~~^~
+/output/HeCBench/md/kernel.cpp:44:40: error: member reference base type 'double' is not a structure or union
+   44 |             FPTYPE delx = ipos.x - jpos.x;
+      |                                    ~~~~^~
+/output/HeCBench/md/kernel.cpp:45:31: error: member reference base type 'double' is not a structure or union
+   45 |             FPTYPE dely = ipos.y - jpos.y;
+      |                           ~~~~^~
+/output/HeCBench/md/kernel.cpp:45:40: error: member reference base type 'double' is not a structure or union
+   45 |             FPTYPE dely = ipos.y - jpos.y;
+      |                                    ~~~~^~
+/output/HeCBench/md/kernel.cpp:46:31: error: member reference base type 'double' is not a structure or union
+   46 |             FPTYPE delz = ipos.z - jpos.z;
+      |                           ~~~~^~
+/output/HeCBench/md/kernel.cpp:46:40: error: member reference base type 'double' is not a structure or union
+   46 |             FPTYPE delz = ipos.z - jpos.z;
+      |                                    ~~~~^~
+/output/HeCBench/md/kernel.cpp:56:14: error: member reference base type 'double' is not a structure or union
+   56 |             f.x += delx * forceC;
+      |             ~^~
+/output/HeCBench/md/kernel.cpp:57:14: error: member reference base type 'double' is not a structure or union
+   57 |             f.y += dely * forceC;
+      |             ~^~
+/output/HeCBench/md/kernel.cpp:58:14: error: member reference base type 'double' is not a structure or union
+   58 |             f.z += delz * forceC;
+      |             ~^~
+15 errors generated.
+/output/HeCBench/md/reference.cpp:28:22: error: use of undeclared identifier 'zero'
+   28 |     forceVecType f = zero;
+      |                      ^
+/output/HeCBench/md/reference.cpp:30:16: error: use of undeclared identifier 'maxNeighbors'
+   30 |     while (j < maxNeighbors)
+      |                ^
+/output/HeCBench/md/reference.cpp:43:32: error: use of undeclared identifier 'cutsq'
+   43 |       if (r2inv > 0 && r2inv < cutsq) {
+      |                                ^
+/output/HeCBench/md/reference.cpp:47:32: error: use of undeclared identifier 'lj1'
+   47 |         T force = r2inv*r6inv*(lj1*r6inv - lj2);
+      |                                ^
+/output/HeCBench/md/reference.cpp:47:44: error: use of undeclared identifier 'lj2'
+   47 |         T force = r2inv*r6inv*(lj1*r6inv - lj2);
+      |                                            ^
+/output/HeCBench/md/reference.cpp:56:12: error: use of undeclared identifier 'std'
+   56 |     assert(std::isnan(d_force[i].x) == false);
+      |            ^
+/output/HeCBench/md/reference.cpp:57:12: error: use of undeclared identifier 'std'
+   57 |     assert(std::isnan(d_force[i].y) == false);
+      |            ^
+/output/HeCBench/md/reference.cpp:58:12: error: use of undeclared identifier 'std'
+   58 |     assert(std::isnan(d_force[i].z) == false);
+      |            ^
+/output/HeCBench/md/reference.cpp:59:13: error: use of undeclared identifier 'std'
+   59 |     T fxe = std::fabs(f.x - d_force[i].x);
+      |             ^
+/output/HeCBench/md/reference.cpp:60:13: error: use of undeclared identifier 'std'
+   60 |     T fye = std::fabs(f.y - d_force[i].y);
+      |             ^
+/output/HeCBench/md/reference.cpp:61:13: error: use of undeclared identifier 'std'
+   61 |     T fze = std::fabs(f.z - d_force[i].z);
+      |             ^
+/output/HeCBench/md/reference.cpp:66:3: error: use of undeclared identifier 'std'
+   66 |   std::cout << "Max error between host and device: " << max_error <<"\n";
+      |   ^
+12 errors generated.

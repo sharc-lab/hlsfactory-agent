@@ -1,0 +1,125 @@
+In file included from /output/HeCBench/backprop/kernel.cpp:1:
+/output/HeCBench/backprop/kernel.h:52:3: error: a type specifier is required for all declarations
+   52 |   new_t = (float *) malloc ((unsigned) (n * sizeof (float)));
+      |   ^
+/output/HeCBench/backprop/kernel.h:52:41: error: use of undeclared identifier 'n'
+   52 |   new_t = (float *) malloc ((unsigned) (n * sizeof (float)));
+      |                                         ^
+/output/HeCBench/backprop/kernel.h:54:11: error: redefinition of 'new_t' with a different type: 'float **' vs 'float *'
+   54 |   float **new_t;
+      |           ^
+/output/HeCBench/backprop/kernel.h:50:10: note: previous definition is here
+   50 |   float *new_t;
+      |          ^
+/output/HeCBench/backprop/kernel.h:56:3: error: a type specifier is required for all declarations
+   56 |   new_t = (float **) malloc ((unsigned) (m * sizeof (float *)));
+      |   ^
+/output/HeCBench/backprop/kernel.h:56:42: error: use of undeclared identifier 'm'
+   56 |   new_t = (float **) malloc ((unsigned) (m * sizeof (float *)));
+      |                                          ^
+/output/HeCBench/backprop/kernel.h:59:7: error: redefinition of 'i'
+   59 |   int i, j;
+      |       ^
+/output/HeCBench/backprop/kernel.h:53:7: note: previous definition is here
+   53 |   int i;
+      |       ^
+/output/HeCBench/backprop/kernel.h:61:1: error: extraneous closing brace ('}')
+   61 | }
+      | ^
+/output/HeCBench/backprop/kernel.h:66:1: error: unknown type name 'BPNN'
+   66 | BPNN *bpnn_internal_create(int n_in, int n_hidden, int n_out)
+      | ^
+/output/HeCBench/backprop/kernel.h:68:3: error: unknown type name 'BPNN'
+   68 |   BPNN *newnet;
+      |   ^
+/output/HeCBench/backprop/kernel.h:70:13: error: use of undeclared identifier 'BPNN'
+   70 |   newnet = (BPNN *) malloc (sizeof (BPNN));
+      |             ^
+/output/HeCBench/backprop/kernel.h:70:19: error: expected expression
+   70 |   newnet = (BPNN *) malloc (sizeof (BPNN));
+      |                   ^
+/output/HeCBench/backprop/kernel.h:75:25: error: use of undeclared identifier 'alloc_1d_dbl'
+   75 |   newnet->input_units = alloc_1d_dbl(n_in + 1);
+      |                         ^
+/output/HeCBench/backprop/kernel.h:76:26: error: use of undeclared identifier 'alloc_1d_dbl'
+   76 |   newnet->hidden_units = alloc_1d_dbl(n_hidden + 1);
+      |                          ^
+/output/HeCBench/backprop/kernel.h:77:26: error: use of undeclared identifier 'alloc_1d_dbl'
+   77 |   newnet->output_units = alloc_1d_dbl(n_out + 1);
+      |                          ^
+/output/HeCBench/backprop/kernel.h:79:26: error: use of undeclared identifier 'alloc_1d_dbl'
+   79 |   newnet->hidden_delta = alloc_1d_dbl(n_hidden + 1);
+      |                          ^
+/output/HeCBench/backprop/kernel.h:80:26: error: use of undeclared identifier 'alloc_1d_dbl'
+   80 |   newnet->output_delta = alloc_1d_dbl(n_out + 1);
+      |                          ^
+/output/HeCBench/backprop/kernel.h:81:20: error: use of undeclared identifier 'alloc_1d_dbl'
+   81 |   newnet->target = alloc_1d_dbl(n_out + 1);
+      |                    ^
+/output/HeCBench/backprop/kernel.h:83:27: error: use of undeclared identifier 'alloc_2d_dbl'
+   83 |   newnet->input_weights = alloc_2d_dbl(n_in + 1, n_hidden + 1);
+      |                           ^
+/output/HeCBench/backprop/kernel.h:84:28: error: use of undeclared identifier 'alloc_2d_dbl'
+   84 |   newnet->hidden_weights = alloc_2d_dbl(n_hidden + 1, n_out + 1);
+      |                            ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/backprop/reference.cpp:9:22: error: use of undeclared identifier 'HEIGHT'
+    9 |     float input_node[HEIGHT];
+      |                      ^
+/output/HeCBench/backprop/reference.cpp:10:25: error: use of undeclared identifier 'HEIGHT'
+   10 |     float weight_matrix[HEIGHT * WIDTH];
+      |                         ^
+/output/HeCBench/backprop/reference.cpp:10:34: error: use of undeclared identifier 'WIDTH'
+   10 |     float weight_matrix[HEIGHT * WIDTH];
+      |                                  ^
+/output/HeCBench/backprop/reference.cpp:11:27: error: use of undeclared identifier 'BLOCK_SIZE'
+   11 |     for (int ty = 0; ty < BLOCK_SIZE; ty++)
+      |                           ^
+/output/HeCBench/backprop/reference.cpp:12:29: error: use of undeclared identifier 'BLOCK_SIZE'
+   12 |       for (int tx = 0; tx < BLOCK_SIZE; tx++) {
+      |                             ^
+/output/HeCBench/backprop/reference.cpp:13:35: error: use of undeclared identifier 'HEIGHT'
+   13 |         int index = ( hid + 1 ) * HEIGHT * by + ( hid + 1 ) * ty + tx + 1 + ( hid + 1 ) ;  
+      |                                   ^
+/output/HeCBench/backprop/reference.cpp:14:24: error: use of undeclared identifier 'HEIGHT'
+   14 |         int index_in = HEIGHT * by + ty + 1;
+      |                        ^
+/output/HeCBench/backprop/reference.cpp:17:28: error: use of undeclared identifier 'WIDTH'
+   17 |         weight_matrix[ty * WIDTH + tx] = input_weights[index];
+      |                            ^
+/output/HeCBench/backprop/reference.cpp:20:27: error: use of undeclared identifier 'BLOCK_SIZE'
+   20 |     for (int ty = 0; ty < BLOCK_SIZE; ty++)
+      |                           ^
+/output/HeCBench/backprop/reference.cpp:21:29: error: use of undeclared identifier 'BLOCK_SIZE'
+   21 |       for (int tx = 0; tx < BLOCK_SIZE; tx++)
+      |                             ^
+/output/HeCBench/backprop/reference.cpp:22:28: error: use of undeclared identifier 'WIDTH'
+   22 |         weight_matrix[ty * WIDTH + tx] = weight_matrix[ty * WIDTH + tx] * input_node[ty];
+      |                            ^
+/output/HeCBench/backprop/reference.cpp:22:61: error: use of undeclared identifier 'WIDTH'
+   22 |         weight_matrix[ty * WIDTH + tx] = weight_matrix[ty * WIDTH + tx] * input_node[ty];
+      |                                                             ^
+/output/HeCBench/backprop/reference.cpp:24:28: error: use of undeclared identifier 'HEIGHT'
+   24 |     for ( int i = 1 ; i <= HEIGHT ; i=i*2){
+      |                            ^
+/output/HeCBench/backprop/reference.cpp:26:30: error: use of undeclared identifier 'BLOCK_SIZE'
+   26 |        for (int ty = 0; ty < BLOCK_SIZE; ty++)
+      |                              ^
+/output/HeCBench/backprop/reference.cpp:27:32: error: use of undeclared identifier 'BLOCK_SIZE'
+   27 |          for (int tx = 0; tx < BLOCK_SIZE; tx++)
+      |                                ^
+/output/HeCBench/backprop/reference.cpp:29:34: error: use of undeclared identifier 'WIDTH'
+   29 |               weight_matrix[ty * WIDTH + tx]= weight_matrix[ty * WIDTH + tx] +
+      |                                  ^
+/output/HeCBench/backprop/reference.cpp:29:66: error: use of undeclared identifier 'WIDTH'
+   29 |               weight_matrix[ty * WIDTH + tx]= weight_matrix[ty * WIDTH + tx] +
+      |                                                                  ^
+/output/HeCBench/backprop/reference.cpp:30:81: error: use of undeclared identifier 'WIDTH'
+   30 |                                               weight_matrix[(ty + power_two/2)* WIDTH + tx];
+      |                                                                                 ^
+/output/HeCBench/backprop/reference.cpp:33:27: error: use of undeclared identifier 'BLOCK_SIZE'
+   33 |     for (int ty = 0; ty < BLOCK_SIZE; ty++)
+      |                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

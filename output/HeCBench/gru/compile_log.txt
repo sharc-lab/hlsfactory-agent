@@ -1,0 +1,64 @@
+In file included from /output/HeCBench/gru/kernel.cpp:1:
+/output/HeCBench/gru/kernel.h:32:1: error: expected unqualified-id
+   32 | template <typename scalar_t, typename accscalar_t, typename index_type>
+      | ^
+/output/HeCBench/gru/kernel.cpp:11:13: error: unknown type name 'scalar_t'
+   11 |             scalar_t * Input,
+      |             ^
+/output/HeCBench/gru/kernel.cpp:12:13: error: unknown type name 'scalar_t'
+   12 |             scalar_t * Hidden,
+      |             ^
+/output/HeCBench/gru/kernel.cpp:13:13: error: unknown type name 'scalar_t'
+   13 |             scalar_t * Bias1,
+      |             ^
+/output/HeCBench/gru/kernel.cpp:14:13: error: unknown type name 'scalar_t'
+   14 |             scalar_t * Bias2,
+      |             ^
+/output/HeCBench/gru/kernel.cpp:15:13: error: unknown type name 'scalar_t'
+   15 |             scalar_t * _hx,   // h(t-1)
+      |             ^
+/output/HeCBench/gru/kernel.cpp:16:13: error: unknown type name 'scalar_t'
+   16 |             scalar_t * _hy,   // h(t)
+      |             ^
+/output/HeCBench/gru/kernel.cpp:17:13: error: unknown type name 'scalar_t'
+   17 |             scalar_t * storage,
+      |             ^
+/output/HeCBench/gru/kernel.cpp:18:13: error: unknown type name 'index_type'
+   18 |             index_type hsz,
+      |             ^
+/output/HeCBench/gru/kernel.cpp:19:13: error: unknown type name 'index_type'
+   19 |             index_type totalElements)
+      |             ^
+/output/HeCBench/gru/kernel.cpp:21:3: error: unknown type name 'index_type'
+   21 |   index_type linearIndex = _bid_x * BLOCK_DIM_X + _tid_x;
+      |   ^
+/output/HeCBench/gru/kernel.cpp:21:28: error: use of undeclared identifier '_bid_x'
+   21 |   index_type linearIndex = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                            ^
+/output/HeCBench/gru/kernel.cpp:21:51: error: use of undeclared identifier '_tid_x'
+   21 |   index_type linearIndex = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                                   ^
+/output/HeCBench/gru/kernel.cpp:23:5: error: unknown type name 'index_type'
+   23 |     index_type offset = (linearIndex/hsz)*3*hsz+linearIndex%hsz;
+      |     ^
+/output/HeCBench/gru/kernel.cpp:25:5: error: unknown type name 'scalar_t'
+   25 |     scalar_t ir = DEVICE_LINEAR_GET(Input,  offset+0*hsz);
+      |     ^
+/output/HeCBench/gru/kernel.cpp:26:5: error: unknown type name 'scalar_t'
+   26 |     scalar_t ii = DEVICE_LINEAR_GET(Input,  offset+1*hsz);
+      |     ^
+/output/HeCBench/gru/kernel.cpp:27:5: error: unknown type name 'scalar_t'
+   27 |     scalar_t in = DEVICE_LINEAR_GET(Input,  offset+2*hsz);
+      |     ^
+/output/HeCBench/gru/kernel.cpp:28:5: error: unknown type name 'scalar_t'
+   28 |     scalar_t hr = DEVICE_LINEAR_GET(Hidden, offset+0*hsz);
+      |     ^
+/output/HeCBench/gru/kernel.cpp:29:5: error: unknown type name 'scalar_t'
+   29 |     scalar_t hi = DEVICE_LINEAR_GET(Hidden, offset+1*hsz);
+      |     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/gru/reference.cpp:66:10: error: use of undeclared identifier 'std'
+   66 |     ng = std::tanh(ng);
+      |          ^
+1 error generated.

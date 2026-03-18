@@ -1,0 +1,116 @@
+In file included from /output/HeCBench/softmax-fused/kernel.cpp:1:
+/output/HeCBench/softmax-fused/kernel.h:39:9: error: unknown type name '__nv_bfloat16'
+   39 | typedef __nv_bfloat16 BFloat16;
+      |         ^
+/output/HeCBench/softmax-fused/kernel.h:40:9: error: unknown type name '__half'
+   40 | typedef __half Half;
+      |         ^
+/output/HeCBench/softmax-fused/kernel.h:42:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   42 | template <typename Datatype, int ELEMENTS_PER_LDG>
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/softmax-fused/kernel.h:47:6: error: use of undeclared identifier 'float2'; did you mean 'float'?
+   47 |   *((float2 *)dst) = *((float2 *)src);
+      |      ^~~~~~
+      |      float
+/output/HeCBench/softmax-fused/kernel.h:47:25: error: use of undeclared identifier 'float2'; did you mean 'float'?
+   47 |   *((float2 *)dst) = *((float2 *)src);
+      |                         ^~~~~~
+      |                         float
+/output/HeCBench/softmax-fused/kernel.h:50:1: error: extraneous 'template<>' in declaration of variable 'copy_vector'
+   50 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/softmax-fused/kernel.h:51:17: error: variable has incomplete type 'void'
+   51 | __inline__ void copy_vector<Half, 1>(Half *dst, const Half *src) {
+      |                 ^
+/output/HeCBench/softmax-fused/kernel.h:51:28: error: expected ';' after top level declarator
+   51 | __inline__ void copy_vector<Half, 1>(Half *dst, const Half *src) {
+      |                            ^
+      |                            ;
+/output/HeCBench/softmax-fused/kernel.h:55:1: error: extraneous 'template<>' in declaration of variable 'copy_vector'
+   55 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/softmax-fused/kernel.h:56:17: error: variable has incomplete type 'void'
+   56 | __inline__ void copy_vector<Half, 4>(Half *dst, const Half *src) {
+      |                 ^
+/output/HeCBench/softmax-fused/kernel.h:56:28: error: expected ';' after top level declarator
+   56 | __inline__ void copy_vector<Half, 4>(Half *dst, const Half *src) {
+      |                            ^
+      |                            ;
+/output/HeCBench/softmax-fused/kernel.h:60:1: error: extraneous 'template<>' in declaration of variable 'copy_vector'
+   60 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/softmax-fused/kernel.h:61:17: error: variable has incomplete type 'void'
+   61 | __inline__ void copy_vector<uint8_t, 1>(uint8_t *dst,
+      |                 ^
+/output/HeCBench/softmax-fused/kernel.h:61:28: error: expected ';' after top level declarator
+   61 | __inline__ void copy_vector<uint8_t, 1>(uint8_t *dst,
+      |                            ^
+      |                            ;
+/output/HeCBench/softmax-fused/kernel.h:66:1: error: extraneous 'template<>' in declaration of variable 'copy_vector'
+   66 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/softmax-fused/kernel.h:67:17: error: variable has incomplete type 'void'
+   67 | __inline__ void copy_vector<uint8_t, 4>(uint8_t *dst,
+      |                 ^
+/output/HeCBench/softmax-fused/kernel.h:67:28: error: expected ';' after top level declarator
+   67 | __inline__ void copy_vector<uint8_t, 4>(uint8_t *dst,
+      |                            ^
+      |                            ;
+/output/HeCBench/softmax-fused/kernel.h:81:57: error: use of undeclared identifier 'warpSize'
+   81 | WARP_SHFL_XOR_NATIVE(T value, int laneMask, int width = warpSize,
+      |                                                         ^
+/output/HeCBench/softmax-fused/kernel.h:89:1: error: unterminated /* comment
+   89 | /*
+      | ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/softmax-fused/reference.cpp:2:16: error: unknown type name 'size_t'
+    2 | T* make_random(size_t N) {
+      |                ^
+/output/HeCBench/softmax-fused/reference.cpp:4:10: error: unknown type name 'size_t'
+    4 |     for (size_t i = 0; i < N; i++) {
+      |          ^
+/output/HeCBench/softmax-fused/reference.cpp:5:19: error: use of undeclared identifier 'rand'
+    5 |         arr[i] = (rand() / (float)RAND_MAX) * 2.0 - 1.0; // range -1..1
+      |                   ^
+/output/HeCBench/softmax-fused/reference.cpp:5:35: error: use of undeclared identifier 'RAND_MAX'
+    5 |         arr[i] = (rand() / (float)RAND_MAX) * 2.0 - 1.0; // range -1..1
+      |                                   ^
+/output/HeCBench/softmax-fused/reference.cpp:10:22: error: unknown type name 'size_t'
+   10 | int* make_random_int(size_t N, int V) {
+      |                      ^
+/output/HeCBench/softmax-fused/reference.cpp:12:10: error: unknown type name 'size_t'
+   12 |     for (size_t i = 0; i < N; i++) {
+      |          ^
+/output/HeCBench/softmax-fused/reference.cpp:13:18: error: use of undeclared identifier 'rand'
+   13 |         arr[i] = rand() % V; // range 0..V-1
+      |                  ^
+/output/HeCBench/softmax-fused/reference.cpp:19:58: error: unknown type name 'uint8_t'
+   19 | void reference (output_t* out, const input_t* inp, const uint8_t* mask, acc_t scale, 
+      |                                                          ^
+/output/HeCBench/softmax-fused/reference.cpp:22:31: error: use of undeclared identifier 'malloc'
+   22 |     acc_t *tmp_row = (acc_t*) malloc (sizeof(acc_t) * C);
+      |                               ^
+/output/HeCBench/softmax-fused/reference.cpp:24:11: error: unknown type name 'uint8_t'
+   24 |     const uint8_t* mask_row;
+      |           ^
+/output/HeCBench/softmax-fused/reference.cpp:28:9: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?
+   28 |         size_t i = (uint64_t)b * head * seq_len + h * seq_len + s;
+      |         ^~~~~~
+      |         sizeof
+/output/HeCBench/softmax-fused/reference.cpp:28:16: error: use of undeclared identifier 'i'
+   28 |         size_t i = (uint64_t)b * head * seq_len + h * seq_len + s;
+      |                ^
+/output/HeCBench/softmax-fused/reference.cpp:28:21: error: use of undeclared identifier 'uint64_t'
+   28 |         size_t i = (uint64_t)b * head * seq_len + h * seq_len + s;
+      |                     ^
+/output/HeCBench/softmax-fused/reference.cpp:29:40: error: use of undeclared identifier 'i'
+   29 |         const input_t* inp_row = inp + i * C;
+      |                                        ^
+/output/HeCBench/softmax-fused/reference.cpp:30:40: error: use of undeclared identifier 'i'
+   30 |              output_t* out_row = out + i * C;
+      |                                        ^
+/output/HeCBench/softmax-fused/reference.cpp:54:9: error: unknown type name 'uint8_t'
+   54 |         uint8_t mask_value = (maxval == (acc_t)-10000.0) ? 1 : 0;
+      |         ^
+16 errors generated.

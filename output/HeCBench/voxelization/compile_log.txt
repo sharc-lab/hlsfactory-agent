@@ -1,0 +1,65 @@
+In file included from /output/HeCBench/voxelization/kernel.cpp:1:
+/output/HeCBench/voxelization/kernel.h:87:24: error: use of undeclared identifier 'atomicCAS'
+   87 |     uint32_t pre_key = atomicCAS(hash_table + slot, empty_key, key);
+      |                        ^
+/output/HeCBench/voxelization/kernel.h:121:19: error: use of undeclared identifier '_bid_x'
+  121 |   int point_idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                   ^
+/output/HeCBench/voxelization/kernel.h:121:42: error: use of undeclared identifier '_tid_x'
+  121 |   int point_idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                          ^
+/output/HeCBench/voxelization/kernel.h:152:19: error: use of undeclared identifier '_bid_x'
+  152 |   int point_idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                   ^
+/output/HeCBench/voxelization/kernel.h:152:42: error: use of undeclared identifier '_tid_x'
+  152 |   int point_idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                          ^
+/output/HeCBench/voxelization/kernel.h:189:30: error: use of undeclared identifier 'atomicAdd'
+  189 |   unsigned int current_num = atomicAdd(num_points_per_voxel + voxel_id, 1);
+      |                              ^
+/output/HeCBench/voxelization/kernel.h:201:5: error: unknown type name 'uint4'; did you mean 'uint'?
+  201 |     uint4 idx = {0, (unsigned int)voxel_idx, (unsigned int)voxel_idy, (unsigned int)voxel_idz};
+      |     ^~~~~
+      |     uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+In file included from /output/HeCBench/voxelization/kernel.cpp:1:
+/output/HeCBench/voxelization/kernel.h:201:11: error: excess elements in scalar initializer
+  201 |     uint4 idx = {0, (unsigned int)voxel_idx, (unsigned int)voxel_idy, (unsigned int)voxel_idz};
+      |           ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/voxelization/kernel.h:202:7: error: use of undeclared identifier 'uint4'
+  202 |     ((uint4 *)voxel_indices)[voxel_id] = idx;
+      |       ^
+/output/HeCBench/voxelization/kernel.h:202:14: error: expected expression
+  202 |     ((uint4 *)voxel_indices)[voxel_id] = idx;
+      |              ^
+/output/HeCBench/voxelization/kernel.h:208:41: error: unknown type name 'half'
+  208 |                                         half *voxel_features) {
+      |                                         ^
+/output/HeCBench/voxelization/kernel.h:209:19: error: use of undeclared identifier '_bid_x'
+  209 |   int voxel_idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                   ^
+/output/HeCBench/voxelization/kernel.h:209:42: error: use of undeclared identifier '_tid_x'
+  209 |   int voxel_idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                          ^
+/output/HeCBench/voxelization/kernel.h:231:48: error: use of undeclared identifier '__float2half'
+  231 |     voxel_features[dst_offset + feature_idx] = __float2half(voxels_temp[src_offset + feature_idx]);
+      |                                                ^
+/output/HeCBench/voxelization/kernel.h:235:1: error: unknown type name 'cudaError_t'
+  235 | cudaError_t featureExtractionLaunch(float *voxels_temp, unsigned int *num_points_per_voxel,
+      | ^
+/output/HeCBench/voxelization/kernel.h:237:54: error: unknown type name 'half'
+  237 |                                     int feature_num, half *voxel_features)
+      |                                                      ^
+/output/HeCBench/voxelization/kernel.h:240:3: error: unknown type name 'dim3'
+  240 |   dim3 blocks((*real_voxel_num + threadNum - 1) / threadNum);
+      |   ^
+/output/HeCBench/voxelization/kernel.h:241:3: error: unknown type name 'dim3'
+  241 |   dim3 threads(threadNum);
+      |   ^
+/output/HeCBench/voxelization/kernel.h:244:75: error: extraneous ')' before ';'
+  244 |                                                feature_num, voxel_features);
+      |                                                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,8 @@
+In file included from /output/HeCBench/svd3x3-hip/kernel.cpp:1:
+/output/HeCBench/svd3x3-hip/kernel.h:49:1: error: cannot declare the namespace 'std' to be inline
+   49 | inline
+      | ^~~~~~
+/output/HeCBench/svd3x3-hip/kernel.h:62:10: fatal error: 'hip/hip_runtime.h' file not found
+   62 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+2 errors generated.

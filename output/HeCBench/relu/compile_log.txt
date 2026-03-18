@@ -1,0 +1,78 @@
+/output/HeCBench/relu/kernel.cpp:5:27: error: unknown type name 'half'
+    5 | void ReluGrad_impl1(const half* gradient,
+      |                           ^
+/output/HeCBench/relu/kernel.cpp:6:27: error: unknown type name 'half'
+    6 |                     const half* feature,
+      |                           ^
+/output/HeCBench/relu/kernel.cpp:7:27: error: unknown type name 'half'
+    7 |                           half* backprop,
+      |                           ^
+/output/HeCBench/relu/kernel.cpp:27:13: error: unknown type name 'half2'
+   27 |             half2 gradient_h2 = reinterpret_cast<const half2*>(gradient)[index];
+      |             ^
+/output/HeCBench/relu/kernel.cpp:27:56: error: unknown type name 'half2'
+   27 |             half2 gradient_h2 = reinterpret_cast<const half2*>(gradient)[index];
+      |                                                        ^
+/output/HeCBench/relu/kernel.cpp:28:13: error: unknown type name 'half2'
+   28 |             half2 feature_h2 = reinterpret_cast<const half2*>(feature)[index];
+      |             ^
+/output/HeCBench/relu/kernel.cpp:28:55: error: unknown type name 'half2'
+   28 |             half2 feature_h2 = reinterpret_cast<const half2*>(feature)[index];
+      |                                                       ^
+/output/HeCBench/relu/kernel.cpp:29:13: error: unknown type name 'half2'
+   29 |             half2* p_backprop_h2 = reinterpret_cast<half2*>(backprop) + index;
+      |             ^
+/output/HeCBench/relu/kernel.cpp:29:53: error: unknown type name 'half2'
+   29 |             half2* p_backprop_h2 = reinterpret_cast<half2*>(backprop) + index;
+      |                                                     ^
+/output/HeCBench/relu/kernel.cpp:32:19: error: unknown type name 'half2'
+   32 |             const half2 kZero_h2 = __float2half2_rn(0.f);
+      |                   ^
+/output/HeCBench/relu/kernel.cpp:32:36: error: use of undeclared identifier '__float2half2_rn'
+   32 |             const half2 kZero_h2 = __float2half2_rn(0.f);
+      |                                    ^
+/output/HeCBench/relu/kernel.cpp:34:13: error: unknown type name 'half2'
+   34 |             half2 mask_h2 = __hgt2(feature_h2, kZero_h2);
+      |             ^
+/output/HeCBench/relu/kernel.cpp:36:13: error: unknown type name 'half2'
+   36 |             half2 backprop_h2 = __hmul2(mask_h2, gradient_h2);
+      |             ^
+/output/HeCBench/relu/kernel.cpp:46:13: error: unknown type name 'half'
+   46 |             half grad_h = gradient[count - 1];
+      |             ^
+/output/HeCBench/relu/kernel.cpp:47:13: error: unknown type name 'half'
+   47 |             half feature_h = feature[count - 1];
+      |             ^
+/output/HeCBench/relu/kernel.cpp:53:13: error: unknown type name 'half'
+   53 |             half backprop_h(backprop_f);
+      |             ^
+/output/HeCBench/relu/kernel.cpp:62:27: error: unknown type name 'half'
+   62 | void ReluGrad_impl2(const half*  gradient,
+      |                           ^
+/output/HeCBench/relu/kernel.cpp:63:27: error: unknown type name 'half'
+   63 |                     const half*  feature,
+      |                           ^
+/output/HeCBench/relu/kernel.cpp:64:27: error: unknown type name 'half'
+   64 |                           half*  backprop,
+      |                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/relu/reference.cpp:2:31: error: unknown type name 'half'
+    2 |                         const half* gradient,
+      |                               ^
+/output/HeCBench/relu/reference.cpp:3:31: error: unknown type name 'half'
+    3 |                         const half* feature,
+      |                               ^
+/output/HeCBench/relu/reference.cpp:4:31: error: unknown type name 'half'
+    4 |                               half* backprop)
+      |                               ^
+/output/HeCBench/relu/reference.cpp:7:5: error: unknown type name 'half'
+    7 |     half grad_h = gradient[i];
+      |     ^
+/output/HeCBench/relu/reference.cpp:8:5: error: unknown type name 'half'
+    8 |     half feature_h = feature[i];
+      |     ^
+/output/HeCBench/relu/reference.cpp:14:5: error: unknown type name 'half'
+   14 |     half backprop_h(backprop_f);
+      |     ^
+6 errors generated.

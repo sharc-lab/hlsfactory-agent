@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/svd3x3/kernel.cpp:1:
+/output/HeCBench/svd3x3/kernel.h:49:1: error: cannot declare the namespace 'std' to be inline
+   49 | inline
+      | ^~~~~~
+1 error generated.

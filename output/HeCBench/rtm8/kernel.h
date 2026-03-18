@@ -1,0 +1,44 @@
+#pragma once
+#include <cstdint>
+#include <cmath>
+#include <algorithm>
+using std::min;
+using std::max;
+
+// CUDA thread/block dimension constants (adjust for your workload)
+#ifndef BLOCK_DIM_X
+#define BLOCK_DIM_X 256
+#endif
+#ifndef GRID_DIM_X
+#define GRID_DIM_X 1
+#endif
+#ifndef BLOCK_DIM_Y
+#define BLOCK_DIM_Y 1
+#endif
+#ifndef GRID_DIM_Y
+#define GRID_DIM_Y 1
+#endif
+#ifndef BLOCK_DIM_Z
+#define BLOCK_DIM_Z 1
+#endif
+#ifndef GRID_DIM_Z
+#define GRID_DIM_Z 1
+#endif
+
+// --- from rtm8.cu ---
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+
+#define nx 680
+#define ny 134
+#define nz 450
+
+#include "mysecond.c"
+
+
+  
+
+

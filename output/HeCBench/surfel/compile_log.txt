@@ -1,0 +1,67 @@
+In file included from /output/HeCBench/surfel/kernel.cpp:1:
+/output/HeCBench/surfel/kernel.h:32:19: error: declaration of 'T' shadows template parameter
+   32 | template<typename T, int TILE>
+      |                   ^
+/output/HeCBench/surfel/kernel.h:30:19: note: template parameter is declared here
+   30 | template<typename T>
+      |                   ^
+/output/HeCBench/surfel/kernel.h:34:20: error: declaration of 'T' shadows template parameter
+   34 | template <typename T>
+      |                    ^
+/output/HeCBench/surfel/kernel.h:32:19: note: template parameter is declared here
+   32 | template<typename T, int TILE>
+      |                   ^
+/output/HeCBench/surfel/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/surfel/kernel.cpp:72:10: error: unknown type name 'T'
+   72 |    const T * s,
+      |          ^
+/output/HeCBench/surfel/kernel.cpp:74:4: error: unknown type name 'T'
+   74 |    T f,
+      |    ^
+/output/HeCBench/surfel/kernel.cpp:77:4: error: unknown type name 'T'
+   77 |    T * d)
+      |    ^
+/output/HeCBench/surfel/kernel.cpp:100:21: error: unknown type name 'T'
+  100 |                     T rayx = T(x) - (w - 1) * T(0.5);
+      |                     ^
+/output/HeCBench/surfel/kernel.cpp:100:30: error: use of undeclared identifier 'T'
+  100 |                     T rayx = T(x) - (w - 1) * T(0.5);
+      |                              ^
+/output/HeCBench/surfel/kernel.cpp:100:47: error: use of undeclared identifier 'T'
+  100 |                     T rayx = T(x) - (w - 1) * T(0.5);
+      |                                               ^
+/output/HeCBench/surfel/kernel.cpp:101:21: error: unknown type name 'T'
+  101 |                     T rayy = T(y) - (h - 1) * T(0.5);
+      |                     ^
+/output/HeCBench/surfel/kernel.cpp:101:30: error: use of undeclared identifier 'T'
+  101 |                     T rayy = T(y) - (h - 1) * T(0.5);
+      |                              ^
+/output/HeCBench/surfel/kernel.cpp:101:47: error: use of undeclared identifier 'T'
+  101 |                     T rayy = T(y) - (h - 1) * T(0.5);
+      |                                               ^
+/output/HeCBench/surfel/kernel.cpp:102:21: error: unknown type name 'T'
+  102 |                     T rayz = f;
+      |                     ^
+/output/HeCBench/surfel/kernel.cpp:104:21: error: unknown type name 'T'
+  104 |                     T dMin = 1e20;
+      |                     ^
+/output/HeCBench/surfel/kernel.cpp:107:21: error: unknown type name 'T'
+  107 |                     T sh[TILE * COL_DIM];
+      |                     ^
+/output/HeCBench/surfel/kernel.cpp:107:26: error: use of undeclared identifier 'TILE'
+  107 |                     T sh[TILE * COL_DIM];
+      |                          ^
+/output/HeCBench/surfel/kernel.cpp:107:33: error: use of undeclared identifier 'COL_DIM'
+  107 |                     T sh[TILE * COL_DIM];
+      |                                 ^
+/output/HeCBench/surfel/kernel.cpp:109:58: error: use of undeclared identifier 'TILE'
+  109 |                     for (int base = 0; base < N; base += TILE) {
+      |                                                          ^
+/output/HeCBench/surfel/kernel.cpp:112:31: error: use of undeclared identifier 'TILE'
+  112 |                     if (tid < TILE && base + tid < N) {
+      |                               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+PASS: reference.cpp

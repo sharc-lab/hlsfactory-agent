@@ -1,0 +1,68 @@
+In file included from /output/HeCBench/sph/kernel.cpp:1:
+/output/HeCBench/sph/kernel.h:96:5: error: unknown type name 'double3'; did you mean 'double'?
+   96 |     double3 pos; // position
+      |     ^~~~~~~
+      |     double
+/output/HeCBench/sph/kernel.h:97:5: error: unknown type name 'double3'; did you mean 'double'?
+   97 |     double3 n;   // position
+      |     ^~~~~~~
+      |     double
+/output/HeCBench/sph/kernel.h:103:5: error: unknown type name 'double3'; did you mean 'double'?
+  103 |     double3 pos;     // position
+      |     ^~~~~~~
+      |     double
+/output/HeCBench/sph/kernel.h:104:5: error: unknown type name 'double3'; did you mean 'double'?
+  104 |     double3 v;       // velocity
+      |     ^~~~~~~
+      |     double
+/output/HeCBench/sph/kernel.h:105:5: error: unknown type name 'double3'; did you mean 'double'?
+  105 |     double3 v_half;  // half step velocity
+      |     ^~~~~~~
+      |     double
+/output/HeCBench/sph/kernel.h:106:5: error: unknown type name 'double3'; did you mean 'double'?
+  106 |     double3 a;       // acceleration
+      |     ^~~~~~~
+      |     double
+/output/HeCBench/sph/kernel.cpp:4:10: error: unknown type name 'double3'; did you mean 'double'?
+    4 | double W(double3 p_pos, double3 q_pos, double h)
+      |          ^~~~~~~
+      |          double
+/output/HeCBench/sph/kernel.cpp:4:25: error: unknown type name 'double3'; did you mean 'double'?
+    4 | double W(double3 p_pos, double3 q_pos, double h)
+      |                         ^~~~~~~
+      |                         double
+/output/HeCBench/sph/kernel.cpp:6:27: error: member reference base type 'double' is not a structure or union
+    6 |     double r = sqrt((p_pos.x-q_pos.x)*(p_pos.x-q_pos.x)
+      |                      ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:6:35: error: member reference base type 'double' is not a structure or union
+    6 |     double r = sqrt((p_pos.x-q_pos.x)*(p_pos.x-q_pos.x)
+      |                              ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:6:45: error: member reference base type 'double' is not a structure or union
+    6 |     double r = sqrt((p_pos.x-q_pos.x)*(p_pos.x-q_pos.x)
+      |                                        ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:6:53: error: member reference base type 'double' is not a structure or union
+    6 |     double r = sqrt((p_pos.x-q_pos.x)*(p_pos.x-q_pos.x)
+      |                                                ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:7:27: error: member reference base type 'double' is not a structure or union
+    7 |                   + (p_pos.y-q_pos.y)*(p_pos.y-q_pos.y)
+      |                      ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:7:35: error: member reference base type 'double' is not a structure or union
+    7 |                   + (p_pos.y-q_pos.y)*(p_pos.y-q_pos.y)
+      |                              ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:7:45: error: member reference base type 'double' is not a structure or union
+    7 |                   + (p_pos.y-q_pos.y)*(p_pos.y-q_pos.y)
+      |                                        ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:7:53: error: member reference base type 'double' is not a structure or union
+    7 |                   + (p_pos.y-q_pos.y)*(p_pos.y-q_pos.y)
+      |                                                ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:8:27: error: member reference base type 'double' is not a structure or union
+    8 |                   + (p_pos.z-q_pos.z)*(p_pos.z-q_pos.z));
+      |                      ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:8:35: error: member reference base type 'double' is not a structure or union
+    8 |                   + (p_pos.z-q_pos.z)*(p_pos.z-q_pos.z));
+      |                              ~~~~~^~
+/output/HeCBench/sph/kernel.cpp:8:45: error: member reference base type 'double' is not a structure or union
+    8 |                   + (p_pos.z-q_pos.z)*(p_pos.z-q_pos.z));
+      |                                        ~~~~~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

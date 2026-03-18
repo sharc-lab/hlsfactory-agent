@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/boxfilter/kernel.cpp:1:
+/output/HeCBench/boxfilter/kernel.h:37:10: fatal error: 'shrUtils.h' file not found
+   37 | #include "shrUtils.h"
+      |          ^~~~~~~~~~~~
+1 error generated.

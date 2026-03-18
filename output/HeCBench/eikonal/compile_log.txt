@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/eikonal/kernel.cpp:1:
+/output/HeCBench/eikonal/kernel.h:27:1: error: use of undeclared identifier 'StructuredEikonal'
+   27 | StructuredEikonal::StructuredEikonal(bool verbose) 
+      | ^
+/output/HeCBench/eikonal/kernel.h:32:1: error: use of undeclared identifier 'StructuredEikonal'
+   32 | StructuredEikonal::~StructuredEikonal() {}
+      | ^
+/output/HeCBench/eikonal/kernel.h:34:6: error: use of undeclared identifier 'StructuredEikonal'
+   34 | void StructuredEikonal::writeNRRD(std::string filename) {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:34:40: error: no type named 'string' in namespace 'std'
+   34 | void StructuredEikonal::writeNRRD(std::string filename) {
+      |                                   ~~~~~^
+/output/HeCBench/eikonal/kernel.h:51:6: error: use of undeclared identifier 'StructuredEikonal'
+   51 | void StructuredEikonal::error(char* msg) {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:93:6: error: use of undeclared identifier 'StructuredEikonal'
+   93 | void StructuredEikonal::set_attribute_mask() {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:117:6: error: use of undeclared identifier 'StructuredEikonal'
+  117 | void StructuredEikonal::initialization() {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:122:6: error: use of undeclared identifier 'StructuredEikonal'
+  122 | void StructuredEikonal::map_generator() {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:129:6: error: use of undeclared identifier 'StructuredEikonal'
+  129 | void StructuredEikonal::setSeeds(std::vector<std::array<size_t, 3> > seeds) {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:133:6: error: use of undeclared identifier 'StructuredEikonal'
+  133 | void StructuredEikonal::useSeeds() {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:158:6: error: use of undeclared identifier 'StructuredEikonal'
+  158 | void StructuredEikonal::setMapType(size_t t) {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:162:6: error: use of undeclared identifier 'StructuredEikonal'
+  162 | void StructuredEikonal::solveEikonal() {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:170:6: error: no template named 'vector' in namespace 'std'
+  170 | std::vector< std::vector< std::vector<double> > > 
+      | ~~~~~^
+/output/HeCBench/eikonal/kernel.h:170:19: error: no member named 'vector' in namespace 'std'
+  170 | std::vector< std::vector< std::vector<double> > > 
+      |              ~~~~~^
+/output/HeCBench/eikonal/kernel.h:170:32: error: no member named 'vector' in namespace 'std'
+  170 | std::vector< std::vector< std::vector<double> > > 
+      |                           ~~~~~^
+/output/HeCBench/eikonal/kernel.h:170:45: error: expected '(' for function-style cast or type construction
+  170 | std::vector< std::vector< std::vector<double> > > 
+      |                                       ~~~~~~^
+/output/HeCBench/eikonal/kernel.h:170:47: error: expected unqualified-id
+  170 | std::vector< std::vector< std::vector<double> > > 
+      |                                               ^
+/output/HeCBench/eikonal/kernel.h:175:6: error: use of undeclared identifier 'StructuredEikonal'
+  175 | void StructuredEikonal::get_solution() {
+      |      ^
+/output/HeCBench/eikonal/kernel.h:186:6: error: use of undeclared identifier 'StructuredEikonal'
+  186 | void StructuredEikonal::setItersPerBlock(size_t t) {
+      |      ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

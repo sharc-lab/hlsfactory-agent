@@ -1,0 +1,44 @@
+In file included from /output/HeCBench/fpdc/kernel.cpp:1:
+/output/HeCBench/fpdc/kernel.h:62:1: error: extraneous closing brace ('}')
+   62 | }
+      | ^
+/output/HeCBench/fpdc/kernel.h:109:10: error: use of undeclared identifier '_tid_x'
+  109 |   lane = _tid_x & 31;
+      |          ^
+/output/HeCBench/fpdc/kernel.h:111:12: error: use of undeclared identifier '_tid_x'
+  111 |   iindex = _tid_x / WARPSIZE * (3 * WARPSIZE / 2) + lane;
+      |            ^
+/output/HeCBench/fpdc/kernel.h:114:14: error: use of undeclared identifier '_tid_x'
+  114 |   lastidx = (_tid_x / WARPSIZE + 1) * (3 * WARPSIZE / 2) - 1;
+      |              ^
+/output/HeCBench/fpdc/kernel.h:116:11: error: use of undeclared identifier '_tid_x'
+  116 |   warp = (_tid_x + _bid_x * BLOCK_DIM_X) / WARPSIZE;
+      |           ^
+/output/HeCBench/fpdc/kernel.h:116:20: error: use of undeclared identifier '_bid_x'
+  116 |   warp = (_tid_x + _bid_x * BLOCK_DIM_X) / WARPSIZE;
+      |                    ^
+/output/HeCBench/fpdc/kernel.h:136:19: error: use of undeclared identifier '__clzll'
+  136 |     bcount = 8 - (__clzll(diff) >> 3);
+      |                   ^
+/output/HeCBench/fpdc/kernel.h:141:5: error: use of undeclared identifier '__threadfence_block'
+  141 |     __threadfence_block();
+      |     ^
+/output/HeCBench/fpdc/kernel.h:143:5: error: use of undeclared identifier '__threadfence_block'
+  143 |     __threadfence_block();
+      |     ^
+/output/HeCBench/fpdc/kernel.h:145:5: error: use of undeclared identifier '__threadfence_block'
+  145 |     __threadfence_block();
+      |     ^
+/output/HeCBench/fpdc/kernel.h:147:5: error: use of undeclared identifier '__threadfence_block'
+  147 |     __threadfence_block();
+      |     ^
+/output/HeCBench/fpdc/kernel.h:149:5: error: use of undeclared identifier '__threadfence_block'
+  149 |     __threadfence_block();
+      |     ^
+/output/HeCBench/fpdc/kernel.h:151:5: error: use of undeclared identifier '__threadfence_block'
+  151 |     __threadfence_block();
+      |     ^
+/output/HeCBench/fpdc/kernel.h:165:5: error: use of undeclared identifier '__threadfence_block'
+  165 |     __threadfence_block();
+      |     ^
+14 errors generated.

@@ -1,0 +1,53 @@
+In file included from /output/HeCBench/graphExecution/kernel.cpp:1:
+/output/HeCBench/graphExecution/kernel.h:17:1: error: unterminated /* comment
+   17 | /*
+      | ^
+/output/HeCBench/graphExecution/kernel.cpp:20:24: error: use of undeclared identifier 'THREADS_PER_BLOCK'
+   20 |             double tmp[THREADS_PER_BLOCK];
+      |                        ^
+/output/HeCBench/graphExecution/kernel.cpp:29:17: error: use of undeclared identifier 'cta'
+   29 |             tmp[cta.thread_rank()] = temp_sum;
+      |                 ^
+/output/HeCBench/graphExecution/kernel.cpp:32:42: error: use of undeclared identifier 'cta'
+   32 |             if ((BLOCK_DIM_X >= 512) && (cta.thread_rank() < 256))
+      |                                          ^
+/output/HeCBench/graphExecution/kernel.cpp:34:17: error: use of undeclared identifier 'cta'
+   34 |             tmp[cta.thread_rank()] = temp_sum = temp_sum + tmp[cta.thread_rank() + 256];
+      |                 ^
+/output/HeCBench/graphExecution/kernel.cpp:34:64: error: use of undeclared identifier 'cta'
+   34 |             tmp[cta.thread_rank()] = temp_sum = temp_sum + tmp[cta.thread_rank() + 256];
+      |                                                                ^
+/output/HeCBench/graphExecution/kernel.cpp:37:41: error: use of undeclared identifier 'cta'
+   37 |             if ((BLOCK_DIM_X >= 256) &&(cta.thread_rank() < 128))
+      |                                         ^
+/output/HeCBench/graphExecution/kernel.cpp:39:17: error: use of undeclared identifier 'cta'
+   39 |             tmp[cta.thread_rank()] = temp_sum = temp_sum + tmp[cta.thread_rank() + 128];
+      |                 ^
+/output/HeCBench/graphExecution/kernel.cpp:39:64: error: use of undeclared identifier 'cta'
+   39 |             tmp[cta.thread_rank()] = temp_sum = temp_sum + tmp[cta.thread_rank() + 128];
+      |                                                                ^
+/output/HeCBench/graphExecution/kernel.cpp:42:42: error: use of undeclared identifier 'cta'
+   42 |             if ((BLOCK_DIM_X >= 128) && (cta.thread_rank() <  64))
+      |                                          ^
+/output/HeCBench/graphExecution/kernel.cpp:44:17: error: use of undeclared identifier 'cta'
+   44 |             tmp[cta.thread_rank()] = temp_sum = temp_sum + tmp[cta.thread_rank() +  64];
+      |                 ^
+/output/HeCBench/graphExecution/kernel.cpp:44:64: error: use of undeclared identifier 'cta'
+   44 |             tmp[cta.thread_rank()] = temp_sum = temp_sum + tmp[cta.thread_rank() +  64];
+      |                                                                ^
+/output/HeCBench/graphExecution/kernel.cpp:47:17: error: use of undeclared identifier 'cta'
+   47 |             if (cta.thread_rank() < 32)
+      |                 ^
+/output/HeCBench/graphExecution/kernel.cpp:50:53: error: use of undeclared identifier 'cta'
+   50 |             if (BLOCK_DIM_X >=  64) temp_sum += tmp[cta.thread_rank() + 32];
+      |                                                     ^
+/output/HeCBench/graphExecution/kernel.cpp:52:31: error: use of undeclared identifier 'tile32'
+   52 |             for (int offset = tile32.size()/2; offset > 0; offset /= 2)
+      |                               ^
+/output/HeCBench/graphExecution/kernel.cpp:54:25: error: use of undeclared identifier 'tile32'
+   54 |             temp_sum += tile32.shfl_down(temp_sum, offset);
+      |                         ^
+/output/HeCBench/graphExecution/kernel.cpp:58:17: error: use of undeclared identifier 'cta'
+   58 |             if (cta.thread_rank() == 0) result[0] = temp_sum;
+      |                 ^
+17 errors generated.

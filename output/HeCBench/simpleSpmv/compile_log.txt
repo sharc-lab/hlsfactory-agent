@@ -1,0 +1,7 @@
+/output/HeCBench/simpleSpmv/kernel.cpp:69:70: error: use of undeclared identifier 'BS'
+   69 |                 for(size_t n = row_start + _tid_x; n < row_end; n += BS){
+      |                                                                      ^
+/output/HeCBench/simpleSpmv/kernel.cpp:73:30: error: use of undeclared identifier 'BS'
+   73 |                 for (int i = BS >> 1; i > 0; i >>= 1)
+      |                              ^
+2 errors generated.

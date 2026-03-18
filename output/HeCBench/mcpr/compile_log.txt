@@ -1,0 +1,51 @@
+In file included from /output/HeCBench/mcpr/kernel.cpp:1:
+/output/HeCBench/mcpr/kernel.h:35:11: error: use of undeclared identifier '_bid_x'
+   35 |   int i = _bid_x * BLOCK_DIM_X + _tid_x; 
+      |           ^
+/output/HeCBench/mcpr/kernel.h:35:34: error: use of undeclared identifier '_tid_x'
+   35 |   int i = _bid_x * BLOCK_DIM_X + _tid_x; 
+      |                                  ^
+/output/HeCBench/mcpr/kernel.h:80:11: error: use of undeclared identifier '_bid_x'
+   80 |   int i = _bid_x * BLOCK_DIM_X + _tid_x; 
+      |           ^
+/output/HeCBench/mcpr/kernel.h:80:34: error: use of undeclared identifier '_tid_x'
+   80 |   int i = _bid_x * BLOCK_DIM_X + _tid_x; 
+      |                                  ^
+/output/HeCBench/mcpr/kernel.h:127:11: error: use of undeclared identifier '_bid_x'
+  127 |   int i = _bid_x * BLOCK_DIM_X + _tid_x; 
+      |           ^
+/output/HeCBench/mcpr/kernel.h:127:34: error: use of undeclared identifier '_tid_x'
+  127 |   int i = _bid_x * BLOCK_DIM_X + _tid_x; 
+      |                                  ^
+/output/HeCBench/mcpr/kernel.h:146:40: error: use of undeclared identifier '_tid_x'
+  146 |     probs_shared[k*threads_per_block + _tid_x] = 0.0;
+      |                                        ^
+/output/HeCBench/mcpr/kernel.h:152:31: error: use of undeclared identifier '_tid_x'
+  152 |       w[k*threads_per_block + _tid_x] = alphas[k*n + i] + rands[k*M + m];
+      |                               ^
+/output/HeCBench/mcpr/kernel.h:155:42: error: use of undeclared identifier '_tid_x'
+  155 |     maxval = w[(K-1)*threads_per_block + _tid_x];
+      |                                          ^
+/output/HeCBench/mcpr/kernel.h:157:34: error: use of undeclared identifier '_tid_x'
+  157 |       if(w[k*threads_per_block + _tid_x] > maxval){
+      |                                  ^
+/output/HeCBench/mcpr/kernel.h:159:42: error: use of undeclared identifier '_tid_x'
+  159 |         maxval = w[k*threads_per_block + _tid_x];
+      |                                          ^
+/output/HeCBench/mcpr/kernel.h:162:45: error: use of undeclared identifier '_tid_x'
+  162 |     probs_shared[maxind*threads_per_block + _tid_x] += 1.0;
+      |                                             ^
+/output/HeCBench/mcpr/kernel.h:166:40: error: use of undeclared identifier '_tid_x'
+  166 |     probs_shared[k*threads_per_block + _tid_x] /= M_d;
+      |                                        ^
+/output/HeCBench/mcpr/kernel.h:171:57: error: use of undeclared identifier '_tid_x'
+  171 |     probs[k*n + i] = probs_shared[k*threads_per_block + _tid_x];
+      |                                                         ^
+14 errors generated.
+/output/HeCBench/mcpr/reference.cpp:4:9: error: use of undeclared identifier 'fabs'
+    4 |     if (fabs(probs[i] - probs_ref[i]) > 1e-3) {
+      |         ^
+/output/HeCBench/mcpr/reference.cpp:9:3: error: use of undeclared identifier 'printf'
+    9 |   printf("%s\n", error ? "FAIL" : "PASS");
+      |   ^
+2 errors generated.

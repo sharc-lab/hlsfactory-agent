@@ -1,0 +1,18 @@
+In file included from /output/HeCBench/sosfil/kernel.cpp:1:
+/output/HeCBench/sosfil/kernel.h:47:20: error: declaration of 'T' shadows template parameter
+   47 | template <typename T>
+      |                    ^
+/output/HeCBench/sosfil/kernel.h:45:19: note: template parameter is declared here
+   45 | template<typename T>
+      |                   ^
+/output/HeCBench/sosfil/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+2 errors generated.
+/output/HeCBench/sosfil/reference.cpp:122:19: error: no member named 'abs' in namespace 'std'
+  122 |     T diff = std::abs(cpu[i] - gpu[i]);
+      |              ~~~~~^
+/output/HeCBench/sosfil/reference.cpp:123:32: error: no member named 'abs' in namespace 'std'
+  123 |     T tol = atol + rtol * std::abs(cpu[i]);
+      |                           ~~~~~^
+2 errors generated.

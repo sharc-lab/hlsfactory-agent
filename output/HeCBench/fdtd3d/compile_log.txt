@@ -1,0 +1,69 @@
+In file included from /output/HeCBench/fdtd3d/kernel.cpp:1:
+/output/HeCBench/fdtd3d/kernel.h:147:3: error: unknown type name 'shrBOOL'
+  147 |   shrBOOL
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:151:3: error: use of undeclared identifier 'ARGCHECK'
+  151 |   ARGCHECK(NULL != filename);
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:152:3: error: use of undeclared identifier 'ARGCHECK'
+  152 |   ARGCHECK(NULL != len);
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:167:3: error: use of undeclared identifier 'fh'
+  167 |   fh.close();
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:170:3: error: expected expression
+  170 |   else 
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:181:10: error: use of undeclared identifier 'shrTRUE'
+  181 |   return shrTRUE;
+      |          ^
+/output/HeCBench/fdtd3d/kernel.h:193:3: error: unknown type name 'shrBOOL'
+  193 |   shrBOOL
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:197:3: error: use of undeclared identifier 'ARGCHECK'
+  197 |   ARGCHECK(NULL != filename);
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:203:3: error: use of undeclared identifier 'fh'
+  203 |   fh << "# " << epsilon << "\n";
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:210:3: error: use of undeclared identifier 'fh'
+  210 |   fh << std::endl;
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:212:10: error: use of undeclared identifier 'shrTRUE'
+  212 |   return shrTRUE;
+      |          ^
+/output/HeCBench/fdtd3d/kernel.h:445:3: error: unknown type name 'shrBOOL'
+  445 |   shrBOOL  
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:466:3: error: unknown type name 'shrBOOL'
+  466 |   shrBOOL  
+      |   ^
+/output/HeCBench/fdtd3d/kernel.h:473:21: error: use of undeclared identifier 'MAX'
+  473 |   float max_error = MAX( (float)epsilon, MIN_EPSILON_ERROR );
+      |                     ^
+/output/HeCBench/fdtd3d/kernel.h:480:9: error: redefinition of 'max_error'
+  480 |   float max_error = MAX( (float)epsilon, MIN_EPSILON_ERROR);
+      |         ^
+/output/HeCBench/fdtd3d/kernel.h:473:9: note: previous definition is here
+  473 |   float max_error = MAX( (float)epsilon, MIN_EPSILON_ERROR );
+      |         ^
+/output/HeCBench/fdtd3d/kernel.h:480:21: error: use of undeclared identifier 'MAX'
+  480 |   float max_error = MAX( (float)epsilon, MIN_EPSILON_ERROR);
+      |                     ^
+/output/HeCBench/fdtd3d/kernel.h:481:7: error: redefinition of 'error_count'
+  481 |   int error_count = 0;
+      |       ^
+/output/HeCBench/fdtd3d/kernel.h:474:7: note: previous definition is here
+  474 |   int error_count = 0;
+      |       ^
+/output/HeCBench/fdtd3d/kernel.h:482:8: error: redefinition of 'result'
+  482 |   bool result = true;
+      |        ^
+/output/HeCBench/fdtd3d/kernel.h:475:8: note: previous definition is here
+  475 |   bool result = true;
+      |        ^
+/output/HeCBench/fdtd3d/kernel.h:1036:9: error: use of undeclared identifier 'RUNTIME_EXCEPTION'
+ 1036 |         RUNTIME_EXCEPTION("CmdArgReader::getArg(): CmdArgReader not initialized.");
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

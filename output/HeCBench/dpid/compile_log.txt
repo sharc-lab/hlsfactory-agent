@@ -1,0 +1,63 @@
+In file included from /output/HeCBench/dpid/kernel.cpp:1:
+/output/HeCBench/dpid/kernel.h:49:17: error: unknown type name 'float4'; did you mean 'float'?
+   49 | void operator+=(float4& output, const float4 value) {
+      |                 ^~~~~~
+      |                 float
+/output/HeCBench/dpid/kernel.h:49:39: error: unknown type name 'float4'; did you mean 'float'?
+   49 | void operator+=(float4& output, const float4 value) {
+      |                                       ^~~~~~
+      |                                       float
+/output/HeCBench/dpid/kernel.h:49:6: error: overloaded 'operator+=' must have at least one parameter of class or enumeration type
+   49 | void operator+=(float4& output, const float4 value) {
+      |      ^
+/output/HeCBench/dpid/kernel.h:50:9: error: member reference base type 'float' is not a structure or union
+   50 |   output.x += value.x;
+      |   ~~~~~~^~
+/output/HeCBench/dpid/kernel.h:50:20: error: member reference base type 'const float' is not a structure or union
+   50 |   output.x += value.x;
+      |               ~~~~~^~
+/output/HeCBench/dpid/kernel.h:51:9: error: member reference base type 'float' is not a structure or union
+   51 |   output.y += value.y;
+      |   ~~~~~~^~
+/output/HeCBench/dpid/kernel.h:51:20: error: member reference base type 'const float' is not a structure or union
+   51 |   output.y += value.y;
+      |               ~~~~~^~
+/output/HeCBench/dpid/kernel.h:52:9: error: member reference base type 'float' is not a structure or union
+   52 |   output.z += value.z;
+      |   ~~~~~~^~
+/output/HeCBench/dpid/kernel.h:52:20: error: member reference base type 'const float' is not a structure or union
+   52 |   output.z += value.z;
+      |               ~~~~~^~
+/output/HeCBench/dpid/kernel.h:53:9: error: member reference base type 'float' is not a structure or union
+   53 |   output.w += value.w;
+      |   ~~~~~~^~
+/output/HeCBench/dpid/kernel.h:53:20: error: member reference base type 'const float' is not a structure or union
+   53 |   output.w += value.w;
+      |               ~~~~~^~
+/output/HeCBench/dpid/kernel.h:62:1: error: 'inline' can only appear on functions and non-local variables
+   62 | inline
+      | ^
+/output/HeCBench/dpid/kernel.cpp:4:16: error: use of undeclared identifier 'float4'; did you mean 'float'?
+    4 | void normalize(float4& var) {
+      |                ^~~~~~
+      |                float
+/output/HeCBench/dpid/kernel.cpp:5:6: error: member reference base type 'float' is not a structure or union
+    5 |   var.x /= var.w;
+      |   ~~~^~
+/output/HeCBench/dpid/kernel.cpp:5:15: error: member reference base type 'float' is not a structure or union
+    5 |   var.x /= var.w;
+      |            ~~~^~
+/output/HeCBench/dpid/kernel.cpp:6:6: error: member reference base type 'float' is not a structure or union
+    6 |   var.y /= var.w;
+      |   ~~~^~
+/output/HeCBench/dpid/kernel.cpp:6:15: error: member reference base type 'float' is not a structure or union
+    6 |   var.y /= var.w;
+      |            ~~~^~
+/output/HeCBench/dpid/kernel.cpp:7:6: error: member reference base type 'float' is not a structure or union
+    7 |   var.z /= var.w;
+      |   ~~~^~
+/output/HeCBench/dpid/kernel.cpp:7:15: error: member reference base type 'float' is not a structure or union
+    7 |   var.z /= var.w;
+      |            ~~~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/bitonic-sort-hip/kernel.cpp:1:
+/output/HeCBench/bitonic-sort-hip/kernel.h:58:10: fatal error: 'hip/hip_runtime.h' file not found
+   58 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.

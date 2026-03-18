@@ -1,0 +1,100 @@
+In file included from /output/HeCBench/scatter/kernel.cpp:1:
+/output/HeCBench/scatter/kernel.h:29:30: error: unknown type name 'ReductionType'
+   29 | template <typename scalar_t, ReductionType REDUCE>
+      |                              ^
+/output/HeCBench/scatter/kernel.h:31:19: error: declaration of 'scalar_t' shadows template parameter
+   31 | template<typename scalar_t, ReductionType REDUCE>
+      |                   ^
+/output/HeCBench/scatter/kernel.h:29:20: note: template parameter is declared here
+   29 | template <typename scalar_t, ReductionType REDUCE>
+      |                    ^
+/output/HeCBench/scatter/kernel.h:31:29: error: unknown type name 'ReductionType'
+   31 | template<typename scalar_t, ReductionType REDUCE>
+      |                             ^
+/output/HeCBench/scatter/kernel.h:31:43: error: declaration of 'REDUCE' shadows template parameter
+   31 | template<typename scalar_t, ReductionType REDUCE>
+      |                                           ^
+/output/HeCBench/scatter/kernel.h:29:44: note: template parameter is declared here
+   29 | template <typename scalar_t, ReductionType REDUCE>
+      |                                            ^
+In file included from /output/HeCBench/scatter/kernel.cpp:1:
+In file included from /output/HeCBench/scatter/kernel.h:38:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cassert:44:
+/usr/include/assert.h:66:1: error: expected unqualified-id
+   66 | __BEGIN_DECLS
+      | ^
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:140:31: note: expanded from macro '__BEGIN_DECLS'
+  140 | # define __BEGIN_DECLS  extern "C" {
+      |                                ^
+In file included from /output/HeCBench/scatter/kernel.cpp:1:
+/output/HeCBench/scatter/kernel.h:200:1: error: use of undeclared identifier '__int_as_float'
+  200 | ATOMIC(Add)
+      | ^
+/output/HeCBench/scatter/kernel.h:178:48: note: expanded from macro 'ATOMIC'
+  178 |                         __float_as_int(OP(val, __int_as_float(assumed))));     \
+      |                                                ^
+/output/HeCBench/scatter/kernel.h:200:1: error: use of undeclared identifier '__longlong_as_double'
+/output/HeCBench/scatter/kernel.h:194:42: note: expanded from macro 'ATOMIC'
+  194 |             __double_as_longlong(OP(val, __longlong_as_double(assumed))));     \
+      |                                          ^
+/output/HeCBench/scatter/kernel.h:222:1: error: use of undeclared identifier '__int_as_float'
+  222 | ATOMIC(Mul)
+      | ^
+/output/HeCBench/scatter/kernel.h:178:48: note: expanded from macro 'ATOMIC'
+  178 |                         __float_as_int(OP(val, __int_as_float(assumed))));     \
+      |                                                ^
+/output/HeCBench/scatter/kernel.h:222:1: error: use of undeclared identifier '__longlong_as_double'
+/output/HeCBench/scatter/kernel.h:194:42: note: expanded from macro 'ATOMIC'
+  194 |             __double_as_longlong(OP(val, __longlong_as_double(assumed))));     \
+      |                                          ^
+/output/HeCBench/scatter/kernel.h:238:1: error: use of undeclared identifier '__int_as_float'
+  238 | ATOMIC(Div)
+      | ^
+/output/HeCBench/scatter/kernel.h:178:48: note: expanded from macro 'ATOMIC'
+  178 |                         __float_as_int(OP(val, __int_as_float(assumed))));     \
+      |                                                ^
+/output/HeCBench/scatter/kernel.h:238:1: error: use of undeclared identifier '__longlong_as_double'
+/output/HeCBench/scatter/kernel.h:194:42: note: expanded from macro 'ATOMIC'
+  194 |             __double_as_longlong(OP(val, __longlong_as_double(assumed))));     \
+      |                                          ^
+/output/HeCBench/scatter/kernel.h:254:1: error: use of undeclared identifier '__int_as_float'
+  254 | ATOMIC(Max)
+      | ^
+/output/HeCBench/scatter/kernel.h:178:48: note: expanded from macro 'ATOMIC'
+  178 |                         __float_as_int(OP(val, __int_as_float(assumed))));     \
+      |                                                ^
+/output/HeCBench/scatter/kernel.h:254:1: error: use of undeclared identifier '__longlong_as_double'
+/output/HeCBench/scatter/kernel.h:194:42: note: expanded from macro 'ATOMIC'
+  194 |             __double_as_longlong(OP(val, __longlong_as_double(assumed))));     \
+      |                                          ^
+/output/HeCBench/scatter/kernel.h:270:1: error: use of undeclared identifier '__int_as_float'
+  270 | ATOMIC(Min)
+      | ^
+/output/HeCBench/scatter/kernel.h:178:48: note: expanded from macro 'ATOMIC'
+  178 |                         __float_as_int(OP(val, __int_as_float(assumed))));     \
+      |                                                ^
+/output/HeCBench/scatter/kernel.h:270:1: error: use of undeclared identifier '__longlong_as_double'
+/output/HeCBench/scatter/kernel.h:194:42: note: expanded from macro 'ATOMIC'
+  194 |             __double_as_longlong(OP(val, __longlong_as_double(assumed))));     \
+      |                                          ^
+/output/HeCBench/scatter/kernel.cpp:5:27: error: unknown type name 'scalar_t'
+    5 | void scatter_kernel(const scalar_t *src_data,
+      |                           ^
+/output/HeCBench/scatter/kernel.cpp:7:16: error: unknown type name 'scalar_t'
+    7 |                scalar_t *out_data, int E, int K, int N, int numel) {
+      |                ^
+/output/HeCBench/scatter/kernel.cpp:33:21: error: use of undeclared identifier 'scalar_t'
+   33 |             Reducer<scalar_t, REDUCE>::atomic_write(out_data + b * N * K + idx * K + k,
+      |                     ^
+In file included from /output/HeCBench/scatter/kernel.cpp:1:
+/output/HeCBench/scatter/kernel.h:200:1: error: use of undeclared identifier 'atomicCAS'
+  200 | ATOMIC(Add)
+      | ^
+/output/HeCBench/scatter/kernel.h:161:15: note: expanded from macro 'ATOMIC'
+  161 |         old = atomicCAS(address_as_ull, assumed, OP(val, (scalar)old));        \
+      |               ^
+/output/HeCBench/scatter/kernel.h:206:51: note: in instantiation of member function 'AtomicAddIntegerImpl<long, 8>::operator()' requested here
+  206 |   AtomicAddIntegerImpl<int64_t, sizeof(int64_t)>()(address, val);
+      |                                                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

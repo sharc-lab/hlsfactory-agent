@@ -1,0 +1,63 @@
+In file included from /output/HeCBench/amgmk-hip/kernel.cpp:1:
+/output/HeCBench/amgmk-hip/kernel.h:54:1: error: unknown type name 'hypre_CSRMatrix'
+   54 | hypre_CSRMatrix *
+      | ^
+/output/HeCBench/amgmk-hip/kernel.h:59:4: error: unknown type name 'hypre_CSRMatrix'
+   59 |    hypre_CSRMatrix  *matrix;
+      |    ^
+/output/HeCBench/amgmk-hip/kernel.h:61:27: error: use of undeclared identifier 'hypre_CSRMatrix'
+   61 |    matrix = hypre_CTAlloc(hypre_CSRMatrix, 1);
+      |                           ^
+/output/HeCBench/amgmk-hip/kernel.h:106:1: error: unknown type name 'hypre_CSRMatrix'
+  106 | hypre_CSRMatrix *
+      | ^
+/output/HeCBench/amgmk-hip/kernel.h:109:4: error: use of undeclared identifier 'hypre_CSRMatrix'; did you mean 'hypre_CSRMatrixRead'?
+  109 |    hypre_CSRMatrix  *matrix;
+      |    ^~~~~~~~~~~~~~~
+      |    hypre_CSRMatrixRead
+/output/HeCBench/amgmk-hip/kernel.h:107:1: note: 'hypre_CSRMatrixRead' declared here
+  107 | hypre_CSRMatrixRead( char *file_name )
+      | ^
+/output/HeCBench/amgmk-hip/kernel.h:109:22: error: use of undeclared identifier 'matrix'
+  109 |    hypre_CSRMatrix  *matrix;
+      |                      ^
+/output/HeCBench/amgmk-hip/kernel.h:111:4: error: unknown type name 'FILE'
+  111 |    FILE    *fp;
+      |    ^
+/output/HeCBench/amgmk-hip/kernel.h:128:9: error: use of undeclared identifier 'fopen'
+  128 |    fp = fopen(file_name, "r");
+      |         ^
+/output/HeCBench/amgmk-hip/kernel.h:132:32: error: expected '(' for function-style cast or type construction
+  132 |    matrix_i = hypre_CTAlloc(int, num_rows + 1);
+      |                             ~~~^
+/output/HeCBench/amgmk-hip/kernel.h:136:4: error: use of undeclared identifier 'matrix'
+  136 |    matrix = hypre_CSRMatrixCreate(num_rows, num_rows, matrix_i[num_rows]);
+      |    ^
+/output/HeCBench/amgmk-hip/kernel.h:137:21: error: use of undeclared identifier 'matrix'
+  137 |    hypre_CSRMatrixI(matrix) = matrix_i;
+      |                     ^
+/output/HeCBench/amgmk-hip/kernel.h:138:30: error: use of undeclared identifier 'matrix'
+  138 |    hypre_CSRMatrixInitialize(matrix);
+      |                              ^
+/output/HeCBench/amgmk-hip/kernel.h:140:32: error: use of undeclared identifier 'matrix'
+  140 |    matrix_j = hypre_CSRMatrixJ(matrix);
+      |                                ^
+/output/HeCBench/amgmk-hip/kernel.h:142:38: error: use of undeclared identifier 'matrix'
+  142 |    matrix_data = hypre_CSRMatrixData(matrix);
+      |                                      ^
+/output/HeCBench/amgmk-hip/kernel.h:146:31: error: use of undeclared identifier 'matrix'
+  146 |    hypre_CSRMatrixNumNonzeros(matrix) = num_nonzeros;
+      |                               ^
+/output/HeCBench/amgmk-hip/kernel.h:147:27: error: use of undeclared identifier 'matrix'
+  147 |    hypre_CSRMatrixNumCols(matrix) = ++max_col;
+      |                           ^
+/output/HeCBench/amgmk-hip/kernel.h:149:11: error: use of undeclared identifier 'matrix'
+  149 |    return matrix;
+      |           ^
+/output/HeCBench/amgmk-hip/kernel.h:324:2: error: unterminated conditional directive
+  324 | #ifdef HYPRE_USE_UMALLOC
+      |  ^
+/output/HeCBench/amgmk-hip/kernel.h:321:2: error: unterminated conditional directive
+  321 | #ifdef HYPRE_USE_PTHREADS
+      |  ^
+19 errors generated.

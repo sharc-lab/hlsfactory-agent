@@ -1,0 +1,24 @@
+In file included from /output/HeCBench/affine/kernel.cpp:1:
+/output/HeCBench/affine/kernel.h:23:1: error: unterminated /* comment
+   23 | /**********
+      | ^
+1 error generated.
+/output/HeCBench/affine/reference.cpp:31:33: error: use of undeclared identifier 'std'
+   31 |       affine[0][0] = lx_expan * std::cos((float)(lx_rot*PI/180.0f));
+      |                                 ^
+/output/HeCBench/affine/reference.cpp:32:33: error: use of undeclared identifier 'std'
+   32 |       affine[0][1] = ly_expan * std::sin((float)(ly_rot*PI/180.0f));
+      |                                 ^
+/output/HeCBench/affine/reference.cpp:33:33: error: use of undeclared identifier 'std'
+   33 |       affine[1][0] = lx_expan * std::sin((float)(lx_rot*PI/180.0f));
+      |                                 ^
+/output/HeCBench/affine/reference.cpp:34:33: error: use of undeclared identifier 'std'
+   34 |       affine[1][1] = ly_expan * std::cos((float)(ly_rot*PI/180.0f));
+      |                                 ^
+/output/HeCBench/affine/reference.cpp:64:23: error: use of undeclared identifier 'std'
+   64 |       m        = (int)std::floor(x_new);
+      |                       ^
+/output/HeCBench/affine/reference.cpp:65:23: error: use of undeclared identifier 'std'
+   65 |       n        = (int)std::floor(y_new);
+      |                       ^
+6 errors generated.

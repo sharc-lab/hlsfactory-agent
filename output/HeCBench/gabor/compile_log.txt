@@ -1,0 +1,23 @@
+PASS: kernel.cpp
+/output/HeCBench/gabor/reference.cpp:8:51: error: use of undeclared identifier 'log'; did you mean 'long'?
+    8 |   const double sx = (double)par_T / (2.0*sqrt(2.0*log(2.0)));
+      |                                                   ^
+/output/HeCBench/gabor/reference.cpp:13:25: error: use of undeclared identifier 'cos'
+   13 |   const double ctheta = cos(theta);
+      |                         ^
+/output/HeCBench/gabor/reference.cpp:14:25: error: use of undeclared identifier 'sin'
+   14 |   const double stheta = sin(theta);
+      |                         ^
+/output/HeCBench/gabor/reference.cpp:17:33: error: use of undeclared identifier 'M_PI'
+   17 |   const double scale = 1.0/(2.0*M_PI*sx*sy);
+      |                                 ^
+/output/HeCBench/gabor/reference.cpp:19:37: error: use of undeclared identifier 'malloc'
+   19 |   double *gabor_spatial = (double*) malloc (height * width * sizeof(double));
+      |                                     ^
+/output/HeCBench/gabor/reference.cpp:29:48: error: use of undeclared identifier 'exp'
+   29 |       *(gabor_spatial + y*width + x) = scale * exp(-0.5*(u*u/sx_2 + v*v/sy_2)) * cos(2.0*M_PI*fx*u);
+      |                                                ^
+/output/HeCBench/gabor/reference.cpp:29:90: error: use of undeclared identifier 'M_PI'
+   29 |       *(gabor_spatial + y*width + x) = scale * exp(-0.5*(u*u/sx_2 + v*v/sy_2)) * cos(2.0*M_PI*fx*u);
+      |                                                                                          ^
+7 errors generated.

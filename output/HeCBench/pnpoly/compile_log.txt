@@ -1,0 +1,66 @@
+In file included from /output/HeCBench/pnpoly/kernel.cpp:1:
+/output/HeCBench/pnpoly/kernel.h:57:11: error: unknown type name 'float2'; did you mean 'float'?
+   57 |     const float2* point,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/pnpoly/kernel.h:58:11: error: unknown type name 'float2'; did you mean 'float'?
+   58 |     const float2* vertex,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/pnpoly/kernel.h:61:11: error: use of undeclared identifier '_bid_x'
+   61 |   int i = _bid_x * BLOCK_SIZE_X * tile_size + _tid_x;
+      |           ^
+/output/HeCBench/pnpoly/kernel.h:61:47: error: use of undeclared identifier '_tid_x'
+   61 |   int i = _bid_x * BLOCK_SIZE_X * tile_size + _tid_x;
+      |                                               ^
+/output/HeCBench/pnpoly/kernel.h:64:5: error: use of undeclared identifier 'float2'; did you mean 'float'?
+   64 |     float2 lpoint[tile_size];
+      |     ^~~~~~
+      |     float
+/output/HeCBench/pnpoly/kernel.h:76:7: error: use of undeclared identifier 'float2'; did you mean 'float'?
+   76 |       float2 vj = vertex[j]; 
+      |       ^~~~~~
+      |       float
+/output/HeCBench/pnpoly/kernel.h:77:7: error: use of undeclared identifier 'float2'; did you mean 'float'?
+   77 |       float2 vk = vertex[k]; 
+      |       ^~~~~~
+      |       float
+/output/HeCBench/pnpoly/kernel.h:79:24: error: member reference base type 'float' is not a structure or union
+   79 |       float slope = (vk.x-vj.x) / (vk.y-vj.y);
+      |                      ~~^~
+/output/HeCBench/pnpoly/kernel.h:79:29: error: member reference base type 'float' is not a structure or union
+   79 |       float slope = (vk.x-vj.x) / (vk.y-vj.y);
+      |                           ~~^~
+/output/HeCBench/pnpoly/kernel.h:79:38: error: member reference base type 'float' is not a structure or union
+   79 |       float slope = (vk.x-vj.x) / (vk.y-vj.y);
+      |                                    ~~^~
+/output/HeCBench/pnpoly/kernel.h:79:43: error: member reference base type 'float' is not a structure or union
+   79 |       float slope = (vk.x-vj.x) / (vk.y-vj.y);
+      |                                         ~~^~
+/output/HeCBench/pnpoly/kernel.h:84:9: error: use of undeclared identifier 'float2'; did you mean 'float'?
+   84 |         float2 p = lpoint[ti];
+      |         ^~~~~~
+      |         float
+/output/HeCBench/pnpoly/kernel.h:86:25: error: member reference base type 'float' is not a structure or union
+   86 |         if (is_between(p.y, vj.y, vk.y) &&         //if p is between vj and vk vertically
+      |                        ~^~
+/output/HeCBench/pnpoly/kernel.h:86:31: error: member reference base type 'float' is not a structure or union
+   86 |         if (is_between(p.y, vj.y, vk.y) &&         //if p is between vj and vk vertically
+      |                             ~~^~
+/output/HeCBench/pnpoly/kernel.h:86:37: error: member reference base type 'float' is not a structure or union
+   86 |         if (is_between(p.y, vj.y, vk.y) &&         //if p is between vj and vk vertically
+      |                                   ~~^~
+/output/HeCBench/pnpoly/kernel.h:87:15: error: member reference base type 'float' is not a structure or union
+   87 |             (p.x < slope * (p.y-vj.y) + vj.x)
+      |              ~^~
+/output/HeCBench/pnpoly/kernel.h:87:30: error: member reference base type 'float' is not a structure or union
+   87 |             (p.x < slope * (p.y-vj.y) + vj.x)
+      |                             ~^~
+/output/HeCBench/pnpoly/kernel.h:87:35: error: member reference base type 'float' is not a structure or union
+   87 |             (p.x < slope * (p.y-vj.y) + vj.x)
+      |                                 ~~^~
+/output/HeCBench/pnpoly/kernel.h:87:43: error: member reference base type 'float' is not a structure or union
+   87 |             (p.x < slope * (p.y-vj.y) + vj.x)
+      |                                         ~~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,56 @@
+/output/HeCBench/grrt/kernel.cpp:26:3: error: use of undeclared identifier 'geodesic'
+   26 |   geodesic(Variables, VariablesIn, ytemp1, ak);
+      |   ^
+/output/HeCBench/grrt/kernel.cpp:37:3: error: use of undeclared identifier 'geodesic'
+   37 |   geodesic(Variables, VariablesIn, ytemp2, ak);
+      |   ^
+/output/HeCBench/grrt/kernel.cpp:49:3: error: use of undeclared identifier 'geodesic'
+   49 |   geodesic(Variables, VariablesIn, ytemp3, ak);
+      |   ^
+/output/HeCBench/grrt/kernel.cpp:60:3: error: use of undeclared identifier 'geodesic'
+   60 |   geodesic(Variables, VariablesIn, ytemp4, ak);
+      |   ^
+/output/HeCBench/grrt/kernel.cpp:69:3: error: use of undeclared identifier 'geodesic'
+   69 |   geodesic(Variables, VariablesIn, ytemp5, ak);
+      |   ^
+/output/HeCBench/grrt/kernel.cpp:127:3: error: use of undeclared identifier 'memcpy'; did you mean 'wmemcpy'?
+  127 |   memcpy(y, ytemp, N * sizeof(double));
+      |   ^~~~~~
+      |   wmemcpy
+/usr/include/wchar.h:287:17: note: 'wmemcpy' declared here
+  287 | extern wchar_t *wmemcpy (wchar_t *__restrict __s1,
+      |                 ^
+/output/HeCBench/grrt/kernel.cpp:127:10: error: cannot initialize a parameter of type 'wchar_t *' with an lvalue of type 'double *'
+  127 |   memcpy(y, ytemp, N * sizeof(double));
+      |          ^
+/usr/include/wchar.h:287:46: note: passing argument to parameter '__s1' here
+  287 | extern wchar_t *wmemcpy (wchar_t *__restrict __s1,
+      |                                              ^
+/output/HeCBench/grrt/kernel.cpp:202:14: error: use of undeclared identifier 'Te_grids'
+  202 |   double d = Te_grids*(log(Te / Te_min)/ log(Te_max / Te_min));
+      |              ^
+/output/HeCBench/grrt/kernel.cpp:202:33: error: use of undeclared identifier 'Te_min'
+  202 |   double d = Te_grids*(log(Te / Te_min)/ log(Te_max / Te_min));
+      |                                 ^
+/output/HeCBench/grrt/kernel.cpp:202:46: error: use of undeclared identifier 'Te_max'
+  202 |   double d = Te_grids*(log(Te / Te_min)/ log(Te_max / Te_min));
+      |                                              ^
+/output/HeCBench/grrt/kernel.cpp:202:55: error: use of undeclared identifier 'Te_min'
+  202 |   double d = Te_grids*(log(Te / Te_min)/ log(Te_max / Te_min));
+      |                                                       ^
+/output/HeCBench/grrt/kernel.cpp:205:32: error: use of undeclared identifier 'K2_tab'
+  205 |   return (1 - (double)(d-i)) * K2_tab[i] + (double)(d-i) * K2_tab[i+1];
+      |                                ^
+/output/HeCBench/grrt/kernel.cpp:205:60: error: use of undeclared identifier 'K2_tab'
+  205 |   return (1 - (double)(d-i)) * K2_tab[i] + (double)(d-i) * K2_tab[i+1];
+      |                                                            ^
+/output/HeCBench/grrt/kernel.cpp:217:10: error: use of undeclared identifier 'Te_min'
+  217 |   if (Te<Te_min){ 
+      |          ^
+/output/HeCBench/grrt/kernel.cpp:299:21: error: use of undeclared identifier 'geodesic'
+  299 |                     geodesic(Variables, VariablesIn, y, dydx);
+      |                     ^
+/output/HeCBench/grrt/kernel.cpp:437:21: error: use of undeclared identifier 'geodesic'
+  437 |                     geodesic(Variables, VariablesIn, y, dydx);
+      |                     ^
+16 errors generated.

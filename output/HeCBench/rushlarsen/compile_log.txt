@@ -1,0 +1,5 @@
+PASS: kernel.cpp
+/output/HeCBench/rushlarsen/reference.cpp:2:10: fatal error: 'utils.h' file not found
+    2 | #include "utils.h"
+      |          ^~~~~~~~~
+1 error generated.

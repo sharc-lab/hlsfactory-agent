@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/pcc-hip/kernel.cpp:1:
+/output/HeCBench/pcc-hip/kernel.h:20:10: fatal error: 'hipblas/hipblas.h' file not found
+   20 | #include <hipblas/hipblas.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.

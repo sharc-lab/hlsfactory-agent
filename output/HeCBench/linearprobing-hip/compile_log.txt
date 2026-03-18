@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/linearprobing-hip/kernel.cpp:1:
+/output/HeCBench/linearprobing-hip/kernel.h:34:13: error: use of undeclared identifier 'KeyValue'
+   34 | std::vector<KeyValue> iterate_hashtable(KeyValue* pHashTable)
+      |             ^
+/output/HeCBench/linearprobing-hip/kernel.h:34:41: error: unknown type name 'KeyValue'
+   34 | std::vector<KeyValue> iterate_hashtable(KeyValue* pHashTable)
+      |                                         ^
+/output/HeCBench/linearprobing-hip/kernel.h:37:3: error: use of undeclared identifier 'hipMalloc'
+   37 |   hipMalloc((void**) &device_num_kvs, sizeof(uint32_t));
+      |   ^
+/output/HeCBench/linearprobing-hip/kernel.h:38:3: error: use of undeclared identifier 'hipMemset'
+   38 |   hipMemset(device_num_kvs, 0, sizeof(uint32_t));
+      |   ^
+/output/HeCBench/linearprobing-hip/kernel.h:40:3: error: unknown type name 'KeyValue'
+   40 |   KeyValue* device_kvs;
+      |   ^
+/output/HeCBench/linearprobing-hip/kernel.h:41:42: error: use of undeclared identifier 'KeyValue'
+   41 |   hipMalloc((void**) &device_kvs, sizeof(KeyValue) * kNumKeyValues);
+      |                                          ^
+/output/HeCBench/linearprobing-hip/kernel.h:41:54: error: use of undeclared identifier 'kNumKeyValues'
+   41 |   hipMalloc((void**) &device_kvs, sizeof(KeyValue) * kNumKeyValues);
+      |                                                      ^
+/output/HeCBench/linearprobing-hip/kernel.h:44:19: error: use of undeclared identifier 'kHashTableCapacity'
+   44 |   int gridsize = (kHashTableCapacity + threadblocksize - 1) / threadblocksize;
+      |                   ^
+/output/HeCBench/linearprobing-hip/kernel.h:46:3: error: use of undeclared identifier 'hipDeviceSynchronize'
+   46 |   hipDeviceSynchronize();
+      |   ^
+/output/HeCBench/linearprobing-hip/kernel.h:49:22: error: use of undeclared identifier 'k_iterate_hashtable'
+   49 |   hipLaunchKernelGGL(k_iterate_hashtable, gridsize, threadblocksize, 0, 0, pHashTable, device_kvs, device_num_kvs);
+      |                      ^
+/output/HeCBench/linearprobing-hip/kernel.h:51:3: error: use of undeclared identifier 'hipDeviceSynchronize'
+   51 |   hipDeviceSynchronize();
+      |   ^
+/output/HeCBench/linearprobing-hip/kernel.h:57:57: error: use of undeclared identifier 'hipMemcpyDeviceToHost'
+   57 |   hipMemcpy(&num_kvs, device_num_kvs, sizeof(uint32_t), hipMemcpyDeviceToHost);
+      |                                                         ^
+/output/HeCBench/linearprobing-hip/kernel.h:59:15: error: use of undeclared identifier 'KeyValue'
+   59 |   std::vector<KeyValue> kvs;
+      |               ^
+/output/HeCBench/linearprobing-hip/kernel.h:62:44: error: use of undeclared identifier 'KeyValue'
+   62 |   hipMemcpy(kvs.data(), device_kvs, sizeof(KeyValue) * num_kvs, hipMemcpyDeviceToHost);
+      |                                            ^
+/output/HeCBench/linearprobing-hip/kernel.h:62:65: error: use of undeclared identifier 'hipMemcpyDeviceToHost'
+   62 |   hipMemcpy(kvs.data(), device_kvs, sizeof(KeyValue) * num_kvs, hipMemcpyDeviceToHost);
+      |                                                                 ^
+/output/HeCBench/linearprobing-hip/kernel.h:65:3: error: use of undeclared identifier 'hipFree'
+   65 |   hipFree(device_num_kvs);
+      |   ^
+/output/HeCBench/linearprobing-hip/kernel.h:83:13: error: use of undeclared identifier 'KeyValue'
+   83 | std::vector<KeyValue> generate_random_keyvalues(std::mt19937& rnd, uint32_t numkvs)
+      |             ^
+/output/HeCBench/linearprobing-hip/kernel.h:85:50: error: use of undeclared identifier 'kEmpty'
+   85 |   std::uniform_int_distribution<uint32_t> dis(0, kEmpty - 1);
+      |                                                  ^
+/output/HeCBench/linearprobing-hip/kernel.h:87:15: error: use of undeclared identifier 'KeyValue'
+   87 |   std::vector<KeyValue> kvs;
+      |               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

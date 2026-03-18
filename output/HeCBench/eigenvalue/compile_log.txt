@@ -1,0 +1,26 @@
+In file included from /output/HeCBench/eigenvalue/kernel.cpp:1:
+/output/HeCBench/eigenvalue/kernel.h:75:1: error: unterminated /* comment
+   75 | /*
+      | ^
+1 error generated.
+/output/HeCBench/eigenvalue/reference.cpp:2:1: error: unknown type name 'uint'; did you mean 'int'?
+    2 | uint calNumEigenValuesLessThan(const float *diagonal,
+      | ^~~~
+      | int
+/output/HeCBench/eigenvalue/reference.cpp:4:38: error: unknown type name 'uint'; did you mean 'int'?
+    4 |                                const uint  length,
+      |                                      ^~~~
+      |                                      int
+/output/HeCBench/eigenvalue/reference.cpp:7:1: error: unknown type name 'uint'; did you mean 'int'?
+    7 | uint eigenValueCPUReference(float * diagonal,
+      | ^~~~
+      | int
+/output/HeCBench/eigenvalue/reference.cpp:9:29: error: unknown type name 'uint'; did you mean 'int'?
+    9 |                             uint    length,
+      |                             ^~~~
+      |                             int
+/output/HeCBench/eigenvalue/reference.cpp:20:39: error: unknown type name 'uint'; did you mean 'int'?
+   20 |                                 const uint  length);
+      |                                       ^~~~
+      |                                       int
+5 errors generated.

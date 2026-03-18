@@ -1,0 +1,25 @@
+/output/HeCBench/softmax/kernel.cpp:51:30: error: use of undeclared identifier 'warp'
+   51 |             int i = _bid_x * warp.meta_group_size() + warp.meta_group_rank();
+      |                              ^
+/output/HeCBench/softmax/kernel.cpp:51:55: error: use of undeclared identifier 'warp'
+   51 |             int i = _bid_x * warp.meta_group_size() + warp.meta_group_rank();
+      |                                                       ^
+/output/HeCBench/softmax/kernel.cpp:54:26: error: use of undeclared identifier 'warp'
+   54 |             for (int j = warp.thread_rank(); j < sliceSize; j += warp.size()) {
+      |                          ^
+/output/HeCBench/softmax/kernel.cpp:54:66: error: use of undeclared identifier 'warp'
+   54 |             for (int j = warp.thread_rank(); j < sliceSize; j += warp.size()) {
+      |                                                                  ^
+/output/HeCBench/softmax/kernel.cpp:59:26: error: use of undeclared identifier 'warp'
+   59 |             for (int j = warp.thread_rank(); j < sliceSize; j += warp.size()) {
+      |                          ^
+/output/HeCBench/softmax/kernel.cpp:59:66: error: use of undeclared identifier 'warp'
+   59 |             for (int j = warp.thread_rank(); j < sliceSize; j += warp.size()) {
+      |                                                                  ^
+/output/HeCBench/softmax/kernel.cpp:63:26: error: use of undeclared identifier 'warp'
+   63 |             for (int j = warp.thread_rank(); j < sliceSize; j += warp.size()) {
+      |                          ^
+/output/HeCBench/softmax/kernel.cpp:63:66: error: use of undeclared identifier 'warp'
+   63 |             for (int j = warp.thread_rank(); j < sliceSize; j += warp.size()) {
+      |                                                                  ^
+8 errors generated.

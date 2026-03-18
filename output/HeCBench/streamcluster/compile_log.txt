@@ -1,0 +1,29 @@
+In file included from /output/HeCBench/streamcluster/kernel.cpp:1:
+/output/HeCBench/streamcluster/kernel.h:125:11: error: unknown type name 'Point_Struct'
+  125 |     const Point_Struct * p_d_acc,       
+      |           ^
+/output/HeCBench/streamcluster/kernel.h:137:24: error: use of undeclared identifier '_tid_x'
+  137 |   const int local_id = _tid_x; 
+      |                        ^
+/output/HeCBench/streamcluster/kernel.h:138:37: error: use of undeclared identifier '_bid_x'
+  138 |   const int thread_id = BLOCK_DIM_X*_bid_x+local_id;
+      |                                     ^
+/output/HeCBench/streamcluster/kernel.h:425:64: error: use of undeclared identifier 'cudaMemcpyHostToDevice'
+  425 |       cudaMemcpyAsync(coord_d, coord_h, sizeof(float)*num*dim, cudaMemcpyHostToDevice, 0);
+      |                                                                ^
+/output/HeCBench/streamcluster/kernel.h:452:68: error: use of undeclared identifier 'cudaMemcpyHostToDevice'
+  452 |     cudaMemcpyAsync(center_table_d, center_table, sizeof(int)*num, cudaMemcpyHostToDevice, 0);
+      |                                                                    ^
+/output/HeCBench/streamcluster/kernel.h:453:57: error: use of undeclared identifier 'cudaMemcpyHostToDevice'
+  453 |     cudaMemcpyAsync(p_d, p_h, sizeof(Point_Struct)*num, cudaMemcpyHostToDevice, 0);
+      |                                                         ^
+/output/HeCBench/streamcluster/kernel.h:469:5: error: use of undeclared identifier 'cudaMemsetAsync'
+  469 |     cudaMemsetAsync(switch_membership_d, 0, num * sizeof(char), 0);
+      |     ^
+/output/HeCBench/streamcluster/kernel.h:471:5: error: use of undeclared identifier 'cudaMemsetAsync'
+  471 |     cudaMemsetAsync(work_mem_d, 0, num*(K+1)*sizeof(float), 0);
+      |     ^
+/output/HeCBench/streamcluster/kernel.h:479:21: error: extraneous ')' before ';'
+  479 |       num, dim, x, K);
+      |                     ^
+9 errors generated.

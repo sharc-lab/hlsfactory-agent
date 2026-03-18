@@ -1,0 +1,4 @@
+/output/HeCBench/loopback/kernel.cpp:61:14: error: use of undeclared identifier '_tid_x'
+   61 |   int base = _tid_x;
+      |              ^
+1 error generated.

@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/bfs/kernel.cpp:1:
+/output/HeCBench/bfs/kernel.h:25:10: fatal error: 'util.h' file not found
+   25 | #include "util.h"
+      |          ^~~~~~~~
+1 error generated.

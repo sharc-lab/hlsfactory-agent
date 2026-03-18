@@ -1,0 +1,17 @@
+In file included from /output/HeCBench/filter/kernel.cpp:1:
+/output/HeCBench/filter/kernel.h:17:1: error: unterminated /* comment
+   17 | /**
+      | ^
+/output/HeCBench/filter/kernel.cpp:7:6: error: use of undeclared identifier 'g'
+    7 |   if(g.thread_rank() == 0)
+      |      ^
+/output/HeCBench/filter/kernel.cpp:8:25: error: use of undeclared identifier 'g'
+    8 |     warp_res = (*ctr += g.size());
+      |                         ^
+/output/HeCBench/filter/kernel.cpp:9:10: error: use of undeclared identifier 'g'
+    9 |   return g.shfl(warp_res, 0) + g.thread_rank();
+      |          ^
+/output/HeCBench/filter/kernel.cpp:9:32: error: use of undeclared identifier 'g'
+    9 |   return g.shfl(warp_res, 0) + g.thread_rank();
+      |                                ^
+5 errors generated.

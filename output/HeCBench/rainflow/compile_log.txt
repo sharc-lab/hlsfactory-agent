@@ -1,0 +1,36 @@
+/output/HeCBench/rainflow/kernel.cpp:19:44: error: unknown type name 'double3'; did you mean 'double'?
+   19 |              double *extrema, int* points, double3 *results,
+      |                                            ^~~~~~~
+      |                                            double
+/output/HeCBench/rainflow/kernel.cpp:38:27: error: use of undeclared identifier 'make_double3'
+   38 |         results[++ridx] = make_double3( 0.5, yRange, yMean );
+      |                           ^
+/output/HeCBench/rainflow/kernel.cpp:45:27: error: use of undeclared identifier 'make_double3'
+   45 |         results[++ridx] = make_double3( 1.0, yRange, yMean );
+      |                           ^
+/output/HeCBench/rainflow/kernel.cpp:56:23: error: use of undeclared identifier 'make_double3'
+   56 |     results[++ridx] = make_double3 ( 0.5, range, mean );
+      |                       ^
+/output/HeCBench/rainflow/kernel.cpp:67:21: error: unknown type name 'double3'; did you mean 'double'?
+   67 |                     double3 * results,
+      |                     ^~~~~~~
+      |                     double
+5 errors generated.
+/output/HeCBench/rainflow/reference.cpp:26:44: error: unknown type name 'double3'; did you mean 'double'?
+   26 |              double *extrema, int* points, double3 *results, int *results_length )
+      |                                            ^~~~~~~
+      |                                            double
+/output/HeCBench/rainflow/reference.cpp:44:27: error: excess elements in scalar initializer
+   44 |         results[++ridx] = { 0.5, yRange, yMean };
+      |                           ^    ~~~~~~~~~~~~~~~~~
+/output/HeCBench/rainflow/reference.cpp:51:27: error: excess elements in scalar initializer
+   51 |         results[++ridx] = { 1.0, yRange, yMean };
+      |                           ^    ~~~~~~~~~~~~~~~~~
+/output/HeCBench/rainflow/reference.cpp:62:23: error: excess elements in scalar initializer
+   62 |     results[++ridx] = { 0.5, range, mean };
+      |                       ^    ~~~~~~~~~~~~~~~
+/output/HeCBench/rainflow/reference.cpp:72:21: error: unknown type name 'double3'; did you mean 'double'?
+   72 |                     double3 *results,
+      |                     ^~~~~~~
+      |                     double
+5 errors generated.

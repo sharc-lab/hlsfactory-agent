@@ -1,0 +1,44 @@
+PASS: kernel.cpp
+/output/HeCBench/car/reference.cpp:9:11: error: unknown type name 'params'
+    9 |     const params p,
+      |           ^
+/output/HeCBench/car/reference.cpp:21:27: error: use of undeclared identifier 'sqrtf'
+   21 |   const int k_size = (int)sqrtf(float(kernels_size));
+      |                           ^
+/output/HeCBench/car/reference.cpp:35:41: error: called object type 'const float *' is not a function or function pointer
+   35 |         const float offset_h = offsets_h(idb,k_size * k_y + k_x,idy,idx) * offset_unit;
+      |                                ~~~~~~~~~^
+/output/HeCBench/car/reference.cpp:36:41: error: called object type 'const float *' is not a function or function pointer
+   36 |         const float offset_v = offsets_v(idb,k_size * k_y + k_x,idy,idx) * offset_unit;
+      |                                ~~~~~~~~~^
+/output/HeCBench/car/reference.cpp:40:35: error: use of undeclared identifier 'floorf'
+   40 |         const float alpha = p_x - floorf(p_x);
+      |                                   ^
+/output/HeCBench/car/reference.cpp:41:34: error: use of undeclared identifier 'floorf'
+   41 |         const float beta = p_y - floorf(p_y);
+      |                                  ^
+/output/HeCBench/car/reference.cpp:43:46: error: use of undeclared identifier 'floorf'
+   43 |         const int xL = std::max(std::min(int(floorf(p_x)), w + 2 * padding - 1), 0);
+      |                                              ^
+/output/HeCBench/car/reference.cpp:45:46: error: use of undeclared identifier 'floorf'
+   45 |         const int yT = std::max(std::min(int(floorf(p_y)), h + 2 * padding - 1), 0);
+      |                                              ^
+/output/HeCBench/car/reference.cpp:48:55: error: called object type 'const float *' is not a function or function pointer
+   48 |         float val = (1.f - alpha) * (1.f - beta) * img(idb,idc,yT,xL);
+      |                                                    ~~~^
+/output/HeCBench/car/reference.cpp:49:42: error: called object type 'const float *' is not a function or function pointer
+   49 |         val += alpha * (1.f - beta) * img(idb,idc,yT,xR);
+      |                                       ~~~^
+/output/HeCBench/car/reference.cpp:50:42: error: called object type 'const float *' is not a function or function pointer
+   50 |         val += (1.f - alpha) * beta * img(idb,idc,yB,xL);
+      |                                       ~~~^
+/output/HeCBench/car/reference.cpp:51:34: error: called object type 'const float *' is not a function or function pointer
+   51 |         val += alpha * beta * img(idb,idc,yB,xR);
+      |                               ~~~^
+/output/HeCBench/car/reference.cpp:52:32: error: called object type 'const float *' is not a function or function pointer
+   52 |         result += val * kernels(idb,k_size * k_y + k_x,idy,idx);
+      |                         ~~~~~~~^
+/output/HeCBench/car/reference.cpp:55:11: error: called object type 'float *' is not a function or function pointer
+   55 |     output(idb,idc,idy,idx) = result;
+      |     ~~~~~~^
+14 errors generated.

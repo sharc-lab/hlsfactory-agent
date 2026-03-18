@@ -1,0 +1,17 @@
+In file included from /output/HeCBench/aligned-types/kernel.cpp:1:
+/output/HeCBench/aligned-types/kernel.h:78:1: error: a type specifier is required for all declarations
+   78 | uchar4_aligned;
+      | ^
+/output/HeCBench/aligned-types/kernel.h:82:1: error: a type specifier is required for all declarations
+   82 | uint2_aligned;
+      | ^
+/output/HeCBench/aligned-types/kernel.h:84:1: error: a type specifier is required for all declarations
+   84 | uint3_aligned;
+      | ^
+/output/HeCBench/aligned-types/kernel.h:86:1: error: a type specifier is required for all declarations
+   86 | uint4_aligned;
+      | ^
+/output/HeCBench/aligned-types/kernel.h:97:1: error: a type specifier is required for all declarations
+   97 | uint8_aligned;
+      | ^
+5 errors generated.

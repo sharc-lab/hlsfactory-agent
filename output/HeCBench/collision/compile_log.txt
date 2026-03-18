@@ -1,0 +1,93 @@
+In file included from /output/HeCBench/collision/kernel.cpp:1:
+/output/HeCBench/collision/kernel.h:88:20: error: declaration of 'T' shadows template parameter
+   88 | template <typename T, typename Comparator>
+      |                    ^
+/output/HeCBench/collision/kernel.h:78:20: note: template parameter is declared here
+   78 | template <typename T, typename Comparator>
+      |                    ^
+/output/HeCBench/collision/kernel.h:88:32: error: declaration of 'Comparator' shadows template parameter
+   88 | template <typename T, typename Comparator>
+      |                                ^
+/output/HeCBench/collision/kernel.h:78:32: note: template parameter is declared here
+   78 | template <typename T, typename Comparator>
+      |                                ^
+/output/HeCBench/collision/kernel.h:91:20: error: declaration of 'T' shadows template parameter
+   91 | template <typename T>
+      |                    ^
+/output/HeCBench/collision/kernel.h:88:20: note: template parameter is declared here
+   88 | template <typename T, typename Comparator>
+      |                    ^
+/output/HeCBench/collision/kernel.h:100:20: error: declaration of 'T' shadows template parameter
+  100 | template <typename T>
+      |                    ^
+/output/HeCBench/collision/kernel.h:91:20: note: template parameter is declared here
+   91 | template <typename T>
+      |                    ^
+/output/HeCBench/collision/kernel.h:78:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   78 | template <typename T, typename Comparator>
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   79 | 
+   80 | /// Defines a bitonic sort network to exchange 'V' according to
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   81 | /// `SWAP()`'s compare and exchange mechanism across the warp, ordered
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   82 | /// according to the comparator `comp`. In other words, if `comp` is
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   83 | /// `GreaterThan<T>`, then lane 0 will contain the highest `val`
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   84 | /// presented across the warp
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   85 | ///
+      | ~~~
+   86 | /// See also 
+      | ~~~~~~~~~~~~
+   87 | /// http://on-demand.gputechconf.com/gtc/2013/presentations/S3174-Kepler-Shuffle-Tips-Tricks.pdf
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   88 | template <typename T, typename Comparator>
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   89 | 
+   90 | /// Determine if two warp threads have the same value (a collision).
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   91 | template <typename T>
+      | ~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/collision/kernel.h:114:24: error: use of undeclared identifier 'cudaMemcpyDeviceToHost'
+  114 |                        cudaMemcpyDeviceToHost);
+      |                        ^
+/output/HeCBench/collision/kernel.cpp:4:10: error: deduction guide cannot be declared 'inline'
+    4 |   inline Pair() {}
+      |   ~~~~~~ ^
+/output/HeCBench/collision/kernel.cpp:4:10: error: deduction guide declaration without trailing return type
+/output/HeCBench/collision/kernel.cpp:6:15: error: unknown type name 'K'
+    6 |   inline Pair(K key, V value)
+      |               ^
+/output/HeCBench/collision/kernel.cpp:6:22: error: unknown type name 'V'
+    6 |   inline Pair(K key, V value)
+      |                      ^
+/output/HeCBench/collision/kernel.cpp:6:10: error: deduction guide cannot be declared 'inline'
+    6 |   inline Pair(K key, V value)
+      |   ~~~~~~ ^
+/output/HeCBench/collision/kernel.cpp:6:10: error: deduction guide declaration without trailing return type
+/output/HeCBench/collision/kernel.cpp:7:11: error: use of undeclared identifier 'key'
+    7 |       : k(key), v(value) {}
+      |           ^
+/output/HeCBench/collision/kernel.cpp:7:19: error: use of undeclared identifier 'value'; did you mean 'false'?
+    7 |       : k(key), v(value) {}
+      |                   ^~~~~
+      |                   false
+/output/HeCBench/collision/kernel.cpp:14:10: error: use of undeclared identifier '_tid_x'
+   14 |   return _tid_x % WARP_SIZE;
+      |          ^
+/output/HeCBench/collision/kernel.cpp:17:36: error: unknown type name 'T'
+   17 |   static inline bool compare(const T lhs, const T rhs) {
+      |                                    ^
+/output/HeCBench/collision/kernel.cpp:17:49: error: unknown type name 'T'
+   17 |   static inline bool compare(const T lhs, const T rhs) {
+      |                                                 ^
+/output/HeCBench/collision/kernel.cpp:21:36: error: unknown type name 'T'
+   21 |   static inline bool compare(const T lhs, const T rhs) {
+      |                                    ^
+/output/HeCBench/collision/kernel.cpp:21:49: error: unknown type name 'T'
+   21 |   static inline bool compare(const T lhs, const T rhs) {
+      |                                                 ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

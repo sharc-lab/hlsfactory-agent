@@ -1,0 +1,21 @@
+In file included from /output/HeCBench/crc64/kernel.cpp:1:
+/output/HeCBench/crc64/kernel.h:200:5: error: excess elements in array initializer
+  200 |     UINT64_C(0xc4e9bffd7bd26add), UINT64_C(0xfbe25eb7eab80716),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/stdint.h:251:23: note: expanded from macro 'UINT64_C'
+  251 | #  define UINT64_C(c)   c ## UL
+      |                         ^~~~~~~
+<scratch space>:109:1: note: expanded from here
+  109 | 0xc4e9bffd7bd26addUL
+      | ^~~~~~~~~~~~~~~~~~~~
+In file included from /output/HeCBench/crc64/kernel.cpp:1:
+/output/HeCBench/crc64/kernel.h:663:5: error: excess elements in array initializer
+  663 |     UINT64_C(0xf30e6db88ccca103), UINT64_C(0xbe6c2606ff77684f),
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/stdint.h:251:23: note: expanded from macro 'UINT64_C'
+  251 | #  define UINT64_C(c)   c ## UL
+      |                         ^~~~~~~
+<scratch space>:105:1: note: expanded from here
+  105 | 0xf30e6db88ccca103UL
+      | ^~~~~~~~~~~~~~~~~~~~
+2 errors generated.

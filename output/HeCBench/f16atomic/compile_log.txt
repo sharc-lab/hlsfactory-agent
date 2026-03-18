@@ -1,0 +1,40 @@
+/output/HeCBench/f16atomic/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/f16atomic/kernel.cpp:33:5: error: extraneous closing brace ('}')
+   33 |     }
+      |     ^
+/output/HeCBench/f16atomic/kernel.cpp:34:1: error: extraneous closing brace ('}')
+   34 | }
+      | ^
+/output/HeCBench/f16atomic/kernel.cpp:36:27: error: unknown type name '__nv_bfloat16'
+   36 | void f16AtomicOnGlobalMem(__nv_bfloat16* result, int n)
+      |                           ^
+/output/HeCBench/f16atomic/kernel.cpp:38:13: error: use of undeclared identifier '_bid_x'
+   38 |   int tid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |             ^
+/output/HeCBench/f16atomic/kernel.cpp:38:36: error: use of undeclared identifier '_tid_x'
+   38 |   int tid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                    ^
+/output/HeCBench/f16atomic/kernel.cpp:40:3: error: unknown type name '__nv_bfloat162'
+   40 |   __nv_bfloat162 *result_v = reinterpret_cast<__nv_bfloat162*>(result);
+      |   ^
+/output/HeCBench/f16atomic/kernel.cpp:40:47: error: unknown type name '__nv_bfloat162'
+   40 |   __nv_bfloat162 *result_v = reinterpret_cast<__nv_bfloat162*>(result);
+      |                                               ^
+/output/HeCBench/f16atomic/kernel.cpp:41:3: error: unknown type name '__nv_bfloat162'
+   41 |   __nv_bfloat162 val {ZERO_BF16, ONE_BF16};
+      |   ^
+/output/HeCBench/f16atomic/kernel.cpp:41:23: error: use of undeclared identifier '__ushort_as_bfloat16'
+   41 |   __nv_bfloat162 val {ZERO_BF16, ONE_BF16};
+      |                       ^
+/output/HeCBench/f16atomic/kernel.h:28:19: note: expanded from macro 'ZERO_BF16'
+   28 | #define ZERO_BF16 __ushort_as_bfloat16((unsigned short)0x0000U)
+      |                   ^
+/output/HeCBench/f16atomic/kernel.cpp:41:34: error: use of undeclared identifier '__ushort_as_bfloat16'
+   41 |   __nv_bfloat162 val {ZERO_BF16, ONE_BF16};
+      |                                  ^
+/output/HeCBench/f16atomic/kernel.h:29:19: note: expanded from macro 'ONE_BF16'
+   29 | #define ONE_BF16  __ushort_as_bfloat16((unsigned short)0x3f80U)
+      |                   ^
+11 errors generated.

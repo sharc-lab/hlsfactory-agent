@@ -1,0 +1,43 @@
+In file included from /output/HeCBench/jenkins-hash/kernel.cpp:1:
+/output/HeCBench/jenkins-hash/kernel.h:24:1: error: unterminated /* comment
+   24 | /*
+      | ^
+/output/HeCBench/jenkins-hash/kernel.cpp:29:3: error: use of undeclared identifier 'final'
+   29 |   final(a,b,c);
+      |   ^
+/output/HeCBench/jenkins-hash/kernel.cpp:56:29: error: unknown type name 'uint3'; did you mean 'uint'?
+   56 |             auto k = (const uint3*) (keys+id*16);  // each key has at most 15 words (60 bytes)
+      |                             ^~~~~
+      |                             uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+/output/HeCBench/jenkins-hash/kernel.cpp:63:13: error: unknown type name 'uint3'; did you mean 'uint'?
+   63 |             uint3 v;
+      |             ^~~~~
+      |             uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+/output/HeCBench/jenkins-hash/kernel.cpp:66:19: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+   66 |             a += v.x;
+      |                  ~^~
+/output/HeCBench/jenkins-hash/kernel.cpp:67:19: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+   67 |             b += v.y;
+      |                  ~^~
+/output/HeCBench/jenkins-hash/kernel.cpp:68:19: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+   68 |             c += v.z;
+      |                  ~^~
+/output/HeCBench/jenkins-hash/kernel.cpp:69:13: error: use of undeclared identifier 'mix'
+   69 |             mix(a,b,c);
+      |             ^
+/output/HeCBench/jenkins-hash/kernel.cpp:84:46: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+   84 |             out[id] = mixRemainder(a, b, c, v.x, v.y, v.z, length);
+      |                                             ~^~
+/output/HeCBench/jenkins-hash/kernel.cpp:84:51: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+   84 |             out[id] = mixRemainder(a, b, c, v.x, v.y, v.z, length);
+      |                                                  ~^~
+/output/HeCBench/jenkins-hash/kernel.cpp:84:56: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+   84 |             out[id] = mixRemainder(a, b, c, v.x, v.y, v.z, length);
+      |                                                       ~^~
+11 errors generated.

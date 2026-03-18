@@ -1,0 +1,36 @@
+In file included from /output/HeCBench/swish/kernel.cpp:1:
+/output/HeCBench/swish/kernel.h:31:20: error: declaration of 'T' shadows template parameter
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/swish/kernel.h:29:20: note: template parameter is declared here
+   29 | template <typename T>
+      |                    ^
+/output/HeCBench/swish/kernel.h:33:19: error: declaration of 'T' shadows template parameter
+   33 | template<typename T>
+      |                   ^
+/output/HeCBench/swish/kernel.h:31:20: note: template parameter is declared here
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/swish/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/swish/kernel.cpp:27:11: error: unknown type name 'T'
+   27 |     const T* X,
+      |           ^
+/output/HeCBench/swish/kernel.cpp:28:11: error: unknown type name 'T'
+   28 |     const T* Y,
+      |           ^
+/output/HeCBench/swish/kernel.cpp:29:11: error: unknown type name 'T'
+   29 |     const T* dY,
+      |           ^
+/output/HeCBench/swish/kernel.cpp:30:11: error: unknown type name 'T'
+   30 |           T* dX)
+      |           ^
+/output/HeCBench/swish/kernel.cpp:45:30: error: use of undeclared identifier 'T'
+   45 |             (__ldg(Y + i) + (T(1) - __ldg(Y + i)) / (T(1) + exp(-__ldg(X + i))));
+      |                              ^
+/output/HeCBench/swish/kernel.cpp:45:54: error: use of undeclared identifier 'T'
+   45 |             (__ldg(Y + i) + (T(1) - __ldg(Y + i)) / (T(1) + exp(-__ldg(X + i))));
+      |                                                      ^
+9 errors generated.
+PASS: reference.cpp

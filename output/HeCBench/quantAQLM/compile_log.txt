@@ -1,0 +1,66 @@
+/output/HeCBench/quantAQLM/kernel.cpp:6:11: error: unknown type name 'int4'; did you mean 'int'?
+    6 |     const int4*  A, const int4*  B,
+      |           ^~~~
+      |           int
+/output/HeCBench/quantAQLM/kernel.cpp:6:27: error: unknown type name 'int4'; did you mean 'int'?
+    6 |     const int4*  A, const int4*  B,
+      |                           ^~~~
+      |                           int
+/output/HeCBench/quantAQLM/kernel.cpp:7:5: error: unknown type name 'int4'; did you mean 'int'?
+    7 |     int4*  C, const int4*  codebook, const int prob_m,
+      |     ^~~~
+      |     int
+/output/HeCBench/quantAQLM/kernel.cpp:7:21: error: unknown type name 'int4'; did you mean 'int'?
+    7 |     int4*  C, const int4*  codebook, const int prob_m,
+      |                     ^~~~
+      |                     int
+/output/HeCBench/quantAQLM/kernel.cpp:9:11: error: unknown type name 'int4'; did you mean 'int'?
+    9 |     const int4 codebook_a_sizes,  // cumulative sizes of A spanning each
+      |           ^~~~
+      |           int
+/output/HeCBench/quantAQLM/kernel.cpp:30:42: error: use of undeclared identifier 'warpSize'
+   30 |             int a_gl_rd = (BLOCK_DIM_X / warpSize) * _bid_x + (_tid_x / warpSize);
+      |                                          ^
+/output/HeCBench/quantAQLM/kernel.cpp:30:73: error: use of undeclared identifier 'warpSize'
+   30 |             int a_gl_rd = (BLOCK_DIM_X / warpSize) * _bid_x + (_tid_x / warpSize);
+      |                                                                         ^
+/output/HeCBench/quantAQLM/kernel.cpp:36:51: error: member reference base type 'const int' is not a structure or union
+   36 |             auto codebook_size = &codebook_a_sizes.x;
+      |                                   ~~~~~~~~~~~~~~~~^~
+/output/HeCBench/quantAQLM/kernel.cpp:45:56: error: use of undeclared identifier 'warpSize'
+   45 |             a_gl_rd = a_gl_stride * a_gl_rd + _tid_x % warpSize;
+      |                                                        ^
+/output/HeCBench/quantAQLM/kernel.cpp:46:61: error: use of undeclared identifier 'warpSize'
+   46 |             int a_gl_end = a_gl_rd + a_gl_stride - _tid_x % warpSize;
+      |                                                             ^
+/output/HeCBench/quantAQLM/kernel.cpp:49:13: error: use of undeclared identifier 'int4'; did you mean 'int'?
+   49 |             int4 sh_b[32 * F]; // 32 is warpSize
+      |             ^~~~
+      |             int
+/output/HeCBench/quantAQLM/kernel.cpp:52:43: error: use of undeclared identifier 'warpSize'
+   52 |             int iters = (prob_k / 8 + 8 * warpSize - 1) / (8 * warpSize);
+      |                                           ^
+/output/HeCBench/quantAQLM/kernel.cpp:52:64: error: use of undeclared identifier 'warpSize'
+   52 |             int iters = (prob_k / 8 + 8 * warpSize - 1) / (8 * warpSize);
+      |                                                                ^
+/output/HeCBench/quantAQLM/kernel.cpp:54:38: error: use of undeclared identifier 'warpSize'
+   54 |             for (int i = _tid_x; i < warpSize * 8; i += BLOCK_DIM_X) {
+      |                                      ^
+/output/HeCBench/quantAQLM/kernel.cpp:57:24: error: use of undeclared identifier 'warpSize'
+   57 |             b_gl_rd += warpSize * 8;
+      |                        ^
+/output/HeCBench/quantAQLM/kernel.cpp:59:41: error: use of undeclared identifier 'warpSize'
+   59 |             int b_sh_rd = F * (_tid_x % warpSize);
+      |                                         ^
+/output/HeCBench/quantAQLM/kernel.cpp:72:13: error: use of undeclared identifier 'int4'; did you mean 'int'?
+   72 |             int4 t = codebook[enc[i]];
+      |             ^~~~
+      |             int
+/output/HeCBench/quantAQLM/kernel.cpp:73:23: error: member reference base type 'int' is not a structure or union
+   73 |             dec[0] = t.x;
+      |                      ~^~
+/output/HeCBench/quantAQLM/kernel.cpp:74:23: error: member reference base type 'int' is not a structure or union
+   74 |             dec[1] = t.y;
+      |                      ~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

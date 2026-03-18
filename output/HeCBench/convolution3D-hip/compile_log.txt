@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/convolution3D-hip/kernel.cpp:1:
+/output/HeCBench/convolution3D-hip/kernel.h:29:3: error: unknown type name 'miopenHandle_t'
+   29 |   miopenHandle_t h;
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:30:3: error: a type specifier is required for all declarations
+   30 |   checkMIOpen(miopenCreate(&h));
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:32:3: error: unknown type name 'miopenTensorDescriptor_t'
+   32 |   miopenTensorDescriptor_t input_descriptor;
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:33:3: error: a type specifier is required for all declarations
+   33 |   checkMIOpen(miopenCreateTensorDescriptor(&input_descriptor));
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:34:3: error: a type specifier is required for all declarations
+   34 |   checkMIOpen(miopenSet4dTensorDescriptor(input_descriptor,
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:35:56: error: use of undeclared identifier 'miopenFloat'
+   35 |                                           /*dataType=*/miopenFloat,
+      |                                                        ^
+/output/HeCBench/convolution3D-hip/kernel.h:36:58: error: use of undeclared identifier 'N'
+   36 |                                           /*batch_size=*/N,
+      |                                                          ^
+/output/HeCBench/convolution3D-hip/kernel.h:37:56: error: use of undeclared identifier 'C'
+   37 |                                           /*channels=*/C,
+      |                                                        ^
+/output/HeCBench/convolution3D-hip/kernel.h:38:60: error: use of undeclared identifier 'Hin'
+   38 |                                           /*image_height=*/Hin,
+      |                                                            ^
+/output/HeCBench/convolution3D-hip/kernel.h:39:59: error: use of undeclared identifier 'Win'
+   39 |                                           /*image_width=*/Win));
+      |                                                           ^
+/output/HeCBench/convolution3D-hip/kernel.h:41:3: error: unknown type name 'miopenTensorDescriptor_t'
+   41 |   miopenTensorDescriptor_t kernel_descriptor;
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:42:3: error: a type specifier is required for all declarations
+   42 |   checkMIOpen(miopenCreateTensorDescriptor(&kernel_descriptor));
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:43:3: error: a type specifier is required for all declarations
+   43 |   checkMIOpen(miopenSet4dTensorDescriptor(kernel_descriptor,
+      |   ^
+/output/HeCBench/convolution3D-hip/kernel.h:44:56: error: use of undeclared identifier 'miopenFloat'
+   44 |                                           /*dataType=*/miopenFloat,
+      |                                                        ^
+/output/HeCBench/convolution3D-hip/kernel.h:45:60: error: use of undeclared identifier 'M'
+   45 |                                           /*out_channels=*/M,
+      |                                                            ^
+/output/HeCBench/convolution3D-hip/kernel.h:46:59: error: use of undeclared identifier 'C'
+   46 |                                           /*in_channels=*/C,
+      |                                                           ^
+/output/HeCBench/convolution3D-hip/kernel.h:47:61: error: use of undeclared identifier 'K'
+   47 |                                           /*kernel_height=*/K,
+      |                                                             ^
+/output/HeCBench/convolution3D-hip/kernel.h:48:60: error: use of undeclared identifier 'K'
+   48 |                                           /*kernel_width=*/K));
+      |                                                            ^
+/output/HeCBench/convolution3D-hip/kernel.h:50:3: error: unknown type name 'miopenConvolutionDescriptor_t'
+   50 |   miopenConvolutionDescriptor_t convolution_descriptor;
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

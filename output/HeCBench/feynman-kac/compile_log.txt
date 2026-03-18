@@ -1,0 +1,32 @@
+In file included from /output/HeCBench/feynman-kac/kernel.cpp:1:
+/output/HeCBench/feynman-kac/kernel.h:125:11: error: use of undeclared identifier '_bid_x'
+  125 |   int i = _bid_x * BLOCK_DIM_X + _tid_x + 1;
+      |           ^
+/output/HeCBench/feynman-kac/kernel.h:125:34: error: use of undeclared identifier '_tid_x'
+  125 |   int i = _bid_x * BLOCK_DIM_X + _tid_x + 1;
+      |                                  ^
+/output/HeCBench/feynman-kac/kernel.h:126:11: error: use of undeclared identifier '_bid_y'
+  126 |   int j = _bid_y * BLOCK_DIM_Y + _tid_y + 1;
+      |           ^
+/output/HeCBench/feynman-kac/kernel.h:126:34: error: use of undeclared identifier '_tid_y'
+  126 |   int j = _bid_y * BLOCK_DIM_Y + _tid_y + 1;
+      |                                  ^
+/output/HeCBench/feynman-kac/kernel.h:167:16: error: use of undeclared identifier 'r8_uniform_01'
+  167 |           ut = r8_uniform_01 ( &seed );
+      |                ^
+/output/HeCBench/feynman-kac/kernel.h:170:18: error: use of undeclared identifier 'r8_uniform_01'
+  170 |             us = r8_uniform_01 ( &seed ) - 0.5;
+      |                  ^
+/output/HeCBench/feynman-kac/kernel.h:181:16: error: use of undeclared identifier 'r8_uniform_01'
+  181 |           ut = r8_uniform_01 ( &seed );
+      |                ^
+/output/HeCBench/feynman-kac/kernel.h:184:18: error: use of undeclared identifier 'r8_uniform_01'
+  184 |             us = r8_uniform_01 ( &seed ) - 0.5;
+      |                  ^
+/output/HeCBench/feynman-kac/kernel.h:194:16: error: use of undeclared identifier 'potential'
+  194 |           vs = potential ( a, b, x1, x2 );
+      |                ^
+/output/HeCBench/feynman-kac/kernel.h:198:16: error: use of undeclared identifier 'potential'
+  198 |           vh = potential ( a, b, x1, x2 );
+      |                ^
+10 errors generated.

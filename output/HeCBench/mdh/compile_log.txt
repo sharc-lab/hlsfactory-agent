@@ -1,0 +1,95 @@
+In file included from /output/HeCBench/mdh/kernel.cpp:1:
+/output/HeCBench/mdh/kernel.h:332:8: error: unknown type name 'float2'; did you mean 'float'?
+  332 | inline float2 float2(float s)
+      |        ^~~~~~
+      |        float
+/output/HeCBench/mdh/kernel.h:334:12: error: no matching function for call to 'float2'
+  334 |     return float2(s, s);
+      |            ^~~~~~
+/output/HeCBench/mdh/kernel.h:332:15: note: candidate function not viable: requires single argument 's', but 2 arguments were provided
+  332 | inline float2 float2(float s)
+      |               ^      ~~~~~~~
+/output/HeCBench/mdh/kernel.h:336:8: error: unknown type name 'float2'; did you mean 'float'?
+  336 | inline float2 float2(float3 a)
+      |        ^~~~~~
+      |        float
+/output/HeCBench/mdh/kernel.h:336:22: error: unknown type name 'float3'; did you mean 'float'?
+  336 | inline float2 float2(float3 a)
+      |                      ^~~~~~
+      |                      float
+/output/HeCBench/mdh/kernel.h:336:15: error: redefinition of 'float2'
+  336 | inline float2 float2(float3 a)
+      |               ^
+/output/HeCBench/mdh/kernel.h:332:15: note: previous definition is here
+  332 | inline float2 float2(float s)
+      |               ^
+/output/HeCBench/mdh/kernel.h:338:20: error: member reference base type 'float' is not a structure or union
+  338 |     return float2(a.x, a.y);
+      |                   ~^~
+/output/HeCBench/mdh/kernel.h:338:25: error: member reference base type 'float' is not a structure or union
+  338 |     return float2(a.x, a.y);
+      |                        ~^~
+/output/HeCBench/mdh/kernel.h:340:8: error: unknown type name 'float2'; did you mean 'float'?
+  340 | inline float2 float2(int2 a)
+      |        ^~~~~~
+      |        float
+/output/HeCBench/mdh/kernel.h:340:22: error: unknown type name 'int2'; did you mean 'int'?
+  340 | inline float2 float2(int2 a)
+      |                      ^~~~
+      |                      int
+/output/HeCBench/mdh/kernel.h:342:26: error: member reference base type 'int' is not a structure or union
+  342 |     return float2(float(a.x), float(a.y));
+      |                         ~^~
+/output/HeCBench/mdh/kernel.h:342:38: error: member reference base type 'int' is not a structure or union
+  342 |     return float2(float(a.x), float(a.y));
+      |                                     ~^~
+/output/HeCBench/mdh/kernel.h:342:12: error: no matching function for call to 'float2'
+  342 |     return float2(float(a.x), float(a.y));
+      |            ^~~~~~
+/output/HeCBench/mdh/kernel.h:340:15: note: candidate function not viable: requires single argument 'a', but 2 arguments were provided
+  340 | inline float2 float2(int2 a)
+      |               ^      ~~~~~~
+/output/HeCBench/mdh/kernel.h:336:15: note: candidate function not viable: requires single argument 'a', but 2 arguments were provided
+  336 | inline float2 float2(float3 a)
+      |               ^      ~~~~~~~~
+/output/HeCBench/mdh/kernel.h:344:8: error: unknown type name 'float2'; did you mean 'float'?
+  344 | inline float2 float2(uint2 a)
+      |        ^~~~~~
+      |        float
+/output/HeCBench/mdh/kernel.h:344:22: error: unknown type name 'uint2'; did you mean 'uint'?
+  344 | inline float2 float2(uint2 a)
+      |                      ^~~~~
+      |                      uint
+/output/HeCBench/mdh/kernel.h:288:22: note: 'uint' declared here
+  288 | typedef unsigned int uint;
+      |                      ^
+/output/HeCBench/mdh/kernel.h:346:26: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  346 |     return float2(float(a.x), float(a.y));
+      |                         ~^~
+/output/HeCBench/mdh/kernel.h:346:38: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  346 |     return float2(float(a.x), float(a.y));
+      |                                     ~^~
+/output/HeCBench/mdh/kernel.h:346:12: error: no matching function for call to 'float2'
+  346 |     return float2(float(a.x), float(a.y));
+      |            ^~~~~~
+/output/HeCBench/mdh/kernel.h:344:15: note: candidate function not viable: requires single argument 'a', but 2 arguments were provided
+  344 | inline float2 float2(uint2 a)
+      |               ^      ~~~~~~~
+/output/HeCBench/mdh/kernel.h:340:15: note: candidate function not viable: requires single argument 'a', but 2 arguments were provided
+  340 | inline float2 float2(int2 a)
+      |               ^      ~~~~~~
+/output/HeCBench/mdh/kernel.h:336:15: note: candidate function not viable: requires single argument 'a', but 2 arguments were provided
+  336 | inline float2 float2(float3 a)
+      |               ^      ~~~~~~~~
+/output/HeCBench/mdh/kernel.h:349:8: error: unknown type name 'int2'; did you mean 'int'?
+  349 | inline int2 int2(int s)
+      |        ^~~~
+      |        int
+/output/HeCBench/mdh/kernel.h:351:12: error: no matching function for call to 'int2'
+  351 |     return int2(s, s);
+      |            ^~~~
+/output/HeCBench/mdh/kernel.h:349:13: note: candidate function not viable: requires single argument 's', but 2 arguments were provided
+  349 | inline int2 int2(int s)
+      |             ^    ~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

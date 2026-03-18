@@ -1,0 +1,52 @@
+/output/HeCBench/spm/kernel.cpp:4:20: error: unknown type name 'int3'; did you mean 'int'?
+    4 | float interp(const int3 d, const unsigned char f[], float x, float y, float z)
+      |                    ^~~~
+      |                    int
+/output/HeCBench/spm/kernel.cpp:16:20: error: member reference base type 'const int' is not a structure or union
+   16 |   ff   = f + ix-1+d.x*(iy-1+d.y*(iz-1));
+      |                   ~^~
+/output/HeCBench/spm/kernel.cpp:16:30: error: member reference base type 'const int' is not a structure or union
+   16 |   ff   = f + ix-1+d.x*(iy-1+d.y*(iz-1));
+      |                             ~^~
+/output/HeCBench/spm/kernel.cpp:18:14: error: member reference base type 'const int' is not a structure or union
+   18 |   k212 = ff[d.x]; k112 = ff[d.x+1];
+      |             ~^~
+/output/HeCBench/spm/kernel.cpp:18:30: error: member reference base type 'const int' is not a structure or union
+   18 |   k212 = ff[d.x]; k112 = ff[d.x+1];
+      |                             ~^~
+/output/HeCBench/spm/kernel.cpp:19:11: error: member reference base type 'const int' is not a structure or union
+   19 |   ff  += d.x*d.y;
+      |          ~^~
+/output/HeCBench/spm/kernel.cpp:19:15: error: member reference base type 'const int' is not a structure or union
+   19 |   ff  += d.x*d.y;
+      |              ~^~
+/output/HeCBench/spm/kernel.cpp:21:14: error: member reference base type 'const int' is not a structure or union
+   21 |   k211 = ff[d.x]; k111 = ff[d.x+1];
+      |             ~^~
+/output/HeCBench/spm/kernel.cpp:21:30: error: member reference base type 'const int' is not a structure or union
+   21 |   k211 = ff[d.x]; k111 = ff[d.x+1];
+      |                             ~^~
+/output/HeCBench/spm/kernel.cpp:35:9: error: unknown type name 'int3'; did you mean 'int'?
+   35 |   const int3 dg,
+      |         ^~~~
+      |         int
+/output/HeCBench/spm/kernel.cpp:36:9: error: unknown type name 'int3'; did you mean 'int'?
+   36 |   const int3 df,
+      |         ^~~~
+      |         int
+/output/HeCBench/spm/kernel.cpp:72:31: error: member reference base type 'const int' is not a structure or union
+   72 |             int x_datasize=(dg.x-2);
+      |                             ~~^~
+/output/HeCBench/spm/kernel.cpp:73:31: error: member reference base type 'const int' is not a structure or union
+   73 |             int y_datasize=(dg.y-2);
+      |                             ~~^~
+/output/HeCBench/spm/kernel.cpp:91:33: error: member reference base type 'const int' is not a structure or union
+   91 |             if (zp>=1.f && zp<df.z && yp>=1.f && yp<df.y && xp>=1.f && xp<df.x)
+      |                               ~~^~
+/output/HeCBench/spm/kernel.cpp:91:55: error: member reference base type 'const int' is not a structure or union
+   91 |             if (zp>=1.f && zp<df.z && yp>=1.f && yp<df.y && xp>=1.f && xp<df.x)
+      |                                                     ~~^~
+/output/HeCBench/spm/kernel.cpp:91:77: error: member reference base type 'const int' is not a structure or union
+   91 |             if (zp>=1.f && zp<df.z && yp>=1.f && yp<df.y && xp>=1.f && xp<df.x)
+      |                                                                           ~~^~
+16 errors generated.

@@ -1,0 +1,15 @@
+In file included from /output/HeCBench/rmsnorm/kernel.cpp:1:
+/output/HeCBench/rmsnorm/kernel.h:17:10: fatal error: 'reduce.cuh' file not found
+   17 | #include "reduce.cuh"
+      |          ^~~~~~~~~~~~
+1 error generated.
+/output/HeCBench/rmsnorm/reference.cpp:4:76: error: unknown type name 'int64_t'
+    4 | void rmsnorm_forward_cpu(float* out, const float* inp, const float* gamma, int64_t N, int64_t H)
+      |                                                                            ^
+/output/HeCBench/rmsnorm/reference.cpp:4:87: error: unknown type name 'int64_t'
+    4 | void rmsnorm_forward_cpu(float* out, const float* inp, const float* gamma, int64_t N, int64_t H)
+      |                                                                                       ^
+/output/HeCBench/rmsnorm/reference.cpp:16:22: error: use of undeclared identifier 'sqrtf'
+   16 |     float s = 1.0f / sqrtf(m + eps);
+      |                      ^
+3 errors generated.

@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/overlap-hip/kernel.cpp:1:
+/output/HeCBench/overlap-hip/kernel.h:48:10: fatal error: 'hip/hip_runtime.h' file not found
+   48 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.

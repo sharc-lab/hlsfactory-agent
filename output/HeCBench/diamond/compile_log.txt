@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/diamond/kernel.cpp:1:
+/output/HeCBench/diamond/kernel.h:34:10: fatal error: '../diamond-sycl/src/basic/masking.h' file not found
+   34 | #include "../diamond-sycl/src/basic/masking.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

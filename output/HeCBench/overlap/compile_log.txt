@@ -1,0 +1,11 @@
+In file included from /output/HeCBench/overlap/kernel.cpp:1:
+/output/HeCBench/overlap/kernel.h:58:1: error: unknown type name 'cudaStream_t'
+   58 | cudaStream_t stream[STREAM_COUNT];
+      | ^
+/output/HeCBench/overlap/kernel.h:66:1: error: unknown type name 'dim3'
+   66 | dim3 block (256, 1, 1);
+      | ^
+/output/HeCBench/overlap/kernel.h:67:1: error: unknown type name 'dim3'
+   67 | dim3 grid (N/256, 1, 1);
+      | ^
+3 errors generated.

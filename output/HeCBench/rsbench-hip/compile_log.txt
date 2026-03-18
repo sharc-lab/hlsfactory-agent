@@ -1,0 +1,68 @@
+In file included from /output/HeCBench/rsbench-hip/kernel.cpp:1:
+/output/HeCBench/rsbench-hip/kernel.h:74:17: error: declaration of 'INT_T' shadows template parameter
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                 ^
+/output/HeCBench/rsbench-hip/kernel.h:71:17: note: template parameter is declared here
+   71 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                 ^
+/output/HeCBench/rsbench-hip/kernel.h:74:30: error: declaration of 'DOUBLE_T' shadows template parameter
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                              ^
+/output/HeCBench/rsbench-hip/kernel.h:71:30: note: template parameter is declared here
+   71 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                              ^
+/output/HeCBench/rsbench-hip/kernel.h:74:46: error: declaration of 'WINDOW_T' shadows template parameter
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:71:46: note: template parameter is declared here
+   71 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:74:62: error: declaration of 'POLE_T' shadows template parameter
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:71:62: note: template parameter is declared here
+   71 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:79:17: error: declaration of 'INT_T' shadows template parameter
+   79 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                 ^
+/output/HeCBench/rsbench-hip/kernel.h:74:17: note: template parameter is declared here
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                 ^
+/output/HeCBench/rsbench-hip/kernel.h:79:30: error: declaration of 'DOUBLE_T' shadows template parameter
+   79 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                              ^
+/output/HeCBench/rsbench-hip/kernel.h:74:30: note: template parameter is declared here
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                              ^
+/output/HeCBench/rsbench-hip/kernel.h:79:46: error: declaration of 'WINDOW_T' shadows template parameter
+   79 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:74:46: note: template parameter is declared here
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:79:62: error: declaration of 'POLE_T' shadows template parameter
+   79 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:74:62: note: template parameter is declared here
+   74 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                                                              ^
+/output/HeCBench/rsbench-hip/kernel.h:83:17: error: declaration of 'DOUBLE_T' shadows template parameter
+   83 | template <class DOUBLE_T>
+      |                 ^
+/output/HeCBench/rsbench-hip/kernel.h:79:30: note: template parameter is declared here
+   79 | template <class INT_T, class DOUBLE_T, class WINDOW_T, class POLE_T >
+      |                              ^
+In file included from /output/HeCBench/rsbench-hip/kernel.cpp:1:
+In file included from /output/HeCBench/rsbench-hip/kernel.h:117:
+/usr/include/stdio.h:30:1: error: expected unqualified-id
+   30 | __BEGIN_DECLS
+      | ^
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:140:31: note: expanded from macro '__BEGIN_DECLS'
+  140 | # define __BEGIN_DECLS  extern "C" {
+      |                                ^
+In file included from /output/HeCBench/rsbench-hip/kernel.cpp:1:
+/output/HeCBench/rsbench-hip/kernel.h:124:10: fatal error: 'hip/hip_runtime.h' file not found
+  124 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+11 errors generated.

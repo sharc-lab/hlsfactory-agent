@@ -1,0 +1,14 @@
+In file included from /output/HeCBench/assert-hip/kernel.cpp:1:
+/output/HeCBench/assert-hip/kernel.h:17:1: error: unterminated /* comment
+   17 | /*
+      | ^
+/output/HeCBench/assert-hip/kernel.cpp:14:13: error: use of undeclared identifier 'assert'
+   14 |             assert(gid <= BLOCK_DIM_X * GRID_DIM_X) ;
+      |             ^
+/output/HeCBench/assert-hip/kernel.cpp:17:18: error: use of undeclared identifier 'assert'
+   17 |             s++; assert(s <= gid);
+      |                  ^
+/output/HeCBench/assert-hip/kernel.cpp:36:18: error: use of undeclared identifier 'assert'
+   36 |             s++; assert(s <= gid);
+      |                  ^
+4 errors generated.

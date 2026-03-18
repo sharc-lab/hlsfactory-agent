@@ -1,0 +1,45 @@
+In file included from /output/HeCBench/p4/kernel.cpp:1:
+/output/HeCBench/p4/kernel.h:60:19: error: use of undeclared identifier '_bid_x'
+   60 |   int loc_index = _bid_x;
+      |                   ^
+/output/HeCBench/p4/kernel.h:61:20: error: use of undeclared identifier '_tid_x'
+   61 |   int ith_anchor = _tid_x;
+      |                    ^
+2 errors generated.
+/output/HeCBench/p4/reference.cpp:36:38: error: use of undeclared identifier 'expf'
+   36 |       float max_score = 1.f / (1.f + expf(-scores[0]));
+      |                                      ^
+/output/HeCBench/p4/reference.cpp:39:40: error: use of undeclared identifier 'expf'
+   39 |         float cls_score = 1.f / (1.f + expf(-scores[i]));
+      |                                        ^
+/output/HeCBench/p4/reference.cpp:64:32: error: use of undeclared identifier 'sqrtf'
+   64 |         const float diagonal = sqrtf(dxa * dxa + dya * dya);
+      |                                ^
+/output/HeCBench/p4/reference.cpp:68:28: error: use of undeclared identifier 'expf'
+   68 |         box_encodings[3] = expf(box_encodings[3]) * dxa;
+      |                            ^
+/output/HeCBench/p4/reference.cpp:69:28: error: use of undeclared identifier 'expf'
+   69 |         box_encodings[4] = expf(box_encodings[4]) * dya;
+      |                            ^
+/output/HeCBench/p4/reference.cpp:70:28: error: use of undeclared identifier 'expf'
+   70 |         box_encodings[5] = expf(box_encodings[5]) * dza;
+      |                            ^
+/output/HeCBench/p4/reference.cpp:74:37: error: use of undeclared identifier 'M_PI'
+   74 |         const float period = (float)M_PI;
+      |                                     ^
+/output/HeCBench/p4/reference.cpp:76:37: error: use of undeclared identifier 'floorf'
+   76 |         const float dir_rot = val - floorf(val / (period + 1e-8f)) * period;
+      |                                     ^
+/output/HeCBench/p4/reference.cpp:162:11: error: use of undeclared identifier 'fabsf'
+  162 |       if (fabsf(*max_ptr - score_output_r[i]) < 1e-6f) {
+      |           ^
+/output/HeCBench/p4/reference.cpp:165:11: error: use of undeclared identifier 'printf'
+  165 |           printf("Comparing values at location %d and reference location %d\n", loc, i);
+      |           ^
+/output/HeCBench/p4/reference.cpp:167:17: error: use of undeclared identifier 'fabsf'
+  167 |             if (fabsf(cbndbox->val[i] - cbndbox_r->val[i]) > 1e-3f) {
+      |                 ^
+/output/HeCBench/p4/reference.cpp:177:3: error: use of undeclared identifier 'printf'
+  177 |   printf("%s\n", ok ? "PASS" : "FAIL");
+      |   ^
+12 errors generated.

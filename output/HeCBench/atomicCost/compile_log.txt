@@ -1,0 +1,20 @@
+In file included from /output/HeCBench/atomicCost/kernel.cpp:1:
+/output/HeCBench/atomicCost/kernel.h:31:20: error: declaration of 'T' shadows template parameter
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicCost/kernel.h:28:20: note: template parameter is declared here
+   28 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicCost/kernel.h:33:20: error: declaration of 'T' shadows template parameter
+   33 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicCost/kernel.h:31:20: note: template parameter is declared here
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicCost/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/atomicCost/kernel.cpp:25:26: error: unknown type name 'T'
+   25 | void wiAtomicOnGlobalMem(T* result, int size)
+      |                          ^
+4 errors generated.

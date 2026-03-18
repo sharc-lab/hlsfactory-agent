@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/face/kernel.cpp:1:
+/output/HeCBench/face/kernel.h:61:22: error: unknown type name 'MyImage'
+   61 | void integralImages( MyImage *src, MyIntImage *sum, MyIntImage *sqsum );
+      |                      ^
+/output/HeCBench/face/kernel.h:61:36: error: unknown type name 'MyIntImage'
+   61 | void integralImages( MyImage *src, MyIntImage *sum, MyIntImage *sqsum );
+      |                                    ^
+/output/HeCBench/face/kernel.h:61:53: error: unknown type name 'MyIntImage'
+   61 | void integralImages( MyImage *src, MyIntImage *sum, MyIntImage *sqsum );
+      |                                                     ^
+/output/HeCBench/face/kernel.h:64:26: error: unknown type name 'myCascade'
+   64 | void ScaleImage_Invoker( myCascade* _cascade, float _factor, int sum_row, int sum_col, std::vector<MyRect>& _vec);
+      |                          ^
+/output/HeCBench/face/kernel.h:64:93: error: no template named 'vector' in namespace 'std'
+   64 | void ScaleImage_Invoker( myCascade* _cascade, float _factor, int sum_row, int sum_col, std::vector<MyRect>& _vec);
+      |                                                                                        ~~~~~^
+/output/HeCBench/face/kernel.h:64:100: error: use of undeclared identifier 'MyRect'
+   64 | void ScaleImage_Invoker( myCascade* _cascade, float _factor, int sum_row, int sum_col, std::vector<MyRect>& _vec);
+      |                                                                                                    ^
+/output/HeCBench/face/kernel.h:73:6: error: no template named 'vector' in namespace 'std'
+   73 | std::vector<MyRect> detectObjects(
+      | ~~~~~^
+/output/HeCBench/face/kernel.h:73:13: error: use of undeclared identifier 'MyRect'
+   73 | std::vector<MyRect> detectObjects(
+      |             ^
+/output/HeCBench/face/kernel.h:74:3: error: unknown type name 'MyImage'
+   74 |   MyImage* _img, MySize minSize, MySize maxSize, myCascade* cascade,
+      |   ^
+/output/HeCBench/face/kernel.h:74:18: error: unknown type name 'MySize'
+   74 |   MyImage* _img, MySize minSize, MySize maxSize, myCascade* cascade,
+      |                  ^
+/output/HeCBench/face/kernel.h:74:34: error: unknown type name 'MySize'
+   74 |   MyImage* _img, MySize minSize, MySize maxSize, myCascade* cascade,
+      |                                  ^
+/output/HeCBench/face/kernel.h:74:50: error: unknown type name 'myCascade'
+   74 |   MyImage* _img, MySize minSize, MySize maxSize, myCascade* cascade,
+      |                                                  ^
+/output/HeCBench/face/kernel.h:80:3: error: unknown type name 'MyImage'
+   80 |   MyImage *img = _img;
+      |   ^
+/output/HeCBench/face/kernel.h:88:3: error: unknown type name 'MyImage'
+   88 |   MyImage image1Obj;
+      |   ^
+/output/HeCBench/face/kernel.h:89:3: error: unknown type name 'MyIntImage'
+   89 |   MyIntImage sum1Obj;
+      |   ^
+/output/HeCBench/face/kernel.h:90:3: error: unknown type name 'MyIntImage'
+   90 |   MyIntImage sqsum1Obj;
+      |   ^
+/output/HeCBench/face/kernel.h:92:3: error: unknown type name 'MyImage'
+   92 |   MyImage *img1 = &image1Obj;
+      |   ^
+/output/HeCBench/face/kernel.h:93:3: error: unknown type name 'MyIntImage'
+   93 |   MyIntImage *sum1 = &sum1Obj;
+      |   ^
+/output/HeCBench/face/kernel.h:94:3: error: unknown type name 'MyIntImage'
+   94 |   MyIntImage *sqsum1 = &sqsum1Obj;
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,76 @@
+/output/HeCBench/heat/kernel.cpp:5:6: error: declaration of 'initial_value' has a different language linkage
+    5 | void initial_value(const unsigned int n, const double dx, const double length, double * u) {
+      |      ^
+/output/HeCBench/heat/kernel.h:57:6: note: previous declaration is here
+   57 | void initial_value(const unsigned int n, const double dx, const double length, double * u);
+      |      ^
+/output/HeCBench/heat/kernel.cpp:34:2: error: expected expression
+   34 |  = idx / n;
+      |  ^
+/output/HeCBench/heat/kernel.cpp:34:4: error: use of undeclared identifier 'idx'; did you mean 'dx'?
+   34 |  = idx / n;
+      |    ^~~
+      |    dx
+/output/HeCBench/heat/kernel.cpp:5:55: note: 'dx' declared here
+    5 | void initial_value(const unsigned int n, const double dx, const double length, double * u) {
+      |                                                       ^
+/output/HeCBench/heat/kernel.cpp:35:30: error: use of undeclared identifier 'j'
+   35 |             double y = dx * (j+1); // Physical y position
+      |                              ^
+/output/HeCBench/heat/kernel.cpp:36:30: error: use of undeclared identifier 'i'
+   36 |             double x = dx * (i+1); // Physical x position
+      |                              ^
+/output/HeCBench/heat/kernel.cpp:37:15: error: use of undeclared identifier 'i'
+   37 |             u[i+j*n] = sin(acos(-1.0) * x / length) * sin(acos(-1.0) * y / length);
+      |               ^
+/output/HeCBench/heat/kernel.cpp:37:17: error: use of undeclared identifier 'j'
+   37 |             u[i+j*n] = sin(acos(-1.0) * x / length) * sin(acos(-1.0) * y / length);
+      |                 ^
+/output/HeCBench/heat/kernel.cpp:40:9: error: extraneous closing brace ('}')
+   40 |         }
+      |         ^
+/output/HeCBench/heat/kernel.cpp:41:5: error: extraneous closing brace ('}')
+   41 |     }
+      |     ^
+/output/HeCBench/heat/kernel.cpp:42:1: error: extraneous closing brace ('}')
+   42 | }
+      | ^
+/output/HeCBench/heat/kernel.cpp:45:6: error: declaration of 'zero' has a different language linkage
+   45 | void zero(const unsigned int n, double * u) {
+      |      ^
+/output/HeCBench/heat/kernel.h:58:6: note: previous declaration is here
+   58 | void zero(const unsigned int n, double * u);
+      |      ^
+/output/HeCBench/heat/kernel.cpp:64:1: error: use of undeclared identifier '_tid_x'
+   64 | _tid_x = 0; _tid_x < BLOCK_DIM_X; _tid_x++) {
+      | ^
+/output/HeCBench/heat/kernel.cpp:64:13: error: unknown type name '_tid_x'; did you mean '__id_t'?
+   64 | _tid_x = 0; _tid_x < BLOCK_DIM_X; _tid_x++) {
+      |             ^~~~~~
+      |             __id_t
+/usr/include/x86_64-linux-gnu/bits/types.h:159:24: note: '__id_t' declared here
+  159 | __STD_TYPE __ID_T_TYPE __id_t;          /* General type for IDs.  */
+      |                        ^
+/output/HeCBench/heat/kernel.cpp:64:20: error: expected unqualified-id
+   64 | _tid_x = 0; _tid_x < BLOCK_DIM_X; _tid_x++) {
+      |                    ^
+/output/HeCBench/heat/kernel.cpp:64:35: error: use of undeclared identifier '_tid_x'
+   64 | _tid_x = 0; _tid_x < BLOCK_DIM_X; _tid_x++) {
+      |                                   ^
+/output/HeCBench/heat/kernel.cpp:73:1: error: extraneous closing brace ('}')
+   73 | }
+      | ^
+/output/HeCBench/heat/kernel.cpp:76:6: error: declaration of 'solve' has a different language linkage
+   76 | void solve(const unsigned int n, const double alpha, const double dx, const double dt, 
+      |      ^
+/output/HeCBench/heat/kernel.h:59:6: note: previous declaration is here
+   59 | void solve(const unsigned int n, const double alpha, const double dx, const double dt, const double r, const double r2,
+      |      ^
+/output/HeCBench/heat/kernel.cpp:118:12: error: use of undeclared identifier 'i'
+  118 |      u_tmp[i+j*n] =  r2 * u[i+j*n] +
+      |            ^
+/output/HeCBench/heat/kernel.cpp:118:14: error: use of undeclared identifier 'j'
+  118 |      u_tmp[i+j*n] =  r2 * u[i+j*n] +
+      |              ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

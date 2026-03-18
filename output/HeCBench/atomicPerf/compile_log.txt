@@ -1,0 +1,82 @@
+In file included from /output/HeCBench/atomicPerf/kernel.cpp:1:
+/output/HeCBench/atomicPerf/kernel.h:29:20: error: declaration of 'T' shadows template parameter
+   29 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:27:20: note: template parameter is declared here
+   27 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:31:20: error: declaration of 'T' shadows template parameter
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:29:20: note: template parameter is declared here
+   29 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:33:20: error: declaration of 'T' shadows template parameter
+   33 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:31:20: note: template parameter is declared here
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:35:20: error: declaration of 'T' shadows template parameter
+   35 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:33:20: note: template parameter is declared here
+   33 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:37:20: error: declaration of 'T' shadows template parameter
+   37 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:35:20: note: template parameter is declared here
+   35 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:39:20: error: declaration of 'T' shadows template parameter
+   39 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.h:37:20: note: template parameter is declared here
+   37 | template <typename T>
+      |                    ^
+/output/HeCBench/atomicPerf/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/atomicPerf/kernel.cpp:25:33: error: unknown type name 'T'
+   25 | void WarpRangeAtomicOnGlobalMem(T* data, int n)
+      |                                 ^
+/output/HeCBench/atomicPerf/kernel.cpp:37:41: error: use of undeclared identifier 'T'
+   37 |             atomicAdd(data+(i & 0x1F), (T)1); //arbitrary number to add
+      |                                         ^
+/output/HeCBench/atomicPerf/kernel.cpp:45:35: error: unknown type name 'T'
+   45 | void SingleRangeAtomicOnGlobalMem(T* data, int offset, int n)
+      |                                   ^
+/output/HeCBench/atomicPerf/kernel.cpp:58:37: error: use of undeclared identifier 'T'
+   58 |             atomicAdd(data+offset, (T)1);    //arbitrary number to add
+      |                                     ^
+/output/HeCBench/atomicPerf/kernel.cpp:66:34: error: unknown type name 'T'
+   66 | void BlockRangeAtomicOnSharedMem(T* data, int n)
+      |                                  ^
+/output/HeCBench/atomicPerf/kernel.cpp:79:13: error: unknown type name 'T'
+   79 |             T smem_data[BLOCK_SIZE];
+      |             ^
+/output/HeCBench/atomicPerf/kernel.cpp:82:42: error: use of undeclared identifier 'T'
+   82 |             atomicAdd(smem_data+_tid_x, (T)1);
+      |                                          ^
+/output/HeCBench/atomicPerf/kernel.cpp:92:33: error: unknown type name 'T'
+   92 | void WarpRangeAtomicOnSharedMem(T* data, int n)
+      |                                 ^
+/output/HeCBench/atomicPerf/kernel.cpp:105:13: error: unknown type name 'T'
+  105 |             T smem_data[32];
+      |             ^
+/output/HeCBench/atomicPerf/kernel.cpp:108:46: error: use of undeclared identifier 'T'
+  108 |             atomicAdd(smem_data+(i & 0x1F), (T)1);
+      |                                              ^
+/output/HeCBench/atomicPerf/kernel.cpp:118:35: error: unknown type name 'T'
+  118 | void SingleRangeAtomicOnSharedMem(T* data, int offset, int n)
+      |                                   ^
+/output/HeCBench/atomicPerf/kernel.cpp:132:13: error: unknown type name 'T'
+  132 |             T smem_data[BLOCK_SIZE];
+      |             ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/atomicPerf/reference.cpp:5:14: error: use of undeclared identifier 'BLOCK_SIZE'
+    5 |     data[i % BLOCK_SIZE] += (T)1;
+      |              ^
+1 error generated.

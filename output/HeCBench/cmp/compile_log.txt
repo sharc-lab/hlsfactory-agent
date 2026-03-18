@@ -1,0 +1,9 @@
+In file included from /output/HeCBench/cmp/kernel.cpp:1:
+/output/HeCBench/cmp/kernel.h:47:10: fatal error: 'log.hpp' file not found
+   47 | #include "log.hpp"
+      |          ^~~~~~~~~
+1 error generated.
+/output/HeCBench/cmp/reference.cpp:2:10: fatal error: 'utils.hpp' file not found
+    2 | #include "utils.hpp"
+      |          ^~~~~~~~~~~
+1 error generated.

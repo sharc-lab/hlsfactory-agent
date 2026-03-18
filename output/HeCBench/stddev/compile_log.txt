@@ -1,0 +1,73 @@
+In file included from /output/HeCBench/stddev/kernel.cpp:1:
+/output/HeCBench/stddev/kernel.h:48:20: error: declaration of 'Type' shadows template parameter
+   48 | template <typename Type, typename IdxType, int TPB, int ColsPerBlk = 32>
+      |                    ^
+/output/HeCBench/stddev/kernel.h:45:20: note: template parameter is declared here
+   45 | template <typename Type, typename IdxType>
+      |                    ^
+/output/HeCBench/stddev/kernel.h:48:35: error: declaration of 'IdxType' shadows template parameter
+   48 | template <typename Type, typename IdxType, int TPB, int ColsPerBlk = 32>
+      |                                   ^
+/output/HeCBench/stddev/kernel.h:45:35: note: template parameter is declared here
+   45 | template <typename Type, typename IdxType>
+      |                                   ^
+/output/HeCBench/stddev/kernel.h:65:20: error: declaration of 'Type' shadows template parameter
+   65 | template <typename Type, typename IdxType = int>
+      |                    ^
+/output/HeCBench/stddev/kernel.h:48:20: note: template parameter is declared here
+   48 | template <typename Type, typename IdxType, int TPB, int ColsPerBlk = 32>
+      |                    ^
+/output/HeCBench/stddev/kernel.h:65:35: error: declaration of 'IdxType' shadows template parameter
+   65 | template <typename Type, typename IdxType = int>
+      |                                   ^
+/output/HeCBench/stddev/kernel.h:48:35: note: template parameter is declared here
+   48 | template <typename Type, typename IdxType, int TPB, int ColsPerBlk = 32>
+      |                                   ^
+/output/HeCBench/stddev/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/stddev/kernel.cpp:26:9: error: unknown type name 'Type'
+   26 |         Type * std, 
+      |         ^
+/output/HeCBench/stddev/kernel.cpp:27:9: error: unknown type name 'Type'
+   27 |   const Type * data, 
+      |         ^
+/output/HeCBench/stddev/kernel.cpp:28:3: error: unknown type name 'IdxType'
+   28 |   IdxType D, 
+      |   ^
+/output/HeCBench/stddev/kernel.cpp:29:3: error: unknown type name 'IdxType'
+   29 |   IdxType N) 
+      |   ^
+/output/HeCBench/stddev/kernel.cpp:43:47: error: use of undeclared identifier 'TPB'
+   43 |                 const int RowsPerBlkPerIter = TPB / ColsPerBlk;
+      |                                               ^
+/output/HeCBench/stddev/kernel.cpp:43:53: error: use of undeclared identifier 'ColsPerBlk'
+   43 |                 const int RowsPerBlkPerIter = TPB / ColsPerBlk;
+      |                                                     ^
+/output/HeCBench/stddev/kernel.cpp:44:17: error: unknown type name 'IdxType'
+   44 |                 IdxType thisColId = _tid_x % ColsPerBlk;
+      |                 ^
+/output/HeCBench/stddev/kernel.cpp:44:46: error: use of undeclared identifier 'ColsPerBlk'
+   44 |                 IdxType thisColId = _tid_x % ColsPerBlk;
+      |                                              ^
+/output/HeCBench/stddev/kernel.cpp:45:17: error: unknown type name 'IdxType'
+   45 |                 IdxType thisRowId = _tid_x / ColsPerBlk;
+      |                 ^
+/output/HeCBench/stddev/kernel.cpp:45:46: error: use of undeclared identifier 'ColsPerBlk'
+   45 |                 IdxType thisRowId = _tid_x / ColsPerBlk;
+      |                                              ^
+/output/HeCBench/stddev/kernel.cpp:46:17: error: unknown type name 'IdxType'
+   46 |                 IdxType colId = thisColId + ((IdxType)_bid_y * ColsPerBlk);
+      |                 ^
+/output/HeCBench/stddev/kernel.cpp:46:47: error: use of undeclared identifier 'IdxType'
+   46 |                 IdxType colId = thisColId + ((IdxType)_bid_y * ColsPerBlk);
+      |                                               ^
+/output/HeCBench/stddev/kernel.cpp:47:17: error: unknown type name 'IdxType'
+   47 |                 IdxType rowId = thisRowId + ((IdxType)_bid_x * RowsPerBlkPerIter);
+      |                 ^
+/output/HeCBench/stddev/kernel.cpp:47:47: error: use of undeclared identifier 'IdxType'
+   47 |                 IdxType rowId = thisRowId + ((IdxType)_bid_x * RowsPerBlkPerIter);
+      |                                               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+PASS: reference.cpp

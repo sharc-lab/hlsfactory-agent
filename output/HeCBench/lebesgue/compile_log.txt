@@ -1,0 +1,26 @@
+/output/HeCBench/lebesgue/kernel.cpp:6:28: error: use of undeclared identifier '__double_as_longlong'
+    6 |   unsigned long long ret = __double_as_longlong(*address);
+      |                            ^
+/output/HeCBench/lebesgue/kernel.cpp:7:15: error: use of undeclared identifier '__longlong_as_double'
+    7 |   while(val > __longlong_as_double(ret))
+      |               ^
+/output/HeCBench/lebesgue/kernel.cpp:10:61: error: use of undeclared identifier '__double_as_longlong'
+   10 |     if((ret = atomicCAS((unsigned long long *)address, old, __double_as_longlong(val))) == old)
+      |                                                             ^
+/output/HeCBench/lebesgue/kernel.cpp:13:10: error: use of undeclared identifier '__longlong_as_double'
+   13 |   return __longlong_as_double(ret);
+      |          ^
+4 errors generated.
+/output/HeCBench/lebesgue/reference.cpp:7:31: error: use of undeclared identifier 'malloc'
+    7 |   double *linterp = (double*) malloc ( n * nfun * sizeof ( double ) );
+      |                               ^
+/output/HeCBench/lebesgue/reference.cpp:21:12: error: use of undeclared identifier 'fabs'
+   21 |       t += fabs ( linterp[i*nfun+j] );
+      |            ^
+/output/HeCBench/lebesgue/reference.cpp:25:3: error: use of undeclared identifier 'free'
+   25 |   free(linterp);
+      |   ^
+/output/HeCBench/lebesgue/reference.cpp:26:10: error: use of undeclared identifier 'fabs'
+   26 |   return fabs(res - lmax) <= 1e-6;
+      |          ^
+4 errors generated.

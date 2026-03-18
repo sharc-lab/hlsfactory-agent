@@ -1,0 +1,74 @@
+In file included from /output/HeCBench/bsearch/kernel.cpp:1:
+/output/HeCBench/bsearch/kernel.h:27:20: error: declaration of 'T' shadows template parameter
+   27 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:25:20: note: template parameter is declared here
+   25 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:29:20: error: declaration of 'T' shadows template parameter
+   29 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:27:20: note: template parameter is declared here
+   27 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:31:20: error: declaration of 'T' shadows template parameter
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:29:20: note: template parameter is declared here
+   29 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:33:20: error: declaration of 'T' shadows template parameter
+   33 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:31:20: note: template parameter is declared here
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:35:20: error: declaration of 'T' shadows template parameter
+   35 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:33:20: note: template parameter is declared here
+   33 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:37:20: error: declaration of 'T' shadows template parameter
+   37 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:35:20: note: template parameter is declared here
+   35 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:39:20: error: declaration of 'T' shadows template parameter
+   39 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.h:37:20: note: template parameter is declared here
+   37 | template <typename T>
+      |                    ^
+/output/HeCBench/bsearch/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/bsearch/kernel.cpp:41:24: error: unknown type name 'T'
+   41 | void kernel_BS2 (const T*  acc_a,
+      |                        ^
+/output/HeCBench/bsearch/kernel.cpp:42:19: error: unknown type name 'T'
+   42 |             const T*  acc_z,
+      |                   ^
+/output/HeCBench/bsearch/kernel.cpp:63:13: error: unknown type name 'T'
+   63 |             T z = acc_z[i];
+      |             ^
+/output/HeCBench/bsearch/kernel.cpp:78:24: error: unknown type name 'T'
+   78 | void kernel_BS3 (const T*  acc_a,
+      |                        ^
+/output/HeCBench/bsearch/kernel.cpp:79:19: error: unknown type name 'T'
+   79 |             const T*  acc_z,
+      |                   ^
+/output/HeCBench/bsearch/kernel.cpp:100:13: error: unknown type name 'T'
+  100 |             T z = acc_z[i];
+      |             ^
+/output/HeCBench/bsearch/kernel.cpp:116:24: error: unknown type name 'T'
+  116 | void kernel_BS4 (const T*  acc_a,
+      |                        ^
+/output/HeCBench/bsearch/kernel.cpp:117:19: error: unknown type name 'T'
+  117 |             const T*  acc_z,
+      |                   ^
+/output/HeCBench/bsearch/kernel.cpp:146:13: error: unknown type name 'T'
+  146 |             T z = acc_z[i];
+      |             ^
+17 errors generated.

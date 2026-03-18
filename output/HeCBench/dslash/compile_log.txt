@@ -1,0 +1,28 @@
+In file included from /output/HeCBench/dslash/kernel.cpp:1:
+/output/HeCBench/dslash/kernel.h:41:6: error: no template named 'vector' in namespace 'std'
+   41 | std::vector<int> squaresize(4, LDIM);
+      | ~~~~~^
+/output/HeCBench/dslash/kernel.h:41:32: error: use of undeclared identifier 'LDIM'
+   41 | std::vector<int> squaresize(4, LDIM);
+      |                                ^
+/output/HeCBench/dslash/kernel.h:42:24: error: use of undeclared identifier 'LDIM'
+   42 | size_t sites_on_node = LDIM*LDIM*LDIM*LDIM;
+      |                        ^
+/output/HeCBench/dslash/kernel.h:42:29: error: use of undeclared identifier 'LDIM'
+   42 | size_t sites_on_node = LDIM*LDIM*LDIM*LDIM;
+      |                             ^
+/output/HeCBench/dslash/kernel.h:42:34: error: use of undeclared identifier 'LDIM'
+   42 | size_t sites_on_node = LDIM*LDIM*LDIM*LDIM;
+      |                                  ^
+/output/HeCBench/dslash/kernel.h:42:39: error: use of undeclared identifier 'LDIM'
+   42 | size_t sites_on_node = LDIM*LDIM*LDIM*LDIM;
+      |                                       ^
+In file included from /output/HeCBench/dslash/kernel.cpp:1:
+In file included from /output/HeCBench/dslash/kernel.h:52:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/random:43:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/string:41:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/bits/stringfwd.h:40:
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/bits/memoryfwd.h:50:1: error: expected unqualified-id
+   50 | namespace std _GLIBCXX_VISIBILITY(default)
+      | ^
+7 errors generated.

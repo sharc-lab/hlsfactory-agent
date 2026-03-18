@@ -1,0 +1,93 @@
+In file included from /output/HeCBench/radixsort/kernel.cpp:1:
+/output/HeCBench/radixsort/kernel.h:239:8: error: unknown type name 'uint4'; did you mean 'uint'?
+  239 | inline uint4 make_uint4(uint s)
+      |        ^~~~~
+      |        uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+In file included from /output/HeCBench/radixsort/kernel.cpp:1:
+/output/HeCBench/radixsort/kernel.h:241:12: error: no matching function for call to 'make_uint4'
+  241 |     return make_uint4(s, s, s, s);
+      |            ^~~~~~~~~~
+/output/HeCBench/radixsort/kernel.h:239:14: note: candidate function not viable: requires single argument 's', but 4 arguments were provided
+  239 | inline uint4 make_uint4(uint s)
+      |              ^          ~~~~~~
+/output/HeCBench/radixsort/kernel.h:244:8: error: unknown type name 'uint4'; did you mean 'uint'?
+  244 | inline uint4 operator+(uint4 a, uint4 b)
+      |        ^~~~~
+      |        uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+In file included from /output/HeCBench/radixsort/kernel.cpp:1:
+/output/HeCBench/radixsort/kernel.h:244:24: error: unknown type name 'uint4'; did you mean 'uint'?
+  244 | inline uint4 operator+(uint4 a, uint4 b)
+      |                        ^~~~~
+      |                        uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+In file included from /output/HeCBench/radixsort/kernel.cpp:1:
+/output/HeCBench/radixsort/kernel.h:244:33: error: unknown type name 'uint4'; did you mean 'uint'?
+  244 | inline uint4 operator+(uint4 a, uint4 b)
+      |                                 ^~~~~
+      |                                 uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+In file included from /output/HeCBench/radixsort/kernel.cpp:1:
+/output/HeCBench/radixsort/kernel.h:244:14: error: overloaded 'operator+' must have at least one parameter of class or enumeration type
+  244 | inline uint4 operator+(uint4 a, uint4 b)
+      |              ^
+/output/HeCBench/radixsort/kernel.h:246:24: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                       ~^~
+/output/HeCBench/radixsort/kernel.h:246:30: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                             ~^~
+/output/HeCBench/radixsort/kernel.h:246:35: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                                  ~^~
+/output/HeCBench/radixsort/kernel.h:246:41: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                                        ~^~
+/output/HeCBench/radixsort/kernel.h:246:46: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                                             ~^~
+/output/HeCBench/radixsort/kernel.h:246:52: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                                                   ~^~
+/output/HeCBench/radixsort/kernel.h:246:58: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                                                         ~^~
+/output/HeCBench/radixsort/kernel.h:246:64: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  246 |     return make_uint4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+      |                                                               ~^~
+/output/HeCBench/radixsort/kernel.h:248:24: error: unknown type name 'uint4'; did you mean 'uint'?
+  248 | inline void operator+=(uint4 &a, uint4 b)
+      |                        ^~~~~
+      |                        uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+In file included from /output/HeCBench/radixsort/kernel.cpp:1:
+/output/HeCBench/radixsort/kernel.h:248:34: error: unknown type name 'uint4'; did you mean 'uint'?
+  248 | inline void operator+=(uint4 &a, uint4 b)
+      |                                  ^~~~~
+      |                                  uint
+/usr/include/x86_64-linux-gnu/sys/types.h:150:22: note: 'uint' declared here
+  150 | typedef unsigned int uint;
+      |                      ^
+In file included from /output/HeCBench/radixsort/kernel.cpp:1:
+/output/HeCBench/radixsort/kernel.h:248:13: error: overloaded 'operator+=' must have at least one parameter of class or enumeration type
+  248 | inline void operator+=(uint4 &a, uint4 b)
+      |             ^
+/output/HeCBench/radixsort/kernel.h:250:6: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  250 |     a.x += b.x;
+      |     ~^~
+/output/HeCBench/radixsort/kernel.h:250:13: error: member reference base type 'uint' (aka 'unsigned int') is not a structure or union
+  250 |     a.x += b.x;
+      |            ~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/tqs-hip/kernel.cpp:1:
+/output/HeCBench/tqs-hip/kernel.h:95:10: fatal error: 'support/setup.h' file not found
+   95 | #include "support/setup.h"
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.

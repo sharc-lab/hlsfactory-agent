@@ -1,0 +1,102 @@
+In file included from /output/HeCBench/babelstream/kernel.cpp:1:
+/output/HeCBench/babelstream/kernel.h:77:17: error: declaration of 'T' shadows template parameter
+   77 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:75:20: note: template parameter is declared here
+   75 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:79:20: error: declaration of 'T' shadows template parameter
+   79 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:77:17: note: template parameter is declared here
+   77 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:81:17: error: declaration of 'T' shadows template parameter
+   81 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:79:20: note: template parameter is declared here
+   79 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:83:20: error: declaration of 'T' shadows template parameter
+   83 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:81:17: note: template parameter is declared here
+   81 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:85:17: error: declaration of 'T' shadows template parameter
+   85 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:83:20: note: template parameter is declared here
+   83 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:87:20: error: declaration of 'T' shadows template parameter
+   87 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:85:17: note: template parameter is declared here
+   85 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:89:17: error: declaration of 'T' shadows template parameter
+   89 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:87:20: note: template parameter is declared here
+   87 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:91:20: error: declaration of 'T' shadows template parameter
+   91 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:89:17: note: template parameter is declared here
+   89 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:93:17: error: declaration of 'T' shadows template parameter
+   93 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:91:20: note: template parameter is declared here
+   91 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:95:20: error: declaration of 'T' shadows template parameter
+   95 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:93:17: note: template parameter is declared here
+   93 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:97:17: error: declaration of 'T' shadows template parameter
+   97 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:95:20: note: template parameter is declared here
+   95 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:99:17: error: declaration of 'T' shadows template parameter
+   99 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:97:17: note: template parameter is declared here
+   97 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:101:17: error: declaration of 'T' shadows template parameter
+  101 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:99:17: note: template parameter is declared here
+   99 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.h:104:20: error: declaration of 'T' shadows template parameter
+  104 | template <typename T>
+      |                    ^
+/output/HeCBench/babelstream/kernel.h:101:17: note: template parameter is declared here
+  101 | template <class T>
+      |                 ^
+/output/HeCBench/babelstream/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+/output/HeCBench/babelstream/kernel.cpp:34:9: error: unknown type name 'T'
+   34 |   const T * a,
+      |         ^
+/output/HeCBench/babelstream/kernel.cpp:35:9: error: unknown type name 'T'
+   35 |         T * c)
+      |         ^
+/output/HeCBench/babelstream/kernel.cpp:54:9: error: unknown type name 'T'
+   54 |         T * b,
+      |         ^
+/output/HeCBench/babelstream/kernel.cpp:55:9: error: unknown type name 'T'
+   55 |   const T * c)
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

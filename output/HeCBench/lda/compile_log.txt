@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/lda/kernel.cpp:1:
+/output/HeCBench/lda/kernel.h:46:12: error: use of undeclared identifier '__shfl_down'
+   46 |     val += __shfl_down(val, offset);
+      |            ^
+/output/HeCBench/lda/kernel.h:57:15: error: use of undeclared identifier '_tid_x'
+   57 |   int warp =  _tid_x / WARP_SIZE;
+      |               ^
+/output/HeCBench/lda/kernel.h:58:14: error: use of undeclared identifier '_tid_x'
+   58 |   int lane = _tid_x % WARP_SIZE;
+      |              ^
+/output/HeCBench/lda/kernel.h:62:16: error: use of undeclared identifier '_tid_x'
+   62 |   for (int i = _tid_x; i < length; i += BLOCK_DIM_X) 
+      |                ^
+/output/HeCBench/lda/kernel.h:77:10: error: use of undeclared identifier '_tid_x'
+   77 |   val = (_tid_x < BLOCK_DIM_X / WARP_SIZE) ? shared[lane]: 0.0f;
+      |          ^
+/output/HeCBench/lda/kernel.h:81:9: error: use of undeclared identifier '_tid_x'
+   81 |     if (_tid_x == 0) {
+      |         ^
+/output/HeCBench/lda/kernel.h:129:50: error: use of undeclared identifier '_bid_x'
+  129 |   float* _grad_alpha = grad_alpha + num_topics * _bid_x;
+      |                                                  ^
+/output/HeCBench/lda/kernel.h:131:16: error: use of undeclared identifier '_bid_x'
+  131 |   for (int i = _bid_x; i < num_indptr; i += GRID_DIM_X) {
+      |                ^
+/output/HeCBench/lda/kernel.h:135:20: error: use of undeclared identifier '_tid_x'
+  135 |       for (int j = _tid_x; j < num_topics; j += BLOCK_DIM_X) {
+      |                    ^
+/output/HeCBench/lda/kernel.h:141:18: error: use of undeclared identifier '_tid_x'
+  141 |     for (int j = _tid_x; j < num_topics; j += BLOCK_DIM_X)
+      |                  ^
+/output/HeCBench/lda/kernel.h:147:20: error: use of undeclared identifier '_tid_x'
+  147 |       for (int k = _tid_x; k < num_topics; k += BLOCK_DIM_X)
+      |                    ^
+/output/HeCBench/lda/kernel.h:157:24: error: use of undeclared identifier '_tid_x'
+  157 |           for (int l = _tid_x; l < num_topics; l += BLOCK_DIM_X)
+      |                        ^
+/output/HeCBench/lda/kernel.h:163:24: error: use of undeclared identifier '_tid_x'
+  163 |           for (int l = _tid_x; l < num_topics; l += BLOCK_DIM_X) {
+      |                        ^
+/output/HeCBench/lda/kernel.h:179:17: error: use of undeclared identifier '_tid_x'
+  179 |             if (_tid_x == 0) {
+      |                 ^
+/output/HeCBench/lda/kernel.h:180:22: error: use of undeclared identifier 'atomicCAS'
+  180 |               while (atomicCAS(&locks[w], 0, 1)) {}
+      |                      ^
+/output/HeCBench/lda/kernel.h:182:26: error: use of undeclared identifier '_tid_x'
+  182 |             for (int l = _tid_x; l < num_topics; l += BLOCK_DIM_X)
+      |                          ^
+/output/HeCBench/lda/kernel.h:186:17: error: use of undeclared identifier '_tid_x'
+  186 |             if (_tid_x == 0) locks[w] = 0;
+      |                 ^
+/output/HeCBench/lda/kernel.h:191:24: error: use of undeclared identifier '_tid_x'
+  191 |           for (int l = _tid_x; l < num_topics; l += BLOCK_DIM_X) {
+      |                        ^
+/output/HeCBench/lda/kernel.h:197:15: error: use of undeclared identifier '_tid_x'
+  197 |           if (_tid_x == 0) {
+      |               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,23 @@
+In file included from /output/HeCBench/sobol/kernel.cpp:1:
+/output/HeCBench/sobol/kernel.h:206:24: error: variable has incomplete type 'const struct primitive'
+  206 | const struct primitive sobol_primitives[] =
+      |                        ^
+/output/HeCBench/sobol/kernel.h:206:14: note: forward declaration of 'primitive'
+  206 | const struct primitive sobol_primitives[] =
+      |              ^
+/output/HeCBench/sobol/kernel.h:10604:24: error: redefinition of 'sobol_primitives'
+ 10604 | const struct primitive sobol_primitives[4096];
+       |                        ^
+/output/HeCBench/sobol/kernel.h:206:24: note: previous definition is here
+  206 | const struct primitive sobol_primitives[] =
+      |                        ^
+/output/HeCBench/sobol/kernel.cpp:56:47: error: use of undeclared identifier '__ffs'
+   56 |                 for (unsigned int k = 0 ; k < __ffs(stride) - 1 ; k++)
+      |                                               ^
+/output/HeCBench/sobol/kernel.cpp:96:49: error: use of undeclared identifier '__ffs'
+   96 |                 unsigned int v_log2stridem1 = v[__ffs(stride) - 2];
+      |                                                 ^
+/output/HeCBench/sobol/kernel.cpp:107:41: error: use of undeclared identifier '__ffs'
+  107 |                 X ^= v_log2stridem1 ^ v[__ffs(~((i - stride) | v_stridemask)) - 1];
+      |                                         ^
+5 errors generated.

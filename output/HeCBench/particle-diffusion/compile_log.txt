@@ -1,0 +1,71 @@
+In file included from /output/HeCBench/particle-diffusion/kernel.cpp:1:
+/output/HeCBench/particle-diffusion/kernel.h:62:20: error: declaration of 'T' shadows template parameter
+   62 | template <typename T>
+      |                    ^
+/output/HeCBench/particle-diffusion/kernel.h:59:20: note: template parameter is declared here
+   59 | template <typename T>
+      |                    ^
+/output/HeCBench/particle-diffusion/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+2 errors generated.
+/output/HeCBench/particle-diffusion/reference.cpp:5:9: error: unknown type name 'size_t'
+    5 |                size_t * a_map,
+      |                ^
+/output/HeCBench/particle-diffusion/reference.cpp:6:22: error: unknown type name 'size_t'
+    6 |                const size_t n_particles,
+      |                      ^
+/output/HeCBench/particle-diffusion/reference.cpp:11:8: error: unknown type name 'size_t'
+   11 |   for (size_t ii = 0; ii < n_particles; ii++) {
+      |        ^
+/output/HeCBench/particle-diffusion/reference.cpp:17:5: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?
+   17 |     size_t iter = 0;
+      |     ^~~~~~
+      |     sizeof
+/output/HeCBench/particle-diffusion/reference.cpp:17:12: error: use of undeclared identifier 'iter'
+   17 |     size_t iter = 0;
+      |            ^
+/output/HeCBench/particle-diffusion/reference.cpp:20:5: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?
+   20 |     size_t map_base = ii * grid_size * grid_size;
+      |     ^~~~~~
+      |     sizeof
+/output/HeCBench/particle-diffusion/reference.cpp:20:12: error: use of undeclared identifier 'map_base'
+   20 |     size_t map_base = ii * grid_size * grid_size;
+      |            ^
+/output/HeCBench/particle-diffusion/reference.cpp:21:12: error: use of undeclared identifier 'iter'
+   21 |     while (iter < nIterations) {
+      |            ^
+/output/HeCBench/particle-diffusion/reference.cpp:27:34: error: use of undeclared identifier 'iter'
+   27 |       float randnumX = a_randomX[iter * n_particles + ii];
+      |                                  ^
+/output/HeCBench/particle-diffusion/reference.cpp:28:34: error: use of undeclared identifier 'iter'
+   28 |       float randnumY = a_randomY[iter * n_particles + ii];
+      |                                  ^
+/output/HeCBench/particle-diffusion/reference.cpp:39:23: error: use of undeclared identifier 'truncf'
+   39 |       float dX = pX - truncf(pX);
+      |                       ^
+/output/HeCBench/particle-diffusion/reference.cpp:40:23: error: use of undeclared identifier 'truncf'
+   40 |       float dY = pY - truncf(pY);
+      |                       ^
+/output/HeCBench/particle-diffusion/reference.cpp:43:16: error: use of undeclared identifier 'floorf'
+   43 |       int iX = floorf(pX);
+      |                ^
+/output/HeCBench/particle-diffusion/reference.cpp:44:16: error: use of undeclared identifier 'floorf'
+   44 |       int iY = floorf(pY);
+      |                ^
+/output/HeCBench/particle-diffusion/reference.cpp:52:17: error: use of undeclared identifier 'map_base'
+   52 |           a_map[map_base + iY * grid_size + iX]++;
+      |                 ^
+/output/HeCBench/particle-diffusion/reference.cpp:55:7: error: use of undeclared identifier 'iter'
+   55 |       iter++;
+      |       ^
+/output/HeCBench/particle-diffusion/reference.cpp:65:64: error: unknown type name 'size_t'
+   65 |                    float* randomX, float* randomY, int** grid, size_t grid_size,
+      |                                                                ^
+/output/HeCBench/particle-diffusion/reference.cpp:66:20: error: unknown type name 'size_t'
+   66 |                    size_t n_particles, int nIterations, float radius,
+      |                    ^
+/output/HeCBench/particle-diffusion/reference.cpp:67:20: error: unknown type name 'size_t'
+   67 |                    size_t* map, int nRepeat) {
+      |                    ^
+19 errors generated.

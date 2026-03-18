@@ -1,0 +1,25 @@
+In file included from /output/HeCBench/mriQ/kernel.cpp:1:
+/output/HeCBench/mriQ/kernel.h:38:7: error: a type specifier is required for all declarations
+   38 |       fprintf(stderr, "CUDA error on line %d: %s\n", __LINE__, cudaGetErrorString(err)); \
+      |       ^
+/output/HeCBench/mriQ/kernel.h:38:15: error: use of undeclared identifier 'stderr'
+   38 |       fprintf(stderr, "CUDA error on line %d: %s\n", __LINE__, cudaGetErrorString(err)); \
+      |               ^
+/output/HeCBench/mriQ/kernel.h:38:83: error: use of undeclared identifier 'err'
+   38 |       fprintf(stderr, "CUDA error on line %d: %s\n", __LINE__, cudaGetErrorString(err)); \
+      |                                                                                   ^
+/output/HeCBench/mriQ/kernel.h:43:1: error: extraneous closing brace ('}')
+   43 | };
+      | ^
+/output/HeCBench/mriQ/kernel.h:47:1: error: unknown type name 'kValues'
+   47 | kValues ck[KERNEL_Q_K_ELEMS_PER_GRID];
+      | ^
+In file included from /output/HeCBench/mriQ/kernel.cpp:1:
+In file included from /output/HeCBench/mriQ/kernel.h:83:
+/usr/include/stdio.h:357:12: error: redefinition of 'fprintf' as different kind of symbol
+  357 | extern int fprintf (FILE *__restrict __stream,
+      |            ^
+/output/HeCBench/mriQ/kernel.h:38:7: note: previous definition is here
+   38 |       fprintf(stderr, "CUDA error on line %d: %s\n", __LINE__, cudaGetErrorString(err)); \
+      |       ^
+6 errors generated.

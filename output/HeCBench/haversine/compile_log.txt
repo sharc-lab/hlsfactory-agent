@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/haversine/kernel.cpp:1:
+/output/HeCBench/haversine/kernel.h:50:10: fatal error: 'sycl/sycl.hpp' file not found
+   50 | #include <sycl/sycl.hpp>
+      |          ^~~~~~~~~~~~~~~
+1 error generated.

@@ -1,0 +1,4 @@
+/output/HeCBench/popcount/kernel.cpp:148:20: error: use of undeclared identifier '__popcll'
+  148 |             r[i] = __popcll(data[i]);
+      |                    ^
+1 error generated.

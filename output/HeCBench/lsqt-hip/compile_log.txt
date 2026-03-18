@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/lsqt-hip/kernel.cpp:1:
+/output/HeCBench/lsqt-hip/kernel.h:37:6: error: use of undeclared identifier 'Anderson'
+   37 | void Anderson::add_disorder(int N, std::mt19937& generator, real* potential)
+      |      ^
+/output/HeCBench/lsqt-hip/kernel.h:37:41: error: no type named 'mt19937' in namespace 'std'
+   37 | void Anderson::add_disorder(int N, std::mt19937& generator, real* potential)
+      |                                    ~~~~~^
+/output/HeCBench/lsqt-hip/kernel.h:37:61: error: unknown type name 'real'
+   37 | void Anderson::add_disorder(int N, std::mt19937& generator, real* potential)
+      |                                                             ^
+/output/HeCBench/lsqt-hip/kernel.h:68:6: error: use of undeclared identifier 'Charge'
+   68 | void Charge::add_impurities(
+      |      ^
+/output/HeCBench/lsqt-hip/kernel.h:69:8: error: no type named 'mt19937' in namespace 'std'
+   69 |   std::mt19937& generator,
+      |   ~~~~~^
+/output/HeCBench/lsqt-hip/kernel.h:71:3: error: unknown type name 'real'
+   71 |   real box_length[3],
+      |   ^
+/output/HeCBench/lsqt-hip/kernel.h:73:8: error: no template named 'vector' in namespace 'std'
+   73 |   std::vector<real>& x,
+      |   ~~~~~^
+/output/HeCBench/lsqt-hip/kernel.h:73:15: error: use of undeclared identifier 'real'
+   73 |   std::vector<real>& x,
+      |               ^
+/output/HeCBench/lsqt-hip/kernel.h:74:8: error: no template named 'vector' in namespace 'std'
+   74 |   std::vector<real>& y,
+      |   ~~~~~^
+/output/HeCBench/lsqt-hip/kernel.h:74:15: error: use of undeclared identifier 'real'
+   74 |   std::vector<real>& y,
+      |               ^
+/output/HeCBench/lsqt-hip/kernel.h:75:8: error: no template named 'vector' in namespace 'std'
+   75 |   std::vector<real>& z,
+      |   ~~~~~^
+/output/HeCBench/lsqt-hip/kernel.h:75:15: error: use of undeclared identifier 'real'
+   75 |   std::vector<real>& z,
+      |               ^
+/output/HeCBench/lsqt-hip/kernel.h:76:3: error: unknown type name 'real'
+   76 |   real* potential)
+      |   ^
+/output/HeCBench/lsqt-hip/kernel.h:91:6: error: use of undeclared identifier 'Charge'
+   91 | void Charge::find_impurity_strength(std::mt19937& generator)
+      |      ^
+/output/HeCBench/lsqt-hip/kernel.h:91:42: error: no type named 'mt19937' in namespace 'std'
+   91 | void Charge::find_impurity_strength(std::mt19937& generator)
+      |                                     ~~~~~^
+/output/HeCBench/lsqt-hip/kernel.h:97:6: error: use of undeclared identifier 'Charge'
+   97 | void Charge::find_cell_numbers(int pbc[3], real box_length[3])
+      |      ^
+/output/HeCBench/lsqt-hip/kernel.h:97:44: error: unknown type name 'real'
+   97 | void Charge::find_cell_numbers(int pbc[3], real box_length[3])
+      |                                            ^
+/output/HeCBench/lsqt-hip/kernel.h:114:6: error: use of undeclared identifier 'Charge'
+  114 | void Charge::find_cell_contents(
+      |      ^
+/output/HeCBench/lsqt-hip/kernel.h:117:3: error: unknown type name 'real'
+  117 |   real box_length[3],
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

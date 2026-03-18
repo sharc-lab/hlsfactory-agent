@@ -1,0 +1,10 @@
+/output/HeCBench/clock/kernel.cpp:5:1: error: cannot combine with previous 'extern' declaration specifier
+    5 | static void timedReduction(const float *input, float *output, clock_t *timer)
+      | ^
+/output/HeCBench/clock/kernel.cpp:24:40: error: use of undeclared identifier 'clock'
+   24 |             if (tid == 0) timer[bid] = clock();
+      |                                        ^
+/output/HeCBench/clock/kernel.cpp:49:51: error: use of undeclared identifier 'clock'
+   49 |             if (tid == 0) timer[bid+GRID_DIM_X] = clock();
+      |                                                   ^
+3 errors generated.

@@ -1,0 +1,38 @@
+In file included from /output/HeCBench/overlay/kernel.cpp:1:
+/output/HeCBench/overlay/kernel.h:52:19: error: declaration of 'T' shadows template parameter
+   52 | template<typename T>
+      |                   ^
+/output/HeCBench/overlay/kernel.h:50:19: note: template parameter is declared here
+   50 | template<typename T>
+      |                   ^
+/output/HeCBench/overlay/kernel.cpp:4:8: error: expected unqualified-id
+    4 | extern "C"
+      |        ^
+2 errors generated.
+/output/HeCBench/overlay/reference.cpp:14:9: error: unknown type name 'float4'; did you mean 'float'?
+   14 |   const float4 color) 
+      |         ^~~~~~
+      |         float
+/output/HeCBench/overlay/reference.cpp:26:34: error: member reference base type 'const float' is not a structure or union
+   26 |         const float alpha = color.w / 255.0f;
+      |                             ~~~~~^~
+/output/HeCBench/overlay/reference.cpp:29:29: error: member reference base type 'const float' is not a structure or union
+   29 |         px.x = alpha * color.x + ialph * px.x;
+      |                        ~~~~~^~
+/output/HeCBench/overlay/reference.cpp:30:29: error: member reference base type 'const float' is not a structure or union
+   30 |         px.y = alpha * color.y + ialph * px.y;
+      |                        ~~~~~^~
+/output/HeCBench/overlay/reference.cpp:31:29: error: member reference base type 'const float' is not a structure or union
+   31 |         px.z = alpha * color.z + ialph * px.z;
+      |                        ~~~~~^~
+/output/HeCBench/overlay/reference.cpp:40:24: error: unknown type name 'uint32_t'
+   40 |   T* input, T* output, uint32_t width, uint32_t height, 
+      |                        ^
+/output/HeCBench/overlay/reference.cpp:40:40: error: unknown type name 'uint32_t'
+   40 |   T* input, T* output, uint32_t width, uint32_t height, 
+      |                                        ^
+/output/HeCBench/overlay/reference.cpp:41:39: error: unknown type name 'float4'; did you mean 'float'?
+   41 |   Box *detections, int numDetections, float4 colors )
+      |                                       ^~~~~~
+      |                                       float
+8 errors generated.

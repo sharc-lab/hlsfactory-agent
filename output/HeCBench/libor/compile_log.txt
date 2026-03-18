@@ -1,0 +1,22 @@
+/output/HeCBench/libor/kernel.cpp:21:14: error: use of undeclared identifier '__fdividef'
+   21 |       v   += __fdividef(con1*L[i],1.f+delta*L[i]);
+      |              ^
+/output/HeCBench/libor/kernel.cpp:48:14: error: use of undeclared identifier '__fdividef'
+   48 |       v   += __fdividef(con1*L[i],1.f+delta*L[i]);
+      |              ^
+/output/HeCBench/libor/kernel.cpp:73:16: error: use of undeclared identifier '__fdividef'
+   73 |       faci   = __fdividef(delta,1.f+delta*L2[i+n*N]);
+      |                ^
+/output/HeCBench/libor/kernel.cpp:74:23: error: use of undeclared identifier '__fdividef'
+   74 |       L_b[i] = L_b[i]*__fdividef(L2[i+(n+1)*N],L2[i+n*N])
+      |                       ^
+/output/HeCBench/libor/kernel.cpp:99:12: error: use of undeclared identifier '__fdividef'
+   99 |     b    = __fdividef(b,1.f+delta*L[n]);
+      |            ^
+/output/HeCBench/libor/kernel.cpp:125:28: error: use of undeclared identifier '__fdividef'
+  125 |     L_b[n]  = -B_b[m]*B[m]*__fdividef(delta,1.f+delta*L[n]);
+      |                            ^
+/output/HeCBench/libor/kernel.cpp:128:19: error: use of undeclared identifier '__fdividef'
+  128 |       B_b[m-1] += __fdividef(B_b[m],1.f+delta*L[n]);
+      |                   ^
+7 errors generated.

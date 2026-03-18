@@ -1,0 +1,6 @@
+In file included from /output/HeCBench/attention-paged/kernel.cpp:1:
+/output/HeCBench/attention-paged/kernel.h:39:10: fatal error: 'attention_kernels.cuh' file not found
+   39 | #include "attention_kernels.cuh"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+PASS: reference.cpp

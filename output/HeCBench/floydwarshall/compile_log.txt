@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/floydwarshall/kernel.cpp:1:
+/output/HeCBench/floydwarshall/kernel.h:65:1: error: unterminated /* comment
+   65 | /*!
+      | ^
+1 error generated.

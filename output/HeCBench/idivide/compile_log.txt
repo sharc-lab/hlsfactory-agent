@@ -1,0 +1,20 @@
+In file included from /output/HeCBench/idivide/kernel.cpp:1:
+/output/HeCBench/idivide/kernel.h:233:11: error: use of undeclared identifier '_bid_x'
+  233 |   int x = _bid_x * BLOCK_DIM_X + _tid_x;
+      |           ^
+/output/HeCBench/idivide/kernel.h:233:34: error: use of undeclared identifier '_tid_x'
+  233 |   int x = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                  ^
+/output/HeCBench/idivide/kernel.h:256:11: error: use of undeclared identifier '_bid_x'
+  256 |   int x = _bid_x * BLOCK_DIM_X + _tid_x;
+      |           ^
+/output/HeCBench/idivide/kernel.h:256:34: error: use of undeclared identifier '_tid_x'
+  256 |   int x = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                  ^
+/output/HeCBench/idivide/kernel.h:272:18: error: use of undeclared identifier '_bid_x'
+  272 |   int divident = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                  ^
+/output/HeCBench/idivide/kernel.h:272:41: error: use of undeclared identifier '_tid_x'
+  272 |   int divident = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                         ^
+6 errors generated.

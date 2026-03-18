@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/mxfp4-hip/kernel.cpp:1:
+/output/HeCBench/mxfp4-hip/kernel.h:22:10: fatal error: 'verify.h' file not found
+   22 | #include "verify.h"
+      |          ^~~~~~~~~~
+1 error generated.

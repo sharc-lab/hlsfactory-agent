@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/simpleMultiDevice/kernel.cpp:1:
+/output/HeCBench/simpleMultiDevice/kernel.h:95:5: error: unknown type name 'cudaStream_t'
+   95 |     cudaStream_t stream;
+      |     ^
+1 error generated.

@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/permute/kernel.cpp:1:
+/output/HeCBench/permute/kernel.h:23:10: fatal error: 'common.h' file not found
+   23 | #include "common.h"
+      |          ^~~~~~~~~~
+1 error generated.

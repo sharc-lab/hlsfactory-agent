@@ -1,0 +1,69 @@
+In file included from /output/HeCBench/tsa/kernel.cpp:1:
+/output/HeCBench/tsa/kernel.h:31:20: error: declaration of 'T' shadows template parameter
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/tsa/kernel.h:29:20: note: template parameter is declared here
+   29 | template <typename T>
+      |                    ^
+/output/HeCBench/tsa/kernel.h:36:19: error: declaration of 'T' shadows template parameter
+   36 | template<typename T, int BLOCK_WIDTH, int BLOCK_HEIGHT, int MARGIN_X, int MARGIN_Y, int BACKWARDS>
+      |                   ^
+/output/HeCBench/tsa/kernel.h:31:20: note: template parameter is declared here
+   31 | template <typename T>
+      |                    ^
+/output/HeCBench/tsa/kernel.h:29:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   29 | template <typename T>
+      | ^~~~~~~~~~~~~~~~~~~~~
+   30 | 
+   31 | template <typename T>
+      | ~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/tsa/kernel.h:93:12: error: use of undeclared identifier '_bid_x'
+   93 |   int px = _bid_x * (BLOCK_X - 2 * STEPS * MARGIN_X) + _tid_x - STEPS * MARGIN_X;
+      |            ^
+/output/HeCBench/tsa/kernel.h:93:56: error: use of undeclared identifier '_tid_x'
+   93 |   int px = _bid_x * (BLOCK_X - 2 * STEPS * MARGIN_X) + _tid_x - STEPS * MARGIN_X;
+      |                                                        ^
+/output/HeCBench/tsa/kernel.h:94:12: error: use of undeclared identifier '_bid_y'
+   94 |   int py = _bid_y * (BLOCK_Y - 2 * STEPS * MARGIN_Y) + _tid_y - STEPS * MARGIN_Y;
+      |            ^
+/output/HeCBench/tsa/kernel.h:94:56: error: use of undeclared identifier '_tid_y'
+   94 |   int py = _bid_y * (BLOCK_Y - 2 * STEPS * MARGIN_Y) + _tid_y - STEPS * MARGIN_Y;
+      |                                                        ^
+/output/HeCBench/tsa/kernel.h:101:12: error: use of undeclared identifier '_tid_y'
+  101 |         rl[_tid_y + i * STRIDE_Y][_tid_x] = p_real[pidx];
+      |            ^
+/output/HeCBench/tsa/kernel.h:101:35: error: use of undeclared identifier '_tid_x'
+  101 |         rl[_tid_y + i * STRIDE_Y][_tid_x] = p_real[pidx];
+      |                                   ^
+/output/HeCBench/tsa/kernel.h:102:12: error: use of undeclared identifier '_tid_y'
+  102 |         im[_tid_y + i * STRIDE_Y][_tid_x] = p_imag[pidx];
+      |            ^
+/output/HeCBench/tsa/kernel.h:102:35: error: use of undeclared identifier '_tid_x'
+  102 |         im[_tid_y + i * STRIDE_Y][_tid_x] = p_imag[pidx];
+      |                                   ^
+/output/HeCBench/tsa/kernel.h:108:12: error: use of undeclared identifier '_tid_x'
+  108 |   int sx = _tid_x;
+      |            ^
+/output/HeCBench/tsa/kernel.h:111:14: error: use of undeclared identifier '_tid_y'
+  111 |     sy = 2 * _tid_y + _tid_x % 2;
+      |              ^
+/output/HeCBench/tsa/kernel.h:111:23: error: use of undeclared identifier '_tid_x'
+  111 |     sy = 2 * _tid_y + _tid_x % 2;
+      |                       ^
+/output/HeCBench/tsa/kernel.h:113:14: error: use of undeclared identifier '_tid_y'
+  113 |     sy = 2 * _tid_y + 1 - _tid_x % 2;
+      |              ^
+/output/HeCBench/tsa/kernel.h:113:27: error: use of undeclared identifier '_tid_x'
+  113 |     sy = 2 * _tid_y + 1 - _tid_x % 2;
+      |                           ^
+/output/HeCBench/tsa/kernel.h:118:25: error: use of undeclared identifier '_bid_y'
+  118 |   int checkerboard_py = _bid_y * (BLOCK_Y - 2 * STEPS * MARGIN_Y) + sy - STEPS * MARGIN_Y;
+      |                         ^
+/output/HeCBench/tsa/kernel.h:194:8: error: use of undeclared identifier '_tid_x'
+  194 |   sx = _tid_x + STEPS * MARGIN_X;
+      |        ^
+/output/HeCBench/tsa/kernel.h:195:8: error: use of undeclared identifier '_tid_y'
+  195 |   sy = _tid_y + STEPS * MARGIN_Y;
+      |        ^
+19 errors generated.
+PASS: reference.cpp

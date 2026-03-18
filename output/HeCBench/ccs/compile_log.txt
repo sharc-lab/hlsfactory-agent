@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/ccs/kernel.cpp:1:
+/output/HeCBench/ccs/kernel.h:34:10: fatal error: 'matrixsize.c' file not found
+   34 | #include "matrixsize.c"
+      |          ^~~~~~~~~~~~~~
+1 error generated.

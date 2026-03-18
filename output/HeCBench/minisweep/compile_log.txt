@@ -1,0 +1,44 @@
+In file included from /output/HeCBench/minisweep/kernel.cpp:1:
+/output/HeCBench/minisweep/kernel.h:32:1: error: extraneous closing brace ('}')
+   32 | }
+      | ^
+/output/HeCBench/minisweep/kernel.cpp:52:21: error: use of undeclared identifier 'Dir_x'
+   52 |   const int dir_x = Dir_x( octant );
+      |                     ^
+/output/HeCBench/minisweep/kernel.cpp:53:21: error: use of undeclared identifier 'Dir_y'
+   53 |   const int dir_y = Dir_y( octant );
+      |                     ^
+/output/HeCBench/minisweep/kernel.cpp:54:21: error: use of undeclared identifier 'Dir_z'
+   54 |   const int dir_z = Dir_z( octant );
+      |                     ^
+/output/HeCBench/minisweep/kernel.cpp:336:9: error: use of undeclared identifier 'atomicAdd'
+  336 |         atomicAdd(
+      |         ^
+/output/HeCBench/minisweep/kernel.cpp:349:8: error: expected unqualified-id
+  349 | extern "C"
+      |        ^
+/output/HeCBench/minisweep/kernel.cpp:418:8: error: expected unqualified-id
+  418 | extern "C"
+      |        ^
+/output/HeCBench/minisweep/kernel.cpp:490:8: error: expected unqualified-id
+  490 | extern "C"
+      |        ^
+/output/HeCBench/minisweep/kernel.cpp:563:8: error: expected unqualified-id
+  563 | extern "C"
+      |        ^
+/output/HeCBench/minisweep/kernel.cpp:668:32: error: function definition is not allowed here
+  668 | inline int Dir_x( int octant ) { return octant & (1<<0) ? DIR_DN * 1: DIR_UP * 1; }
+      |                                ^
+/output/HeCBench/minisweep/kernel.cpp:670:32: error: function definition is not allowed here
+  670 | inline int Dir_y( int octant ) { return octant & (1<<1) ? DIR_DN * 1: DIR_UP * 1; }
+      |                                ^
+/output/HeCBench/minisweep/kernel.cpp:672:32: error: function definition is not allowed here
+  672 | inline int Dir_z( int octant ) { return octant & (1<<2) ? DIR_DN * 1 : DIR_UP * 1; }
+      |                                ^
+/output/HeCBench/minisweep/kernel.cpp:672:85: error: expected '}'
+  672 | inline int Dir_z( int octant ) { return octant & (1<<2) ? DIR_DN * 1 : DIR_UP * 1; }
+      |                                                                                     ^
+/output/HeCBench/minisweep/kernel.cpp:194:1: note: to match this '{'
+  194 | {
+      | ^
+13 errors generated.

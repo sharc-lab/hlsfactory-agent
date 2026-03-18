@@ -1,0 +1,33 @@
+In file included from /output/HeCBench/epistasis/kernel.cpp:1:
+/output/HeCBench/epistasis/kernel.h:40:20: error: declaration of 'T' shadows template parameter
+   40 | template <typename T>
+      |                    ^
+/output/HeCBench/epistasis/kernel.h:38:20: note: template parameter is declared here
+   38 | template <typename T>
+      |                    ^
+/output/HeCBench/epistasis/kernel.h:38:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   38 | template <typename T>
+      | ^~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/epistasis/kernel.cpp:171:30: error: no matching function for call to 'gammafunction'
+  171 |                     score += gammafunction(ft[k] + ft[9 + k] + 1) -
+      |                              ^~~~~~~~~~~~~
+/output/HeCBench/epistasis/kernel.cpp:172:21: error: no matching function for call to 'gammafunction'
+  172 |                     gammafunction(ft[k]) - gammafunction(ft[9 + k]);
+      |                     ^~~~~~~~~~~~~
+/output/HeCBench/epistasis/kernel.cpp:172:44: error: no matching function for call to 'gammafunction'
+  172 |                     gammafunction(ft[k]) - gammafunction(ft[9 + k]);
+      |                                            ^~~~~~~~~~~~~
+5 errors generated.
+/output/HeCBench/epistasis/reference.cpp:13:33: error: use of undeclared identifier 'logf'
+   13 |   float x = ((float)n + 0.5f) * logf((float) n) -
+      |                                 ^
+/output/HeCBench/epistasis/reference.cpp:14:30: error: use of undeclared identifier 'expf'
+   14 |     ((float)n - 1.0f) * logf(expf(1.0f));
+      |                              ^
+/output/HeCBench/epistasis/reference.cpp:155:17: error: use of undeclared identifier 'fabsf'
+  155 |         score = fabsf(score);
+      |                 ^
+/output/HeCBench/epistasis/reference.cpp:157:19: error: use of undeclared identifier 'FLT_MAX'
+  157 |           score = FLT_MAX;
+      |                   ^
+4 errors generated.

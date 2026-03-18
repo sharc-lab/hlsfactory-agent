@@ -1,0 +1,14 @@
+In file included from /output/HeCBench/hotspot/kernel.cpp:1:
+/output/HeCBench/hotspot/kernel.h:108:12: error: use of undeclared identifier '_bid_x'
+  108 |   int bx = _bid_x;
+      |            ^
+/output/HeCBench/hotspot/kernel.h:109:12: error: use of undeclared identifier '_bid_y'
+  109 |   int by = _bid_y;
+      |            ^
+/output/HeCBench/hotspot/kernel.h:111:12: error: use of undeclared identifier '_tid_x'
+  111 |   int tx = _tid_x;
+      |            ^
+/output/HeCBench/hotspot/kernel.h:112:12: error: use of undeclared identifier '_tid_y'
+  112 |   int ty = _tid_y;
+      |            ^
+4 errors generated.

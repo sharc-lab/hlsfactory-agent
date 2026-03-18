@@ -1,0 +1,62 @@
+/output/HeCBench/chemv/kernel.cpp:5:6: error: declaration of 'chemv_kernel0' has a different language linkage
+    5 | void chemv_kernel0(struct ComplexFloat *AT, struct ComplexFloat *X, struct ComplexFloat *Y, float alpha_im, float alpha_re, float beta_im, float beta_re)
+      |      ^
+/output/HeCBench/chemv/kernel.h:62:6: note: previous declaration is here
+   62 | void chemv_kernel0(struct ComplexFloat *AT, struct ComplexFloat *X, struct ComplexFloat *Y, float alpha_im, float alpha_re, float beta_im, float beta_re);
+      |      ^
+/output/HeCBench/chemv/kernel.cpp:76:1: error: use of undeclared identifier 'c3'
+   76 | c3].Im));
+      | ^
+/output/HeCBench/chemv/kernel.cpp:77:13: error: use of undeclared identifier 'private_var98_Im'
+   77 |             private_var98_Im = ((private_var97_Im * X[c1 + c3].Re) + (private_var97_Re * X[c1 + c3].Im));
+      |             ^
+/output/HeCBench/chemv/kernel.cpp:77:34: error: use of undeclared identifier 'private_var97_Im'
+   77 |             private_var98_Im = ((private_var97_Im * X[c1 + c3].Re) + (private_var97_Re * X[c1 + c3].Im));
+      |                                  ^
+/output/HeCBench/chemv/kernel.cpp:77:55: error: use of undeclared identifier 'c1'
+   77 |             private_var98_Im = ((private_var97_Im * X[c1 + c3].Re) + (private_var97_Re * X[c1 + c3].Im));
+      |                                                       ^
+/output/HeCBench/chemv/kernel.cpp:77:60: error: use of undeclared identifier 'c3'
+   77 |             private_var98_Im = ((private_var97_Im * X[c1 + c3].Re) + (private_var97_Re * X[c1 + c3].Im));
+      |                                                            ^
+/output/HeCBench/chemv/kernel.cpp:77:71: error: use of undeclared identifier 'private_var97_Re'
+   77 |             private_var98_Im = ((private_var97_Im * X[c1 + c3].Re) + (private_var97_Re * X[c1 + c3].Im));
+      |                                                                       ^
+/output/HeCBench/chemv/kernel.cpp:77:92: error: use of undeclared identifier 'c1'
+   77 |             private_var98_Im = ((private_var97_Im * X[c1 + c3].Re) + (private_var97_Re * X[c1 + c3].Im));
+      |                                                                                            ^
+/output/HeCBench/chemv/kernel.cpp:77:97: error: use of undeclared identifier 'c3'
+   77 |             private_var98_Im = ((private_var97_Im * X[c1 + c3].Re) + (private_var97_Re * X[c1 + c3].Im));
+      |                                                                                                 ^
+/output/HeCBench/chemv/kernel.cpp:78:13: error: use of undeclared identifier 'private_var99_Re'
+   78 |             private_var99_Re = (Y[32 * b0 + t0].Re + private_var98_Re);
+      |             ^
+/output/HeCBench/chemv/kernel.cpp:78:40: error: use of undeclared identifier 'b0'
+   78 |             private_var99_Re = (Y[32 * b0 + t0].Re + private_var98_Re);
+      |                                        ^
+/output/HeCBench/chemv/kernel.cpp:78:45: error: use of undeclared identifier 't0'
+   78 |             private_var99_Re = (Y[32 * b0 + t0].Re + private_var98_Re);
+      |                                             ^
+/output/HeCBench/chemv/kernel.cpp:78:54: error: use of undeclared identifier 'private_var98_Re'
+   78 |             private_var99_Re = (Y[32 * b0 + t0].Re + private_var98_Re);
+      |                                                      ^
+/output/HeCBench/chemv/kernel.cpp:79:13: error: use of undeclared identifier 'private_var99_Im'
+   79 |             private_var99_Im = (Y[32 * b0 + t0].Im + private_var98_Im);
+      |             ^
+/output/HeCBench/chemv/kernel.cpp:79:40: error: use of undeclared identifier 'b0'
+   79 |             private_var99_Im = (Y[32 * b0 + t0].Im + private_var98_Im);
+      |                                        ^
+/output/HeCBench/chemv/kernel.cpp:79:45: error: use of undeclared identifier 't0'
+   79 |             private_var99_Im = (Y[32 * b0 + t0].Im + private_var98_Im);
+      |                                             ^
+/output/HeCBench/chemv/kernel.cpp:79:54: error: use of undeclared identifier 'private_var98_Im'
+   79 |             private_var99_Im = (Y[32 * b0 + t0].Im + private_var98_Im);
+      |                                                      ^
+/output/HeCBench/chemv/kernel.cpp:80:20: error: use of undeclared identifier 'b0'
+   80 |             Y[32 * b0 + t0].Re = private_var99_Re;
+      |                    ^
+/output/HeCBench/chemv/kernel.cpp:80:25: error: use of undeclared identifier 't0'
+   80 |             Y[32 * b0 + t0].Re = private_var99_Re;
+      |                         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

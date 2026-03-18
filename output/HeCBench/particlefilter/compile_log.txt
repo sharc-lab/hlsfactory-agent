@@ -1,0 +1,23 @@
+In file included from /output/HeCBench/particlefilter/kernel.cpp:1:
+/output/HeCBench/particlefilter/kernel.h:177:25: error: use of undeclared identifier '_bid_x'
+  177 |   int i = BLOCK_DIM_X * _bid_x + _tid_x;
+      |                         ^
+/output/HeCBench/particlefilter/kernel.h:177:34: error: use of undeclared identifier '_tid_x'
+  177 |   int i = BLOCK_DIM_X * _bid_x + _tid_x;
+      |                                  ^
+/output/HeCBench/particlefilter/kernel.h:221:18: error: use of undeclared identifier '_bid_x'
+  221 |   int block_id = _bid_x; 
+      |                  ^
+/output/HeCBench/particlefilter/kernel.h:222:19: error: use of undeclared identifier '_tid_x'
+  222 |   int thread_id = _tid_x;
+      |                   ^
+/output/HeCBench/particlefilter/kernel.h:299:18: error: use of undeclared identifier '_tid_x'
+  299 |   int local_id = _tid_x;
+      |                  ^
+/output/HeCBench/particlefilter/kernel.h:300:25: error: use of undeclared identifier '_bid_x'
+  300 |   int i = BLOCK_DIM_X * _bid_x + _tid_x;
+      |                         ^
+/output/HeCBench/particlefilter/kernel.h:300:34: error: use of undeclared identifier '_tid_x'
+  300 |   int i = BLOCK_DIM_X * _bid_x + _tid_x;
+      |                                  ^
+7 errors generated.

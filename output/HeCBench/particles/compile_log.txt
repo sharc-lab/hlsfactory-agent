@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/particles/kernel.cpp:1:
+/output/HeCBench/particles/kernel.h:112:1: error: unterminated /* comment
+  112 | /*
+      | ^
+/output/HeCBench/particles/kernel.cpp:45:32: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   45 |             unsigned int l_key[LOCAL_SIZE_LIMIT];
+      |                                ^
+/output/HeCBench/particles/kernel.cpp:46:32: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   46 |             unsigned int l_val[LOCAL_SIZE_LIMIT];
+      |                                ^
+/output/HeCBench/particles/kernel.cpp:49:34: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   49 |             d_SrcKey += _bid_x * LOCAL_SIZE_LIMIT + _tid_x;
+      |                                  ^
+/output/HeCBench/particles/kernel.cpp:50:34: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   50 |             d_SrcVal += _bid_x * LOCAL_SIZE_LIMIT + _tid_x;
+      |                                  ^
+/output/HeCBench/particles/kernel.cpp:51:34: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   51 |             d_DstKey += _bid_x * LOCAL_SIZE_LIMIT + _tid_x;
+      |                                  ^
+/output/HeCBench/particles/kernel.cpp:52:34: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   52 |             d_DstVal += _bid_x * LOCAL_SIZE_LIMIT + _tid_x;
+      |                                  ^
+/output/HeCBench/particles/kernel.cpp:55:29: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   55 |             l_key[_tid_x + (LOCAL_SIZE_LIMIT / 2)] = d_SrcKey[(LOCAL_SIZE_LIMIT / 2)];
+      |                             ^
+/output/HeCBench/particles/kernel.cpp:55:64: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   55 |             l_key[_tid_x + (LOCAL_SIZE_LIMIT / 2)] = d_SrcKey[(LOCAL_SIZE_LIMIT / 2)];
+      |                                                                ^
+/output/HeCBench/particles/kernel.cpp:56:29: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   56 |             l_val[_tid_x + (LOCAL_SIZE_LIMIT / 2)] = d_SrcVal[(LOCAL_SIZE_LIMIT / 2)];
+      |                             ^
+/output/HeCBench/particles/kernel.cpp:56:64: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   56 |             l_val[_tid_x + (LOCAL_SIZE_LIMIT / 2)] = d_SrcVal[(LOCAL_SIZE_LIMIT / 2)];
+      |                                                                ^
+/output/HeCBench/particles/kernel.cpp:82:23: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   82 |             d_DstKey[(LOCAL_SIZE_LIMIT / 2)] = l_key[_tid_x + (LOCAL_SIZE_LIMIT / 2)];
+      |                       ^
+/output/HeCBench/particles/kernel.cpp:82:64: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   82 |             d_DstKey[(LOCAL_SIZE_LIMIT / 2)] = l_key[_tid_x + (LOCAL_SIZE_LIMIT / 2)];
+      |                                                                ^
+/output/HeCBench/particles/kernel.cpp:83:23: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   83 |             d_DstVal[(LOCAL_SIZE_LIMIT / 2)] = l_val[_tid_x + (LOCAL_SIZE_LIMIT / 2)];
+      |                       ^
+/output/HeCBench/particles/kernel.cpp:83:64: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+   83 |             d_DstVal[(LOCAL_SIZE_LIMIT / 2)] = l_val[_tid_x + (LOCAL_SIZE_LIMIT / 2)];
+      |                                                                ^
+/output/HeCBench/particles/kernel.cpp:112:32: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+  112 |             unsigned int l_key[LOCAL_SIZE_LIMIT];
+      |                                ^
+/output/HeCBench/particles/kernel.cpp:113:32: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+  113 |             unsigned int l_val[LOCAL_SIZE_LIMIT];
+      |                                ^
+/output/HeCBench/particles/kernel.cpp:116:34: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+  116 |             d_SrcKey += _bid_x * LOCAL_SIZE_LIMIT + _tid_x;
+      |                                  ^
+/output/HeCBench/particles/kernel.cpp:117:34: error: use of undeclared identifier 'LOCAL_SIZE_LIMIT'
+  117 |             d_SrcVal += _bid_x * LOCAL_SIZE_LIMIT + _tid_x;
+      |                                  ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

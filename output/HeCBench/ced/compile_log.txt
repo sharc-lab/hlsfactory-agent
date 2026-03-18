@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/ced/kernel.cpp:1:
+/output/HeCBench/ced/kernel.h:110:10: fatal error: 'support/partitioner.h' file not found
+  110 | #include "support/partitioner.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

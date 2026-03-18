@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/multimaterial-hip/kernel.cpp:1:
+/output/HeCBench/multimaterial-hip/kernel.h:26:10: fatal error: 'hip/hip_runtime.h' file not found
+   26 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.

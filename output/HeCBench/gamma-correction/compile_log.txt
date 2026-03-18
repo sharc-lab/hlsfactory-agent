@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/gamma-correction/kernel.cpp:1:
+/output/HeCBench/gamma-correction/kernel.h:26:10: fatal error: 'utils.hpp' file not found
+   26 | #include "utils.hpp"
+      |          ^~~~~~~~~~~
+1 error generated.

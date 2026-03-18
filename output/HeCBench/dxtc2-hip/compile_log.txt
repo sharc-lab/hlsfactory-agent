@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/dxtc2-hip/kernel.cpp:1:
+/output/HeCBench/dxtc2-hip/kernel.h:52:10: fatal error: 'shrUtils.h' file not found
+   52 | #include "shrUtils.h"
+      |          ^~~~~~~~~~~~
+1 error generated.

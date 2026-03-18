@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/rainflow-hip/kernel.cpp:1:
+/output/HeCBench/rainflow-hip/kernel.h:78:10: fatal error: 'hip/hip_runtime.h' file not found
+   78 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.

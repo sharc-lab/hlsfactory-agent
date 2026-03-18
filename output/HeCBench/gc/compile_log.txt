@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/gc/kernel.cpp:1:
+/output/HeCBench/gc/kernel.h:63:10: fatal error: 'graph.h' file not found
+   63 | #include "graph.h"
+      |          ^~~~~~~~~
+1 error generated.

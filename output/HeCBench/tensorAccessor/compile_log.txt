@@ -1,0 +1,69 @@
+In file included from /output/HeCBench/tensorAccessor/kernel.cpp:1:
+/output/HeCBench/tensorAccessor/kernel.h:63:3: error: unknown type name 'HOST_DEVICE'
+   63 |   HOST_DEVICE TensorAccessorBase(
+      |   ^
+/output/HeCBench/tensorAccessor/kernel.h:63:15: error: constructor cannot have a return type
+   63 |   HOST_DEVICE TensorAccessorBase(
+      |               ^~~~~~~~~~~~~~~~~~
+/output/HeCBench/tensorAccessor/kernel.h:69:3: error: unknown type name 'HOST_DEVICE'
+   69 |   HOST_DEVICE index_t stride(index_t i) const {
+      |   ^
+/output/HeCBench/tensorAccessor/kernel.h:69:15: error: declaration of 'index_t' shadows template parameter
+   69 |   HOST_DEVICE index_t stride(index_t i) const {
+      |               ^
+/output/HeCBench/tensorAccessor/kernel.h:58:19: note: template parameter is declared here
+   58 |          typename index_t = int64_t>
+      |                   ^
+/output/HeCBench/tensorAccessor/kernel.h:69:22: error: expected ';' at end of declaration list
+   69 |   HOST_DEVICE index_t stride(index_t i) const {
+      |                      ^
+      |                      ;
+/output/HeCBench/tensorAccessor/kernel.h:83:9: error: unknown type name 'index_t'
+   83 |   const index_t* sizes_;
+      |         ^
+/output/HeCBench/tensorAccessor/kernel.h:84:9: error: unknown type name 'index_t'
+   84 |   const index_t* strides_;
+      |         ^
+/output/HeCBench/tensorAccessor/kernel.h:92:3: error: unknown type name 'HOST_DEVICE'
+   92 |   HOST_DEVICE TensorAccessor(
+      |   ^
+/output/HeCBench/tensorAccessor/kernel.h:92:15: error: constructor cannot have a return type
+   92 |   HOST_DEVICE TensorAccessor(
+      |               ^~~~~~~~~~~~~~
+/output/HeCBench/tensorAccessor/kernel.h:98:3: error: unknown type name 'HOST_DEVICE'
+   98 |   HOST_DEVICE TensorAccessor<T, N - 1, PtrTraits, index_t> operator[](index_t i) {
+      |   ^
+/output/HeCBench/tensorAccessor/kernel.h:98:15: error: member 'TensorAccessor' cannot have template arguments
+   98 |   HOST_DEVICE TensorAccessor<T, N - 1, PtrTraits, index_t> operator[](index_t i) {
+      |               ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/tensorAccessor/kernel.h:98:59: error: expected ';' at end of declaration list
+   98 |   HOST_DEVICE TensorAccessor<T, N - 1, PtrTraits, index_t> operator[](index_t i) {
+      |                                                           ^
+      |                                                           ;
+/output/HeCBench/tensorAccessor/kernel.h:112:3: error: unknown type name 'HOST_DEVICE'
+  112 |   HOST_DEVICE TensorAccessor(
+      |   ^
+/output/HeCBench/tensorAccessor/kernel.h:112:15: error: constructor cannot have a return type
+  112 |   HOST_DEVICE TensorAccessor(
+      |               ^~~~~~~~~~~~~~
+/output/HeCBench/tensorAccessor/kernel.h:117:3: error: unknown type name 'HOST_DEVICE'
+  117 |   HOST_DEVICE T & operator[](index_t i) {
+      |   ^
+/output/HeCBench/tensorAccessor/kernel.h:117:15: error: declaration of 'T' shadows template parameter
+  117 |   HOST_DEVICE T & operator[](index_t i) {
+      |               ^
+/output/HeCBench/tensorAccessor/kernel.h:107:19: note: template parameter is declared here
+  107 | template<typename T, template <typename U> class PtrTraits, typename index_t>
+      |                   ^
+/output/HeCBench/tensorAccessor/kernel.h:117:16: error: expected ';' at end of declaration list
+  117 |   HOST_DEVICE T & operator[](index_t i) {
+      |                ^
+      |                ;
+/output/HeCBench/tensorAccessor/kernel.h:138:3: error: unknown type name 'HOST'
+  138 |   HOST GenericPackedTensorAccessorBase(
+      |   ^
+/output/HeCBench/tensorAccessor/kernel.h:138:8: error: constructor cannot have a return type
+  138 |   HOST GenericPackedTensorAccessorBase(
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

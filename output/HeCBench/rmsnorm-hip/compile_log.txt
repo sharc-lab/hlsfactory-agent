@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/rmsnorm-hip/kernel.cpp:1:
+/output/HeCBench/rmsnorm-hip/kernel.h:17:10: fatal error: 'reference.h' file not found
+   17 | #include "reference.h"
+      |          ^~~~~~~~~~~~~
+1 error generated.

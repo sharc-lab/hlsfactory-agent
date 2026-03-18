@@ -1,0 +1,59 @@
+In file included from /output/HeCBench/fsm/kernel.cpp:1:
+/output/HeCBench/fsm/kernel.h:91:29: error: use of undeclared identifier 'TABSIZE'
+   91 |   unsigned char *fsm, state[TABSIZE];
+      |                             ^
+/output/HeCBench/fsm/kernel.h:92:22: error: use of undeclared identifier 'FSMSIZE'
+   92 |   unsigned char next[FSMSIZE * 2 * POPSIZE];
+      |                      ^
+/output/HeCBench/fsm/kernel.h:92:36: error: use of undeclared identifier 'POPSIZE'
+   92 |   unsigned char next[FSMSIZE * 2 * POPSIZE];
+      |                                    ^
+/output/HeCBench/fsm/kernel.h:94:25: error: use of undeclared identifier 'FSMSIZE'
+   94 |   fsm = &next[_tid_x * (FSMSIZE * 2)];
+      |                         ^
+/output/HeCBench/fsm/kernel.h:94:15: error: use of undeclared identifier '_tid_x'
+   94 |   fsm = &next[_tid_x * (FSMSIZE * 2)];
+      |               ^
+/output/HeCBench/fsm/kernel.h:96:7: error: use of undeclared identifier '_tid_x'
+   96 |   if (_tid_x == 0) {
+      |       ^
+/output/HeCBench/fsm/kernel.h:97:12: error: use of undeclared identifier '_bid_x'
+   97 |     oldmax[_bid_x] = 0;
+      |            ^
+/output/HeCBench/fsm/kernel.h:98:10: error: use of undeclared identifier '_bid_x'
+   98 |     same[_bid_x] = 0;
+      |          ^
+/output/HeCBench/fsm/kernel.h:101:8: error: use of undeclared identifier '_tid_x'
+  101 |   id = _tid_x + _bid_x * BLOCK_DIM_X;
+      |        ^
+/output/HeCBench/fsm/kernel.h:101:17: error: use of undeclared identifier '_bid_x'
+  101 |   id = _tid_x + _bid_x * BLOCK_DIM_X;
+      |                 ^
+/output/HeCBench/fsm/kernel.h:102:18: error: use of undeclared identifier 'SEED'
+  102 |   rndstate[id] = SEED ^ id;
+      |                  ^
+/output/HeCBench/fsm/kernel.h:106:19: error: use of undeclared identifier 'FSMSIZE'
+  106 |   for (i = 0; i < FSMSIZE * 2; i++) {
+      |                   ^
+/output/HeCBench/fsm/kernel.h:107:41: error: use of undeclared identifier 'FSMSIZE'
+  107 |     fsm[i] = LCG_random(rndstate+id) & (FSMSIZE - 1);
+      |                                         ^
+/output/HeCBench/fsm/kernel.h:113:12: error: use of undeclared identifier 'state'
+  113 |     memset(state, 0, TABSIZE);
+      |            ^
+/output/HeCBench/fsm/kernel.h:113:22: error: use of undeclared identifier 'TABSIZE'
+  113 |     memset(state, 0, TABSIZE);
+      |                      ^
+/output/HeCBench/fsm/kernel.h:120:24: error: use of undeclared identifier 'TABSIZE'
+  120 |       pc = (d >> 1) & (TABSIZE - 1);
+      |                        ^
+/output/HeCBench/fsm/kernel.h:122:16: error: use of undeclared identifier 'state'; did you mean 'static'?
+  122 |       s = (int)state[pc];
+      |                ^~~~~
+      |                static
+/output/HeCBench/fsm/kernel.h:122:16: error: expected expression
+/output/HeCBench/fsm/kernel.h:124:7: error: use of undeclared identifier 'state'
+  124 |       state[pc] = fsm[s + s + bit];
+      |       ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

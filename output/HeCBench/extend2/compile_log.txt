@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/extend2/kernel.cpp:1:
+/output/HeCBench/extend2/kernel.h:37:10: fatal error: 'read_data.h' file not found
+   37 | #include "read_data.h"
+      |          ^~~~~~~~~~~~~
+1 error generated.

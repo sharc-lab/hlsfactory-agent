@@ -1,0 +1,86 @@
+In file included from /output/HeCBench/morphology-hip/kernel.cpp:1:
+/output/HeCBench/morphology-hip/kernel.h:34:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   34 | template <MorphOpType opType>
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/morphology-hip/kernel.h:42:22: error: no function template matches function template specialization 'borderValue'
+   42 | inline unsigned char borderValue<MorphOpType::ERODE>()
+      |                      ^
+/output/HeCBench/morphology-hip/kernel.h:44:10: error: use of undeclared identifier 'BLACK'
+   44 |   return BLACK;
+      |          ^
+/output/HeCBench/morphology-hip/kernel.h:47:1: error: extraneous 'template<>' in declaration of variable 'borderValue'
+   47 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/morphology-hip/kernel.h:48:22: error: redefinition of 'borderValue' as different kind of symbol
+   48 | inline unsigned char borderValue<MorphOpType::DILATE>()
+      |                      ^
+/output/HeCBench/morphology-hip/kernel.h:42:22: note: previous definition is here
+   42 | inline unsigned char borderValue<MorphOpType::ERODE>()
+      |                      ^
+/output/HeCBench/morphology-hip/kernel.h:48:33: error: expected ';' after top level declarator
+   48 | inline unsigned char borderValue<MorphOpType::DILATE>()
+      |                                 ^
+      |                                 ;
+/output/HeCBench/morphology-hip/kernel.h:57:23: error: declaration of 'opType' shadows template parameter
+   57 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:54:23: note: template parameter is declared here
+   54 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:60:23: error: declaration of 'opType' shadows template parameter
+   60 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:57:23: note: template parameter is declared here
+   57 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:62:23: error: declaration of 'opType' shadows template parameter
+   62 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:60:23: note: template parameter is declared here
+   60 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:64:23: error: declaration of 'opType' shadows template parameter
+   64 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:62:23: note: template parameter is declared here
+   62 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:66:23: error: declaration of 'opType' shadows template parameter
+   66 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:64:23: note: template parameter is declared here
+   64 | template <MorphOpType opType>
+      |                       ^
+/output/HeCBench/morphology-hip/kernel.h:68:8: error: expected unqualified-id
+   68 | extern "C"
+      |        ^
+In file included from /output/HeCBench/morphology-hip/kernel.cpp:1:
+In file included from /output/HeCBench/morphology-hip/kernel.h:77:
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cstdio:98:11: error: no member named 'FILE' in the global namespace
+   98 |   using ::FILE;
+      |         ~~^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cstdio:99:11: error: no member named 'fpos_t' in the global namespace
+   99 |   using ::fpos_t;
+      |         ~~^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cstdio:101:11: error: no member named 'clearerr' in the global namespace; did you mean 'clearenv'?
+  101 |   using ::clearerr;
+      |         ~~^
+/usr/include/stdlib.h:803:12: note: 'clearenv' declared here
+  803 | extern int clearenv (void) __THROW;
+      |            ^
+In file included from /output/HeCBench/morphology-hip/kernel.cpp:1:
+In file included from /output/HeCBench/morphology-hip/kernel.h:77:
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cstdio:102:11: error: no member named 'fclose' in the global namespace
+  102 |   using ::fclose;
+      |         ~~^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cstdio:103:11: error: no member named 'feof' in the global namespace
+  103 |   using ::feof;
+      |         ~~^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cstdio:104:11: error: no member named 'ferror' in the global namespace
+  104 |   using ::ferror;
+      |         ~~^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cstdio:105:11: error: no member named 'fflush' in the global namespace
+  105 |   using ::fflush;
+      |         ~~^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,149 @@
+In file included from /output/HeCBench/adv/kernel.cpp:1:
+/output/HeCBench/adv/kernel.h:46:1: error: unknown type name 'dfloat'; did you mean 'float'?
+   46 | dfloat *drandAlloc(int N){
+      | ^~~~~~
+      | float
+/output/HeCBench/adv/kernel.h:47:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   47 |   dfloat *v = (dfloat*) malloc(N * sizeof(dfloat));
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:47:16: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   47 |   dfloat *v = (dfloat*) malloc(N * sizeof(dfloat));
+      |                ^~~~~~
+      |                float
+/output/HeCBench/adv/kernel.h:47:43: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   47 |   dfloat *v = (dfloat*) malloc(N * sizeof(dfloat));
+      |                                           ^~~~~~
+      |                                           float
+/output/HeCBench/adv/kernel.h:57:11: error: unknown type name 'dfloat'; did you mean 'float'?
+   57 |     const dfloat * __restrict vgeo,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/kernel.h:58:11: error: unknown type name 'dfloat'; did you mean 'float'?
+   58 |     const dfloat * __restrict cubvgeo,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/kernel.h:59:11: error: unknown type name 'dfloat'; did you mean 'float'?
+   59 |     const dfloat * __restrict cubD,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/kernel.h:60:11: error: unknown type name 'dfloat'; did you mean 'float'?
+   60 |     const dfloat * __restrict cubInterpT,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/kernel.h:62:11: error: unknown type name 'dfloat'; did you mean 'float'?
+   62 |     const dfloat * __restrict U,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/kernel.h:63:5: error: unknown type name 'dfloat'; did you mean 'float'?
+   63 |     dfloat * __restrict NU)
+      |     ^~~~~~
+      |     float
+/output/HeCBench/adv/kernel.h:65:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   65 |   dfloat s_cubD[16][16];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:66:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   66 |   dfloat s_cubInterpT[8][16];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:67:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   67 |   dfloat s_U[8][8];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:68:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   68 |   dfloat s_V[8][8];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:69:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   69 |   dfloat s_W[8][8];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:70:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   70 |   dfloat s_U1[16][16];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:71:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   71 |   dfloat s_V1[16][16];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:72:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   72 |   dfloat s_W1[16][16];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/adv/kernel.h:74:3: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   74 |   dfloat r_U[16], r_V[16], r_W[16];
+      |   ^~~~~~
+      |   float
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/adv/reference.cpp:6:11: error: unknown type name 'dfloat'; did you mean 'float'?
+    6 |     const dfloat* vgeo,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/reference.cpp:7:11: error: unknown type name 'dfloat'; did you mean 'float'?
+    7 |     const dfloat* cubvgeo,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/reference.cpp:8:11: error: unknown type name 'dfloat'; did you mean 'float'?
+    8 |     const dfloat* cubD,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/reference.cpp:9:11: error: unknown type name 'dfloat'; did you mean 'float'?
+    9 |     const dfloat* cubInterpT,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/reference.cpp:11:11: error: unknown type name 'dfloat'; did you mean 'float'?
+   11 |     const dfloat* U,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/adv/reference.cpp:12:5: error: unknown type name 'dfloat'; did you mean 'float'?
+   12 |     dfloat*       NU)
+      |     ^~~~~~
+      |     float
+/output/HeCBench/adv/reference.cpp:15:22: error: use of undeclared identifier 'p_cubNp'
+   15 |     const int cNp  = p_cubNp;
+      |                      ^
+/output/HeCBench/adv/reference.cpp:16:22: error: use of undeclared identifier 'p_cubNq'
+   16 |     const int cQ   = p_cubNq;
+      |                      ^
+/output/HeCBench/adv/reference.cpp:17:22: error: use of undeclared identifier 'p_cubNq'
+   17 |     const int cQ2  = p_cubNq * p_cubNq;
+      |                      ^
+/output/HeCBench/adv/reference.cpp:17:32: error: use of undeclared identifier 'p_cubNq'
+   17 |     const int cQ2  = p_cubNq * p_cubNq;
+      |                                ^
+/output/HeCBench/adv/reference.cpp:18:22: error: use of undeclared identifier 'p_Nq'
+   18 |     const int Nq   = p_Nq;
+      |                      ^
+/output/HeCBench/adv/reference.cpp:19:22: error: use of undeclared identifier 'p_Nq'
+   19 |     const int Nq2  = p_Nq * p_Nq;
+      |                      ^
+/output/HeCBench/adv/reference.cpp:19:29: error: use of undeclared identifier 'p_Nq'
+   19 |     const int Nq2  = p_Nq * p_Nq;
+      |                             ^
+/output/HeCBench/adv/reference.cpp:22:5: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   22 |     dfloat* cU = (dfloat*)malloc(cNp * sizeof(dfloat));
+      |     ^~~~~~
+      |     float
+/output/HeCBench/adv/reference.cpp:22:19: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   22 |     dfloat* cU = (dfloat*)malloc(cNp * sizeof(dfloat));
+      |                   ^~~~~~
+      |                   float
+/output/HeCBench/adv/reference.cpp:22:47: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   22 |     dfloat* cU = (dfloat*)malloc(cNp * sizeof(dfloat));
+      |                                               ^~~~~~
+      |                                               float
+/output/HeCBench/adv/reference.cpp:22:27: error: use of undeclared identifier 'malloc'
+   22 |     dfloat* cU = (dfloat*)malloc(cNp * sizeof(dfloat));
+      |                           ^
+/output/HeCBench/adv/reference.cpp:23:5: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   23 |     dfloat* cV = (dfloat*)malloc(cNp * sizeof(dfloat));
+      |     ^~~~~~
+      |     float
+/output/HeCBench/adv/reference.cpp:23:19: error: use of undeclared identifier 'dfloat'; did you mean 'float'?
+   23 |     dfloat* cV = (dfloat*)malloc(cNp * sizeof(dfloat));
+      |                   ^~~~~~
+      |                   float
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

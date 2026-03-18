@@ -1,0 +1,61 @@
+In file included from /output/HeCBench/gpp/kernel.cpp:1:
+/output/HeCBench/gpp/kernel.h:70:5: error: unknown type name 'ESS'
+   70 |     ESS
+      |     ^
+/output/HeCBench/gpp/kernel.h:71:16: error: constructor cannot have a return type
+   71 |       explicit CustomComplex(const T& a, const T& b)
+      |                ^~~~~~~~~~~~~
+/output/HeCBench/gpp/kernel.h:77:5: error: unknown type name 'ESS'
+   77 |     ESS
+      |     ^
+/output/HeCBench/gpp/kernel.h:78:7: error: constructor cannot have a return type
+   78 |       CustomComplex(const CustomComplex& src)
+      |       ^~~~~~~~~~~~~
+/output/HeCBench/gpp/kernel.h:84:5: error: unknown type name 'ESS'
+   84 |     ESS
+      |     ^
+/output/HeCBench/gpp/kernel.h:85:20: error: expected ';' at end of declaration list
+   85 |       CustomComplex& operator=(const CustomComplex& src)
+      |                    ^
+      |                    ;
+/output/HeCBench/gpp/kernel.h:294:17: error: use of undeclared identifier '_bid_x'
+  294 |   for (int n1 = _bid_x; n1 < number_bands; n1 += GRID_DIM_X) // 512 iterations
+      |                 ^
+/output/HeCBench/gpp/kernel.h:296:23: error: use of undeclared identifier '_bid_y'
+  296 |     for (int my_igp = _bid_y; my_igp < ngpown; my_igp += GRID_DIM_Y) // 1634 iterations
+      |                       ^
+/output/HeCBench/gpp/kernel.h:301:38: error: called object type 'const CustomComplex<double> *' is not a function or function pointer
+  301 |           CustomComplex_conj(aqsmtemp(n1, igp)) * aqsntemp(n1, igp) * 0.5 *
+      |                              ~~~~~~~~^
+/output/HeCBench/gpp/kernel.h:301:59: error: called object type 'const CustomComplex<double> *' is not a function or function pointer
+  301 |           CustomComplex_conj(aqsmtemp(n1, igp)) * aqsntemp(n1, igp) * 0.5 *
+      |                                                   ~~~~~~~~^
+/output/HeCBench/gpp/kernel.h:304:21: error: use of undeclared identifier '_tid_x'
+  304 |       for (int ig = _tid_x; ig < ncouls; ig += BLOCK_DIM_X) {
+      |                     ^
+/output/HeCBench/gpp/kernel.h:309:42: error: called object type 'const CustomComplex<double> *' is not a function or function pointer
+  309 |               wx_array[iw] - wtilde_array(my_igp, ig);
+      |                              ~~~~~~~~~~~~^
+/output/HeCBench/gpp/kernel.h:311:27: error: called object type 'const CustomComplex<double> *' is not a function or function pointer
+  311 |               wtilde_array(my_igp, ig) * CustomComplex_conj(wdiff) *
+      |               ~~~~~~~~~~~~^
+/output/HeCBench/gpp/kernel.h:311:42: error: use of undeclared identifier 'CustomComplex_conj'
+  311 |               wtilde_array(my_igp, ig) * CustomComplex_conj(wdiff) *
+      |                                          ^
+/output/HeCBench/gpp/kernel.h:312:48: error: use of undeclared identifier 'CustomComplex_conj'
+  312 |               (1 / CustomComplex_real((wdiff * CustomComplex_conj(wdiff))));
+      |                                                ^
+/output/HeCBench/gpp/kernel.h:314:33: error: called object type 'const CustomComplex<double> *' is not a function or function pointer
+  314 |               delw * I_eps_array(my_igp, ig) * sch_store1;
+      |                      ~~~~~~~~~~~^
+/output/HeCBench/gpp/kernel.h:316:33: error: use of undeclared identifier 'CustomComplex_real'
+  316 |           achtemp_re_loc[iw] += CustomComplex_real(sch_array);
+      |                                 ^
+/output/HeCBench/gpp/kernel.h:317:33: error: use of undeclared identifier 'CustomComplex_imag'
+  317 |           achtemp_im_loc[iw] += CustomComplex_imag(sch_array);
+      |                                 ^
+/output/HeCBench/gpp/kernel.h:364:31: error: no member named 'get_real' in 'CustomComplex<double>'
+  364 |     dataType re_diff = result.get_real() - -24852.551547;
+      |                        ~~~~~~ ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

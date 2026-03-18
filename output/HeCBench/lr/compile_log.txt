@@ -1,0 +1,72 @@
+In file included from /output/HeCBench/lr/kernel.cpp:1:
+In file included from /output/HeCBench/lr/kernel.h:41:
+/usr/include/string.h:28:1: error: cannot combine with previous 'static' declaration specifier
+   28 | __BEGIN_DECLS
+      | ^
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:140:24: note: expanded from macro '__BEGIN_DECLS'
+  140 | # define __BEGIN_DECLS  extern "C" {
+      |                         ^
+In file included from /output/HeCBench/lr/kernel.cpp:1:
+In file included from /output/HeCBench/lr/kernel.h:41:
+/usr/include/string.h:28:1: error: expected unqualified-id
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:140:31: note: expanded from macro '__BEGIN_DECLS'
+  140 | # define __BEGIN_DECLS  extern "C" {
+      |                                ^
+In file included from /output/HeCBench/lr/kernel.cpp:1:
+/output/HeCBench/lr/kernel.h:75:9: error: unknown type name 'float2'; did you mean 'float'?
+   75 |   const float2 * dataset,
+      |         ^~~~~~
+      |         float
+/output/HeCBench/lr/kernel.h:76:9: error: unknown type name 'float4'; did you mean 'float'?
+   76 |         float4 * result)
+      |         ^~~~~~
+      |         float
+/output/HeCBench/lr/kernel.h:78:3: error: use of undeclared identifier 'float4'; did you mean 'float'?
+   78 |   float4 interns[4096];
+      |   ^~~~~~
+      |   float
+/output/HeCBench/lr/kernel.h:80:21: error: use of undeclared identifier '_tid_x'
+   80 |   size_t loc_id   = _tid_x;
+      |                     ^
+/output/HeCBench/lr/kernel.h:82:21: error: use of undeclared identifier '_bid_x'
+   82 |   size_t glob_id  = _bid_x * loc_size + loc_id;
+      |                     ^
+/output/HeCBench/lr/kernel.h:85:18: error: member reference base type 'float' is not a structure or union
+   85 |   interns[loc_id].x = dataset[glob_id].x;
+      |   ~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:85:39: error: member reference base type 'const float' is not a structure or union
+   85 |   interns[loc_id].x = dataset[glob_id].x;
+      |                       ~~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:86:18: error: member reference base type 'float' is not a structure or union
+   86 |   interns[loc_id].y = dataset[glob_id].y;
+      |   ~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:86:39: error: member reference base type 'const float' is not a structure or union
+   86 |   interns[loc_id].y = dataset[glob_id].y;
+      |                       ~~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:87:18: error: member reference base type 'float' is not a structure or union
+   87 |   interns[loc_id].z = (dataset[glob_id].x * dataset[glob_id].y);
+      |   ~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:87:40: error: member reference base type 'const float' is not a structure or union
+   87 |   interns[loc_id].z = (dataset[glob_id].x * dataset[glob_id].y);
+      |                        ~~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:87:61: error: member reference base type 'const float' is not a structure or union
+   87 |   interns[loc_id].z = (dataset[glob_id].x * dataset[glob_id].y);
+      |                                             ~~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:88:18: error: member reference base type 'float' is not a structure or union
+   88 |   interns[loc_id].w = (dataset[glob_id].x * dataset[glob_id].x);
+      |   ~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:88:40: error: member reference base type 'const float' is not a structure or union
+   88 |   interns[loc_id].w = (dataset[glob_id].x * dataset[glob_id].x);
+      |                        ~~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:88:61: error: member reference base type 'const float' is not a structure or union
+   88 |   interns[loc_id].w = (dataset[glob_id].x * dataset[glob_id].x);
+      |                                             ~~~~~~~~~~~~~~~~^~
+/output/HeCBench/lr/kernel.h:102:27: error: use of undeclared identifier '_bid_x'
+  102 |   if (loc_id == 0) result[_bid_x] = interns[0];
+      |                           ^
+/output/HeCBench/lr/kernel.h:106:9: error: unknown type name 'float2'; did you mean 'float'?
+  106 |   const float2 * dataset,
+      |         ^~~~~~
+      |         float
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

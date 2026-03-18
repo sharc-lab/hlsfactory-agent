@@ -1,0 +1,15 @@
+In file included from /output/HeCBench/laplace3d/kernel.cpp:1:
+/output/HeCBench/laplace3d/kernel.h:90:27: error: use of undeclared identifier '_tid_x'
+   90 |   const int threadIdx_x = _tid_x;
+      |                           ^
+/output/HeCBench/laplace3d/kernel.h:91:27: error: use of undeclared identifier '_tid_y'
+   91 |   const int threadIdx_y = _tid_y;
+      |                           ^
+/output/HeCBench/laplace3d/kernel.h:92:26: error: use of undeclared identifier '_bid_x'
+   92 |   const int blockIdx_x = _bid_x;
+      |                          ^
+/output/HeCBench/laplace3d/kernel.h:93:26: error: use of undeclared identifier '_bid_y'
+   93 |   const int blockIdx_y = _bid_y;
+      |                          ^
+4 errors generated.
+PASS: reference.cpp

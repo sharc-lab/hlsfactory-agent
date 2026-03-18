@@ -1,0 +1,11 @@
+In file included from /output/HeCBench/lci/kernel.cpp:1:
+/output/HeCBench/lci/kernel.h:59:12: error: use of undeclared identifier 'double_fact_table'
+   59 |     return double_fact_table[2*l-1] / fact_table[l];
+      |            ^
+/output/HeCBench/lci/kernel.h:59:39: error: use of undeclared identifier 'fact_table'
+   59 |     return double_fact_table[2*l-1] / fact_table[l];
+      |                                       ^
+/output/HeCBench/lci/kernel.h:86:11: error: use of undeclared identifier '_tid_x'
+   86 |   int l = _tid_x;
+      |           ^
+3 errors generated.

@@ -1,0 +1,62 @@
+/output/HeCBench/rodrigues/kernel.cpp:5:52: error: unknown type name 'float3'; did you mean 'float'?
+    5 | void rotate (const int n, const float angle, const float3 w, float3 *d)
+      |                                                    ^~~~~~
+      |                                                    float
+/output/HeCBench/rodrigues/kernel.cpp:5:62: error: unknown type name 'float3'; did you mean 'float'?
+    5 | void rotate (const int n, const float angle, const float3 w, float3 *d)
+      |                                                              ^~~~~~
+      |                                                              float
+/output/HeCBench/rodrigues/kernel.cpp:23:19: error: unknown type name 'float3'; did you mean 'float'?
+   23 |             const float3 p = d[i];
+      |                   ^~~~~~
+      |                   float
+/output/HeCBench/rodrigues/kernel.cpp:27:28: error: member reference base type 'const float' is not a structure or union
+   27 |             float m1 = c+(w.x)*(w.x)*(mc);
+      |                           ~^~
+/output/HeCBench/rodrigues/kernel.cpp:27:34: error: member reference base type 'const float' is not a structure or union
+   27 |             float m1 = c+(w.x)*(w.x)*(mc);
+      |                                 ~^~
+/output/HeCBench/rodrigues/kernel.cpp:28:26: error: member reference base type 'const float' is not a structure or union
+   28 |             float m2 = (w.z)*s+(w.x)*(w.y)*(mc);
+      |                         ~^~
+/output/HeCBench/rodrigues/kernel.cpp:28:34: error: member reference base type 'const float' is not a structure or union
+   28 |             float m2 = (w.z)*s+(w.x)*(w.y)*(mc);
+      |                                 ~^~
+/output/HeCBench/rodrigues/kernel.cpp:28:40: error: member reference base type 'const float' is not a structure or union
+   28 |             float m2 = (w.z)*s+(w.x)*(w.y)*(mc);
+      |                                       ~^~
+/output/HeCBench/rodrigues/kernel.cpp:29:26: error: member reference base type 'const float' is not a structure or union
+   29 |             float m3 =-(w.y)*s+(w.x)*(w.z)*(mc);
+      |                         ~^~
+/output/HeCBench/rodrigues/kernel.cpp:29:34: error: member reference base type 'const float' is not a structure or union
+   29 |             float m3 =-(w.y)*s+(w.x)*(w.z)*(mc);
+      |                                 ~^~
+/output/HeCBench/rodrigues/kernel.cpp:29:40: error: member reference base type 'const float' is not a structure or union
+   29 |             float m3 =-(w.y)*s+(w.x)*(w.z)*(mc);
+      |                                       ~^~
+/output/HeCBench/rodrigues/kernel.cpp:31:26: error: member reference base type 'const float' is not a structure or union
+   31 |             float m4 =-(w.z)*s+(w.x)*(w.y)*(mc);
+      |                         ~^~
+/output/HeCBench/rodrigues/kernel.cpp:31:34: error: member reference base type 'const float' is not a structure or union
+   31 |             float m4 =-(w.z)*s+(w.x)*(w.y)*(mc);
+      |                                 ~^~
+/output/HeCBench/rodrigues/kernel.cpp:31:40: error: member reference base type 'const float' is not a structure or union
+   31 |             float m4 =-(w.z)*s+(w.x)*(w.y)*(mc);
+      |                                       ~^~
+/output/HeCBench/rodrigues/kernel.cpp:32:28: error: member reference base type 'const float' is not a structure or union
+   32 |             float m5 = c+(w.y)*(w.y)*(mc);
+      |                           ~^~
+/output/HeCBench/rodrigues/kernel.cpp:32:34: error: member reference base type 'const float' is not a structure or union
+   32 |             float m5 = c+(w.y)*(w.y)*(mc);
+      |                                 ~^~
+/output/HeCBench/rodrigues/kernel.cpp:33:26: error: member reference base type 'const float' is not a structure or union
+   33 |             float m6 = (w.x)*s+(w.y)*(w.z)*(mc);
+      |                         ~^~
+/output/HeCBench/rodrigues/kernel.cpp:33:34: error: member reference base type 'const float' is not a structure or union
+   33 |             float m6 = (w.x)*s+(w.y)*(w.z)*(mc);
+      |                                 ~^~
+/output/HeCBench/rodrigues/kernel.cpp:33:40: error: member reference base type 'const float' is not a structure or union
+   33 |             float m6 = (w.x)*s+(w.y)*(w.z)*(mc);
+      |                                       ~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

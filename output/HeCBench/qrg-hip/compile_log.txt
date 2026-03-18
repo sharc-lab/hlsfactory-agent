@@ -1,0 +1,9 @@
+In file included from /output/HeCBench/qrg-hip/kernel.cpp:1:
+/output/HeCBench/qrg-hip/kernel.h:41:10: fatal error: 'hip/hip_runtime.h' file not found
+   41 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.
+/output/HeCBench/qrg-hip/reference.cpp:13:10: fatal error: 'qrg.h' file not found
+   13 | #include "qrg.h"
+      |          ^~~~~~~
+1 error generated.

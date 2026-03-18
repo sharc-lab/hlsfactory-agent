@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/cfd/kernel.cpp:1:
+/output/HeCBench/cfd/kernel.h:145:3: error: use of undeclared identifier 'gettimeofday'
+  145 |   gettimeofday(&t,NULL);
+      |   ^
+1 error generated.

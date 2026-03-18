@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/merkle/kernel.cpp:1:
+/output/HeCBench/merkle/kernel.h:19:10: fatal error: 'bench_merkle_tree.hpp' file not found
+   19 | #include "bench_merkle_tree.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

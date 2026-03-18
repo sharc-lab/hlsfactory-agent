@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/cobahh-hip/kernel.cpp:1:
+/output/HeCBench/cobahh-hip/kernel.h:21:10: fatal error: 'neuron_update_host.h' file not found
+   21 | #include "neuron_update_host.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

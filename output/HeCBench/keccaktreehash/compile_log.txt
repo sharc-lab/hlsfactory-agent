@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/keccaktreehash/kernel.cpp:1:
+/output/HeCBench/keccaktreehash/kernel.h:31:7: error: unknown type name 'tKeccakLane'
+   31 | const tKeccakLane KeccakF_RoundConstantsCPU[22] =
+      |       ^
+/output/HeCBench/keccaktreehash/kernel.h:33:4: error: use of undeclared identifier 'tKeccakLane'
+   33 |   (tKeccakLane)0x00000001 ,
+      |    ^
+/output/HeCBench/keccaktreehash/kernel.h:154:1: error: unknown type name 'tKeccakLane'
+  154 | tKeccakLane KeccakF_RoundConstants_h[22] =
+      | ^
+/output/HeCBench/keccaktreehash/kernel.h:156:4: error: use of undeclared identifier 'tKeccakLane'
+  156 |   (tKeccakLane)0x00000001 ,
+      |    ^
+/output/HeCBench/keccaktreehash/kernel.h:221:1: error: unknown type name 'tKeccakLane'
+  221 | tKeccakLane Kstate_cpu[25];
+      | ^
+/output/HeCBench/keccaktreehash/kernel.h:222:1: error: unknown type name 'tKeccakLane'
+  222 | tKeccakLane Kstate_gpu[25];
+      | ^
+/output/HeCBench/keccaktreehash/kernel.h:265:15: error: unknown type name 'tKeccakLane'
+  265 | void KeccakF( tKeccakLane * state );
+      |               ^
+/output/HeCBench/keccaktreehash/kernel.h:268:19: error: unknown type name 'tKeccakLane'
+  268 | void KeccakF_CPU( tKeccakLane * state );
+      |                   ^
+/output/HeCBench/keccaktreehash/kernel.h:271:15: error: unknown type name 'tKeccakLane'
+  271 | void zeroize( tKeccakLane * state );
+      |               ^
+/output/HeCBench/keccaktreehash/kernel.h:275:17: error: unknown type name 'tKeccakLane'
+  275 | void Keccak_top(tKeccakLane * Kstate, tKeccakLane *inBuffer , int block_number);
+      |                 ^
+/output/HeCBench/keccaktreehash/kernel.h:275:39: error: unknown type name 'tKeccakLane'
+  275 | void Keccak_top(tKeccakLane * Kstate, tKeccakLane *inBuffer , int block_number);
+      |                                       ^
+/output/HeCBench/keccaktreehash/kernel.h:278:16: error: unknown type name 'tKeccakLane'
+  278 | int isEqual_KS(tKeccakLane * Ks1, tKeccakLane * Ks2);
+      |                ^
+/output/HeCBench/keccaktreehash/kernel.h:278:35: error: unknown type name 'tKeccakLane'
+  278 | int isEqual_KS(tKeccakLane * Ks1, tKeccakLane * Ks2);
+      |                                   ^
+/output/HeCBench/keccaktreehash/kernel.h:281:15: error: unknown type name 'tKeccakLane'
+  281 | void print_KS(tKeccakLane * state);
+      |               ^
+/output/HeCBench/keccaktreehash/kernel.h:282:19: error: unknown type name 'tKeccakLane'
+  282 | void print_KS_256(tKeccakLane * state);
+      |                   ^
+/output/HeCBench/keccaktreehash/kernel.h:334:20: error: unknown type name 'tKeccakLane'
+  334 | void KeccakTreeCPU(tKeccakLane * inBuffer, tKeccakLane * outBuffer);
+      |                    ^
+/output/HeCBench/keccaktreehash/kernel.h:334:44: error: unknown type name 'tKeccakLane'
+  334 | void KeccakTreeCPU(tKeccakLane * inBuffer, tKeccakLane * outBuffer);
+      |                                            ^
+/output/HeCBench/keccaktreehash/kernel.h:357:20: error: unknown type name 'tKeccakLane'
+  357 | void KeccakTreeGPU(tKeccakLane * h_inBuffer, tKeccakLane * d_inBuffer, 
+      |                    ^
+/output/HeCBench/keccaktreehash/kernel.h:357:46: error: unknown type name 'tKeccakLane'
+  357 | void KeccakTreeGPU(tKeccakLane * h_inBuffer, tKeccakLane * d_inBuffer, 
+      |                                              ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,110 @@
+/output/HeCBench/vanGenuchten/kernel.cpp:30:22: error: use of undeclared identifier 'n'
+   30 |             lambda = n - 1.0;
+      |                      ^
+/output/HeCBench/vanGenuchten/kernel.cpp:31:24: error: use of undeclared identifier 'n'
+   31 |             m = lambda/n;
+      |                        ^
+/output/HeCBench/vanGenuchten/kernel.cpp:36:23: error: use of undeclared identifier 'theta_S'; did you mean 'theta'?
+   36 |             _theta = (theta_S - theta_R) / pow(1.0 + pow((alpha * (-_psi)), n), m) + theta_R;
+      |                       ^~~~~~~
+      |                       theta
+/output/HeCBench/vanGenuchten/kernel.cpp:9:18: note: 'theta' declared here
+    9 |         double * theta,
+      |                  ^
+/output/HeCBench/vanGenuchten/kernel.cpp:36:59: error: use of undeclared identifier 'alpha'
+   36 |             _theta = (theta_S - theta_R) / pow(1.0 + pow((alpha * (-_psi)), n), m) + theta_R;
+      |                                                           ^
+/output/HeCBench/vanGenuchten/kernel.cpp:36:77: error: use of undeclared identifier 'n'
+   36 |             _theta = (theta_S - theta_R) / pow(1.0 + pow((alpha * (-_psi)), n), m) + theta_R;
+      |                                                                             ^
+/output/HeCBench/vanGenuchten/kernel.cpp:36:33: error: use of undeclared identifier 'theta_R'; did you mean 'theta'?
+   36 |             _theta = (theta_S - theta_R) / pow(1.0 + pow((alpha * (-_psi)), n), m) + theta_R;
+      |                                 ^~~~~~~
+      |                                 theta
+/output/HeCBench/vanGenuchten/kernel.cpp:9:18: note: 'theta' declared here
+    9 |         double * theta,
+      |                  ^
+/output/HeCBench/vanGenuchten/kernel.cpp:36:86: error: use of undeclared identifier 'theta_R'; did you mean 'theta'?
+   36 |             _theta = (theta_S - theta_R) / pow(1.0 + pow((alpha * (-_psi)), n), m) + theta_R;
+      |                                                                                      ^~~~~~~
+      |                                                                                      theta
+/output/HeCBench/vanGenuchten/kernel.cpp:9:18: note: 'theta' declared here
+    9 |         double * theta,
+      |                  ^
+/output/HeCBench/vanGenuchten/kernel.cpp:38:22: error: use of undeclared identifier 'theta_S'; did you mean '_theta'?
+   38 |             _theta = theta_S;
+      |                      ^~~~~~~
+      |                      _theta
+/output/HeCBench/vanGenuchten/kernel.cpp:25:24: note: '_theta' declared here
+   25 |             double Se, _theta, _psi, lambda, m, t;
+      |                        ^
+/output/HeCBench/vanGenuchten/kernel.cpp:43:40: error: use of undeclared identifier 'theta_S'; did you mean 'theta'?
+   43 |             Se = (_theta - theta_R) / (theta_S - theta_R);
+      |                                        ^~~~~~~
+      |                                        theta
+/output/HeCBench/vanGenuchten/kernel.cpp:9:18: note: 'theta' declared here
+    9 |         double * theta,
+      |                  ^
+/output/HeCBench/vanGenuchten/kernel.cpp:43:28: error: use of undeclared identifier 'theta_R'; did you mean '_theta'?
+   43 |             Se = (_theta - theta_R) / (theta_S - theta_R);
+      |                            ^~~~~~~
+      |                            _theta
+/output/HeCBench/vanGenuchten/kernel.cpp:25:24: note: '_theta' declared here
+   25 |             double Se, _theta, _psi, lambda, m, t;
+      |                        ^
+/output/HeCBench/vanGenuchten/kernel.cpp:43:50: error: use of undeclared identifier 'theta_R'; did you mean 'theta'?
+   43 |             Se = (_theta - theta_R) / (theta_S - theta_R);
+      |                                                  ^~~~~~~
+      |                                                  theta
+/output/HeCBench/vanGenuchten/kernel.cpp:9:18: note: 'theta' declared here
+    9 |         double * theta,
+      |                  ^
+/output/HeCBench/vanGenuchten/kernel.cpp:53:16: error: use of undeclared identifier 'theta_R'; did you mean 'theta'?
+   53 |             * (theta_R - theta_S) * pow(pow(alpha * fabs(_psi), n) + 1.0, 1.0 / n - 2.0);
+      |                ^~~~~~~
+      |                theta
+/output/HeCBench/vanGenuchten/kernel.cpp:9:18: note: 'theta' declared here
+    9 |         double * theta,
+      |                  ^
+/output/HeCBench/vanGenuchten/kernel.cpp:52:28: error: use of undeclared identifier 'alpha'
+   52 |             C[i] = 100.0 * alpha * n * (1.0 /n - 1.0) * pow(alpha * fabs(_psi), n - 1.0)
+      |                            ^
+/output/HeCBench/vanGenuchten/kernel.cpp:52:36: error: use of undeclared identifier 'n'
+   52 |             C[i] = 100.0 * alpha * n * (1.0 /n - 1.0) * pow(alpha * fabs(_psi), n - 1.0)
+      |                                    ^
+/output/HeCBench/vanGenuchten/kernel.cpp:52:46: error: use of undeclared identifier 'n'
+   52 |             C[i] = 100.0 * alpha * n * (1.0 /n - 1.0) * pow(alpha * fabs(_psi), n - 1.0)
+      |                                              ^
+/output/HeCBench/vanGenuchten/kernel.cpp:52:61: error: use of undeclared identifier 'alpha'
+   52 |             C[i] = 100.0 * alpha * n * (1.0 /n - 1.0) * pow(alpha * fabs(_psi), n - 1.0)
+      |                                                             ^
+/output/HeCBench/vanGenuchten/kernel.cpp:52:81: error: use of undeclared identifier 'n'
+   52 |             C[i] = 100.0 * alpha * n * (1.0 /n - 1.0) * pow(alpha * fabs(_psi), n - 1.0)
+      |                                                                                 ^
+/output/HeCBench/vanGenuchten/kernel.cpp:53:26: error: use of undeclared identifier 'theta_S'
+   53 |             * (theta_R - theta_S) * pow(pow(alpha * fabs(_psi), n) + 1.0, 1.0 / n - 2.0);
+      |                          ^
+/output/HeCBench/vanGenuchten/kernel.cpp:53:45: error: use of undeclared identifier 'alpha'
+   53 |             * (theta_R - theta_S) * pow(pow(alpha * fabs(_psi), n) + 1.0, 1.0 / n - 2.0);
+      |                                             ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/vanGenuchten/reference.cpp:34:48: error: use of undeclared identifier 'pow'
+   34 |       _theta = (theta_S - theta_R) / pow(1.0 + pow((alpha*(-_psi)),n), m) + theta_R;
+      |                                                ^
+/output/HeCBench/vanGenuchten/reference.cpp:44:22: error: use of undeclared identifier 'sqrt'
+   44 |     K[i] = Ksat[i] * sqrt(Se) * (1.0 - pow( 1.0-pow(Se,1.0/m), m) ) * (1.0 - pow( 1.0-pow( Se, 1.0/m), m ));
+      |                      ^
+/output/HeCBench/vanGenuchten/reference.cpp:44:49: error: use of undeclared identifier 'pow'
+   44 |     K[i] = Ksat[i] * sqrt(Se) * (1.0 - pow( 1.0-pow(Se,1.0/m), m) ) * (1.0 - pow( 1.0-pow( Se, 1.0/m), m ));
+      |                                                 ^
+/output/HeCBench/vanGenuchten/reference.cpp:44:87: error: use of undeclared identifier 'pow'
+   44 |     K[i] = Ksat[i] * sqrt(Se) * (1.0 - pow( 1.0-pow(Se,1.0/m), m) ) * (1.0 - pow( 1.0-pow( Se, 1.0/m), m ));
+      |                                                                                       ^
+/output/HeCBench/vanGenuchten/reference.cpp:49:54: error: use of undeclared identifier 'abs'
+   49 |       C[i] = 100 * alpha * n * (1.0/n-1.0)*pow(alpha*abs(_psi), n-1)
+      |                                                      ^
+/output/HeCBench/vanGenuchten/reference.cpp:50:45: error: use of undeclared identifier 'abs'
+   50 |         * (theta_R-theta_S) * pow(pow(alpha*abs(_psi), n)+1, 1.0/n-2.0);
+      |                                             ^
+6 errors generated.

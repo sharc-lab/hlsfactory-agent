@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/scan-hip/kernel.cpp:1:
+/output/HeCBench/scan-hip/kernel.h:21:10: fatal error: 'hip/hip_runtime.h' file not found
+   21 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+1 error generated.

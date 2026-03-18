@@ -1,0 +1,62 @@
+/output/HeCBench/vadd/kernel.cpp:6:11: error: unknown type name '__half'
+    6 |     const __half*  gA,
+      |           ^
+/output/HeCBench/vadd/kernel.cpp:7:11: error: unknown type name '__half'
+    7 |     const __half*  gB,
+      |           ^
+/output/HeCBench/vadd/kernel.cpp:8:11: error: unknown type name '__half'
+    8 |           __half*  gC,
+      |           ^
+/output/HeCBench/vadd/kernel.cpp:32:11: error: unknown type name '__half'
+   32 |     const __half*  gA,
+      |           ^
+/output/HeCBench/vadd/kernel.cpp:33:11: error: unknown type name '__half'
+   33 |     const __half*  gB,
+      |           ^
+/output/HeCBench/vadd/kernel.cpp:34:11: error: unknown type name '__half'
+   34 |           __half*  gC,
+      |           ^
+/output/HeCBench/vadd/kernel.cpp:58:51: error: unknown type name 'float4'; did you mean 'float'?
+   58 |                 auto a8 = *reinterpret_cast<const float4*>(gA + index);
+      |                                                   ^~~~~~
+      |                                                   float
+/output/HeCBench/vadd/kernel.cpp:59:51: error: unknown type name 'float4'; did you mean 'float'?
+   59 |                 auto b8 = *reinterpret_cast<const float4*>(gB + index);
+      |                                                   ^~~~~~
+      |                                                   float
+/output/HeCBench/vadd/kernel.cpp:61:45: error: unknown type name '__half2'
+   61 |                 auto a0 = *reinterpret_cast<__half2*>(&a8.x);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:62:45: error: unknown type name '__half2'
+   62 |                 auto a1 = *reinterpret_cast<__half2*>(&a8.y);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:63:45: error: unknown type name '__half2'
+   63 |                 auto a2 = *reinterpret_cast<__half2*>(&a8.z);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:64:45: error: unknown type name '__half2'
+   64 |                 auto a3 = *reinterpret_cast<__half2*>(&a8.w);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:65:45: error: unknown type name '__half2'
+   65 |                 auto b0 = *reinterpret_cast<__half2*>(&b8.x);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:66:45: error: unknown type name '__half2'
+   66 |                 auto b1 = *reinterpret_cast<__half2*>(&b8.y);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:67:45: error: unknown type name '__half2'
+   67 |                 auto b2 = *reinterpret_cast<__half2*>(&b8.z);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:68:45: error: unknown type name '__half2'
+   68 |                 auto b3 = *reinterpret_cast<__half2*>(&b8.w);
+      |                                             ^
+/output/HeCBench/vadd/kernel.cpp:70:17: error: use of undeclared identifier 'float4'; did you mean 'float'?
+   70 |                 float4 c8;
+      |                 ^~~~~~
+      |                 float
+/output/HeCBench/vadd/kernel.cpp:71:35: error: unknown type name '__half2'
+   71 |                 *reinterpret_cast<__half2*>(&c8.x) = __hadd2(a0, b0);
+      |                                   ^
+/output/HeCBench/vadd/kernel.cpp:71:48: error: member reference base type 'float' is not a structure or union
+   71 |                 *reinterpret_cast<__half2*>(&c8.x) = __hadd2(a0, b0);
+      |                                              ~~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

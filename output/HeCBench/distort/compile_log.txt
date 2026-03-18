@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/distort/kernel.cpp:1:
+/output/HeCBench/distort/kernel.h:60:9: error: unknown type name 'uchar3'
+   60 |   const uchar3* src,
+      |         ^
+/output/HeCBench/distort/kernel.h:61:9: error: unknown type name 'uchar3'
+   61 |         uchar3* dst,
+      |         ^
+/output/HeCBench/distort/kernel.h:65:9: error: unknown type name 'uchar3'
+   65 |   const uchar3* src,
+      |         ^
+/output/HeCBench/distort/kernel.h:66:9: error: unknown type name 'uchar3'
+   66 |         uchar3* dst,
+      |         ^
+/output/HeCBench/distort/kernel.cpp:22:35: error: unknown type name 'uchar3'
+   22 | inline void sampleImageTest(const uchar3* src, float idx0, float idx1,
+      |                                   ^
+/output/HeCBench/distort/kernel.cpp:23:29: error: unknown type name 'uchar3'
+   23 |                             uchar3& result, const struct Properties* prop)
+      |                             ^
+/output/HeCBench/distort/kernel.cpp:39:3: error: unknown type name 'uchar3'
+   39 |   uchar3 s1 = src[(idx0_floor * prop->width) + idx1_floor];
+      |   ^
+/output/HeCBench/distort/kernel.cpp:40:3: error: unknown type name 'uchar3'
+   40 |   uchar3 s2 = src[(idx0_floor * prop->width) + idx1_ceil];
+      |   ^
+/output/HeCBench/distort/kernel.cpp:41:3: error: unknown type name 'uchar3'
+   41 |   uchar3 s3 = src[(idx0_ceil * prop->width) + idx1_ceil];
+      |   ^
+/output/HeCBench/distort/kernel.cpp:42:3: error: unknown type name 'uchar3'
+   42 |   uchar3 s4 = src[(idx0_ceil * prop->width) + idx1_floor];
+      |   ^
+/output/HeCBench/distort/kernel.cpp:54:9: error: unknown type name 'uchar3'
+   54 |   const uchar3 * src,
+      |         ^
+/output/HeCBench/distort/kernel.cpp:55:9: error: unknown type name 'uchar3'
+   55 |         uchar3 * dst,
+      |         ^
+/output/HeCBench/distort/kernel.cpp:79:21: error: unknown type name 'uchar3'
+   79 |                     uchar3 temp;
+      |                     ^
+/output/HeCBench/distort/kernel.cpp:88:2: error: indirection requires pointer operand ('int' invalid)
+   88 |  * BLOCK_DIM_Y + _tid_y;
+      |  ^ ~~~~~~~~~~~
+/output/HeCBench/distort/kernel.cpp:88:18: error: use of undeclared identifier '_tid_y'
+   88 |  * BLOCK_DIM_Y + _tid_y;
+      |                  ^
+/output/HeCBench/distort/kernel.cpp:89:29: error: use of undeclared identifier '_bid_x'
+   89 |                     int w = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                             ^
+/output/HeCBench/distort/kernel.cpp:89:52: error: use of undeclared identifier '_tid_x'
+   89 |                     int w = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                                    ^
+/output/HeCBench/distort/kernel.cpp:90:44: error: use of undeclared identifier 'h'
+   90 |                     if (w < prop->width && h < prop->height) {
+      |                                            ^
+/output/HeCBench/distort/kernel.cpp:91:59: error: use of undeclared identifier 'h'
+   91 |                     float x = getRadialX((float)w, (float)h, prop);
+      |                                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,104 @@
+In file included from /output/HeCBench/lanczos/kernel.cpp:1:
+/output/HeCBench/lanczos/kernel.h:28:12: error: no member named 'vector' in namespace 'std'
+   28 | using std::vector;
+      |       ~~~~~^
+/output/HeCBench/lanczos/kernel.h:47:20: error: declaration of 'T' shadows template parameter
+   47 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:38:20: note: template parameter is declared here
+   38 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:57:20: error: declaration of 'T' shadows template parameter
+   57 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:47:20: note: template parameter is declared here
+   47 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:71:20: error: declaration of 'T' shadows template parameter
+   71 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:57:20: note: template parameter is declared here
+   57 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:73:20: error: declaration of 'T' shadows template parameter
+   73 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:71:20: note: template parameter is declared here
+   71 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:84:20: error: declaration of 'T' shadows template parameter
+   84 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:73:20: note: template parameter is declared here
+   73 | template <typename T>
+      |                    ^
+/output/HeCBench/lanczos/kernel.h:85:1: error: no template named 'symm_tridiag_matrix'
+   85 | symm_tridiag_matrix<T> gpu_lanczos(const csr_matrix<T> &m,
+      | ^
+/output/HeCBench/lanczos/kernel.h:85:42: error: no template named 'csr_matrix'
+   85 | symm_tridiag_matrix<T> gpu_lanczos(const csr_matrix<T> &m,
+      |                                          ^
+/output/HeCBench/lanczos/kernel.h:86:11: error: no template named 'vector'
+   86 |     const vector<T> &v, const int steps) {
+      |           ^
+/output/HeCBench/lanczos/kernel.h:38:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   38 | template <typename T>
+      | ^~~~~~~~~~~~~~~~~~~~~
+   39 | 
+   40 | /**
+      | ~~~
+   41 |  * @brief   Cuda kernel function for vector multiply in place.
+      |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   42 |  *
+      |  ~
+   43 |  * @param   N   The vector size.
+      |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   44 |  * @param   x   The input vector.
+      |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   45 |  * @param   k   The value to multiply.
+      |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   46 |  */
+      |  ~~
+   47 | template <typename T>
+      | ~~~~~~~~~~~~~~~~~~~~~
+   48 | 
+   49 | /**
+      | ~~~
+   50 |  * @brief   Cuda kernel function for vector saxpy in place(y += a * x).
+      |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   51 |  *
+      |  ~
+   52 |  * @param   N   The vector size.
+      |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   53 |  * @param   y   The output vector.
+      |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/lanczos/kernel.h:87:27: error: expected ';' after expression
+   87 |     symm_tridiag_matrix<T> result(steps + 1);
+      |                           ^
+      |                           ;
+/output/HeCBench/lanczos/kernel.h:87:5: error: use of undeclared identifier 'symm_tridiag_matrix'
+   87 |     symm_tridiag_matrix<T> result(steps + 1);
+      |     ^
+/output/HeCBench/lanczos/kernel.h:87:28: error: use of undeclared identifier 'result'
+   87 |     symm_tridiag_matrix<T> result(steps + 1);
+      |                            ^
+/output/HeCBench/lanczos/kernel.h:102:9: error: use of undeclared identifier 'cudaMemcpyHostToDevice'
+  102 |         cudaMemcpyHostToDevice);
+      |         ^
+/output/HeCBench/lanczos/kernel.h:104:9: error: use of undeclared identifier 'cudaMemcpyHostToDevice'
+  104 |         cudaMemcpyHostToDevice);
+      |         ^
+/output/HeCBench/lanczos/kernel.h:106:9: error: use of undeclared identifier 'cudaMemcpyHostToDevice'
+  106 |         cudaMemcpyHostToDevice);
+      |         ^
+/output/HeCBench/lanczos/kernel.h:116:25: error: use of undeclared identifier 'cycle_timer'
+  116 |     double start_time = cycle_timer::current_seconds();
+      |                         ^
+/output/HeCBench/lanczos/kernel.h:118:23: error: use of undeclared identifier 'cycle_timer'
+  118 |     double end_time = cycle_timer::current_seconds();
+      |                       ^
+/output/HeCBench/lanczos/kernel.h:124:5: error: use of undeclared identifier 'result'
+  124 |     result.resize(steps);
+      |     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

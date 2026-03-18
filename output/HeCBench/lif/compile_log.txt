@@ -1,0 +1,14 @@
+PASS: kernel.cpp
+/output/HeCBench/lif/reference.cpp:2:5: error: unknown type name 'size_t'
+    2 |     size_t numNeurons, int neurons_per_item, float dt,
+      |     ^
+/output/HeCBench/lif/reference.cpp:11:8: error: unknown type name 'size_t'
+   11 |   for (size_t i = 0; i < numNeurons; i++)
+      |        ^
+/output/HeCBench/lif/reference.cpp:21:11: error: use of undeclared identifier 'expm1f'
+   21 |     dV = -expm1f(-dt / tau_rc) * (current - voltage);
+      |           ^
+/output/HeCBench/lif/reference.cpp:22:15: error: use of undeclared identifier 'fmaxf'
+   22 |     voltage = fmaxf(voltage + dV, 0.f);
+      |               ^
+4 errors generated.

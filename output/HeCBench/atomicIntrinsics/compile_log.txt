@@ -1,0 +1,54 @@
+In file included from /output/HeCBench/atomicIntrinsics/kernel.cpp:1:
+/output/HeCBench/atomicIntrinsics/kernel.h:69:38: error: use of undeclared identifier '_bid_x'
+   69 |     const size_t tid = BLOCK_DIM_X * _bid_x + _tid_x;
+      |                                      ^
+/output/HeCBench/atomicIntrinsics/kernel.h:69:47: error: use of undeclared identifier '_tid_x'
+   69 |     const size_t tid = BLOCK_DIM_X * _bid_x + _tid_x;
+      |                                               ^
+/output/HeCBench/atomicIntrinsics/kernel.h:79:38: error: expected expression
+   79 |     (g_odata[2] = max(g_odata[2], (T))tid);
+      |                                      ^
+/output/HeCBench/atomicIntrinsics/kernel.h:82:38: error: expected expression
+   82 |     (g_odata[3] = min(g_odata[3], (T))tid);
+      |                                      ^
+/output/HeCBench/atomicIntrinsics/kernel.h:94:5: error: use of undeclared identifier 'atomicInc'
+   94 |     atomicInc((unsigned int*)&g_odata[7], 17);
+      |     ^
+/output/HeCBench/atomicIntrinsics/kernel.h:97:5: error: use of undeclared identifier 'atomicDec'
+   97 |     atomicDec((unsigned int*)&g_odata[8], 137);
+      |     ^
+6 errors generated.
+/output/HeCBench/atomicIntrinsics/reference.cpp:12:36: error: unknown type name 'size_t'
+   12 | void computeGold(T *gpuData, const size_t len)
+      |                                    ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:17:8: error: unknown type name 'size_t'
+   17 |   for (size_t i = 0; i < len; ++i)
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:30:8: error: unknown type name 'size_t'
+   30 |   for (size_t i = 0; i < len; ++i)
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:43:8: error: unknown type name 'size_t'
+   43 |   for (size_t i = 0; i < len; ++i)
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:56:8: error: unknown type name 'size_t'
+   56 |   for (size_t i = 0; i < len; ++i)
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:69:8: error: unknown type name 'size_t'
+   69 |   for (size_t i = 0; i < len; ++i)
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:82:8: error: unknown type name 'size_t'
+   82 |   for (size_t i = 0; i < len; ++i)
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:95:8: error: unknown type name 'size_t'
+   95 |   for (size_t i = 0; i < len; ++i)
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:109:8: error: unknown type name 'size_t'
+  109 |   for (size_t i = 0; i < len; ++i) {
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:121:8: error: unknown type name 'size_t'
+  121 |   for (size_t i = 0; i < len; ++i) {
+      |        ^
+/output/HeCBench/atomicIntrinsics/reference.cpp:130:3: error: use of undeclared identifier 'printf'
+  130 |   printf("%s\n", ok ? "PASS" : "FAIL");
+      |   ^
+11 errors generated.

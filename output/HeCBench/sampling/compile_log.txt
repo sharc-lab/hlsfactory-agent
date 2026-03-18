@@ -1,0 +1,28 @@
+/output/HeCBench/sampling/kernel.cpp:6:9: error: unknown type name 'IdxT'
+    6 |   const IdxT* nsamples,
+      |         ^
+/output/HeCBench/sampling/kernel.cpp:8:9: error: unknown type name 'IdxT'
+    8 |   const IdxT nrows_X,
+      |         ^
+/output/HeCBench/sampling/kernel.cpp:9:9: error: unknown type name 'IdxT'
+    9 |   const IdxT ncols,
+      |         ^
+/output/HeCBench/sampling/kernel.cpp:10:3: error: unknown type name 'DataT'
+   10 |   DataT* background,
+      |   ^
+/output/HeCBench/sampling/kernel.cpp:11:9: error: unknown type name 'IdxT'
+   11 |   const IdxT nrows_background,
+      |         ^
+/output/HeCBench/sampling/kernel.cpp:12:3: error: unknown type name 'DataT'
+   12 |   DataT* dataset,
+      |   ^
+/output/HeCBench/sampling/kernel.cpp:13:9: error: unknown type name 'DataT'
+   13 |   const DataT* observation,
+      |         ^
+/output/HeCBench/sampling/kernel.cpp:37:34: error: use of undeclared identifier 'LCG_random_double'
+   37 |             int rand_idx = (int)(LCG_random_double(&seed) * ncols);
+      |                                  ^
+/output/HeCBench/sampling/kernel.cpp:41:30: error: use of undeclared identifier 'LCG_random_double'
+   41 |             rand_idx = (int)(LCG_random_double(&seed) * ncols);
+      |                              ^
+9 errors generated.

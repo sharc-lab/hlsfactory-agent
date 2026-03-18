@@ -1,0 +1,41 @@
+In file included from /output/HeCBench/urng/kernel.cpp:1:
+/output/HeCBench/urng/kernel.h:49:16: error: use of undeclared identifier 'temp'
+   49 |   float avg = (temp.x + temp.y + temp.z + temp.w) / 4.0f;
+      |                ^
+/output/HeCBench/urng/kernel.h:49:25: error: use of undeclared identifier 'temp'
+   49 |   float avg = (temp.x + temp.y + temp.z + temp.w) / 4.0f;
+      |                         ^
+/output/HeCBench/urng/kernel.h:49:34: error: use of undeclared identifier 'temp'
+   49 |   float avg = (temp.x + temp.y + temp.z + temp.w) / 4.0f;
+      |                                  ^
+/output/HeCBench/urng/kernel.h:49:43: error: use of undeclared identifier 'temp'
+   49 |   float avg = (temp.x + temp.y + temp.z + temp.w) / 4.0f;
+      |                                           ^
+/output/HeCBench/urng/kernel.h:52:10: error: use of undeclared identifier 'NTAB'
+   52 |   int iv[NTAB * GROUP_SIZE];
+      |          ^
+/output/HeCBench/urng/kernel.h:52:17: error: use of undeclared identifier 'GROUP_SIZE'
+   52 |   int iv[NTAB * GROUP_SIZE];
+      |                 ^
+/output/HeCBench/urng/kernel.h:56:3: error: a type specifier is required for all declarations
+   56 |   dev = (dev - 0.55f) * (float)factor;
+      |   ^
+/output/HeCBench/urng/kernel.h:56:32: error: use of undeclared identifier 'factor'
+   56 |   dev = (dev - 0.55f) * (float)factor;
+      |                                ^
+/output/HeCBench/urng/kernel.h:59:15: error: use of undeclared identifier 'pos'
+   59 |   outputImage[pos] = convert_uchar4_sat(temp + dev);
+      |               ^
+/output/HeCBench/urng/kernel.h:59:3: error: a type specifier is required for all declarations
+   59 |   outputImage[pos] = convert_uchar4_sat(temp + dev);
+      |   ^
+/output/HeCBench/urng/kernel.h:59:41: error: use of undeclared identifier 'temp'
+   59 |   outputImage[pos] = convert_uchar4_sat(temp + dev);
+      |                                         ^
+/output/HeCBench/urng/kernel.h:60:1: error: extraneous closing brace ('}')
+   60 | }
+      | ^
+/output/HeCBench/urng/kernel.h:107:10: fatal error: 'SDKBitMap.h' file not found
+  107 | #include "SDKBitMap.h"
+      |          ^~~~~~~~~~~~~
+13 errors generated.

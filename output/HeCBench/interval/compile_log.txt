@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/interval/kernel.cpp:1:
+/output/HeCBench/interval/kernel.h:100:10: fatal error: 'boost/numeric/interval.hpp' file not found
+  100 | #include <boost/numeric/interval.hpp>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

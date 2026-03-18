@@ -1,0 +1,14 @@
+In file included from /output/HeCBench/lrn/kernel.cpp:1:
+/output/HeCBench/lrn/kernel.h:48:22: error: use of undeclared identifier '_bid_x'
+   48 |   for (int64_t idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                      ^
+/output/HeCBench/lrn/kernel.h:48:45: error: use of undeclared identifier '_tid_x'
+   48 |   for (int64_t idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                             ^
+/output/HeCBench/lrn/kernel.h:138:22: error: use of undeclared identifier '_bid_x'
+  138 |   for (int64_t idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                      ^
+/output/HeCBench/lrn/kernel.h:138:45: error: use of undeclared identifier '_tid_x'
+  138 |   for (int64_t idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                             ^
+4 errors generated.

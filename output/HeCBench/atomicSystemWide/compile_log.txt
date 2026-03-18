@@ -1,0 +1,25 @@
+/output/HeCBench/atomicSystemWide/kernel.cpp:20:13: error: use of undeclared identifier 'atomicAdd_system'
+   20 |             atomicAdd_system(&atom_arr[0], 10);
+      |             ^
+/output/HeCBench/atomicSystemWide/kernel.cpp:23:13: error: use of undeclared identifier 'atomicExch_system'
+   23 |             atomicExch_system(&atom_arr[1], tid);
+      |             ^
+/output/HeCBench/atomicSystemWide/kernel.cpp:26:13: error: use of undeclared identifier 'atomicMax_system'
+   26 |             atomicMax_system(&atom_arr[2], tid);
+      |             ^
+/output/HeCBench/atomicSystemWide/kernel.cpp:29:13: error: use of undeclared identifier 'atomicMin_system'
+   29 |             atomicMin_system(&atom_arr[3], tid);
+      |             ^
+/output/HeCBench/atomicSystemWide/kernel.cpp:38:13: error: use of undeclared identifier 'atomicCAS_system'
+   38 |             atomicCAS_system(&atom_arr[6], tid-1, tid);
+      |             ^
+/output/HeCBench/atomicSystemWide/kernel.cpp:43:13: error: use of undeclared identifier 'atomicAnd_system'
+   43 |             atomicAnd_system(&atom_arr[7], 2*tid+7);
+      |             ^
+/output/HeCBench/atomicSystemWide/kernel.cpp:46:13: error: use of undeclared identifier 'atomicOr_system'
+   46 |             atomicOr_system(&atom_arr[8], 1 << tid);
+      |             ^
+/output/HeCBench/atomicSystemWide/kernel.cpp:49:13: error: use of undeclared identifier 'atomicXor_system'
+   49 |             atomicXor_system(&atom_arr[9], tid);
+      |             ^
+8 errors generated.

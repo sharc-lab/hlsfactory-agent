@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/mis/kernel.cpp:1:
+/output/HeCBench/mis/kernel.h:83:5: error: a type specifier is required for all declarations
+   83 |     fprintf(stderr, "ERROR: could not allocate nlist_d\n\n");
+      |     ^
+/output/HeCBench/mis/kernel.h:84:3: error: extraneous closing brace ('}')
+   84 |   }
+      |   ^
+/output/HeCBench/mis/kernel.h:86:5: error: a type specifier is required for all declarations
+   86 |     fprintf(stderr, "ERROR: could not allocate nstat_d\n\n");
+      |     ^
+/output/HeCBench/mis/kernel.h:87:3: error: extraneous closing brace ('}')
+   87 |   }
+      |   ^
+/output/HeCBench/mis/kernel.h:89:5: error: a type specifier is required for all declarations
+   89 |     fprintf(stderr, "ERROR: copying to device failed\n\n");
+      |     ^
+/output/HeCBench/mis/kernel.h:90:3: error: extraneous closing brace ('}')
+   90 |   }
+      |   ^
+/output/HeCBench/mis/kernel.h:92:5: error: a type specifier is required for all declarations
+   92 |     fprintf(stderr, "ERROR: copying to device failed\n\n");
+      |     ^
+/output/HeCBench/mis/kernel.h:93:3: error: extraneous closing brace ('}')
+   93 |   }
+      |   ^
+/output/HeCBench/mis/kernel.h:102:52: error: use of undeclared identifier 'repeat'
+  102 |   float runtime = (float)elapsed_seconds.count() / repeat;
+      |                                                    ^
+/output/HeCBench/mis/kernel.h:103:3: error: a type specifier is required for all declarations
+  103 |   printf("compute time: %.6f s\n", runtime);
+      |   ^
+/output/HeCBench/mis/kernel.h:104:3: error: a type specifier is required for all declarations
+  104 |   printf("throughput: %.6f Mnodes/s\n", nodes * 0.000001 / runtime);
+      |   ^
+/output/HeCBench/mis/kernel.h:104:41: error: use of undeclared identifier 'nodes'
+  104 |   printf("throughput: %.6f Mnodes/s\n", nodes * 0.000001 / runtime);
+      |                                         ^
+/output/HeCBench/mis/kernel.h:105:3: error: a type specifier is required for all declarations
+  105 |   printf("throughput: %.6f Medges/s\n", edges * 0.000001 / runtime);
+      |   ^
+/output/HeCBench/mis/kernel.h:105:41: error: use of undeclared identifier 'edges'
+  105 |   printf("throughput: %.6f Medges/s\n", edges * 0.000001 / runtime);
+      |                                         ^
+/output/HeCBench/mis/kernel.h:107:3: error: a type specifier is required for all declarations
+  107 |   printf("ECL-MIS v1.3 (%s)\n", __FILE__);
+      |   ^
+/output/HeCBench/mis/kernel.h:109:3: error: unknown type name 'ECLgraph'
+  109 |   ECLgraph g = readECLgraph(argv[1]);
+      |   ^
+/output/HeCBench/mis/kernel.h:109:29: error: use of undeclared identifier 'argv'
+  109 |   ECLgraph g = readECLgraph(argv[1]);
+      |                             ^
+/output/HeCBench/mis/kernel.h:110:3: error: a type specifier is required for all declarations
+  110 |   printf("configuration: %d nodes and %d edges (%s)\n", g.nodes, g.edges, argv[1]);
+      |   ^
+/output/HeCBench/mis/kernel.h:110:75: error: use of undeclared identifier 'argv'
+  110 |   printf("configuration: %d nodes and %d edges (%s)\n", g.nodes, g.edges, argv[1]);
+      |                                                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

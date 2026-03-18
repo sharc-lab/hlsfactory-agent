@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/minkowski/kernel.cpp:1:
+/output/HeCBench/minkowski/kernel.h:43:10: fatal error: 'verify.cpp' file not found
+   43 | #include "verify.cpp"
+      |          ^~~~~~~~~~~~
+1 error generated.

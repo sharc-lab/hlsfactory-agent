@@ -1,0 +1,70 @@
+In file included from /output/HeCBench/fma/kernel.cpp:1:
+/output/HeCBench/fma/kernel.h:68:30: error: enumeration cannot be a template
+   68 | enum class ImplicitFmaStatus {
+      |                              ^
+/output/HeCBench/fma/kernel.h:68:1: error: declaration does not declare anything
+   68 | enum class ImplicitFmaStatus {
+      | ^
+/output/HeCBench/fma/kernel.h:103:13: error: use of undeclared identifier '_tid_x'
+  103 |   int tid = _tid_x;
+      |             ^
+/output/HeCBench/fma/kernel.h:112:13: error: use of undeclared identifier '_bid_x'
+  112 |   int idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |             ^
+/output/HeCBench/fma/kernel.h:112:36: error: use of undeclared identifier '_tid_x'
+  112 |   int idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                    ^
+/output/HeCBench/fma/kernel.h:157:13: error: use of undeclared identifier '_tid_x'
+  157 |   int tid = _tid_x;
+      |             ^
+/output/HeCBench/fma/kernel.h:170:7: error: use of undeclared identifier 'float4'; did you mean 'float'?
+  170 |       float4 b_vec = *reinterpret_cast<const float4*>(b_ptr);
+      |       ^~~~~~
+      |       float
+/output/HeCBench/fma/kernel.h:170:46: error: unknown type name 'float4'; did you mean 'float'?
+  170 |       float4 b_vec = *reinterpret_cast<const float4*>(b_ptr);
+      |                                              ^~~~~~
+      |                                              float
+/output/HeCBench/fma/kernel.h:171:25: error: unknown type name 'float4'; did you mean 'float'?
+  171 |       *reinterpret_cast<float4*>(sb_ptr) = b_vec;
+      |                         ^~~~~~
+      |                         float
+/output/HeCBench/fma/kernel.h:191:13: error: use of undeclared identifier '_bid_x'
+  191 |   int idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |             ^
+/output/HeCBench/fma/kernel.h:191:36: error: use of undeclared identifier '_tid_x'
+  191 |   int idx = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                    ^
+/output/HeCBench/fma/kernel.h:217:7: error: use of undeclared identifier 'float4'; did you mean 'float'?
+  217 |       float4 a_vec = *reinterpret_cast<const float4*>(a_ptr);
+      |       ^~~~~~
+      |       float
+/output/HeCBench/fma/kernel.h:217:46: error: unknown type name 'float4'; did you mean 'float'?
+  217 |       float4 a_vec = *reinterpret_cast<const float4*>(a_ptr);
+      |                                              ^~~~~~
+      |                                              float
+/output/HeCBench/fma/kernel.h:218:7: error: use of undeclared identifier 'float4'; did you mean 'float'?
+  218 |       float4 b_vec = *reinterpret_cast<const float4*>(b_ptr);
+      |       ^~~~~~
+      |       float
+/output/HeCBench/fma/kernel.h:218:46: error: unknown type name 'float4'; did you mean 'float'?
+  218 |       float4 b_vec = *reinterpret_cast<const float4*>(b_ptr);
+      |                                              ^~~~~~
+      |                                              float
+/output/HeCBench/fma/kernel.h:219:7: error: use of undeclared identifier 'float4'; did you mean 'float'?
+  219 |       float4 c_vec = *reinterpret_cast<const float4*>(c_ptr);
+      |       ^~~~~~
+      |       float
+/output/HeCBench/fma/kernel.h:219:46: error: unknown type name 'float4'; did you mean 'float'?
+  219 |       float4 c_vec = *reinterpret_cast<const float4*>(c_ptr);
+      |                                              ^~~~~~
+      |                                              float
+/output/HeCBench/fma/kernel.h:222:12: error: member reference base type 'float' is not a structure or union
+  222 |       c_vec.x += a_vec.x * b_vec.x;
+      |       ~~~~~^~
+/output/HeCBench/fma/kernel.h:222:23: error: member reference base type 'float' is not a structure or union
+  222 |       c_vec.x += a_vec.x * b_vec.x;
+      |                  ~~~~~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+PASS: reference.cpp

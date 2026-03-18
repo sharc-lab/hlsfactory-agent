@@ -1,0 +1,64 @@
+In file included from /output/HeCBench/mr/kernel.cpp:1:
+/output/HeCBench/mr/kernel.h:77:3: error: use of undeclared identifier 'myseed'
+   77 |   myseed();
+      |   ^
+/output/HeCBench/mr/kernel.h:81:21: error: use of undeclared identifier 'myrand32'
+   81 |       uint32_t n = (myrand32() & mask32[i]) | 1;
+      |                     ^
+/output/HeCBench/mr/kernel.h:84:15: error: use of undeclared identifier 'efficient_mr32'
+   84 |       while (!efficient_mr32(bases32, 3, n))
+      |               ^
+/output/HeCBench/mr/kernel.h:92:3: error: use of undeclared identifier 'myseed'
+   92 |   myseed();
+      |   ^
+/output/HeCBench/mr/kernel.h:95:21: error: use of undeclared identifier 'myrand32'
+   95 |       uint32_t n = (myrand32() & mask32[i]) | 1;
+      |                     ^
+/output/HeCBench/mr/kernel.h:138:11: error: use of undeclared identifier '_bid_x'
+  138 |   int j = _bid_x * BLOCK_DIM_X + _tid_x;
+      |           ^
+/output/HeCBench/mr/kernel.h:138:34: error: use of undeclared identifier '_tid_x'
+  138 |   int j = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                  ^
+/output/HeCBench/mr/kernel.h:142:16: error: use of undeclared identifier 'straightforward_mr32'
+  142 |       (*val += straightforward_mr32(bases, cnt, n));
+      |                ^
+/output/HeCBench/mr/kernel.h:153:11: error: use of undeclared identifier '_bid_x'
+  153 |   int j = _bid_x * BLOCK_DIM_X + _tid_x;
+      |           ^
+/output/HeCBench/mr/kernel.h:153:34: error: use of undeclared identifier '_tid_x'
+  153 |   int j = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                  ^
+/output/HeCBench/mr/kernel.h:157:16: error: use of undeclared identifier 'efficient_mr32'
+  157 |       (*val += efficient_mr32(bases, cnt, n));
+      |                ^
+/output/HeCBench/mr/kernel.h:273:1: error: unknown type name 'ESS'
+  273 | ESS
+      | ^
+/output/HeCBench/mr/kernel.h:274:23: error: expected ';' after top level declarator
+  274 | static inline uint32_t mont_prod32(const uint32_t a, const uint32_t b, const uint32_t n, const uint32_t npi)
+      |                       ^
+      |                       ;
+/output/HeCBench/mr/kernel.h:289:1: error: unknown type name 'ESS'
+  289 | ESS
+      | ^
+/output/HeCBench/mr/kernel.h:290:23: error: expected ';' after top level declarator
+  290 | static inline uint32_t mont_square32(const uint32_t a, const uint32_t n, const uint32_t npi)
+      |                       ^
+      |                       ;
+/output/HeCBench/mr/kernel.h:297:1: error: unknown type name 'ESS'
+  297 | ESS
+      | ^
+/output/HeCBench/mr/kernel.h:298:23: error: expected ';' after top level declarator
+  298 | static inline uint32_t modular_inverse32(const uint32_t a)
+      |                       ^
+      |                       ;
+/output/HeCBench/mr/kernel.h:310:1: error: unknown type name 'ESS'
+  310 | ESS
+      | ^
+/output/HeCBench/mr/kernel.h:311:23: error: expected ';' after top level declarator
+  311 | static inline uint32_t compute_modn32(const uint32_t n)
+      |                       ^
+      |                       ;
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

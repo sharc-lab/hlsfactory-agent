@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/mmcsf/kernel.cpp:1:
+/output/HeCBench/mmcsf/kernel.h:25:9: error: unknown type name 'DTYPE'
+   25 |   const DTYPE * vals,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:26:9: error: unknown type name 'ITYPE'
+   26 |   const ITYPE * fbrLikeSlcInds,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:27:9: error: unknown type name 'ITYPE'
+   27 |   const ITYPE * dInds3, 
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:28:9: error: unknown type name 'ITYPE'
+   28 |   const ITYPE * fbrPtr0,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:29:9: error: unknown type name 'ITYPE'
+   29 |   const ITYPE * fbrPtr1,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:30:9: error: unknown type name 'ITYPE'
+   30 |   const ITYPE * fbrIdx1,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:31:9: error: unknown type name 'ITYPE'
+   31 |   const ITYPE * fbrPtr2,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:32:9: error: unknown type name 'ITYPE'
+   32 |   const ITYPE * fbrIdx2,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:33:3: error: unknown type name 'ITYPE'
+   33 |   ITYPE nFibers,
+      |   ^
+/output/HeCBench/mmcsf/kernel.h:34:9: error: unknown type name 'DTYPE'
+   34 |         DTYPE * dU0, 
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:35:9: error: unknown type name 'DTYPE'
+   35 |   const DTYPE * dU1,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:36:9: error: unknown type name 'DTYPE'
+   36 |   const DTYPE * dU2,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:37:9: error: unknown type name 'DTYPE'
+   37 |   const DTYPE * dU3,
+      |         ^
+/output/HeCBench/mmcsf/kernel.h:38:3: error: unknown type name 'ITYPE'
+   38 |   ITYPE  mode,
+      |   ^
+/output/HeCBench/mmcsf/kernel.h:39:3: error: unknown type name 'ITYPE'
+   39 |   ITYPE R,
+      |   ^
+/output/HeCBench/mmcsf/kernel.h:40:3: error: unknown type name 'ITYPE'
+   40 |   ITYPE warpPerSlice,
+      |   ^
+/output/HeCBench/mmcsf/kernel.h:45:3: error: unknown type name 'ITYPE'
+   45 |   ITYPE tId = _tid_x;
+      |   ^
+/output/HeCBench/mmcsf/kernel.h:45:15: error: use of undeclared identifier '_tid_x'
+   45 |   ITYPE tId = _tid_x;
+      |               ^
+/output/HeCBench/mmcsf/kernel.h:46:3: error: unknown type name 'ITYPE'
+   46 |   ITYPE laneId = tId & 31;
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

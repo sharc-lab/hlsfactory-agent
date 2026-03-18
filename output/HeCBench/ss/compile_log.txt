@@ -1,0 +1,7 @@
+/output/HeCBench/ss/kernel.cpp:171:27: error: use of undeclared identifier 'atomicSub'
+  171 |             revStackPos = atomicSub(&stack1Counter, (uint)1);
+      |                           ^
+/output/HeCBench/ss/kernel.cpp:198:27: error: use of undeclared identifier 'atomicSub'
+  198 |             revStackPos = atomicSub(&stack2Counter, (uint)1);
+      |                           ^
+2 errors generated.

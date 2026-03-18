@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/gemv/kernel.cpp:1:
+/output/HeCBench/gemv/kernel.h:30:14: error: use of undeclared identifier '__half'
+   30 | SimpleTensor<__half> solve_gemv_int4_quantized_with_params(
+      |              ^
+/output/HeCBench/gemv/kernel.h:32:24: error: use of undeclared identifier 'uint4_2'
+   32 |     const SimpleTensor<uint4_2>& mat, const SimpleTensor<__half>& vec,
+      |                        ^
+/output/HeCBench/gemv/kernel.h:32:58: error: use of undeclared identifier '__half'
+   32 |     const SimpleTensor<uint4_2>& mat, const SimpleTensor<__half>& vec,
+      |                                                          ^
+/output/HeCBench/gemv/kernel.h:36:3: error: unknown type name '__half'
+   36 |   __half scale = __float2half(scale_f);
+      |   ^
+/output/HeCBench/gemv/kernel.h:36:18: error: use of undeclared identifier '__float2half'
+   36 |   __half scale = __float2half(scale_f);
+      |                  ^
+/output/HeCBench/gemv/kernel.h:37:3: error: unknown type name '__half'
+   37 |   __half zero_point = __float2half(zero_point_f);
+      |   ^
+/output/HeCBench/gemv/kernel.h:37:23: error: use of undeclared identifier '__float2half'
+   37 |   __half zero_point = __float2half(zero_point_f);
+      |                       ^
+/output/HeCBench/gemv/kernel.h:39:25: error: use of undeclared identifier 'SHARED_MEM_MAX_ROWS'
+   39 |   assert(block_dim_y <= SHARED_MEM_MAX_ROWS);
+      |                         ^
+/output/HeCBench/gemv/kernel.h:40:39: error: use of undeclared identifier 'MAX_THREADS_PER_BLOCK'
+   40 |   assert(block_dim_x * block_dim_y <= MAX_THREADS_PER_BLOCK);
+      |                                       ^
+/output/HeCBench/gemv/kernel.h:43:16: error: use of undeclared identifier '__half'
+   43 |   SimpleTensor<__half> result(vec.height_, 1);
+      |                ^
+/output/HeCBench/gemv/kernel.h:44:3: error: unknown type name 'dim3'
+   44 |   dim3 grid_dim(1, mat.height_ / block_dim_y);
+      |   ^
+/output/HeCBench/gemv/kernel.h:45:3: error: unknown type name 'dim3'
+   45 |   dim3 block_dim(block_dim_x, block_dim_y);
+      |   ^
+/output/HeCBench/gemv/kernel.h:53:10: error: use of undeclared identifier 'result'
+   53 |   return result;
+      |          ^
+/output/HeCBench/gemv/kernel.h:56:14: error: use of undeclared identifier '__half'
+   56 | SimpleTensor<__half> solve_gemv_int8_quantized_with_params(
+      |              ^
+/output/HeCBench/gemv/kernel.h:58:11: error: no template named 'SimpleTensor'
+   58 |     const SimpleTensor<int8_t>& mat, const SimpleTensor<__half>& vec,
+      |           ^
+/output/HeCBench/gemv/kernel.h:58:57: error: use of undeclared identifier '__half'
+   58 |     const SimpleTensor<int8_t>& mat, const SimpleTensor<__half>& vec,
+      |                                                         ^
+/output/HeCBench/gemv/kernel.h:62:3: error: unknown type name '__half'
+   62 |   __half scale = __float2half(scale_f);
+      |   ^
+/output/HeCBench/gemv/kernel.h:62:18: error: use of undeclared identifier '__float2half'
+   62 |   __half scale = __float2half(scale_f);
+      |                  ^
+/output/HeCBench/gemv/kernel.h:63:3: error: unknown type name '__half'
+   63 |   __half zero_point = __float2half(zero_point_f);
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

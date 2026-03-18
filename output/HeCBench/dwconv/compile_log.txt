@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/dwconv/kernel.cpp:1:
+/output/HeCBench/dwconv/kernel.h:20:10: fatal error: 'tensorAccessor.h' file not found
+   20 | #include "tensorAccessor.h"
+      |          ^~~~~~~~~~~~~~~~~~
+1 error generated.

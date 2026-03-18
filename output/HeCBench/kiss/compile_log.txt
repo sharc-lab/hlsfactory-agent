@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/kiss/kernel.cpp:1:
+/output/HeCBench/kiss/kernel.h:19:10: fatal error: 'kiss.cuh' file not found
+   19 | #include "kiss.cuh"
+      |          ^~~~~~~~~~
+1 error generated.

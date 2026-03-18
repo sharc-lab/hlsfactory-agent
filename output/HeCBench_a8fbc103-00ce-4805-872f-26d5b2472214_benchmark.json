@@ -1,0 +1,21 @@
+{
+  "run_id": "a8fbc103-00ce-4805-872f-26d5b2472214",
+  "timestamp": "2026-03-18T18:48:35.157381+00:00",
+  "repo_url": "https://github.com/ORNL/HeCBench.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.02094241,
+  "total_api_calls": 9,
+  "format_errors": 0,
+  "traj_file": "HeCBench_a8fbc103-00ce-4805-872f-26d5b2472214.traj.json",
+  "quality": {
+    "designs_found": 717,
+    "compile_pass": 62,
+    "compile_fail": 655,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 717,
+    "designs_with_tcl": 617
+  }
+}

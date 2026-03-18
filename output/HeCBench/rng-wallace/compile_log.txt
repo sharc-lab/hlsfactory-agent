@@ -1,0 +1,152 @@
+In file included from /output/HeCBench/rng-wallace/kernel.cpp:1:
+/output/HeCBench/rng-wallace/kernel.h:465:47: error: unknown type name '_bid_x'; did you mean '__id_t'?
+  465 |         unsigned offset = __mul24(WALLACE_POOL_SIZE, _bid_x);
+      |                                                      ^~~~~~
+      |                                                      __id_t
+/output/HeCBench/rng-wallace/kernel.h:432:30: note: expanded from macro '__mul24'
+  432 | #define __mul24(a,b) ((a) * (b))
+      |                              ^
+/usr/include/x86_64-linux-gnu/bits/types.h:159:24: note: '__id_t' declared here
+  159 | __STD_TYPE __ID_T_TYPE __id_t;          /* General type for IDs.  */
+      |                        ^
+In file included from /output/HeCBench/rng-wallace/kernel.cpp:1:
+/output/HeCBench/rng-wallace/kernel.h:465:20: error: expected expression
+  465 |         unsigned offset = __mul24(WALLACE_POOL_SIZE, _bid_x);
+      |                           ^
+/output/HeCBench/rng-wallace/kernel.h:432:32: note: expanded from macro '__mul24'
+  432 | #define __mul24(a,b) ((a) * (b))
+      |                                ^
+/output/HeCBench/rng-wallace/kernel.h:469:9: error: use of undeclared identifier '_tid_x'
+  469 |           pool[_tid_x + WALLACE_NUM_THREADS * i] = globalPool[offset + _tid_x + WALLACE_NUM_THREADS * i];
+      |                ^
+/output/HeCBench/rng-wallace/kernel.h:469:65: error: use of undeclared identifier '_tid_x'
+  469 |           pool[_tid_x + WALLACE_NUM_THREADS * i] = globalPool[offset + _tid_x + WALLACE_NUM_THREADS * i];
+      |                                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:478:37: error: unknown type name '_bid_x'; did you mean '__id_t'?
+  478 |                         __mul24(8 * WALLACE_NUM_THREADS, _bid_x) + _tid_x;
+      |                                                          ^~~~~~
+      |                                                          __id_t
+/output/HeCBench/rng-wallace/kernel.h:432:30: note: expanded from macro '__mul24'
+  432 | #define __mul24(a,b) ((a) * (b))
+      |                              ^
+/usr/include/x86_64-linux-gnu/bits/types.h:159:24: note: '__id_t' declared here
+  159 | __STD_TYPE __ID_T_TYPE __id_t;          /* General type for IDs.  */
+      |                        ^
+In file included from /output/HeCBench/rng-wallace/kernel.cpp:1:
+/output/HeCBench/rng-wallace/kernel.h:478:4: error: expected expression
+  478 |                         __mul24(8 * WALLACE_NUM_THREADS, _bid_x) + _tid_x;
+      |                         ^
+/output/HeCBench/rng-wallace/kernel.h:432:32: note: expanded from macro '__mul24'
+  432 | #define __mul24(a,b) ((a) * (b))
+      |                                ^
+/output/HeCBench/rng-wallace/kernel.h:478:47: error: use of undeclared identifier '_tid_x'
+  478 |                         __mul24(8 * WALLACE_NUM_THREADS, _bid_x) + _tid_x;
+      |                                                                    ^
+/output/HeCBench/rng-wallace/kernel.h:480:7: error: use of undeclared identifier '_tid_x'
+  480 |                 if (_tid_x == 0)
+      |                     ^
+/output/HeCBench/rng-wallace/kernel.h:481:56: error: unknown type name '_bid_x'; did you mean '__id_t'?
+  481 |                         pool[WALLACE_CHI2_OFFSET] = chi2Corrections[__mul24(_bid_x, WALLACE_NUM_OUTPUTS_PER_RUN) + loop];
+      |                                                                             ^~~~~~
+      |                                                                             __id_t
+/output/HeCBench/rng-wallace/kernel.h:432:24: note: expanded from macro '__mul24'
+  432 | #define __mul24(a,b) ((a) * (b))
+      |                        ^
+/usr/include/x86_64-linux-gnu/bits/types.h:159:24: note: '__id_t' declared here
+  159 | __STD_TYPE __ID_T_TYPE __id_t;          /* General type for IDs.  */
+      |                        ^
+In file included from /output/HeCBench/rng-wallace/kernel.cpp:1:
+/output/HeCBench/rng-wallace/kernel.h:481:48: error: indirection requires pointer operand ('unsigned int' invalid)
+  481 |                         pool[WALLACE_CHI2_OFFSET] = chi2Corrections[__mul24(_bid_x, WALLACE_NUM_OUTPUTS_PER_RUN) + loop];
+      |                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/rng-wallace/kernel.h:432:27: note: expanded from macro '__mul24'
+  432 | #define __mul24(a,b) ((a) * (b))
+      |                           ^ ~~~
+/output/HeCBench/rng-wallace/kernel.h:486:44: error: use of undeclared identifier '_tid_x'
+  486 |                                 pool[__mul24(i, WALLACE_NUM_THREADS) + _tid_x] * chi2CorrAndScale;
+      |                                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:492:30: error: use of undeclared identifier '_tid_x'
+  492 |                         unsigned seed = (m_seed + _tid_x) & mod_mask;
+      |                                                   ^
+/output/HeCBench/rng-wallace/kernel.h:511:35: error: use of undeclared identifier '_tid_x'
+  511 |                         pool[0 * WALLACE_NUM_THREADS + _tid_x] = rin0_0;
+      |                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:512:35: error: use of undeclared identifier '_tid_x'
+  512 |                         pool[1 * WALLACE_NUM_THREADS + _tid_x] = rin1_0;
+      |                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:513:35: error: use of undeclared identifier '_tid_x'
+  513 |                         pool[2 * WALLACE_NUM_THREADS + _tid_x] = rin2_0;
+      |                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:514:35: error: use of undeclared identifier '_tid_x'
+  514 |                         pool[3 * WALLACE_NUM_THREADS + _tid_x] = rin3_0;
+      |                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:517:35: error: use of undeclared identifier '_tid_x'
+  517 |                         pool[4 * WALLACE_NUM_THREADS + _tid_x] = rin0_1;
+      |                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:518:35: error: use of undeclared identifier '_tid_x'
+  518 |                         pool[5 * WALLACE_NUM_THREADS + _tid_x] = rin1_1;
+      |                                                        ^
+/output/HeCBench/rng-wallace/kernel.h:519:35: error: use of undeclared identifier '_tid_x'
+  519 |                         pool[6 * WALLACE_NUM_THREADS + _tid_x] = rin2_1;
+      |                                                        ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+/output/HeCBench/rng-wallace/reference.cpp:38:20: error: use of undeclared identifier 'WALLACE_POOL_SIZE'
+   38 |         float pool[WALLACE_POOL_SIZE + WALLACE_CHI2_SHARED_SIZE];
+      |                    ^
+/output/HeCBench/rng-wallace/reference.cpp:38:40: error: use of undeclared identifier 'WALLACE_CHI2_SHARED_SIZE'
+   38 |         float pool[WALLACE_POOL_SIZE + WALLACE_CHI2_SHARED_SIZE];
+      |                                        ^
+/output/HeCBench/rng-wallace/reference.cpp:40:27: error: use of undeclared identifier 'WALLACE_POOL_SIZE'
+   40 |         unsigned offset = WALLACE_POOL_SIZE * blockIdx;
+      |                           ^
+/output/HeCBench/rng-wallace/reference.cpp:43:50: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   43 |         for (unsigned threadIdx = 0; threadIdx < WALLACE_NUM_THREADS; ++threadIdx)
+      |                                                  ^
+/output/HeCBench/rng-wallace/reference.cpp:47:34: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   47 |                 pool[threadIdx + WALLACE_NUM_THREADS * i] =
+      |                                  ^
+/output/HeCBench/rng-wallace/reference.cpp:48:53: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   48 |                     globalPool[offset + threadIdx + WALLACE_NUM_THREADS * i];
+      |                                                     ^
+/output/HeCBench/rng-wallace/reference.cpp:53:40: error: use of undeclared identifier 'WALLACE_NUM_OUTPUTS_PER_RUN'
+   53 |         for (unsigned loop = 0; loop < WALLACE_NUM_OUTPUTS_PER_RUN; ++loop)
+      |                                        ^
+/output/HeCBench/rng-wallace/reference.cpp:57:18: error: use of undeclared identifier 'WALLACE_CHI2_OFFSET'
+   57 |             pool[WALLACE_CHI2_OFFSET] = chi2Corrections[blockIdx * WALLACE_NUM_OUTPUTS_PER_RUN + loop];
+      |                  ^
+/output/HeCBench/rng-wallace/reference.cpp:57:68: error: use of undeclared identifier 'WALLACE_NUM_OUTPUTS_PER_RUN'
+   57 |             pool[WALLACE_CHI2_OFFSET] = chi2Corrections[blockIdx * WALLACE_NUM_OUTPUTS_PER_RUN + loop];
+      |                                                                    ^
+/output/HeCBench/rng-wallace/reference.cpp:59:43: error: use of undeclared identifier 'WALLACE_CHI2_OFFSET'
+   59 |             float chi2CorrAndScale = pool[WALLACE_CHI2_OFFSET];
+      |                                           ^
+/output/HeCBench/rng-wallace/reference.cpp:61:54: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   61 |             for (unsigned threadIdx = 0; threadIdx < WALLACE_NUM_THREADS; ++threadIdx)
+      |                                                      ^
+/output/HeCBench/rng-wallace/reference.cpp:63:60: error: use of undeclared identifier 'WALLACE_TOTAL_NUM_THREADS'
+   63 |                 unsigned intermediate_address = loop * 8 * WALLACE_TOTAL_NUM_THREADS +
+      |                                                            ^
+/output/HeCBench/rng-wallace/reference.cpp:64:25: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   64 |                     8 * WALLACE_NUM_THREADS * blockIdx + threadIdx;
+      |                         ^
+/output/HeCBench/rng-wallace/reference.cpp:68:74: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   68 |                     generatedRandomNumberPool[intermediate_address + i * WALLACE_NUM_THREADS] =
+      |                                                                          ^
+/output/HeCBench/rng-wallace/reference.cpp:69:34: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   69 |                         pool[i * WALLACE_NUM_THREADS + threadIdx] * chi2CorrAndScale;
+      |                                  ^
+/output/HeCBench/rng-wallace/reference.cpp:73:26: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   73 |             float rin0_0[WALLACE_NUM_THREADS],
+      |                          ^
+/output/HeCBench/rng-wallace/reference.cpp:74:26: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   74 |                   rin1_0[WALLACE_NUM_THREADS],
+      |                          ^
+/output/HeCBench/rng-wallace/reference.cpp:75:26: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   75 |                   rin2_0[WALLACE_NUM_THREADS],
+      |                          ^
+/output/HeCBench/rng-wallace/reference.cpp:76:26: error: use of undeclared identifier 'WALLACE_NUM_THREADS'
+   76 |                   rin3_0[WALLACE_NUM_THREADS],
+      |                          ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

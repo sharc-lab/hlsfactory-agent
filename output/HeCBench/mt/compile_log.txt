@@ -1,0 +1,26 @@
+In file included from /output/HeCBench/mt/kernel.cpp:1:
+/output/HeCBench/mt/kernel.h:76:8: error: unknown type name 'mt_struct'; did you mean 'struct'?
+   76 | static mt_struct MT[MT_RNG_COUNT];
+      |        ^~~~~~~~~
+      |        struct
+/output/HeCBench/mt/kernel.h:76:20: error: decomposition declaration cannot be declared with type 'struct MT'; declared type must be 'auto' or reference to 'auto'
+   76 | static mt_struct MT[MT_RNG_COUNT];
+      |                    ^
+/output/HeCBench/mt/kernel.h:76:20: error: decomposition declaration '[MT_RNG_COUNT]' requires an initializer
+/output/HeCBench/mt/kernel.h:77:23: error: use of undeclared identifier 'MT_NN'
+   77 | static uint32_t state[MT_NN];
+      |                       ^
+/output/HeCBench/mt/kernel.h:94:9: error: use of undeclared identifier 'BoxMuller'; did you mean 'BoxMullerRef'?
+   94 |         BoxMuller(h_Random[i + 0], h_Random[i + 1]);
+      |         ^~~~~~~~~
+      |         BoxMullerRef
+/output/HeCBench/mt/kernel.h:90:17: note: 'BoxMullerRef' declared here
+   90 | extern "C" void BoxMullerRef(float *h_Random, int NPerRng) {
+      |                 ^
+/output/HeCBench/mt/kernel.h:94:19: error: cannot initialize a parameter of type 'float *' with an lvalue of type 'float'
+   94 |         BoxMuller(h_Random[i + 0], h_Random[i + 1]);
+      |                   ^~~~~~~~~~~~~~~
+/output/HeCBench/mt/kernel.h:90:37: note: passing argument to parameter 'h_Random' here
+   90 | extern "C" void BoxMullerRef(float *h_Random, int NPerRng) {
+      |                                     ^
+6 errors generated.

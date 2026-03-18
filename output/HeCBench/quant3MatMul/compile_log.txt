@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/quant3MatMul/kernel.cpp:1:
+/output/HeCBench/quant3MatMul/kernel.h:50:27: error: use of undeclared identifier '_bid_x'
+   50 |   int row = BLOCKHEIGHT * _bid_x;
+      |                           ^
+/output/HeCBench/quant3MatMul/kernel.h:51:27: error: use of undeclared identifier '_bid_y'
+   51 |   int col =  BLOCKWIDTH * _bid_y + _tid_x;
+      |                           ^
+/output/HeCBench/quant3MatMul/kernel.h:51:36: error: use of undeclared identifier '_tid_x'
+   51 |   int col =  BLOCKWIDTH * _bid_y + _tid_x;
+      |                                    ^
+/output/HeCBench/quant3MatMul/kernel.h:55:12: error: use of undeclared identifier '_tid_x'
+   55 |   blockvec[_tid_x] = vec[(row / BLOCKHEIGHT) * BLOCKWIDTH + _tid_x];
+      |            ^
+/output/HeCBench/quant3MatMul/kernel.h:55:61: error: use of undeclared identifier '_tid_x'
+   55 |   blockvec[_tid_x] = vec[(row / BLOCKHEIGHT) * BLOCKWIDTH + _tid_x];
+      |                                                             ^
+/output/HeCBench/quant3MatMul/kernel.h:118:12: error: unknown type name 'half2'
+  118 |     const  half2*  vec,
+      |            ^
+/output/HeCBench/quant3MatMul/kernel.h:129:27: error: use of undeclared identifier '_bid_x'
+  129 |   int row = BLOCKHEIGHT * _bid_x;
+      |                           ^
+/output/HeCBench/quant3MatMul/kernel.h:130:26: error: use of undeclared identifier '_bid_y'
+  130 |   int col = BLOCKWIDTH * _bid_y + _tid_x;
+      |                          ^
+/output/HeCBench/quant3MatMul/kernel.h:130:35: error: use of undeclared identifier '_tid_x'
+  130 |   int col = BLOCKWIDTH * _bid_y + _tid_x;
+      |                                   ^
+/output/HeCBench/quant3MatMul/kernel.h:132:3: error: unknown type name 'half2'
+  132 |   half2 blockvec[blockwidth2];
+      |   ^
+/output/HeCBench/quant3MatMul/kernel.h:133:7: error: use of undeclared identifier '_tid_x'
+  133 |   if (_tid_x < blockwidth2)
+      |       ^
+/output/HeCBench/quant3MatMul/kernel.h:134:14: error: use of undeclared identifier '_tid_x'
+  134 |     blockvec[_tid_x] = vec[(row / BLOCKHEIGHT) * blockwidth2 + _tid_x];
+      |              ^
+/output/HeCBench/quant3MatMul/kernel.h:134:64: error: use of undeclared identifier '_tid_x'
+  134 |     blockvec[_tid_x] = vec[(row / BLOCKHEIGHT) * blockwidth2 + _tid_x];
+      |                                                                ^
+/output/HeCBench/quant3MatMul/kernel.h:136:3: error: unknown type name 'half2'
+  136 |   half2 deq2[64][32];
+      |   ^
+/output/HeCBench/quant3MatMul/kernel.h:137:13: error: use of undeclared identifier '_tid_x'
+  137 |   int val = _tid_x / 32;
+      |             ^
+/output/HeCBench/quant3MatMul/kernel.h:138:13: error: use of undeclared identifier '_tid_x'
+  138 |   int off = _tid_x % 32;
+      |             ^
+/output/HeCBench/quant3MatMul/kernel.h:141:8: error: use of undeclared identifier '__int2half_rn'
+  141 |        __int2half_rn(val & 0x7), __int2half_rn(val >> 3)
+      |        ^
+/output/HeCBench/quant3MatMul/kernel.h:141:34: error: use of undeclared identifier '__int2half_rn'
+  141 |        __int2half_rn(val & 0x7), __int2half_rn(val >> 3)
+      |                                  ^
+/output/HeCBench/quant3MatMul/kernel.h:145:3: error: unknown type name 'half2'
+  145 |   half2 scale = __float2half2_rn(scales[col]);
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,34 @@
+/output/HeCBench/atomicAggregate/kernel.cpp:11:23: error: use of undeclared identifier 'warpSize'
+   11 |   for (int i = 0; i < warpSize; i++){
+      |                       ^
+/output/HeCBench/atomicAggregate/kernel.cpp:12:32: error: invalid suffix 'ptr' on integer constant
+   12 |     unsigned long long tptr = 0ptr, i);
+      |                                ^
+/output/HeCBench/atomicAggregate/kernel.cpp:12:37: error: redefinition of 'i' with a different type: 'unsigned long long' vs 'int'
+   12 |     unsigned long long tptr = 0ptr, i);
+      |                                     ^
+/output/HeCBench/atomicAggregate/kernel.cpp:11:12: note: previous definition is here
+   11 |   for (int i = 0; i < warpSize; i++){
+      |            ^
+/output/HeCBench/atomicAggregate/kernel.cpp:12:38: error: extraneous ')' before ';'
+   12 |     unsigned long long tptr = 0ptr, i);
+      |                                      ^
+/output/HeCBench/atomicAggregate/kernel.cpp:13:25: error: invalid suffix 'ptr' on integer constant
+   13 |     unsigned my_mask = 0ptr));
+      |                         ^
+/output/HeCBench/atomicAggregate/kernel.cpp:14:15: error: use of undeclared identifier '_tid_x'
+   14 |     if (i == (_tid_x & (warpSize-1))) mask = my_mask;
+      |               ^
+/output/HeCBench/atomicAggregate/kernel.cpp:14:25: error: use of undeclared identifier 'warpSize'
+   14 |     if (i == (_tid_x & (warpSize-1))) mask = my_mask;
+      |                         ^
+/output/HeCBench/atomicAggregate/kernel.cpp:17:16: error: use of undeclared identifier '__ffs'
+   17 |   int leader = __ffs(mask) - 1;  // select a leader
+      |                ^
+/output/HeCBench/atomicAggregate/kernel.cpp:19:22: error: use of undeclared identifier '_tid_x'
+   19 |   unsigned lane_id = _tid_x % warpSize;
+      |                      ^
+/output/HeCBench/atomicAggregate/kernel.cpp:19:31: error: use of undeclared identifier 'warpSize'
+   19 |   unsigned lane_id = _tid_x % warpSize;
+      |                               ^
+10 errors generated.

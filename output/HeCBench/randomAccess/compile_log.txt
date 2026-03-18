@@ -1,0 +1,4 @@
+/output/HeCBench/randomAccess/kernel.cpp:75:13: error: use of undeclared identifier 'atomicXor'
+   75 |             atomicXor(&Table[ran & (TableSize-1)], ran);
+      |             ^
+1 error generated.

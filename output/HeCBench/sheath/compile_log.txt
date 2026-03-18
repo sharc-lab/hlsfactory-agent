@@ -1,0 +1,7 @@
+/output/HeCBench/sheath/kernel.cpp:115:3: error: use of undeclared identifier 'atomicAdd'
+  115 |   atomicAdd(&(field[i]), value * (1 - di));
+      |   ^
+/output/HeCBench/sheath/kernel.cpp:116:3: error: use of undeclared identifier 'atomicAdd'
+  116 |   atomicAdd(&(field[i + 1]), value * (di));
+      |   ^
+2 errors generated.

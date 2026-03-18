@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/sparkler-hip/kernel.cpp:1:
+/output/HeCBench/sparkler-hip/kernel.h:26:10: fatal error: 'mpi.h' file not found
+   26 | #include <mpi.h>
+      |          ^~~~~~~
+1 error generated.

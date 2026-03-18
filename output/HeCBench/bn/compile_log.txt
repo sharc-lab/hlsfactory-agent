@@ -1,0 +1,32 @@
+In file included from /output/HeCBench/bn/kernel.cpp:1:
+/output/HeCBench/bn/kernel.h:54:13: error: use of undeclared identifier 'NODE_N'
+   54 | bool orders[NODE_N][NODE_N];
+      |             ^
+/output/HeCBench/bn/kernel.h:54:21: error: use of undeclared identifier 'NODE_N'
+   54 | bool orders[NODE_N][NODE_N];
+      |                     ^
+/output/HeCBench/bn/kernel.h:55:16: error: use of undeclared identifier 'NODE_N'
+   55 | bool preOrders[NODE_N][NODE_N];
+      |                ^
+/output/HeCBench/bn/kernel.h:55:24: error: use of undeclared identifier 'NODE_N'
+   55 | bool preOrders[NODE_N][NODE_N];
+      |                        ^
+/output/HeCBench/bn/kernel.h:56:15: error: use of undeclared identifier 'NODE_N'
+   56 | bool preGraph[NODE_N][NODE_N];
+      |               ^
+/output/HeCBench/bn/kernel.h:56:23: error: use of undeclared identifier 'NODE_N'
+   56 | bool preGraph[NODE_N][NODE_N];
+      |                       ^
+/output/HeCBench/bn/kernel.h:57:25: error: use of undeclared identifier 'NODE_N'
+   57 | bool bestGraph[HIGHEST][NODE_N][NODE_N];
+      |                         ^
+/output/HeCBench/bn/kernel.h:57:33: error: use of undeclared identifier 'NODE_N'
+   57 | bool bestGraph[HIGHEST][NODE_N][NODE_N];
+      |                                 ^
+/output/HeCBench/bn/kernel.h:58:12: error: use of undeclared identifier 'NODE_N'
+   58 | bool graph[NODE_N][NODE_N];
+      |            ^
+/output/HeCBench/bn/kernel.h:58:20: error: use of undeclared identifier 'NODE_N'
+   58 | bool graph[NODE_N][NODE_N];
+      |                    ^
+10 errors generated.

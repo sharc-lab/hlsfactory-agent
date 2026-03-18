@@ -1,0 +1,5 @@
+In file included from /output/HeCBench/layernorm-hip/kernel.cpp:1:
+/output/HeCBench/layernorm-hip/kernel.h:24:10: fatal error: 'reference.h' file not found
+   24 | #include "reference.h"
+      |          ^~~~~~~~~~~~~
+1 error generated.

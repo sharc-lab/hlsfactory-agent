@@ -1,0 +1,82 @@
+/output/HeCBench/meanshift/kernel.cpp:5:8: error: redefinition of 'mean_shift' as different kind of symbol
+    5 |   void mean_shift(const float *data, float *data_next) {
+      |        ^
+/output/HeCBench/meanshift/kernel.h:69:11: note: previous definition is here
+   69 | namespace mean_shift::gpu::utils {
+      |           ^
+/output/HeCBench/meanshift/kernel.cpp:15:23: error: use of undeclared identifier 'N'
+   15 |             if (tid < N) {
+      |                       ^
+/output/HeCBench/meanshift/kernel.cpp:16:32: error: use of undeclared identifier 'D'
+   16 |             size_t row = tid * D;
+      |                                ^
+/output/HeCBench/meanshift/kernel.cpp:17:32: error: use of undeclared identifier 'D'
+   17 |             float new_position[D] = {0.f};
+      |                                ^
+/output/HeCBench/meanshift/kernel.cpp:19:36: error: use of undeclared identifier 'N'
+   19 |             for (size_t i = 0; i < N; ++i) {
+      |                                    ^
+/output/HeCBench/meanshift/kernel.cpp:20:32: error: use of undeclared identifier 'D'
+   20 |             size_t row_n = i * D;
+      |                                ^
+/output/HeCBench/meanshift/kernel.cpp:22:36: error: use of undeclared identifier 'D'
+   22 |             for (size_t j = 0; j < D; ++j) {
+      |                                    ^
+/output/HeCBench/meanshift/kernel.cpp:25:28: error: use of undeclared identifier 'RADIUS'; did you mean 'mean_shift::gpu::RADIUS'?
+   25 |             if (sq_dist <= RADIUS) {
+      |                            ^~~~~~
+      |                            mean_shift::gpu::RADIUS
+/output/HeCBench/meanshift/kernel.h:36:21: note: 'mean_shift::gpu::RADIUS' declared here
+   36 |     constexpr float RADIUS = 60;
+      |                     ^
+/output/HeCBench/meanshift/kernel.cpp:26:44: error: use of undeclared identifier 'DBL_SIGMA_SQ'; did you mean 'mean_shift::gpu::DBL_SIGMA_SQ'?
+   26 |             float weight = expf(-sq_dist / DBL_SIGMA_SQ);
+      |                                            ^~~~~~~~~~~~
+      |                                            mean_shift::gpu::DBL_SIGMA_SQ
+/output/HeCBench/meanshift/kernel.h:38:21: note: 'mean_shift::gpu::DBL_SIGMA_SQ' declared here
+   38 |     constexpr float DBL_SIGMA_SQ = (2 * SIGMA * SIGMA);
+      |                     ^
+/output/HeCBench/meanshift/kernel.cpp:27:36: error: use of undeclared identifier 'D'
+   27 |             for (size_t j = 0; j < D; ++j) {
+      |                                    ^
+/output/HeCBench/meanshift/kernel.cpp:33:36: error: use of undeclared identifier 'D'
+   33 |             for (size_t j = 0; j < D; ++j) {
+      |                                    ^
+/output/HeCBench/meanshift/kernel.cpp:56:30: error: use of undeclared identifier 'TILE_WIDTH'
+   56 |             float local_data[TILE_WIDTH * D];
+      |                              ^
+/output/HeCBench/meanshift/kernel.cpp:56:43: error: use of undeclared identifier 'D'
+   56 |             float local_data[TILE_WIDTH * D];
+      |                                           ^
+/output/HeCBench/meanshift/kernel.cpp:57:30: error: use of undeclared identifier 'TILE_WIDTH'; did you mean 'mean_shift::gpu::TILE_WIDTH'?
+   57 |             float valid_data[TILE_WIDTH];
+      |                              ^~~~~~~~~~
+      |                              mean_shift::gpu::TILE_WIDTH
+/output/HeCBench/meanshift/kernel.h:49:19: note: 'mean_shift::gpu::TILE_WIDTH' declared here
+   49 |     constexpr int TILE_WIDTH = THREADS;
+      |                   ^
+/output/HeCBench/meanshift/kernel.cpp:61:29: error: use of undeclared identifier 'D'
+   61 |             int row = tid * D;
+      |                             ^
+/output/HeCBench/meanshift/kernel.cpp:62:35: error: use of undeclared identifier 'D'
+   62 |             int local_row = lid * D;
+      |                                   ^
+/output/HeCBench/meanshift/kernel.cpp:63:32: error: use of undeclared identifier 'D'
+   63 |             float new_position[D] = {0.f};
+      |                                ^
+/output/HeCBench/meanshift/kernel.cpp:66:33: error: use of undeclared identifier 'BLOCKS'; did you mean 'mean_shift::gpu::BLOCKS'?
+   66 |             for (int t = 0; t < BLOCKS; ++t) {
+      |                                 ^~~~~~
+      |                                 mean_shift::gpu::BLOCKS
+/output/HeCBench/meanshift/kernel.h:48:19: note: 'mean_shift::gpu::BLOCKS' declared here
+   48 |     constexpr int BLOCKS = (N + THREADS - 1) / THREADS;
+      |                   ^
+/output/HeCBench/meanshift/kernel.cpp:67:35: error: use of undeclared identifier 'TILE_WIDTH'; did you mean 'mean_shift::gpu::TILE_WIDTH'?
+   67 |             int tid_in_tile = t * TILE_WIDTH + lid;
+      |                                   ^~~~~~~~~~
+      |                                   mean_shift::gpu::TILE_WIDTH
+/output/HeCBench/meanshift/kernel.h:49:19: note: 'mean_shift::gpu::TILE_WIDTH' declared here
+   49 |     constexpr int TILE_WIDTH = THREADS;
+      |                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

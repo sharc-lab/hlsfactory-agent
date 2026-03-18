@@ -1,0 +1,61 @@
+In file included from /output/HeCBench/graphB+/kernel.cpp:1:
+/output/HeCBench/graphB+/kernel.h:284:20: error: use of undeclared identifier '_tid_x'
+  284 |   const int from = _tid_x + _bid_x * ThreadsPerBlock;
+      |                    ^
+/output/HeCBench/graphB+/kernel.h:284:29: error: use of undeclared identifier '_bid_x'
+  284 |   const int from = _tid_x + _bid_x * ThreadsPerBlock;
+      |                             ^
+/output/HeCBench/graphB+/kernel.h:318:20: error: use of undeclared identifier '_tid_x'
+  318 |   const int from = _tid_x + _bid_x * ThreadsPerBlock;
+      |                    ^
+/output/HeCBench/graphB+/kernel.h:318:29: error: use of undeclared identifier '_bid_x'
+  318 |   const int from = _tid_x + _bid_x * ThreadsPerBlock;
+      |                             ^
+/output/HeCBench/graphB+/kernel.h:343:21: error: use of undeclared identifier '_tid_x'
+  343 |   const int from = (_tid_x + _bid_x * ThreadsPerBlock) / warpsize;
+      |                     ^
+/output/HeCBench/graphB+/kernel.h:343:30: error: use of undeclared identifier '_bid_x'
+  343 |   const int from = (_tid_x + _bid_x * ThreadsPerBlock) / warpsize;
+      |                              ^
+/output/HeCBench/graphB+/kernel.h:345:20: error: use of undeclared identifier '_tid_x'
+  345 |   const int lane = _tid_x % warpsize;
+      |                    ^
+/output/HeCBench/graphB+/kernel.h:352:20: error: use of undeclared identifier 'atomicAnd'
+  352 |     if (lane == 0) atomicAnd((int*)&parent[node], ~3);
+      |                    ^
+/output/HeCBench/graphB+/kernel.h:363:19: error: use of undeclared identifier 'atomicCAS'
+  363 |                  (atomicCAS((int*)&parent[neighbor], val, me) != val));
+      |                   ^
+/output/HeCBench/graphB+/kernel.h:369:5: error: use of undeclared identifier '__syncwarp'; did you mean '__sync_swap'?
+  369 |     __syncwarp();
+      |     ^~~~~~~~~~
+      |     __sync_swap
+/output/HeCBench/graphB+/kernel.h:369:16: error: too few arguments to function call, expected at least 1, have 0
+  369 |     __syncwarp();
+      |     ~~~~~~~~~~ ^
+/output/HeCBench/graphB+/kernel.h:403:20: error: use of undeclared identifier '_tid_x'
+  403 |   const int from = _tid_x + _bid_x * ThreadsPerBlock;
+      |                    ^
+/output/HeCBench/graphB+/kernel.h:403:29: error: use of undeclared identifier '_bid_x'
+  403 |   const int from = _tid_x + _bid_x * ThreadsPerBlock;
+      |                             ^
+/output/HeCBench/graphB+/kernel.h:408:5: error: use of undeclared identifier 'atomicAdd'
+  408 |     atomicAdd(&label[parent[node] >> 2], label[node]);
+      |     ^
+/output/HeCBench/graphB+/kernel.h:426:21: error: use of undeclared identifier '_tid_x'
+  426 |   const int from = (_tid_x + _bid_x * ThreadsPerBlock) / warpsize;
+      |                     ^
+/output/HeCBench/graphB+/kernel.h:426:30: error: use of undeclared identifier '_bid_x'
+  426 |   const int from = (_tid_x + _bid_x * ThreadsPerBlock) / warpsize;
+      |                              ^
+/output/HeCBench/graphB+/kernel.h:428:20: error: use of undeclared identifier '_tid_x'
+  428 |   const int lane = _tid_x % warpsize;
+      |                    ^
+/output/HeCBench/graphB+/kernel.h:440:30: error: use of undeclared identifier '__any_sync'
+  440 |     for (int j = beg + lane; __any_sync(mask, j < end); j += warpsize) {
+      |                              ^
+/output/HeCBench/graphB+/kernel.h:453:25: error: use of undeclared identifier '__shfl_up_sync'
+  453 |         const int tmp = __shfl_up_sync(mask, lblinc, d);
+      |                         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

@@ -1,0 +1,22 @@
+In file included from /output/HeCBench/degrid-hip/kernel.cpp:1:
+/output/HeCBench/degrid-hip/kernel.h:24:20: error: declaration of 'CmplxType' shadows template parameter
+   24 | template <typename CmplxType>
+      |                    ^
+/output/HeCBench/degrid-hip/kernel.h:22:20: note: template parameter is declared here
+   22 | template <typename CmplxType>
+      |                    ^
+In file included from /output/HeCBench/degrid-hip/kernel.cpp:1:
+In file included from /output/HeCBench/degrid-hip/kernel.h:30:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/iostream:41:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:40:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ios:40:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/iosfwd:41:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/bits/stringfwd.h:40:
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/bits/memoryfwd.h:50:1: error: expected unqualified-id
+   50 | namespace std _GLIBCXX_VISIBILITY(default)
+      | ^
+In file included from /output/HeCBench/degrid-hip/kernel.cpp:1:
+/output/HeCBench/degrid-hip/kernel.h:31:10: fatal error: 'hip/hip_runtime.h' file not found
+   31 | #include <hip/hip_runtime.h>
+      |          ^~~~~~~~~~~~~~~~~~~
+3 errors generated.

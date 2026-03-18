@@ -1,0 +1,24 @@
+PASS: kernel.cpp
+/output/HeCBench/romberg/reference.cpp:21:60: error: unknown type name 'size_t'
+   21 | double reference (double (*f)(double), double a, double b, size_t max_steps, double acc) {
+      |                                                            ^
+/output/HeCBench/romberg/reference.cpp:31:8: error: unknown type name 'size_t'
+   31 |   for (size_t i = 1; i < max_steps; ++i) {
+      |        ^
+/output/HeCBench/romberg/reference.cpp:34:5: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?
+   34 |     size_t ep = 1 << (i-1); //2^(n-1)
+      |     ^~~~~~
+      |     sizeof
+/output/HeCBench/romberg/reference.cpp:34:12: error: use of undeclared identifier 'ep'
+   34 |     size_t ep = 1 << (i-1); //2^(n-1)
+      |            ^
+/output/HeCBench/romberg/reference.cpp:35:10: error: unknown type name 'size_t'
+   35 |     for (size_t j = 1; j <= ep; ++j) {
+      |          ^
+/output/HeCBench/romberg/reference.cpp:35:29: error: use of undeclared identifier 'ep'
+   35 |     for (size_t j = 1; j <= ep; ++j) {
+      |                             ^
+/output/HeCBench/romberg/reference.cpp:40:10: error: unknown type name 'size_t'
+   40 |     for (size_t j = 1; j <= i; ++j) {
+      |          ^
+7 errors generated.

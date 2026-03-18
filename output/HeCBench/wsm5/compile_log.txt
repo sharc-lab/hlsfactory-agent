@@ -1,0 +1,60 @@
+In file included from /output/HeCBench/wsm5/kernel.cpp:1:
+/output/HeCBench/wsm5/kernel.h:169:13: error: use of undeclared identifier 'MKX'
+  169 |   float qs1[MKX] ; 
+      |             ^
+/output/HeCBench/wsm5/kernel.h:170:13: error: use of undeclared identifier 'MKX'
+  170 |   float qs2[MKX] ; 
+      |             ^
+/output/HeCBench/wsm5/kernel.h:171:13: error: use of undeclared identifier 'MKX'
+  171 |   float rh1[MKX] ; 
+      |             ^
+/output/HeCBench/wsm5/kernel.h:172:13: error: use of undeclared identifier 'MKX'
+  172 |   float rh2[MKX] ; 
+      |             ^
+/output/HeCBench/wsm5/kernel.h:174:8: error: use of undeclared identifier 'ig'
+  174 |   if ( ig < ide-ids+1 && jg < jde-jds+1 ) {
+      |        ^
+/output/HeCBench/wsm5/kernel.h:174:26: error: use of undeclared identifier 'jg'
+  174 |   if ( ig < ide-ids+1 && jg < jde-jds+1 ) {
+      |                          ^
+/output/HeCBench/wsm5/kernel.h:179:13: error: use of undeclared identifier 'MKX'
+  179 |     float t[MKX] ; 
+      |             ^
+/output/HeCBench/wsm5/kernel.h:180:15: error: use of undeclared identifier 'MKX'
+  180 |     float cpm[MKX] ; 
+      |               ^
+/output/HeCBench/wsm5/kernel.h:181:14: error: use of undeclared identifier 'MKX'
+  181 |     float xl[MKX] ; 
+      |              ^
+/output/HeCBench/wsm5/kernel.h:184:20: error: use of undeclared identifier 'ti'
+  184 |       t[k] = th[P3(ti,k,tj)] * pii[P3(ti,k,tj)] ;
+      |                    ^
+/output/HeCBench/wsm5/kernel.h:184:25: error: use of undeclared identifier 'tj'
+  184 |       t[k] = th[P3(ti,k,tj)] * pii[P3(ti,k,tj)] ;
+      |                         ^
+/output/HeCBench/wsm5/kernel.h:184:39: error: use of undeclared identifier 'ti'
+  184 |       t[k] = th[P3(ti,k,tj)] * pii[P3(ti,k,tj)] ;
+      |                                       ^
+/output/HeCBench/wsm5/kernel.h:184:44: error: use of undeclared identifier 'tj'
+  184 |       t[k] = th[P3(ti,k,tj)] * pii[P3(ti,k,tj)] ;
+      |                                            ^
+/output/HeCBench/wsm5/kernel.h:188:18: error: use of undeclared identifier 'ti'
+  188 |       if ( qc[P3(ti,k,tj)] < 0.f ) { qc[P3(ti,k,tj)] = 0.f ; } 
+      |                  ^
+/output/HeCBench/wsm5/kernel.h:188:23: error: use of undeclared identifier 'tj'
+  188 |       if ( qc[P3(ti,k,tj)] < 0.f ) { qc[P3(ti,k,tj)] = 0.f ; } 
+      |                       ^
+/output/HeCBench/wsm5/kernel.h:188:44: error: use of undeclared identifier 'ti'
+  188 |       if ( qc[P3(ti,k,tj)] < 0.f ) { qc[P3(ti,k,tj)] = 0.f ; } 
+      |                                            ^
+/output/HeCBench/wsm5/kernel.h:188:49: error: use of undeclared identifier 'tj'
+  188 |       if ( qc[P3(ti,k,tj)] < 0.f ) { qc[P3(ti,k,tj)] = 0.f ; } 
+      |                                                 ^
+/output/HeCBench/wsm5/kernel.h:189:18: error: use of undeclared identifier 'ti'
+  189 |       if ( qi[P3(ti,k,tj)] < 0.f ) { qi[P3(ti,k,tj)] = 0.f ; } 
+      |                  ^
+/output/HeCBench/wsm5/kernel.h:189:23: error: use of undeclared identifier 'tj'
+  189 |       if ( qi[P3(ti,k,tj)] < 0.f ) { qi[P3(ti,k,tj)] = 0.f ; } 
+      |                       ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

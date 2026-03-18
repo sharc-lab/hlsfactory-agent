@@ -1,0 +1,89 @@
+In file included from /output/HeCBench/atan2/kernel.cpp:1:
+/output/HeCBench/atan2/kernel.h:46:1: error: extraneous template parameter list in template specialization or out-of-line template definition
+   46 | template <int DEGREE>
+      | ^~~~~~~~~~~~~~~~~~~~~
+/output/HeCBench/atan2/kernel.h:56:1: error: extraneous 'template<>' in declaration of variable 'approx_atan2f_P'
+   56 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/atan2/kernel.h:57:17: error: redefinition of 'approx_atan2f_P' as different kind of symbol
+   57 | constexpr float approx_atan2f_P<7>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:50:17: note: previous definition is here
+   50 | constexpr float approx_atan2f_P<5>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:57:32: error: expected ';' after top level declarator
+   57 | constexpr float approx_atan2f_P<7>(float x) {
+      |                                ^
+      |                                ;
+/output/HeCBench/atan2/kernel.h:63:1: error: extraneous 'template<>' in declaration of variable 'approx_atan2f_P'
+   63 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/atan2/kernel.h:64:17: error: redefinition of 'approx_atan2f_P'
+   64 | constexpr float approx_atan2f_P<9>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:57:17: note: previous definition is here
+   57 | constexpr float approx_atan2f_P<7>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:64:32: error: expected ';' after top level declarator
+   64 | constexpr float approx_atan2f_P<9>(float x) {
+      |                                ^
+      |                                ;
+/output/HeCBench/atan2/kernel.h:72:1: error: extraneous 'template<>' in declaration of variable 'approx_atan2f_P'
+   72 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/atan2/kernel.h:73:17: error: redefinition of 'approx_atan2f_P'
+   73 | constexpr float approx_atan2f_P<11>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:64:17: note: previous definition is here
+   64 | constexpr float approx_atan2f_P<9>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:73:32: error: expected ';' after top level declarator
+   73 | constexpr float approx_atan2f_P<11>(float x) {
+      |                                ^
+      |                                ;
+/output/HeCBench/atan2/kernel.h:82:1: error: extraneous 'template<>' in declaration of variable 'approx_atan2f_P'
+   82 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/atan2/kernel.h:83:17: error: redefinition of 'approx_atan2f_P'
+   83 | constexpr float approx_atan2f_P<13>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:73:17: note: previous definition is here
+   73 | constexpr float approx_atan2f_P<11>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:83:32: error: expected ';' after top level declarator
+   83 | constexpr float approx_atan2f_P<13>(float x) {
+      |                                ^
+      |                                ;
+/output/HeCBench/atan2/kernel.h:93:1: error: extraneous 'template<>' in declaration of variable 'approx_atan2f_P'
+   93 | template <>
+      | ^~~~~~~~~~~
+/output/HeCBench/atan2/kernel.h:94:17: error: redefinition of 'approx_atan2f_P'
+   94 | constexpr float approx_atan2f_P<15>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:83:17: note: previous definition is here
+   83 | constexpr float approx_atan2f_P<13>(float x) {
+      |                 ^
+/output/HeCBench/atan2/kernel.h:94:32: error: expected ';' after top level declarator
+   94 | constexpr float approx_atan2f_P<15>(float x) {
+      |                                ^
+      |                                ;
+/output/HeCBench/atan2/kernel.h:106:15: error: declaration of 'DEGREE' shadows template parameter
+  106 | template <int DEGREE>
+      |               ^
+/output/HeCBench/atan2/kernel.h:104:15: note: template parameter is declared here
+  104 | template <int DEGREE>
+      |               ^
+/output/HeCBench/atan2/kernel.h:108:15: error: declaration of 'DEGREE' shadows template parameter
+  108 | template <int DEGREE>
+      |               ^
+/output/HeCBench/atan2/kernel.h:106:15: note: template parameter is declared here
+  106 | template <int DEGREE>
+      |               ^
+/output/HeCBench/atan2/kernel.h:117:15: error: declaration of 'DEGREE' shadows template parameter
+  117 | template <int DEGREE>
+      |               ^
+/output/HeCBench/atan2/kernel.h:108:15: note: template parameter is declared here
+  108 | template <int DEGREE>
+      |               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

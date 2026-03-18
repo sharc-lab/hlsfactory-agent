@@ -1,0 +1,8 @@
+/output/HeCBench/kernelLaunch/kernel.cpp:5:26: error: unknown type name 'SmallKernelArgs'; did you mean 'LargeKernelArgs'?
+    5 | void KernelWithSmallArgs(SmallKernelArgs args, char* out) {
+      |                          ^~~~~~~~~~~~~~~
+      |                          LargeKernelArgs
+/output/HeCBench/kernelLaunch/kernel.h:50:8: note: 'LargeKernelArgs' declared here
+   50 | struct LargeKernelArgs {
+      |        ^
+1 error generated.

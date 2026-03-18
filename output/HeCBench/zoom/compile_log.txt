@@ -1,0 +1,93 @@
+In file included from /output/HeCBench/zoom/kernel.cpp:1:
+/output/HeCBench/zoom/kernel.h:50:21: error: use of undeclared identifier '_bid_y'
+   50 |   int out_start_h = _bid_y * BLOCK_DIM_Y;
+      |                     ^
+/output/HeCBench/zoom/kernel.h:52:21: error: use of undeclared identifier '_bid_x'
+   52 |   int out_start_w = _bid_x * BLOCK_DIM_X;
+      |                     ^
+/output/HeCBench/zoom/kernel.h:55:29: error: use of undeclared identifier '_bid_z'
+   55 |   size_t img_start_offset = _bid_z * pitch;
+      |                             ^
+/output/HeCBench/zoom/kernel.h:69:16: error: use of undeclared identifier '_tid_y'
+   69 |   for (int i = _tid_y; i < smem_h_load_stretch; i+=BLOCK_DIM_Y) {
+      |                ^
+/output/HeCBench/zoom/kernel.h:70:18: error: use of undeclared identifier '_tid_x'
+   70 |     for (int j = _tid_x; j < smem_w_load_stretch; j+=BLOCK_DIM_X) {
+      |                  ^
+/output/HeCBench/zoom/kernel.h:84:35: error: use of undeclared identifier '_tid_y'
+   84 |   int out_pixel_h = out_start_h + _tid_y;
+      |                                   ^
+/output/HeCBench/zoom/kernel.h:85:35: error: use of undeclared identifier '_tid_x'
+   85 |   int out_pixel_w = out_start_w + _tid_x;
+      |                                   ^
+/output/HeCBench/zoom/kernel.h:127:21: error: use of undeclared identifier '_bid_y'
+  127 |   int out_start_h = _bid_y * BLOCK_DIM_Y;
+      |                     ^
+/output/HeCBench/zoom/kernel.h:129:21: error: use of undeclared identifier '_bid_x'
+  129 |   int out_start_w = _bid_x * BLOCK_DIM_X;
+      |                     ^
+/output/HeCBench/zoom/kernel.h:132:29: error: use of undeclared identifier '_bid_z'
+  132 |   size_t img_start_offset = _bid_z * pitch;
+      |                             ^
+/output/HeCBench/zoom/kernel.h:146:16: error: use of undeclared identifier '_tid_y'
+  146 |   for (int i = _tid_y; i < smem_h_load_stretch; i+=BLOCK_DIM_Y) {
+      |                ^
+/output/HeCBench/zoom/kernel.h:147:18: error: use of undeclared identifier '_tid_x'
+  147 |     for (int j = _tid_x; j < smem_w_load_stretch; j+=BLOCK_DIM_X) {
+      |                  ^
+/output/HeCBench/zoom/kernel.h:161:35: error: use of undeclared identifier '_tid_y'
+  161 |   int out_pixel_h = out_start_h + _tid_y;
+      |                                   ^
+/output/HeCBench/zoom/kernel.h:162:35: error: use of undeclared identifier '_tid_x'
+  162 |   int out_pixel_w = out_start_w + _tid_x;
+      |                                   ^
+/output/HeCBench/zoom/kernel.h:201:21: error: use of undeclared identifier '_bid_y'
+  201 |   int out_pixel_h = _bid_y * BLOCK_DIM_Y + _tid_y;
+      |                     ^
+/output/HeCBench/zoom/kernel.h:201:44: error: use of undeclared identifier '_tid_y'
+  201 |   int out_pixel_h = _bid_y * BLOCK_DIM_Y + _tid_y;
+      |                                            ^
+/output/HeCBench/zoom/kernel.h:202:21: error: use of undeclared identifier '_bid_x'
+  202 |   int out_pixel_w = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                     ^
+/output/HeCBench/zoom/kernel.h:202:44: error: use of undeclared identifier '_tid_x'
+  202 |   int out_pixel_w = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                            ^
+/output/HeCBench/zoom/kernel.h:204:29: error: use of undeclared identifier '_bid_z'
+  204 |   size_t img_start_offset = _bid_z * pitch;
+      |                             ^
+19 errors generated.
+/output/HeCBench/zoom/reference.cpp:6:5: error: unknown type name 'size_t'
+    6 |     size_t pitch,
+      |     ^
+/output/HeCBench/zoom/reference.cpp:29:28: error: use of undeclared identifier 'floorf'
+   29 |         int start_h = (int)floorf( oh      * ratio_h);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:30:28: error: use of undeclared identifier 'ceilf'
+   30 |         int end_h   = (int)ceilf ((oh + 1) * ratio_h);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:31:28: error: use of undeclared identifier 'floorf'
+   31 |         int start_w = (int)floorf( ow      * ratio_w);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:32:28: error: use of undeclared identifier 'ceilf'
+   32 |         int end_w   = (int)ceilf ((ow + 1) * ratio_w);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:64:5: error: unknown type name 'size_t'
+   64 |     size_t pitch,
+      |     ^
+/output/HeCBench/zoom/reference.cpp:81:28: error: use of undeclared identifier 'floorf'
+   81 |         int start_h = (int)floorf( oh      * ratio_h);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:82:28: error: use of undeclared identifier 'ceilf'
+   82 |         int end_h   = (int)ceilf ((oh + 1) * ratio_h);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:83:28: error: use of undeclared identifier 'floorf'
+   83 |         int start_w = (int)floorf( ow      * ratio_w);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:84:28: error: use of undeclared identifier 'ceilf'
+   84 |         int end_w   = (int)ceilf ((ow + 1) * ratio_w);
+      |                            ^
+/output/HeCBench/zoom/reference.cpp:115:5: error: unknown type name 'size_t'
+  115 |     size_t pitch,
+      |     ^
+11 errors generated.

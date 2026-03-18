@@ -1,0 +1,35 @@
+In file included from /output/HeCBench/marchingCubes/kernel.cpp:1:
+/output/HeCBench/marchingCubes/kernel.h:406:1: error: unknown type name 'uchar4'
+  406 | uchar4 edgeIDTable[12]
+      | ^
+/output/HeCBench/marchingCubes/kernel.cpp:134:45: error: use of undeclared identifier '__shfl_up_sync'
+  134 |                             unsigned int tp(__shfl_up_sync(0xffffffffu, testSum, c0));
+      |                                             ^
+/output/HeCBench/marchingCubes/kernel.cpp:144:45: error: use of undeclared identifier '__shfl_up_sync'
+  144 |                             unsigned int tp(__shfl_up_sync(0xffffffffu, warpSum, c0));
+      |                                             ^
+/output/HeCBench/marchingCubes/kernel.cpp:275:45: error: use of undeclared identifier '__shfl_up_sync'
+  275 |                             unsigned int tp(__shfl_up_sync(0xffffffffu, testSum, c0));
+      |                                             ^
+/output/HeCBench/marchingCubes/kernel.cpp:285:45: error: use of undeclared identifier '__shfl_up_sync'
+  285 |                             unsigned int tp(__shfl_up_sync(0xffffffffu, warpSum, c0));
+      |                                             ^
+/output/HeCBench/marchingCubes/kernel.cpp:328:9: error: unknown type name 'uchar4'
+  328 |   const uchar4 * edgeIDTable,
+      |         ^
+/output/HeCBench/marchingCubes/kernel.cpp:423:46: error: use of undeclared identifier '__shfl_up_sync'
+  423 |                             unsigned int tp0(__shfl_up_sync(0xffffffffu, sumVertices, c0));
+      |                                              ^
+/output/HeCBench/marchingCubes/kernel.cpp:424:46: error: use of undeclared identifier '__shfl_up_sync'
+  424 |                             unsigned int tp1(__shfl_up_sync(0xffffffffu, sumTriangles, c0));
+      |                                              ^
+/output/HeCBench/marchingCubes/kernel.cpp:443:46: error: use of undeclared identifier '__shfl_up_sync'
+  443 |                             unsigned int tp0(__shfl_up_sync(0xffffffffu, warpSumVertices, c0));
+      |                                              ^
+/output/HeCBench/marchingCubes/kernel.cpp:444:46: error: use of undeclared identifier '__shfl_up_sync'
+  444 |                             unsigned int tp1(__shfl_up_sync(0xffffffffu, warpSumTriangles, c0));
+      |                                              ^
+/output/HeCBench/marchingCubes/kernel.cpp:476:29: error: unknown type name 'uchar4'
+  476 |                             uchar4 edgePos(edgeIDTable[edgeID]);
+      |                             ^
+11 errors generated.

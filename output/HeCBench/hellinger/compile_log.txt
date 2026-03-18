@@ -1,0 +1,8 @@
+/output/HeCBench/hellinger/kernel.cpp:35:39: error: use of undeclared identifier 'signbit'; did you mean 'std::signbit'?
+   35 |                     const FP gate = (!signbit(value));
+      |                                       ^~~~~~~
+      |                                       std::signbit
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/cmath:1225:3: note: 'std::signbit' declared here
+ 1225 |   signbit(float __x)
+      |   ^
+1 error generated.

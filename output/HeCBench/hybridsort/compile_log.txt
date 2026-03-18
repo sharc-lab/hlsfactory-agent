@@ -1,0 +1,67 @@
+In file included from /output/HeCBench/hybridsort/kernel.cpp:1:
+/output/HeCBench/hybridsort/kernel.h:81:1: error: unknown type name 'float4'; did you mean 'float'?
+   81 | float4* runMergeSort(int listsize, int divisions,
+      | ^~~~~~
+      | float
+/output/HeCBench/hybridsort/kernel.h:82:5: error: unknown type name 'float4'; did you mean 'float'?
+   82 |     float4 *d_origList, float4 *d_resultList,
+      |     ^~~~~~
+      |     float
+/output/HeCBench/hybridsort/kernel.h:82:25: error: unknown type name 'float4'; did you mean 'float'?
+   82 |     float4 *d_origList, float4 *d_resultList,
+      |                         ^~~~~~
+      |                         float
+/output/HeCBench/hybridsort/kernel.h:162:19: error: use of undeclared identifier '_bid_x'
+  162 |   const int gid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                   ^
+/output/HeCBench/hybridsort/kernel.h:162:42: error: use of undeclared identifier '_tid_x'
+  162 |   const int gid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                          ^
+/output/HeCBench/hybridsort/kernel.h:163:19: error: use of undeclared identifier '_tid_x'
+  163 |   const int lid = _tid_x;
+      |                   ^
+/output/HeCBench/hybridsort/kernel.h:190:20: error: use of undeclared identifier '_bid_x'
+  190 |   int prefixBase = _bid_x * BUCKET_BLOCK_MEMORY;
+      |                    ^
+/output/HeCBench/hybridsort/kernel.h:207:19: error: use of undeclared identifier '_bid_x'
+  207 |   const int tid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                   ^
+/output/HeCBench/hybridsort/kernel.h:207:42: error: use of undeclared identifier '_tid_x'
+  207 |   const int tid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                          ^
+/output/HeCBench/hybridsort/kernel.h:230:22: error: use of undeclared identifier '_bid_x'
+  230 |   const int grp_id = _bid_x;
+      |                      ^
+/output/HeCBench/hybridsort/kernel.h:231:19: error: use of undeclared identifier '_bid_x'
+  231 |   const int gid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                   ^
+/output/HeCBench/hybridsort/kernel.h:231:42: error: use of undeclared identifier '_tid_x'
+  231 |   const int gid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                          ^
+/output/HeCBench/hybridsort/kernel.h:232:19: error: use of undeclared identifier '_tid_x'
+  232 |   const int lid = _tid_x;
+      |                   ^
+/output/HeCBench/hybridsort/kernel.h:268:19: error: use of undeclared identifier '_bid_x'
+  268 |   const int gid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                   ^
+/output/HeCBench/hybridsort/kernel.h:268:42: error: use of undeclared identifier '_tid_x'
+  268 |   const int gid = _bid_x * BLOCK_DIM_X + _tid_x;
+      |                                          ^
+/output/HeCBench/hybridsort/kernel.h:269:19: error: use of undeclared identifier '_tid_x'
+  269 |   const int lid = _tid_x;
+      |                   ^
+/output/HeCBench/hybridsort/kernel.h:275:24: error: use of undeclared identifier '__mul24'
+  275 |   const int warpBase = IMUL(mulBase, HISTOGRAM_BIN_COUNT);
+      |                        ^
+/output/HeCBench/hybridsort/kernel.h:141:20: note: expanded from macro 'IMUL'
+  141 | #define IMUL(a, b) __mul24(a, b)
+      |                    ^
+/output/HeCBench/hybridsort/kernel.h:286:5: error: use of undeclared identifier 'atomicAdd'
+  286 |     atomicAdd(&s_Hist[warpBase+(data4 & 0x3FFU)], 1U);
+      |     ^
+/output/HeCBench/hybridsort/kernel.h:304:22: error: unknown type name 'float4'; did you mean 'float'?
+  304 | mergeSortPass (const float4* input, 
+      |                      ^~~~~~
+      |                      float
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

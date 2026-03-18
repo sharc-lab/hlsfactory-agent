@@ -1,0 +1,64 @@
+In file included from /output/HeCBench/wlcpow/kernel.cpp:1:
+/output/HeCBench/wlcpow/kernel.h:24:14: error: unknown type name 'r64'
+   24 |              r64*  force_x,
+      |              ^
+/output/HeCBench/wlcpow/kernel.h:25:14: error: unknown type name 'r64'
+   25 |              r64*  force_y,
+      |              ^
+/output/HeCBench/wlcpow/kernel.h:26:14: error: unknown type name 'r64'
+   26 |              r64*  force_z,
+      |              ^
+/output/HeCBench/wlcpow/kernel.h:27:11: error: unknown type name 'float4'; did you mean 'float'?
+   27 |     const float4*  coord_merged,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/wlcpow/kernel.h:28:11: error: unknown type name 'float4'; did you mean 'float'?
+   28 |     const float4*  veloc,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/wlcpow/kernel.h:30:11: error: unknown type name 'int2'; did you mean 'int'?
+   30 |     const int2*  bonds,
+      |           ^~~~
+      |           int
+/output/HeCBench/wlcpow/kernel.h:31:11: error: unknown type name 'r64'
+   31 |     const r64*  bond_r0,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:32:11: error: unknown type name 'r32'
+   32 |     const r32*  temp_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:33:11: error: unknown type name 'r32'
+   33 |     const r32*  r0_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:34:11: error: unknown type name 'r32'
+   34 |     const r32*  mu_targ_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:35:11: error: unknown type name 'r32'
+   35 |     const r32*  qp_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:36:11: error: unknown type name 'r32'
+   36 |     const r32*  gamc_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:37:11: error: unknown type name 'r32'
+   37 |     const r32*  gamt_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:38:11: error: unknown type name 'r32'
+   38 |     const r32*  sigc_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:39:11: error: unknown type name 'r32'
+   39 |     const r32*  sigt_global,
+      |           ^
+/output/HeCBench/wlcpow/kernel.h:40:11: error: unknown type name 'float3'; did you mean 'float'?
+   40 |     const float3 period,
+      |           ^~~~~~
+      |           float
+/output/HeCBench/wlcpow/kernel.h:45:3: error: unknown type name 'r32'
+   45 |   r32 shared_data[4096];
+      |   ^
+/output/HeCBench/wlcpow/kernel.h:46:3: error: unknown type name 'r32'
+   46 |   r32* temp    = &shared_data[0];
+      |   ^
+/output/HeCBench/wlcpow/kernel.h:47:3: error: unknown type name 'r32'
+   47 |   r32* r0      = &shared_data[1*(n_type+1)];
+      |   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
