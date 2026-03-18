@@ -1,0 +1,62 @@
+Compilation Log for decimation
+/output/S2CBench/decimation/filt_decim.cpp:124:34: error: use of overloaded operator '+' is ambiguous (with operand types 'sc_fixed<19, 2, 1, 1>' (aka 'ap_fixed<19, 2, 1, 1>') and 'sc_fixed<19, 2, 0, 1>' (aka 'ap_fixed<19, 2, 0, 1>'))
+  124 |    SoP1 = SoP1 + (bufferline_1[x]+buffer_1 )*incoef1_var[x];
+      |                   ~~~~~~~~~~~~~~~^~~~~~~~~
+/workspace/stubs/ap_fixed.h:46:14: note: candidate function
+   46 |     ap_fixed operator+(const ap_fixed& other) const { return ap_fixed(val + other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:65:14: note: candidate function
+   65 |     ap_fixed operator+(double other) const { return ap_fixed(val + other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:71:14: note: candidate function
+   71 |     ap_fixed operator+(int other) const { return ap_fixed(val + other); }
+      |              ^
+/output/S2CBench/decimation/filt_decim.cpp:161:48: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_fixed<19, 2, 1, 1>' and 'sc_fixed<17, 2, 1, 1>' (aka 'ap_fixed<17, 2, 1, 1>'))
+  161 |       SoP2 = SoP2 + (bufferline_2[x]+buffer_2 )*incoef2_var[x];
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+/output/S2CBench/decimation/filt_decim.cpp:197:47: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_fixed<19, 2, 1, 1>' and 'sc_fixed<17, 2, 1, 1>' (aka 'ap_fixed<17, 2, 1, 1>'))
+  197 |       SoP3 = SoP3 + (bufferline_3[x]+buffer_3)*incoef3_var[x];
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+/output/S2CBench/decimation/filt_decim.cpp:234:44: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_fixed<19, 2, 1, 1>' and 'sc_fixed<17, 2, 1, 1>' (aka 'ap_fixed<17, 2, 1, 1>'))
+  234 |    SoP4 = SoP4 + (bufferline_4[x]+buffer_4)*incoef4_var[x];
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+/output/S2CBench/decimation/filt_decim.cpp:266:76: error: use of overloaded operator '*' is ambiguous (with operand types 'ap_fixed<19, 2, 1, 1>' and 'sc_fixed<17, 2, 1, 1>' (aka 'ap_fixed<17, 2, 1, 1>'))
+  266 |     SoP5 = SoP5 + (bufferline_5[x]+bufferline_5[ BUFFER_SIZE_STAGE5-1 - x])*incoef5_var[x];
+      |                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+5 errors generated.

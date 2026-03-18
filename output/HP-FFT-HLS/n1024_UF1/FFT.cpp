@@ -118,8 +118,8 @@ void reverse_input_stream_UF1 (
         for (int u = 0; u < UF*2; u++) {
             reversed[u] = bit_reverse<EXP2_FFT>(original[u]);
         }
-        data_rev_stream[0][reversed[0]%TIME_STEP] = temp[0];
-        data_rev_stream[1][reversed[1]%TIME_STEP] = temp[1];
+        data_rev_stream[0][(int)reversed[0]% (int)TIME_STEP] = temp[0];
+        data_rev_stream[1][(int)reversed[1]% (int)TIME_STEP] = temp[1];
     }
 
     // // print data_rev_stream
@@ -136,7 +136,7 @@ void reverse_input_stream_UF1 (
         int offset[UF*2];
         #pragma HLS array_partition variable=offset type=complete dim=1
         for (int u = 0; u < UF*2; u++) {
-            offset[u] = (i+u)%TIME_STEP;
+            offset[u] = (i+u)% (int)TIME_STEP;
         }
         int cyclic_offset[UF*2];
         #pragma HLS array_partition variable=cyclic_offset type=complete dim=1
@@ -154,13 +154,13 @@ void reverse_input_stream_UF1 (
             cyclic_data[1] = block_data[1];
 
             cyclic_offset[0] = i/PAR ;
-            cyclic_offset[1] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[1] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
 
         }else if (i%PAR ==1 ){
             cyclic_data[0] = block_data[1];
             cyclic_data[1] = block_data[0];
 
-            cyclic_offset[0] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[0] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
             cyclic_offset[1] = i/PAR; 
 
         }
@@ -173,8 +173,8 @@ void reverse_input_stream_UF1 (
     // for(int j = 0; j < TIME_STEP; j++){
     //     for (int i = 0; i < UF*2; i++){
     //         int index = j*UF*2+i;
-    //         if(data_in_cyclic[i][j] != data_rev_stream[index/TIME_STEP][index%TIME_STEP]) cout << "!!! " << i << " " << j << " " << endl;
-    //         // cout << "index " << index << ": rev "<< data_rev_stream[index/TIME_STEP][index%TIME_STEP] << " cyclic " << data_in_cyclic[i][j] << endl;
+    //         if(data_in_cyclic[i][j] != data_rev_stream[index/TIME_STEP][index% (int)TIME_STEP]) cout << "!!! " << i << " " << j << " " << endl;
+    //         // cout << "index " << index << ": rev "<< data_rev_stream[index/TIME_STEP][index% (int)TIME_STEP] << " cyclic " << data_in_cyclic[i][j] << endl;
     //     }
     // }
 
@@ -182,7 +182,7 @@ void reverse_input_stream_UF1 (
     //     for (int u = 0; u < UF*2; u++) {
     //         // data_rev_stream[u][i] = data_in_cyclic[u][i];
     //         int index = i * UF*2 + u;
-    //         data_in_cyclic[u][i] = data_rev_stream[index/TIME_STEP][index%TIME_STEP];
+    //         data_in_cyclic[u][i] = data_rev_stream[index/TIME_STEP][index% (int)TIME_STEP];
     //     }
     // }
 

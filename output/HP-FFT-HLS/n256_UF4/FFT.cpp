@@ -105,14 +105,14 @@ void reverse_input_stream_UF4 (
         for (int u = 0; u < UF*2; u++) {
             reversed[u] = bit_reverse<EXP2_FFT>(original[u]);
         }
-        data_rev_stream[0][reversed[0]%TIME_STEP] = temp[0];
-        data_rev_stream[4][reversed[1]%TIME_STEP] = temp[1];
-        data_rev_stream[2][reversed[2]%TIME_STEP] = temp[2];
-        data_rev_stream[6][reversed[3]%TIME_STEP] = temp[3];
-        data_rev_stream[1][reversed[4]%TIME_STEP] = temp[4];
-        data_rev_stream[5][reversed[5]%TIME_STEP] = temp[5];
-        data_rev_stream[3][reversed[6]%TIME_STEP] = temp[6];
-        data_rev_stream[7][reversed[7]%TIME_STEP] = temp[7];
+        data_rev_stream[0][(int)reversed[0]% (int)TIME_STEP] = temp[0];
+        data_rev_stream[4][(int)reversed[1]% (int)TIME_STEP] = temp[1];
+        data_rev_stream[2][(int)reversed[2]% (int)TIME_STEP] = temp[2];
+        data_rev_stream[6][(int)reversed[3]% (int)TIME_STEP] = temp[3];
+        data_rev_stream[1][reversed[4]% (int)TIME_STEP] = temp[4];
+        data_rev_stream[5][reversed[5]% (int)TIME_STEP] = temp[5];
+        data_rev_stream[3][reversed[6]% (int)TIME_STEP] = temp[6];
+        data_rev_stream[7][reversed[7]% (int)TIME_STEP] = temp[7];
     }
 
     FROM_BLOCK_TO_CYCLIC: for (int i = 0; i < TIME_STEP; i= i + 1){ 
@@ -121,7 +121,7 @@ void reverse_input_stream_UF4 (
         int offset[UF*2];
         #pragma HLS array_partition variable=offset type=complete dim=1
         for (int u = 0; u < UF*2; u++) {
-            offset[u] = (i+u)%TIME_STEP;
+            offset[u] = (i+u)% (int)TIME_STEP;
         }
         int cyclic_offset[UF*2];
         #pragma HLS array_partition variable=cyclic_offset type=complete dim=1
@@ -144,13 +144,13 @@ void reverse_input_stream_UF4 (
             cyclic_data[7] = block_data[7];
             
             cyclic_offset[0] = i/PAR ;
-            cyclic_offset[1] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
-            cyclic_offset[2] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR;
-            cyclic_offset[3] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
-            cyclic_offset[4] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
-            cyclic_offset[5] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
-            cyclic_offset[6] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR;
-            cyclic_offset[7] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR;
+            cyclic_offset[1] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[2] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR;
+            cyclic_offset[3] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[4] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[5] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[6] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR;
+            cyclic_offset[7] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR;
 
         }else if (i%8 ==1 ){
             cyclic_data[0] = block_data[7];
@@ -162,14 +162,14 @@ void reverse_input_stream_UF4 (
             cyclic_data[6] = block_data[5];
             cyclic_data[7] = block_data[6];
 
-            cyclic_offset[0] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR;
+            cyclic_offset[0] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR;
             cyclic_offset[1] = i/PAR; 
-            cyclic_offset[2] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
-            cyclic_offset[3] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR; 
-            cyclic_offset[4] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
-            cyclic_offset[5] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
-            cyclic_offset[6] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
-            cyclic_offset[7] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR;
+            cyclic_offset[2] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[3] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR; 
+            cyclic_offset[4] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[5] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[6] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[7] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR;
 
         }else if (i%8 ==2 ){
             cyclic_data[0] = block_data[6];
@@ -181,14 +181,14 @@ void reverse_input_stream_UF4 (
             cyclic_data[6] = block_data[4];
             cyclic_data[7] = block_data[5];
 
-            cyclic_offset[0] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR; 
-            cyclic_offset[1] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR;
+            cyclic_offset[0] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR; 
+            cyclic_offset[1] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR;
             cyclic_offset[2] = i/PAR;  
-            cyclic_offset[3] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
-            cyclic_offset[4] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR;
-            cyclic_offset[5] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
-            cyclic_offset[6] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
-            cyclic_offset[7] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[3] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[4] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR;
+            cyclic_offset[5] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[6] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[7] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
             
         }else if (i%8 ==3 ){
             cyclic_data[0] = block_data[5];
@@ -200,14 +200,14 @@ void reverse_input_stream_UF4 (
             cyclic_data[6] = block_data[3];
             cyclic_data[7] = block_data[4];
 
-            cyclic_offset[0] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
-            cyclic_offset[1] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR;
-            cyclic_offset[2] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR; 
+            cyclic_offset[0] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[1] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR;
+            cyclic_offset[2] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR; 
             cyclic_offset[3] = i/PAR; 
-            cyclic_offset[4] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
-            cyclic_offset[5] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR;
-            cyclic_offset[6] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
-            cyclic_offset[7] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[4] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[5] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR;
+            cyclic_offset[6] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[7] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
         }else if  (i%8 ==4 ){
             cyclic_data[0] = block_data[4];
             cyclic_data[1] = block_data[5];
@@ -218,14 +218,14 @@ void reverse_input_stream_UF4 (
             cyclic_data[6] = block_data[2];
             cyclic_data[7] = block_data[3];
 
-            cyclic_offset[0] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
-            cyclic_offset[1] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
-            cyclic_offset[2] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR;
-            cyclic_offset[3] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR;
+            cyclic_offset[0] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[1] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[2] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR;
+            cyclic_offset[3] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR;
             cyclic_offset[4] = i/PAR;
-            cyclic_offset[5] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
-            cyclic_offset[6] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR;
-            cyclic_offset[7] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[5] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[6] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR;
+            cyclic_offset[7] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
         }else if  (i%8 ==5 ){
             cyclic_data[0] = block_data[3];
             cyclic_data[1] = block_data[4];
@@ -236,14 +236,14 @@ void reverse_input_stream_UF4 (
             cyclic_data[6] = block_data[1];
             cyclic_data[7] = block_data[2];
 
-            cyclic_offset[0] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
-            cyclic_offset[1] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
-            cyclic_offset[2] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
-            cyclic_offset[3] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR;
-            cyclic_offset[4] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR;
+            cyclic_offset[0] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[1] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[2] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[3] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR;
+            cyclic_offset[4] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR;
             cyclic_offset[5] = i/PAR;
-            cyclic_offset[6] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
-            cyclic_offset[7] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR;
+            cyclic_offset[6] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[7] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR;
         }else if  (i%8 ==6 ){
             cyclic_data[0] = block_data[2];
             cyclic_data[1] = block_data[3];
@@ -254,14 +254,14 @@ void reverse_input_stream_UF4 (
             cyclic_data[6] = block_data[0];
             cyclic_data[7] = block_data[1];
 
-            cyclic_offset[0] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR;
-            cyclic_offset[1] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
-            cyclic_offset[2] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
-            cyclic_offset[3] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
-            cyclic_offset[4] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR;
-            cyclic_offset[5] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR;
+            cyclic_offset[0] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR;
+            cyclic_offset[1] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[2] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[3] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[4] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR;
+            cyclic_offset[5] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR;
             cyclic_offset[6] = i/PAR;
-            cyclic_offset[7] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[7] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
         }else if  (i%8 ==7 ){
             cyclic_data[0] = block_data[1];
             cyclic_data[1] = block_data[2];
@@ -272,13 +272,13 @@ void reverse_input_stream_UF4 (
             cyclic_data[6] = block_data[7];
             cyclic_data[7] = block_data[0];
 
-            cyclic_offset[0] = ((i+1)%TIME_STEP+TIME_STEP)/PAR;
-            cyclic_offset[1] = ((i+2)%TIME_STEP+TIME_STEP*2)/PAR;
-            cyclic_offset[2] = ((i+3)%TIME_STEP+TIME_STEP*3)/PAR;
-            cyclic_offset[3] = ((i+4)%TIME_STEP+TIME_STEP*4)/PAR;
-            cyclic_offset[4] = ((i+5)%TIME_STEP+TIME_STEP*5)/PAR;
-            cyclic_offset[5] = ((i+6)%TIME_STEP+TIME_STEP*6)/PAR;
-            cyclic_offset[6] = ((i+7)%TIME_STEP+TIME_STEP*7)/PAR;
+            cyclic_offset[0] = ((i+1)% (int)TIME_STEP+TIME_STEP)/PAR;
+            cyclic_offset[1] = ((i+2)% (int)TIME_STEP+TIME_STEP*2)/PAR;
+            cyclic_offset[2] = ((i+3)% (int)TIME_STEP+TIME_STEP*3)/PAR;
+            cyclic_offset[3] = ((i+4)% (int)TIME_STEP+TIME_STEP*4)/PAR;
+            cyclic_offset[4] = ((i+5)% (int)TIME_STEP+TIME_STEP*5)/PAR;
+            cyclic_offset[5] = ((i+6)% (int)TIME_STEP+TIME_STEP*6)/PAR;
+            cyclic_offset[6] = ((i+7)% (int)TIME_STEP+TIME_STEP*7)/PAR;
             cyclic_offset[7] = i/PAR;
         }
 

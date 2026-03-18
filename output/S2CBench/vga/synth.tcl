@@ -1,15 +1,7 @@
-open_project /output/S2CBench/vga/project
-set_top vga
-add_files -tb /output/S2CBench/vga/tb/*.cpp
-add_files /output/S2CBench/vga/src/define.h
-add_files /output/S2CBench/vga/src/image.cpp
-add_files /output/S2CBench/vga/src/image.h
-add_files /output/S2CBench/vga/src/main.cpp
-add_files /output/S2CBench/vga/src/top_vga.cpp
-add_files /output/S2CBench/vga/src/top_vga.h
-add_files /output/S2CBench/vga/src/vga.cpp
-add_files /output/S2CBench/vga/src/vga.h
-open_solution "solution1" -flow_target vitis
+open_project project
+set_top void image::image_main(void){
+add_files vga.cpp top_vga.cpp tb_vga.cpp main.cpp tb_top.cpp image.cpp 
+open_solution solution1 -flow_target vivado
 set_part xcu250-figd2104-2L-e
 csynth_design
 exit

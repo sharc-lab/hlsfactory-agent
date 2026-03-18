@@ -1,0 +1,21 @@
+{
+  "run_id": "3c8c3c9d-5d0d-416b-a9fd-72e111eb8d0d",
+  "timestamp": "2026-03-18T20:58:56.563173+00:00",
+  "repo_url": "https://github.com/UCLA-VAST/HP-FFT-HLS.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.038878982,
+  "total_api_calls": 59,
+  "format_errors": 0,
+  "traj_file": "HP-FFT-HLS_3c8c3c9d-5d0d-416b-a9fd-72e111eb8d0d.traj.json",
+  "quality": {
+    "designs_found": 16,
+    "compile_pass": 8,
+    "compile_fail": 8,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 16,
+    "designs_with_tcl": 16
+  }
+}

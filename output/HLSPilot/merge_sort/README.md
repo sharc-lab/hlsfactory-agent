@@ -1,1 +1,1 @@
-# merge_sort Design\n\nExtracted from HLSPilot repository.
+# merge_sort" Design

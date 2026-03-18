@@ -1,0 +1,44 @@
+Compilation Log for aes_cipher
+/output/S2CBench/aes_cipher/aes.cpp:175:37: error: conversion from 'ap_uint<8>' to 'U8' (aka 'unsigned char') is ambiguous
+  175 |             idata_buf[i] = idata[i].read();
+      |                            ~~~~~~~~~^~~~~~
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/aes_cipher/aes.cpp:176:34: error: conversion from 'ap_uint<8>' to 'U8' (aka 'unsigned char') is ambiguous
+  176 |             key_buf[i] = ikey[i].read();
+      |                          ~~~~~~~~^~~~~~
+/workspace/stubs/ap_int.h:220:5: note: candidate function
+  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:221:5: note: candidate function
+  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:222:5: note: candidate function
+  222 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:223:5: note: candidate function
+  223 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate function
+  224 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:225:5: note: candidate function
+  225 |     operator bool() const { return val != 0; }
+      |     ^
+2 errors generated.

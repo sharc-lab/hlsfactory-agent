@@ -1,15 +1,4 @@
-/output/HLSPilot/optical_flow/src/host/check_result.cpp:96:10: error: no member named 'cout' in namespace 'std'
-   96 |     std::cout << "Failed to create output file!" << std::endl;
-      |     ~~~~~^
-1 error generated.
-/output/HLSPilot/optical_flow/src/host/optical_flow_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
-   17 | #include "../../../utils/xcl.h"
-      |          ^~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
-/output/HLSPilot/optical_flow/src/host/optical_flow_sw_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
-   17 | #include "../../../utils/xcl.h"
-      |          ^~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
+Compilation Log:
 /output/HLSPilot/optical_flow/src/ocl/optical_flow.cpp:9:10: fatal error: 'host/typedefs.h' file not found
     9 | #include "host/typedefs.h"
       |          ^~~~~~~~~~~~~~~~~
@@ -22,3 +11,15 @@ In file included from /output/HLSPilot/optical_flow/src/sdsoc/optical_flow.cpp:9
    11 | #include <hls_video.h>
       |          ^~~~~~~~~~~~~
 2 errors generated.
+/output/HLSPilot/optical_flow/src/host/check_result.cpp:96:10: error: no member named 'cout' in namespace 'std'
+   96 |     std::cout << "Failed to create output file!" << std::endl;
+      |     ~~~~~^
+1 error generated.
+/output/HLSPilot/optical_flow/src/host/optical_flow_sw_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
+   17 | #include "../../../utils/xcl.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+/output/HLSPilot/optical_flow/src/host/optical_flow_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
+   17 | #include "../../../utils/xcl.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

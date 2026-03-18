@@ -1,11 +1,7 @@
-open_project /output/S2CBench/snow3G/project
-set_top snow_3G
-add_files -tb /output/S2CBench/snow3G/tb/*.cpp
-add_files /output/S2CBench/snow3G/src/define.h
-add_files /output/S2CBench/snow3G/src/main.cpp
-add_files /output/S2CBench/snow3G/src/snow_3G.cpp
-add_files /output/S2CBench/snow3G/src/snow_3G.h
-open_solution "solution1" -flow_target vitis
+open_project project
+set_top int sc_main(int argc, char** argv)
+add_files tb_snow_3G.cpp snow_3G.cpp main.cpp 
+open_solution solution1 -flow_target vivado
 set_part xcu250-figd2104-2L-e
 csynth_design
 exit

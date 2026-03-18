@@ -1,0 +1,50 @@
+Compilation Log for interpolation
+/output/S2CBench/interpolation/filter_interp.cpp:79:28: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_fixed<16, 2, 0, 0>' (aka 'ap_fixed<16, 2, 0, 0>') and 'const sc_fixed<17, 2, 0, 0>' (aka 'const ap_fixed<17, 2, 0, 0>'))
+   79 |                         SoP1 = SoP1 + buffer[n] * coeff1[n];
+      |                                       ~~~~~~~~~ ^ ~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+/output/S2CBench/interpolation/filter_interp.cpp:84:27: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_fixed<16, 2, 0, 0>' (aka 'ap_fixed<16, 2, 0, 0>') and 'const sc_fixed<17, 2, 0, 0>' (aka 'const ap_fixed<17, 2, 0, 0>'))
+   84 |                         SoP2 =SoP2 + buffer[n] * coeff2[n];
+      |                                      ~~~~~~~~~ ^ ~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+/output/S2CBench/interpolation/filter_interp.cpp:89:28: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_fixed<16, 2, 0, 0>' (aka 'ap_fixed<16, 2, 0, 0>') and 'const sc_fixed<17, 2, 0, 0>' (aka 'const ap_fixed<17, 2, 0, 0>'))
+   89 |                         SoP3 = SoP3 + buffer[n] * coeff3[n];
+      |                                       ~~~~~~~~~ ^ ~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+/output/S2CBench/interpolation/filter_interp.cpp:94:28: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_fixed<16, 2, 0, 0>' (aka 'ap_fixed<16, 2, 0, 0>') and 'const sc_fixed<17, 2, 0, 0>' (aka 'const ap_fixed<17, 2, 0, 0>'))
+   94 |                         SoP4 = SoP4 + buffer[n] * coeff4[n];
+      |                                       ~~~~~~~~~ ^ ~~~~~~~~~
+/workspace/stubs/ap_fixed.h:48:14: note: candidate function
+   48 |     ap_fixed operator*(const ap_fixed& other) const { return ap_fixed(val * other.val); }
+      |              ^
+/workspace/stubs/ap_fixed.h:67:14: note: candidate function
+   67 |     ap_fixed operator*(double other) const { return ap_fixed(val * other); }
+      |              ^
+/workspace/stubs/ap_fixed.h:73:14: note: candidate function
+   73 |     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
+      |              ^
+4 errors generated.

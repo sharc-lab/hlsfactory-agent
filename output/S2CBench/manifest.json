@@ -4,173 +4,153 @@
   "framework": "unknown",
   "total_designs": 21,
   "designs": [
-    {
-      "name": "md5c",
-      "top_function": "md5c",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/md5c.cpp\",\"src/md5c.h\",\"src/main.cpp\"]
-    },
-    {
-      "name": "qsort",
-      "top_function": "qsort",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/qsort.h\",\"src/qsort.cpp\",\"src/main.cpp\"]
-    },
-    {
-      "name": "vga",
-      "top_function": "vga",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/vga.cpp\",\"src/top_vga.cpp\",\"src/main.cpp\",\"src/image.cpp\",\"src/vga.h\",\"src/top_vga.h\",\"src/image.h\"]
-    },
-    {
-      "name": "disparity",
-      "top_function": "disparity",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/disparity.cpp\",\"src/main.cpp\",\"src/disparity.h\"]
-    },
-    {
-      "name": "aes",
-      "top_function": "",
-      "compile_status": "pass",
-      "has_testbench": false,
-      "has_tcl": true,
-      "source_files": []
-    },
-    {
-      "name": "kasumi",
-      "top_function": "kasumi",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/kasumi.cpp\",\"src/main.cpp\",\"src/kasumi.h\"]
-    },
-    {
-      "name": "jpeg_decoder",
-      "top_function": "decoder",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/config_tb.h\",\"src/common.h\",\"src/decoder.cpp\",\"src/decoder.h\",\"src/bmp.h\",\"src/main.cpp\",\"src/jpeg_decoder.h\",\"src/jpeg_decoder.cpp\"]
-    },
-    {
-      "name": "aes_cipher",
-      "top_function": "aes",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/aes.cpp\",\"src/aes.h\",\"src/main.cpp\"]
-    },
-    {
-      "name": "snow3G",
-      "top_function": "snow_3G",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/snow_3G.h\",\"src/snow_3G.cpp\",\"src/main.cpp\"]
-    },
-    {
-      "name": "interpolation",
-      "top_function": "filter_interp",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/filter_interp.cpp\",\"src/main.cpp\",\"src/filter_interp.h\"]
-    },
-    {
-      "name": "fir",
-      "top_function": "fir",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/fir.cpp\",\"src/main.cpp\",\"src/fir.h\"]
-    },
-    {
-      "name": "ann",
-      "top_function": "layer",
-      "compile_status": "pass",
-      "has_testbench": false,
-      "has_tcl": true,
-      "source_files": [\"src/layer.h\",\"src/train_parameters.h\",\"src/layer.cpp\",\"src/ann.h\",\"src/image_parameters.h\",\"src/synth_param.h\",\"src/config.h\",\"src/ann_tb.h\",\"src/ann_tb.cpp\",\"src/main.cpp\",\"src/ann.cpp\"]
-    },
-    {
-      "name": "fft_fixed",
-      "top_function": "main",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/fft.h\",\"src/main.cpp\",\"src/fft.cpp\"]
-    },
-    {
-      "name": "ave8",
-      "top_function": "ave8",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/ave8.cpp\",\"src/main.cpp\",\"src/ave8.h\"]
-    },
-    {
-      "name": "cholesky",
-      "top_function": "main",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/cholesky.h\",\"src/main.cpp\",\"src/cholesky.cpp\",\"src/square_root_lut.h\"]
-    },
-    {
-      "name": "uart",
-      "top_function": "uart",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/uart.h\",\"src/uart.cpp\",\"src/main.cpp\"]
-    },
-    {
-      "name": "adpcm",
-      "top_function": "main",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/adpcm_encoder.h\",\"src/main.cpp\",\"src/adpcm_encoder.cpp\"]
-    },
-    {
-      "name": "decimation",
-      "top_function": "filt_decim",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/filt_decim.h\",\"src/filt_decim.cpp\",\"src/main.cpp\"]
-    },
-    {
-      "name": "jpeg_encoder",
-      "top_function": "dct",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/rle.h\",\"src/dct.cpp\",\"src/dct.h\",\"src/quantization.h\",\"src/rle.cpp\",\"src/main.cpp\",\"src/jpeg_encoder.cpp\",\"src/huffman.h\",\"src/jpeg_encoder.h\",\"src/huffman.cpp\",\"src/quantization.cpp\"]
-    },
-    {
-      "name": "idct",
-      "top_function": "idct",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/idct.cpp\",\"src/main.cpp\",\"src/idct.h\"]
-    },
-    {
-      "name": "sobel",
-      "top_function": "main",
-      "compile_status": "pass",
-      "has_testbench": true,
-      "has_tcl": true,
-      "source_files": [\"src/define.h\",\"src/sobel.h\",\"src/main.cpp\",\"src/sobel.cpp\"]
-    }
+{
+  "name": "adpcm",
+  "top_function": "void adpcm::run() {",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["adpcm_encoder.cpp","main.cpp","tb_adpcm_encoder.cpp"]
+},{
+  "name": "aes",
+  "top_function": "void aes::assign_key(U8 key_in[SIZE], U8 key_out[SIZE])\r",
+  "compile_status": "fail",
+  "has_testbench": true,
+  "has_tcl": true,
+  "source_files": ["aes.cpp","aes_1.cpp","aes_2.cpp","aes_cipher.cpp","aes.cpp","aes_cipher.cpp","main.cpp","tb_aes.cpp","aes.cpp","main.cpp","tb_aes.cpp","aes_inv_cipher.cpp","aes.cpp","aes_inv_cipher.cpp","main.cpp","tb_aes.cpp","main.cpp","main_1.cpp","main_2.cpp","tb_aes.cpp","tb_aes_1.cpp","tb_aes_2.cpp","tb_aes_3.cpp","tb_aes_4.cpp","tb_aes_5.cpp"]
+},{
+  "name": "aes_cipher",
+  "top_function": "void aes::assign_key(U8 key_in[SIZE], U8 key_out[SIZE])",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["aes.cpp","main.cpp","tb_aes.cpp"]
+},{
+  "name": "ann",
+  "top_function": "ann::ann",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["ann.cpp","ann_tb.cpp","layer.cpp","main.cpp","testbench.cpp"]
+},{
+  "name": "ave8",
+  "top_function": "void ave8::ave8_main ( void ) {",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["ave8.cpp","main.cpp","tb_ave8.cpp"]
+},{
+  "name": "cholesky",
+  "top_function": "void cholesky::cholesky_main ( void ) {",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["cholesky.cpp","main.cpp","tb_cholesky.cpp"]
+},{
+  "name": "decimation",
+  "top_function": "void decfilt::run() ",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["filt_decim.cpp","main.cpp","tb_decim.cpp"]
+},{
+  "name": "disparity",
+  "top_function": "void disparity::shift_diff( sc_uint<8> image_in_r[IN_BUFFER_DEPTH][WIN_SIZE],\r",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["disparity.cpp","main.cpp","tb_disparity.cpp"]
+},{
+  "name": "fft_fixed",
+  "top_function": "void fft::entry()",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["fft.cpp","main.cpp","tb_fft.cpp"]
+},{
+  "name": "fir",
+  "top_function": "void fir::fir_main ( void ) {",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["fir.cpp","main.cpp","tb_fir.cpp"]
+},{
+  "name": "idct",
+  "top_function": "void idct::jpeg_idct_islow()",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["idct.cpp","main.cpp","tb_idct.cpp"]
+},{
+  "name": "interpolation",
+  "top_function": "void interp::run ( void ) {",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["filter_interp.cpp","main.cpp","tb_interp.cpp"]
+},{
+  "name": "jpeg_decoder",
+  "top_function": "de_quantization",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["decoder.cpp","jpeg_decoder.cpp","main.cpp","tb_jpeg_decoder.cpp"]
+},{
+  "name": "jpeg_encoder",
+  "top_function": "void dct::jpeg_dct(void)",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["dct.cpp","huffman.cpp","jpeg_encoder.cpp","main.cpp","quantization.cpp","rle.cpp","tb_jpeg_encoder.cpp"]
+},{
+  "name": "kasumi",
+  "top_function": "void kasumi::kasumi_run(){",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["kasumi.cpp","main.cpp","tb_kasumi.cpp"]
+},{
+  "name": "md5c",
+  "top_function": "int sc_main(int argc, char** argv)",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["main.cpp","md5c.cpp","tb_md5c.cpp"]
+},{
+  "name": "qsort",
+  "top_function": "int sc_main(int argc, char** argv)",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["main.cpp","qsort.cpp","tb_qsort.cpp"]
+},{
+  "name": "snow3G",
+  "top_function": "int sc_main(int argc, char** argv)",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["main.cpp","snow_3G.cpp","tb_snow_3G.cpp"]
+},{
+  "name": "sobel",
+  "top_function": "int sc_main(int argc, char* argv[]){",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["main.cpp","sobel.cpp","tb_sobel.cpp"]
+},{
+  "name": "uart",
+  "top_function": "int sc_main (int argc, char* argv[])",
+  "compile_status": "fail",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["main.cpp","tb_uart.cpp","uart.cpp"]
+},{
+  "name": "vga",
+  "top_function": "void image::image_main(void){",
+  "compile_status": "pass",
+  "has_testbench": false,
+  "has_tcl": true,
+  "source_files": ["image.cpp","main.cpp","tb_top.cpp","tb_vga.cpp","top_vga.cpp","vga.cpp"]
+}
   ]
 }

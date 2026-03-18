@@ -14,6 +14,7 @@
 #include <queue>
 #include <vector>
 #include <functional>
+#include <string>
 
 // Include common HLS types that TAPA designs often use
 #include "ap_int.h"
@@ -69,6 +70,7 @@ public:
         bool empty() { return true; }
         bool try_read(T& val) { return false; }
         T read() { return T{}; }
+        T read(std::nullptr_t) { return read(); }
         void open() {}
     };
     // Write address channel
@@ -88,6 +90,7 @@ public:
         bool empty() { return true; }
         bool try_read(uint8_t& resp) { return false; }
         uint8_t read() { return 0; }
+        uint8_t read(std::nullptr_t) { return read(); }
         void open() {}
     };
 
@@ -131,6 +134,7 @@ public:
         data_.pop();
         return val;
     }
+    T read(std::nullptr_t) { return read(); }
     void read(T& val) { val = read(); }
     void write(const T& val) { data_.push(val); }
 

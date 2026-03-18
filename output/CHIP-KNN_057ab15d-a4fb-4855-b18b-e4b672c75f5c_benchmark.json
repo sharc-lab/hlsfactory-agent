@@ -1,0 +1,21 @@
+{
+  "run_id": "057ab15d-a4fb-4855-b18b-e4b672c75f5c",
+  "timestamp": "2026-03-18T21:23:59.266642+00:00",
+  "repo_url": "https://github.com/SFU-HiAccel/CHIP-KNN.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.01867970399999999,
+  "total_api_calls": 59,
+  "format_errors": 0,
+  "traj_file": "CHIP-KNN_057ab15d-a4fb-4855-b18b-e4b672c75f5c.traj.json",
+  "quality": {
+    "designs_found": 1,
+    "compile_pass": 1,
+    "compile_fail": 0,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 1,
+    "designs_with_tcl": 1
+  }
+}

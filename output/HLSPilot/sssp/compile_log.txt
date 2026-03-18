@@ -1,3 +1,4 @@
+Compilation Log:
 /output/HLSPilot/sssp/sssp.cpp:12:23: error: use of undeclared identifier 'INT_MAX'
    12 |         distance[i] = INT_MAX;
       |                       ^

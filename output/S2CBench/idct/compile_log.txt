@@ -1,0 +1,1348 @@
+Compilation Log for idct
+/output/S2CBench/idct/idct.cpp:114:18: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_int<16>' (aka 'ap_int<16>') and 'int')
+  114 |     if (inptr[1] == 0 && inptr[2] == 0 &&
+      |         ~~~~~~~~ ^  ~
+/workspace/stubs/ap_int.h:165:10: note: candidate function
+  165 |     bool operator==(const ap_int& other) const { return val == other.val; }
+      |          ^
+/output/S2CBench/idct/idct.cpp:114:18: note: because of ambiguity in conversion of 'sc_int<16>' (aka 'ap_int<16>') to 'float'
+  114 |     if (inptr[1] == 0 && inptr[2] == 0 &&
+      |                  ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, int)
+  114 |     if (inptr[1] == 0 && inptr[2] == 0 &&
+      |                  ^
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(float, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__float128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(__int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, float)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, long double)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, __float128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, __int128)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:18: note: built-in candidate operator==(unsigned __int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_int<16>' (aka 'ap_int<16>') and 'int')
+  114 |     if (inptr[1] == 0 && inptr[2] == 0 &&
+      |                          ~~~~~~~~ ^  ~
+/workspace/stubs/ap_int.h:165:10: note: candidate function
+  165 |     bool operator==(const ap_int& other) const { return val == other.val; }
+      |          ^
+/output/S2CBench/idct/idct.cpp:114:35: note: because of ambiguity in conversion of 'sc_int<16>' (aka 'ap_int<16>') to 'float'
+  114 |     if (inptr[1] == 0 && inptr[2] == 0 &&
+      |                                   ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, int)
+  114 |     if (inptr[1] == 0 && inptr[2] == 0 &&
+      |                                   ^
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(float, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__float128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(__int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, float)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, long double)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, __float128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, __int128)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:114:35: note: built-in candidate operator==(unsigned __int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_int<16>' (aka 'ap_int<16>') and 'int')
+  115 |         inptr[3] == 0 && inptr[4] == 0 &&
+      |         ~~~~~~~~ ^  ~
+/workspace/stubs/ap_int.h:165:10: note: candidate function
+  165 |     bool operator==(const ap_int& other) const { return val == other.val; }
+      |          ^
+/output/S2CBench/idct/idct.cpp:115:11: note: because of ambiguity in conversion of 'sc_int<16>' (aka 'ap_int<16>') to 'float'
+  115 |         inptr[3] == 0 && inptr[4] == 0 &&
+      |                  ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, int)
+  115 |         inptr[3] == 0 && inptr[4] == 0 &&
+      |                  ^
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(float, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__float128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(__int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, float)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, long double)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, __float128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, __int128)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:11: note: built-in candidate operator==(unsigned __int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_int<16>' (aka 'ap_int<16>') and 'int')
+  115 |         inptr[3] == 0 && inptr[4] == 0 &&
+      |                          ~~~~~~~~ ^  ~
+/workspace/stubs/ap_int.h:165:10: note: candidate function
+  165 |     bool operator==(const ap_int& other) const { return val == other.val; }
+      |          ^
+/output/S2CBench/idct/idct.cpp:115:28: note: because of ambiguity in conversion of 'sc_int<16>' (aka 'ap_int<16>') to 'float'
+  115 |         inptr[3] == 0 && inptr[4] == 0 &&
+      |                                   ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, int)
+  115 |         inptr[3] == 0 && inptr[4] == 0 &&
+      |                                   ^
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(float, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__float128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(__int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, float)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, long double)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, __float128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, __int128)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:115:28: note: built-in candidate operator==(unsigned __int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_int<16>' (aka 'ap_int<16>') and 'int')
+  116 |         inptr[5] == 0 && inptr[6] == 0 &&
+      |         ~~~~~~~~ ^  ~
+/workspace/stubs/ap_int.h:165:10: note: candidate function
+  165 |     bool operator==(const ap_int& other) const { return val == other.val; }
+      |          ^
+/output/S2CBench/idct/idct.cpp:116:11: note: because of ambiguity in conversion of 'sc_int<16>' (aka 'ap_int<16>') to 'float'
+  116 |         inptr[5] == 0 && inptr[6] == 0 &&
+      |                  ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, int)
+  116 |         inptr[5] == 0 && inptr[6] == 0 &&
+      |                  ^
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(float, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__float128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(__int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, float)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, long double)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, __float128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, __int128)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:11: note: built-in candidate operator==(unsigned __int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_int<16>' (aka 'ap_int<16>') and 'int')
+  116 |         inptr[5] == 0 && inptr[6] == 0 &&
+      |                          ~~~~~~~~ ^  ~
+/workspace/stubs/ap_int.h:165:10: note: candidate function
+  165 |     bool operator==(const ap_int& other) const { return val == other.val; }
+      |          ^
+/output/S2CBench/idct/idct.cpp:116:28: note: because of ambiguity in conversion of 'sc_int<16>' (aka 'ap_int<16>') to 'float'
+  116 |         inptr[5] == 0 && inptr[6] == 0 &&
+      |                                   ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, int)
+  116 |         inptr[5] == 0 && inptr[6] == 0 &&
+      |                                   ^
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(float, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__float128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(__int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, float)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, long double)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, __float128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, __int128)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:116:28: note: built-in candidate operator==(unsigned __int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_int<16>' (aka 'ap_int<16>') and 'int')
+  117 |         inptr[7] == 0) {
+      |         ~~~~~~~~ ^  ~
+/workspace/stubs/ap_int.h:165:10: note: candidate function
+  165 |     bool operator==(const ap_int& other) const { return val == other.val; }
+      |          ^
+/output/S2CBench/idct/idct.cpp:117:11: note: because of ambiguity in conversion of 'sc_int<16>' (aka 'ap_int<16>') to 'float'
+  117 |         inptr[7] == 0) {
+      |                  ^
+/workspace/stubs/ap_int.h:107:5: note: candidate function
+  107 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:108:5: note: candidate function
+  108 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:109:5: note: candidate function
+  109 |     operator long() const { return static_cast<long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:110:5: note: candidate function
+  110 |     operator long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:111:5: note: candidate function
+  111 |     operator unsigned long long() const { return static_cast<unsigned long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:112:5: note: candidate function
+  112 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, int)
+  117 |         inptr[7] == 0) {
+      |                  ^
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(float, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long double, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__float128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(__int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned int, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned long long, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, float)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, long double)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, __float128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, __int128)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, unsigned int)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, unsigned long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, unsigned long long)
+/output/S2CBench/idct/idct.cpp:117:11: note: built-in candidate operator==(unsigned __int128, unsigned __int128)
+/output/S2CBench/idct/idct.cpp:119:27: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  119 |       workspace_t dcval = DEQUANTIZE(inptr[0], quantptr[0]) << PASS1_BITS;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:137:10: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  137 |     z2 = DEQUANTIZE(inptr[2], quantptr[2]);
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:138:10: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  138 |     z3 = DEQUANTIZE(inptr[6], quantptr[6]);
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:144:10: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  144 |     z2 = DEQUANTIZE(inptr[0], quantptr[0]);
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:145:10: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  145 |     z3 = DEQUANTIZE(inptr[4], quantptr[4]);
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:159:12: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  159 |     tmp0 = DEQUANTIZE(inptr[7], quantptr[7]);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:160:12: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  160 |     tmp1 = DEQUANTIZE(inptr[5], quantptr[5]);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:161:12: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  161 |     tmp2 = DEQUANTIZE(inptr[3], quantptr[3]);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+/output/S2CBench/idct/idct.cpp:162:12: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<32>' (aka 'ap_int<32>') and 'sc_uint<6>' (aka 'ap_uint<6>'))
+  162 |     tmp3 = DEQUANTIZE(inptr[1], quantptr[1]);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/idct/idct.cpp:78:59: note: expanded from macro 'DEQUANTIZE'
+   78 | #define DEQUANTIZE(coef,quantval)  (((sc_int<32>) (coef)) * (quantval))
+      |                                     ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:124:12: note: candidate function
+  124 |     ap_int operator*(const ap_int& other) const { return ap_int(val * other.val); }
+      |            ^
+/workspace/stubs/ap_int.h:140:12: note: candidate function
+  140 |     ap_int operator*(int other) const { return ap_int(val * other); }
+      |            ^
+/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 6]
+  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+      |            ^
+16 errors generated.

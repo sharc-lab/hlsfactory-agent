@@ -1,8 +1,9 @@
-/output/HLSPilot/digit_recognition/src/host/digit_recognition_sw.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
+Compilation Log:
+/output/HLSPilot/digit_recognition/src/host/digit_recognition.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
    17 | #include "../../../utils/xcl.h"
       |          ^~~~~~~~~~~~~~~~~~~~~~
 1 error generated.
-/output/HLSPilot/digit_recognition/src/host/digit_recognition.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
+/output/HLSPilot/digit_recognition/src/host/digit_recognition_sw.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
    17 | #include "../../../utils/xcl.h"
       |          ^~~~~~~~~~~~~~~~~~~~~~
 1 error generated.

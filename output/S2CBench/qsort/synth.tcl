@@ -1,11 +1,7 @@
-open_project /output/S2CBench/qsort/project
-set_top qsort
-add_files -tb /output/S2CBench/qsort/tb/*.cpp
-add_files /output/S2CBench/qsort/src/define.h
-add_files /output/S2CBench/qsort/src/main.cpp
-add_files /output/S2CBench/qsort/src/qsort.cpp
-add_files /output/S2CBench/qsort/src/qsort.h
-open_solution "solution1" -flow_target vitis
+open_project project
+set_top int sc_main(int argc, char** argv)
+add_files qsort.cpp main.cpp tb_qsort.cpp 
+open_solution solution1 -flow_target vivado
 set_part xcu250-figd2104-2L-e
 csynth_design
 exit

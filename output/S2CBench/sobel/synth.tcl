@@ -1,11 +1,7 @@
-open_project /output/S2CBench/sobel/project
-set_top main
-add_files -tb /output/S2CBench/sobel/tb/*.cpp
-add_files /output/S2CBench/sobel/src/define.h
-add_files /output/S2CBench/sobel/src/main.cpp
-add_files /output/S2CBench/sobel/src/sobel.cpp
-add_files /output/S2CBench/sobel/src/sobel.h
-open_solution "solution1" -flow_target vitis
+open_project project
+set_top int sc_main(int argc, char* argv[]){
+add_files tb_sobel.cpp main.cpp sobel.cpp 
+open_solution solution1 -flow_target vivado
 set_part xcu250-figd2104-2L-e
 csynth_design
 exit

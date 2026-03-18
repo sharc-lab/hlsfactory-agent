@@ -1,0 +1,21 @@
+{
+  "run_id": "916add74-95c0-49c3-a9d2-5d4e2157bc8e",
+  "timestamp": "2026-03-18T21:04:28.479257+00:00",
+  "repo_url": "https://github.com/xcw-1010/HLSPilot.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.0077526999999999995,
+  "total_api_calls": 29,
+  "format_errors": 0,
+  "traj_file": "HLSPilot_916add74-95c0-49c3-a9d2-5d4e2157bc8e.traj.json",
+  "quality": {
+    "designs_found": 19,
+    "compile_pass": 11,
+    "compile_fail": 8,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 19,
+    "designs_with_tcl": 19
+  }
+}

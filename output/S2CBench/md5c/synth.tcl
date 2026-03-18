@@ -1,11 +1,7 @@
-open_project /output/S2CBench/md5c/project
-set_top md5c
-add_files -tb /output/S2CBench/md5c/tb/*.cpp
-add_files /output/S2CBench/md5c/src/define.h
-add_files /output/S2CBench/md5c/src/main.cpp
-add_files /output/S2CBench/md5c/src/md5c.cpp
-add_files /output/S2CBench/md5c/src/md5c.h
-open_solution "solution1" -flow_target vitis
+open_project project
+set_top int sc_main(int argc, char** argv)
+add_files md5c.cpp tb_md5c.cpp main.cpp 
+open_solution solution1 -flow_target vivado
 set_part xcu250-figd2104-2L-e
 csynth_design
 exit

@@ -1,1 +1,1 @@
-# digit_recognition Design\n\nExtracted from HLSPilot repository.
+# digit_recognition" Design

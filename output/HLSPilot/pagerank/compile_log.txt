@@ -1,3 +1,4 @@
+Compilation Log:
 /output/HLSPilot/pagerank/pagerank.cpp:44:69: error: use of undeclared identifier 'max_iterations'
    44 |         pagerank_kernel(rpao, ciao, pr, vertex_num, damping_factor, max_iterations);
       |                                                                     ^
