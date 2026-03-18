@@ -1,0 +1,10 @@
+In file included from /output/Spector-HLS/sobel_filter_catapult_subdim_x_src/sobel_test_subdimx.cpp:2:
+/output/Spector-HLS/sobel_filter_catapult_subdim_x_src/sobel.h:3:10: fatal error: 'ac_int.h' file not found
+    3 | #include <ac_int.h>
+      |          ^~~~~~~~~~
+1 error generated.
+In file included from /output/Spector-HLS/sobel_filter_catapult_subdim_x_src/sobel_subdimx.cpp:1:
+/output/Spector-HLS/sobel_filter_catapult_subdim_x_src/sobel.h:3:10: fatal error: 'ac_int.h' file not found
+    3 | #include <ac_int.h>
+      |          ^~~~~~~~~~
+1 error generated.

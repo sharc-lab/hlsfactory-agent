@@ -1,0 +1,10 @@
+In file included from /output/Spector-HLS/template_matching_vivado_src/fpga_temp_match.cpp:1:
+/output/Spector-HLS/template_matching_vivado_src/fpga_temp_matching.h:3:10: fatal error: '/opt/Xilinx/Vivado/2018.3/include/gmp.h' file not found
+    3 | #include "/opt/Xilinx/Vivado/2018.3/include/gmp.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from /output/Spector-HLS/template_matching_vivado_src/testbench.cpp:1:
+/output/Spector-HLS/template_matching_vivado_src/fpga_temp_matching.h:3:10: fatal error: '/opt/Xilinx/Vivado/2018.3/include/gmp.h' file not found
+    3 | #include "/opt/Xilinx/Vivado/2018.3/include/gmp.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

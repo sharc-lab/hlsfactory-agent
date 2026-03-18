@@ -1,0 +1,5 @@
+In file included from /output/Spector-HLS/mergesort_catapult_src/mergesort.cpp:1:
+/output/Spector-HLS/mergesort_catapult_src/mergesort.h:3:10: fatal error: 'ac_channel.h' file not found
+    3 | #include <ac_channel.h>
+      |          ^~~~~~~~~~~~~~
+1 error generated.
