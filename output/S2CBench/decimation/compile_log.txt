@@ -1,4 +1,3 @@
-Compilation Log for decimation
 /output/S2CBench/decimation/filt_decim.cpp:124:34: error: use of overloaded operator '+' is ambiguous (with operand types 'sc_fixed<19, 2, 1, 1>' (aka 'ap_fixed<19, 2, 1, 1>') and 'sc_fixed<19, 2, 0, 1>' (aka 'ap_fixed<19, 2, 0, 1>'))
   124 |    SoP1 = SoP1 + (bufferline_1[x]+buffer_1 )*incoef1_var[x];
       |                   ~~~~~~~~~~~~~~~^~~~~~~~~

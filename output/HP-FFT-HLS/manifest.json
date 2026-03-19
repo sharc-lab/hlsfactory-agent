@@ -1,2 +1,151 @@
-{"repo_name":"HP-FFT-HLS","repo_url":"https://github.com/UCLA-VAST/HP-FFT-HLS.git","framework":"vivado_hls","total_designs":16,"designs":[{"name":"n1024_UF1","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n1024_UF16","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n1024_UF2","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n1024_UF32","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n1024_UF4","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n1024_UF8","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n1024_no_StagePipeline","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n1024_original_C_style","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_UF1","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_UF16","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_UF2","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_UF32","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_UF4","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_UF8","top_function":"FFT_TOP","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_no_StagePipeline","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]},{"name":"n256_original_C_style","top_function":"FFT_TOP","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["FFT.cpp","testbench.cpp"]}
-]}
+{
+  "repo_name": "HP-FFT-HLS",
+  "repo_url": "https://github.com/UCLA-VAST/HP-FFT-HLS.git",
+  "framework": "vivado_hls",
+  "total_designs": 16,
+  "designs": [
+    {
+      "name": "n1024_UF1",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF16",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF2",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF32",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF4",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF8",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_no_StagePipeline",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_original_C_style",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF1",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF16",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF2",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF32",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF4",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF8",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_no_StagePipeline",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_original_C_style",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+  ]
+}

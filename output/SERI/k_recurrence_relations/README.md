@@ -1,3 +1,2 @@
-# Design `k_recurrence_relations`
-
-This design implements the HLS kernel defined in `k_recurrence_relations.cpp`. It uses the common header files from the repository's `fpga/include` directory. A basic testbench `testbench.cpp` is provided.
+# Design: k_recurrence_relations
+This design is extracted from the SERI repository. The top-level HLS function is defined in `k_recurrence_relations.cpp`.

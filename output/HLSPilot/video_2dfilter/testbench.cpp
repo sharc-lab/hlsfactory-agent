@@ -1,5 +1,2 @@
-#include <iostream>
-int main(){
-    std::cout << "Testbench" << std::endl;
-    return 0;
-}
+#include "video_2dfilter.cpp"
+int main(){return 0;}

@@ -1,30 +1,29 @@
-Compilation Log for qsort
 /output/S2CBench/qsort/qsort.cpp:69:22: error: use of overloaded operator '>=' is ambiguous (with operand types 'sc_uint<8>' (aka 'ap_uint<8>') and 'int')
    69 |         while (arr[R]>=piv && L<R)
       |                ~~~~~~^ ~~~
-/workspace/stubs/ap_int.h:286:10: note: candidate function
-  286 |     bool operator>=(const ap_uint& other) const { return val >= other.val; }
+/workspace/stubs/ap_int.h:292:10: note: candidate function
+  292 |     bool operator>=(const ap_uint& other) const { return val >= other.val; }
       |          ^
 /output/S2CBench/qsort/qsort.cpp:69:22: note: because of ambiguity in conversion of 'sc_uint<8>' (aka 'ap_uint<8>') to 'float'
    69 |         while (arr[R]>=piv && L<R)
       |                      ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/qsort/qsort.cpp:69:22: note: built-in candidate operator>=(float, int)
    69 |         while (arr[R]>=piv && L<R)
@@ -175,29 +174,29 @@ Compilation Log for qsort
 /output/S2CBench/qsort/qsort.cpp:74:15: error: use of overloaded operator '<=' is ambiguous (with operand types 'sc_uint<8>' (aka 'ap_uint<8>') and 'int')
    74 |         while (arr[L]<=piv && L<R)
       |                ~~~~~~^ ~~~
-/workspace/stubs/ap_int.h:285:10: note: candidate function
-  285 |     bool operator<=(const ap_uint& other) const { return val <= other.val; }
+/workspace/stubs/ap_int.h:291:10: note: candidate function
+  291 |     bool operator<=(const ap_uint& other) const { return val <= other.val; }
       |          ^
 /output/S2CBench/qsort/qsort.cpp:74:15: note: because of ambiguity in conversion of 'sc_uint<8>' (aka 'ap_uint<8>') to 'float'
    74 |         while (arr[L]<=piv && L<R)
       |                      ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/qsort/qsort.cpp:74:15: note: built-in candidate operator<=(float, int)
    74 |         while (arr[L]<=piv && L<R)

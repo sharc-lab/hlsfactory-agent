@@ -1,1 +1,1 @@
-# snow3G Design
+# snow3G

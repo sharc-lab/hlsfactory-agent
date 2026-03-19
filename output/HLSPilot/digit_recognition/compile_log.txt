@@ -1,4 +1,7 @@
-Compilation Log:
+/output/HLSPilot/digit_recognition/testbench.cpp:1:10: fatal error: 'digitrec_sw.cpp' file not found
+    1 | #include "digitrec_sw.cpp"
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.
 /output/HLSPilot/digit_recognition/src/host/digit_recognition.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
    17 | #include "../../../utils/xcl.h"
       |          ^~~~~~~~~~~~~~~~~~~~~~

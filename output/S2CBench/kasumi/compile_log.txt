@@ -1,33 +1,32 @@
-Compilation Log for kasumi
 /output/S2CBench/kasumi/kasumi.cpp:68:60: error: use of overloaded operator '+' is ambiguous (with operand types 'ap_uint<32>' and 'ap_uint<8>')
    68 |     left = (((u32)d[0].b8[0])<<24)+(((u32)d[0].b8[1])<<16) +(d[0].b8[2]<<8)+(d[0].b8[3]);
       |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:236:13: note: candidate function
-  236 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
+/workspace/stubs/ap_int.h:242:13: note: candidate function
+  242 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
       |             ^
-/workspace/stubs/ap_int.h:251:13: note: candidate function
-  251 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:257:13: note: candidate function
+  257 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:258:13: note: candidate function
-  258 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:264:13: note: candidate function
+  264 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 8]
-  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+/workspace/stubs/ap_int.h:315:12: note: candidate function [with W = 8]
+  315 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
       |            ^
 /output/S2CBench/kasumi/kasumi.cpp:69:60: error: use of overloaded operator '+' is ambiguous (with operand types 'ap_uint<32>' and 'ap_uint<8>')
    69 |     right = (((u32)d[1].b8[0])<<24)+(((u32)d[1].b8[1])<<16)+(d[1].b8[2]<<8)+(d[1].b8[3]);
       |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:236:13: note: candidate function
-  236 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
+/workspace/stubs/ap_int.h:242:13: note: candidate function
+  242 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
       |             ^
-/workspace/stubs/ap_int.h:251:13: note: candidate function
-  251 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:257:13: note: candidate function
+  257 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:258:13: note: candidate function
-  258 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:264:13: note: candidate function
+  264 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 8]
-  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+/workspace/stubs/ap_int.h:315:12: note: candidate function [with W = 8]
+  315 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
       |            ^
 /output/S2CBench/kasumi/kasumi.cpp:101:14: error: no viable overloaded '='
   101 |         odata[x][n] = d[x].b8[n];
@@ -41,11 +40,11 @@ Compilation Log for kasumi
 /output/S2CBench/kasumi/kasumi.cpp:171:23: error: use of overloaded operator '&' is ambiguous (with operand types 'u16' (aka 'ap_uint<16>') and 'int')
   171 |         seven = (u16)(in_data&0x7F);
       |                       ~~~~~~~^~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/kasumi/kasumi.cpp:171:23: note: built-in candidate operator&(int, int)
   171 |         seven = (u16)(in_data&0x7F);
@@ -116,53 +115,53 @@ Compilation Log for kasumi
 /output/S2CBench/kasumi/kasumi.cpp:174:18: error: conversion from 'u16' (aka 'ap_uint<16>') to 'long' is ambiguous
   174 |         nine = (u16)(S9[nine] ^ seven);
       |                         ^~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/kasumi/kasumi.cpp:175:19: error: conversion from 'u16' (aka 'ap_uint<16>') to 'long' is ambiguous
   175 |         seven = (u16)(S7[seven] ^ (nine & 0x7F));
       |                          ^~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/kasumi/kasumi.cpp:175:34: error: use of overloaded operator '&' is ambiguous (with operand types 'u16' (aka 'ap_uint<16>') and 'int')
   175 |         seven = (u16)(S7[seven] ^ (nine & 0x7F));
       |                                    ~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/kasumi/kasumi.cpp:175:34: note: built-in candidate operator&(int, int)
   175 |         seven = (u16)(S7[seven] ^ (nine & 0x7F));
@@ -233,11 +232,11 @@ Compilation Log for kasumi
 /output/S2CBench/kasumi/kasumi.cpp:177:17: error: use of overloaded operator '&' is ambiguous (with operand types 'u16' (aka 'ap_uint<16>') and 'int')
   177 |         nine ^= (subkey&0x1FF);
       |                  ~~~~~~^~~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/kasumi/kasumi.cpp:177:17: note: built-in candidate operator&(int, int)
   177 |         nine ^= (subkey&0x1FF);
@@ -308,53 +307,53 @@ Compilation Log for kasumi
 /output/S2CBench/kasumi/kasumi.cpp:178:18: error: conversion from 'u16' (aka 'ap_uint<16>') to 'long' is ambiguous
   178 |         nine = (u16)(S9[nine] ^ seven);
       |                         ^~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/kasumi/kasumi.cpp:179:19: error: conversion from 'u16' (aka 'ap_uint<16>') to 'long' is ambiguous
   179 |         seven = (u16)(S7[seven] ^ (nine & 0x7F));
       |                          ^~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/kasumi/kasumi.cpp:179:34: error: use of overloaded operator '&' is ambiguous (with operand types 'u16' (aka 'ap_uint<16>') and 'int')
   179 |         seven = (u16)(S7[seven] ^ (nine & 0x7F));
       |                                    ~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/kasumi/kasumi.cpp:179:34: note: built-in candidate operator&(int, int)
   179 |         seven = (u16)(S7[seven] ^ (nine & 0x7F));
@@ -425,31 +424,31 @@ Compilation Log for kasumi
 /output/S2CBench/kasumi/kasumi.cpp:210:30: error: use of overloaded operator '+' is ambiguous (with operand types 'ap_uint<32>' and 'u16' (aka 'ap_uint<16>'))
   210 |         in_data = (((u32)right)<<16)+left;
       |                   ~~~~~~~~~~~~~~~~~~^~~~~
-/workspace/stubs/ap_int.h:236:13: note: candidate function
-  236 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
+/workspace/stubs/ap_int.h:242:13: note: candidate function
+  242 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
       |             ^
-/workspace/stubs/ap_int.h:251:13: note: candidate function
-  251 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:257:13: note: candidate function
+  257 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:258:13: note: candidate function
-  258 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:264:13: note: candidate function
+  264 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 16]
-  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+/workspace/stubs/ap_int.h:315:12: note: candidate function [with W = 16]
+  315 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
       |            ^
 /output/S2CBench/kasumi/kasumi.cpp:236:27: error: use of overloaded operator '+' is ambiguous (with operand types 'ap_uint<32>' and 'u16' (aka 'ap_uint<16>'))
   236 |         in_data = (((u32)l)<<16) + r;
       |                   ~~~~~~~~~~~~~~ ^ ~
-/workspace/stubs/ap_int.h:236:13: note: candidate function
-  236 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
+/workspace/stubs/ap_int.h:242:13: note: candidate function
+  242 |     ap_uint operator+(const ap_uint& other) const { return ap_uint(val + other.val); }
       |             ^
-/workspace/stubs/ap_int.h:251:13: note: candidate function
-  251 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:257:13: note: candidate function
+  257 |     ap_uint operator+(unsigned int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:258:13: note: candidate function
-  258 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
+/workspace/stubs/ap_int.h:264:13: note: candidate function
+  264 |     ap_uint operator+(int other) const { return ap_uint(val + other); }
       |             ^
-/workspace/stubs/ap_int.h:303:12: note: candidate function [with W = 16]
-  303 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
+/workspace/stubs/ap_int.h:315:12: note: candidate function [with W = 16]
+  315 | ap_uint<W> operator+(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs + rhs.val); }
       |            ^
 13 errors generated.

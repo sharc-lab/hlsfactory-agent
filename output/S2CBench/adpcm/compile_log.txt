@@ -1,33 +1,32 @@
-Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:79:29: error: conversion from 'sc_uint<7>' (aka 'ap_uint<7>') to 'long' is ambiguous
    79 |       divider = step_table[ index ];
       |                             ^~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:82:47: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<16>' and 'int')
    82 |       diff = (width.in_data - width.pre_data) & 0x0000ffff;
       |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:82:47: note: built-in candidate operator&(int, int)
    82 |       diff = (width.in_data - width.pre_data) & 0x0000ffff;
@@ -98,8 +97,8 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:84:34: error: use of overloaded operator '^' is ambiguous (with operand types 'sc_uint<17>' (aka 'ap_uint<17>') and 'int')
    84 |          width.diff_data = ((diff^0xffff) + 1);
       |                              ~~~~^~~~~~~
-/workspace/stubs/ap_int.h:243:13: note: candidate function
-  243 |     ap_uint operator^(const ap_uint& other) const { return ap_uint(val ^ other.val); }
+/workspace/stubs/ap_int.h:249:13: note: candidate function
+  249 |     ap_uint operator^(const ap_uint& other) const { return ap_uint(val ^ other.val); }
       |             ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:84:34: note: built-in candidate operator^(int, int)
    84 |          width.diff_data = ((diff^0xffff) + 1);
@@ -170,47 +169,47 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:94:22: error: no viable overloaded '='
    94 |       width.enc_data = temp.range(31,17);
       |       ~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<4>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<4>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<4>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<4>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
 /output/S2CBench/adpcm/adpcm_encoder.cpp:95:17: error: no viable overloaded '='
    95 |       remainder = temp.range(14,0);
       |       ~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<15>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<15>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<15>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<15>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
 /output/S2CBench/adpcm/adpcm_encoder.cpp:102:26: error: use of overloaded operator '>' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   102 |       if( width.enc_data > 7 ){
       |           ~~~~~~~~~~~~~~ ^ ~
-/workspace/stubs/ap_int.h:284:10: note: candidate function
-  284 |     bool operator>(const ap_uint& other) const { return val > other.val; }
+/workspace/stubs/ap_int.h:290:10: note: candidate function
+  290 |     bool operator>(const ap_uint& other) const { return val > other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:102:26: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   102 |       if( width.enc_data > 7 ){
       |                          ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:102:26: note: built-in candidate operator>(float, int)
   102 |       if( width.enc_data > 7 ){
@@ -361,53 +360,53 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:104:35: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'sc_uint<15>' (aka 'ap_uint<15>'))
   104 |          dec_tmp = width.enc_data * divider;
       |                    ~~~~~~~~~~~~~~ ^ ~~~~~~~
-/workspace/stubs/ap_int.h:238:13: note: candidate function
-  238 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
+/workspace/stubs/ap_int.h:244:13: note: candidate function
+  244 |     ap_uint operator*(const ap_uint& other) const { return ap_uint(val * other.val); }
       |             ^
-/workspace/stubs/ap_int.h:253:13: note: candidate function
-  253 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
+/workspace/stubs/ap_int.h:259:13: note: candidate function
+  259 |     ap_uint operator*(unsigned int other) const { return ap_uint(val * other); }
       |             ^
-/workspace/stubs/ap_int.h:260:13: note: candidate function
-  260 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
+/workspace/stubs/ap_int.h:266:13: note: candidate function
+  266 |     ap_uint operator*(int other) const { return ap_uint(val * other); }
       |             ^
-/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 15]
-  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+/workspace/stubs/ap_int.h:319:12: note: candidate function [with W = 15]
+  319 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
       |            ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:105:21: error: no viable overloaded '='
   105 |          remainder1 = dec_tmp.range(1,0);
       |          ~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'ap_uint_range_ref<19>' to 'const ap_uint<2>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'ap_uint_range_ref<19>' to 'const ap_uint<2>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'ap_uint_range_ref<19>' to 'ap_uint<2>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'ap_uint_range_ref<19>' to 'ap_uint<2>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
 /output/S2CBench/adpcm/adpcm_encoder.cpp:106:25: error: use of overloaded operator '>=' is ambiguous (with operand types 'sc_uint<2>' (aka 'ap_uint<2>') and 'int')
   106 |          if( remainder1 >= 2 ){
       |              ~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:286:10: note: candidate function
-  286 |     bool operator>=(const ap_uint& other) const { return val >= other.val; }
+/workspace/stubs/ap_int.h:292:10: note: candidate function
+  292 |     bool operator>=(const ap_uint& other) const { return val >= other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:106:25: note: because of ambiguity in conversion of 'sc_uint<2>' (aka 'ap_uint<2>') to 'float'
   106 |          if( remainder1 >= 2 ){
       |                         ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:106:25: note: built-in candidate operator>=(float, int)
   106 |          if( remainder1 >= 2 ){
@@ -576,29 +575,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:128:16: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_uint<7>' (aka 'ap_uint<7>') and 'int')
   128 |       if( index==0 && index_delta==1 ){
       |           ~~~~~^ ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:128:16: note: because of ambiguity in conversion of 'sc_uint<7>' (aka 'ap_uint<7>') to 'float'
   128 |       if( index==0 && index_delta==1 ){
       |                ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:128:16: note: built-in candidate operator==(float, int)
   128 |       if( index==0 && index_delta==1 ){
@@ -749,29 +748,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:128:34: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   128 |       if( index==0 && index_delta==1 ){
       |                       ~~~~~~~~~~~^ ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:128:34: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   128 |       if( index==0 && index_delta==1 ){
       |                                  ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:128:34: note: built-in candidate operator==(float, int)
   128 |       if( index==0 && index_delta==1 ){
@@ -922,29 +921,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:131:27: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   131 |       else if( index_delta==1 ) {
       |                ~~~~~~~~~~~^ ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:131:27: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   131 |       else if( index_delta==1 ) {
       |                           ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:131:27: note: built-in candidate operator==(float, int)
   131 |       else if( index_delta==1 ) {
@@ -1095,29 +1094,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:147:11: error: use of overloaded operator '>=' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   147 |    if( enc>=0 && enc<=3 ) return 1;
       |        ~~~^ ~
-/workspace/stubs/ap_int.h:286:10: note: candidate function
-  286 |     bool operator>=(const ap_uint& other) const { return val >= other.val; }
+/workspace/stubs/ap_int.h:292:10: note: candidate function
+  292 |     bool operator>=(const ap_uint& other) const { return val >= other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:147:11: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   147 |    if( enc>=0 && enc<=3 ) return 1;
       |           ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:147:11: note: built-in candidate operator>=(float, int)
   147 |    if( enc>=0 && enc<=3 ) return 1;
@@ -1268,29 +1267,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:147:21: error: use of overloaded operator '<=' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   147 |    if( enc>=0 && enc<=3 ) return 1;
       |                  ~~~^ ~
-/workspace/stubs/ap_int.h:285:10: note: candidate function
-  285 |     bool operator<=(const ap_uint& other) const { return val <= other.val; }
+/workspace/stubs/ap_int.h:291:10: note: candidate function
+  291 |     bool operator<=(const ap_uint& other) const { return val <= other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:147:21: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   147 |    if( enc>=0 && enc<=3 ) return 1;
       |                     ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:147:21: note: built-in candidate operator<=(float, int)
   147 |    if( enc>=0 && enc<=3 ) return 1;
@@ -1441,29 +1440,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:148:16: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   148 |    else if( enc==4 ) return 2;
       |             ~~~^ ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:148:16: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   148 |    else if( enc==4 ) return 2;
       |                ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:148:16: note: built-in candidate operator==(float, int)
   148 |    else if( enc==4 ) return 2;
@@ -1614,29 +1613,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:149:16: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   149 |    else if( enc==5 ) return 4;
       |             ~~~^ ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:149:16: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   149 |    else if( enc==5 ) return 4;
       |                ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:149:16: note: built-in candidate operator==(float, int)
   149 |    else if( enc==5 ) return 4;
@@ -1787,29 +1786,29 @@ Compilation Log for adpcm
 /output/S2CBench/adpcm/adpcm_encoder.cpp:150:16: error: use of overloaded operator '==' is ambiguous (with operand types 'sc_uint<4>' (aka 'ap_uint<4>') and 'int')
   150 |    else if( enc==6 ) return 6;
       |             ~~~^ ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:150:16: note: because of ambiguity in conversion of 'sc_uint<4>' (aka 'ap_uint<4>') to 'float'
   150 |    else if( enc==6 ) return 6;
       |                ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/adpcm/adpcm_encoder.cpp:150:16: note: built-in candidate operator==(float, int)
   150 |    else if( enc==6 ) return 6;

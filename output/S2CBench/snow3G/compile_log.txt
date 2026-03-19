@@ -1,30 +1,29 @@
-Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:106:18: error: use of overloaded operator '<' is ambiguous (with operand types 'u32' (aka 'ap_uint<32>') and 'int')
   106 |     for (t=0 ; t < SIZE; t++)
       |                ~ ^ ~~~~
-/workspace/stubs/ap_int.h:283:10: note: candidate function
-  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+/workspace/stubs/ap_int.h:289:10: note: candidate function
+  289 |     bool operator<(const ap_uint& other) const { return val < other.val; }
       |          ^
 /output/S2CBench/snow3G/snow_3G.cpp:106:18: note: because of ambiguity in conversion of 'u32' (aka 'ap_uint<32>') to 'float'
   106 |     for (t=0 ; t < SIZE; t++)
       |                  ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:106:18: note: built-in candidate operator<(float, int)
   106 |     for (t=0 ; t < SIZE; t++)
@@ -175,71 +174,71 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:107:10: error: conversion from 'u32' (aka 'ap_uint<32>') to 'long' is ambiguous
   107 |       ks[t] = ks_in[t];
       |          ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:107:21: error: conversion from 'u32' (aka 'ap_uint<32>') to 'long' is ambiguous
   107 |       ks[t] = ks_in[t];
       |                     ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:114:16: error: use of overloaded operator '<' is ambiguous (with operand types 'u32' (aka 'ap_uint<32>') and 'int')
   114 |   for ( t=0; t < SIZE; t++){
       |              ~ ^ ~~~~
-/workspace/stubs/ap_int.h:283:10: note: candidate function
-  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+/workspace/stubs/ap_int.h:289:10: note: candidate function
+  289 |     bool operator<(const ap_uint& other) const { return val < other.val; }
       |          ^
 /output/S2CBench/snow3G/snow_3G.cpp:114:16: note: because of ambiguity in conversion of 'u32' (aka 'ap_uint<32>') to 'float'
   114 |   for ( t=0; t < SIZE; t++){
       |                ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:114:16: note: built-in candidate operator<(float, int)
   114 |   for ( t=0; t < SIZE; t++){
@@ -390,50 +389,50 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:117:8: error: conversion from 'u32' (aka 'ap_uint<32>') to 'long' is ambiguous
   117 |     ks[t] =  F ^ LFSR_S0; /* STEP 2 */
       |        ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:127:13: error: use of overloaded operator '<' is ambiguous (with operand types 'u32' (aka 'ap_uint<32>') and 'int')
   127 |   for(t=0; t<SIZE;t++)
       |            ~^~~~~
-/workspace/stubs/ap_int.h:283:10: note: candidate function
-  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+/workspace/stubs/ap_int.h:289:10: note: candidate function
+  289 |     bool operator<(const ap_uint& other) const { return val < other.val; }
       |          ^
 /output/S2CBench/snow3G/snow_3G.cpp:127:13: note: because of ambiguity in conversion of 'u32' (aka 'ap_uint<32>') to 'float'
   127 |   for(t=0; t<SIZE;t++)
       |             ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:127:13: note: built-in candidate operator<(float, int)
   127 |   for(t=0; t<SIZE;t++)
@@ -584,53 +583,53 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:128:12: error: conversion from 'u32' (aka 'ap_uint<32>') to 'long' is ambiguous
   128 |     ks_out[t] = ks[t];
       |            ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:128:20: error: conversion from 'u32' (aka 'ap_uint<32>') to 'long' is ambiguous
   128 |     ks_out[t] = ks[t];
       |                    ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:149:10: error: use of overloaded operator '&' is ambiguous (with operand types 'u8' (aka 'ap_uint<8>') and 'int')
   149 |   if ( V & 0x80 )
       |        ~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/snow3G/snow_3G.cpp:149:10: note: built-in candidate operator&(int, int)
   149 |   if ( V & 0x80 )
@@ -701,11 +700,11 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:224:30: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<32>' and 'int')
   224 | u8 srw0 = SR[ (u8)((w >> 24) & 0xff) ];
       |                    ~~~~~~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/snow3G/snow_3G.cpp:224:30: note: built-in candidate operator&(int, int)
   224 | u8 srw0 = SR[ (u8)((w >> 24) & 0xff) ];
@@ -776,32 +775,32 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:224:15: error: conversion from 'u8' (aka 'ap_uint<8>') to 'long' is ambiguous
   224 | u8 srw0 = SR[ (u8)((w >> 24) & 0xff) ];
       |               ^~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:225:30: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<32>' and 'int')
   225 | u8 srw1 = SR[ (u8)((w >> 16) & 0xff) ];
       |                    ~~~~~~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/snow3G/snow_3G.cpp:225:30: note: built-in candidate operator&(int, int)
   225 | u8 srw1 = SR[ (u8)((w >> 16) & 0xff) ];
@@ -872,32 +871,32 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:225:15: error: conversion from 'u8' (aka 'ap_uint<8>') to 'long' is ambiguous
   225 | u8 srw1 = SR[ (u8)((w >> 16) & 0xff) ];
       |               ^~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:226:29: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<32>' and 'int')
   226 | u8 srw2 = SR[ (u8)((w >> 8) & 0xff) ];
       |                    ~~~~~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/snow3G/snow_3G.cpp:226:29: note: built-in candidate operator&(int, int)
   226 | u8 srw2 = SR[ (u8)((w >> 8) & 0xff) ];
@@ -968,32 +967,32 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:226:15: error: conversion from 'u8' (aka 'ap_uint<8>') to 'long' is ambiguous
   226 | u8 srw2 = SR[ (u8)((w >> 8) & 0xff) ];
       |               ^~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:227:24: error: use of overloaded operator '&' is ambiguous (with operand types 'u32' (aka 'ap_uint<32>') and 'int')
   227 | u8 srw3 = SR[ (u8)((w) & 0xff) ];
       |                    ~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/snow3G/snow_3G.cpp:227:24: note: built-in candidate operator&(int, int)
   227 | u8 srw3 = SR[ (u8)((w) & 0xff) ];
@@ -1064,32 +1063,32 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:227:15: error: conversion from 'u8' (aka 'ap_uint<8>') to 'long' is ambiguous
   227 | u8 srw3 = SR[ (u8)((w) & 0xff) ];
       |               ^~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/snow3G/snow_3G.cpp:246:30: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<32>' and 'int')
   246 | u8 sqw0 = SQ[ (u8)((w >> 24) & 0xff) ];
       |                    ~~~~~~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/snow3G/snow_3G.cpp:246:30: note: built-in candidate operator&(int, int)
   246 | u8 sqw0 = SQ[ (u8)((w >> 24) & 0xff) ];
@@ -1160,23 +1159,23 @@ Compilation Log for snow3G
 /output/S2CBench/snow3G/snow_3G.cpp:246:15: error: conversion from 'u8' (aka 'ap_uint<8>') to 'long' is ambiguous
   246 | u8 sqw0 = SQ[ (u8)((w >> 24) & 0xff) ];
       |               ^~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 fatal error: too many errors emitted, stopping now [-ferror-limit=]
 20 errors generated.

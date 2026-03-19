@@ -1,17 +1,1027 @@
-Compiling /output/SERI/k_gaussian_quadrature_a/testbench.cpp
-/output/SERI/k_gaussian_quadrature_a/testbench.cpp:1:10: fatal error: 'rys_testbench.h' file not found
-    1 | #include "rys_testbench.h"
-      |          ^~~~~~~~~~~~~~~~~
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   83 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, float)
+   83 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned __int128)
+In file included from /workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:4:
+/workspace/repo/fpga/src/device/gaussian_qaudrature_opt.h:221:42: error: no viable conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160>'
+  221 |         partial_eris_stream_out_0.write( result.range( bit_width / 2 - 1, 0 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:143:9: note: in instantiation of function template specialization 'gaussian_quadrature_split<5, 2, 4, 3, 10, 3, 10, 0, 1>' requested here
+  143 |         gaussian_quadrature_split<rys_unroll, len_d, len_c, ncg_d, ncg_c, ncg_b, ncg_a, 0, ncg_b_gq_a>( int_cba_buf_x, int_cba_buf_y, int_cba_buf_z, partial_eris_stream_out_0, partial_eris_stream_out_1 );
+      |         ^
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'ap_uint<160> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+In file included from /workspace/repo/fpga/src/device/k_gaussian_quadrature_a.cpp:4:
+/workspace/repo/fpga/src/device/gaussian_qaudrature_opt.h:222:42: error: no viable conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160>'
+  222 |         partial_eris_stream_out_1.write( result.range( bit_width - 1, bit_width / 2 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'ap_uint<160> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+3 errors generated.
+In file included from /workspace/repo/fpga/src/device/k_compress_store.cpp:2:
+/workspace/repo/fpga/src/device/compress_store_split.h:45:25: error: ambiguous conversion for C-style cast from 'ap_ufixed<16, 16, 6, 0>' to 'short'
+   45 |         p_eri.data[i] = (short) r;
+      |                         ^~~~~~~~~
+/workspace/stubs/ap_fixed.h:125:5: note: candidate function
+  125 |     operator double() const { return val; }
+      |     ^
+/workspace/stubs/ap_fixed.h:126:5: note: candidate function
+  126 |     operator float() const { return static_cast<float>(val); }
+      |     ^
+/workspace/stubs/ap_fixed.h:127:5: note: candidate function
+  127 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_fixed.h:128:5: note: candidate function
+  128 |     operator int() const { return static_cast<int>(val); }
+      |     ^
 1 error generated.
-Compilation FAIL on attempt 0. Attempting simple fix...
-/output/SERI/k_gaussian_quadrature_a/testbench.cpp:2:10: fatal error: 'rys_testbench.h' file not found
-    2 | #include "rys_testbench.h"
-      |          ^~~~~~~~~~~~~~~~~
+In file included from /workspace/repo/fpga/src/device/k_recurrence_relations.cpp:2:
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   53 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, float)
+   53 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned __int128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:188:42: error: no viable conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512>'
+  188 |                 ucba_stream_out_0.write( packet.range( ucba_pt::bit_width / 2 - 1, 0 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+In file included from /workspace/repo/fpga/src/device/k_recurrence_relations.cpp:2:
+/workspace/repo/fpga/src/device/recurrence_relations.h:189:42: error: no viable conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512>'
+  189 |                 ucba_stream_out_1.write( packet.range( ucba_pt::bit_width - 1, ucba_pt::bit_width / 2 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+3 errors generated.
+In file included from /workspace/repo/fpga/src/device/k_rr_a.cpp:2:
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   53 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, float)
+   53 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned __int128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:188:42: error: no viable conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512>'
+  188 |                 ucba_stream_out_0.write( packet.range( ucba_pt::bit_width / 2 - 1, 0 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+In file included from /workspace/repo/fpga/src/device/k_rr_a.cpp:2:
+/workspace/repo/fpga/src/device/recurrence_relations.h:189:42: error: no viable conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512>'
+  189 |                 ucba_stream_out_1.write( packet.range( ucba_pt::bit_width - 1, ucba_pt::bit_width / 2 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   33 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, float)
+   33 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:33:27: note: built-in candidate operator<(int, unsigned __int128)
+/workspace/repo/fpga/src/device/k_rr_a.cpp:164:45: error: no viable conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'const ap_uint<512>'
+  164 |                     ucba_stream_out_0.write(packed_dcbaox);
+      |                                             ^~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'packed_array'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'packed_array'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/repo/fpga/src/device/packed_array.hpp:66:5: note: candidate function
+   66 |     operator ap_uint<bit_width>() // NOLINT(*-explicit-constructor)
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+5 errors generated.
+In file included from /workspace/repo/fpga/src/device/k_rr_b.cpp:2:
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   53 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, float)
+   53 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/recurrence_relations.h:53:27: note: built-in candidate operator<(int, unsigned __int128)
+/workspace/repo/fpga/src/device/recurrence_relations.h:188:42: error: no viable conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512>'
+  188 |                 ucba_stream_out_0.write( packet.range( ucba_pt::bit_width / 2 - 1, 0 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+In file included from /workspace/repo/fpga/src/device/k_rr_b.cpp:2:
+/workspace/repo/fpga/src/device/recurrence_relations.h:189:42: error: no viable conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512>'
+  189 |                 ucba_stream_out_1.write( packet.range( ucba_pt::bit_width - 1, ucba_pt::bit_width / 2 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<1024>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   28 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, float)
+   28 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:28:27: note: built-in candidate operator<(int, unsigned __int128)
+/workspace/repo/fpga/src/device/k_rr_b.cpp:149:46: error: no viable conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'const ap_uint<512>'
+  149 |                     ucba_stream_out_1.write( packed_dcbaox );
+      |                                              ^~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'const ap_uint<512> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'ap_uint<512> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'cba_pt' (aka 'packed_array<float, len_c, len_b, len_a>') to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'packed_array'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'packed_array'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/repo/fpga/src/device/packed_array.hpp:66:5: note: candidate function
+   66 |     operator ap_uint<bit_width>() // NOLINT(*-explicit-constructor)
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+5 errors generated.
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   36 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, float)
+   36 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/k_buffer_permutation.cpp:36:27: note: built-in candidate operator<(int, unsigned __int128)
 1 error generated.
-Compilation FAIL on attempt 1. Attempting simple fix...
-/output/SERI/k_gaussian_quadrature_a/testbench.cpp:2:10: fatal error: 'rys_testbench.h' file not found
-    2 | #include "rys_testbench.h"
-      |          ^~~~~~~~~~~~~~~~~
-1 error generated.
-Compilation FAIL on attempt 2. Attempting simple fix...
-Compilation FAIL after maximum attempts.
+In file included from /workspace/repo/fpga/src/device/k_find_bmax.cpp:3:
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   73 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, float)
+   73 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/find_bmax.h:73:27: note: built-in candidate operator<(int, unsigned __int128)
+/workspace/repo/fpga/src/device/find_bmax.h:86:55: error: no viable conversion from 'ap_uint_range_ref<960>' to 'ap_uint<ba_cart_eris_pt::bit_width / 2>'
+   86 |             D_WIDTH( ba_cart_eris_pt::bit_width / 2 ) packet_0 = full.range( ba_cart_eris_pt::bit_width / 2 - 1, 0 );
+      |                                                       ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<960>' to 'const ap_uint<480> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<960>' to 'ap_uint<480> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+In file included from /workspace/repo/fpga/src/device/k_find_bmax.cpp:3:
+/workspace/repo/fpga/src/device/find_bmax.h:87:55: error: no viable conversion from 'ap_uint_range_ref<960>' to 'ap_uint<ba_cart_eris_pt::bit_width / 2>'
+   87 |             D_WIDTH( ba_cart_eris_pt::bit_width / 2 ) packet_1 = full.range( ba_cart_eris_pt::bit_width - 1, ba_cart_eris_pt::bit_width / 2 );
+      |                                                       ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<960>' to 'const ap_uint<480> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<960>' to 'ap_uint<480> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<960>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+3 errors generated.
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   73 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, float)
+   73 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, double)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, long double)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, __float128)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, int)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, long long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, __int128)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, unsigned int)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, unsigned long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, unsigned long long)
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:73:27: note: built-in candidate operator<(int, unsigned __int128)
+In file included from /workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:4:
+/workspace/repo/fpga/src/device/gaussian_qaudrature_opt.h:221:42: error: no viable conversion from 'ap_uint_range_ref<640>' to 'const ap_uint<320>'
+  221 |         partial_eris_stream_out_0.write( result.range( bit_width / 2 - 1, 0 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:126:9: note: in instantiation of function template specialization 'gaussian_quadrature_split<5, 2, 4, 3, 10, 3, 10, 1, 3>' requested here
+  126 |         gaussian_quadrature_split<rys_unroll, len_d, len_c, ncg_d, ncg_c, ncg_b, ncg_a, ncg_b_gq_a, ncg_b>( int_cba_buf_x, int_cba_buf_y, int_cba_buf_z, partial_eris_stream_out_0, partial_eris_stream_out_1 );
+      |         ^
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<640>' to 'const ap_uint<320> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<640>' to 'ap_uint<320> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+In file included from /workspace/repo/fpga/src/device/k_gaussian_quadrature_b.cpp:4:
+/workspace/repo/fpga/src/device/gaussian_qaudrature_opt.h:222:42: error: no viable conversion from 'ap_uint_range_ref<640>' to 'const ap_uint<320>'
+  222 |         partial_eris_stream_out_1.write( result.range( bit_width - 1, bit_width / 2 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<640>' to 'const ap_uint<320> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<640>' to 'ap_uint<320> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<640>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+3 errors generated.
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'n_t' (aka 'ap_uint<21>'))
+   83 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                       ~~~ ^ ~
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: because of ambiguity in conversion of 'n_t' (aka 'ap_uint<21>') to 'float'
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, float)
+   83 |     for( int i_n = 0; i_n < n; ++i_n )
+      |                           ^
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, double)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, long double)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, __float128)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, int)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, long)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, long long)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, __int128)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned int)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned long)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned long long)
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:83:27: note: built-in candidate operator<(int, unsigned __int128)
+In file included from /output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:4:
+/workspace/repo/fpga/src/device/gaussian_qaudrature_opt.h:221:42: error: no viable conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160>'
+  221 |         partial_eris_stream_out_0.write( result.range( bit_width / 2 - 1, 0 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:143:9: note: in instantiation of function template specialization 'gaussian_quadrature_split<5, 2, 4, 3, 10, 3, 10, 0, 1>' requested here
+  143 |         gaussian_quadrature_split<rys_unroll, len_d, len_c, ncg_d, ncg_c, ncg_b, ncg_a, 0, ncg_b_gq_a>( int_cba_buf_x, int_cba_buf_y, int_cba_buf_z, partial_eris_stream_out_0, partial_eris_stream_out_1 );
+      |         ^
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'ap_uint<160> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+In file included from /output/SERI/k_gaussian_quadrature_a/k_gaussian_quadrature_a.cpp:4:
+/workspace/repo/fpga/src/device/gaussian_qaudrature_opt.h:222:42: error: no viable conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160>'
+  222 |         partial_eris_stream_out_1.write( result.range( bit_width - 1, bit_width / 2 ) );
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'const ap_uint<160> &' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<320>' to 'ap_uint<160> &&' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
+      |     ^       ~~~~~~~~~~~~~~~~~~~~
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<320>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+      |     ^       ~~~~~~~~~~~
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+      |     ^
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+      |     ^
+/workspace/stubs/ap_int.h:81:5: note: candidate function
+   81 |     operator uint64_t() const {
+      |     ^
+/workspace/stubs/hls_stream.h:30:25: note: passing argument to parameter 'val' here
+   30 |     void write(const T& val) {
+      |                         ^
+3 errors generated.
+compile_status: fail

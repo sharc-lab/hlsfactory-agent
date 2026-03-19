@@ -1,25 +1,24 @@
-Compilation Log for disparity
 /output/S2CBench/disparity/disparity.cpp:29:17: error: use of overloaded operator '<' is ambiguous (with operand types 'int' and 'sc_uint<16>' (aka 'ap_uint<16>'))
    29 |                 for (i = 0; i < width ; i++)
       |                             ~ ^ ~~~~~
 /output/S2CBench/disparity/disparity.cpp:29:17: note: because of ambiguity in conversion of 'sc_uint<16>' (aka 'ap_uint<16>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/disparity/disparity.cpp:29:17: note: built-in candidate operator<(int, float)
    29 |                 for (i = 0; i < width ; i++)
@@ -39,23 +38,23 @@ Compilation Log for disparity
    33 |                         if (i < width - shift )
       |                             ~ ^ ~~~~~~~~~~~~~
 /output/S2CBench/disparity/disparity.cpp:33:10: note: because of ambiguity in conversion of 'ap_uint<16>' to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/disparity/disparity.cpp:33:10: note: built-in candidate operator<(int, float)
    33 |                         if (i < width - shift )
@@ -75,23 +74,23 @@ Compilation Log for disparity
    54 |         for (i = 0; i < width - WIN_SIZE + 1; i++)
       |                     ~ ^ ~~~~~~~~~~~~~~~~~~~~
 /output/S2CBench/disparity/disparity.cpp:54:16: note: because of ambiguity in conversion of 'ap_uint<16>' to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/disparity/disparity.cpp:54:16: note: built-in candidate operator<(int, float)
    54 |         for (i = 0; i < width - WIN_SIZE + 1; i++)
@@ -111,23 +110,23 @@ Compilation Log for disparity
    62 |                                 accu += image_diff[i + ii][j];
       |                                 ~~~~ ^  ~~~~~~~~~~~~~~~~~~~~~
 /output/S2CBench/disparity/disparity.cpp:62:10: note: because of ambiguity in conversion of 'sc_uint<8>' (aka 'ap_uint<8>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/disparity/disparity.cpp:62:10: note: built-in candidate operator+=(int &, float)
    62 |                                 accu += image_diff[i + ii][j];
@@ -147,23 +146,23 @@ Compilation Log for disparity
    74 |         for (i=0; i < width - WIN_SIZE + 1; i++)
       |                   ~ ^ ~~~~~~~~~~~~~~~~~~~~
 /output/S2CBench/disparity/disparity.cpp:74:14: note: because of ambiguity in conversion of 'ap_uint<16>' to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/disparity/disparity.cpp:74:14: note: built-in candidate operator<(int, float)
    74 |         for (i=0; i < width - WIN_SIZE + 1; i++)
@@ -183,23 +182,23 @@ Compilation Log for disparity
    98 |                 for ( i=0; i < width_read; i++){
       |                            ~ ^ ~~~~~~~~~~
 /output/S2CBench/disparity/disparity.cpp:98:16: note: because of ambiguity in conversion of 'sc_uint<16>' (aka 'ap_uint<16>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/disparity/disparity.cpp:98:16: note: built-in candidate operator<(int, float)
    98 |                 for ( i=0; i < width_read; i++){
@@ -219,23 +218,23 @@ Compilation Log for disparity
   124 |                 for ( i=0; i < width_read - WIN_SIZE + 1; i++){
       |                            ~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~
 /output/S2CBench/disparity/disparity.cpp:124:16: note: because of ambiguity in conversion of 'ap_uint<16>' to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/disparity/disparity.cpp:124:16: note: built-in candidate operator<(int, float)
   124 |                 for ( i=0; i < width_read - WIN_SIZE + 1; i++){

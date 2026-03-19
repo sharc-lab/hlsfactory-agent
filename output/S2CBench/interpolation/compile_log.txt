@@ -1,4 +1,3 @@
-Compilation Log for interpolation
 /output/S2CBench/interpolation/filter_interp.cpp:79:28: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_fixed<16, 2, 0, 0>' (aka 'ap_fixed<16, 2, 0, 0>') and 'const sc_fixed<17, 2, 0, 0>' (aka 'const ap_fixed<17, 2, 0, 0>'))
    79 |                         SoP1 = SoP1 + buffer[n] * coeff1[n];
       |                                       ~~~~~~~~~ ^ ~~~~~~~~~

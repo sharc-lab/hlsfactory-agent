@@ -1,33 +1,32 @@
-Compilation Log for ave8
 /output/S2CBench/ave8/ave8.cpp:49:24: error: use of overloaded operator '/' is ambiguous (with operand types 'sc_uint<11>' (aka 'ap_uint<11>') and 'int')
    49 |                 ave8_output.write(sum/SIZE) ;
       |                                   ~~~^~~~~
-/workspace/stubs/ap_int.h:254:13: note: candidate function
-  254 |     ap_uint operator/(unsigned int other) const { return ap_uint(val / other); }
+/workspace/stubs/ap_int.h:260:13: note: candidate function
+  260 |     ap_uint operator/(unsigned int other) const { return ap_uint(val / other); }
       |             ^
-/workspace/stubs/ap_int.h:239:13: note: candidate function
-  239 |     ap_uint operator/(const ap_uint& other) const { return ap_uint(val / other.val); }
+/workspace/stubs/ap_int.h:245:13: note: candidate function
+  245 |     ap_uint operator/(const ap_uint& other) const { return ap_uint(val / other.val); }
       |             ^
 /output/S2CBench/ave8/ave8.cpp:49:24: note: because of ambiguity in conversion of 'sc_uint<11>' (aka 'ap_uint<11>') to 'float'
    49 |                 ave8_output.write(sum/SIZE) ;
       |                                      ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/ave8/ave8.cpp:49:24: note: built-in candidate operator/(float, int)
    49 |                 ave8_output.write(sum/SIZE) ;

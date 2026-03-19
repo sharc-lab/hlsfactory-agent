@@ -179,6 +179,12 @@ public:
     int64_t range(int hi, int lo) const {
         return (val >> lo) & ((1LL << (hi - lo + 1)) - 1);
     }
+    ap_range_ref<W> operator()(int hi, int lo) {
+        return range(hi, lo);
+    }
+    int64_t operator()(int hi, int lo) const {
+        return range(hi, lo);
+    }
 
     // Concat / slice helpers
     int length() const { return W; }
@@ -293,6 +299,12 @@ public:
     }
     uint64_t range(int hi, int lo) const {
         return (val >> lo) & ((1ULL << (hi - lo + 1)) - 1);
+    }
+    ap_uint_range_ref<W> operator()(int hi, int lo) {
+        return range(hi, lo);
+    }
+    uint64_t operator()(int hi, int lo) const {
+        return range(hi, lo);
     }
 
     int length() const { return W; }

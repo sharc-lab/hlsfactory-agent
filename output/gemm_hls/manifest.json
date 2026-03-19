@@ -1,0 +1,21 @@
+{
+  "repo_name": "gemm_hls",
+  "repo_url": "https://github.com/spcl/gemm_hls.git",
+  "framework": "vivado_hls",
+  "total_designs": 1,
+  "designs": [
+    {
+      "name": "MatrixMultiplication",
+      "top_function": "MatrixMultiplicationKernel",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": [
+        "Top.cpp",
+        "Memory.cpp",
+        "Compute.cpp",
+        "testbench.cpp"
+      ]
+    }
+  ]
+}

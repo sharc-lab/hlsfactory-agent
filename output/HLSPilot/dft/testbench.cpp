@@ -1,5 +1,2 @@
-#include <iostream>
-int main(){
-    std::cout << "Testbench" << std::endl;
-    return 0;
-}
+#include "dft_pipeline.cpp"
+int main(){return 0;}

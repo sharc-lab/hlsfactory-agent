@@ -1,1 +1,1 @@
-# md5c Design
+# md5c

@@ -1,5 +1,2 @@
-#include <iostream>
-int main(){
-    std::cout << "Testbench" << std::endl;
-    return 0;
-}
+#include "merge_sort.cpp"
+int main(){return 0;}

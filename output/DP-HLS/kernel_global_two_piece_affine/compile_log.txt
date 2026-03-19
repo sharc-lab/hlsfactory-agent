@@ -1,0 +1,4 @@
+/output/DP-HLS/kernel_global_two_piece_affine/kernel_global_two_piece_affine.cpp:2:10: fatal error: '../../include/frontend.h' file not found
+    2 | #include "../../include/frontend.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

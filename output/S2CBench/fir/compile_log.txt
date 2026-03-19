@@ -1,4 +1,3 @@
-Compilation Log for fir
 /output/S2CBench/fir/fir.cpp:67:31: error: use of overloaded operator '*' is ambiguous (with operand types 'sc_int<25>' (aka 'ap_int<25>') and 'sc_uint<8>' (aka 'ap_uint<8>'))
    67 |                 sop += sc_int<25>(coeff[i]) * ary[i];
       |                        ~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~
@@ -8,8 +7,8 @@ Compilation Log for fir
 /workspace/stubs/ap_int.h:140:12: note: candidate function
   140 |     ap_int operator*(int other) const { return ap_int(val * other); }
       |            ^
-/workspace/stubs/ap_int.h:307:12: note: candidate function [with W = 8]
-  307 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
+/workspace/stubs/ap_int.h:319:12: note: candidate function [with W = 8]
+  319 | ap_uint<W> operator*(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs * rhs.val); }
       |            ^
 /output/S2CBench/fir/fir.cpp:71:11: error: use of overloaded operator '<' is ambiguous (with operand types 'sc_int<25>' (aka 'ap_int<25>') and 'int')
    71 |         if ( sop < 0 ){

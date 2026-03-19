@@ -1,5 +1,2 @@
-#include <iostream>
-int main(){
-    std::cout << "Testbench" << std::endl;
-    return 0;
-}
+#include "prefix_sum.cpp"
+int main(){return 0;}

@@ -1,9 +1,8 @@
-open_project n1024_UF2_proj
-set_top FFT_TOP
-add_files -cflags "-I/workspace/stubs -I/output/HP-FFT-HLS/n1024_UF2" /output/HP-FFT-HLS/n1024_UF2/*.cpp
+open_project /output/HP-FFT-HLS/n1024_UF2
+set_top RADIX2_BFLY_double_buffer_quarter_CY
+add_files [glob /output/HP-FFT-HLS/n1024_UF2/*.cpp /output/HP-FFT-HLS/n1024_UF2/*.h]
 add_files -tb /output/HP-FFT-HLS/n1024_UF2/testbench.cpp
 open_solution "solution1"
 set_part xcu250-figd2104-2L-e
-create_clock -period 5 -name default
 csynth_design
 exit

@@ -1,8 +1,9 @@
 open_project k_gaussian_quadrature_b_proj
-set_top /output/SERI/k_gaussian_quadrature_b/k_gaussian_quadrature_b.cpp:k_gaussian_quadrature_b
-set_part xcu250-figd2104-2L-e
-add_files {/output/SERI/k_gaussian_quadrature_b/*.cpp}
-add_files -tb {/output/SERI/k_gaussian_quadrature_b/testbench.cpp}
+set_top k_gaussian_quadrature_b
+add_files k_gaussian_quadrature_b.cpp
+add_files -tb testbench.cpp
 open_solution "solution1"
+set_part {xcu250-figd2104-2L-e}
+create_clock -period 5 -name default
 csynth_design
 exit

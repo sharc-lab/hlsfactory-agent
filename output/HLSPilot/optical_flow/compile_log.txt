@@ -1,4 +1,7 @@
-Compilation Log:
+/output/HLSPilot/optical_flow/testbench.cpp:1:10: fatal error: 'optical_flow.cpp' file not found
+    1 | #include "optical_flow.cpp"
+      |          ^~~~~~~~~~~~~~~~~~
+1 error generated.
 /output/HLSPilot/optical_flow/src/ocl/optical_flow.cpp:9:10: fatal error: 'host/typedefs.h' file not found
     9 | #include "host/typedefs.h"
       |          ^~~~~~~~~~~~~~~~~

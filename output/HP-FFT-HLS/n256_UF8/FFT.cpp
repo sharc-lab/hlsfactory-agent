@@ -113,22 +113,22 @@ void reverse_input_stream_UF8 (
         for (int u = 0; u < UF*2; u++) {
             reversed[u] = bit_reverse<EXP2_FFT>(original[u]);
         }
-        data_rev_stream[0][(int)reversed[0]% (int)TIME_STEP] = temp[0];
-        data_rev_stream[8][(int)reversed[1]% (int)TIME_STEP] = temp[1];
-        data_rev_stream[4][(int)reversed[2]% (int)TIME_STEP] = temp[2];
-        data_rev_stream[12][(int)reversed[3]% (int)TIME_STEP] = temp[3];
-        data_rev_stream[2][reversed[4]% (int)TIME_STEP] = temp[4];
-        data_rev_stream[10][reversed[5]% (int)TIME_STEP] = temp[5];
-        data_rev_stream[6][reversed[6]% (int)TIME_STEP] = temp[6];
-        data_rev_stream[14][reversed[7]% (int)TIME_STEP] = temp[7];
-        data_rev_stream[1][reversed[8]% (int)TIME_STEP] = temp[8];
-        data_rev_stream[9][reversed[9]% (int)TIME_STEP] = temp[9];
-        data_rev_stream[5][reversed[10]% (int)TIME_STEP] = temp[10];
-        data_rev_stream[13][reversed[11]% (int)TIME_STEP] = temp[11];
-        data_rev_stream[3][reversed[12]% (int)TIME_STEP] = temp[12];
-        data_rev_stream[11][reversed[13]% (int)TIME_STEP] = temp[13];
-        data_rev_stream[7][reversed[14]% (int)TIME_STEP] = temp[14];
-        data_rev_stream[15][reversed[15]% (int)TIME_STEP] = temp[15];
+        data_rev_stream[0][reversed[0]%TIME_STEP] = temp[0];
+        data_rev_stream[8][reversed[1]%TIME_STEP] = temp[1];
+        data_rev_stream[4][reversed[2]%TIME_STEP] = temp[2];
+        data_rev_stream[12][reversed[3]%TIME_STEP] = temp[3];
+        data_rev_stream[2][reversed[4]%TIME_STEP] = temp[4];
+        data_rev_stream[10][reversed[5]%TIME_STEP] = temp[5];
+        data_rev_stream[6][reversed[6]%TIME_STEP] = temp[6];
+        data_rev_stream[14][reversed[7]%TIME_STEP] = temp[7];
+        data_rev_stream[1][reversed[8]%TIME_STEP] = temp[8];
+        data_rev_stream[9][reversed[9]%TIME_STEP] = temp[9];
+        data_rev_stream[5][reversed[10]%TIME_STEP] = temp[10];
+        data_rev_stream[13][reversed[11]%TIME_STEP] = temp[11];
+        data_rev_stream[3][reversed[12]%TIME_STEP] = temp[12];
+        data_rev_stream[11][reversed[13]%TIME_STEP] = temp[13];
+        data_rev_stream[7][reversed[14]%TIME_STEP] = temp[14];
+        data_rev_stream[15][reversed[15]%TIME_STEP] = temp[15];
     }
 
 
@@ -137,7 +137,7 @@ void reverse_input_stream_UF8 (
         #pragma HLS pipeline II=1
         for (int u = 0; u < UF*2; u++) {
             int index = i * UF*2 + u;
-            data_in_cyclic[u][i] = data_rev_stream[index/TIME_STEP][index% (int)TIME_STEP];
+            data_in_cyclic[u][i] = data_rev_stream[index/TIME_STEP][index%TIME_STEP];
         }
     }
 

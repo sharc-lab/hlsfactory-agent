@@ -1,4 +1,7 @@
-Compilation Log:
+/output/HLSPilot/spam_filter/testbench.cpp:1:10: fatal error: 'sgd.cpp' file not found
+    1 | #include "sgd.cpp"
+      |          ^~~~~~~~~
+1 error generated.
 /output/HLSPilot/spam_filter/src/ocl/sgd.cpp:9:10: fatal error: 'host/typedefs.h' file not found
     9 | #include "host/typedefs.h"
       |          ^~~~~~~~~~~~~~~~~

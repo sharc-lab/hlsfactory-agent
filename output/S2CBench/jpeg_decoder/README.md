@@ -1,1 +1,1 @@
-# jpeg_decoder Design
+# jpeg_decoder

@@ -1,7 +1,10 @@
-open_project project
-set_top void disparity::shift_diff( sc_uint<8> image_in_r[IN_BUFFER_DEPTH][WIN_SIZE],
-add_files disparity.cpp main.cpp tb_disparity.cpp 
+open_project disparity
+set_top /output/S2CBench/disparity/main.cpp:int sc_main(int argc, char** argv)
+add_files /output/S2CBench/disparity/disparity.cpp
+add_files /output/S2CBench/disparity/main.cpp
+add_files /output/S2CBench/disparity/tb_disparity.cpp
+add_files -tb /output/S2CBench/disparity/tb_disparity.cpp
 open_solution solution1 -flow_target vivado
-set_part xcu250-figd2104-2L-e
+set_part {xcu250-figd2104-2L-e}
 csynth_design
 exit

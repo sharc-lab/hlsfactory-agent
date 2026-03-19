@@ -1,1 +1,1 @@
-# digit_recognition" Design
+# Design: digit_recognition

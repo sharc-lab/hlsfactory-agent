@@ -1,0 +1,21 @@
+{
+  "run_id": "1243aa74-b799-4b62-8234-c1d4f979a861",
+  "timestamp": "2026-03-19T03:19:06.799935+00:00",
+  "repo_url": "https://github.com/spcl/gemm_hls.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.024768120000000005,
+  "total_api_calls": 45,
+  "format_errors": 0,
+  "traj_file": "gemm_hls_1243aa74-b799-4b62-8234-c1d4f979a861.traj.json",
+  "quality": {
+    "designs_found": 1,
+    "compile_pass": 1,
+    "compile_fail": 0,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 1,
+    "designs_with_tcl": 1
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "repo_name": "DP-HLS",
+  "repo_url": "https://github.com/TurakhiaLab/DP-HLS.git",
+  "framework": "unknown",
+  "total_designs": 30,
+  "designs": [
+        { "name": "banded_global_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["banded_global_linear.cpp"] }
+    ,    { "name": "banded_local_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["banded_local_affine.cpp"] }
+    ,    { "name": "banding_local_affine_scored", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["banding_local_affine_scored.cpp"] }
+    ,    { "name": "global_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["global_affine.cpp"] }
+    ,    { "name": "global_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["global_linear.cpp"] }
+    ,    { "name": "kernel_banding_global_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_banding_global_linear.cpp"] }
+    ,    { "name": "kernel_banding_global_two_piece_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_banding_global_two_piece_affine.cpp"] }
+    ,    { "name": "kernel_banding_local_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_banding_local_affine.cpp"] }
+    ,    { "name": "kernel_dtw", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_dtw.cpp"] }
+    ,    { "name": "kernel_global_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_global_affine.cpp"] }
+    ,    { "name": "kernel_global_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_global_linear.cpp"] }
+    ,    { "name": "kernel_global_two_piece_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_global_two_piece_affine.cpp"] }
+    ,    { "name": "kernel_local_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_local_affine.cpp"] }
+    ,    { "name": "kernel_local_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_local_linear.cpp"] }
+    ,    { "name": "kernel_local_two_piece_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_local_two_piece_affine.cpp"] }
+    ,    { "name": "kernel_overlap_linear_prefix_suffix", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_overlap_linear_prefix_suffix.cpp"] }
+    ,    { "name": "kernel_overlap_linear_suffix_prefix", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_overlap_linear_suffix_prefix.cpp"] }
+    ,    { "name": "kernel_profile_alignment", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_profile_alignment.cpp"] }
+    ,    { "name": "kernel_protein_local_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_protein_local_affine.cpp"] }
+    ,    { "name": "kernel_sdtw", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_sdtw.cpp"] }
+    ,    { "name": "kernel_semi_global_linear_long_short", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_semi_global_linear_long_short.cpp"] }
+    ,    { "name": "kernel_semi_global_linear_short_long", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_semi_global_linear_short_long.cpp"] }
+    ,    { "name": "kernel_sw_software_tiling", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_sw_software_tiling.cpp"] }
+    ,    { "name": "kernel_sw_tiling", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_sw_tiling.cpp"] }
+    ,    { "name": "kernel_viterbi", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["kernel_viterbi.cpp"] }
+    ,    { "name": "local_affine", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["local_affine.cpp"] }
+    ,    { "name": "local_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["local_linear.cpp"] }
+    ,    { "name": "manifest.tmp", "top_function": "unknown", "compile_status": "pass", "has_testbench": true, "has_tcl": true, "source_files": [""] }
+    ,    { "name": "overlap_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["overlap_linear.cpp"] }
+    ,    { "name": "semi_global_linear", "top_function": "unknown", "compile_status": "fail", "has_testbench": true, "has_tcl": true, "source_files": ["semi_global_linear.cpp"] }
+  ]
+}

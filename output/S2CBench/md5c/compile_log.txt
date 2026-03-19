@@ -1,12 +1,11 @@
-Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:123:39: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<32>' and 'int')
   123 |   sc_uint<6> idx = ((m_count[0] >> 3) & 0x3F);
       |                     ~~~~~~~~~~~~~~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/md5c/md5c.cpp:123:39: note: built-in candidate operator&(int, int)
   123 |   sc_uint<6> idx = ((m_count[0] >> 3) & 0x3F);
@@ -79,29 +78,29 @@ Compilation Log for md5c
       |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   127 |       < ((u_int32_t)inputLen << 3)) {
       |       ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:283:10: note: candidate function
-  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+/workspace/stubs/ap_int.h:289:10: note: candidate function
+  289 |     bool operator<(const ap_uint& other) const { return val < other.val; }
       |          ^
 /output/S2CBench/md5c/md5c.cpp:127:7: note: because of ambiguity in conversion of 'ap_uint<32>' to 'float'
   127 |       < ((u_int32_t)inputLen << 3)) {
       |       ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:127:7: note: built-in candidate operator<(float, unsigned int)
   127 |       < ((u_int32_t)inputLen << 3)) {
@@ -253,23 +252,23 @@ Compilation Log for md5c
   132 |   sc_uint<7> partLen = 64 - idx;
       |                        ~~ ^ ~~~
 /output/S2CBench/md5c/md5c.cpp:132:27: note: because of ambiguity in conversion of 'sc_uint<6>' (aka 'ap_uint<6>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:132:27: note: built-in candidate operator-(int, float)
   132 |   sc_uint<7> partLen = 64 - idx;
@@ -285,30 +284,30 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:132:27: note: built-in candidate operator-(int, unsigned long)
 /output/S2CBench/md5c/md5c.cpp:132:27: note: built-in candidate operator-(int, unsigned long long)
 /output/S2CBench/md5c/md5c.cpp:132:27: note: built-in candidate operator-(int, unsigned __int128)
-/workspace/stubs/ap_int.h:305:12: note: candidate function [with W = 6]
-  305 | ap_uint<W> operator-(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs - rhs.val); }
+/workspace/stubs/ap_int.h:317:12: note: candidate function [with W = 6]
+  317 | ap_uint<W> operator-(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs - rhs.val); }
       |            ^
 /output/S2CBench/md5c/md5c.cpp:139:29: error: use of overloaded operator '<' is ambiguous (with operand types 'unsigned int' and 'sc_uint<7>' (aka 'ap_uint<7>'))
   139 |     for ( unsigned j = 0; j < partLen; j++ ) m_buffer[idx+j] = m_input[j];
       |                           ~ ^ ~~~~~~~
 /output/S2CBench/md5c/md5c.cpp:139:29: note: because of ambiguity in conversion of 'sc_uint<7>' (aka 'ap_uint<7>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:139:29: note: built-in candidate operator<(unsigned int, float)
   139 |     for ( unsigned j = 0; j < partLen; j++ ) m_buffer[idx+j] = m_input[j];
@@ -327,45 +326,45 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:139:58: error: conversion from 'ap_uint<6>' to 'long' is ambiguous
   139 |     for ( unsigned j = 0; j < partLen; j++ ) m_buffer[idx+j] = m_input[j];
       |                                                       ~~~^~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:143:30: error: use of overloaded operator '<' is ambiguous (with operand types 'unsigned int' and 'sc_uint<32>' (aka 'ap_uint<32>'))
   143 |     for (i = partLen; i + 63 < inputLen; i += 64) {
       |                       ~~~~~~ ^ ~~~~~~~~
 /output/S2CBench/md5c/md5c.cpp:143:30: note: because of ambiguity in conversion of 'sc_uint<32>' (aka 'ap_uint<32>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:143:30: note: built-in candidate operator<(unsigned int, float)
   143 |     for (i = partLen; i + 63 < inputLen; i += 64) {
@@ -385,23 +384,23 @@ Compilation Log for md5c
   156 |   for ( unsigned j = 0; j < inputLen-i; j ++ ) m_buffer[idx+j] = m_input[i+j];
       |                         ~ ^ ~~~~~~~~~~
 /output/S2CBench/md5c/md5c.cpp:156:27: note: because of ambiguity in conversion of 'ap_uint<32>' to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:156:27: note: built-in candidate operator<(unsigned int, float)
   156 |   for ( unsigned j = 0; j < inputLen-i; j ++ ) m_buffer[idx+j] = m_input[i+j];
@@ -420,32 +419,32 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:156:60: error: conversion from 'ap_uint<6>' to 'long' is ambiguous
   156 |   for ( unsigned j = 0; j < inputLen-i; j ++ ) m_buffer[idx+j] = m_input[i+j];
       |                                                         ~~~^~
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:174:38: error: use of overloaded operator '&' is ambiguous (with operand types 'ap_uint<32>' and 'int')
   174 |   sc_uint<6> idx = (m_count[0] >> 3) & 0x3f;
       |                    ~~~~~~~~~~~~~~~~~ ^ ~~~~
-/workspace/stubs/ap_int.h:256:13: note: candidate function
-  256 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
+/workspace/stubs/ap_int.h:262:13: note: candidate function
+  262 |     ap_uint operator&(unsigned int other) const { return ap_uint(val & other); }
       |             ^
-/workspace/stubs/ap_int.h:241:13: note: candidate function
-  241 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
+/workspace/stubs/ap_int.h:247:13: note: candidate function
+  247 |     ap_uint operator&(const ap_uint& other) const { return ap_uint(val & other.val); }
       |             ^
 /output/S2CBench/md5c/md5c.cpp:174:38: note: built-in candidate operator&(int, int)
   174 |   sc_uint<6> idx = (m_count[0] >> 3) & 0x3f;
@@ -516,29 +515,29 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:175:28: error: use of overloaded operator '<' is ambiguous (with operand types 'sc_uint<6>' (aka 'ap_uint<6>') and 'int')
   175 |   sc_uint<7> padLen = (idx < 56) ? (56 - idx) : (120 - idx);
       |                        ~~~ ^ ~~
-/workspace/stubs/ap_int.h:283:10: note: candidate function
-  283 |     bool operator<(const ap_uint& other) const { return val < other.val; }
+/workspace/stubs/ap_int.h:289:10: note: candidate function
+  289 |     bool operator<(const ap_uint& other) const { return val < other.val; }
       |          ^
 /output/S2CBench/md5c/md5c.cpp:175:28: note: because of ambiguity in conversion of 'sc_uint<6>' (aka 'ap_uint<6>') to 'float'
   175 |   sc_uint<7> padLen = (idx < 56) ? (56 - idx) : (120 - idx);
       |                            ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:175:28: note: built-in candidate operator<(float, int)
   175 |   sc_uint<7> padLen = (idx < 56) ? (56 - idx) : (120 - idx);
@@ -690,23 +689,23 @@ Compilation Log for md5c
   175 |   sc_uint<7> padLen = (idx < 56) ? (56 - idx) : (120 - idx);
       |                                     ~~ ^ ~~~
 /output/S2CBench/md5c/md5c.cpp:175:40: note: because of ambiguity in conversion of 'sc_uint<6>' (aka 'ap_uint<6>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:175:40: note: built-in candidate operator-(int, float)
   175 |   sc_uint<7> padLen = (idx < 56) ? (56 - idx) : (120 - idx);
@@ -722,30 +721,30 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:175:40: note: built-in candidate operator-(int, unsigned long)
 /output/S2CBench/md5c/md5c.cpp:175:40: note: built-in candidate operator-(int, unsigned long long)
 /output/S2CBench/md5c/md5c.cpp:175:40: note: built-in candidate operator-(int, unsigned __int128)
-/workspace/stubs/ap_int.h:305:12: note: candidate function [with W = 6]
-  305 | ap_uint<W> operator-(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs - rhs.val); }
+/workspace/stubs/ap_int.h:317:12: note: candidate function [with W = 6]
+  317 | ap_uint<W> operator-(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs - rhs.val); }
       |            ^
 /output/S2CBench/md5c/md5c.cpp:175:54: error: use of overloaded operator '-' is ambiguous (with operand types 'int' and 'sc_uint<6>' (aka 'ap_uint<6>'))
   175 |   sc_uint<7> padLen = (idx < 56) ? (56 - idx) : (120 - idx);
       |                                                  ~~~ ^ ~~~
 /output/S2CBench/md5c/md5c.cpp:175:54: note: because of ambiguity in conversion of 'sc_uint<6>' (aka 'ap_uint<6>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:175:54: note: built-in candidate operator-(int, float)
   175 |   sc_uint<7> padLen = (idx < 56) ? (56 - idx) : (120 - idx);
@@ -761,30 +760,30 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:175:54: note: built-in candidate operator-(int, unsigned long)
 /output/S2CBench/md5c/md5c.cpp:175:54: note: built-in candidate operator-(int, unsigned long long)
 /output/S2CBench/md5c/md5c.cpp:175:54: note: built-in candidate operator-(int, unsigned __int128)
-/workspace/stubs/ap_int.h:305:12: note: candidate function [with W = 6]
-  305 | ap_uint<W> operator-(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs - rhs.val); }
+/workspace/stubs/ap_int.h:317:12: note: candidate function [with W = 6]
+  317 | ap_uint<W> operator-(unsigned int lhs, const ap_uint<W>& rhs) { return ap_uint<W>(lhs - rhs.val); }
       |            ^
 /output/S2CBench/md5c/md5c.cpp:177:27: error: use of overloaded operator '<' is ambiguous (with operand types 'unsigned int' and 'sc_uint<7>' (aka 'ap_uint<7>'))
   177 |   for ( unsigned j = 0; j < padLen; j++ ) m_input[j] = PADDING[j];
       |                         ~ ^ ~~~~~~
 /output/S2CBench/md5c/md5c.cpp:177:27: note: because of ambiguity in conversion of 'sc_uint<7>' (aka 'ap_uint<7>') to 'float'
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:177:27: note: built-in candidate operator<(unsigned int, float)
   177 |   for ( unsigned j = 0; j < padLen; j++ ) m_input[j] = PADDING[j];
@@ -803,35 +802,35 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:203:21: error: no viable conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8>'
   203 |     o_digest.write( m_state[j].range(  7,  0 ) ); wait();
       |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:207:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
-  207 |     ap_uint(unsigned int v) : val(v) {}
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:208:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
-  208 |     ap_uint(unsigned long v) : val(v) {}
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:209:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
-  209 |     ap_uint(unsigned long long v) : val(v) {}
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:210:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
-  210 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~
-/workspace/stubs/ap_int.h:211:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
-  211 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~
-/workspace/stubs/ap_int.h:212:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
-  212 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~~~~~~
-/workspace/stubs/ap_int.h:216:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
-  216 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
       |     ^
-/workspace/stubs/ap_int.h:218:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
-  218 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
       |     ^
 /workspace/stubs/ap_int.h:81:5: note: candidate function
    81 |     operator uint64_t() const {
@@ -842,35 +841,35 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:204:21: error: no viable conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8>'
   204 |     o_digest.write( m_state[j].range( 15,  8 ) ); wait();
       |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:207:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
-  207 |     ap_uint(unsigned int v) : val(v) {}
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:208:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
-  208 |     ap_uint(unsigned long v) : val(v) {}
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:209:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
-  209 |     ap_uint(unsigned long long v) : val(v) {}
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:210:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
-  210 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~
-/workspace/stubs/ap_int.h:211:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
-  211 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~
-/workspace/stubs/ap_int.h:212:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
-  212 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~~~~~~
-/workspace/stubs/ap_int.h:216:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
-  216 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
       |     ^
-/workspace/stubs/ap_int.h:218:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
-  218 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
       |     ^
 /workspace/stubs/ap_int.h:81:5: note: candidate function
    81 |     operator uint64_t() const {
@@ -881,35 +880,35 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:205:21: error: no viable conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8>'
   205 |     o_digest.write( m_state[j].range( 23, 16 ) ); wait();
       |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:207:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
-  207 |     ap_uint(unsigned int v) : val(v) {}
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:208:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
-  208 |     ap_uint(unsigned long v) : val(v) {}
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:209:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
-  209 |     ap_uint(unsigned long long v) : val(v) {}
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:210:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
-  210 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~
-/workspace/stubs/ap_int.h:211:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
-  211 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~
-/workspace/stubs/ap_int.h:212:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
-  212 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~~~~~~
-/workspace/stubs/ap_int.h:216:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
-  216 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
       |     ^
-/workspace/stubs/ap_int.h:218:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
-  218 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
       |     ^
 /workspace/stubs/ap_int.h:81:5: note: candidate function
    81 |     operator uint64_t() const {
@@ -920,35 +919,35 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:206:21: error: no viable conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8>'
   206 |     o_digest.write( m_state[j].range( 31, 24 ) ); wait();
       |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'const ap_uint<8> &' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'ap_uint_range_ref<32>' to 'ap_uint<8> &&' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:207:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
-  207 |     ap_uint(unsigned int v) : val(v) {}
+/workspace/stubs/ap_int.h:213:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned int' for 1st argument
+  213 |     ap_uint(unsigned int v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:208:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
-  208 |     ap_uint(unsigned long v) : val(v) {}
+/workspace/stubs/ap_int.h:214:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long' for 1st argument
+  214 |     ap_uint(unsigned long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:209:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
-  209 |     ap_uint(unsigned long long v) : val(v) {}
+/workspace/stubs/ap_int.h:215:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'unsigned long long' for 1st argument
+  215 |     ap_uint(unsigned long long v) : val(v) {}
       |     ^       ~~~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:210:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
-  210 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:216:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'int' for 1st argument
+  216 |     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~
-/workspace/stubs/ap_int.h:211:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
-  211 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:217:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long' for 1st argument
+  217 |     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~
-/workspace/stubs/ap_int.h:212:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
-  212 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+/workspace/stubs/ap_int.h:218:5: note: candidate constructor not viable: no known conversion from 'ap_uint_range_ref<32>' to 'long long' for 1st argument
+  218 |     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
       |     ^       ~~~~~~~~~~~
-/workspace/stubs/ap_int.h:216:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
-  216 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
+/workspace/stubs/ap_int.h:222:5: note: candidate template ignored: could not match 'ap_uint' against 'ap_uint_range_ref'
+  222 |     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
       |     ^
-/workspace/stubs/ap_int.h:218:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
-  218 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+/workspace/stubs/ap_int.h:224:5: note: candidate template ignored: could not match 'ap_int' against 'ap_uint_range_ref'
+  224 |     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
       |     ^
 /workspace/stubs/ap_int.h:81:5: note: candidate function
    81 |     operator uint64_t() const {
@@ -959,29 +958,29 @@ Compilation Log for md5c
 /output/S2CBench/md5c/md5c.cpp:337:24: error: use of overloaded operator '<=' is ambiguous (with operand types 'sc_uint<32>' (aka 'ap_uint<32>') and 'int')
   337 |     assert( m_inputLen <= MD5C_INPUT_BUFSIZE );
       |             ~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~~
-/workspace/stubs/ap_int.h:285:10: note: candidate function
-  285 |     bool operator<=(const ap_uint& other) const { return val <= other.val; }
+/workspace/stubs/ap_int.h:291:10: note: candidate function
+  291 |     bool operator<=(const ap_uint& other) const { return val <= other.val; }
       |          ^
 /output/S2CBench/md5c/md5c.cpp:337:24: note: because of ambiguity in conversion of 'sc_uint<32>' (aka 'ap_uint<32>') to 'float'
   337 |     assert( m_inputLen <= MD5C_INPUT_BUFSIZE );
       |                        ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/S2CBench/md5c/md5c.cpp:337:24: note: built-in candidate operator<=(float, int)
   337 |     assert( m_inputLen <= MD5C_INPUT_BUFSIZE );

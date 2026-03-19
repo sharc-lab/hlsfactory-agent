@@ -1,4 +1,3 @@
-Compilation Log for ann
 /output/S2CBench/ann/ann_tb.cpp:398:109: error: conversion from 'ap_int<8>' to 'unsigned char' is ambiguous
   398 |             result[(i+(i_main/(H/baseB))*baseB)*H + j+(i_main%(H/baseB))*baseB] = outputs[baseB*i+j]->read()+128;
       |                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~

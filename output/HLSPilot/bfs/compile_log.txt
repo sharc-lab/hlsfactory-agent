@@ -1,4 +1,8 @@
-Compilation Log:
+In file included from /output/HLSPilot/bfs/testbench.cpp:1:
+/output/HLSPilot/bfs/host.cpp:1:10: fatal error: 'xcl.h' file not found
+    1 | #include "xcl.h"
+      |          ^~~~~~~
+1 error generated.
 /output/HLSPilot/bfs/host.cpp:1:10: fatal error: 'xcl.h' file not found
     1 | #include "xcl.h"
       |          ^~~~~~~
@@ -9,29 +13,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:66:28: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
    66 |     while ((frontier_empty != 1) || (done != 1)) {
       |             ~~~~~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:66:28: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
    66 |     while ((frontier_empty != 1) || (done != 1)) {
       |                            ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:66:28: note: built-in candidate operator!=(float, int)
    66 |     while ((frontier_empty != 1) || (done != 1)) {
@@ -182,29 +186,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:66:43: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
    66 |     while ((frontier_empty != 1) || (done != 1)) {
       |                                      ~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:66:43: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
    66 |     while ((frontier_empty != 1) || (done != 1)) {
       |                                           ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:66:43: note: built-in candidate operator!=(float, int)
    66 |     while ((frontier_empty != 1) || (done != 1)) {
@@ -355,29 +359,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:71:28: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
    71 |         if (frontier_empty != 1) {
       |             ~~~~~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:71:28: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
    71 |         if (frontier_empty != 1) {
       |                            ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:71:28: note: built-in candidate operator!=(float, int)
    71 |         if (frontier_empty != 1) {
@@ -528,29 +532,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:78:24: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
    78 |         if (done_empty != 1 && frontier_empty == 1) {
       |             ~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:78:24: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
    78 |         if (done_empty != 1 && frontier_empty == 1) {
       |                        ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:78:24: note: built-in candidate operator!=(float, int)
    78 |         if (done_empty != 1 && frontier_empty == 1) {
@@ -701,29 +705,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:78:47: error: use of overloaded operator '==' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
    78 |         if (done_empty != 1 && frontier_empty == 1) {
       |                                ~~~~~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:78:47: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
    78 |         if (done_empty != 1 && frontier_empty == 1) {
       |                                               ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:78:47: note: built-in candidate operator==(float, int)
    78 |         if (done_empty != 1 && frontier_empty == 1) {
@@ -874,29 +878,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:100:24: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
   100 |     while ((rpao_empty != 1) || (done != 1)) {
       |             ~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:100:24: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
   100 |     while ((rpao_empty != 1) || (done != 1)) {
       |                        ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:100:24: note: built-in candidate operator!=(float, int)
   100 |     while ((rpao_empty != 1) || (done != 1)) {
@@ -1047,29 +1051,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:100:39: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
   100 |     while ((rpao_empty != 1) || (done != 1)) {
       |                                  ~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:100:39: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
   100 |     while ((rpao_empty != 1) || (done != 1)) {
       |                                       ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:100:39: note: built-in candidate operator!=(float, int)
   100 |     while ((rpao_empty != 1) || (done != 1)) {
@@ -1220,29 +1224,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:104:24: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
   104 |         if (rpao_empty != 1) {
       |             ~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:104:24: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
   104 |         if (rpao_empty != 1) {
       |                        ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:104:24: note: built-in candidate operator!=(float, int)
   104 |         if (rpao_empty != 1) {
@@ -1393,29 +1397,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:114:24: error: use of overloaded operator '!=' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
   114 |         if (done_empty != 1 && rpao_empty == 1) {
       |             ~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:282:10: note: candidate function
-  282 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
+/workspace/stubs/ap_int.h:288:10: note: candidate function
+  288 |     bool operator!=(const ap_uint& other) const { return val != other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:114:24: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
   114 |         if (done_empty != 1 && rpao_empty == 1) {
       |                        ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:114:24: note: built-in candidate operator!=(float, int)
   114 |         if (done_empty != 1 && rpao_empty == 1) {
@@ -1566,29 +1570,29 @@ Compilation Log:
 /output/HLSPilot/bfs/bfs_pipeline.cpp:114:43: error: use of overloaded operator '==' is ambiguous (with operand types 'uint1_dt' (aka 'ap_uint<1>') and 'int')
   114 |         if (done_empty != 1 && rpao_empty == 1) {
       |                                ~~~~~~~~~~ ^  ~
-/workspace/stubs/ap_int.h:281:10: note: candidate function
-  281 |     bool operator==(const ap_uint& other) const { return val == other.val; }
+/workspace/stubs/ap_int.h:287:10: note: candidate function
+  287 |     bool operator==(const ap_uint& other) const { return val == other.val; }
       |          ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:114:43: note: because of ambiguity in conversion of 'uint1_dt' (aka 'ap_uint<1>') to 'float'
   114 |         if (done_empty != 1 && rpao_empty == 1) {
       |                                           ^
-/workspace/stubs/ap_int.h:220:5: note: candidate function
-  220 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:221:5: note: candidate function
-  221 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:222:5: note: candidate function
-  222 |     operator unsigned long long() const { return val; }
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
       |     ^
-/workspace/stubs/ap_int.h:223:5: note: candidate function
-  223 |     operator int() const { return static_cast<int>(val); }
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
       |     ^
-/workspace/stubs/ap_int.h:224:5: note: candidate function
-  224 |     operator long long() const { return static_cast<long long>(val); }
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
       |     ^
-/workspace/stubs/ap_int.h:225:5: note: candidate function
-  225 |     operator bool() const { return val != 0; }
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
       |     ^
 /output/HLSPilot/bfs/bfs_pipeline.cpp:114:43: note: built-in candidate operator==(float, int)
   114 |         if (done_empty != 1 && rpao_empty == 1) {

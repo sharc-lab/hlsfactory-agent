@@ -1,0 +1,4 @@
+/output/DP-HLS/kernel_banding_local_affine/kernel_banding_local_affine.cpp:1:10: fatal error: 'frontend.h' file not found
+    1 | #include "frontend.h"
+      |          ^~~~~~~~~~~~
+1 error generated.

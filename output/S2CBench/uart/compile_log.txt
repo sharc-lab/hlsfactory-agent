@@ -1,21 +1,20 @@
-Compilation Log for uart
 /output/S2CBench/uart/uart.cpp:33:17: error: no viable overloaded '='
    33 |     r_data_buff = "00000000";
       |     ~~~~~~~~~~~ ^ ~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'const char[9]' to 'const ap_uint<8>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'const char[9]' to 'const ap_uint<8>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'const char[9]' to 'ap_uint<8>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'const char[9]' to 'ap_uint<8>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
 /output/S2CBench/uart/uart.cpp:34:17: error: no viable overloaded '='
    34 |     t_data_buff = "11111111";
       |     ~~~~~~~~~~~ ^ ~~~~~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'const char[9]' to 'const ap_uint<8>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'const char[9]' to 'const ap_uint<8>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
-/workspace/stubs/ap_int.h:202:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'const char[9]' to 'ap_uint<8>' for 1st argument
-  202 | class ap_uint {
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'const char[9]' to 'ap_uint<8>' for 1st argument
+  208 | class ap_uint {
       |       ^~~~~~~
 /output/S2CBench/uart/uart.cpp:61:27: error: use of overloaded operator '<<' is ambiguous (with operand types '__ostream_type' (aka 'basic_ostream<char, std::char_traits<char>>') and 'sc_uint<8>' (aka 'ap_uint<8>'))
    61 |                 cout<<endl<<t_data_buff<<endl;

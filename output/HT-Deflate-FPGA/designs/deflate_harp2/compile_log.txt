@@ -1,1 +1,0 @@
-Verilator not found, skipping RTL syntax check
