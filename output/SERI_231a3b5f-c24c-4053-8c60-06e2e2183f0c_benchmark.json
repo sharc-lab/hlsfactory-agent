@@ -1,0 +1,21 @@
+{
+  "run_id": "231a3b5f-c24c-4053-8c60-06e2e2183f0c",
+  "timestamp": "2026-03-19T04:30:48.810440+00:00",
+  "repo_url": "https://github.com/SFU-HiAccel/SERI.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.006405699999999999,
+  "total_api_calls": 23,
+  "format_errors": 0,
+  "traj_file": "SERI_231a3b5f-c24c-4053-8c60-06e2e2183f0c.traj.json",
+  "quality": {
+    "designs_found": 10,
+    "compile_pass": 0,
+    "compile_fail": 10,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 10,
+    "designs_with_tcl": 10
+  }
+}

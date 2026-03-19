@@ -1,0 +1,48 @@
+{
+  "repo_name": "hls-fpga-accelerators",
+  "repo_url": "https://github.com/ECASLab/hls-fpga-accelerators.git",
+  "framework": "unknown",
+  "total_designs": 5,
+  "designs": [
+    {
+      "name": "elementwise",
+      "top_function": "elementwise",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["elementwise.cpp"]
+    },
+    {
+      "name": "matmul",
+      "top_function": "matmul",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["matmul.cpp"]
+    },
+    {
+      "name": "rmsnorm",
+      "top_function": "rmsnorm",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["rmsnorm.cpp"]
+    },
+    {
+      "name": "softmax",
+      "top_function": "softmax",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["softmax.cpp"]
+    },
+    {
+      "name": "unary",
+      "top_function": "unary",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["unary.cpp"]
+    }
+  ]
+}

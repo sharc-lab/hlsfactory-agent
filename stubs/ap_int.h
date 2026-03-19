@@ -11,6 +11,7 @@
 
 #include <cstdint>
 #include <limits>
+#include <type_traits>
 
 // Forward declarations
 template<int W> class ap_int;
@@ -103,6 +104,10 @@ public:
     ap_int(const ap_int<W2>& other) : val(other.val) {}
     template<int W2>
     ap_int(const ap_uint<W2>& other) : val(static_cast<int64_t>(other.val)) {}
+    template<int W2>
+    ap_int(const ap_range_ref<W2>& other) : val(static_cast<int64_t>(other)) {}
+    template<int W2>
+    ap_int(const ap_uint_range_ref<W2>& other) : val(static_cast<int64_t>(other)) {}
 
     operator int() const { return static_cast<int>(val); }
     operator unsigned int() const { return static_cast<unsigned int>(val); }
@@ -168,6 +173,18 @@ public:
     bool operator>(const ap_int& other) const { return val > other.val; }
     bool operator<=(const ap_int& other) const { return val <= other.val; }
     bool operator>=(const ap_int& other) const { return val >= other.val; }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator==(T other) const { return val == static_cast<int64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator!=(T other) const { return val != static_cast<int64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator<(T other) const { return val < static_cast<int64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator>(T other) const { return val > static_cast<int64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator<=(T other) const { return val <= static_cast<int64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator>=(T other) const { return val >= static_cast<int64_t>(other); }
 
     // Bit access
     bool operator[](int i) const { return (val >> i) & 1; }
@@ -201,6 +218,14 @@ template<int W>
 bool operator==(int lhs, const ap_int<W>& rhs) { return lhs == rhs.val; }
 template<int W>
 bool operator!=(int lhs, const ap_int<W>& rhs) { return lhs != rhs.val; }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator<(T lhs, const ap_int<W>& rhs) { return static_cast<int64_t>(lhs) < rhs.val; }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator>(T lhs, const ap_int<W>& rhs) { return static_cast<int64_t>(lhs) > rhs.val; }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator<=(T lhs, const ap_int<W>& rhs) { return static_cast<int64_t>(lhs) <= rhs.val; }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator>=(T lhs, const ap_int<W>& rhs) { return static_cast<int64_t>(lhs) >= rhs.val; }
 
 
 // Arbitrary-precision unsigned integer
@@ -222,6 +247,16 @@ public:
     ap_uint(const ap_uint<W2>& other) : val(other.val) {}
     template<int W2>
     ap_uint(const ap_int<W2>& other) : val(static_cast<uint64_t>(other.val)) {}
+    template<int W2>
+    ap_uint(const ap_range_ref<W2>& other) : val(static_cast<uint64_t>(other)) {}
+    template<int W2>
+    ap_uint(const ap_uint_range_ref<W2>& other) : val(static_cast<uint64_t>(other)) {}
+    template<typename U, int BW = U::bit_width, typename std::enable_if<!std::is_integral<U>::value, int>::type = 0>
+    ap_uint(const U& other) {
+        U tmp = other;
+        ap_uint<BW> packed = static_cast<ap_uint<BW>>(tmp);
+        val = static_cast<uint64_t>(packed.val);
+    }
 
     operator unsigned int() const { return static_cast<unsigned int>(val); }
     operator unsigned long() const { return static_cast<unsigned long>(val); }
@@ -290,6 +325,18 @@ public:
     bool operator>(const ap_uint& other) const { return val > other.val; }
     bool operator<=(const ap_uint& other) const { return val <= other.val; }
     bool operator>=(const ap_uint& other) const { return val >= other.val; }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator==(T other) const { return val == static_cast<uint64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator!=(T other) const { return val != static_cast<uint64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator<(T other) const { return val < static_cast<uint64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator>(T other) const { return val > static_cast<uint64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator<=(T other) const { return val <= static_cast<uint64_t>(other); }
+    template<typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    bool operator>=(T other) const { return val >= static_cast<uint64_t>(other); }
 
     bool operator[](int i) const { return (val >> i) & 1; }
 
@@ -321,6 +368,14 @@ template<int W>
 bool operator==(unsigned int lhs, const ap_uint<W>& rhs) { return lhs == rhs.val; }
 template<int W>
 bool operator!=(unsigned int lhs, const ap_uint<W>& rhs) { return lhs != rhs.val; }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator<(T lhs, const ap_uint<W>& rhs) { return static_cast<long long>(lhs) < static_cast<long long>(rhs.val); }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator>(T lhs, const ap_uint<W>& rhs) { return static_cast<long long>(lhs) > static_cast<long long>(rhs.val); }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator<=(T lhs, const ap_uint<W>& rhs) { return static_cast<long long>(lhs) <= static_cast<long long>(rhs.val); }
+template<typename T, int W, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+bool operator>=(T lhs, const ap_uint<W>& rhs) { return static_cast<long long>(lhs) >= static_cast<long long>(rhs.val); }
 
 // Deferred implementations for range_ref assignment from ap_int/ap_uint
 template<int W> template<int W2>

@@ -40,8 +40,13 @@ public:
 
     operator double() const { return val; }
     operator float() const { return static_cast<float>(val); }
+    operator short() const { return static_cast<short>(val); }
+    operator unsigned short() const { return static_cast<unsigned short>(val); }
     operator int() const { return static_cast<int>(val); }
+    operator unsigned int() const { return static_cast<unsigned int>(val); }
+    operator long() const { return static_cast<long>(val); }
     operator long long() const { return static_cast<long long>(val); }
+    operator unsigned long long() const { return static_cast<unsigned long long>(val); }
 
     ap_fixed operator+(const ap_fixed& other) const { return ap_fixed(val + other.val); }
     ap_fixed operator-(const ap_fixed& other) const { return ap_fixed(val - other.val); }
@@ -124,8 +129,13 @@ public:
 
     operator double() const { return val; }
     operator float() const { return static_cast<float>(val); }
+    operator short() const { return static_cast<short>(val); }
+    operator unsigned short() const { return static_cast<unsigned short>(val); }
     operator unsigned int() const { return static_cast<unsigned int>(val); }
     operator int() const { return static_cast<int>(val); }
+    operator long() const { return static_cast<long>(val); }
+    operator long long() const { return static_cast<long long>(val); }
+    operator unsigned long long() const { return static_cast<unsigned long long>(val); }
 
     ap_ufixed operator+(const ap_ufixed& other) const { return ap_ufixed(val + other.val); }
     ap_ufixed operator-(const ap_ufixed& other) const { return ap_ufixed(val - other.val); }

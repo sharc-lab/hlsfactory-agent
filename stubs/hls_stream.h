@@ -11,6 +11,7 @@
 
 #include <queue>
 #include <string>
+#include <type_traits>
 
 namespace hls {
 
@@ -29,6 +30,12 @@ public:
     // Write to stream
     void write(const T& val) {
         data.push(val);
+    }
+    template<typename U, typename std::enable_if<!std::is_same<typename std::decay<U>::type, T>::value, int>::type = 0>
+    void write(const U& val) {
+        auto tmp = val;
+        T converted = tmp;
+        data.push(converted);
     }
 
     // Blocking read from stream
@@ -59,6 +66,13 @@ public:
         data.push(val);
         return true;
     }
+    template<typename U, typename std::enable_if<!std::is_same<typename std::decay<U>::type, T>::value, int>::type = 0>
+    bool write_nb(const U& val) {
+        auto tmp = val;
+        T converted = tmp;
+        data.push(converted);
+        return true;
+    }
 
     // Check if empty
     bool empty() const {
@@ -77,6 +91,10 @@ public:
 
     // Operator overloads for convenience
     void operator<<(const T& val) {
+        write(val);
+    }
+    template<typename U, typename std::enable_if<!std::is_same<typename std::decay<U>::type, T>::value, int>::type = 0>
+    void operator<<(const U& val) {
         write(val);
     }
 
