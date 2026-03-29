@@ -1,9 +1,0 @@
-In file included from /output/HeCBench/hexciton/kernel.cpp:1:
-/output/HeCBench/hexciton/kernel.h:28:10: fatal error: 'utils.hpp' file not found
-   28 | #include "utils.hpp"
-      |          ^~~~~~~~~~~
-1 error generated.
-/output/HeCBench/hexciton/reference.cpp:6:10: fatal error: 'utils.hpp' file not found
-    6 | #include "utils.hpp"
-      |          ^~~~~~~~~~~
-1 error generated.

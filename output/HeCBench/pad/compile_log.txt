@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/pad/kernel.cpp:1:
-/output/HeCBench/pad/kernel.h:51:10: fatal error: 'support/common.h' file not found
-   51 | #include "support/common.h"
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.

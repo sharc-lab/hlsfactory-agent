@@ -1,9 +1,0 @@
-In file included from /output/HeCBench/sobel-hip/kernel.cpp:1:
-/output/HeCBench/sobel-hip/kernel.h:64:10: fatal error: 'SDKBitMap.h' file not found
-   64 | #include "SDKBitMap.h"
-      |          ^~~~~~~~~~~~~
-1 error generated.
-/output/HeCBench/sobel-hip/reference.cpp:1:10: fatal error: 'sobel.h' file not found
-    1 | #include "sobel.h"
-      |          ^~~~~~~~~
-1 error generated.

@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/colorwheel-hip/kernel.cpp:1:
-/output/HeCBench/colorwheel-hip/kernel.h:28:10: fatal error: 'hip/hip_runtime.h' file not found
-   28 | #include <hip/hip_runtime.h>
-      |          ^~~~~~~~~~~~~~~~~~~
-1 error generated.

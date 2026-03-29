@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/sad/kernel.cpp:1:
-/output/HeCBench/sad/kernel.h:25:10: fatal error: 'bitmap_image.hpp' file not found
-   25 | #include "bitmap_image.hpp"
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.

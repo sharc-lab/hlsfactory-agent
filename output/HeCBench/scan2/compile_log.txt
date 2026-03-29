@@ -1,7 +1,0 @@
-/output/HeCBench/scan2/kernel.cpp:11:13: error: use of undeclared identifier '_tid_x'
-   11 |   int tid = _tid_x;
-      |             ^
-/output/HeCBench/scan2/kernel.cpp:12:13: error: use of undeclared identifier '_bid_x'
-   12 |   int bid = _bid_x;
-      |             ^
-2 errors generated.

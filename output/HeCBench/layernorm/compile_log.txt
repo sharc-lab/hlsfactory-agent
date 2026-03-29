@@ -1,9 +1,0 @@
-In file included from /output/HeCBench/layernorm/kernel.cpp:1:
-/output/HeCBench/layernorm/kernel.h:24:10: fatal error: 'utils.cuh' file not found
-   24 | #include "utils.cuh"
-      |          ^~~~~~~~~~~
-1 error generated.
-/output/HeCBench/layernorm/reference.cpp:27:30: error: use of undeclared identifier 'sqrtf'
-   27 |             float s = 1.0f / sqrtf(v + eps);
-      |                              ^
-1 error generated.

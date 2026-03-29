@@ -9,8 +9,10 @@
 #ifndef __AP_INT_H__
 #define __AP_INT_H__
 
+#include <cstdlib>
 #include <cstdint>
 #include <limits>
+#include <string>
 #include <type_traits>
 
 // Forward declarations
@@ -98,6 +100,8 @@ public:
     ap_int(unsigned long v) : val(static_cast<int64_t>(v)) {}
     ap_int(long long v) : val(v) {}
     ap_int(unsigned long long v) : val(static_cast<int64_t>(v)) {}
+    ap_int(const char* str, int base) : val(str ? std::strtoll(str, nullptr, base) : 0) {}
+    ap_int(const std::string& str, int base) : ap_int(str.c_str(), base) {}
 
     // Cross-width conversion
     template<int W2>
@@ -241,6 +245,9 @@ public:
     ap_uint(int v) : val(static_cast<uint64_t>(v)) {}
     ap_uint(long v) : val(static_cast<uint64_t>(v)) {}
     ap_uint(long long v) : val(static_cast<uint64_t>(v)) {}
+    ap_uint(const char* str, int base)
+        : val(str ? static_cast<uint64_t>(std::strtoull(str, nullptr, base)) : 0) {}
+    ap_uint(const std::string& str, int base) : ap_uint(str.c_str(), base) {}
 
     // Cross-width conversion
     template<int W2>

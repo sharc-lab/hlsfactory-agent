@@ -18,6 +18,20 @@
 template<int W, int I, int Q = 0, int O = 0>
 class ap_fixed {
 public:
+    class range_ref {
+        ap_fixed* parent_;
+    public:
+        explicit range_ref(ap_fixed* parent) : parent_(parent) {}
+
+        template<typename T>
+        range_ref& operator=(const T& rhs) {
+            parent_->set_raw_bits(static_cast<int64_t>(rhs));
+            return *this;
+        }
+
+        operator int64_t() const { return parent_->raw_bits(); }
+    };
+
     double val;  // Use double for simulation
 
     ap_fixed() : val(0) {}
@@ -77,11 +91,18 @@ public:
     ap_fixed operator-(int other) const { return ap_fixed(val - other); }
     ap_fixed operator*(int other) const { return ap_fixed(val * other); }
     ap_fixed operator/(int other) const { return ap_fixed(val / other); }
+    ap_fixed operator+(unsigned int other) const { return ap_fixed(val + other); }
+    ap_fixed operator-(unsigned int other) const { return ap_fixed(val - other); }
+    ap_fixed operator*(unsigned int other) const { return ap_fixed(val * other); }
+    ap_fixed operator/(unsigned int other) const { return ap_fixed(val / other); }
 
     // Range access (simplified — returns integer representation)
     ap_int<W> range(int hi, int lo) const {
         int64_t int_val = static_cast<int64_t>(val * (1LL << (W - I)));
         return ap_int<W>((int_val >> lo) & ((1LL << (hi - lo + 1)) - 1));
+    }
+    range_ref range() {
+        return range_ref(this);
     }
     ap_int<W> range() const {
         return ap_int<W>(static_cast<int64_t>(val * (1LL << (W - I))));
@@ -99,12 +120,45 @@ public:
     int to_int() const { return static_cast<int>(val); }
     double to_double() const { return val; }
     float to_float() const { return static_cast<float>(val); }
+
+private:
+    int64_t raw_bits() const {
+        constexpr int frac_bits = W - I;
+        if constexpr (frac_bits <= 0) {
+            return static_cast<int64_t>(val);
+        } else {
+            return static_cast<int64_t>(val * static_cast<double>(1LL << frac_bits));
+        }
+    }
+
+    void set_raw_bits(int64_t bits) {
+        constexpr int frac_bits = W - I;
+        if constexpr (frac_bits <= 0) {
+            val = static_cast<double>(bits);
+        } else {
+            val = static_cast<double>(bits) / static_cast<double>(1LL << frac_bits);
+        }
+    }
 };
 
 // Arbitrary-precision unsigned fixed-point
 template<int W, int I, int Q = 0, int O = 0>
 class ap_ufixed {
 public:
+    class range_ref {
+        ap_ufixed* parent_;
+    public:
+        explicit range_ref(ap_ufixed* parent) : parent_(parent) {}
+
+        template<typename T>
+        range_ref& operator=(const T& rhs) {
+            parent_->set_raw_bits(static_cast<uint64_t>(rhs));
+            return *this;
+        }
+
+        operator uint64_t() const { return parent_->raw_bits(); }
+    };
+
     double val;
 
     ap_ufixed() : val(0) {}
@@ -159,11 +213,18 @@ public:
     ap_ufixed operator-(double other) const { return ap_ufixed(val - other); }
     ap_ufixed operator*(double other) const { return ap_ufixed(val * other); }
     ap_ufixed operator/(double other) const { return ap_ufixed(val / other); }
+    ap_ufixed operator+(unsigned int other) const { return ap_ufixed(val + other); }
+    ap_ufixed operator-(unsigned int other) const { return ap_ufixed(val - other); }
+    ap_ufixed operator*(unsigned int other) const { return ap_ufixed(val * other); }
+    ap_ufixed operator/(unsigned int other) const { return ap_ufixed(val / other); }
 
     // Range access
     ap_uint<W> range(int hi, int lo) const {
         uint64_t int_val = static_cast<uint64_t>(val * (1ULL << (W - I)));
         return ap_uint<W>((int_val >> lo) & ((1ULL << (hi - lo + 1)) - 1));
+    }
+    range_ref range() {
+        return range_ref(this);
     }
     ap_uint<W> range() const {
         return ap_uint<W>(static_cast<uint64_t>(val * (1ULL << (W - I))));
@@ -177,6 +238,25 @@ public:
     int length() const { return W; }
     int to_int() const { return static_cast<int>(val); }
     double to_double() const { return val; }
+
+private:
+    uint64_t raw_bits() const {
+        constexpr int frac_bits = W - I;
+        if constexpr (frac_bits <= 0) {
+            return static_cast<uint64_t>(val);
+        } else {
+            return static_cast<uint64_t>(val * static_cast<double>(1ULL << frac_bits));
+        }
+    }
+
+    void set_raw_bits(uint64_t bits) {
+        constexpr int frac_bits = W - I;
+        if constexpr (frac_bits <= 0) {
+            val = static_cast<double>(bits);
+        } else {
+            val = static_cast<double>(bits) / static_cast<double>(1ULL << frac_bits);
+        }
+    }
 };
 
 // Quantization modes (stubs)

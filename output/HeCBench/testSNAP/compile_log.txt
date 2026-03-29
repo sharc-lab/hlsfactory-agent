@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/testSNAP/kernel.cpp:1:
-/output/HeCBench/testSNAP/kernel.h:53:10: fatal error: 'refdata_2J2_W.h' file not found
-   53 | #include "refdata_2J2_W.h"
-      |          ^~~~~~~~~~~~~~~~~
-1 error generated.

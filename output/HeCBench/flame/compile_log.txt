@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/flame/kernel.cpp:1:
-/output/HeCBench/flame/kernel.h:121:10: fatal error: 'flame.hpp' file not found
-  121 | #include "flame.hpp"
-      |          ^~~~~~~~~~~
-1 error generated.

@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/dense-embedding-hip/kernel.cpp:1:
-/output/HeCBench/dense-embedding-hip/kernel.h:22:10: fatal error: 'hip/hip_runtime.h' file not found
-   22 | #include <hip/hip_runtime.h>
-      |          ^~~~~~~~~~~~~~~~~~~
-1 error generated.

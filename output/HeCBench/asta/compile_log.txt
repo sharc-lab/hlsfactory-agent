@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/asta/kernel.cpp:1:
-/output/HeCBench/asta/kernel.h:56:10: fatal error: 'support/common.h' file not found
-   56 | #include "support/common.h"
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.

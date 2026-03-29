@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/xlqc-hip/kernel.cpp:1:
-/output/HeCBench/xlqc-hip/kernel.h:123:10: fatal error: 'gsl/gsl_math.h' file not found
-  123 | #include <gsl/gsl_math.h>
-      |          ^~~~~~~~~~~~~~~~
-1 error generated.

@@ -1,0 +1,4 @@
+/output/fpgaconvnet-hls/bias/bias.cpp:1:10: fatal error: 'bias_tb.hpp' file not found
+    1 | #include "bias_tb.hpp"
+      |          ^~~~~~~~~~~~~
+1 error generated.

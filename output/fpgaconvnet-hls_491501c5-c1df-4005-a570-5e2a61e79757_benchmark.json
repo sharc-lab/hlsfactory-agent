@@ -1,0 +1,21 @@
+{
+  "run_id": "491501c5-c1df-4005-a570-5e2a61e79757",
+  "timestamp": "2026-03-19T19:59:57.759895+00:00",
+  "repo_url": "https://github.com/AlexMontgomerie/fpgaconvnet-hls.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.02886035,
+  "total_api_calls": 60,
+  "format_errors": 0,
+  "traj_file": "fpgaconvnet-hls_491501c5-c1df-4005-a570-5e2a61e79757.traj.json",
+  "quality": {
+    "designs_found": 26,
+    "compile_pass": 1,
+    "compile_fail": 26,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 26,
+    "designs_with_tcl": 26
+  }
+}

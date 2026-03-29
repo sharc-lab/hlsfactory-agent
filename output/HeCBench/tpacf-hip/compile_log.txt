@@ -1,8 +1,0 @@
-In file included from /output/HeCBench/tpacf-hip/kernel.cpp:1:
-/output/HeCBench/tpacf-hip/kernel.h:62:18: error: use of undeclared identifier 'NUMBINS'
-   62 | double binbounds[NUMBINS-1];
-      |                  ^
-/output/HeCBench/tpacf-hip/kernel.h:99:10: fatal error: 'hip/hip_runtime.h' file not found
-   99 | #include <hip/hip_runtime.h>
-      |          ^~~~~~~~~~~~~~~~~~~
-2 errors generated.

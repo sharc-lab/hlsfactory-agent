@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/p2p-hip/kernel.cpp:1:
-/output/HeCBench/p2p-hip/kernel.h:17:1: error: unterminated /* comment
-   17 | /*
-      | ^
-1 error generated.

@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/rsc/kernel.cpp:1:
-/output/HeCBench/rsc/kernel.h:58:10: fatal error: 'support/setup.h' file not found
-   58 | #include "support/setup.h"
-      |          ^~~~~~~~~~~~~~~~~
-1 error generated.

@@ -1,0 +1,4 @@
+/output/fpgaconvnet-hls/sliding_window/sliding_window.cpp:1:10: fatal error: 'sliding_window_tb.hpp' file not found
+    1 | #include "sliding_window_tb.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

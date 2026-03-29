@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/lud/kernel.cpp:1:
-/output/HeCBench/lud/kernel.h:31:10: fatal error: 'common.h' file not found
-   31 | #include "common.h"
-      |          ^~~~~~~~~~
-1 error generated.

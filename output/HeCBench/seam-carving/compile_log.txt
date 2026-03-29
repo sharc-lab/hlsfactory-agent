@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/seam-carving/kernel.cpp:1:
-/output/HeCBench/seam-carving/kernel.h:33:10: fatal error: 'stb_image.h' file not found
-   33 | #include "stb_image.h"
-      |          ^~~~~~~~~~~~~
-1 error generated.

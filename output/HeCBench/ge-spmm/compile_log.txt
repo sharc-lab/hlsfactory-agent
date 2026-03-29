@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/ge-spmm/kernel.cpp:1:
-/output/HeCBench/ge-spmm/kernel.h:29:10: fatal error: './util/mmio.hpp' file not found
-   29 | #include "./util/mmio.hpp"
-      |          ^~~~~~~~~~~~~~~~~
-1 error generated.

@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/myocyte-hip/kernel.cpp:1:
-/output/HeCBench/myocyte-hip/kernel.h:185:10: fatal error: 'file.c' file not found
-  185 | #include "file.c"
-      |          ^~~~~~~~
-1 error generated.

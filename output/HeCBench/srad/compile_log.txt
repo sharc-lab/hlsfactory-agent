@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/srad/kernel.cpp:1:
-/output/HeCBench/srad/kernel.h:48:10: fatal error: 'graphics.c' file not found
-   48 | #include "graphics.c"
-      |          ^~~~~~~~~~~~
-1 error generated.
