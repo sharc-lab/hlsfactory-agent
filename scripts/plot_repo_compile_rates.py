@@ -14,10 +14,10 @@ from matplotlib.ticker import PercentFormatter
 UUID_BENCH_RE = re.compile(r"_(?P<uuid>[0-9a-fA-F-]{36})_benchmark$")
 STATUS_KEYS = ("pass", "fail", "skip", "unknown")
 STATUS_COLORS = {
-    "pass": "#2E8B57",
-    "fail": "#C84C3A",
-    "skip": "#8E9AAF",
-    "unknown": "#D7DCE5",
+    "pass": "#3a8c5c",
+    "fail": "#c0392b",
+    "skip": "#8e99a4",
+    "unknown": "#d5dbe1",
 }
 STATUS_LABELS = {
     "pass": "Pass",
@@ -301,10 +301,23 @@ def plot_rows(
     value_mode: str,
     orientation: str,
 ) -> None:
+    # -- Academic style --
+    plt.rcParams.update({
+        "font.family": "serif",
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+        "axes.linewidth": 0.6,
+        "axes.edgecolor": "#cccccc",
+        "xtick.color": "#444444",
+        "ytick.color": "#444444",
+        "xtick.major.width": 0.5,
+        "ytick.major.width": 0.5,
+    })
+
     labels = [f"{row.repo} (n={row.denominator})" for row in rows]
     if orientation == "vertical":
-        fig_width = max(16, 0.48 * len(rows) + 4.0)
-        fig, ax = plt.subplots(figsize=(fig_width, 8.5))
+        fig_width = max(10, 0.48 * len(rows) + 3.0)
+        fig, ax = plt.subplots(figsize=(fig_width, 6.0))
         positions = list(range(len(rows)))
         bottom = [0.0] * len(rows)
         for status in STATUS_KEYS:
@@ -315,34 +328,28 @@ def plot_rows(
             if not any(values):
                 continue
             ax.bar(
-                positions,
-                values,
-                bottom=bottom,
-                color=STATUS_COLORS[status],
-                edgecolor="white",
-                linewidth=0.6,
-                label=STATUS_LABELS[status],
+                positions, values, bottom=bottom, width=0.72,
+                color=STATUS_COLORS[status], edgecolor="white",
+                linewidth=0.5, label=STATUS_LABELS[status],
             )
             bottom = [b + v for b, v in zip(bottom, values)]
 
         ax.set_xticks(positions)
-        ax.set_xticklabels(labels, rotation=75, ha="right", fontsize=8.5)
+        ax.set_xticklabels(labels, rotation=55, ha="right", fontsize=8)
         if value_mode == "counts":
             max_total = max(
                 row.pass_count + row.fail_count + row.skip_count + row.unknown_count for row in rows
             ) if rows else 0
-            ax.set_ylim(0, max_total * 1.03 if max_total else 1)
-            ax.set_ylabel("Design Count", fontsize=11)
+            ax.set_ylim(0, max_total * 1.05 if max_total else 1)
+            ax.set_ylabel("Design count", fontsize=10)
         else:
             ax.set_ylim(0, 1)
             ax.yaxis.set_major_formatter(PercentFormatter(xmax=1.0))
-            ax.set_ylabel("Rate", fontsize=11)
-        ax.set_xlabel("Repository", fontsize=11)
-        ax.grid(axis="y", alpha=0.2, linewidth=0.8)
+            ax.set_ylabel("Rate", fontsize=10)
+        ax.grid(axis="y", color="#e8e8e8", linewidth=0.5, zorder=0)
     else:
-        label_rows = labels
-        fig_height = max(10, 0.38 * len(rows) + 2.8)
-        fig, ax = plt.subplots(figsize=(15, fig_height))
+        fig_height = max(6, 0.30 * len(rows) + 2.0)
+        fig, ax = plt.subplots(figsize=(5.5, fig_height))
 
         y_positions = list(range(len(rows)))
         left = [0.0] * len(rows)
@@ -355,59 +362,40 @@ def plot_rows(
             if not any(values):
                 continue
             ax.barh(
-                y_positions,
-                values,
-                left=left,
-                color=STATUS_COLORS[status],
-                edgecolor="white",
-                linewidth=0.6,
-                label=STATUS_LABELS[status],
+                y_positions, values, left=left,
+                color=STATUS_COLORS[status], edgecolor="white",
+                linewidth=0.5, height=0.65, label=STATUS_LABELS[status],
             )
             left = [l + v for l, v in zip(left, values)]
 
         ax.set_yticks(y_positions)
-        ax.set_yticklabels(label_rows, fontsize=9)
+        ax.set_yticklabels(labels, fontsize=7.5)
         ax.invert_yaxis()
         if value_mode == "counts":
             max_total = max(
                 row.pass_count + row.fail_count + row.skip_count + row.unknown_count for row in rows
             ) if rows else 0
-            ax.set_xlim(0, max_total * 1.02 if max_total else 1)
-            ax.set_xlabel("Design Count", fontsize=11)
+            ax.set_xlim(0, max_total * 1.04 if max_total else 1)
+            ax.set_xlabel("Design count", fontsize=9.5, labelpad=6)
         else:
             ax.set_xlim(0, 1)
             ax.xaxis.set_major_formatter(PercentFormatter(xmax=1.0))
-            ax.set_xlabel("Rate", fontsize=11)
-        ax.set_ylabel("Repository", fontsize=11)
-        ax.grid(axis="x", alpha=0.2, linewidth=0.8)
+            ax.set_xlabel("Rate", fontsize=9.5, labelpad=6)
+        ax.grid(axis="x", color="#e8e8e8", linewidth=0.5, zorder=0)
 
-    if value_mode == "counts":
-        fig.suptitle("Per-Repo Compile Outcome Counts", fontsize=16, fontweight="bold", y=0.99)
-        orientation_text = "Vertical" if orientation == "vertical" else "Horizontal"
-        ax.set_title(
-            f"{orientation_text} stacked bars showing absolute pass/fail/skip counts for the current output snapshot.",
-            fontsize=10,
-            pad=14,
-        )
-    else:
-        fig.suptitle("Per-Repo Compile Outcome Rates", fontsize=16, fontweight="bold", y=0.99)
-        ax.set_title(
-            "Pass/fail/skip rates for the current output snapshot. Unknown appears only when no trustworthy status accounting exists.",
-            fontsize=10,
-            pad=14,
-        )
+    ax.tick_params(labelsize=8, length=2)
     ax.legend(
-        loc="upper center",
-        bbox_to_anchor=(0.5, 1.05),
-        ncol=4,
-        frameon=False,
-        fontsize=10,
+        loc="upper right", ncol=2, frameon=True,
+        framealpha=0.95, fontsize=8.5, edgecolor="#dddddd",
+        fancybox=False,
     )
 
-    fig.tight_layout(rect=(0, 0, 1, 0.965))
+    fig.tight_layout(pad=1.0)
     png_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(png_path, dpi=220, bbox_inches="tight")
-    fig.savefig(svg_path, bbox_inches="tight")
+    fig.savefig(png_path, dpi=300, bbox_inches="tight",
+                facecolor="white", edgecolor="none")
+    fig.savefig(svg_path, bbox_inches="tight",
+                facecolor="white", edgecolor="none")
     plt.close(fig)
 
 
