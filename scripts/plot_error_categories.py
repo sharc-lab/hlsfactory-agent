@@ -66,6 +66,8 @@ def classify_log(content: str) -> list[str]:
     return matched
 
 
+
+
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     output_dir = repo_root / "output"
@@ -132,8 +134,7 @@ def main() -> None:
 
     # Subtitle with context
     ax.text(0.98, 0.12,
-            f"Classified from {failed_logs} failed compile logs\n"
-            f"({total_logs} total designs checked via clang with stub headers)",
+            f"Classified from {failed_logs} failed compile logs",
             transform=ax.transAxes, ha="right", va="bottom",
             fontsize=6.5, color=GRAY, linespacing=1.4)
 
