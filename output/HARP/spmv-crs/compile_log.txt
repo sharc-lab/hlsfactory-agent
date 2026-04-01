@@ -1,4 +1,0 @@
-Compilation: SUCCESS
-Command: clang -c -fsyntax-only -I/workspace/stubs /output/HARP/spmv-crs/spmv-crs_kernel.c
-
-No errors found.

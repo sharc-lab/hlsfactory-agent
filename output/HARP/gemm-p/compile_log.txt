@@ -1,4 +1,0 @@
-Compilation: SUCCESS
-Command: clang -c -fsyntax-only -I/workspace/stubs /output/HARP/gemm-p/gemm-p_kernel.c
-
-No errors found.
