@@ -1,8 +1,8 @@
-open_project "prefix_sum"
+open_project synth
 set_top prefix_sum
-add_files [glob "/output/HLSPilot/prefix_sum/**/*.cpp"]
-add_files -tb [glob "/output/HLSPilot/prefix_sum/**/*.cpp"]
-open_solution "solution1"
 set_part xcu250-figd2104-2L-e
+add_files [glob *.cpp *.c *.h *.hpp]
+add_files -tb testbench.cpp
+open_solution "solution1"
 csynth_design
 exit

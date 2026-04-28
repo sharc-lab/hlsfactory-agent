@@ -1,0 +1,61 @@
+/output/S2CBench/uart/uart.cpp:33:17: error: no viable overloaded '='
+   33 |     r_data_buff = "00000000";
+      |     ~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'const char[9]' to 'const ap_uint<8>' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'const char[9]' to 'ap_uint<8>' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/output/S2CBench/uart/uart.cpp:34:17: error: no viable overloaded '='
+   34 |     t_data_buff = "11111111";
+      |     ~~~~~~~~~~~ ^ ~~~~~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit copy assignment operator) not viable: no known conversion from 'const char[9]' to 'const ap_uint<8>' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/workspace/stubs/ap_int.h:208:7: note: candidate function (the implicit move assignment operator) not viable: no known conversion from 'const char[9]' to 'ap_uint<8>' for 1st argument
+  208 | class ap_uint {
+      |       ^~~~~~~
+/output/S2CBench/uart/uart.cpp:61:27: error: use of overloaded operator '<<' is ambiguous (with operand types '__ostream_type' (aka 'basic_ostream<char, std::char_traits<char>>') and 'sc_uint<8>' (aka 'ap_uint<8>'))
+   61 |                 cout<<endl<<t_data_buff<<endl;
+      |                 ~~~~~~~~~~^ ~~~~~~~~~~~
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:174:7: note: candidate function
+  174 |       operator<<(long __n)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:178:7: note: candidate function
+  178 |       operator<<(unsigned long __n)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:182:7: note: candidate function
+  182 |       operator<<(bool __n)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:186:7: note: candidate function
+  186 |       operator<<(short __n);
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:189:7: note: candidate function
+  189 |       operator<<(unsigned short __n)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:197:7: note: candidate function
+  197 |       operator<<(int __n);
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:200:7: note: candidate function
+  200 |       operator<<(unsigned int __n)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:211:7: note: candidate function
+  211 |       operator<<(long long __n)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:215:7: note: candidate function
+  215 |       operator<<(unsigned long long __n)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:231:7: note: candidate function
+  231 |       operator<<(double __f)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:235:7: note: candidate function
+  235 |       operator<<(float __f)
+      |       ^
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/ostream:243:7: note: candidate function
+  243 |       operator<<(long double __f)
+      |       ^
+/output/S2CBench/uart/uart.cpp:82:28: error: expression is not assignable
+   82 |             r_data_buff[i] = rx_buff;
+      |             ~~~~~~~~~~~~~~ ^
+4 errors generated.

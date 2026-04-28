@@ -1,8 +1,8 @@
-open_project "merge_sort"
-set_top merge_arrays
-add_files [glob "/output/HLSPilot/merge_sort/**/*.cpp"]
-add_files -tb [glob "/output/HLSPilot/merge_sort/**/*.cpp"]
-open_solution "solution1"
+open_project synth
+set_top merge
 set_part xcu250-figd2104-2L-e
+add_files [glob *.cpp *.c *.h *.hpp]
+add_files -tb testbench.cpp
+open_solution "solution1"
 csynth_design
 exit

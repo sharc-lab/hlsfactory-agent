@@ -1,4 +1,0 @@
-Compilation: SUCCESS
-Command: clang -c -fsyntax-only -I/workspace/stubs /output/HARP/fdtd-2d-large/fdtd-2d-large_kernel.c
-
-No errors found.

@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/miniWeather-hip/kernel.cpp:1:
-/output/HeCBench/miniWeather-hip/kernel.h:39:10: fatal error: 'mpi.h' file not found
-   39 | #include <mpi.h>
-      |          ^~~~~~~
-1 error generated.

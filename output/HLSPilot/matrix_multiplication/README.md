@@ -1,1 +1,1 @@
-# matrix_multiplication Design\n\nExtracted from HLSPilot repository.
+# Design: matrix_multiplication

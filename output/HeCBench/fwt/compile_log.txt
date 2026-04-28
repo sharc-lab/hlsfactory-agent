@@ -1,6 +1,0 @@
-In file included from /output/HeCBench/fwt/kernel.cpp:1:
-/output/HeCBench/fwt/kernel.h:92:1: error: unterminated /* comment
-   92 | /*
-      | ^
-1 error generated.
-PASS: reference.cpp

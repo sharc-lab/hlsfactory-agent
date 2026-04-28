@@ -1,1 +1,1 @@
-# prefix_sum Design\n\nExtracted from HLSPilot repository.
+# Design: prefix_sum

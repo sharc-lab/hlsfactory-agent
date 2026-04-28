@@ -1,1 +1,1 @@
-# 3d_rendering Design\n\nExtracted from HLSPilot repository.
+# Design: 3d_rendering

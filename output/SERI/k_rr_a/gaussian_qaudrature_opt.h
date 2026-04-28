@@ -1,9 +1,9 @@
 #ifndef RYS_QUADRATURE_GAUSSIAN_QUADRATURE_OPT_H
 #define RYS_QUADRATURE_GAUSSIAN_QUADRATURE_OPT_H
 
-#include "types.h"
-#include "repeat.h"
-#include "parameters.h"
+#include "common/types.h"
+#include "common/repeat.h"
+#include "common/parameters.h"
 #include "streams.h"
 #include <hls_stream.h>
 #include "internal_types.h"

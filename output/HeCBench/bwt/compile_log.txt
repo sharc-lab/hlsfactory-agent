@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/bwt/kernel.cpp:1:
-/output/HeCBench/bwt/kernel.h:19:10: fatal error: 'bwt.hpp' file not found
-   19 | #include "bwt.hpp"
-      |          ^~~~~~~~~
-1 error generated.

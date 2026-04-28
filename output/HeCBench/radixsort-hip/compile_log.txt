@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/radixsort-hip/kernel.cpp:1:
-/output/HeCBench/radixsort-hip/kernel.h:184:10: fatal error: 'hip/hip_runtime.h' file not found
-  184 | #include <hip/hip_runtime.h>
-      |          ^~~~~~~~~~~~~~~~~~~
-1 error generated.

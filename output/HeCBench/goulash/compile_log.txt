@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/goulash/kernel.cpp:1:
-/output/HeCBench/goulash/kernel.h:42:12: error: use of undeclared identifier 'gettimeofday'
-   42 |   status = gettimeofday( &ts, NULL );
-      |            ^
-1 error generated.

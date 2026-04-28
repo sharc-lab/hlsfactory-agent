@@ -1,0 +1,4 @@
+/output/DP-HLS/kernel_overlap_linear_prefix_suffix/kernel_overlap_linear_prefix_suffix.cpp:2:10: fatal error: '../../include/frontend.h' file not found
+    2 | #include "../../include/frontend.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

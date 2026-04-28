@@ -1,0 +1,125 @@
+/output/S2CBench/aes_cipher/aes.cpp:175:37: error: conversion from 'ap_uint<8>' to 'U8' (aka 'unsigned char') is ambiguous
+  175 |             idata_buf[i] = idata[i].read();
+      |                            ~~~~~~~~~^~~~~~
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+/output/S2CBench/aes_cipher/aes.cpp:176:34: error: conversion from 'ap_uint<8>' to 'U8' (aka 'unsigned char') is ambiguous
+  176 |             key_buf[i] = ikey[i].read();
+      |                          ~~~~~~~~^~~~~~
+/workspace/stubs/ap_int.h:226:5: note: candidate function
+  226 |     operator unsigned int() const { return static_cast<unsigned int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:227:5: note: candidate function
+  227 |     operator unsigned long() const { return static_cast<unsigned long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:228:5: note: candidate function
+  228 |     operator unsigned long long() const { return val; }
+      |     ^
+/workspace/stubs/ap_int.h:229:5: note: candidate function
+  229 |     operator int() const { return static_cast<int>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:230:5: note: candidate function
+  230 |     operator long long() const { return static_cast<long long>(val); }
+      |     ^
+/workspace/stubs/ap_int.h:231:5: note: candidate function
+  231 |     operator bool() const { return val != 0; }
+      |     ^
+2 errors generated.
+/output/S2CBench/aes_cipher/aes_cipher.cpp:86:7: error: use of undeclared identifier 'init'; did you mean 'int'?
+   86 |       init[i] = idata[i].read();
+      |       ^~~~
+      |       int
+/output/S2CBench/aes_cipher/aes_cipher.cpp:86:11: error: decomposition declaration cannot be declared with type 'int'; declared type must be 'auto' or reference to 'auto'
+   86 |       init[i] = idata[i].read();
+      |           ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:86:23: error: binding 'i' cannot appear in the initializer of its own decomposition declaration
+   86 |       init[i] = idata[i].read();
+      |                       ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:92:27: error: too few arguments to function call, expected 3, have 2
+   92 |     KeyExpansion(key, Sbox);   
+      |     ~~~~~~~~~~~~          ^
+/output/S2CBench/aes_cipher/aes.h:36:10: note: 'KeyExpansion' declared here
+   36 |     void KeyExpansion(U8 current_key[SIZE], U8 rcon, U8 next_key[SIZE]);
+      |          ^            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/output/S2CBench/aes_cipher/aes_cipher.cpp:96:21: error: use of undeclared identifier 'NBb'
+   96 |     for (i = 0; i < NBb/4; i ++) {
+      |                     ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:99:21: error: use of undeclared identifier 'init'
+   99 |         wrk = (wrk << 8) | init[i*4+j];
+      |                            ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:101:7: error: use of undeclared identifier 'data'; did you mean 'std::data'?
+  101 |       data[i] = wrk;
+      |       ^~~~
+      |       std::data
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/bits/range_access.h:312:5: note: 'std::data' declared here
+  312 |     data(_Container& __cont) noexcept(noexcept(__cont.data()))
+      |     ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:101:7: error: reference to overloaded function could not be resolved; did you mean to call it?
+  101 |       data[i] = wrk;
+      |       ^~~~
+/usr/lib/gcc/x86_64-linux-gnu/14/../../../../include/c++/14/bits/range_access.h:312:5: note: possible target for call
+  312 |     data(_Container& __cont) noexcept(noexcept(__cont.data()))
+      |     ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:107:12: error: use of undeclared identifier 'data'
+  107 |         Computing(data, Sbox);
+      |                   ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:112:19: error: use of undeclared identifier 'NB'
+  112 |   for (i = 0; i < NB; i ++) {
+      |                   ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:113:21: error: use of undeclared identifier 'NB'
+  113 |     for (j = 0; j < NB; j++) {
+      |                     ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:114:16: error: use of undeclared identifier 'NB'
+  114 |       odata[(i*NB)+j] = data[i] >> (j * 8);
+      |                ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:114:25: error: use of undeclared identifier 'data'
+  114 |       odata[(i*NB)+j] = data[i] >> (j * 8);
+      |                         ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:127:11: error: out-of-line definition of 'Computing' does not match any declaration in 'aes'
+  127 | int  aes::Computing(int *data, int *sboxs)
+      |           ^~~~~~~~~
+/output/S2CBench/aes_cipher/aes_cipher.cpp:131:15: error: cannot initialize a parameter of type 'U8 *' (aka 'unsigned char *') with an lvalue of type 'int *'
+  131 |   AddRoundKey(data,0);
+      |               ^~~~
+/output/S2CBench/aes_cipher/aes.h:32:25: note: passing argument to parameter 'state' here
+   32 |     void AddRoundKey(U8 state[SIZE], U8 key[SIZE]);
+      |                         ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:133:13: error: use of undeclared identifier 'nr'
+  133 |   for(i=1;i<nr;i++)
+      |             ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:135:22: error: too many arguments to function call, expected single argument 'state', have 2 arguments
+  135 |       SubBytes(data, sboxs);
+      |       ~~~~~~~~       ^~~~~
+/output/S2CBench/aes_cipher/aes.h:33:10: note: 'SubBytes' declared here
+   33 |     void SubBytes(U8 state[SIZE]);
+      |          ^        ~~~~~~~~~~~~~~
+/output/S2CBench/aes_cipher/aes_cipher.cpp:136:17: error: cannot initialize a parameter of type 'U8 *' (aka 'unsigned char *') with an lvalue of type 'int *'
+  136 |       ShiftRows(data);
+      |                 ^~~~
+/output/S2CBench/aes_cipher/aes.h:34:23: note: passing argument to parameter 'state' here
+   34 |     void ShiftRows(U8 state[SIZE]);
+      |                       ^
+/output/S2CBench/aes_cipher/aes_cipher.cpp:137:18: error: cannot initialize a parameter of type 'U8 *' (aka 'unsigned char *') with an lvalue of type 'int *'
+  137 |       MixColumns(data);
+      |                  ^~~~
+/output/S2CBench/aes_cipher/aes.h:35:24: note: passing argument to parameter 'state' here
+   35 |     void MixColumns(U8 state[SIZE]);
+      |                        ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.

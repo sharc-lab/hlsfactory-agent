@@ -1,14 +1,10 @@
-/output/HLSPilot/face_detection/src/host/face_detect_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
-   17 | #include "../../../utils/xcl.h"
-      |          ^~~~~~~~~~~~~~~~~~~~~~
+/output/HLSPilot/face_detection/testbench.cpp:1:10: fatal error: 'face_detect.cpp' file not found
+    1 | #include "face_detect.cpp"
+      |          ^~~~~~~~~~~~~~~~~
 1 error generated.
-/output/HLSPilot/face_detection/src/host/check_result.cpp:62:10: error: no member named 'cout' in namespace 'std'
-   62 |     std::cout << "Failed to create output file!" << std::endl;
-      |     ~~~~~^
-1 error generated.
-/output/HLSPilot/face_detection/src/host/face_detect_sw_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
-   17 | #include "../../../utils/xcl.h"
-      |          ^~~~~~~~~~~~~~~~~~~~~~
+/output/HLSPilot/face_detection/src/ocl/face_detect.cpp:9:10: fatal error: 'host/typedefs.h' file not found
+    9 | #include "host/typedefs.h"
+      |          ^~~~~~~~~~~~~~~~~
 1 error generated.
 /output/HLSPilot/face_detection/src/sw/face_detect_sw.cpp:114:19: error: type 'float' cannot be narrowed to 'int' in initializer list [-Wc++11-narrowing]
   114 |     MySize sz = { (IMAGE_WIDTH/factor), (IMAGE_HEIGHT/factor) };
@@ -25,10 +21,6 @@
       |                                         ^~~~~~~~~~~~~~~~~~~~~
       |                                         static_cast<int>(    )
 2 errors generated.
-/output/HLSPilot/face_detection/src/ocl/face_detect.cpp:9:10: fatal error: 'host/typedefs.h' file not found
-    9 | #include "host/typedefs.h"
-      |          ^~~~~~~~~~~~~~~~~
-1 error generated.
 /output/HLSPilot/face_detection/src/sdsoc/face_detect.cpp:13:1: error: unknown type name 'uint5_t'
    13 | uint5_t get_bank(uint10_t addr)
       | ^
@@ -88,3 +80,15 @@
       |   ^
 fatal error: too many errors emitted, stopping now [-ferror-limit=]
 20 errors generated.
+/output/HLSPilot/face_detection/src/host/face_detect_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
+   17 | #include "../../../utils/xcl.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+/output/HLSPilot/face_detection/src/host/face_detect_sw_host.cpp:17:10: fatal error: '../../../utils/xcl.h' file not found
+   17 | #include "../../../utils/xcl.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+/output/HLSPilot/face_detection/src/host/check_result.cpp:62:10: error: no member named 'cout' in namespace 'std'
+   62 |     std::cout << "Failed to create output file!" << std::endl;
+      |     ~~~~~^
+1 error generated.

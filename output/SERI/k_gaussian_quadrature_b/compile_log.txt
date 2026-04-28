@@ -1,17 +1,16 @@
-Compiling /output/SERI/k_gaussian_quadrature_b/testbench.cpp
-/output/SERI/k_gaussian_quadrature_b/testbench.cpp:1:10: fatal error: 'rys_testbench.h' file not found
-    1 | #include "rys_testbench.h"
-      |          ^~~~~~~~~~~~~~~~~
+Compilation log for k_gaussian_quadrature_b
+Compiling /output/SERI/k_gaussian_quadrature_b/k_gaussian_quadrature_b.cpp ...
+In file included from /output/SERI/k_gaussian_quadrature_b/k_gaussian_quadrature_b.cpp:1:
+/output/SERI/k_gaussian_quadrature_b/internal_types.h:7:10: fatal error: 'common/types.h' file not found
+    7 | #include "common/types.h"
+      |          ^~~~~~~~~~~~~~~~
 1 error generated.
-Compilation FAIL on attempt 0. Attempting simple fix...
-/output/SERI/k_gaussian_quadrature_b/testbench.cpp:2:10: fatal error: 'rys_testbench.h' file not found
-    2 | #include "rys_testbench.h"
-      |          ^~~~~~~~~~~~~~~~~
+FAIL
+Compiling /output/SERI/k_gaussian_quadrature_b/testbench.cpp ...
+In file included from /output/SERI/k_gaussian_quadrature_b/testbench.cpp:2:
+In file included from /output/SERI/k_gaussian_quadrature_b/k_gaussian_quadrature_b.cpp:1:
+/output/SERI/k_gaussian_quadrature_b/internal_types.h:7:10: fatal error: 'common/types.h' file not found
+    7 | #include "common/types.h"
+      |          ^~~~~~~~~~~~~~~~
 1 error generated.
-Compilation FAIL on attempt 1. Attempting simple fix...
-/output/SERI/k_gaussian_quadrature_b/testbench.cpp:2:10: fatal error: 'rys_testbench.h' file not found
-    2 | #include "rys_testbench.h"
-      |          ^~~~~~~~~~~~~~~~~
-1 error generated.
-Compilation FAIL on attempt 2. Attempting simple fix...
-Compilation FAIL after maximum attempts.
+FAIL

@@ -1,8 +1,8 @@
-open_project "optical_flow"
-set_top ReadFlowFile
-add_files [glob "/output/HLSPilot/optical_flow/**/*.cpp"]
-add_files -tb [glob "/output/HLSPilot/optical_flow/**/*.cpp"]
-open_solution "solution1"
+open_project synth
+set_top main
 set_part xcu250-figd2104-2L-e
+add_files [glob *.cpp *.c *.h *.hpp]
+add_files -tb testbench.cpp
+open_solution "solution1"
 csynth_design
 exit

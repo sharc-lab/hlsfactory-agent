@@ -1,2 +1,0 @@
-PASS: kernel.cpp
-PASS: reference.cpp

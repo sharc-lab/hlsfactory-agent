@@ -1,10 +1,10 @@
 #ifndef RYS_QUADRATURE_RECURRENCE_RELATIONS_H
 #define RYS_QUADRATURE_RECURRENCE_RELATIONS_H
 
-#include "types.h"
+#include "common/types.h"
 #include "internal_types.h"
-#include "repeat.h"
-#include "parameters.h"
+#include "common/repeat.h"
+#include "common/parameters.h"
 #include "streams.h"
 #include "mdim_range.hpp"
 

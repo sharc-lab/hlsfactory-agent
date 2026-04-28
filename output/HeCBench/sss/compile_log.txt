@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/sss/kernel.cpp:1:
-/output/HeCBench/sss/kernel.h:92:10: fatal error: 'gsl/gsl_integration.h' file not found
-   92 | #include <gsl/gsl_integration.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

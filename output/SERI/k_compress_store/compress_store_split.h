@@ -1,13 +1,13 @@
 #ifndef RYS_QUADRATURE_COMPRESS_STORE_SPLIT_H
 #define RYS_QUADRATURE_COMPRESS_STORE_SPLIT_H
 
-#include "types.h"
+#include "common/types.h"
 #include <limits>
 #include <algorithm>
 #include <ap_fixed.h>
-#include "repeat.h"
-#include "parameters.h"
-#include "parameters.h"
+#include "common/repeat.h"
+#include "common/parameters.h"
+#include "common/parameters.h"
 
 
 using namespace qcf;

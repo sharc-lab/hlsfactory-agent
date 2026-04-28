@@ -1,4 +1,0 @@
-/output/HeCBench/threadfence/kernel.cpp:50:13: error: use of undeclared identifier '__threadfence'
-   50 |             __threadfence();
-      |             ^
-1 error generated.

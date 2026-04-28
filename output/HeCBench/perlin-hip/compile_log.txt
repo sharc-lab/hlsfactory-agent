@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/perlin-hip/kernel.cpp:1:
-/output/HeCBench/perlin-hip/kernel.h:13:10: fatal error: 'utils.hpp' file not found
-   13 | #include "utils.hpp"
-      |          ^~~~~~~~~~~
-1 error generated.

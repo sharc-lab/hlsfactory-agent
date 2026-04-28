@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/rtm8/kernel.cpp:1:
-/output/HeCBench/rtm8/kernel.h:39:10: fatal error: 'mysecond.c' file not found
-   39 | #include "mysecond.c"
-      |          ^~~~~~~~~~~~
-1 error generated.

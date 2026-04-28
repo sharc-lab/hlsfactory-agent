@@ -1,9 +1,9 @@
 #ifndef RYS_QUADRATURE_PREPARATION_H
 #define RYS_QUADRATURE_PREPARATION_H
 
-#include "types.h"
-#include "repeat.h"
-#include "parameters.h"
+#include "common/types.h"
+#include "common/repeat.h"
+#include "common/parameters.h"
 #include "internal_types.h"
 
 using namespace qcf;

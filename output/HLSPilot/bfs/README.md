@@ -1,1 +1,1 @@
-# bfs Design\n\nExtracted from HLSPilot repository.
+# Design: bfs

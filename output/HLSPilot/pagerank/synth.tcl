@@ -1,8 +1,8 @@
-open_project "pagerank"
-set_top pagerank
-add_files [glob "/output/HLSPilot/pagerank/**/*.cpp"]
-add_files -tb [glob "/output/HLSPilot/pagerank/**/*.cpp"]
-open_solution "solution1"
+open_project synth
+set_top main
 set_part xcu250-figd2104-2L-e
+add_files [glob *.cpp *.c *.h *.hpp]
+add_files -tb testbench.cpp
+open_solution "solution1"
 csynth_design
 exit

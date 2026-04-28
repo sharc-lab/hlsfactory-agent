@@ -1,9 +1,0 @@
-PASS: kernel.cpp
-/output/HeCBench/ga/reference.cpp:4:22: error: unknown type name 'uint32_t'
-    4 |                      uint32_t length,
-      |                      ^
-/output/HeCBench/ga/reference.cpp:10:8: error: unknown type name 'uint'; did you mean 'int'?
-   10 |   for (uint tid = 0; tid < length; tid++) { 
-      |        ^~~~
-      |        int
-2 errors generated.

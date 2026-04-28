@@ -1,0 +1,4 @@
+/output/fpgaconvnet-hls/glue/glue.cpp:1:10: fatal error: 'glue_tb.hpp' file not found
+    1 | #include "glue_tb.hpp"
+      |          ^~~~~~~~~~~~~
+1 error generated.

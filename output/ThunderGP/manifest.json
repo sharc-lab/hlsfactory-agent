@@ -1,0 +1,9 @@
+{
+  "repo_name": "ThunderGP",
+  "repo_url": "https://github.com/Xtra-Computing/ThunderGP.git",
+  "framework": "vivado_hls",
+  "total_designs": 3,
+  "designs": [
+    {"name":"apply_top","top_function":"vertexApply","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["apply_top.cpp"]},{"name":"scatter_gather_top","top_function":"scatter_gather_top_top","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["scatter_gather_top.cpp"]},{"name":"customize_apply_top","top_function":"vertexApply","compile_status":"fail","has_testbench":true,"has_tcl":true,"source_files":["customize_apply_top.cpp"]}
+  ]
+}

@@ -1,16 +1,16 @@
 {
   "repo_name": "CHIP-KNN",
   "repo_url": "https://github.com/SFU-HiAccel/CHIP-KNN.git",
-  "framework": "tapa",
+  "framework": "vivado_hls",
   "total_designs": 1,
   "designs": [
     {
-      "name": "singlePE",
+      "name": "knn",
       "top_function": "Knn",
-      "compile_status": "fail",
+      "compile_status": "pass",
       "has_testbench": true,
-      "has_tcl": false,
-      "source_files": ["knn.cpp", "knn.h", "testbench.cpp"]
+      "has_tcl": true,
+      "source_files": ["knn.cpp", "knn.h"]
     }
   ]
 }

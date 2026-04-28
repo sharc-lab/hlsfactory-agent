@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/atomicSystemWide-hip/kernel.cpp:1:
-/output/HeCBench/atomicSystemWide-hip/kernel.h:36:10: fatal error: 'hip/hip_runtime.h' file not found
-   36 | #include <hip/hip_runtime.h>
-      |          ^~~~~~~~~~~~~~~~~~~
-1 error generated.

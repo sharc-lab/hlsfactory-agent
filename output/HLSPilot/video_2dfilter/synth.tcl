@@ -1,8 +1,8 @@
-open_project "video_2dfilter"
-set_top video_2dfilter
-add_files [glob "/output/HLSPilot/video_2dfilter/**/*.cpp"]
-add_files -tb [glob "/output/HLSPilot/video_2dfilter/**/*.cpp"]
-open_solution "solution1"
+open_project synth
+set_top Write24BitBMP
 set_part xcu250-figd2104-2L-e
+add_files [glob *.cpp *.c *.h *.hpp]
+add_files -tb testbench.cpp
+open_solution "solution1"
 csynth_design
 exit

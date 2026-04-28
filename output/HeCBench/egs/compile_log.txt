@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/egs/kernel.cpp:1:
-/output/HeCBench/egs/kernel.h:270:10: fatal error: 'output.c' file not found
-  270 | #include "output.c"
-      |          ^~~~~~~~~~
-1 error generated.

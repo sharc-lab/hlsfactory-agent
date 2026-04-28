@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/debayer/kernel.cpp:1:
-/output/HeCBench/debayer/kernel.h:26:10: fatal error: 'util.h' file not found
-   26 | #include "util.h"
-      |          ^~~~~~~~
-1 error generated.

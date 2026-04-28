@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/haversine-hip/kernel.cpp:1:
-/output/HeCBench/haversine-hip/kernel.h:17:10: fatal error: 'distance.h' file not found
-   17 | #include "distance.h"
-      |          ^~~~~~~~~~~~
-1 error generated.

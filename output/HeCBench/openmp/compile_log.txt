@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/openmp/kernel.cpp:1:
-/output/HeCBench/openmp/kernel.h:46:10: fatal error: 'reference.h' file not found
-   46 | #include "reference.h"
-      |          ^~~~~~~~~~~~~
-1 error generated.

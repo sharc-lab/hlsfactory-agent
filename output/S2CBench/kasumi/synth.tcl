@@ -1,11 +1,10 @@
-open_project /output/S2CBench/kasumi/project
-set_top kasumi
-add_files -tb /output/S2CBench/kasumi/tb/*.cpp
-add_files /output/S2CBench/kasumi/src/define.h
-add_files /output/S2CBench/kasumi/src/kasumi.cpp
-add_files /output/S2CBench/kasumi/src/kasumi.h
-add_files /output/S2CBench/kasumi/src/main.cpp
-open_solution "solution1" -flow_target vitis
-set_part xcu250-figd2104-2L-e
+open_project kasumi
+set_top /output/S2CBench/kasumi/main.cpp:int sc_main(int argc, char** argv)
+add_files /output/S2CBench/kasumi/kasumi.cpp
+add_files /output/S2CBench/kasumi/main.cpp
+add_files /output/S2CBench/kasumi/tb_kasumi.cpp
+add_files -tb /output/S2CBench/kasumi/tb_kasumi.cpp
+open_solution solution1 -flow_target vivado
+set_part {xcu250-figd2104-2L-e}
 csynth_design
 exit

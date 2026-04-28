@@ -1,9 +1,9 @@
 #ifndef QC_FPGA_BUFFER_PERMUTATION_H
 #define QC_FPGA_BUFFER_PERMUTATION_H
 
-#include "types.h"
-#include "repeat.h"
-#include "parameters.h"
+#include "common/types.h"
+#include "common/repeat.h"
+#include "common/parameters.h"
 #include "streams.h"
 #include <hls_stream.h>
 #include "internal_types.h"

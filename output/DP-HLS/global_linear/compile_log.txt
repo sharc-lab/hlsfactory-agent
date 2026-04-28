@@ -1,0 +1,4 @@
+/output/DP-HLS/global_linear/global_linear.cpp:1:10: fatal error: 'seqan3/alignment/pairwise/align_pairwise.hpp' file not found
+    1 | #include <seqan3/alignment/pairwise/align_pairwise.hpp>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

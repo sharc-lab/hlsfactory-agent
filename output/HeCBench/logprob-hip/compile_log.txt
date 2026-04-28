@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/logprob-hip/kernel.cpp:1:
-/output/HeCBench/logprob-hip/kernel.h:45:10: fatal error: 'hip/hip_fp16.h' file not found
-   45 | #include <hip/hip_fp16.h>
-      |          ^~~~~~~~~~~~~~~~
-1 error generated.

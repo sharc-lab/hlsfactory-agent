@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/thomas/kernel.cpp:1:
-/output/HeCBench/thomas/kernel.h:90:10: fatal error: 'ThomasMatrix.hpp' file not found
-   90 | #include "ThomasMatrix.hpp"
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.

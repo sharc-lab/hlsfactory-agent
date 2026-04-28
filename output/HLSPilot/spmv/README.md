@@ -1,1 +1,1 @@
-# spmv Design\n\nExtracted from HLSPilot repository.
+# Design: spmv

@@ -1,0 +1,234 @@
+[
+  {
+    "name": "AutoNTT",
+    "size_kb": 852,
+    "files": 225,
+    "max_depth": 5,
+    "ext_count": 20,
+    "language": "Python"
+  },
+  {
+    "name": "BitBlender",
+    "size_kb": 8292,
+    "files": 212,
+    "max_depth": 7,
+    "ext_count": 24,
+    "language": "C++"
+  },
+  {
+    "name": "CHIP-KNN",
+    "size_kb": 222,
+    "files": 74,
+    "max_depth": 4,
+    "ext_count": 9,
+    "language": "C++"
+  },
+  {
+    "name": "CLINK",
+    "size_kb": 1215,
+    "files": 119,
+    "max_depth": 6,
+    "ext_count": 17,
+    "language": "C++"
+  },
+  {
+    "name": "DP-HLS",
+    "size_kb": 131216,
+    "files": 1389,
+    "max_depth": 7,
+    "ext_count": 41,
+    "language": "C++"
+  },
+  {
+    "name": "FORC",
+    "size_kb": 59726,
+    "files": 24,
+    "max_depth": 2,
+    "ext_count": 11,
+    "language": "C++"
+  },
+  {
+    "name": "HLS-CNN",
+    "size_kb": 22662,
+    "files": 133,
+    "max_depth": 5,
+    "ext_count": 19,
+    "language": "C"
+  },
+  {
+    "name": "HLSPilot",
+    "size_kb": 14946,
+    "files": 290,
+    "max_depth": 5,
+    "ext_count": 26,
+    "language": "C"
+  },
+  {
+    "name": "HP-FFT-HLS",
+    "size_kb": 8769,
+    "files": 140,
+    "max_depth": 3,
+    "ext_count": 9,
+    "language": "C++"
+  },
+  {
+    "name": "HiSpMV",
+    "size_kb": 510228,
+    "files": 217,
+    "max_depth": 4,
+    "ext_count": 32,
+    "language": "C++"
+  },
+  {
+    "name": "ISCA-2024-HAL",
+    "size_kb": 350,
+    "files": 114,
+    "max_depth": 4,
+    "ext_count": 14,
+    "language": "C"
+  },
+  {
+    "name": "InTAR",
+    "size_kb": 1186873,
+    "files": 168,
+    "max_depth": 5,
+    "ext_count": 30,
+    "language": "C++"
+  },
+  {
+    "name": "NN2FPGA",
+    "size_kb": 189580,
+    "files": 500,
+    "max_depth": 11,
+    "ext_count": 42,
+    "language": "C++"
+  },
+  {
+    "name": "PQC-Crystals-HLS-Accelerators",
+    "size_kb": 61,
+    "files": 27,
+    "max_depth": 4,
+    "ext_count": 10,
+    "language": "C++"
+  },
+  {
+    "name": "ProgSG",
+    "size_kb": 166951,
+    "files": 3926,
+    "max_depth": 9,
+    "ext_count": 17,
+    "language": "LLVM"
+  },
+  {
+    "name": "S2CBench",
+    "size_kb": 7809,
+    "files": 308,
+    "max_depth": 3,
+    "ext_count": 31,
+    "language": "C++"
+  },
+  {
+    "name": "SERI",
+    "size_kb": 463,
+    "files": 147,
+    "max_depth": 4,
+    "ext_count": 17,
+    "language": "C++"
+  },
+  {
+    "name": "ScaleHLS-HIDA",
+    "size_kb": 4338,
+    "files": 253,
+    "max_depth": 6,
+    "ext_count": 17,
+    "language": "MLIR"
+  },
+  {
+    "name": "Spector-HLS",
+    "size_kb": 182404,
+    "files": 1196,
+    "max_depth": 6,
+    "ext_count": 23,
+    "language": "Jupyter Notebook"
+  },
+  {
+    "name": "SyncNN",
+    "size_kb": 107,
+    "files": 44,
+    "max_depth": 4,
+    "ext_count": 8,
+    "language": "C++"
+  },
+  {
+    "name": "ThunderGP",
+    "size_kb": 7439,
+    "files": 232,
+    "max_depth": 4,
+    "ext_count": 16,
+    "language": "C++"
+  },
+  {
+    "name": "balor",
+    "size_kb": 2093,
+    "files": 120,
+    "max_depth": 4,
+    "ext_count": 11,
+    "language": "C++"
+  },
+  {
+    "name": "blaze",
+    "size_kb": 65325,
+    "files": 250,
+    "max_depth": 9,
+    "ext_count": 40,
+    "language": null
+  },
+  {
+    "name": "fpgaconvnet-hls",
+    "size_kb": 425,
+    "files": 504,
+    "max_depth": 5,
+    "ext_count": 14,
+    "language": "Python"
+  },
+  {
+    "name": "gemm_hls",
+    "size_kb": 17540,
+    "files": 33,
+    "max_depth": 2,
+    "ext_count": 10,
+    "language": "C++"
+  },
+  {
+    "name": "gpu-rodinia",
+    "size_kb": 35087,
+    "files": 1561,
+    "max_depth": 6,
+    "ext_count": 350,
+    "language": "C"
+  },
+  {
+    "name": "hls-fpga-accelerators",
+    "size_kb": 92,
+    "files": 31,
+    "max_depth": 3,
+    "ext_count": 7,
+    "language": "C++"
+  },
+  {
+    "name": "hpcc",
+    "size_kb": 3137,
+    "files": 659,
+    "max_depth": 5,
+    "ext_count": 97,
+    "language": "C"
+  },
+  {
+    "name": "pasta",
+    "size_kb": 1537,
+    "files": 652,
+    "max_depth": 8,
+    "ext_count": 39,
+    "language": "C"
+  }
+]

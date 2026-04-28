@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/medianfilter/kernel.cpp:1:
-/output/HeCBench/medianfilter/kernel.h:37:10: fatal error: 'shrUtils.h' file not found
-   37 | #include "shrUtils.h"
-      |          ^~~~~~~~~~~~
-1 error generated.

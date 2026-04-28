@@ -1,2 +1,9 @@
-Compiling /output/SERI/tapa_qcf/tapa_qcf.cpp
-Compilation PASS after 0 attempts.
+Compilation log for tapa_qcf
+Compiling /output/SERI/tapa_qcf/tapa_qcf.cpp ...
+PASS
+Compiling /output/SERI/tapa_qcf/testbench.cpp ...
+/output/SERI/tapa_qcf/testbench.cpp:4:5: error: use of undeclared identifier 't_preparation'
+    4 |     t_preparation();
+      |     ^
+1 error generated.
+FAIL

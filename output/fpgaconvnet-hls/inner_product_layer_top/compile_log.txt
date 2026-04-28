@@ -1,0 +1,4 @@
+/output/fpgaconvnet-hls/inner_product_layer_top/inner_product_layer_top.cpp:1:10: fatal error: 'inner_product_layer_tb.hpp' file not found
+    1 | #include "inner_product_layer_tb.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

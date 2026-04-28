@@ -1,0 +1,21 @@
+{
+  "run_id": "2f927c4c-16d1-4869-bc62-c811c83c8e81",
+  "timestamp": "2026-03-19T16:57:02.453845+00:00",
+  "repo_url": "https://github.com/Xtra-Computing/ThunderGP.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.016184973,
+  "total_api_calls": 21,
+  "format_errors": 0,
+  "traj_file": "ThunderGP_2f927c4c-16d1-4869-bc62-c811c83c8e81.traj.json",
+  "quality": {
+    "designs_found": 3,
+    "compile_pass": 0,
+    "compile_fail": 3,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 3,
+    "designs_with_tcl": 3
+  }
+}

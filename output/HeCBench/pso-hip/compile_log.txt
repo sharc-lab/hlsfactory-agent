@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/pso-hip/kernel.cpp:1:
-/output/HeCBench/pso-hip/kernel.h:18:10: fatal error: 'hip/hip_runtime.h' file not found
-   18 | #include <hip/hip_runtime.h>
-      |          ^~~~~~~~~~~~~~~~~~~
-1 error generated.

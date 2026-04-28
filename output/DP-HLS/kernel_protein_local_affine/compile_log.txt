@@ -1,0 +1,4 @@
+/output/DP-HLS/kernel_protein_local_affine/kernel_protein_local_affine.cpp:1:10: fatal error: 'frontend.h' file not found
+    1 | #include "frontend.h"
+      |          ^~~~~~~~~~~~
+1 error generated.

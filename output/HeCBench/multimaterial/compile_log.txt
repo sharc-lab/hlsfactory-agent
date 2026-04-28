@@ -1,8 +1,0 @@
-In file included from /output/HeCBench/multimaterial/kernel.cpp:1:
-/output/HeCBench/multimaterial/kernel.h:111:8: error: redefinition of 'full_data'
-  111 | struct full_data
-      |        ^
-/output/HeCBench/multimaterial/kernel.h:43:8: note: previous definition is here
-   43 | struct full_data
-      |        ^
-1 error generated.

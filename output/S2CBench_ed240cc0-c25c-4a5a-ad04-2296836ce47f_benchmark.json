@@ -1,0 +1,21 @@
+{
+  "run_id": "ed240cc0-c25c-4a5a-ad04-2296836ce47f",
+  "timestamp": "2026-03-18T20:32:36.805609+00:00",
+  "repo_url": "https://github.com/DARClab-UTD/S2CBench.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.025796136,
+  "total_api_calls": 31,
+  "format_errors": 0,
+  "traj_file": "S2CBench_ed240cc0-c25c-4a5a-ad04-2296836ce47f.traj.json",
+  "quality": {
+    "designs_found": 21,
+    "compile_pass": 1,
+    "compile_fail": 20,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 21,
+    "designs_with_tcl": 21
+  }
+}

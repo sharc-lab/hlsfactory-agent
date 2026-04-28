@@ -1,1 +1,1 @@
-# face_detection Design\n\nExtracted from HLSPilot repository.
+# Design: face_detection

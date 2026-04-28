@@ -1,0 +1,4 @@
+/output/DP-HLS/kernel_semi_global_linear_long_short/kernel_semi_global_linear_long_short.cpp:2:10: fatal error: '../../include/frontend.h' file not found
+    2 | #include "../../include/frontend.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

@@ -1,4 +1,0 @@
-/output/HeCBench/chacha20/kernel.cpp:5:16: error: use of undeclared identifier '_tid_x'
-    5 |   for (int i = _tid_x; i < n/2; i = i + BLOCK_DIM_X) {
-      |                ^
-1 error generated.

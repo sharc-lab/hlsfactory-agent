@@ -1,7 +1,0 @@
-/output/HeCBench/nms/kernel.cpp:4:8: error: expected unqualified-id
-    4 | extern "C"
-      |        ^
-/output/HeCBench/nms/kernel.cpp:37:19: error: use of undeclared identifier '__syncthreads_and'
-   37 |   *pointsbitmap = __syncthreads_and(cond);
-      |                   ^
-2 errors generated.

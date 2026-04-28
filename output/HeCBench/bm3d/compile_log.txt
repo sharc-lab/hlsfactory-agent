@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/bm3d/kernel.cpp:1:
-/output/HeCBench/bm3d/kernel.h:23:10: fatal error: 'params.hpp' file not found
-   23 | #include "params.hpp"
-      |          ^~~~~~~~~~~~
-1 error generated.

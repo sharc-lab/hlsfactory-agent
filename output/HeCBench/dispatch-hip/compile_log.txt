@@ -1,5 +1,0 @@
-In file included from /output/HeCBench/dispatch-hip/kernel.cpp:1:
-/output/HeCBench/dispatch-hip/kernel.h:9:1: error: unterminated /* comment
-    9 | /* -----------------------------------------------------------------------------
-      | ^
-1 error generated.

@@ -1,8 +1,0 @@
-/output/HeCBench/bilateral/kernel.cpp:4:8: error: expected unqualified-id
-    4 | extern "C"
-      |        ^
-1 error generated.
-/output/HeCBench/bilateral/reference.cpp:47:37: error: use of undeclared identifier 'expf'
-   47 |           float weight = a_square * expf(spatial + range);
-      |                                     ^
-1 error generated.

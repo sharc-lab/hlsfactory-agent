@@ -1,0 +1,21 @@
+{
+  "run_id": "e52053c0-29c7-4191-9d48-c849da650697",
+  "timestamp": "2026-03-18T23:58:48.002369+00:00",
+  "repo_url": "https://github.com/bsc-loca/PQC-Crystals-HLS-Accelerators.git",
+  "model": "openai/gpt-oss-120b",
+  "exit_status": "Submitted",
+  "total_cost_usd": 0.013720396,
+  "total_api_calls": 32,
+  "format_errors": 0,
+  "traj_file": "PQC-Crystals-HLS-Accelerators_e52053c0-29c7-4191-9d48-c849da650697.traj.json",
+  "quality": {
+    "designs_found": 2,
+    "compile_pass": 2,
+    "compile_fail": 0,
+    "compile_skip": 0,
+    "has_manifest": true,
+    "manifest_valid_json": true,
+    "designs_with_testbench": 2,
+    "designs_with_tcl": 2
+  }
+}

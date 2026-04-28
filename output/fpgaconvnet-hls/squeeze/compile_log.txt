@@ -1,0 +1,4 @@
+/output/fpgaconvnet-hls/squeeze/squeeze.cpp:1:10: fatal error: 'squeeze_tb.hpp' file not found
+    1 | #include "squeeze_tb.hpp"
+      |          ^~~~~~~~~~~~~~~~
+1 error generated.

@@ -4,9 +4,9 @@
 // needs to be defined before inclusion of ap_int.h
 #define AP_INT_MAX_W 8192
 
-#include "types.h"
+#include "common/types.h"
 #include "packed_array.hpp"
-#include "qc_util_advanced.h"
+#include "common/qc_util_advanced.h"
 #include "ap_int.h"
 
 #define D_WIDTH( d_width ) ap_uint< d_width >

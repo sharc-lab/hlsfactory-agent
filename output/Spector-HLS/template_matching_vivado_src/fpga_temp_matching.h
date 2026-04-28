@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "/opt/Xilinx/Vivado/2018.3/include/gmp.h"
+#include "gmp.h"
 #include "ap_int.h"
 #include <algorithm>
 #include "params.h"

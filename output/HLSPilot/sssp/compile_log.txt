@@ -1,3 +1,11 @@
+In file included from /output/HLSPilot/sssp/testbench.cpp:1:
+/output/HLSPilot/sssp/sssp.cpp:12:23: error: use of undeclared identifier 'INT_MAX'
+   12 |         distance[i] = INT_MAX;
+      |                       ^
+/output/HLSPilot/sssp/sssp.cpp:19:23: error: use of undeclared identifier 'INT_MAX'
+   19 |         int min_dis = INT_MAX;
+      |                       ^
+2 errors generated.
 /output/HLSPilot/sssp/sssp.cpp:12:23: error: use of undeclared identifier 'INT_MAX'
    12 |         distance[i] = INT_MAX;
       |                       ^

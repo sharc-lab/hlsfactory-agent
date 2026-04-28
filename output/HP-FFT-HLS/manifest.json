@@ -1,586 +1,151 @@
 {
-  "repository": {
-    "name": "HP-FFT-HLS",
-    "url": "https://github.com/UCLA-VAST/HP-FFT-HLS.git",
-    "description": "High-Performance FFT Generator using High-Level Synthesis",
-    "publication": "FCCM25: HP-FFT: A General High-Performance FFT Generator Using High-Level Synthesis"
-  },
-  "processed_at": "2026-03-05T05:49:53Z",
+  "repo_name": "HP-FFT-HLS",
+  "repo_url": "https://github.com/UCLA-VAST/HP-FFT-HLS.git",
+  "framework": "vivado_hls",
+  "total_designs": 16,
   "designs": [
     {
       "name": "n1024_UF1",
-      "directory": "n1024_UF1",
-      "fft_size": 1024,
-      "variant": "UF1",
-      "unroll_factor": 1,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
-    {
-      "name": "n1024_UF2",
-      "directory": "n1024_UF2",
-      "fft_size": 1024,
-      "variant": "UF2",
-      "unroll_factor": 2,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
-    {
-      "name": "n1024_UF4",
-      "directory": "n1024_UF4",
-      "fft_size": 1024,
-      "variant": "UF4",
-      "unroll_factor": 4,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
-    {
-      "name": "n1024_UF8",
-      "directory": "n1024_UF8",
-      "fft_size": 1024,
-      "variant": "UF8",
-      "unroll_factor": 8,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n1024_UF16",
-      "directory": "n1024_UF16",
-      "fft_size": 1024,
-      "variant": "UF16",
-      "unroll_factor": 16,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF2",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n1024_UF32",
-      "directory": "n1024_UF32",
-      "fft_size": 1024,
-      "variant": "UF32",
-      "unroll_factor": 32,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF4",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n1024_UF8",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n1024_no_StagePipeline",
-      "directory": "n1024_no_StagePipeline",
-      "fft_size": 1024,
-      "variant": "no_StagePipeline",
-      "unroll_factor": 1,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n1024_original_C_style",
-      "directory": "n1024_original_C_style",
-      "fft_size": 1024,
-      "variant": "original_C_style",
-      "unroll_factor": 1,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n256_UF1",
-      "directory": "n256_UF1",
-      "fft_size": 256,
-      "variant": "UF1",
-      "unroll_factor": 1,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
-    {
-      "name": "n256_UF2",
-      "directory": "n256_UF2",
-      "fft_size": 256,
-      "variant": "UF2",
-      "unroll_factor": 2,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
-    {
-      "name": "n256_UF4",
-      "directory": "n256_UF4",
-      "fft_size": 256,
-      "variant": "UF4",
-      "unroll_factor": 4,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
-    {
-      "name": "n256_UF8",
-      "directory": "n256_UF8",
-      "fft_size": 256,
-      "variant": "UF8",
-      "unroll_factor": 8,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n256_UF16",
-      "directory": "n256_UF16",
-      "fft_size": 256,
-      "variant": "UF16",
-      "unroll_factor": 16,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF2",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n256_UF32",
-      "directory": "n256_UF32",
-      "fft_size": 256,
-      "variant": "UF32",
-      "unroll_factor": 32,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF4",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
+    {
+      "name": "n256_UF8",
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n256_no_StagePipeline",
-      "directory": "n256_no_StagePipeline",
-      "fft_size": 256,
-      "variant": "no_StagePipeline",
-      "unroll_factor": 1,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
-    },
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
+    }
+    ,
     {
       "name": "n256_original_C_style",
-      "directory": "n256_original_C_style",
-      "fft_size": 256,
-      "variant": "original_C_style",
-      "unroll_factor": 1,
-      "top_function": "FFT_TOP",
-      "files": {
-        "source": [
-          "FFT.cpp",
-          "FFT.h"
-        ],
-        "testbench": [
-          "testbench.cpp"
-        ],
-        "documentation": [
-          "README.md"
-        ],
-        "synthesis": [
-          "synth.tcl"
-        ],
-        "logs": [
-          "compile_log.txt"
-        ]
-      },
-      "interfaces": {
-        "input": "hls::stream<hls::vector<complex<float>, UF*2>>",
-        "output": "hls::stream<hls::vector<complex<float>, UF*2>>"
-      },
-      "compilation": {
-        "status": "success",
-        "compiler": "clang++",
-        "standard": "c++17"
-      }
+      "top_function": "RADIX2_BFLY_double_buffer_quarter_CY",
+      "compile_status": "pass",
+      "has_testbench": true,
+      "has_tcl": true,
+      "source_files": ["FFT.cpp","testbench.cpp"]
     }
-  ],
-  "total_designs": 16,
-  "variants": [
-    "UF1",
-    "UF2",
-    "UF4",
-    "UF8",
-    "UF16",
-    "UF32",
-    "no_StagePipeline",
-    "original_C_style"
-  ],
-  "fft_sizes": [
-    256,
-    1024
   ]
 }

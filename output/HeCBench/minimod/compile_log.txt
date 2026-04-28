@@ -1,8 +1,0 @@
-In file included from /output/HeCBench/minimod/kernel.cpp:1:
-/output/HeCBench/minimod/kernel.h:55:28: error: use of undeclared identifier 'grid'
-   55 |   int leadpad = getLeadpad(grid);
-      |                            ^
-/output/HeCBench/minimod/kernel.h:57:1: error: extraneous closing brace ('}')
-   57 | }
-      | ^
-2 errors generated.

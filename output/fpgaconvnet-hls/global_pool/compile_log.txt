@@ -1,0 +1,4 @@
+/output/fpgaconvnet-hls/global_pool/global_pool.cpp:1:10: fatal error: 'global_pool_tb.hpp' file not found
+    1 | #include "global_pool_tb.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~
+1 error generated.
