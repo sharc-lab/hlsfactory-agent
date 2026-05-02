@@ -67,17 +67,17 @@ bars_skip = ax.bar(x, df["compile_skip"],  width=bar_width, color=COLORS["compil
 # ── Annotate total above each bar ────────────────────────────────────────────
 for i, total in enumerate(df["designs_found"]):
     ax.text(i, total + 0.3, str(total), ha="center", va="bottom",
-            fontsize=8, color="#333333", fontweight="bold")
+            fontsize=11, color="#333333", fontweight="bold")
 
 # ── Axes & labels ─────────────────────────────────────────────────────────────
 ax.set_xticks(list(x))
 ax.set_xticklabels(
     [f"{i}" for i, name in enumerate(df["name"])],
-    fontsize=7.5, rotation=35, ha="right",
+    fontsize=10, rotation=35, ha="right",
 )
-ax.set_ylabel("Design Count", fontsize=11, labelpad=8)
-ax.set_xlabel("Repository (index · name)", fontsize=11, labelpad=10)
-ax.set_title("HLS Compilation Outcomes by Repository", fontsize=13, fontweight="bold", pad=14)
+ax.set_ylabel("Design Count", fontsize=14, labelpad=8)
+ax.set_xlabel("Repository (index · name)", fontsize=14, labelpad=10)
+ax.set_title("HLS Compilation Outcomes by Repository", fontsize=16, fontweight="bold", pad=14)
 ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 ax.set_ylim(0, df["designs_found"].max() * 1.12)
 
@@ -88,7 +88,7 @@ legend_handles = [
     mpatches.Patch(color=COLORS["compile_skip"], label="Compile Skip"),
 ]
 ax.legend(handles=legend_handles, loc="upper left",
-          frameon=True, framealpha=0.9, fontsize=9)
+          frameon=True, framealpha=0.9, fontsize=12)
 
 fig.tight_layout()
 fig.savefig("designs_found_by_model.png", dpi=300, bbox_inches="tight")
