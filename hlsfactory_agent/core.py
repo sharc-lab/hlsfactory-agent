@@ -10,7 +10,7 @@ from docker.models.containers import Container
 
 from github_fast_downloader import GithubFastDownloader
 
-from hlsfactory_agent.prompt import build_prompt
+from hlsfactory_agent.prompt import build_prompt, build_prompt_v2
 from hlsfactory_agent.utils import Timer, load_jsonl_text
 
 DIR_CURRENT = Path(__file__).resolve().parent
@@ -111,7 +111,7 @@ class HLSFactoryAgentRun:
             },
         )
 
-        prompt = build_prompt(repo_name)
+        prompt = build_prompt_v2(repo_name)
         prompt_escaped = shlex.quote(prompt)
         cmd = f"umask 000 && pi -p {prompt_escaped}"
         exit_code, output_agent = container.exec_run(

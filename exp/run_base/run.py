@@ -21,6 +21,7 @@ repo_urls = [
     "SFU-HiAccel/SyncNN",
     "SFU-HiAccel/blaze",
     "SFU-HiAccel/pasta",
+    "SFU-HiAccel/SERI",
     "TurakhiaLab/DP-HLS",
     "UCLA-VAST/CLINK",
     "UCLA-VAST/HP-FFT-HLS",
@@ -31,6 +32,7 @@ repo_urls = [
     "icl-utk-edu/hpcc",
     "robertoBosio/NN2FPGA",
     "spcl/gemm_hls",
+    "ECASLab/hls-fpga-accelerators",
 ]
 
 API_KEY_OPENROUTER = check_key(dotenv_values(".env")["OPENROUTER_API_KEY"])
@@ -41,11 +43,6 @@ DIR_CURRENT = Path(__file__).resolve().parent
 DIR_RUNS = DIR_CURRENT / "runs"
 DIR_RUNS.mkdir(parents=True, exist_ok=True)
 
-# for repo_url in repo_urls:
-#     repo_id = repo_url
-#     run_id = f"hlsfactory-agent-{repo_id}"
-#     run = HLSFactoryAgentRun(run_id, repo_id, DIR_RUNS, MODEL, API_KEY_OPENROUTER)
-#     run.run()
 
 def run_single(repo_url: str):
     repo_id = repo_url
