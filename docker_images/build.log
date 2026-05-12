@@ -1,0 +1,60 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 941B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/7] FROM docker.io/library/ubuntu:22.04@sha256:962f6cadeae0ea6284001009daa4cc9a8c37e75d1f5191cf0eb83fe565b63dd7
+#4 DONE 0.0s
+
+#5 [2/7] RUN apt-get update &&     apt-get install -y git curl wget clang tree make cmake build-essential xz-utils ca-certificates&&     rm -rf /var/lib/apt/lists/*
+#5 CACHED
+
+#6 [3/7] RUN if command -v clang >/dev/null 2>&1 && command -v clang++ >/dev/null 2>&1; then     echo "Found clang and clang++, setting as default compilers";     clang --version;     clang++ --version;     else     echo "ERROR: clang and/or clang++ not found!";     exit 1;     fi
+#6 0.150 Found clang and clang++, setting as default compilers
+#6 0.165 Ubuntu clang version 14.0.0-1ubuntu1.1
+#6 0.165 Target: x86_64-pc-linux-gnu
+#6 0.165 Thread model: posix
+#6 0.165 InstalledDir: /usr/bin
+#6 0.183 Ubuntu clang version 14.0.0-1ubuntu1.1
+#6 0.183 Target: x86_64-pc-linux-gnu
+#6 0.183 Thread model: posix
+#6 0.183 InstalledDir: /usr/bin
+#6 DONE 0.2s
+
+#7 [4/7] RUN curl -fsSL https://nodejs.org/dist/v24.15.0/node-v24.15.0-linux-x64.tar.xz     | tar -xJ -C /usr/local --strip-components=1
+#7 DONE 2.7s
+
+#8 [5/7] RUN npm install -g @mariozechner/pi-coding-agent
+#8 6.196 npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+#8 8.475 
+#8 8.475 added 256 packages in 8s
+#8 8.475 
+#8 8.475 34 packages are looking for funding
+#8 8.475   run `npm fund` for details
+#8 8.477 npm notice
+#8 8.477 npm notice New minor version of npm available! 11.12.1 -> 11.13.0
+#8 8.477 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.13.0
+#8 8.477 npm notice To update run: npm install -g npm@11.13.0
+#8 8.477 npm notice
+#8 DONE 9.0s
+
+#9 [6/7] RUN mkdir -p /workspace
+#9 DONE 0.1s
+
+#10 [7/7] WORKDIR /workspace
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 4.1s done
+#11 writing image sha256:9e8988614bf47e88712bd476c91fd6478b09bbc639bf1962b095f13c0bb9f19c done
+#11 naming to docker.io/library/hlsfactory-agent done
+#11 DONE 4.1s

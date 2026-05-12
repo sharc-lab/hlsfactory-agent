@@ -1,11 +1,18 @@
 [project]
 name = "hlsfactory-agent"
 version = "0.1.0"
-description = "Add your description here"
-requires-python = ">=3.11"
+description = "Agentic tool to extract HLS designs from code repositories"
+requires-python = ">=3.12"
 dependencies = [
     "adjusttext>=1.3.0",
-    "matplotlib>=3.10.8",
-    "mini-swe-agent>=2.2.4",
-    "pandas>=3.0.1",
+    "docker>=7.1.0",
+    "github-fast-downloader",
+    "joblib>=1.5.3",
+    "matplotlib>=3.10.9",
+    "pandas>=3.0.2",
+    "psutil>=7.2.2",
+    "python-dotenv>=1.2.2",
 ]
+
+[tool.uv.sources]
+github-fast-downloader = { git = "ssh://git@github.com/stefanpie/github-fast-downloader.git", rev = "main" }

@@ -1,0 +1,2 @@
+./exp/run_base/runs/hlsfactory-agent-ECASLab__hls-fpga-accelerators/run_area/.pi/sessions
+./exp/run_base/runs/hlsfactory-agent-SFU-HiAccel__SERI/run_area/.pi/sessions
