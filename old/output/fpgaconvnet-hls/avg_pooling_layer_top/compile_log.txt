@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/avg_pooling_layer_top/avg_pooling_layer_top.cpp:1:10: fatal error: 'avg_pooling_layer_tb.hpp' file not found
-    1 | #include "avg_pooling_layer_tb.hpp"
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

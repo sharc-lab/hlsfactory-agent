@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/pooling_layer_top/pooling_layer_top.cpp:1:10: fatal error: 'pooling_layer_tb.hpp' file not found
-    1 | #include "pooling_layer_tb.hpp"
-      |          ^~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

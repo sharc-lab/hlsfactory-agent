@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/split_layer_top/split_layer_top.cpp:1:10: fatal error: 'split_layer_tb.hpp' file not found
-    1 | #include "split_layer_tb.hpp"
-      |          ^~~~~~~~~~~~~~~~~~~~
-1 error generated.

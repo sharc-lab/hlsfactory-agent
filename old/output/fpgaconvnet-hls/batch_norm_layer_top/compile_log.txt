@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/batch_norm_layer_top/batch_norm_layer_top.cpp:1:10: fatal error: 'batch_norm_layer_tb.hpp' file not found
-    1 | #include "batch_norm_layer_tb.hpp"
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

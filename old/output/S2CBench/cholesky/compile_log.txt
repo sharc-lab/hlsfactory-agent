@@ -1,4 +1,0 @@
-/output/S2CBench/cholesky/cholesky.cpp:20:11: fatal error: 'square_root_lut.dat' file not found
-   20 |         #include "square_root_lut.dat"
-      |                  ^~~~~~~~~~~~~~~~~~~~~
-1 error generated.

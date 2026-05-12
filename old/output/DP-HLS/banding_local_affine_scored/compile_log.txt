@@ -1,4 +1,0 @@
-/output/DP-HLS/banding_local_affine_scored/banding_local_affine_scored.cpp:1:10: fatal error: 'frontend.h' file not found
-    1 | #include "frontend.h"
-      |          ^~~~~~~~~~~~
-1 error generated.

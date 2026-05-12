@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/elementwise_add/elementwise_add.cpp:1:10: fatal error: 'elementwise_add_tb.hpp' file not found
-    1 | #include "elementwise_add_tb.hpp"
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

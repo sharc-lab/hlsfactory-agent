@@ -1,4 +1,0 @@
-SW_MurmurHash3.cpp:49:33: error: unknown type name 'KEY_DTYPE'
-   49 | uint32_t SW_MurmurHash3_x86_32 (KEY_DTYPE key,
-      |                                 ^
-1 error generated.

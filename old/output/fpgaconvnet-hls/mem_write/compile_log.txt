@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/mem_write/mem_write.cpp:1:10: fatal error: 'mem_write_tb.hpp' file not found
-    1 | #include "mem_write_tb.hpp"
-      |          ^~~~~~~~~~~~~~~~~~
-1 error generated.

@@ -1,2 +1,0 @@
-#include "sssp.cpp"
-int main(){return 0;}

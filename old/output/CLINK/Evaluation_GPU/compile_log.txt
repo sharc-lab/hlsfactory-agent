@@ -1,1 +1,0 @@
-Placeholder compile log – syntax check skipped (clang not available).

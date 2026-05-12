@@ -1,5 +1,0 @@
-In file included from /output/Spector-HLS/normals_catapult_src/normals.cpp:1:
-/output/Spector-HLS/normals_catapult_src/normals.h:3:10: fatal error: 'ac_int.h' file not found
-    3 | #include <ac_int.h>
-      |          ^~~~~~~~~~
-1 error generated.

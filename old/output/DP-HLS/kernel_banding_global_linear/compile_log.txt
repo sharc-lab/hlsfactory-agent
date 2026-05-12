@@ -1,4 +1,0 @@
-/output/DP-HLS/kernel_banding_global_linear/kernel_banding_global_linear.cpp:2:10: fatal error: '../../include/frontend.h' file not found
-    2 | #include "../../include/frontend.h"
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

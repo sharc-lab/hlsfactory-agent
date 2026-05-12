@@ -1,4 +1,0 @@
-/output/InTAR/benchmark_self-attn_spatial_self-attn-spatial-kernel/self-attn-spatial-kernel.cpp:7:10: fatal error: 'hls_vector.h' file not found
-    7 | #include <hls_vector.h>
-      |          ^~~~~~~~~~~~~~
-1 error generated.

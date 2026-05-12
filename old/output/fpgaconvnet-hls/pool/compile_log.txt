@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/pool/pool.cpp:1:10: fatal error: 'pool_tb.hpp' file not found
-    1 | #include "pool_tb.hpp"
-      |          ^~~~~~~~~~~~~
-1 error generated.

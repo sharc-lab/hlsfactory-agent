@@ -1,9 +1,0 @@
-{
-  "repo_name": "Spector-HLS",
-  "repo_url": "https://github.com/KastnerRG/Spector-HLS.git",
-  "framework": "vivado_hls",
-  ,,,"total_designs": 10,
-  "designs": [
-{"name":"matrix_multiplication_int","top_function":"matrix_mul","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["matrix_mul.cpp","matrix_mul_test.cpp"]},{"name":"matrix_multiplication_float","top_function":"matrix_mul","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["matrix_mul.cpp","matrix_mul_test.cpp"]},{"name":"dct_int","top_function":"DCT8_auto","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["dct.cpp","dct_test.cpp"]},{"name":"dct_float","top_function":"DCT8_auto","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["dct.cpp","dct_test.cpp"]},{"name":"normals_int","top_function":"normalized","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["normals.cpp","normals_test.cpp"]},{"name":"normals_float","top_function":"normalized","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["normals.cpp","normals_test.cpp"]},{"name":"sobel_filter_subdimx","top_function":"sobel_x","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["sobel_subdimx.cpp","sobel_test_subdimx.cpp"]},{"name":"sobel_filter_subdimy","top_function":"sobel_y","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["sobel_subdimy.cpp","sobel_test_subdimy.cpp"]},{"name":"spmv_int","top_function":"sub_sum","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["spmv.cpp","spmv_test.cpp"]},{"name":"spmv_float","top_function":"sub_sum","compile_status":"pass","has_testbench":true,"has_tcl":true,"source_files":["spmv.cpp","spmv_test.cpp"]}
-  ]
-}

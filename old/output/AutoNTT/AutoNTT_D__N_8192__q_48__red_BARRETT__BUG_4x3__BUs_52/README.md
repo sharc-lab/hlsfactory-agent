@@ -1,1 +1,0 @@
-# Design AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52

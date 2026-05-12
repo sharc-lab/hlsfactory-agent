@@ -1,8 +1,0 @@
-open_project matrix_vector_product_with_bias_input_layer
-set_top matrix_vector_product_with_bias_input_layer
-add_files matrix_vector_product_with_bias_input_layer.cpp
-add_files -tb matrix_vector_product_with_bias_input_layer_tb.cpp
-open_solution "solution1"
-set_part xcu250-figd2104-2L-e
-csynth_design
-exit

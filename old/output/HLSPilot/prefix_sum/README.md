@@ -1,1 +1,0 @@
-# Design: prefix_sum

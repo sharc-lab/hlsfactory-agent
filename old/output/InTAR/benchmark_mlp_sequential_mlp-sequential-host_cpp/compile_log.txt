@@ -1,4 +1,0 @@
-/output/InTAR/benchmark_mlp_sequential_mlp-sequential-host_cpp/mlp-sequential-host.cpp:8:10: fatal error: 'gflags/gflags.h' file not found
-    8 | #include <gflags/gflags.h>
-      |          ^~~~~~~~~~~~~~~~~
-1 error generated.

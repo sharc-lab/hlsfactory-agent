@@ -1,1 +1,0 @@
-# Design AutoNTT_I__N_8192__q_48__red_BARRETT__BUs_16

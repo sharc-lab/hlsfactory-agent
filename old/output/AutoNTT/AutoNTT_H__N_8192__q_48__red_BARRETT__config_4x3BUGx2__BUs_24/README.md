@@ -1,1 +1,0 @@
-# Design AutoNTT_H__N_8192__q_48__red_BARRETT__config_4x3BUGx2__BUs_24

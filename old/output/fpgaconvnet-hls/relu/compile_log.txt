@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/relu/relu.cpp:1:10: fatal error: 'relu_tb.hpp' file not found
-    1 | #include "relu_tb.hpp"
-      |          ^~~~~~~~~~~~~
-1 error generated.

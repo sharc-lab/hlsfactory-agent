@@ -1,8 +1,0 @@
-open_project get_delta_matrix_weights3
-set_top get_delta_matrix_weights3
-add_files get_delta_matrix_weights3.cpp
-add_files -tb get_delta_matrix_weights3_tb.cpp
-open_solution "solution1"
-set_part xcu250-figd2104-2L-e
-csynth_design
-exit

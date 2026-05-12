@@ -1,7 +1,0 @@
-open_project AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52
-set_top top_function
-add_files {/output/AutoNTT/AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/*.cpp}
-add_files -tb {/output/AutoNTT/AutoNTT_D__N_8192__q_48__red_BARRETT__BUG_4x3__BUs_52/ntt_test.cpp}
-open_solution solution1
-csynth_design
-exit

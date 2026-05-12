@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/elementwise_add_layer_top/elementwise_add_layer_top.cpp:1:10: fatal error: 'elementwise_add_layer_tb.hpp' file not found
-    1 | #include "elementwise_add_layer_tb.hpp"
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

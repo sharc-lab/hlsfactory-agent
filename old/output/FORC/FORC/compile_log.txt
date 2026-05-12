@@ -1,3 +1,0 @@
-/output/FORC/FORC/kernel/orc_proc.cpp: pass
-/output/FORC/FORC/host/orc_proc_host.cpp: pass
-/output/FORC/FORC/host/orc_proc_host_1S1C.cpp: pass

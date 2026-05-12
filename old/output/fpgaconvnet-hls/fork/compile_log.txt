@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/fork/fork.cpp:1:10: fatal error: 'fork_tb.hpp' file not found
-    1 | #include "fork_tb.hpp"
-      |          ^~~~~~~~~~~~~
-1 error generated.

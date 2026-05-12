@@ -1,4 +1,0 @@
-/output/S2CBench/idct/idct.cpp:95:13: fatal error: 'range_limit.dat' file not found
-   95 | #   include "range_limit.dat"
-      |             ^~~~~~~~~~~~~~~~~
-1 error generated.

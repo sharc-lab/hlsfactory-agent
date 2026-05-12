@@ -1,4 +1,0 @@
-/output/DP-HLS/kernel_sdtw/kernel_sdtw.cpp:2:10: fatal error: '../../include/frontend.h' file not found
-    2 | #include "../../include/frontend.h"
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.

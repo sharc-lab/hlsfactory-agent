@@ -1,5 +1,0 @@
-In file included from /output/ThunderGP/scatter_gather_top/scatter_gather_top.cpp:3:
-/output/ThunderGP/scatter_gather_top/graph_fpga.h:6:10: fatal error: 'para_check.h' file not found
-    6 | #include "para_check.h"
-      |          ^~~~~~~~~~~~~~
-1 error generated.

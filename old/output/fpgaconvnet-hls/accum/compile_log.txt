@@ -1,4 +1,0 @@
-/output/fpgaconvnet-hls/accum/accum.cpp:1:10: fatal error: 'accum_tb.hpp' file not found
-    1 | #include "accum_tb.hpp"
-      |          ^~~~~~~~~~~~~~
-1 error generated.

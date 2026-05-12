@@ -1,9 +1,0 @@
-/output/Spector-HLS/histogram_catapult_src/hist_test.cpp:4:10: fatal error: 'mc_scverify.h' file not found
-    4 | #include <mc_scverify.h>
-      |          ^~~~~~~~~~~~~~~
-1 error generated.
-In file included from /output/Spector-HLS/histogram_catapult_src/histogram_hls.cpp:1:
-/output/Spector-HLS/histogram_catapult_src/histogram_hls.h:1:10: fatal error: 'ac_int.h' file not found
-    1 | #include <ac_int.h>
-      |          ^~~~~~~~~~
-1 error generated.

@@ -1,4 +1,0 @@
-/output/DP-HLS/kernel_profile_alignment/kernel_profile_alignment.cpp:1:10: fatal error: 'frontend.h' file not found
-    1 | #include "frontend.h"
-      |          ^~~~~~~~~~~~
-1 error generated.

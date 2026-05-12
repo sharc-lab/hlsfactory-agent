@@ -1,4 +1,0 @@
-/workspace/repo/BitBlender_HLS/krnl_includes/common/includes/cmdparser/cmdlineparser.cpp:36:10: fatal error: 'logger.h' file not found
-   36 | #include "logger.h"
-      |          ^~~~~~~~~~
-1 error generated.
