@@ -94,15 +94,15 @@ def main() -> None:
            linewidth=0.5, label="Original repo", zorder=3)
     ax.bar(x + w / 2, after_files, w, color=LIGHT_GREEN, edgecolor=GREEN,
            linewidth=0.5, label="Extracted output", zorder=3)
-    ax.set_ylabel("Total files", fontsize=8.5)
+    ax.set_ylabel("Total files", fontsize=11)
     ax.set_yscale("log")
     ax.set_xticks(x)
-    ax.set_xticklabels(common, rotation=75, ha="right", fontsize=5.5)
-    ax.tick_params(labelsize=7, length=2)
+    ax.set_xticklabels(common, rotation=75, ha="right", fontsize=8)
+    ax.tick_params(labelsize=10, length=2)
     ax.grid(axis="y", color="#e8e8e8", linewidth=0.4, zorder=0)
-    ax.legend(fontsize=6.5, frameon=True, edgecolor="#dddddd", fancybox=False,
+    ax.legend(fontsize=9, frameon=True, edgecolor="#dddddd", fancybox=False,
               loc="upper right")
-    ax.set_title("File count", fontsize=9, pad=6)
+    ax.set_title("File count", fontsize=12, pad=6)
 
     # --- Panel 2: Max Directory Depth ---
     ax = axes[1]
@@ -110,12 +110,12 @@ def main() -> None:
            linewidth=0.5, label="Original repo", zorder=3)
     ax.bar(x + w / 2, after_depth, w, color=LIGHT_GREEN, edgecolor=GREEN,
            linewidth=0.5, label="Extracted output", zorder=3)
-    ax.set_ylabel("Max directory depth", fontsize=8.5)
+    ax.set_ylabel("Max directory depth", fontsize=11)
     ax.set_xticks(x)
-    ax.set_xticklabels(common, rotation=75, ha="right", fontsize=5.5)
-    ax.tick_params(labelsize=7, length=2)
+    ax.set_xticklabels(common, rotation=75, ha="right", fontsize=8)
+    ax.tick_params(labelsize=10, length=2)
     ax.grid(axis="y", color="#e8e8e8", linewidth=0.4, zorder=0)
-    ax.set_title("Directory depth", fontsize=9, pad=6)
+    ax.set_title("Directory depth", fontsize=12, pad=6)
 
     # --- Panel 3: File Extension Diversity ---
     ax = axes[2]
@@ -123,12 +123,12 @@ def main() -> None:
            linewidth=0.5, label="Original repo", zorder=3)
     ax.bar(x + w / 2, after_exts, w, color=LIGHT_GREEN, edgecolor=GREEN,
            linewidth=0.5, label="Extracted output", zorder=3)
-    ax.set_ylabel("Unique file extensions", fontsize=8.5)
+    ax.set_ylabel("Unique file extensions", fontsize=11)
     ax.set_xticks(x)
-    ax.set_xticklabels(common, rotation=75, ha="right", fontsize=5.5)
-    ax.tick_params(labelsize=7, length=2)
+    ax.set_xticklabels(common, rotation=75, ha="right", fontsize=8)
+    ax.tick_params(labelsize=10, length=2)
     ax.grid(axis="y", color="#e8e8e8", linewidth=0.4, zorder=0)
-    ax.set_title("File type diversity", fontsize=9, pad=6)
+    ax.set_title("File type diversity", fontsize=12, pad=6)
 
     fig.tight_layout(pad=0.8, w_pad=1.5)
     fig.savefig(figures_dir / "standardization_comparison.png", dpi=300,
@@ -143,7 +143,7 @@ def main() -> None:
     # Overall title
     fig2.suptitle(
         "Structural comparison: original repositories vs. standardized output",
-        fontsize=10, y=0.99, color="#333333",
+        fontsize=13, y=0.99, color="#333333",
     )
 
     metrics = [
@@ -155,7 +155,7 @@ def main() -> None:
     for ax, (title, before, after) in zip(axes2, metrics):
         bp = ax.boxplot(
             [before, after],
-            tick_labels=["Original\nGitHub repo", "Agent-extracted\noutput"],
+            tick_labels=["Original\nrepo", "Extracted\noutput"],
             widths=0.5,
             patch_artist=True,
             medianprops=dict(color="#333333", linewidth=1.2),
@@ -166,8 +166,8 @@ def main() -> None:
         bp["boxes"][1].set_facecolor(LIGHT_GREEN)
         bp["boxes"][1].set_edgecolor(GREEN)
 
-        ax.set_title(title, fontsize=9, pad=6)
-        ax.tick_params(labelsize=7.5, length=2)
+        ax.set_title(title, fontsize=12, pad=6)
+        ax.tick_params(labelsize=10, length=2)
         ax.grid(axis="y", color="#e8e8e8", linewidth=0.4, zorder=0)
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
@@ -181,7 +181,7 @@ def main() -> None:
             reduction = (1 - med_a / med_b) * 100
             ax.text(0.5, 0.95, f"{reduction:.0f}% reduction (median)",
                     transform=ax.transAxes, ha="center", va="top",
-                    fontsize=7, color=GRAY)
+                    fontsize=10, color=GRAY)
 
     fig2.tight_layout(pad=0.8, w_pad=1.2, rect=(0, 0, 1, 0.94))
     fig2.savefig(figures_dir / "standardization_boxplot.png", dpi=300,

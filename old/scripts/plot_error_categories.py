@@ -123,20 +123,20 @@ def main() -> None:
 
     for i, val in enumerate(values):
         ax.text(val + max(values) * 0.02, i, str(val),
-                va="center", fontsize=7.5, color="#444444", fontweight="medium")
+                va="center", fontsize=10, color="#444444", fontweight="medium")
 
     ax.set_yticks(y_pos)
-    ax.set_yticklabels(labels, fontsize=8)
+    ax.set_yticklabels(labels, fontsize=11)
     ax.invert_yaxis()
-    ax.set_xlabel("Number of designs", fontsize=9, labelpad=6)
+    ax.set_xlabel("Number of designs", fontsize=12, labelpad=6)
     ax.set_xlim(0, max(values) * 1.12)
-    ax.tick_params(labelsize=7.5, length=2)
+    ax.tick_params(labelsize=10, length=2)
 
     # Subtitle with context
     ax.text(0.98, 0.12,
             f"Classified from {failed_logs} failed compile logs",
             transform=ax.transAxes, ha="right", va="bottom",
-            fontsize=6.5, color=GRAY, linespacing=1.4)
+            fontsize=9, color=GRAY, linespacing=1.4)
 
     fig.tight_layout(pad=0.8)
     fig.savefig(figures_dir / "error_categories.png", dpi=300, bbox_inches="tight",

@@ -87,7 +87,7 @@ def main() -> None:
         if is_outlier:
             texts.append(ax.text(
                 designs[i], costs[i], name,
-                fontsize=6.5, color=GRAY,
+                fontsize=9, color=GRAY,
             ))
 
     # Use adjustText to push labels apart and away from data points
@@ -101,13 +101,13 @@ def main() -> None:
     )
 
     cbar = fig.colorbar(scatter, ax=ax, shrink=0.75, pad=0.03, aspect=25)
-    cbar.set_label("API calls", fontsize=8.5, labelpad=6)
-    cbar.ax.tick_params(labelsize=7.5)
+    cbar.set_label("API calls", fontsize=11, labelpad=6)
+    cbar.ax.tick_params(labelsize=10)
     cbar.outline.set_linewidth(0.4)
 
-    ax.set_xlabel("Designs extracted per repository", fontsize=9.5, labelpad=6)
-    ax.set_ylabel("LLM API cost (USD)", fontsize=9.5, labelpad=6)
-    ax.tick_params(labelsize=8)
+    ax.set_xlabel("Designs extracted per repository", fontsize=12, labelpad=6)
+    ax.set_ylabel("LLM API cost (USD)", fontsize=12, labelpad=6)
+    ax.tick_params(labelsize=11)
 
     # Summary box — top-right, clear of data
     total_d = int(designs.sum())
@@ -117,7 +117,7 @@ def main() -> None:
         0.97, 0.97,
         f"{total_d} designs  |  \${total_c:.2f} total  |  \${avg_c:.4f}/design",
         transform=ax.transAxes, ha="right", va="top",
-        fontsize=7.5, color="#444444",
+        fontsize=10, color="#444444",
         bbox=dict(boxstyle="round,pad=0.35", facecolor="#f7f7f7",
                   edgecolor="#dddddd", linewidth=0.5),
     )
@@ -127,7 +127,7 @@ def main() -> None:
         0.97, 0.85,
         "Each point = one repository\nBubble size = agent reasoning iterations",
         transform=ax.transAxes, ha="right", va="top",
-        fontsize=6.5, color=GRAY, linespacing=1.4,
+        fontsize=9, color=GRAY, linespacing=1.4,
     )
 
     fig.tight_layout(pad=1.0)

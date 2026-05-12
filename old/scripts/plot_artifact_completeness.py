@@ -83,9 +83,9 @@ def main() -> None:
         ax.axvline(j - 0.5, color="#e0e0e0", linewidth=0.4)
 
     ax.set_xticks(range(len(artifact_types)))
-    ax.set_xticklabels(artifact_types, fontsize=7.5, rotation=35, ha="right")
+    ax.set_xticklabels(artifact_types, fontsize=10, rotation=35, ha="right")
     ax.set_yticks(range(len(repo_names)))
-    ax.set_yticklabels(repo_names, fontsize=7)
+    ax.set_yticklabels(repo_names, fontsize=10)
 
     # Annotate cells with simple text (avoids missing unicode glyphs)
     for i in range(len(repo_names)):
@@ -98,14 +98,14 @@ def main() -> None:
             else:
                 sym, col = "", "#bbbbbb"
             if sym:
-                ax.text(j, i, sym, ha="center", va="center", fontsize=6.5,
+                ax.text(j, i, sym, ha="center", va="center", fontsize=9,
                         color=col, fontweight="bold")
 
     cbar = fig.colorbar(im, ax=ax, shrink=0.5, pad=0.03, aspect=20)
-    cbar.set_label("Coverage", fontsize=7.5, labelpad=4)
+    cbar.set_label("Coverage", fontsize=10, labelpad=4)
     cbar.set_ticks([0, 0.5, 1.0])
     cbar.set_ticklabels(["0%", "50%", "100%"])
-    cbar.ax.tick_params(labelsize=7)
+    cbar.ax.tick_params(labelsize=10)
     cbar.outline.set_linewidth(0.4)
 
     ax.tick_params(length=0)

@@ -314,7 +314,21 @@ def plot_rows(
         "ytick.major.width": 0.5,
     })
 
-    labels = [f"{row.repo} (n={row.denominator})" for row in rows]
+    ylabel_fontsize = 13
+    legend_fontsize = 11
+    if orientation == "vertical" and value_mode == "counts":
+        ylabel_fontsize = 14
+        legend_fontsize = 12
+
+    def shorten(name: str, max_len: int = 18) -> str:
+        if len(name) <= max_len:
+            return name
+        parts = name.split("-")
+        if len(parts) >= 2:
+            return f"{parts[0]}..{parts[-1]}"
+        return name[:max_len - 2] + ".."
+
+    labels = [f"{shorten(row.repo)} (n={row.denominator})" for row in rows]
     if orientation == "vertical":
         fig_width = max(10, 0.48 * len(rows) + 3.0)
         fig, ax = plt.subplots(figsize=(fig_width, 6.0))
@@ -335,17 +349,17 @@ def plot_rows(
             bottom = [b + v for b, v in zip(bottom, values)]
 
         ax.set_xticks(positions)
-        ax.set_xticklabels(labels, rotation=55, ha="right", fontsize=8)
+        ax.set_xticklabels(labels, rotation=55, ha="right", fontsize=11)
         if value_mode == "counts":
             max_total = max(
                 row.pass_count + row.fail_count + row.skip_count + row.unknown_count for row in rows
             ) if rows else 0
             ax.set_ylim(0, max_total * 1.05 if max_total else 1)
-            ax.set_ylabel("Design count", fontsize=10)
+            ax.set_ylabel("Design count", fontsize=ylabel_fontsize)
         else:
             ax.set_ylim(0, 1)
             ax.yaxis.set_major_formatter(PercentFormatter(xmax=1.0))
-            ax.set_ylabel("Rate", fontsize=10)
+            ax.set_ylabel("Rate", fontsize=ylabel_fontsize)
         ax.grid(axis="y", color="#e8e8e8", linewidth=0.5, zorder=0)
     else:
         fig_height = max(6, 0.30 * len(rows) + 2.0)
@@ -369,24 +383,24 @@ def plot_rows(
             left = [l + v for l, v in zip(left, values)]
 
         ax.set_yticks(y_positions)
-        ax.set_yticklabels(labels, fontsize=7.5)
+        ax.set_yticklabels(labels, fontsize=10)
         ax.invert_yaxis()
         if value_mode == "counts":
             max_total = max(
                 row.pass_count + row.fail_count + row.skip_count + row.unknown_count for row in rows
             ) if rows else 0
             ax.set_xlim(0, max_total * 1.04 if max_total else 1)
-            ax.set_xlabel("Design count", fontsize=9.5, labelpad=6)
+            ax.set_xlabel("Design count", fontsize=12, labelpad=6)
         else:
             ax.set_xlim(0, 1)
             ax.xaxis.set_major_formatter(PercentFormatter(xmax=1.0))
-            ax.set_xlabel("Rate", fontsize=9.5, labelpad=6)
+            ax.set_xlabel("Rate", fontsize=12, labelpad=6)
         ax.grid(axis="x", color="#e8e8e8", linewidth=0.5, zorder=0)
 
-    ax.tick_params(labelsize=8, length=2)
+    ax.tick_params(labelsize=11, length=2)
     ax.legend(
         loc="upper right", ncol=2, frameon=True,
-        framealpha=0.95, fontsize=8.5, edgecolor="#dddddd",
+        framealpha=0.95, fontsize=legend_fontsize, edgecolor="#dddddd",
         fancybox=False,
     )
 
