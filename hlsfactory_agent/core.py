@@ -131,7 +131,7 @@ class HLSFactoryAgentRun:
         session_file = next(dir_sessions.glob("*.jsonl"), None)
         if session_file is None:
             raise RuntimeError(f"No session file found in {dir_sessions}")
-        session_data = load_jsonl_text(session_file.read_text())
+        session_data = load_jsonl_text(session_file.read_text(encoding="utf-8", errors="replace"))
         run_data["session_data"] = session_data
 
         exit_code, _ = container.exec_run(

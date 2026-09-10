@@ -103,6 +103,16 @@ def test_check_flags_vitis_leftovers(tmp_path: Path):
     assert any("dialect" in f for f in r["failures"])
 
 
+def test_check_ignores_commented_out_pragmas_but_records_them(tmp_path: Path):
+    out = make_good_design(tmp_path)
+    (out / "mac.cpp").write_text(GOOD_KERNEL + "\n    // #pragma HLS array_partition variable=x complete\n")
+    r = check_translated_design(out, CATAPULT)
+    assert r["passed"], r["failures"]
+    assert r["leftovers"] == []
+    assert len(r["commented_leftovers"]) == 1
+    assert r["commented_leftovers"][0]["line"] > 1
+
+
 def test_check_flags_leftover_pragma_in_header(tmp_path: Path):
     out = make_good_design(tmp_path)
     (out / "mac.h").write_text("#pragma HLS INLINE\n")

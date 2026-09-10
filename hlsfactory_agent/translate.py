@@ -356,7 +356,7 @@ def find_top_from_synth_tcl(dir_design: Path) -> str | None:
     tcl = dir_design / "synth.tcl"
     if not tcl.exists():
         return None
-    m = re.search(r"^\s*set_top\s+(\S+)", tcl.read_text(errors="replace"), re.MULTILINE)
+    m = re.search(r"^\s*set_top\s+(\S+)", tcl.read_text(encoding="utf-8", errors="replace"), re.MULTILINE)
     return m.group(1) if m else None
 
 
@@ -384,26 +384,30 @@ def check_translated_design(dir_output: Path, target: TargetSpec) -> dict:
             result["failures"].append(f"missing required file {fname}")
 
     leftovers: list[dict] = []
+    commented: list[dict] = []
     for p in sources:
-        text = p.read_text(errors="replace")
+        text = p.read_text(encoding="utf-8", errors="replace")
         for i, line in enumerate(text.splitlines(), start=1):
             for pat in target.forbidden_patterns:
                 if re.search(pat, line):
-                    leftovers.append({"file": str(p.relative_to(dir_output)), "line": i, "text": line.strip()})
+                    entry = {"file": str(p.relative_to(dir_output)), "line": i, "text": line.strip()}
+                    # A line that is entirely a // comment is inert for the target tool; record it separately.
+                    (commented if line.lstrip().startswith("//") else leftovers).append(entry)
                     break
     checks["no_source_tool_leftovers"] = len(leftovers) == 0
     result["leftovers"] = leftovers
+    result["commented_leftovers"] = commented
     if leftovers:
         result["failures"].append(f"{len(leftovers)} line(s) still use the source tool's dialect")
 
-    has_top_marker = any(target.top_marker in p.read_text(errors="replace") for p in cpp_sources)
+    has_top_marker = any(target.top_marker in p.read_text(encoding="utf-8", errors="replace") for p in cpp_sources)
     checks["has_top_marker"] = has_top_marker
     if not has_top_marker:
         result["failures"].append(f"top marker `{target.top_marker}` not found in any source")
 
     driver = dir_output / target.driver_file
     if driver.exists():
-        driver_text = driver.read_text(errors="replace")
+        driver_text = driver.read_text(encoding="utf-8", errors="replace")
         missing_tokens = [t for t in target.driver_required_tokens if t not in driver_text]
         checks["driver_complete"] = not missing_tokens
         if missing_tokens:
@@ -419,6 +423,64 @@ def _container_exec(container: Container, cmd: str, workdir: str) -> tuple[int, 
     exit_code, output = container.exec_run(["sh", "-lc", cmd], workdir=workdir)
     text = output.decode("utf-8", errors="replace") if isinstance(output, bytes) else str(output)
     return (exit_code if exit_code is not None else -1), text
+
+
+def run_oracle_check(
+    dir_design: Path,
+    docker_image_name: str = DOCKER_IMAGE_NAME,
+    timeout_s: int = 120,
+) -> dict:
+    """Compile and run a Vitis design's own testbench against its own sources with clang.
+
+    This is the pre-filter: a design whose testbench does not pass on the original code has no
+    oracle for translation. The design is copied into a scratch folder so the testbench may write files.
+    """
+    import tempfile
+
+    dir_design = Path(dir_design).resolve()
+    tmp_root = Path(tempfile.mkdtemp(prefix="oracle_"))
+    dir_copy = tmp_root / "input_design"
+    shutil.copytree(dir_design, dir_copy)
+    os.chmod(dir_copy, 0o777)
+
+    client = docker.from_env()
+    container: Container = client.containers.run(
+        image=docker_image_name,
+        command="sleep 30m",
+        detach=True,
+        volumes={
+            str(dir_copy): {"bind": f"{CONTAINER_RUN_AREA}/{INPUT_DIR_NAME}", "mode": "rw"},
+            str(DIR_VITIS_HLS_INCLUDE.resolve()): {"bind": f"{CONTAINER_RUN_AREA}/vitis_hls_include", "mode": "ro"},
+        },
+    )
+    inp = f"{CONTAINER_RUN_AREA}/{INPUT_DIR_NAME}"
+    inc = f"{CONTAINER_RUN_AREA}/vitis_hls_include"
+    result: dict[str, Any] = {"design": dir_design.name, "top": find_top_from_synth_tcl(dir_design)}
+    try:
+        code, listing = _container_exec(container, f"ls -1 {inp}/*.cpp {inp}/*.cc {inp}/*.c 2>/dev/null", inp)
+        cpp_files = [ln.strip() for ln in listing.splitlines() if ln.strip()]
+        result["cpp_files"] = [Path(f).name for f in cpp_files]
+        if not cpp_files:
+            result["build"] = {"exit_code": None, "output": "no sources"}
+            result["run"] = {"exit_code": None, "output": "no sources"}
+        else:
+            build_cmd = (
+                f"clang++ -std=c++17 -I{inc} -I{inp} -w " + " ".join(shlex.quote(f) for f in cpp_files) + " -o /tmp/oracle.out"
+            )
+            code, output = _container_exec(container, build_cmd, inp)
+            result["build"] = {"exit_code": code, "output": output[-4000:]}
+            if code == 0:
+                code, output = _container_exec(container, f"timeout {timeout_s}s /tmp/oracle.out", inp)
+                result["run"] = {"exit_code": code, "output": output[-4000:]}
+            else:
+                result["run"] = {"exit_code": None, "output": "not run: build failed"}
+    finally:
+        container.stop()
+        container.remove(force=True)
+        shutil.rmtree(tmp_root, ignore_errors=True)
+
+    result["passed"] = result["run"]["exit_code"] == 0
+    return result
 
 
 def run_checks_standalone(
@@ -488,6 +550,30 @@ def run_container_checks(container: Container, target: TargetSpec) -> dict:
     return results
 
 
+def _rmtree_robust(path: Path, attempts: int = 5, delay_s: float = 1.0) -> None:
+    """rmtree that survives Windows read-only bits and transient file locks (OneDrive, antivirus)."""
+    import stat
+    import sys
+    import time
+
+    def _retry_writable(func, p, _exc):
+        os.chmod(p, stat.S_IWRITE)
+        func(p)
+
+    last: Exception | None = None
+    for i in range(attempts):
+        try:
+            if sys.version_info >= (3, 12):
+                shutil.rmtree(path, onexc=_retry_writable)
+            else:
+                shutil.rmtree(path, onerror=_retry_writable)  # pragma: no cover
+            return
+        except Exception as e:  # PermissionError, OSError from locks
+            last = e
+            time.sleep(delay_s * (i + 1))
+    raise RuntimeError(f"Could not remove {path} after {attempts} attempts: {last!r}")
+
+
 # --------------------------------------------------------------------------------------
 # Run class
 # --------------------------------------------------------------------------------------
@@ -526,7 +612,7 @@ class HLSTranslationRun:
         if not self.dir_design.is_dir():
             raise FileNotFoundError(f"Design directory not found: {self.dir_design}")
         if self.dir_work.exists():
-            shutil.rmtree(self.dir_work)
+            _rmtree_robust(self.dir_work)
         self.dir_work.mkdir(parents=True, exist_ok=True)
 
         dir_run_area = self.dir_work / "run_area"
@@ -535,7 +621,8 @@ class HLSTranslationRun:
         dir_pi = dir_run_area / ".pi"
         dir_pi.mkdir(parents=True, exist_ok=True)
         (dir_pi / "settings.json").write_text(
-            json.dumps(
+            encoding="utf-8",
+            data=json.dumps(
                 {"defaultProvider": "openrouter", "defaultModel": self.model_name, "sessionDir": ".pi/sessions"},
                 indent=4,
             )
@@ -593,7 +680,7 @@ class HLSTranslationRun:
             dir_sessions = dir_run_area / ".pi" / "sessions"
             session_file = next(dir_sessions.glob("*.jsonl"), None) if dir_sessions.exists() else None
             if session_file is not None:
-                run_data["session_data"] = load_jsonl_text(session_file.read_text())
+                run_data["session_data"] = load_jsonl_text(session_file.read_text(encoding="utf-8", errors="replace"))
                 container.exec_run(
                     [
                         "sh",
@@ -619,8 +706,8 @@ class HLSTranslationRun:
             container.remove(force=True)
 
         check_data["passed"] = bool(check_data["static"]["passed"] and check_data["container"]["testbench_ok"])
-        (self.dir_work / "run_data.json").write_text(json.dumps(run_data, indent=4))
-        (self.dir_work / "check_data.json").write_text(json.dumps(check_data, indent=4))
+        (self.dir_work / "run_data.json").write_text(json.dumps(run_data, indent=4), encoding="utf-8")
+        (self.dir_work / "check_data.json").write_text(json.dumps(check_data, indent=4), encoding="utf-8")
         print(f"Translation `{self.run_id}`: passed={check_data['passed']} failures={check_data['static']['failures']}")
         return check_data
 
@@ -628,4 +715,4 @@ class HLSTranslationRun:
         top = find_top_from_synth_tcl(self.dir_design) or "top"
         sources = [p.name for p in _iter_source_files(dir_output) if p.suffix.lower() in (".cpp", ".cc", ".c") and p.name != "testbench.cpp"]
         tb = "testbench.cpp" if (dir_output / "testbench.cpp").exists() else None
-        (dir_output / self.target.driver_file).write_text(render_catapult_run_tcl(top, sources, tb))
+        (dir_output / self.target.driver_file).write_text(render_catapult_run_tcl(top, sources, tb), encoding="utf-8")
