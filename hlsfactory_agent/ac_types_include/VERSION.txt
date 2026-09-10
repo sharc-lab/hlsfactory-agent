@@ -1,0 +1,1 @@
+hlslibs/ac_types e9ed172a464e0a9b45a23c712ab526782c668952 vendored 2026-09-10 from https://github.com/hlslibs/ac_types
