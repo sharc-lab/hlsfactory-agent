@@ -1,0 +1,17 @@
+=== Compile and Testbench Log ===
+
+File: mac.cpp
+Command: clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only mac.cpp
+Result: PASS (no errors)
+
+File: testbench.cpp
+Command: clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only testbench.cpp
+Result: PASS (no errors)
+
+Build and run:
+Command: cd /workspace/run_area/output_design && clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w *.cpp -o testbench.out && timeout 30s ./testbench.out
+Output:
+expected=11.679688 got=11.679688 err=0.000000
+PASS
+
+Result: Testbench PASSED (returned 0)

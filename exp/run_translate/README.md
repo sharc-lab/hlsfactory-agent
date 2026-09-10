@@ -32,10 +32,11 @@ runs/                         outputs, git-ignored
 ## Running
 
 Needs Docker with the `hlsfactory-agent` image and a valid `OPENROUTER_API_KEY` in `.env`.
+Run from the repository root with the package on the path, either through `uv run` or `PYTHONPATH`:
 
 ```
-python exp/run_translate/run.py --target catapult
-python exp/run_translate/run.py --design exp/run_translate/designs/vitis_mac --model deepseek/deepseek-v4-flash
+uv run python exp/run_translate/run.py --target catapult
+PYTHONPATH=. python exp/run_translate/run.py --design exp/run_translate/designs/vitis_mac --model deepseek/deepseek-v4-flash
 ```
 
 Unit tests, no Docker or key needed:
@@ -57,10 +58,20 @@ run_checks_standalone(Path("exp/run_translate/expected/catapult_mac"), CATAPULT)
 
 - Unit tests pass (12).
 - The hand-translated reference passes every check inside the container: syntax, build, testbench PASS.
-- The full agent path runs end to end (workspace, container, Pi invocation, session capture, checks, outputs).
-  The key currently in `.env` is not an OpenRouter key, so the agent step returns 401 and the run is recorded
-  as failed. A live translation has therefore not been observed yet. Once a valid key is in `.env`, the
-  command above is the whole experiment.
+- First live run, `deepseek/deepseek-v4-flash` on `designs/vitis_mac`: every check passed. The agent's
+  `mac.h`, `mac.cpp`, and `testbench.cpp` are identical to the hand-translated reference apart from whitespace,
+  the report accounts for all four original pragmas (one translated and moved, three dropped with reasons), and
+  the translated testbench printed PASS with exit 0 inside the container.
+
+  | Metric | Value |
+  |---|---|
+  | wall time | 1 min 54 s |
+  | model messages | 16 |
+  | tool calls | 22 (12 bash, 4 read, 6 write) |
+  | tokens in / out | 12,573 / 4,824 |
+  | cost | 0.0034 USD |
+
+  Artifacts, including the session transcript, are in `results/2026-09-10-vitis_mac-to-catapult/`.
 - Not verified: Catapult synthesis of the output. `run.tcl` follows the structure Allo's Catapult backend
   emits (nangate sample library, 5 ns clock) and needs a Catapult install to run.
 
