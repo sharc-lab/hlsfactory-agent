@@ -1,0 +1,18 @@
+=== Compilation Log for n1024_UF1 (Catapult HLS Port) ===
+
+Source Syntax Check (FFT.cpp):
+  Command: clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only FFT.cpp
+  Exit code: 0 (PASS)
+
+Source Syntax Check (testbench.cpp):
+  Command: clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only testbench.cpp
+  Exit code: 0 (PASS)
+
+Full Build and Link:
+  Command: clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w *.cpp -o testbench.out
+  Exit code: 0 (PASS)
+
+Testbench Run:
+  Command: cd /workspace/run_area/output_design && timeout 30s ./testbench.out
+  Exit code: 0 (PASS)
+  Result: Max error: 0.0000, Test PASSED

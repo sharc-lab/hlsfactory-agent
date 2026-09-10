@@ -1,0 +1,18 @@
+=== Compile and Test Log for n256_original_C_style (Catapult HLS translation) ===
+
+--- Syntax Checks ---
+
+$ clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only FFT.cpp
+Result: PASS (no errors, no warnings)
+
+$ clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only testbench.cpp
+Result: PASS (no errors, no warnings)
+
+--- Build and Test ---
+
+$ cd /workspace/run_area/output_design && clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w *.cpp -o testbench.out && timeout 30s ./testbench.out
+
+Result: PASS
+- All 256 FFT outputs match the golden reference within floating-point precision
+- Max error: 0.0000
+- Testbench returned 0 ("Test PASSED")

@@ -1,0 +1,15 @@
+Compilation and Testbench Run Log
+====================================
+
+1. Syntax check: FFT.cpp
+   Command: clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only FFT.cpp
+   Result: PASSED (no errors, no warnings)
+
+2. Syntax check: testbench.cpp
+   Command: clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only testbench.cpp
+   Result: PASSED (no errors, no warnings)
+
+3. Build and run testbench:
+   Command: cd /workspace/run_area/output_design && clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w *.cpp -o testbench.out && timeout 30s ./testbench.out
+   Result: PASSED (return code 0, "Test PASSED")
+   Max error: 0.0000

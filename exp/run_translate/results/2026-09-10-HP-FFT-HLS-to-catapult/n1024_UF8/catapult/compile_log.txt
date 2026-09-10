@@ -1,0 +1,30 @@
+Compile and Test Log
+====================
+
+Date: 2026-09-10
+Design: n1024_UF8
+Top Function: FFT_TOP
+
+Syntax checks
+-------------
+
+1. clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only FFT.cpp
+   Result: PASS (no errors)
+
+2. clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w -fsyntax-only testbench.cpp
+   Result: PASS (no errors)
+
+Build and test
+--------------
+
+Command:
+  cd /workspace/run_area/output_design && clang++ -std=c++17 -I/workspace/run_area/ac_types_include -I/workspace/run_area/output_design -w *.cpp -o testbench.out && timeout 30s ./testbench.out
+
+Result: PASS
+Exit code: 0
+Output: "Test PASSED"
+Max error: 0.0000
+
+Summary
+-------
+All syntax checks pass. Testbench compiles and runs successfully, returning 0.
