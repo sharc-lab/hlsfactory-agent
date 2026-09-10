@@ -75,6 +75,21 @@ run_checks_standalone(Path("exp/run_translate/expected/catapult_mac"), CATAPULT)
 - Not verified: Catapult synthesis of the output. `run.tcl` follows the structure Allo's Catapult backend
   emits (nangate sample library, 5 ns clock) and needs a Catapult install to run.
 
+## Catapult synthesis, 2026-09-10
+
+Both committed Catapult designs were synthesized with Catapult Prime 2026.2 on a lab machine:
+
+| Design | Result |
+|---|---|
+| `expected/catapult_mac` (hand-translated reference) | PASS: `go extract` completed, RTL written |
+| `results/2026-09-10-vitis_mac-to-catapult` (live agent output) | PASS: identical reports (sources are byte-identical) |
+
+`run.tcl` ran unmodified: `nangate-45nm_beh`, `ccs_sample_mem`, and `CppStandard c++11` are all
+accepted by this install. Schedule: latency 8, throughput 10 cycles, II=1 on the 8-tap loop at
+5 ns; one 16x16 multiplier plus a 32-bit accumulator, as expected for a rolled MAC.
+Logs, reports, and full notes (including a license-server workaround specific to that machine)
+are in `results/2026-09-10-catapult-synth/`.
+
 ## Known gaps
 
 - `ARRAY_PARTITION`, `INTERFACE`, `DEPENDENCE`, `BIND_STORAGE` have no source-level Catapult equivalent and are

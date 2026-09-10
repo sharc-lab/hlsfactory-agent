@@ -1,0 +1,160 @@
+//  Catapult Prime Synthesis 2026.2/1292347 (Production Release) Thu May 14 14:20:28 PDT 2026
+//  
+//          Copyright (c) Siemens EDA, 1996-2026, All Rights Reserved.
+//                        UNPUBLISHED, LICENSED SOFTWARE.
+//             CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
+//                   PROPERTY OF SIEMENS EDA OR ITS LICENSORS.
+//  
+//  Running on Linux tshukla31@chao-srv1.ece.gatech.edu:3207626 4.18.0-553.154.1.el8_10.x86_64 x86_64 aol
+//  
+//  Package information: SIFLIBS v29.2_0.0, HLS_PKGS v29.2_0.0, 
+//                       SIF_TOOLKITS v29.2_0.0, SIF_XILINX v29.2_0.0, 
+//                       SIF_ALTERA v29.2_0.0, CCS_LIBS v29.2_0.0, 
+//                       CDS_PPRO v2026.1, CDS_DesignChecker v2026.1_2, 
+//                       CDS_OASYS v21.1_3.1, CDS_PSR v26.1_0.6, 
+//                       DesignPad v2.78_1.0, DesignAnalyzer 2026.2/1292296
+//  
+//  Start time Thu Sep 10 15:46:57 2026
+# -------------------------------------------------
+# Logging session transcript to file "/tmp/log3207626781e090a.0"
+# Moving session transcript to file "/tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/catapult_run.log"
+dofile ./batch.tcl
+# > set rc [catch {source run.tcl} err]
+# Info: Branching solution 'solution.v2' at state 'initial' (PRJ-2)
+# Info: Starting transformation 'analyze' on solution 'solution.v2' (SOL-8)
+# Creating project directory '/tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/Catapult/'. (PRJ-1)
+# Front End called with arguments: -- /tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/mac.cpp (CIN-69)
+# Edison Design Group C++/C Front End - Version 6.6 (CIN-1)
+# $PROJECT_HOME/mac.cpp(3): Pragma 'hls_design<top>' detected on routine 'mac' (CIN-6)
+# Source file analysis completed (CIN-68)
+# Info: Completed transformation 'analyze' on solution 'solution.v2': elapsed time 1.61 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# solution design set mac -top (HC-8)
+# Info: Starting transformation 'compile' on solution 'mac.v1' (SOL-8)
+# Generating synthesis internal form... (CIN-3)
+# $PROJECT_HOME/mac.cpp(4): Found top design routine 'mac' specified by directive (CIN-52)
+# $PROJECT_HOME/mac.cpp(4): Synthesizing routine 'mac' (CIN-13)
+# $PROJECT_HOME/mac.cpp(4): Inlining routine 'mac' (CIN-14)
+# $PROJECT_HOME/mac.cpp(6): Pragma 'hls_pipeline_init_interval<1>' detected on '/mac/core/for' (CIN-203)
+# $PROJECT_HOME/mac.cpp(4): Optimizing block '/mac' ... (CIN-4)
+# $PROJECT_HOME/mac.cpp(4): INOUT port 'in' is only used as an input. (OPT-10)
+# $PROJECT_HOME/mac.cpp(4): INOUT port 'out' is only used as an output. (OPT-11)
+# $PROJECT_HOME/mac.cpp(4): INOUT port 'coef' is only used as an input. (OPT-10)
+# $PROJECT_HOME/mac.cpp(7): Loop '/mac/core/for' iterated at most 8 times. (LOOP-2)
+# Design 'mac' was read (SOL-1)
+# Info: CDesignChecker Shell script written to '/tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/Catapult/mac.v1/CDesignChecker/design_checker.sh'
+# Info: Completed transformation 'compile' on solution 'mac.v1': elapsed time 1.14 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'compile': Total ops = 13, Real ops = 3, Vars = 6 (SOL-21)
+# Info: Starting transformation 'libraries' on solution 'mac.v1' (SOL-8)
+# Info: Please set ComponentLibs/TechLibSearchPath to enable flows that use downstream synthesis tools (LIB-220)
+# Reading component library '$MGC_HOME/pkgs/siflibs/mgc_busdefs.lib' [mgc_busdefs]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/stdops.lib' [STDOPS]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/fpops.lib' [FPOPS]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/ccs_dw_ops.lib' [CCS_DW_OPS]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/ccs_ioport.lib' [ccs_ioport]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/mgc_ioport.lib' [mgc_ioport]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/cds_assert/assert_ops.lib' [ASSERT_OPS]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/cds_assert/assert_mods.lib' [assert_mods]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/ccs_connections.lib' [ccs_connections]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/nangate/nangate-45nm_beh.lib' [nangate-45nm_beh]... (LIB-49)
+# Reading component library '$MGC_HOME/pkgs/siflibs/ccs_sample_mem.lib' [ccs_sample_mem]... (LIB-49)
+# Warning: Extrapolation detected. Script '/tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/Catapult/mac.v1/adjust_char_library.tcl' generated. (LIB-142)
+# Info: Completed transformation 'libraries' on solution 'mac.v1': elapsed time 0.34 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'libraries': Total ops = 13, Real ops = 3, Vars = 6 (SOL-21)
+# Info: Starting transformation 'assembly' on solution 'mac.v1' (SOL-8)
+# Info: Completed transformation 'assembly' on solution 'mac.v1': elapsed time 0.05 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'assembly': Total ops = 14, Real ops = 4, Vars = 8 (SOL-21)
+# Info: Starting transformation 'loops' on solution 'mac.v1' (SOL-8)
+# $PROJECT_HOME/mac.cpp(7): Loop '/mac/core/for' is left rolled. (LOOP-4)
+# Warning: $PROJECT_HOME/mac.cpp(4): Cannot unroll loop '/mac/core/main' because the number of iterations cannot be determined. (LOOP-26)
+# Info: Completed transformation 'loops' on solution 'mac.v1': elapsed time 0.02 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'loops': Total ops = 16, Real ops = 4, Vars = 9 (SOL-21)
+# Info: Starting transformation 'memories' on solution 'mac.v1' (SOL-8)
+# $PROJECT_HOME/mac.cpp(4): I/O-Port Resource '/mac/coef:rsc' (from var: coef) mapped to 'ccs_ioport.ccs_in' (size: 128). (MEM-2)
+# Info: Completed transformation 'memories' on solution 'mac.v1': elapsed time 0.07 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'memories': Total ops = 17, Real ops = 4, Vars = 9 (SOL-21)
+# Info: Starting transformation 'cluster' on solution 'mac.v1' (SOL-8)
+# Info: Completed transformation 'cluster' on solution 'mac.v1': elapsed time 0.00 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'cluster': Total ops = 17, Real ops = 4, Vars = 9 (SOL-21)
+# Info: Starting transformation 'architect' on solution 'mac.v1' (SOL-8)
+# Design 'mac' contains '5' real operations. (SOL-11)
+# Info: Completed transformation 'architect' on solution 'mac.v1': elapsed time 0.14 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'architect': Total ops = 34, Real ops = 5, Vars = 13 (SOL-21)
+# Info: Starting transformation 'allocate' on solution 'mac.v1' (SOL-8)
+# Performing concurrent resource allocation and scheduling on '/mac/core' (CRAAS-1)
+# Info: Select qualified components for data operations ... (CRAAS-3)
+# Info: Apply resource constraints on data operations ... (CRAAS-4)
+# $PROJECT_HOME/mac.cpp(7): Prescheduled LOOP '/mac/core/for' (1 c-steps) (SCHD-7)
+# $PROJECT_HOME/mac.cpp(4): Prescheduled LOOP '/mac/core/main' (2 c-steps) (SCHD-7)
+# $PROJECT_HOME/mac.cpp(4): Prescheduled LOOP '/mac/core/core:rlp' (0 c-steps) (SCHD-7)
+# $PROJECT_HOME/mac.cpp(4): Prescheduled SEQUENTIAL '/mac/core' (total length 10 c-steps) (SCHD-8)
+# Info: $PROJECT_HOME/mac.cpp(4): Initial schedule of SEQUENTIAL '/mac/core': Latency = 8, Area (Datapath, Register, Total) = 3130.53, 255.36, 3385.89 (CRAAS-11)
+# At least one feasible schedule exists. (CRAAS-9)
+# Info: $PROJECT_HOME/mac.cpp(4): Final schedule of SEQUENTIAL '/mac/core': Latency = 8, Area (Datapath, Register, Total) = 1583.09, 255.36, 1838.45 (CRAAS-12)
+# Resource allocation and scheduling done. (CRAAS-2)
+# Netlist written to file 'schedule.gnt' (NET-4)
+# Info: Completed transformation 'allocate' on solution 'mac.v1': elapsed time 0.05 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'allocate': Total ops = 34, Real ops = 5, Vars = 13 (SOL-21)
+# Info: Starting transformation 'schedule' on solution 'mac.v1' (SOL-8)
+# Performing concurrent resource allocation and scheduling on '/mac/core' (CRAAS-1)
+# Global signal 'in:rsc.rdy' added to design 'mac' for component 'in:rsci' (LIB-3)
+# Global signal 'in:rsc.vld' added to design 'mac' for component 'in:rsci' (LIB-3)
+# Global signal 'in:rsc.dat' added to design 'mac' for component 'in:rsci' (LIB-3)
+# Info: $PROJECT_HOME/mac.cpp(8): Creating buffer for wait controller for component 'in:rsc' (SCHD-46)
+# Global signal 'out:rsc.rdy' added to design 'mac' for component 'out:rsci' (LIB-3)
+# Global signal 'out:rsc.vld' added to design 'mac' for component 'out:rsci' (LIB-3)
+# Global signal 'out:rsc.dat' added to design 'mac' for component 'out:rsci' (LIB-3)
+# Global signal 'coef:rsc.dat' added to design 'mac' for component 'coef:rsci' (LIB-3)
+# Info: $PROJECT_HOME/mac.cpp(9): Creating buffer for wait controller for component 'coef:rsc' (SCHD-46)
+# Global signal 'coef.triosy.lz' added to design 'mac' for component 'coef.triosy:obj' (LIB-3)
+# Info: $PROJECT_HOME/mac.cpp(7): Loop '/mac/core/for' is pipelined with initiation interval 1 and no flushing (SCHD-43)
+# Report written to file 'cycle.rpt'
+# Info: Completed transformation 'schedule' on solution 'mac.v1': elapsed time 1.50 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'schedule': Total ops = 155, Real ops = 25, Vars = 97 (SOL-21)
+# Info: Starting transformation 'dpfsm' on solution 'mac.v1' (SOL-8)
+# Performing FSM extraction... (FSM-1)
+# Info: Completed transformation 'dpfsm' on solution 'mac.v1': elapsed time 0.14 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'dpfsm': Total ops = 144, Real ops = 37, Vars = 98 (SOL-21)
+# Info: Starting transformation 'instance' on solution 'mac.v1' (SOL-8)
+# Netlist written to file 'schematic.nlv' (NET-4)
+# Info: Completed transformation 'instance' on solution 'mac.v1': elapsed time 0.22 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'instance': Total ops = 138, Real ops = 35, Vars = 132 (SOL-21)
+# Info: Starting transformation 'extract' on solution 'mac.v1' (SOL-8)
+# Report written to file 'rtl.rpt'
+# Netlist written to file 'rtl.vhdl' (NET-4)
+# generate concat
+# order file name is: rtl.vhdl_order.txt
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_wait_v1.vhd
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_out_wait_v1.vhd
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/mgc_io_sync_v2.vhd
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_v1.vhd
+# Add dependent file: ./rtl.vhdl
+# Finished writing concatenated file: /tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/Catapult/mac.v1/concat_rtl.vhdl
+# order file name is: rtl.vhdl_order_sim.txt
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_wait_v1.vhd
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_out_wait_v1.vhd
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/mgc_io_sync_v2.vhd
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_v1.vhd
+# Add dependent file: ./rtl.vhdl
+# Finished writing concatenated simulation file: /tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/Catapult/mac.v1/concat_sim_rtl.vhdl
+# Netlist written to file 'rtl.v' (NET-4)
+# generate concat
+# order file name is: rtl.v_order.txt
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_wait_v1.v
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_out_wait_v1.v
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/mgc_io_sync_v2.v
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_v1.v
+# Add dependent file: ./rtl.v
+# Finished writing concatenated file: /tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/Catapult/mac.v1/concat_rtl.v
+# order file name is: rtl.v_order_sim.txt
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_wait_v1.v
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_out_wait_v1.v
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/mgc_io_sync_v2.v
+# Add dependent file: /tools/software/siemens/catapult/latest/Mgc_home/pkgs/siflibs/ccs_in_v1.v
+# Add dependent file: ./rtl.v
+# Finished writing concatenated simulation file: /tmp/claude-3425030/-export-hdd-scratch-tshukla31-hlsfactory-agent/5839337a-92a4-4485-83f2-ec2a637dece5/scratchpad/catapult-synth/expected_mac/Catapult/mac.v1/concat_sim_rtl.v
+# Info: Completed transformation 'extract' on solution 'mac.v1': elapsed time 1.65 seconds, memory usage 1437764kB, peak memory usage 1437764kB (SOL-9)
+# Info: Design complexity at end of 'extract': Total ops = 138, Real ops = 35, Vars = 98 (SOL-21)
+# 0
+# > if {$rc} { puts "BATCH_ERROR: $err" }
+# > exit
+// Finish time Thu Sep 10 15:47:22 2026, time elapsed 0:25, peak memory 1.37GB, exit status 0
