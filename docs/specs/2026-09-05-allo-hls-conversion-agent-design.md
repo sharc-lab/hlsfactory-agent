@@ -1,7 +1,12 @@
 # Allo-based HLS conversion agent: design
 
 Date: 2026-09-05
-Status: draft for review
+Status: draft for review. Revision note 2026-09-10: after source-level review of Allo's Catapult and XLS emitters
+(section 3.4), the hub decision changed from Allo to a thin portable HLS-C layer owned by the lab, with Allo kept
+as an optional template-authoring frontend. Sections 4, 5.2, 5.3, 5.4, 9, and 12 still describe the Allo hub and
+are to be rewritten. The first implemented flow is a direct Vitis to Catapult translation on the existing agent
+harness, in `hlsfactory_agent/translate.py` with the run script in `exp/run_translate/`; it is the first target row
+of the projection table the portable layer will generalize.
 Scope: the standalone conversion phase only. HLSFactory integration, the template library, SyntheticHLS as an input source, and the cross-tool QoR study are later phases and are named here only where a seam has to be left for them.
 
 ## 1. Goal
@@ -46,6 +51,20 @@ Documentation: https://cornell-zhang.github.io/allo/ and source under `allo/back
 - Frontend rejects break, continue, pointers, and structs. While loops, nested functions, template kernels, and a dataflow module with streams exist.
 - `allo.verify(s1, s2)` checks two schedules of the same kernel against each other. It is not used here because the check needed is original C++ against lifted code.
 - Allo is heavy to build because it pins its own LLVM. It ships a Docker folder. This design treats Allo as a black box, Python in and C++ out, and never composes with its MLIR dialects.
+
+Backend maturity, verified from source on 2026-09-10. The real converters are C++ MLIR translation passes under `mlir/lib/Translation/`; the Python files in `allo/backend/` are wrappers that generate harnesses and scripts. All are deterministic.
+
+| Backend | Emitter | Size | Age | Primitives emitted | Not emitted | Tests |
+|---|---|---|---|---|---|---|
+| Vitis | `EmitVivadoHLS.cpp` | ~2,100 lines | since 2023, PLDI 2024 evaluation | pipeline with II and rewind, unroll with factor, dataflow, inline, stream depth, array_partition block, cyclic and complete, bind_storage | | mature suites |
+| Catapult | `EmitCatapultHLS.cpp`, inherits the Vitis emitter | ~480 lines | added 2026-02-05, one commit | pipeline_init_interval, unroll with factor, hls_design top, dataflow, inline | any memory or partition directive, marked TODO in source | 16 tests on tiny kernels; 12 check strings only, csim and csyn tests skip without `MGC_HOME` |
+| XLS | `EmitXlsHLS.cpp` | ~1,150 lines | added 2026-01-05, three commits | pipeline_init_interval fixed at 1, unroll yes with optional factor, hls_top | partition, dataflow, any II other than 1; loops default to full unroll unless `use_memory` | ~20 tests on scalar ops, vvadd and a 2 by 2 GEMM; pragma string checks plus g++ emulation; never invokes xlscc, opt_main or codegen_main |
+| Intel | `EmitIntelHLS.cpp` | ~850 lines | oneAPI 2024.2 style, `[[intel::initiation_interval]]`, `#pragma unroll` | | "can only support one function now" in source; reachable as `target="ihls"`, which writes `kernel.cpp` and a run.tcl but has no execution path in `HLSModule.__call__` | none found |
+
+Two consequences for this design:
+
+1. Allo's fixed-point type carries width and fraction only. There is no rounding or overflow mode. The Vitis emitter writes `ap_fixed<W,I>` and the Catapult emitter writes `ac_fixed<W,I,S>`, both with tool defaults, which are truncate and wrap on both tools. An extracted design that uses any other mode, such as `AP_RND` or `AP_SAT`, cannot be lifted faithfully and fails rule 4 in section 5.2 with reason `numeric_unsupported`. The bundle stage records whether a design's sources mention non-default modes so the prevalence is known before lifting starts.
+2. Allo's own tests never run the emitted xlscc code through the XLS tools. Rung 3 of this design is therefore the first real exercise of that emitter on non-trivial kernels. Expect to find emitter bugs and to report them upstream; the failure label `emit_failed` with backend `xlscc` and the coverage table are where they show up.
 
 ### 3.5 Principles taken from the reading list
 
@@ -295,7 +314,10 @@ Decision point at the end of phase 2: if the rung 1 lift rate on the subset is b
 |---|---|---|
 | The C++ to Python semantic hop is large | Low lift rate on pointer-heavy or bit-twiddling designs | Restructuring rules in the guide; the failure taxonomy is a result; C++ dialect held in reserve |
 | Models know Vitis C++ far better than Allo | Frontend errors, hallucinated primitives | Syntax guide plus worked examples in context; fast rung 0 feedback; lessons file; one run with a stronger model |
-| Allo backend coverage of primitives is unknown | Silent QoR differences later | Measured coverage table; dropped list per design |
+| Allo backend coverage of primitives is uneven: Catapult has no partition, XLS honors only II equal to 1 and no partition or dataflow | Silent QoR differences later | Measured coverage table; dropped list per design; both facts already recorded in section 3.4 |
+| Allo fixed-point types have no rounding or overflow modes | Designs using `AP_RND`, `AP_SAT` or similar cannot be lifted | Counted at bundle time; fail with `numeric_unsupported`; reported as its own bucket |
+| Allo's XLS emitter is untested against real xlscc | Emitter bugs surface as rung 3 failures | Treat as findings; report upstream; keep `use_memory` on by default so large loops are not fully unrolled |
+| Allo is maintained slowly by a few students, with no releases, about three commits a month in 2026, and no commits to the Catapult, XLS, or Intel emitters since February 2026 | Upstream fixes may not land; APIs may shift without notice | Pin a commit SHA in the image; keep a lab fork of Allo and apply emitter fixes there; the emitters are small enough to own, about 480 lines for Catapult and 1,150 for XLS |
 | Original testbenches may not run | Fewer designs with an oracle | Oracle check reported as its own number; feeds back to HLSFactory-Agent |
 | Allo version churn | Breakage between runs | Pinned version in image; version recorded in summary |
 | No Catapult license | Rung 3 skipped for Catapult | Rung 2 still checks Catapult emission; report as skipped, not failed |
@@ -322,3 +344,4 @@ Decision point at the end of phase 2: if the rung 1 lift rate on the subset is b
 - Templates: a template instantiation writes `allo/` directly and skips stage 2.
 - SyntheticHLS: its designs are bundles with a testbench and already-clean code, so they enter at stage 1 unchanged, and its mutation loop could gain a portability objective defined as the number of targets passing rung 2.
 - Dynamatic: emit Vitis C++, strip pragmas, and widen arbitrary-precision types to native widths, recorded as lossy.
+- Intel: Allo already reaches an Intel emitter in oneAPI style through `target="ihls"`, but only to write `kernel.cpp`; there is no execution path, no tests, and the emitter supports one function. It is a candidate fourth target that matches the mentor's interest in Intel, and it needs a run path, tests, and a oneAPI toolchain before it can enter the ladder.
