@@ -1,10 +1,29 @@
-# Translation flow: Vitis HLS -> Catapult HLS
+# Translation flow: Vitis HLS -> Catapult HLS, Vitis HLS -> XLS
 
-First cross-tool translation flow, built on the existing Pi-in-Docker agent harness.
-The agent takes a standalone Vitis HLS design folder (as produced by HLSFactory-Agent) and
-produces an equivalent Catapult HLS design folder. Deterministic checks run after the agent.
+Cross-tool translation flows built on the existing Pi-in-Docker agent harness. A standalone Vitis HLS
+design folder (as produced by HLSFactory-Agent) becomes an equivalent design for a target tool. Targets
+are data (`TargetSpec` in `translate.py`): Catapult is complete through synthesis, XLS through emulation.
 
-Code: `hlsfactory_agent/translate.py`. Tests: `tests/test_translate.py`.
+Code: `hlsfactory_agent/translate.py` (targets, prompt, checks, run class), `scan.py` (inventory),
+`rewrite.py` (mechanical pre-pass). Tests: `tests/`.
+
+## Pipeline for one design
+
+1. **Scan**: `scan.py` inventories every `#pragma HLS` kind, vendor type, header, and risky construct;
+   written as `scan.json` for the agent and used later to check the report.
+2. **Oracle**: the design's own testbench must pass on its original code (`run_oracle_check`).
+3. **Mechanical pre-pass**: `rewrite.py` copies the design and swaps headers and types, moves loop
+   pragmas to the target's placement, drops pragmas with no equivalent, inserts the top marker, and
+   writes `rewrite_log.json` with a `residue` list of what it could not do safely. No numerics are guessed.
+4. **Agent**: Pi fixes the residue, ports the testbench, writes the driver script and a translation
+   report. Bounded by `attempts`; each failed attempt feeds a retry prompt built from the harness's own
+   findings (`build_retry_prompt`).
+5. **Checks**, independent of the agent's claims: static (required files, no leftover Vitis identifiers,
+   top marker, driver complete, report accounts for every pragma kind in the scan), in-container clang
+   syntax check and testbench run with the target's headers, and `compare_outputs` against the original
+   testbench's stdout.
+6. Everything is recorded: `run_data.json` (prompt, sessions per attempt), `check_data.json` (all checks,
+   attempts), plus the transcripts.
 
 ## What is here
 
@@ -114,10 +133,19 @@ accepted by this install. Schedule: latency 8, throughput 10 cycles, II=1 on the
 5 ns; one 16x16 multiplier plus a 32-bit accumulator, as expected for a rolled MAC.
 Logs and reports are kept outside this repository.
 
+## XLS target
+
+`--target xlscc`. Same ac types as Catapult (xlscc ships ac-compatible headers), streams become
+`__xls_channel<T>`, top gets `#pragma hls_top`, loop pragmas use the Catapult spellings. For host
+emulation the translated code includes `xls_emu.h` (`hlsfactory_agent/xls_emu_include/`), a small
+channel emulation that is empty under `__SYNTHESIS__`. The driver `run_xlscc.sh` runs xlscc, opt_main
+and codegen_main; the synthesis rung for XLS needs those binaries in the Docker image and is not run yet.
+
 ## Known gaps
 
 - `ARRAY_PARTITION`, `INTERFACE`, `DEPENDENCE`, `BIND_STORAGE` have no source-level Catapult equivalent and are
   dropped with a note in the report. Catapult sets these in TCL; that mapping is future work.
-- `DATAFLOW` maps to per-function `hls_design block`, which is lossy.
-- Only one fixture design so far. Next: run on real extracted designs from the base run.
-- Adding a target means adding a `TargetSpec` entry; the prompt and checks are generated from it.
+- `DATAFLOW` maps to per-function `hls_design block`, which is lossy. XLS drops it.
+- The pre-pass moves a loop pragma to the nearest loop header within three lines; unusual layouts land in `residue`.
+- XLS synthesis rung not run; lessons store and pass@k sampling not built. See `docs/plans/2026-09-10-conversion-next-steps.md`.
+- Adding a target means adding a `TargetSpec` entry; the prompt, pre-pass, and checks are generated from it.
