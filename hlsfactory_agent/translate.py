@@ -256,7 +256,7 @@ def _format_map(m: dict[str, str]) -> str:
     return "\n".join(f"- `{k}` -> `{v}`" for k, v in m.items())
 
 
-def build_translate_prompt(design_name: str, target: TargetSpec) -> str:
+def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool = False) -> str:
     inc = f"{CONTAINER_RUN_AREA}/{target.include_dir_name}"
     out = f"{CONTAINER_RUN_AREA}/{OUTPUT_DIR_NAME}"
     driver_example = (
@@ -264,6 +264,22 @@ def build_translate_prompt(design_name: str, target: TargetSpec) -> str:
         if target.name == "catapult"
         else ""
     )
+    if prepass:
+        step2 = (
+            "### Step 2: A mechanical pre-pass already ran\n"
+            f"'./{OUTPUT_DIR_NAME}' already contains every input file with headers, types, and loop pragmas rewritten by a script, "
+            "and `rewrite_log.json` listing what it changed, what it dropped, and a `residue` list of what it could not handle.\n"
+            "- Read `rewrite_log.json` first. Fix every residue item by hand.\n"
+            "- Review the moved pragmas: the script places a loop pragma on the line before the nearest loop header; correct any it placed wrongly.\n"
+            "- Do not redo the mechanical work; do verify it in Step 6.\n"
+            "- `synth.tcl` was intentionally not copied; the output gets its own driver script (Step 7).\n"
+        )
+    else:
+        step2 = (
+            "### Step 2: Copy everything into the output folder\n"
+            f"- Copy every file from './{INPUT_DIR_NAME}' into './{OUTPUT_DIR_NAME}', including data files and README.\n"
+            "- Do not copy `synth.tcl`; the output gets its own driver script (Step 7).\n"
+        )
     return (
         f"Translate the Vitis HLS design in './{INPUT_DIR_NAME}' (design name: `{design_name}`) into an "
         f"equivalent {target.display_name} design in './{OUTPUT_DIR_NAME}' in the current working directory.\n"
@@ -281,9 +297,7 @@ def build_translate_prompt(design_name: str, target: TargetSpec) -> str:
         f"- `{CONTAINER_RUN_AREA}/scan.json` lists every `#pragma HLS` kind, vendor type, and header in the input with counts. "
         "Every pragma kind listed there must appear in your report, translated or DROPPED.\n"
         "\n"
-        "### Step 2: Copy everything into the output folder\n"
-        f"- Copy every file from './{INPUT_DIR_NAME}' into './{OUTPUT_DIR_NAME}', including data files and README.\n"
-        "- Do not copy `synth.tcl`; the output gets its own driver script (Step 7).\n"
+        + step2 +
         "\n"
         "### Step 3: Translate headers and types\n"
         "Headers:\n"
@@ -657,6 +671,7 @@ class HLSTranslationRun:
         target: TargetSpec | str = CATAPULT,
         docker_image_name: str = DOCKER_IMAGE_NAME,
         agent_timeout_s: int = 60 * 30,
+        prepass: bool = True,
     ):
         self.run_id = run_id
         self.dir_design = Path(dir_design).resolve()
@@ -666,6 +681,7 @@ class HLSTranslationRun:
         self.target = get_target(target) if isinstance(target, str) else target
         self.docker_image_name = docker_image_name
         self.agent_timeout_s = agent_timeout_s
+        self.prepass = prepass
 
     # ---- workspace -------------------------------------------------------------------
 
@@ -699,8 +715,14 @@ class HLSTranslationRun:
         from hlsfactory_agent.scan import write_scan
 
         write_scan(dir_run_area / INPUT_DIR_NAME, dir_run_area)
-        (dir_run_area / OUTPUT_DIR_NAME).mkdir(parents=True, exist_ok=True)
-        os.chmod(dir_run_area / OUTPUT_DIR_NAME, 0o777)
+        dir_output = dir_run_area / OUTPUT_DIR_NAME
+        if self.prepass:
+            from hlsfactory_agent.rewrite import rewrite_design
+
+            rewrite_design(dir_run_area / INPUT_DIR_NAME, dir_output, self.target, find_top_from_synth_tcl(self.dir_design))
+        else:
+            dir_output.mkdir(parents=True, exist_ok=True)
+        os.chmod(dir_output, 0o777)
         return dir_run_area
 
     # ---- main ------------------------------------------------------------------------
@@ -719,8 +741,9 @@ class HLSTranslationRun:
         }
 
         dir_run_area = self.prepare_run_area()
-        prompt = build_translate_prompt(design_name, self.target)
+        prompt = build_translate_prompt(design_name, self.target, prepass=self.prepass)
         run_data["prompt_task"] = prompt
+        run_data["prepass"] = self.prepass
 
         client = docker.from_env()
         container: Container = client.containers.run(
