@@ -7,6 +7,7 @@ from hlsfactory_agent.translate import (
     OUTPUT_DIR_NAME,
     build_translate_prompt,
     check_translated_design,
+    compare_outputs,
     find_top_from_synth_tcl,
     get_target,
     render_catapult_run_tcl,
@@ -173,6 +174,21 @@ def test_check_without_scan_is_unchanged(tmp_path: Path):
     out = make_good_design(tmp_path)
     r = check_translated_design(out, CATAPULT)
     assert r["passed"] and "report_covers_all_pragma_kinds" not in r["checks"]
+
+
+def test_compare_outputs_identical_after_normalization():
+    r = compare_outputs("a  b\n(-0.0000,0.0000)\nPASS \n", "a b\n(0.0000,-0.0000)\n\nPASS\n")
+    assert r["identical"] and r["differing"] == 0
+
+
+def test_compare_outputs_reports_differences():
+    r = compare_outputs("x=1\nPASS\n", "x=2\nPASS\n")
+    assert not r["identical"] and r["differing"] == 1 and r["sample"] == ["x=1 | x=2"]
+
+
+def test_compare_outputs_counts_missing_lines():
+    r = compare_outputs("a\nb\nc\n", "a\n")
+    assert r["differing"] == 2 and r["original_lines"] == 3 and r["translated_lines"] == 1
 
 
 def test_check_missing_output_dir(tmp_path: Path):

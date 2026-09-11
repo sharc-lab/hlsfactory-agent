@@ -446,6 +446,46 @@ def _container_exec(container: Container, cmd: str, workdir: str) -> tuple[int, 
     return (exit_code if exit_code is not None else -1), text
 
 
+_RE_NEG_ZERO = re.compile(r"-(0\.0+)\b")
+
+
+def _normalize_output(text: str) -> list[str]:
+    """Whitespace-collapsed, negative-zero-free, non-empty lines of a testbench's stdout."""
+    lines: list[str] = []
+    for raw in text.splitlines():
+        s = " ".join(raw.split())
+        s = _RE_NEG_ZERO.sub(r"\1", s)
+        if s:
+            lines.append(s)
+    return lines
+
+
+def compare_outputs(original: str, translated: str) -> dict:
+    """Line-by-line comparison of the original testbench's stdout with the translated one's.
+
+    The original design is the oracle, so any printed value that differs is a translation concern,
+    even when both testbenches report PASS.
+    """
+    a, b = _normalize_output(original), _normalize_output(translated)
+    n = max(len(a), len(b))
+    differing = 0
+    sample: list[str] = []
+    for i in range(n):
+        x = a[i] if i < len(a) else ""
+        y = b[i] if i < len(b) else ""
+        if x != y:
+            differing += 1
+            if len(sample) < 5:
+                sample.append(f"{x} | {y}")
+    return {
+        "identical": differing == 0,
+        "original_lines": len(a),
+        "translated_lines": len(b),
+        "differing": differing,
+        "sample": sample,
+    }
+
+
 def run_oracle_check(
     dir_design: Path,
     docker_image_name: str = DOCKER_IMAGE_NAME,

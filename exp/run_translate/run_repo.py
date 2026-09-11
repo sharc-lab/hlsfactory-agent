@@ -24,6 +24,7 @@ from hlsfactory_agent.translate import (
     HLSTranslationRun,
     _rmtree_robust,
     check_translated_design,
+    compare_outputs,
     get_target,
     run_oracle_check,
 )
@@ -119,6 +120,12 @@ def translate_one(dir_design: Path, target: str, model: str, api_key: str, dir_r
             }
         )
         row.update(session_stats(dir_run))
+        orig_run = oracle.get("run") or {}
+        trans_run = (check.get("container") or {}).get("testbench_run") or {}
+        if orig_run.get("exit_code") is not None and trans_run.get("exit_code") is not None:
+            row["output_match"] = compare_outputs(orig_run.get("output", ""), trans_run.get("output", ""))
+        else:
+            row["output_match"] = None
     except Exception as e:  # keep the batch going; the row records the failure
         row.update(
             {
@@ -134,6 +141,12 @@ def translate_one(dir_design: Path, target: str, model: str, api_key: str, dir_r
     row["seconds"] = round(time.monotonic() - t0)
     print(f"[design] {dir_design.name}: oracle={row['oracle_passed']} translation={row['translation_passed']} ({row['seconds']}s)")
     return row
+
+
+def _match_cell(m: dict | None) -> str:
+    if m is None:
+        return "n/a"
+    return "yes" if m.get("identical") else f"no ({m.get('differing')} lines)"
 
 
 def save_results(repo_id: str, target: str, dir_designs: Path, dir_runs: Path, rows: list[dict], dir_results: Path) -> Path:
@@ -170,13 +183,14 @@ def save_results(repo_id: str, target: str, dir_designs: Path, dir_runs: Path, r
     lines = [
         f"# {repo_id} -> {target}",
         "",
-        "| design | oracle (orig testbench) | translation checks | syntax | testbench | agent wall s | tool calls | tokens in/out | cost USD |",
-        "|---|---|---|---|---|---|---|---|---|",
+        "| design | oracle (orig testbench) | translation checks | syntax | testbench | outputs match | agent wall s | tool calls | tokens in/out | cost USD |",
+        "|---|---|---|---|---|---|---|---|---|---|",
     ]
     for r in rows:
         lines.append(
             f"| {r['design']} | {'pass' if r['oracle_passed'] else 'FAIL'} | {'pass' if r['translation_passed'] else 'FAIL'} | "
             f"{'ok' if r['syntax_all_ok'] else 'FAIL'} | {'pass' if r['testbench_ok'] else 'FAIL'} | "
+            f"{_match_cell(r.get('output_match'))} | "
             f"{r.get('wall_s', '')} | {r.get('tool_calls', '')} | {r.get('tokens_in', '')}/{r.get('tokens_out', '')} | {r.get('cost_usd', '')} |"
         )
     n = len(rows)
