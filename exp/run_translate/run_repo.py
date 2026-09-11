@@ -87,7 +87,9 @@ def session_stats(dir_run: Path) -> dict:
     return stats
 
 
-def translate_one(dir_design: Path, target: str, model: str, api_key: str, dir_runs: Path, resume: bool = False) -> dict:
+def translate_one(
+    dir_design: Path, target: str, model: str, api_key: str, dir_runs: Path, resume: bool = False, attempts: int = 1
+) -> dict:
     run_id = f"translate-{target}-{dir_design.name}"
     dir_run = dir_runs / run_id
     t0 = time.monotonic()
@@ -105,7 +107,7 @@ def translate_one(dir_design: Path, target: str, model: str, api_key: str, dir_r
             row["resumed"] = True
         else:
             oracle = run_oracle_check(dir_design)
-            check = HLSTranslationRun(run_id, dir_design, dir_run, model, api_key, target=target).run()
+            check = HLSTranslationRun(run_id, dir_design, dir_run, model, api_key, target=target, attempts=attempts).run()
             (dir_run / "oracle.json").write_text(json.dumps(oracle, indent=2), encoding="utf-8")
             row["resumed"] = False
         row.update(
@@ -116,6 +118,7 @@ def translate_one(dir_design: Path, target: str, model: str, api_key: str, dir_r
                 "static_failures": check["static"]["failures"],
                 "syntax_all_ok": check["container"]["syntax_all_ok"],
                 "testbench_ok": check["container"]["testbench_ok"],
+                "attempts_used": check.get("attempts_used", 1),
                 "error": None,
             }
         )
@@ -217,6 +220,7 @@ def main() -> None:
     parser.add_argument("--resume", action="store_true", help="reuse translations that already have check_data.json")
     parser.add_argument("--limit", type=int, default=0, help="translate at most N designs (0 = all)")
     parser.add_argument("--only", default="", help="comma-separated design names to translate; others are skipped")
+    parser.add_argument("--attempts", type=int, default=1, help="agent attempts per design; failures feed a retry prompt")
     parser.add_argument("--runs-dir", type=Path, default=DIR_RUNS)
     parser.add_argument("--results-dir", type=Path, default=DIR_RESULTS)
     parser.add_argument("--env", type=Path, default=Path(".env"))

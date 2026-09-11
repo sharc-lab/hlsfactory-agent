@@ -5,6 +5,7 @@ import pytest
 from hlsfactory_agent.translate import (
     CATAPULT,
     OUTPUT_DIR_NAME,
+    build_retry_prompt,
     build_translate_prompt,
     check_translated_design,
     compare_outputs,
@@ -12,6 +13,8 @@ from hlsfactory_agent.translate import (
     get_target,
     render_catapult_run_tcl,
 )
+
+ROOT_FIXTURE = Path(__file__).resolve().parents[1] / "exp" / "run_translate" / "designs" / "vitis_mac"
 
 GOOD_KERNEL = """#include "ac_fixed.h"
 #include "ac_channel.h"
@@ -189,6 +192,112 @@ def test_compare_outputs_reports_differences():
 def test_compare_outputs_counts_missing_lines():
     r = compare_outputs("a\nb\nc\n", "a\n")
     assert r["differing"] == 2 and r["original_lines"] == 3 and r["translated_lines"] == 1
+
+
+def test_retry_prompt_carries_failures_and_tool_output():
+    check = {
+        "static": {"failures": ["missing required file run.tcl"], "unaccounted_pragma_kinds": ["dataflow"]},
+        "container": {
+            "syntax_check": {"a.cpp": {"exit_code": 1, "output": "a.cpp:3: error: unknown type"}},
+            "testbench_build": {"exit_code": 1, "output": "ld: undefined reference"},
+            "testbench_run": {"exit_code": None, "output": "not run: build failed"},
+        },
+    }
+    p = build_retry_prompt("BASE", check)
+    assert p.startswith("BASE")
+    for needle in (
+        "Previous attempt failed",
+        "missing required file run.tcl",
+        "dataflow",
+        "unknown type",
+        "undefined reference",
+        "Do not start over",
+    ):
+        assert needle in p, needle
+    assert "not run: build failed" not in p
+
+
+def test_fixer_loop_retries_until_checks_pass(tmp_path: Path, monkeypatch):
+    """Attempt 1 leaves the top marker out; the harness feeds the failure back; attempt 2 fixes it."""
+    import hlsfactory_agent.translate as t
+
+    class FakeContainer:
+        def exec_run(self, *a, **k):
+            return 0, b""
+
+        def stop(self):
+            pass
+
+        def remove(self, force=False):
+            pass
+
+    class FakeClient:
+        class containers:
+            @staticmethod
+            def run(**kwargs):
+                return FakeContainer()
+
+    prompts: list[str] = []
+
+    def fake_agent(self, container, prompt_text, dir_run_area, run_data, attempt):
+        prompts.append(prompt_text)
+        out = dir_run_area / OUTPUT_DIR_NAME
+        kernel = GOOD_KERNEL if attempt == 2 else GOOD_KERNEL.replace("#pragma hls_design top\n", "")
+        (out / "mac.cpp").write_text(kernel, encoding="utf-8")
+        (out / "testbench.cpp").write_text(GOOD_TB, encoding="utf-8")
+        (out / "run.tcl").write_text(render_catapult_run_tcl("mac", ["mac.cpp"], "testbench.cpp"), encoding="utf-8")
+        (out / "translation_report.md").write_text("pipeline interface array_partition\n", encoding="utf-8")
+        run_data["sessions"].append({"attempt": attempt, "file": None, "exit_code": 0, "events": 0})
+        run_data["session_data"] = None
+
+    def fake_container_checks(container, target):
+        return {
+            "cpp_files": ["mac.cpp", "testbench.cpp"],
+            "syntax_check": {},
+            "syntax_all_ok": True,
+            "testbench_build": {"exit_code": 0, "output": ""},
+            "testbench_run": {"exit_code": 0, "output": "PASS"},
+            "testbench_ok": True,
+        }
+
+    monkeypatch.setattr(t.docker, "from_env", lambda: FakeClient())
+    monkeypatch.setattr(t.HLSTranslationRun, "_run_agent_once", fake_agent)
+    monkeypatch.setattr(t, "run_container_checks", fake_container_checks)
+
+    design = ROOT_FIXTURE
+    run = t.HLSTranslationRun("loop-test", design, tmp_path / "work", "model", "key", target="catapult", prepass=False, attempts=3)
+    check = run.run()
+    assert check["passed"]
+    assert check["attempts_used"] == 2
+    assert [a["passed"] for a in check["attempts"]] == [False, True]
+    assert "Previous attempt failed" in prompts[1] and "hls_design top" in prompts[1]
+    assert "Previous attempt failed" not in prompts[0]
+
+
+def test_xlscc_target_registered():
+    from hlsfactory_agent.translate import XLSCC
+
+    assert get_target("xlscc") is XLSCC
+    assert XLSCC.top_marker == "#pragma hls_top"
+    assert XLSCC.driver_file == "run_xlscc.sh"
+    assert any("__xls_channel" in v for v in XLSCC.type_map.values())
+    assert XLSCC.include_dir_names == ["ac_types_include", "xls_emu_include"]
+
+
+def test_xlscc_driver_has_three_tools():
+    from hlsfactory_agent.translate import render_xlscc_driver
+
+    d = render_xlscc_driver("fft", ["fft.cpp"])
+    for tok in ("xlscc fft.cpp --top fft", "opt_main", "codegen_main", "--pipeline_stages=1"):
+        assert tok in d
+
+
+def test_xlscc_prompt_mentions_channel_top_and_both_include_dirs():
+    from hlsfactory_agent.translate import XLSCC
+
+    p = build_translate_prompt("k", XLSCC)
+    for needle in ("__xls_channel", "#pragma hls_top", "run_xlscc.sh", "-I/workspace/run_area/xls_emu_include", "-I/workspace/run_area/ac_types_include"):
+        assert needle in p, needle
 
 
 def test_check_missing_output_dir(tmp_path: Path):

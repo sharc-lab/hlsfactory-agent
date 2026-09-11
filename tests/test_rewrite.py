@@ -69,6 +69,17 @@ def test_prepass_output_passes_static_check(tmp_path: Path):
     assert r["passed"], r["failures"]
 
 
+def test_prepass_xlscc_uses_channels_and_top_pragma(tmp_path: Path):
+    from hlsfactory_agent.translate import XLSCC
+
+    log = rewrite_design(FIXTURE, tmp_path / "out", XLSCC, top="mac")
+    cpp = (tmp_path / "out" / "mac.cpp").read_text(encoding="utf-8")
+    h = (tmp_path / "out" / "mac.h").read_text(encoding="utf-8")
+    assert "#pragma hls_top" in cpp and "hls_pipeline_init_interval 1" in cpp
+    assert "__xls_channel<data_t>" in h and '#include "xls_emu.h"' in h
+    assert log["residue"] == []
+
+
 def test_prompt_with_prepass_points_at_rewrite_log():
     p = build_translate_prompt("k", CATAPULT, prepass=True)
     assert "rewrite_log.json" in p and "residue" in p
