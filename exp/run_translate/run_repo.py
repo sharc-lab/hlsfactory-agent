@@ -96,7 +96,9 @@ def translate_one(dir_design: Path, target: str, model: str, api_key: str, dir_r
             oracle = json.loads((dir_run / "oracle.json").read_text(encoding="utf-8"))
             check = json.loads((dir_run / "check_data.json").read_text(encoding="utf-8"))
             # Static checks are cheap and deterministic: recompute them so resumed rows follow the current rules.
-            check["static"] = check_translated_design(dir_run / "run_area" / OUTPUT_DIR_NAME, get_target(target))
+            scan_path = dir_run / "run_area" / "scan.json"
+            scan = json.loads(scan_path.read_text(encoding="utf-8")) if scan_path.exists() else None
+            check["static"] = check_translated_design(dir_run / "run_area" / OUTPUT_DIR_NAME, get_target(target), scan=scan)
             check["passed"] = bool(check["static"]["passed"] and check["container"]["testbench_ok"])
             (dir_run / "check_data.json").write_text(json.dumps(check, indent=4), encoding="utf-8")
             row["resumed"] = True

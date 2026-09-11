@@ -147,6 +147,34 @@ def test_check_flags_incomplete_driver(tmp_path: Path):
     assert r["checks"]["driver_complete"] is False
 
 
+def test_reconciliation_flags_pragma_kind_missing_from_report(tmp_path: Path):
+    out = make_good_design(tmp_path)
+    (out / "translation_report.md").write_text("| mac.cpp | `#pragma HLS PIPELINE II=1` | moved |\n", encoding="utf-8")
+    scan = {"counts": {"pragmas": {"pipeline": 1, "array_partition": 2}}}
+    r = check_translated_design(out, CATAPULT, scan=scan)
+    assert not r["passed"]
+    assert r["unaccounted_pragma_kinds"] == ["array_partition"]
+    assert r["checks"]["report_covers_all_pragma_kinds"] is False
+
+
+def test_reconciliation_accepts_report_naming_every_kind(tmp_path: Path):
+    out = make_good_design(tmp_path)
+    (out / "translation_report.md").write_text(
+        "| mac.cpp | `#pragma HLS PIPELINE II=1` | moved |\n| mac.cpp | all 2 ARRAY_PARTITION pragmas | DROPPED |\n",
+        encoding="utf-8",
+    )
+    scan = {"counts": {"pragmas": {"pipeline": 1, "array_partition": 2}}}
+    r = check_translated_design(out, CATAPULT, scan=scan)
+    assert r["passed"], r["failures"]
+    assert r["unaccounted_pragma_kinds"] == []
+
+
+def test_check_without_scan_is_unchanged(tmp_path: Path):
+    out = make_good_design(tmp_path)
+    r = check_translated_design(out, CATAPULT)
+    assert r["passed"] and "report_covers_all_pragma_kinds" not in r["checks"]
+
+
 def test_check_missing_output_dir(tmp_path: Path):
     r = check_translated_design(tmp_path / "nothing", CATAPULT)
     assert r["passed"] is False if "passed" in r else True

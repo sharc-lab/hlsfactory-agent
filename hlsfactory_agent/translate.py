@@ -278,6 +278,8 @@ def build_translate_prompt(design_name: str, target: TargetSpec) -> str:
         f"- List './{INPUT_DIR_NAME}' and read every source, header, the testbench, and `synth.tcl`.\n"
         "- Identify the top-level function from the `set_top` line.\n"
         "- Write down every `#pragma HLS` line and every Vitis type or header you find. You will account for each one in the report.\n"
+        f"- `{CONTAINER_RUN_AREA}/scan.json` lists every `#pragma HLS` kind, vendor type, and header in the input with counts. "
+        "Every pragma kind listed there must appear in your report, translated or DROPPED.\n"
         "\n"
         "### Step 2: Copy everything into the output folder\n"
         f"- Copy every file from './{INPUT_DIR_NAME}' into './{OUTPUT_DIR_NAME}', including data files and README.\n"
@@ -360,8 +362,12 @@ def find_top_from_synth_tcl(dir_design: Path) -> str | None:
     return m.group(1) if m else None
 
 
-def check_translated_design(dir_output: Path, target: TargetSpec) -> dict:
-    """Static checks on the agent's output. Pure Python, no tools, no container."""
+def check_translated_design(dir_output: Path, target: TargetSpec, scan: dict | None = None) -> dict:
+    """Static checks on the agent's output. Pure Python, no tools, no container.
+
+    When ``scan`` (the scanner inventory of the input) is given, the translation report must mention
+    every pragma kind in it, translated or dropped, or the check fails.
+    """
     result: dict = {"target": target.name, "checks": {}, "failures": []}
     checks = result["checks"]
 
@@ -414,6 +420,21 @@ def check_translated_design(dir_output: Path, target: TargetSpec) -> dict:
             result["failures"].append(f"{target.driver_file} missing: {missing_tokens}")
     else:
         checks["driver_complete"] = False
+
+    if scan is not None:
+        report = dir_output / "translation_report.md"
+        report_text = report.read_text(encoding="utf-8", errors="replace").lower() if report.exists() else ""
+        kinds = sorted(scan.get("counts", {}).get("pragmas", {}).keys())
+        unaccounted = [
+            k
+            for k in kinds
+            if not re.search(rf"#\s*pragma\s+hls\s+{re.escape(k)}\b", report_text)
+            and not re.search(rf"\b{re.escape(k)}\b", report_text)
+        ]
+        checks["report_covers_all_pragma_kinds"] = not unaccounted
+        result["unaccounted_pragma_kinds"] = unaccounted
+        if unaccounted:
+            result["failures"].append(f"report does not account for pragma kinds: {unaccounted}")
 
     result["passed"] = not result["failures"]
     return result
@@ -635,6 +656,9 @@ class HLSTranslationRun:
         shutil.copytree(self.dir_design, dir_run_area / INPUT_DIR_NAME)
         shutil.copytree(self.target.include_dir, dir_run_area / self.target.include_dir_name)
         shutil.copytree(DIR_VITIS_HLS_INCLUDE, dir_run_area / "vitis_hls_include")
+        from hlsfactory_agent.scan import write_scan
+
+        write_scan(dir_run_area / INPUT_DIR_NAME, dir_run_area)
         (dir_run_area / OUTPUT_DIR_NAME).mkdir(parents=True, exist_ok=True)
         os.chmod(dir_run_area / OUTPUT_DIR_NAME, 0o777)
         return dir_run_area
@@ -697,8 +721,10 @@ class HLSTranslationRun:
             if not (dir_output / self.target.driver_file).exists() and self.target.name == "catapult":
                 self._render_missing_driver(dir_output)
 
+            scan_path = dir_run_area / "scan.json"
+            scan = json.loads(scan_path.read_text(encoding="utf-8")) if scan_path.exists() else None
             check_data: dict[str, Any] = {
-                "static": check_translated_design(dir_output, self.target),
+                "static": check_translated_design(dir_output, self.target, scan=scan),
                 "container": run_container_checks(container, self.target),
             }
         finally:
