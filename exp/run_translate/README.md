@@ -11,9 +11,9 @@ Code: `hlsfactory_agent/translate.py`. Tests: `tests/test_translate.py`.
 ```
 designs/vitis_mac/            small Vitis fixture: ap_fixed MAC over hls::stream, three pragma kinds
 expected/catapult_mac/        hand-translated reference output, used to validate the check path without an LLM
-expected/catapult_mac_check.json  result of running the in-container checks on the reference (all pass)
 run.py                        runs the agent on one or more design folders
-runs/                         outputs, git-ignored
+run_repo.py                   full loop on a repository: extract, oracle-check, translate, save
+runs/, results/               outputs, git-ignored; results are not committed to this repository
 ```
 
 ## How the flow works
@@ -83,10 +83,9 @@ run_checks_standalone(Path("exp/run_translate/expected/catapult_mac"), CATAPULT)
   | tokens in / out | 12,573 / 4,824 |
   | cost | 0.0034 USD |
 
-  Artifacts, including the session transcript, are in `results/2026-09-10-vitis_mac-to-catapult/`.
 - Catapult synthesis of the fixture, both the hand reference and the agent output, verified on a lab machine with
   Catapult Prime Synthesis 2026.2: `go extract` completes with run.tcl unmodified, II 1, latency 8 cycles, one
-  multiplier. See `results/2026-09-10-catapult-synth/` once that commit is pushed from the lab machine.
+  multiplier.
 
 - Full loop on a real repository, `UCLA-VAST/HP-FFT-HLS` from the base run, 2026-09-10: extraction produced 16
   standardized Vitis designs (FFT variants, the main source is about 2,600 lines). Every one of the 16 passes its own
@@ -94,8 +93,8 @@ run_checks_standalone(Path("exp/run_translate/expected/catapult_mac"), CATAPULT)
   `n256_no_StagePipeline`, is a missing `#pragma hls_design top` and nothing else, and its run.tcl names the top so
   it should still synthesize. Total agent cost 0.37 USD, median agent time about six minutes per design. Two
   designs left commented-out Vitis pragmas in place; the checker records those separately and does not fail them.
-  Results, originals, reports, checks and transcripts: `results/2026-09-10-HP-FFT-HLS-to-catapult/`.
-  Catapult synthesis of these 16 has not been run yet.
+  Catapult synthesis of these 16 has not been run yet. Results are kept locally and are not committed; the dataset
+  will live in its own repository.
 
 - Harness fixes made during that run: all file reads and writes forced to UTF-8 (a Windows default-encoding crash
   while reading a session transcript; the same one-line fix applied to `core.py`), a workspace wipe that survives
@@ -113,8 +112,7 @@ Both committed Catapult designs were synthesized with Catapult Prime 2026.2 on a
 `run.tcl` ran unmodified: `nangate-45nm_beh`, `ccs_sample_mem`, and `CppStandard c++11` are all
 accepted by this install. Schedule: latency 8, throughput 10 cycles, II=1 on the 8-tap loop at
 5 ns; one 16x16 multiplier plus a 32-bit accumulator, as expected for a rolled MAC.
-Logs, reports, and full notes (including a license-server workaround specific to that machine)
-are in `results/2026-09-10-catapult-synth/`.
+Logs and reports are kept outside this repository.
 
 ## Known gaps
 
