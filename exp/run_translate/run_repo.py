@@ -196,12 +196,26 @@ def save_results(repo_id: str, target: str, dir_designs: Path, dir_runs: Path, r
             f"{_match_cell(r.get('output_match'))} | "
             f"{r.get('wall_s', '')} | {r.get('tool_calls', '')} | {r.get('tokens_in', '')}/{r.get('tokens_out', '')} | {r.get('cost_usd', '')} |"
         )
+    categories: dict[str, int] = {}
+    for row in rows:
+        f = dir_runs / row["run_id"] / "run_area" / OUTPUT_DIR_NAME / "rewrite_log.json"
+        if not f.exists():
+            continue
+        for k, v in json.loads(f.read_text(encoding="utf-8")).get("category_counts", {}).items():
+            categories[k] = categories.get(k, 0) + v
+
     n = len(rows)
     lines += [
         "",
         f"Designs: {n}. Oracle pass: {sum(r['oracle_passed'] for r in rows)}. Translation pass: {sum(r['translation_passed'] for r in rows)}. "
         f"Total agent cost: {round(sum(float(r.get('cost_usd') or 0) for r in rows), 4)} USD. "
         f"Total agent wall time: {sum(int(r.get('wall_s') or 0) for r in rows)} s.",
+        "",
+        "Pragma categories across designs: "
+        + ", ".join(f"{k} {v}" for k, v in sorted(categories.items()))
+        + "."
+        if categories
+        else "",
         "",
         "Each design folder holds `vitis/` (the extracted original), the target folder (translated output with run.tcl and",
         "translation_report.md), `oracle.json`, `check_data.json`, and the agent session transcript.",

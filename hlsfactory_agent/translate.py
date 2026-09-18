@@ -25,6 +25,7 @@ from hlsfactory_agent.utils import load_jsonl_text
 DIR_CURRENT = Path(__file__).resolve().parent
 DIR_VITIS_HLS_INCLUDE = DIR_CURRENT / "vitis_hls_include"
 DIR_AC_TYPES_INCLUDE = DIR_CURRENT / "ac_types_include"
+DIR_TARGETS = DIR_CURRENT / "targets"
 DIR_XLS_EMU_INCLUDE = DIR_CURRENT / "xls_emu_include"
 
 DOCKER_IMAGE_NAME = "hlsfactory-agent"
@@ -49,6 +50,7 @@ class PragmaRule:
     target: str | None
     placement: str
     note: str = ""
+    category: str = "translate"
 
 
 @dataclass(frozen=True)
@@ -67,6 +69,7 @@ class TargetSpec:
     driver_required_tokens: tuple[str, ...]
     top_marker: str
     extra_rules: tuple[str, ...] = field(default_factory=tuple)
+    directive_rules: dict[str, str] = field(default_factory=dict)
     # additional header directories copied into the run area as (source_dir, name_in_run_area)
     extra_include_dirs: tuple[tuple[Path, str], ...] = field(default_factory=tuple)
 
@@ -79,6 +82,57 @@ class TargetSpec:
         d["include_dir"] = str(self.include_dir)
         d["extra_include_dirs"] = [[str(p), n] for p, n in self.extra_include_dirs]
         return d
+
+
+def load_directive_rules(target_name: str) -> dict[str, str]:
+    f = DIR_TARGETS / f"{target_name}_directives.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+
+
+def directive_template(resource: dict, rules: dict[str, str]) -> str | None:
+    """Most specific matching rule: kind.type.scope, then kind.type, then kind."""
+    args = resource.get("args", {})
+    keys = []
+    if args.get("type"):
+        keys.append(f"{resource['kind']}.{args['type']}.{resource.get('scope', 'unknown')}")
+        keys.append(f"{resource['kind']}.{args['type']}")
+    keys.append(resource["kind"])
+    return next((rules[k] for k in keys if k in rules), None)
+
+
+def render_directives(resources: list[dict], top: str, rules: dict[str, str]) -> tuple[list[str], list[dict]]:
+    lines: list[str] = []
+    unrendered: list[dict] = []
+    for r in resources:
+        args = r.get("args", {})
+        template = directive_template(r, rules)
+        if template is None:
+            unrendered.append({"resource": r, "reason": "no directive rule"})
+            continue
+        if r.get("unresolved"):
+            unrendered.append({"resource": r, "reason": f"unresolved factor {r['unresolved']}"})
+            continue
+        # Vitis `factor` is the number of partitions; Catapult BLOCK_SIZE is elements per block.
+        block_size = None
+        if "{block_size}" in template:
+            size, factor = r.get("size"), r.get("factor")
+            if not size or not factor:
+                unrendered.append({"resource": r, "reason": "block partition needs both array size and factor"})
+                continue
+            block_size = max(1, -(-size // factor))
+        lines.append(
+            template.format(
+                top=top,
+                var=args.get("variable") or args.get("port") or "",
+                factor=r.get("factor") if r.get("factor") is not None else "",
+                block_size=block_size if block_size is not None else "",
+                dim=args.get("dim", "1"),
+                impl=args.get("impl", ""),
+                mode=args.get("mode", ""),
+                port=args.get("port", ""),
+            )
+        )
+    return lines, unrendered
 
 
 CATAPULT = TargetSpec(
@@ -128,6 +182,7 @@ CATAPULT = TargetSpec(
             target="#pragma hls_design block  (on each sub-function that becomes a dataflow block)",
             placement="on the line directly BEFORE the sub-function definition; the top keeps `#pragma hls_design top`",
             note="Lossy: Catapult hierarchical blocks are set per function, not per region. Record it in the report.",
+            category="lossy",
         ),
         PragmaRule(
             source="#pragma HLS INLINE",
@@ -139,36 +194,42 @@ CATAPULT = TargetSpec(
             target=None,
             placement="removed from source",
             note="No source-level equivalent. Catapult sets memory mapping in TCL. Remove and list it in the report as DROPPED with the original text.",
+            category="directive",
         ),
         PragmaRule(
             source="#pragma HLS INTERFACE ...",
             target=None,
             placement="removed from source",
             note="Interfaces are TCL directives in Catapult. Remove and list as DROPPED.",
+            category="directive",
         ),
         PragmaRule(
             source="#pragma HLS LOOP_TRIPCOUNT ...",
             target=None,
             placement="removed from source",
             note="Analysis-only pragma. Remove and list as DROPPED.",
+            category="advisory",
         ),
         PragmaRule(
             source="#pragma HLS BIND_STORAGE / RESOURCE / BIND_OP ...",
             target=None,
             placement="removed from source",
             note="Resource binding is TCL in Catapult. Remove and list as DROPPED.",
+            category="directive",
         ),
         PragmaRule(
             source="#pragma HLS DEPENDENCE ...",
             target=None,
             placement="removed from source",
             note="Remove and list as DROPPED. Mention it in the report as a possible performance difference.",
+            category="absent",
         ),
         PragmaRule(
             source="any other #pragma HLS ...",
             target=None,
             placement="removed from source",
             note="Remove and list as DROPPED with the original text.",
+            category="absent",
         ),
     ),
     forbidden_patterns=(
@@ -194,6 +255,7 @@ CATAPULT = TargetSpec(
         "Do not use `ac_int<N, false>` for a value that was `ap_int<N>`. Signedness must be preserved exactly.",
         "Streams: ac_channel<T> has read() and write(). It does not have empty(); use `!ch.available(1)` only if the original code used empty().",
     ),
+    directive_rules=load_directive_rules("catapult"),
 )
 
 XLSCC = TargetSpec(
@@ -235,24 +297,28 @@ XLSCC = TargetSpec(
             target="#pragma hls_unroll yes",
             placement="on the line directly BEFORE the `for` statement",
             note="xlscc has no partial unroll; record the factor as lost",
+            category="lossy",
         ),
         PragmaRule(
             source="#pragma HLS ARRAY_PARTITION ...",
             target=None,
             placement="removed from source",
             note="XLS has no partition; arrays become registers or memories by its own rules. List as DROPPED.",
+            category="absent",
         ),
         PragmaRule(
             source="#pragma HLS DATAFLOW",
             target=None,
             placement="removed from source",
             note="XLS procs are a different model; record as DROPPED.",
+            category="absent",
         ),
         PragmaRule(
             source="any other #pragma HLS ...",
             target=None,
             placement="removed from source",
             note="Remove and list as DROPPED with the original text.",
+            category="absent",
         ),
     ),
     forbidden_patterns=CATAPULT.forbidden_patterns,
@@ -288,6 +354,7 @@ def render_catapult_run_tcl(
     sources: list[str],
     testbench: str | None,
     clock_period_ns: float = 5.0,
+    directives: list[str] | tuple[str, ...] = (),
 ) -> str:
     lines = [
         "# Catapult HLS run script generated by hlsfactory_agent.translate",
@@ -306,6 +373,11 @@ def render_catapult_run_tcl(
         "solution library add nangate-45nm_beh -- -rtlsyntool DesignCompiler -vendor Nangate -technology 045nm",
         "solution library add ccs_sample_mem",
         "go libraries",
+    ]
+    if directives:
+        lines.append("# resource directives carried from Vitis pragmas")
+        lines.extend(directives)
+    lines += [
         f"directive set -CLOCKS {{clk {{-CLOCK_PERIOD {clock_period_ns}}}}}",
         "go assembly",
         "go architect",
@@ -368,6 +440,10 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
             "- Review the moved pragmas: the script places a loop pragma on the line before the nearest loop header; correct any it placed wrongly.\n"
             "- Do not redo the mechanical work; do verify it in Step 6.\n"
             "- `synth.tcl` was intentionally not copied; the output gets its own driver script (Step 7).\n"
+            f"- `{target.driver_file}` and `directives.json` were generated from the input's resource pragmas. "
+            f"Do NOT rewrite `{target.driver_file}` from scratch. For every line in it starting with `# UNRESOLVED`, "
+            f"work out the numeric value (the expression and the #defines are in `{CONTAINER_RUN_AREA}/scan.json`), "
+            "replace that whole comment line with the finished directive, and leave every other line alone.\n"
         )
     else:
         step2 = (
@@ -545,6 +621,19 @@ def check_translated_design(dir_output: Path, target: TargetSpec, scan: dict | N
         result["unaccounted_pragma_kinds"] = unaccounted
         if unaccounted:
             result["failures"].append(f"report does not account for pragma kinds: {unaccounted}")
+
+    dfile = dir_output / "directives.json"
+    if dfile.exists():
+        d = json.loads(dfile.read_text(encoding="utf-8", errors="replace"))
+        script_text = driver.read_text(encoding="utf-8", errors="replace") if driver.exists() else ""
+        missing = [ln for ln in d.get("rendered", []) if ln not in script_text]
+        leftover = [ln for ln in script_text.splitlines() if ln.startswith("# UNRESOLVED")]
+        result["directive_failures"] = [f"missing: {m}" for m in missing] + [f"unresolved: {ln}" for ln in leftover]
+        checks["directives_in_script"] = not result["directive_failures"]
+        if result["directive_failures"]:
+            result["failures"].append(
+                f"{len(result['directive_failures'])} directive(s) missing or unresolved in {target.driver_file}"
+            )
 
     result["passed"] = not result["failures"]
     return result
@@ -845,16 +934,42 @@ class HLSTranslationRun:
         shutil.copytree(DIR_VITIS_HLS_INCLUDE, dir_run_area / "vitis_hls_include")
         from hlsfactory_agent.scan import write_scan
 
-        write_scan(dir_run_area / INPUT_DIR_NAME, dir_run_area)
+        write_scan(dir_run_area / INPUT_DIR_NAME, dir_run_area, top=find_top_from_synth_tcl(self.dir_design))
         dir_output = dir_run_area / OUTPUT_DIR_NAME
         if self.prepass:
             from hlsfactory_agent.rewrite import rewrite_design
 
-            rewrite_design(dir_run_area / INPUT_DIR_NAME, dir_output, self.target, find_top_from_synth_tcl(self.dir_design))
+            top = find_top_from_synth_tcl(self.dir_design)
+            rewrite_design(dir_run_area / INPUT_DIR_NAME, dir_output, self.target, top)
+            if self.target.directive_rules:
+                self._write_directives(dir_run_area, dir_output, top or "top")
         else:
             dir_output.mkdir(parents=True, exist_ok=True)
         os.chmod(dir_output, 0o777)
         return dir_run_area
+
+    def _write_directives(self, dir_run_area: Path, dir_output: Path, top: str) -> None:
+        scan = json.loads((dir_run_area / "scan.json").read_text(encoding="utf-8"))
+        rendered, unrendered = render_directives(scan.get("resources", []), top, self.target.directive_rules)
+        (dir_output / "directives.json").write_text(
+            json.dumps({"rendered": rendered, "unrendered": unrendered}, indent=2), encoding="utf-8"
+        )
+        comments = []
+        for u in unrendered:
+            r = u["resource"]
+            template = directive_template(r, self.target.directive_rules)
+            if template is None:
+                continue
+            hint = template.replace("{top}", top).replace("{var}", r["args"].get("variable", "?")).replace("{factor}", "<factor>")
+            comments.append(f"# UNRESOLVED {u['reason']}: {hint}")
+        sources = [
+            f.name for f in _iter_source_files(dir_output)
+            if f.suffix.lower() in (".cpp", ".cc", ".c") and f.name != "testbench.cpp"
+        ]
+        tb = "testbench.cpp" if (dir_output / "testbench.cpp").exists() else None
+        (dir_output / self.target.driver_file).write_text(
+            render_catapult_run_tcl(top, sources, tb, directives=rendered + comments), encoding="utf-8"
+        )
 
     # ---- main ------------------------------------------------------------------------
 

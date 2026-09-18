@@ -1,20 +1,21 @@
+import json
 from pathlib import Path
 
-import pytest
-
+from hlsfactory_agent.rewrite import rewrite_design
+from hlsfactory_agent.scan import resolve_int, scan_design
 from hlsfactory_agent.translate import (
     CATAPULT,
     OUTPUT_DIR_NAME,
-    build_retry_prompt,
-    build_translate_prompt,
     check_translated_design,
-    compare_outputs,
-    find_top_from_synth_tcl,
-    get_target,
+    directive_template,
+    load_directive_rules,
     render_catapult_run_tcl,
+    render_directives,
 )
 
-ROOT_FIXTURE = Path(__file__).resolve().parents[1] / "exp" / "run_translate" / "designs" / "vitis_mac"
+ROOT = Path(__file__).resolve().parents[1]
+FIXTURE = ROOT / "exp" / "run_translate" / "designs" / "vitis_mac"
+EXPECTED = ROOT / "exp" / "run_translate" / "expected" / "catapult_mac"
 
 GOOD_KERNEL = """#include "ac_fixed.h"
 #include "ac_channel.h"
@@ -28,279 +29,199 @@ void mac(ac_channel<data_t> &in, ac_channel<data_t> &out) {
 }
 """
 
-GOOD_TB = """#include "ac_fixed.h"
-int main() { return 0; }
-"""
-
 
 def make_good_design(root: Path) -> Path:
     out = root / OUTPUT_DIR_NAME
     out.mkdir()
-    (out / "mac.cpp").write_text(GOOD_KERNEL)
-    (out / "testbench.cpp").write_text(GOOD_TB)
-    (out / "run.tcl").write_text(render_catapult_run_tcl("mac", ["mac.cpp"], "testbench.cpp"))
-    (out / "translation_report.md").write_text("# report\n")
+    (out / "mac.cpp").write_text(GOOD_KERNEL, encoding="utf-8")
+    (out / "testbench.cpp").write_text('#include "ac_fixed.h"\nint main() { return 0; }\n', encoding="utf-8")
+    (out / "run.tcl").write_text(render_catapult_run_tcl("mac", ["mac.cpp"], "testbench.cpp"), encoding="utf-8")
+    (out / "translation_report.md").write_text("# report\n", encoding="utf-8")
     return out
 
 
-def test_catapult_target_is_registered():
-    t = get_target("catapult")
-    assert t is CATAPULT
-    assert "ap_int<N>" in t.type_map
-    assert any("hls_pipeline_init_interval" in (r.target or "") for r in t.pragma_rules)
-    assert any(r.target is None and "ARRAY_PARTITION" in r.source for r in t.pragma_rules)
+def _res(kind, **args):
+    meta = {k[1:]: args.pop(k) for k in list(args) if k.startswith("_")}
+    return {
+        "kind": kind,
+        "args": args,
+        "factor": meta.get("factor"),
+        "unresolved": meta.get("unresolved"),
+        "scope": meta.get("scope", "unknown"),
+        "size": meta.get("size"),
+    }
 
 
-def test_unknown_target_raises():
-    with pytest.raises(ValueError):
-        get_target("intel")
+def _norm(p: Path) -> str:
+    return "\n".join(" ".join(ln.split()) for ln in p.read_text(encoding="utf-8").splitlines() if ln.strip())
 
 
-def test_prompt_contains_the_essentials():
-    p = build_translate_prompt("vitis_mac", CATAPULT)
-    for needle in (
-        "ac_int<N, true>",
-        "ac_channel<T>",
-        "hls_pipeline_init_interval",
-        "BEFORE the `for`",
-        "#pragma hls_design top",
-        "/workspace/run_area/ac_types_include",
-        "translation_report.md",
-        "run.tcl",
-        "go extract",
-        "timeout 30s",
-        "vitis_mac",
-    ):
-        assert needle in p, needle
+# --- scanner ---------------------------------------------------------------------------
 
 
-def test_render_run_tcl_has_required_tokens():
-    tcl = render_catapult_run_tcl("mac", ["mac.cpp", "util.cpp"], "testbench.cpp", clock_period_ns=4.0)
-    for token in CATAPULT.driver_required_tokens:
-        assert token in tcl
-    assert "solution file add ./mac.cpp -type C++" in tcl
-    assert "solution file add ./util.cpp -type C++" in tcl
-    assert "testbench.cpp -type C++ -exclude true" in tcl
-    assert "-DESIGN_HIERARCHY mac" in tcl
-    assert "-CLOCK_PERIOD 4.0" in tcl
+def test_resolve_int_substitutes_defines_and_rejects_non_arithmetic():
+    d = {"UF": "4", "N": "UF*2", "HALF": "(N/2)"}
+    assert resolve_int("UF*2", d) == 8
+    assert resolve_int("HALF+1", d) == 5
+    assert resolve_int("UNKNOWN*2", d) is None
+    assert resolve_int("__import__('os')", d) is None
 
 
-def test_find_top_from_synth_tcl(tmp_path: Path):
-    (tmp_path / "synth.tcl").write_text("open_project p\nset_top   mac\nadd_files mac.cpp\n")
-    assert find_top_from_synth_tcl(tmp_path) == "mac"
-    assert find_top_from_synth_tcl(tmp_path / "nope") is None
-
-
-def test_check_passes_on_good_design(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    r = check_translated_design(out, CATAPULT)
-    assert r["passed"], r["failures"]
-    assert r["leftovers"] == []
-
-
-def test_check_flags_vitis_leftovers(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "mac.cpp").write_text(GOOD_KERNEL.replace("ac_fixed<16, 8, true>", "ap_fixed<16, 8>"))
-    r = check_translated_design(out, CATAPULT)
-    assert not r["passed"]
-    assert r["leftovers"] and r["leftovers"][0]["file"] == "mac.cpp"
-    assert any("dialect" in f for f in r["failures"])
-
-
-def test_check_ignores_commented_out_pragmas_but_records_them(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "mac.cpp").write_text(GOOD_KERNEL + "\n    // #pragma HLS array_partition variable=x complete\n")
-    r = check_translated_design(out, CATAPULT)
-    assert r["passed"], r["failures"]
-    assert r["leftovers"] == []
-    assert len(r["commented_leftovers"]) == 1
-    assert r["commented_leftovers"][0]["line"] > 1
-
-
-def test_check_flags_leftover_pragma_in_header(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "mac.h").write_text("#pragma HLS INLINE\n")
-    r = check_translated_design(out, CATAPULT)
-    assert not r["passed"]
-    assert r["leftovers"][0]["file"] == "mac.h"
-
-
-def test_check_flags_missing_driver_and_report(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "run.tcl").unlink()
-    (out / "translation_report.md").unlink()
-    r = check_translated_design(out, CATAPULT)
-    assert not r["passed"]
-    assert "missing required file run.tcl" in r["failures"]
-    assert "missing required file translation_report.md" in r["failures"]
-
-
-def test_check_flags_missing_top_marker(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "mac.cpp").write_text(GOOD_KERNEL.replace("#pragma hls_design top\n", ""))
-    r = check_translated_design(out, CATAPULT)
-    assert not r["passed"]
-    assert r["checks"]["has_top_marker"] is False
-
-
-def test_check_flags_incomplete_driver(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "run.tcl").write_text("go analyze\n")
-    r = check_translated_design(out, CATAPULT)
-    assert not r["passed"]
-    assert r["checks"]["driver_complete"] is False
-
-
-def test_reconciliation_flags_pragma_kind_missing_from_report(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "translation_report.md").write_text("| mac.cpp | `#pragma HLS PIPELINE II=1` | moved |\n", encoding="utf-8")
-    scan = {"counts": {"pragmas": {"pipeline": 1, "array_partition": 2}}}
-    r = check_translated_design(out, CATAPULT, scan=scan)
-    assert not r["passed"]
-    assert r["unaccounted_pragma_kinds"] == ["array_partition"]
-    assert r["checks"]["report_covers_all_pragma_kinds"] is False
-
-
-def test_reconciliation_accepts_report_naming_every_kind(tmp_path: Path):
-    out = make_good_design(tmp_path)
-    (out / "translation_report.md").write_text(
-        "| mac.cpp | `#pragma HLS PIPELINE II=1` | moved |\n| mac.cpp | all 2 ARRAY_PARTITION pragmas | DROPPED |\n",
+def test_scan_collects_resources_with_resolved_factors(tmp_path: Path):
+    d = tmp_path / "design"
+    d.mkdir()
+    (d / "k.h").write_text("#define UF 4\n", encoding="utf-8")
+    (d / "k.cpp").write_text(
+        '#include "k.h"\n'
+        "void top(int a[16]) {\n"
+        "#pragma HLS array_partition variable=a type=cyclic factor=UF*2 dim=1\n"
+        "#pragma HLS array_partition variable=b type=block factor=MISSING dim=1\n"
+        "#pragma HLS ARRAY_PARTITION variable=c complete dim=1\n"
+        "}\n",
         encoding="utf-8",
     )
-    scan = {"counts": {"pragmas": {"pipeline": 1, "array_partition": 2}}}
-    r = check_translated_design(out, CATAPULT, scan=scan)
-    assert r["passed"], r["failures"]
-    assert r["unaccounted_pragma_kinds"] == []
+    by_var = {r["args"]["variable"]: r for r in scan_design(d)["resources"]}
+    assert by_var["a"]["factor"] == 8 and by_var["a"]["unresolved"] is None
+    assert by_var["b"]["factor"] is None and by_var["b"]["unresolved"] == "MISSING"
+    assert by_var["c"]["args"]["type"] == "complete"
 
 
-def test_check_without_scan_is_unchanged(tmp_path: Path):
+def test_scan_marks_argument_vs_local_arrays_and_sizes(tmp_path: Path):
+    d = tmp_path / "design"
+    d.mkdir()
+    (d / "k.cpp").write_text(
+        "void top(int coef[8]) {\n"
+        "#pragma HLS array_partition variable=coef complete dim=1\n"
+        "    int buf[16];\n"
+        "#pragma HLS array_partition variable=buf type=cyclic factor=4 dim=1\n"
+        "}\n",
+        encoding="utf-8",
+    )
+    by_var = {r["args"]["variable"]: r for r in scan_design(d, top="top")["resources"]}
+    assert by_var["coef"]["scope"] == "argument" and by_var["coef"]["size"] == 8
+    assert by_var["buf"]["scope"] == "local" and by_var["buf"]["size"] == 16
+
+
+# --- mechanical pre-pass ---------------------------------------------------------------
+
+
+def test_prepass_reproduces_the_hand_translation_of_the_fixture(tmp_path: Path):
+    log = rewrite_design(FIXTURE, tmp_path / "out", CATAPULT, top="mac")
+    for name in ("mac.h", "mac.cpp", "testbench.cpp"):
+        assert _norm(tmp_path / "out" / name) == _norm(EXPECTED / name), name
+    assert log["residue"] == []
+    assert {d["kind"] for d in log["pragmas_dropped"]} == {"interface", "array_partition"}
+
+
+def test_prepass_maps_every_mode_ac_fixed_supports(tmp_path: Path):
+    d = tmp_path / "in"
+    d.mkdir()
+    (d / "k.cpp").write_text(
+        '#include "ap_fixed.h"\n'
+        "typedef ap_fixed<8, 4, AP_RND_ZERO, AP_SAT_SYM> a_t;\n"
+        "typedef ap_fixed<8, 4, AP_TRN_ZERO, AP_SAT_ZERO> b_t;\n"
+        "typedef ap_fixed<8, 4, AP_RND_CONV, AP_WRAP_SM> c_t;\n"
+        "void top(a_t x) {}\n",
+        encoding="utf-8",
+    )
+    log = rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
+    text = (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")
+    assert "ac_fixed<8, 4, true, AC_RND_ZERO, AC_SAT_SYM> a_t" in text
+    assert "ac_fixed<8, 4, true, AC_TRN_ZERO, AC_SAT_ZERO> b_t" in text
+    # AP_WRAP_SM has no ac_fixed counterpart; it must be reported, never approximated.
+    assert any("AP_WRAP_SM" in r["reason"] for r in log["residue"])
+
+
+# --- Catapult directives (forms confirmed on Catapult 2026.2, 2026-09-16) ---------------
+
+
+def test_render_directives_uses_the_confirmed_catapult_forms():
+    rules = load_directive_rules("catapult")
+    lines, left = render_directives(
+        [
+            _res("array_partition", variable="a", type="complete", _scope="local"),
+            _res("array_partition", variable="b", type="cyclic", _factor=8, _scope="local"),
+            _res("array_partition", variable="c", type="block", _factor=4, _size=32, _scope="local"),
+            _res("array_partition", variable="d", type="complete", _scope="argument"),
+        ],
+        "fft",
+        rules,
+    )
+    assert left == []
+    assert lines == [
+        "directive set /fft/a:rsc -MAP_TO_MODULE {[Register]}",
+        "directive set /fft/b:rsc -INTERLEAVE 8",
+        # Vitis factor counts partitions; Catapult BLOCK_SIZE counts elements per block.
+        "directive set /fft/c:rsc -BLOCK_SIZE 8",
+        # On an interface array -MAP_TO_MODULE {[Register]} is rejected with MEM-31.
+        "directive set /fft/d:rsc -BLOCK_SIZE 1",
+    ]
+
+
+def test_render_directives_omits_forms_catapult_ignores_or_breaks_on():
+    rules = load_directive_rules("catapult")
+    unresolved = _res("array_partition", variable="d", type="cyclic", _unresolved="UF*2", _scope="local")
+    lines, left = render_directives(
+        [
+            # -INTERLEAVE on an interface array is accepted and silently ignored.
+            _res("array_partition", variable="a", type="cyclic", _factor=2, _scope="argument"),
+            # mapping an array to a RAM can fail scheduling, so no rule is provided.
+            _res("bind_storage", variable="b", impl="bram", _scope="local"),
+            _res("array_partition", variable="c", type="block", _factor=2, _scope="local"),
+            unresolved,
+        ],
+        "fft",
+        rules,
+    )
+    assert lines == []
+    assert [e["reason"] for e in left] == [
+        "no directive rule",
+        "no directive rule",
+        "block partition needs both array size and factor",
+        "unresolved factor UF*2",
+    ]
+    # an unresolved factor must still resolve to a template so the agent gets a hint line
+    assert directive_template(unresolved, rules) is not None
+
+
+def test_fixture_partition_reaches_the_catapult_script():
+    resources = scan_design(FIXTURE, top="mac")["resources"]
+    rendered, unrendered = render_directives(resources, "mac", CATAPULT.directive_rules)
+    assert rendered == ["directive set /mac/coef:rsc -BLOCK_SIZE 1"]
+    assert [u["resource"]["kind"] for u in unrendered] == ["interface", "interface"]
+
+
+def test_run_tcl_places_directives_between_libraries_and_assembly():
+    line = "directive set /fft/a:rsc -INTERLEAVE 8"
+    lines = render_catapult_run_tcl("fft", ["fft.cpp"], "testbench.cpp", directives=[line]).splitlines()
+    assert lines.index("go libraries") < lines.index(line) < lines.index("go assembly")
+
+
+# --- output checks ---------------------------------------------------------------------
+
+
+def test_check_flags_leftover_vitis_dialect(tmp_path: Path):
     out = make_good_design(tmp_path)
+    (out / "mac.cpp").write_text(GOOD_KERNEL.replace("ac_fixed<16, 8, true>", "ap_fixed<16, 8>"), encoding="utf-8")
     r = check_translated_design(out, CATAPULT)
-    assert r["passed"] and "report_covers_all_pragma_kinds" not in r["checks"]
+    assert not r["passed"] and r["leftovers"][0]["file"] == "mac.cpp"
 
 
-def test_compare_outputs_identical_after_normalization():
-    r = compare_outputs("a  b\n(-0.0000,0.0000)\nPASS \n", "a b\n(0.0000,-0.0000)\n\nPASS\n")
-    assert r["identical"] and r["differing"] == 0
+def test_check_flags_directives_missing_or_unresolved_in_the_script(tmp_path: Path):
+    out = make_good_design(tmp_path)
+    line = "directive set /mac/coef:rsc -MAP_TO_MODULE {[Register]}"
+    (out / "directives.json").write_text(json.dumps({"rendered": [line], "unrendered": []}), encoding="utf-8")
+    r = check_translated_design(out, CATAPULT)
+    assert r["checks"]["directives_in_script"] is False
+
+    (out / "run.tcl").write_text(
+        render_catapult_run_tcl("mac", ["mac.cpp"], "testbench.cpp", directives=[line]), encoding="utf-8"
+    )
+    assert check_translated_design(out, CATAPULT)["checks"]["directives_in_script"] is True
 
 
-def test_compare_outputs_reports_differences():
-    r = compare_outputs("x=1\nPASS\n", "x=2\nPASS\n")
-    assert not r["identical"] and r["differing"] == 1 and r["sample"] == ["x=1 | x=2"]
-
-
-def test_compare_outputs_counts_missing_lines():
-    r = compare_outputs("a\nb\nc\n", "a\n")
-    assert r["differing"] == 2 and r["original_lines"] == 3 and r["translated_lines"] == 1
-
-
-def test_retry_prompt_carries_failures_and_tool_output():
-    check = {
-        "static": {"failures": ["missing required file run.tcl"], "unaccounted_pragma_kinds": ["dataflow"]},
-        "container": {
-            "syntax_check": {"a.cpp": {"exit_code": 1, "output": "a.cpp:3: error: unknown type"}},
-            "testbench_build": {"exit_code": 1, "output": "ld: undefined reference"},
-            "testbench_run": {"exit_code": None, "output": "not run: build failed"},
-        },
-    }
-    p = build_retry_prompt("BASE", check)
-    assert p.startswith("BASE")
-    for needle in (
-        "Previous attempt failed",
-        "missing required file run.tcl",
-        "dataflow",
-        "unknown type",
-        "undefined reference",
-        "Do not start over",
-    ):
-        assert needle in p, needle
-    assert "not run: build failed" not in p
-
-
-def test_fixer_loop_retries_until_checks_pass(tmp_path: Path, monkeypatch):
-    """Attempt 1 leaves the top marker out; the harness feeds the failure back; attempt 2 fixes it."""
-    import hlsfactory_agent.translate as t
-
-    class FakeContainer:
-        def exec_run(self, *a, **k):
-            return 0, b""
-
-        def stop(self):
-            pass
-
-        def remove(self, force=False):
-            pass
-
-    class FakeClient:
-        class containers:
-            @staticmethod
-            def run(**kwargs):
-                return FakeContainer()
-
-    prompts: list[str] = []
-
-    def fake_agent(self, container, prompt_text, dir_run_area, run_data, attempt):
-        prompts.append(prompt_text)
-        out = dir_run_area / OUTPUT_DIR_NAME
-        kernel = GOOD_KERNEL if attempt == 2 else GOOD_KERNEL.replace("#pragma hls_design top\n", "")
-        (out / "mac.cpp").write_text(kernel, encoding="utf-8")
-        (out / "testbench.cpp").write_text(GOOD_TB, encoding="utf-8")
-        (out / "run.tcl").write_text(render_catapult_run_tcl("mac", ["mac.cpp"], "testbench.cpp"), encoding="utf-8")
-        (out / "translation_report.md").write_text("pipeline interface array_partition\n", encoding="utf-8")
-        run_data["sessions"].append({"attempt": attempt, "file": None, "exit_code": 0, "events": 0})
-        run_data["session_data"] = None
-
-    def fake_container_checks(container, target):
-        return {
-            "cpp_files": ["mac.cpp", "testbench.cpp"],
-            "syntax_check": {},
-            "syntax_all_ok": True,
-            "testbench_build": {"exit_code": 0, "output": ""},
-            "testbench_run": {"exit_code": 0, "output": "PASS"},
-            "testbench_ok": True,
-        }
-
-    monkeypatch.setattr(t.docker, "from_env", lambda: FakeClient())
-    monkeypatch.setattr(t.HLSTranslationRun, "_run_agent_once", fake_agent)
-    monkeypatch.setattr(t, "run_container_checks", fake_container_checks)
-
-    design = ROOT_FIXTURE
-    run = t.HLSTranslationRun("loop-test", design, tmp_path / "work", "model", "key", target="catapult", prepass=False, attempts=3)
-    check = run.run()
-    assert check["passed"]
-    assert check["attempts_used"] == 2
-    assert [a["passed"] for a in check["attempts"]] == [False, True]
-    assert "Previous attempt failed" in prompts[1] and "hls_design top" in prompts[1]
-    assert "Previous attempt failed" not in prompts[0]
-
-
-def test_xlscc_target_registered():
-    from hlsfactory_agent.translate import XLSCC
-
-    assert get_target("xlscc") is XLSCC
-    assert XLSCC.top_marker == "#pragma hls_top"
-    assert XLSCC.driver_file == "run_xlscc.sh"
-    assert any("__xls_channel" in v for v in XLSCC.type_map.values())
-    assert XLSCC.include_dir_names == ["ac_types_include", "xls_emu_include"]
-
-
-def test_xlscc_driver_has_three_tools():
-    from hlsfactory_agent.translate import render_xlscc_driver
-
-    d = render_xlscc_driver("fft", ["fft.cpp"])
-    for tok in ("xlscc fft.cpp --top fft", "opt_main", "codegen_main", "--pipeline_stages=1"):
-        assert tok in d
-
-
-def test_xlscc_prompt_mentions_channel_top_and_both_include_dirs():
-    from hlsfactory_agent.translate import XLSCC
-
-    p = build_translate_prompt("k", XLSCC)
-    for needle in ("__xls_channel", "#pragma hls_top", "run_xlscc.sh", "-I/workspace/run_area/xls_emu_include", "-I/workspace/run_area/ac_types_include"):
-        assert needle in p, needle
-
-
-def test_check_missing_output_dir(tmp_path: Path):
-    r = check_translated_design(tmp_path / "nothing", CATAPULT)
-    assert r["passed"] is False if "passed" in r else True
-    assert r["checks"]["output_exists"] is False
+def test_check_flags_pragma_kind_missing_from_the_report(tmp_path: Path):
+    out = make_good_design(tmp_path)
+    (out / "translation_report.md").write_text("only pipeline is mentioned\n", encoding="utf-8")
+    r = check_translated_design(out, CATAPULT, scan={"counts": {"pragmas": {"pipeline": 1, "dataflow": 2}}})
+    assert not r["passed"] and r["unaccounted_pragma_kinds"] == ["dataflow"]

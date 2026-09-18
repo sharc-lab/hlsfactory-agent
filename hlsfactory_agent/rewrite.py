@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+from collections import Counter
 from pathlib import Path
 
 from hlsfactory_agent.translate import SOURCE_SUFFIXES, TargetSpec
@@ -20,7 +21,19 @@ HEADER_MAPS: dict[str, dict[str, str]] = {
     "xlscc": {"ap_int.h": "ac_int.h", "ap_fixed.h": "ac_fixed.h", "hls_stream.h": "xls_emu.h"},
 }
 STREAM_MAPS: dict[str, str] = {"catapult": "ac_channel<", "xlscc": "__xls_channel<"}
-MODE_MAP = {"AP_TRN": "AC_TRN", "AP_RND": "AC_RND", "AP_WRAP": "AC_WRAP", "AP_SAT": "AC_SAT"}
+MODE_MAP = {
+    "AP_TRN": "AC_TRN",
+    "AP_TRN_ZERO": "AC_TRN_ZERO",
+    "AP_RND": "AC_RND",
+    "AP_RND_ZERO": "AC_RND_ZERO",
+    "AP_RND_MIN_INF": "AC_RND_MIN_INF",
+    "AP_RND_INF": "AC_RND_INF",
+    "AP_RND_CONV": "AC_RND_CONV",
+    "AP_WRAP": "AC_WRAP",
+    "AP_SAT": "AC_SAT",
+    "AP_SAT_ZERO": "AC_SAT_ZERO",
+    "AP_SAT_SYM": "AC_SAT_SYM",
+}
 
 RE_INCLUDE = re.compile(r'^(\s*#\s*include\s*)([<"])(ap_int\.h|ap_fixed\.h|hls_stream\.h)([>"])')
 RE_AP_INT = re.compile(r"\bap_int\s*<\s*([^<>,]+?)\s*>")
@@ -84,6 +97,19 @@ def _find_back(out: list[str], predicate) -> int | None:
     return None
 
 
+def _category_for(kind: str, rest: str, target: TargetSpec) -> str:
+    kind_l = kind.lower()
+    has_factor = "factor" in rest.lower()
+    for rule in target.pragma_rules:
+        src = rule.source.lower()
+        if f"hls {kind_l}" not in src:
+            continue
+        if kind_l == "unroll" and ("factor" in src) != has_factor:
+            continue
+        return rule.category
+    return "absent"
+
+
 def _rewrite_pragmas(lines: list[str], target: TargetSpec, log: dict, rel: str) -> list[str]:
     out: list[str] = []
     for i, line in enumerate(lines, start=1):
@@ -92,7 +118,7 @@ def _rewrite_pragmas(lines: list[str], target: TargetSpec, log: dict, rel: str) 
             out.append(line)
             continue
         kind, rest = m.group(2).lower(), m.group(3)
-        entry = {"file": rel, "line": i, "kind": kind, "before": line.strip()}
+        entry = {"file": rel, "line": i, "kind": kind, "before": line.strip(), "category": _category_for(kind, rest, target)}
 
         if kind == "pipeline":
             if re.search(r"\boff\b", rest, re.IGNORECASE):
@@ -191,5 +217,6 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
                     break
         p.write_text(text, encoding="utf-8")
 
+    log["category_counts"] = dict(Counter(e["category"] for e in log["pragmas_moved"] + log["pragmas_dropped"]))
     (dir_out / "rewrite_log.json").write_text(json.dumps(log, indent=2), encoding="utf-8")
     return log
