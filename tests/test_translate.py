@@ -225,3 +225,21 @@ def test_check_flags_pragma_kind_missing_from_the_report(tmp_path: Path):
     (out / "translation_report.md").write_text("only pipeline is mentioned\n", encoding="utf-8")
     r = check_translated_design(out, CATAPULT, scan={"counts": {"pragmas": {"pipeline": 1, "dataflow": 2}}})
     assert not r["passed"] and r["unaccounted_pragma_kinds"] == ["dataflow"]
+
+
+def test_parse_catapult_report(tmp_path):
+    from hlsfactory_agent.targets.catapult import parse_catapult_report
+
+    (tmp_path / "catapult.log").write_text(
+        "# Error: $PROJECT_HOME/FFT.cpp(1): Logic mixed with interconnect in hierarchical function '/top/f'\n"
+        "# SYNTH_ERROR: go schedule: Failed schedule\n",
+        encoding="utf-8",
+    )
+    r = parse_catapult_report(tmp_path)
+    assert (r.status, r.failure_class) == ("FAILED", "logic-in-interconnect")
+    rpt = tmp_path / "Catapult" / "mac.v1" / "rtl.rpt"
+    rpt.parent.mkdir(parents=True)
+    rpt.write_text("  Design Total:   8   8   10   0  0\n  Total Area Score:   1940.6   2261.2   2220.6\n", encoding="utf-8")
+    (tmp_path / "catapult.log").write_text("# done\n", encoding="utf-8")
+    r = parse_catapult_report(tmp_path)
+    assert (r.status, r.latency, r.throughput, r.area) == ("PASS", 8, 10, 2220.6)

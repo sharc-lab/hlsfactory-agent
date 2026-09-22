@@ -1,12 +1,7 @@
 # Allo-based HLS conversion agent: design
 
 Date: 2026-09-05
-Status: draft for review. Revision note 2026-09-10: after source-level review of Allo's Catapult and XLS emitters
-(section 3.4), the hub decision changed from Allo to a thin portable HLS-C layer owned by the lab, with Allo kept
-as an optional template-authoring frontend. Sections 4, 5.2, 5.3, 5.4, 9, and 12 still describe the Allo hub and
-are to be rewritten. The first implemented flow is a direct Vitis to Catapult translation on the existing agent
-harness, in `hlsfactory_agent/translate.py` with the run script in `exp/run_translate/`; it is the first target row
-of the projection table the portable layer will generalize.
+Status: draft for review. Revision note 2026-09-16: the hub is neither Allo nor a shared portable header. What is built is direct, table-driven rewriting of the source with the design's intent captured as data beside it (`scan.json`, `rewrite_log.json`, `directives.json`). Each target is one `TargetSpec` entry holding a header map, a type map, pragma rules with placement and a drop category, a directive map for resource decisions the target expresses in its run script rather than in source, and the types it cannot represent. Sections 4, 5.2, 5.3, 5.4, 9 and 12 still describe the earlier Allo design and should be read with this note. Implemented flows: Vitis to Catapult (through synthesis, verified on a lab install) and Vitis to XLS (emulation only).
 Scope: the standalone conversion phase only. HLSFactory integration, the template library, SyntheticHLS as an input source, and the cross-tool QoR study are later phases and are named here only where a seam has to be left for them.
 
 ## 1. Goal

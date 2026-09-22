@@ -12,3 +12,6 @@ wheels/
 .venv
 
 .env
+
+# local agent session log
+agents.md

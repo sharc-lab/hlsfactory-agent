@@ -17,7 +17,7 @@ from pathlib import Path
 SOURCE_SUFFIXES = (".cpp", ".cc", ".c", ".h", ".hpp")
 
 RE_PRAGMA = re.compile(r"^\s*#\s*pragma\s+HLS\s+([A-Za-z_]+)", re.IGNORECASE)
-RE_TYPES = re.compile(r"\b(ap_int|ap_uint|ap_fixed|ap_ufixed|hls::stream|hls::vector)\b")
+RE_TYPES = re.compile(r"\b(ap_int|ap_uint|ap_fixed|ap_ufixed|hls::stream|hls::vector|float|double)\b")
 RE_HEADER = re.compile(
     r'^\s*#\s*include\s*[<"]((?:ap_int|ap_fixed|hls_stream|hls_math|hls_vector|ap_axi_sdata)\.h)[>"]'
 )
