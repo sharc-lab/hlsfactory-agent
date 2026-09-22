@@ -15,3 +15,5 @@ wheels/
 
 # local agent session log
 agents.md
+
+.DS_Store
