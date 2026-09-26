@@ -43,19 +43,30 @@ RE_AP_FIXED = re.compile(
 )
 RE_STREAM = re.compile(r"\bhls::stream\s*<")
 RE_PRAGMA = re.compile(r"^(\s*)#\s*pragma\s+HLS\s+([A-Za-z_]+)(.*)$", re.IGNORECASE)
-RE_LOOP = re.compile(r"^\s*(for|while)\b")
+RE_LOOP = re.compile(r"^\s*(?:[A-Za-z_]\w*\s*:\s*)?(for|while)\b")
 RE_FN_HEADER_END = re.compile(r"\)\s*(const\s*)?\{?\s*$")
 # Methods of ap_int/ap_fixed with no same-named ac_int/ac_fixed equivalent. to_int, to_uint, to_double and the
 # *_reduce family exist on both families and are left alone.
 RE_VENDOR_METHOD = re.compile(r"\.(range|reverse|length|set_bit|get_bit|bit|test|invert|rrotate|lrotate|concat)\s*\(")
 RE_INT_LITERAL = re.compile(r"^\d+$")
 
+# Catapult cannot synthesize std::complex (CIN-15), native float arithmetic (CIN-290) or float math calls
+# (CIN-16); its front end does not include <stdint.h> transitively (CRD-20); local channels must be static (HIER-6).
+DIALECT_TYPES: dict[str, dict[str, str]] = {
+    "catapult": {"std::complex": "ac_complex", "complex": "ac_complex", "float": "ac_ieee_float32", "double": "ac_ieee_float64"},
+}
+DIALECT_HEADERS: dict[str, dict[str, str]] = {"catapult": {"<complex>": "<ac_complex.h>"}}
+RE_DIALECT_TYPE = re.compile(r"\b(std::complex|complex|float|double)\b")
+RE_CONST_TABLE = re.compile(r"\bconst\s+(float|double)\b[^=;]*\[")
+RE_FLOAT_MATH = re.compile(r"\b(cos|sin|tan|exp|log|sqrt|pow|atan2?)\s*\(")
+RE_LOCAL_CHANNEL = re.compile(r"^(\s+)(ac_channel\s*<[^;&]*>\s+[A-Za-z_]\w*\s*;)")
 LOOKBACK_LINES = 3
+SIGNATURE_LINES = 8
 
 
 def _fn_def_regex(top: str) -> re.Pattern:
-    # a definition line: return type, the top name, an argument list, optionally the opening brace; never ends with ';'
-    return re.compile(r"^\s*[A-Za-z_][\w:<>,\s\*&]*?\b" + re.escape(top) + r"\s*\([^;]*\)\s*\{?\s*$")
+    # a definition: return type, the top name, an argument list that may span lines, then the opening brace
+    return re.compile(r"^\s*[A-Za-z_][\w:<>,\s\*&]*?\b" + re.escape(top) + r"\s*\([^;{}]*\)\s*\{")
 
 
 def _rewrite_types(line: str, target: TargetSpec, log: dict, rel: str, i: int) -> str:
@@ -86,6 +97,46 @@ def _rewrite_types(line: str, target: TargetSpec, log: dict, rel: str, i: int) -
     if m and not line.lstrip().startswith("//"):
         log["residue"].append({"file": rel, "line": i, "reason": f"vendor method needs manual translation: {m.group(0)}"})
     return line
+
+
+def _rewrite_dialect(lines: list[str], target: TargetSpec, log: dict, rel: str, testbench: bool) -> list[str]:
+    """Constructs the target's synthesizer rejects but a host compiler accepts. The testbench keeps host
+    types (it is compiled, never synthesized); mixing at the DUT boundary is left to the agent as residue."""
+    types = DIALECT_TYPES.get(target.name, {})
+    if not types:
+        return lines
+    out: list[str] = []
+    for i, line in enumerate(lines, start=1):
+        code = line.split("//", 1)[0]
+        if testbench:
+            if log.get("dialect_dut_changed") and RE_DIALECT_TYPE.search(code):
+                log["residue"].append({"file": rel, "line": i, "reason": "testbench uses std::complex/float; the DUT now uses ac_complex/ac_ieee_float32, convert at the boundary with .real()/.imag() or a cast"})
+                break
+            continue
+        for h, new_h in DIALECT_HEADERS.get(target.name, {}).items():
+            if re.match(r"\s*#\s*include\s*" + re.escape(h), line):
+                line = line.replace(h, new_h)
+        if not RE_CONST_TABLE.search(code) and not line.lstrip().startswith("#"):
+            new = RE_DIALECT_TYPE.sub(lambda m: types[m.group(1)], line)
+            if new != line:
+                log["types"].append({"file": rel, "line": i, "before": line.strip(), "after": new.strip()})
+                log["dialect_dut_changed"] = True
+                line = new
+        m = RE_LOCAL_CHANNEL.match(line)
+        if m:
+            line = f"{m.group(1)}static {m.group(2)}"
+            log["types"].append({"file": rel, "line": i, "before": lines[i - 1].strip(), "after": line.strip()})
+        if RE_FLOAT_MATH.search(code):
+            log["residue"].append({"file": rel, "line": i, "reason": f"no synthesizable float math in {target.display_name}: {RE_FLOAT_MATH.search(code).group(0)}) — constant-fold to a table or use a fixed-point ac_math function"})
+        out.append(line)
+    if testbench:
+        return lines
+    text = "\n".join(out)
+    for needed, inc in reversed(target.required_includes):
+        if re.search(needed, text) and inc not in text and inc.replace("<stdint.h>", "<cstdint>") not in text:
+            out.insert(0, inc)
+            log["headers"].append({"file": rel, "line": 1, "before": "", "after": inc})
+    return out
 
 
 def _find_back(out: list[str], predicate) -> int | None:
@@ -162,7 +213,7 @@ def _rewrite_pragmas(lines: list[str], target: TargetSpec, log: dict, rel: str) 
 def _insert_top_marker(lines: list[str], top: str, target: TargetSpec, log: dict, rel: str) -> list[str]:
     rx = _fn_def_regex(top)
     for idx, line in enumerate(lines):
-        if rx.match(line) and not line.rstrip().endswith(";"):
+        if rx.match("\n".join(lines[idx : idx + SIGNATURE_LINES])):
             lines.insert(idx, target.top_marker)
             log["top_marker"] = {"file": rel, "line": idx + 1, "inserted": True}
             return lines
@@ -190,7 +241,7 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(p, dst)
 
-    for p in sorted(dir_out.rglob("*")):
+    for p in sorted(dir_out.rglob("*"), key=lambda q: (q.name == "testbench.cpp", str(q))):
         if not p.is_file() or p.suffix.lower() not in SOURCE_SUFFIXES:
             continue
         rel = str(p.relative_to(dir_out))
@@ -204,6 +255,7 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
                 new_lines.append(new)
                 continue
             new_lines.append(_rewrite_types(line, target, log, rel, i))
+        new_lines = _rewrite_dialect(new_lines, target, log, rel, testbench=p.name == "testbench.cpp")
         new_lines = _rewrite_pragmas(new_lines, target, log, rel)
         if top and p.suffix.lower() in (".cpp", ".cc", ".c") and not log["top_marker"]["inserted"]:
             new_lines = _insert_top_marker(new_lines, top, target, log, rel)
@@ -211,7 +263,7 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
         for k, l in enumerate(text.splitlines(), start=1):
             if l.lstrip().startswith("//"):
                 continue
-            for pat in target.forbidden_patterns:
+            for pat in target.forbidden_patterns + (() if p.name == "testbench.cpp" else target.dut_forbidden_patterns):
                 if re.search(pat, l):
                     log["residue"].append({"file": rel, "line": k, "reason": f"still matches `{pat}`: {l.strip()}"})
                     break

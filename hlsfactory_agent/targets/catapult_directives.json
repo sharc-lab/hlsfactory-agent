@@ -1,7 +1,7 @@
 {
-  "array_partition.complete.local": "directive set /{top}/{var}:rsc -MAP_TO_MODULE {{[Register]}}",
-  "array_partition.complete.argument": "directive set /{top}/{var}:rsc -BLOCK_SIZE 1",
-  "array_partition.cyclic.local": "directive set /{top}/{var}:rsc -INTERLEAVE {factor}",
-  "array_partition.block.local": "directive set /{top}/{var}:rsc -BLOCK_SIZE {block_size}",
-  "array_partition.block.argument": "directive set /{top}/{var}:rsc -BLOCK_SIZE {block_size}"
+  "array_partition.complete.local": "resource_directive {var} -MAP_TO_MODULE {{[Register]}}",
+  "array_partition.complete.argument": "resource_directive {var} -BLOCK_SIZE 1",
+  "array_partition.cyclic.local": "resource_directive {var} -INTERLEAVE {factor}",
+  "array_partition.block.local": "resource_directive {var} -BLOCK_SIZE {block_size}",
+  "array_partition.block.argument": "resource_directive {var} -BLOCK_SIZE {block_size}"
 }

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import ast
 import json
+import math
 import re
 from collections import Counter
 from pathlib import Path
@@ -24,7 +25,7 @@ RE_HEADER = re.compile(
 RESOURCE_KINDS = ("array_partition", "bind_storage", "interface", "dependence", "stream")
 RE_DEFINE = re.compile(r"^\s*#\s*define\s+([A-Za-z_]\w*)\s+(.+?)\s*$")
 RE_KV = re.compile(r"([A-Za-z_]\w*)\s*=\s*(\S+)")
-RE_ARRAY_DECL_T = r"\b{var}\s*\[\s*([^\]]+?)\s*\]"
+RE_ARRAY_DECL_T = r"\b{var}\s*((?:\[\s*[^\]]+?\s*\])+)"
 BARE_PARTITION_WORDS = ("complete", "cyclic", "block")
 _ALLOWED_AST = (
     ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant,
@@ -122,13 +123,14 @@ def array_params(signature: str) -> set[str]:
     return set(re.findall(r"([A-Za-z_]\w*)\s*(?:\[[^\]]*\])+", signature))
 
 
-def array_size(dir_design: Path, var: str, defines: dict[str, str]) -> int | None:
+def array_dims(dir_design: Path, var: str, defines: dict[str, str]) -> list[int] | None:
+    """Every dimension of the array's declaration, outermost first."""
     rx = re.compile(RE_ARRAY_DECL_T.format(var=re.escape(var)))
     for p in _source_files(Path(dir_design)):
         for m in rx.finditer(p.read_text(encoding="utf-8", errors="replace")):
-            n = resolve_int(m.group(1), defines)
-            if n:
-                return n
+            dims = [resolve_int(d, defines) for d in re.findall(r"\[\s*([^\]]+?)\s*\]", m.group(1))]
+            if dims and all(dims):
+                return dims
     return None
 
 
@@ -156,6 +158,7 @@ def scan_design(dir_design: Path, top: str | None = None) -> dict:
                     factor = resolve_int(args["factor"], defines) if "factor" in args else None
                     unresolved = args["factor"] if "factor" in args and factor is None else None
                     var = args.get("variable", "")
+                    dims = array_dims(dir_design, var, defines) if var else None
                     if params is None:
                         scope = "unknown"
                     else:
@@ -170,7 +173,8 @@ def scan_design(dir_design: Path, top: str | None = None) -> dict:
                             "factor": factor,
                             "unresolved": unresolved,
                             "scope": scope,
-                            "size": array_size(dir_design, var, defines) if var else None,
+                            "dims": dims,
+                            "size": math.prod(dims) if dims else None,
                         }
                     )
                 continue

@@ -147,5 +147,5 @@ and codegen_main; the synthesis rung for XLS needs those binaries in the Docker 
   dropped with a note in the report. Catapult sets these in TCL; that mapping is future work.
 - `DATAFLOW` maps to per-function `hls_design block`, which is lossy. XLS drops it.
 - The pre-pass moves a loop pragma to the nearest loop header within three lines; unusual layouts land in `residue`.
-- XLS synthesis rung not run; lessons store and pass@k sampling not built. See `docs/plans/2026-09-10-conversion-next-steps.md`.
+- XLS synthesis rung not run; lessons store and pass@k sampling not built.
 - Adding a target means adding a `TargetSpec` entry; the prompt, pre-pass, and checks are generated from it.

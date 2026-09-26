@@ -26,6 +26,7 @@ def main() -> None:
     parser.add_argument("--model", default="deepseek/deepseek-v4-flash")
     parser.add_argument("--runs-dir", type=Path, default=DIR_RUNS)
     parser.add_argument("--env", type=Path, default=Path(".env"))
+    parser.add_argument("--attempts", type=int, default=1, help="agent attempts per design; a failed check feeds the retry prompt")
     args = parser.parse_args()
 
     api_key = check_key(dotenv_values(args.env).get("OPENROUTER_API_KEY"))
@@ -43,6 +44,7 @@ def main() -> None:
             model_name=args.model,
             api_key=api_key,
             target=args.target,
+            attempts=args.attempts,
         )
         check = run.run()
         summary[run_id] = {

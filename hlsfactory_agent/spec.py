@@ -13,6 +13,7 @@ class SynthResult:
     area: float | None = None
     first_error: str = ""
     failure_class: str = ""
+    directives: dict[str, int] = field(default_factory=dict)  # resource var -> paths it was applied to
 
 
 @dataclass(frozen=True)
@@ -43,6 +44,10 @@ class TargetSpec:
     top_marker: str
     extra_rules: tuple[str, ...] = field(default_factory=tuple)
     directive_rules: dict[str, str] = field(default_factory=dict)
+    # forbidden in the DUT only; the testbench is compiled, never synthesized
+    dut_forbidden_patterns: tuple[str, ...] = field(default_factory=tuple)
+    # (regex a DUT file may use, include line it then needs): the pre-pass inserts it, the check enforces it
+    required_includes: tuple[tuple[str, str], ...] = field(default_factory=tuple)
     blocking_types: tuple[str, ...] = field(default_factory=tuple)
     # additional header directories copied into the run area as (source_dir, name_in_run_area)
     extra_include_dirs: tuple[tuple[Path, str], ...] = field(default_factory=tuple)

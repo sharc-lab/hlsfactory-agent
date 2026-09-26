@@ -131,7 +131,8 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
             f"- `{target.driver_file}` and `directives.json` were generated from the input's resource pragmas. "
             f"Do NOT rewrite `{target.driver_file}` from scratch. For every line in it starting with `# UNRESOLVED`, "
             f"work out the numeric value (the expression and the #defines are in `{CONTAINER_RUN_AREA}/scan.json`), "
-            "replace that whole comment line with the finished directive, and leave every other line alone.\n"
+            "replace that whole comment line with the finished directive; if the reason in parentheses says the directive does not apply "
+            "(array size unknown or over the register threshold), delete the line instead. Leave every other line alone.\n"
         )
     else:
         step2 = (
@@ -267,8 +268,13 @@ def check_translated_design(dir_output: Path, target: TargetSpec, scan: dict | N
     commented: list[dict] = []
     for p in sources:
         text = p.read_text(encoding="utf-8", errors="replace")
+        if p.name != "testbench.cpp":
+            for needed, inc in target.required_includes:
+                if re.search(needed, text) and inc not in text and inc.replace("<stdint.h>", "<cstdint>") not in text:
+                    leftovers.append({"file": str(p.relative_to(dir_output)), "line": 1, "text": f"missing {inc}"})
+        patterns = target.forbidden_patterns + (() if p.name == "testbench.cpp" else target.dut_forbidden_patterns)
         for i, line in enumerate(text.splitlines(), start=1):
-            for pat in target.forbidden_patterns:
+            for pat in patterns:
                 if re.search(pat, line):
                     entry = {"file": str(p.relative_to(dir_output)), "line": i, "text": line.strip()}
                     # A line that is entirely a // comment is inert for the target tool; record it separately.
@@ -650,7 +656,7 @@ class HLSTranslationRun:
             if template is None:
                 continue
             hint = template.replace("{top}", top).replace("{var}", r["args"].get("variable", "?")).replace("{factor}", "<factor>")
-            comments.append(f"# UNRESOLVED {u['reason']}: {hint}")
+            comments.append(f"# UNRESOLVED ({u['reason']}) finish this directive only if that is settled, otherwise delete the line: {hint}")
         sources = [
             f.name for f in _iter_source_files(dir_output)
             if f.suffix.lower() in (".cpp", ".cc", ".c") and f.name != "testbench.cpp"

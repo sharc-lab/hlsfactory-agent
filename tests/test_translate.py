@@ -48,6 +48,7 @@ def _res(kind, **args):
         "factor": meta.get("factor"),
         "unresolved": meta.get("unresolved"),
         "scope": meta.get("scope", "unknown"),
+        "dims": meta.get("dims"),
         "size": meta.get("size"),
     }
 
@@ -94,12 +95,15 @@ def test_scan_marks_argument_vs_local_arrays_and_sizes(tmp_path: Path):
         "#pragma HLS array_partition variable=coef complete dim=1\n"
         "    int buf[16];\n"
         "#pragma HLS array_partition variable=buf type=cyclic factor=4 dim=1\n"
+        "    int grid[4][256];\n"
+        "#pragma HLS array_partition variable=grid complete dim=1\n"
         "}\n",
         encoding="utf-8",
     )
     by_var = {r["args"]["variable"]: r for r in scan_design(d, top="top")["resources"]}
     assert by_var["coef"]["scope"] == "argument" and by_var["coef"]["size"] == 8
     assert by_var["buf"]["scope"] == "local" and by_var["buf"]["size"] == 16
+    assert by_var["grid"]["dims"] == [4, 256] and by_var["grid"]["size"] == 1024
 
 
 # --- mechanical pre-pass ---------------------------------------------------------------
@@ -132,6 +136,37 @@ def test_prepass_maps_every_mode_ac_fixed_supports(tmp_path: Path):
     assert any("AP_WRAP_SM" in r["reason"] for r in log["residue"])
 
 
+def test_prepass_catapult_dialect(tmp_path: Path):
+    d = tmp_path / "design"
+    d.mkdir()
+    (d / "k.h").write_text(
+        "#include <complex>\n#include <hls_stream.h>\ntypedef float dt;\n"
+        "void top(hls::stream<std::complex<float>> &in, hls::stream<complex<float>> &out);\n",
+        encoding="utf-8",
+    )
+    (d / "k.cpp").write_text(
+        '#include "k.h"\nstatic const float TW[4] = {1.0f, 0.0f, -1.0f, 0.0f};\n'
+        "void top(hls::stream<std::complex<float>> &in, hls::stream<complex<float>> &out) {\n"
+        "    hls::stream<complex<float>> mid;\n    uint16_t idx = 0;\n    double a = cos(1.0);\n"
+        "    L: for (int i = 0; i < 4; i++) {\n#pragma HLS PIPELINE II=1\n        out.write(in.read());\n    }\n}\n",
+        encoding="utf-8",
+    )
+    (d / "testbench.cpp").write_text('#include "k.h"\nint main() { std::complex<double> g(0, 0); return 0; }\n', encoding="utf-8")
+    log = rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
+    h = (tmp_path / "out" / "k.h").read_text(encoding="utf-8")
+    c = (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")
+    assert "#include <ac_complex.h>" in h and "typedef ac_ieee_float32 dt;" in h and "<complex>" not in h
+    assert c.startswith("#include <stdint.h>\n#include <ac_std_float.h>\n")
+    assert "ac_channel<ac_complex<ac_ieee_float32>> &in" in c and "static ac_channel<ac_complex<ac_ieee_float32>> mid;" in c
+    assert "static const float TW[4]" in c  # literal tables stay native
+    assert "ac_ieee_float64 a = cos(1.0);" in c
+    # labelled loop: the pipeline pragma lands before `L: for`, not inside the body
+    assert c.index("#pragma hls_pipeline_init_interval 1") < c.index("L: for")
+    assert (tmp_path / "out" / "testbench.cpp").read_text(encoding="utf-8").count("std::complex<double>") == 1
+    reasons = " ".join(r["reason"] for r in log["residue"])
+    assert "cos(" in reasons and "testbench" in reasons
+
+
 # --- Catapult directives (forms confirmed on Catapult 2026.2, 2026-09-16) ---------------
 
 
@@ -139,22 +174,27 @@ def test_render_directives_uses_the_confirmed_catapult_forms():
     rules = load_directive_rules("catapult")
     lines, left = render_directives(
         [
-            _res("array_partition", variable="a", type="complete", _scope="local"),
+            _res("array_partition", variable="a", type="complete", _size=4, _scope="local"),
             _res("array_partition", variable="b", type="cyclic", _factor=8, _scope="local"),
             _res("array_partition", variable="c", type="block", _factor=4, _size=32, _scope="local"),
             _res("array_partition", variable="d", type="complete", _scope="argument"),
+            # Catapult flattens row-major: splitting the outer dim is BLOCK_SIZE, the innermost is INTERLEAVE
+            _res("array_partition", variable="e", type="complete", dim="1", _dims=[4, 256], _scope="local"),
+            _res("array_partition", variable="f", type="cyclic", dim="2", _factor=2, _dims=[4, 256], _scope="local"),
         ],
         "fft",
         rules,
     )
     assert left == []
     assert lines == [
-        "directive set /fft/a:rsc -MAP_TO_MODULE {[Register]}",
-        "directive set /fft/b:rsc -INTERLEAVE 8",
+        "resource_directive a -MAP_TO_MODULE {[Register]}",
+        "resource_directive b -INTERLEAVE 8",
         # Vitis factor counts partitions; Catapult BLOCK_SIZE counts elements per block.
-        "directive set /fft/c:rsc -BLOCK_SIZE 8",
+        "resource_directive c -BLOCK_SIZE 8",
         # On an interface array -MAP_TO_MODULE {[Register]} is rejected with MEM-31.
-        "directive set /fft/d:rsc -BLOCK_SIZE 1",
+        "resource_directive d -BLOCK_SIZE 1",
+        "resource_directive e -BLOCK_SIZE 256",
+        "resource_directive f -INTERLEAVE 2",
     ]
 
 
@@ -169,6 +209,9 @@ def test_render_directives_omits_forms_catapult_ignores_or_breaks_on():
             _res("bind_storage", variable="b", impl="bram", _scope="local"),
             _res("array_partition", variable="c", type="block", _factor=2, _scope="local"),
             unresolved,
+            # 1024 registers is over Catapult's REGISTER_THRESHOLD (MEM-8); the outer dim of a 2-D array is not
+            _res("array_partition", variable="e", type="complete", _size=1024, _scope="local"),
+            _res("array_partition", variable="g", type="cyclic", dim="1", _factor=2, _dims=[4, 256], _scope="local"),
         ],
         "fft",
         rules,
@@ -179,6 +222,8 @@ def test_render_directives_omits_forms_catapult_ignores_or_breaks_on():
         "no directive rule",
         "block partition needs both array size and factor",
         "unresolved factor UF*2",
+        "1024 elements exceed Catapult REGISTER_THRESHOLD 256",
+        "cyclic partition of dim 1 of a 4x256 array has no flat equivalent",
     ]
     # an unresolved factor must still resolve to a template so the agent gets a hint line
     assert directive_template(unresolved, rules) is not None
@@ -187,14 +232,19 @@ def test_render_directives_omits_forms_catapult_ignores_or_breaks_on():
 def test_fixture_partition_reaches_the_catapult_script():
     resources = scan_design(FIXTURE, top="mac")["resources"]
     rendered, unrendered = render_directives(resources, "mac", CATAPULT.directive_rules)
-    assert rendered == ["directive set /mac/coef:rsc -BLOCK_SIZE 1"]
+    assert rendered == ["resource_directive coef -BLOCK_SIZE 1"]
     assert [u["resource"]["kind"] for u in unrendered] == ["interface", "interface"]
 
 
-def test_run_tcl_places_directives_between_libraries_and_assembly():
-    line = "directive set /fft/a:rsc -INTERLEAVE 8"
+def test_run_tcl_looks_up_resource_paths_after_assembly():
+    # predicted paths like /fft/a:rsc never exist: resources are nested per block and split per struct field
+    line = "resource_directive a -INTERLEAVE 8"
     lines = render_catapult_run_tcl("fft", ["fft.cpp"], "testbench.cpp", directives=[line]).splitlines()
-    assert lines.index("go libraries") < lines.index(line) < lines.index("go assembly")
+    proc = lines.index("proc resource_directive {var args} {")
+    assert lines.index("go assembly") < proc < lines.index(line) < lines.index("go architect")
+    assert "    set pat /fft" in lines
+    # -DESIGN_HIERARCHY overrides every hls_design block with inline (CIN-393)
+    assert not any("DESIGN_HIERARCHY" in l for l in lines)
 
 
 # --- output checks ---------------------------------------------------------------------
@@ -205,11 +255,17 @@ def test_check_flags_leftover_vitis_dialect(tmp_path: Path):
     (out / "mac.cpp").write_text(GOOD_KERNEL.replace("ac_fixed<16, 8, true>", "ap_fixed<16, 8>"), encoding="utf-8")
     r = check_translated_design(out, CATAPULT)
     assert not r["passed"] and r["leftovers"][0]["file"] == "mac.cpp"
+    # DUT-only: float math and non-static local channels fail in the kernel, not in the testbench
+    (out / "mac.cpp").write_text(GOOD_KERNEL.replace("    for", "    ac_channel<data_t> mid;\n    double a = cosf(1.0);\n    std::complex<float> z; ac_complex<float> ok; uint16_t k;\n    for"), encoding="utf-8")
+    (out / "testbench.cpp").write_text('#include "ac_fixed.h"\n#include <cmath>\nint main() { return cos(0.0) > 2; }\n', encoding="utf-8")
+    r = check_translated_design(out, CATAPULT)
+    # a used uint16_t without <stdint.h> is reported at line 1 (the pre-pass inserts it; the agent must not remove it)
+    assert [(l["file"], l["line"]) for l in r["leftovers"]] == [("mac.cpp", 1), ("mac.cpp", 7), ("mac.cpp", 8), ("mac.cpp", 9)]
 
 
 def test_check_flags_directives_missing_or_unresolved_in_the_script(tmp_path: Path):
     out = make_good_design(tmp_path)
-    line = "directive set /mac/coef:rsc -MAP_TO_MODULE {[Register]}"
+    line = "resource_directive coef -MAP_TO_MODULE {[Register]}"
     (out / "directives.json").write_text(json.dumps({"rendered": [line], "unrendered": []}), encoding="utf-8")
     r = check_translated_design(out, CATAPULT)
     assert r["checks"]["directives_in_script"] is False
@@ -240,6 +296,7 @@ def test_parse_catapult_report(tmp_path):
     rpt = tmp_path / "Catapult" / "mac.v1" / "rtl.rpt"
     rpt.parent.mkdir(parents=True)
     rpt.write_text("  Design Total:   8   8   10   0  0\n  Total Area Score:   1940.6   2261.2   2220.6\n", encoding="utf-8")
-    (tmp_path / "catapult.log").write_text("# done\n", encoding="utf-8")
+    (tmp_path / "catapult.log").write_text("# DIRECTIVE coef hits=2\n# DIRECTIVE tw hits=0\n", encoding="utf-8")
     r = parse_catapult_report(tmp_path)
     assert (r.status, r.latency, r.throughput, r.area) == ("PASS", 8, 10, 2220.6)
+    assert r.directives == {"coef": 2, "tw": 0}
