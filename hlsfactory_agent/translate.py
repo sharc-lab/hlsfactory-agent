@@ -8,6 +8,7 @@ class that mirrors ``HLSFactoryAgentRun`` but takes a local design directory as 
 
 from __future__ import annotations
 
+import difflib
 import json
 import os
 import re
@@ -19,6 +20,7 @@ from typing import Any
 import docker
 from docker.models.containers import Container
 
+from hlsfactory_agent.tools import installation
 from hlsfactory_agent.spec import PragmaRule as PragmaRule
 from hlsfactory_agent.spec import SynthResult as SynthResult
 from hlsfactory_agent.spec import TargetSpec
@@ -237,11 +239,88 @@ def find_top_from_synth_tcl(dir_design: Path) -> str | None:
     return m.group(1) if m else None
 
 
-def check_translated_design(dir_output: Path, target: TargetSpec, scan: dict | None = None) -> dict:
+def repair_top(dir_design: Path) -> dict:
+    """Extraction sometimes writes `set_top <folder name>` for a function that does not exist, which fails Vitis,
+    the top marker and the scan. When exactly one function defined in the DUT sources is called from the
+    testbench, `set_top` is rewritten to it. Returns what was found and whether anything changed."""
+    from hlsfactory_agent.scan import SOURCE_SUFFIXES as _sfx  # noqa: F401  (same suffix set)
+
+    top = find_top_from_synth_tcl(dir_design)
+    dut = [p for p in Path(dir_design).rglob("*") if p.is_file() and p.suffix.lower() in SOURCE_SUFFIXES and p.name != "testbench.cpp"]
+    defined: set[str] = set()
+    for p in dut:
+        defined |= {m.group(1) for m in re.finditer(r"(?m)^[ \t]*(?:template\s*<[^>]*>\s*)?[A-Za-z_][\w:<>,\s\*&]*?\b([A-Za-z_]\w*)\s*\([^;{}]*\)\s*\{", p.read_text(encoding="utf-8", errors="replace"))}
+    defined -= {"if", "for", "while", "switch", "main"}
+    tb = dir_design / "testbench.cpp"
+    if top in defined or not tb.exists():
+        return {"top": top, "repaired": False}
+    called = [f for f in defined if re.search(r"\b" + re.escape(f) + r"\s*\(", tb.read_text(encoding="utf-8", errors="replace"))]
+    if len(called) != 1:  # a stub testbench calls nothing: fall back to the one function named after the design
+        called = [f for f in defined if f.startswith(top or "") or f.startswith(Path(dir_design).name)]
+    if len(called) != 1:
+        return {"top": top, "repaired": False, "candidates": sorted(called)}
+    tcl = dir_design / "synth.tcl"
+    tcl.write_text(re.sub(r"(?m)^(\s*set_top\s+)\S+", lambda m: m.group(1) + called[0], tcl.read_text(encoding="utf-8", errors="replace")), encoding="utf-8")
+    return {"top": called[0], "repaired": True, "was": top}
+
+
+PREPASS_DIR_NAME = "prepass_design"
+FENCE_LINES = 3  # a residue item also licenses edits this many lines either side of it
+# a pre-pass line the agent may change on its own merits: comment or blank, or itself a residue trigger
+RE_FENCE_FREE = (
+    r"^\s*(//.*)?$",
+    r"^\s*[A-Za-z_]\w*\s*:\s*$",  # a loop label on its own line names the loop and nothing else
+    r"#pragma\s+hls_(unroll|pipeline_init_interval)\s+[A-Za-z_]",  # non-literal factor or II
+    r"\b(cos|sin|tan|exp|log|sqrt|pow|atan2?)f?\s*\(",
+    r"\.(range|reverse|length|set_bit|get_bit|bit|test|invert|rrotate|lrotate|concat)\s*\(",
+)
+
+
+def _licensed(lines: list[str], patterns: tuple[str, ...]) -> bool:
+    return all(any(re.search(pat, l) for pat in patterns) for l in lines)
+
+
+def fenced_edits(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> list[dict]:
+    """Lines of the pre-pass output the agent changed or deleted that no residue item licenses.
+    Insertions are free (new structs, includes); the testbench is not fenced."""
+    log_path = dir_prepass / "rewrite_log.json"
+    if not log_path.exists():
+        return []
+    log = json.loads(log_path.read_text(encoding="utf-8", errors="replace"))
+    windows: dict[str, list[int]] = {}
+    for r in log.get("residue", []):
+        windows.setdefault(r["file"], []).append(int(r.get("line", 0)))
+    free = RE_FENCE_FREE + target.forbidden_patterns + target.dut_forbidden_patterns
+    out: list[dict] = []
+    for p in _iter_source_files(dir_prepass):
+        if p.name == "testbench.cpp":
+            continue
+        rel = str(p.relative_to(dir_prepass))
+        q = dir_output / rel
+        if not q.exists():
+            out.append({"file": rel, "line": 1, "kind": "file deleted", "prepass": ""})
+            continue
+        a = p.read_text(encoding="utf-8", errors="replace").splitlines()
+        b = q.read_text(encoding="utf-8", errors="replace").splitlines()
+        for op, i1, i2, _, _ in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+            if op not in ("replace", "delete"):
+                continue
+            if any(i1 - FENCE_LINES <= ln - 1 < i2 + FENCE_LINES for ln in windows.get(rel, [])):
+                continue
+            if _licensed(a[i1:i2], free):
+                continue
+            out.append({"file": rel, "line": i1 + 1, "kind": op, "prepass": "\n".join(a[i1:i2])[:400]})
+    return out
+
+
+def check_translated_design(
+    dir_output: Path, target: TargetSpec, scan: dict | None = None, dir_prepass: Path | None = None
+) -> dict:
     """Static checks on the agent's output. Pure Python, no tools, no container.
 
     When ``scan`` (the scanner inventory of the input) is given, the translation report must mention
-    every pragma kind in it, translated or dropped, or the check fails.
+    every pragma kind in it, translated or dropped, or the check fails. When ``dir_prepass`` (the
+    pre-pass output the agent started from) is given, edits outside the residue list fail the check.
     """
     result: dict = {"target": target.name, "checks": {}, "failures": []}
     checks = result["checks"]
@@ -270,6 +349,8 @@ def check_translated_design(dir_output: Path, target: TargetSpec, scan: dict | N
         text = p.read_text(encoding="utf-8", errors="replace")
         if p.name != "testbench.cpp":
             for needed, inc in target.required_includes:
+                if p.name in inc:  # the header that provides the construct does not include itself
+                    continue
                 if re.search(needed, text) and inc not in text and inc.replace("<stdint.h>", "<cstdint>") not in text:
                     leftovers.append({"file": str(p.relative_to(dir_output)), "line": 1, "text": f"missing {inc}"})
         patterns = target.forbidden_patterns + (() if p.name == "testbench.cpp" else target.dut_forbidden_patterns)
@@ -316,6 +397,14 @@ def check_translated_design(dir_output: Path, target: TargetSpec, scan: dict | N
         if unaccounted:
             result["failures"].append(f"report does not account for pragma kinds: {unaccounted}")
 
+    if dir_prepass is not None and dir_prepass.exists():
+        result["fenced_edits"] = fenced_edits(dir_output, dir_prepass, target)
+        checks["edits_within_residue"] = not result["fenced_edits"]
+        if result["fenced_edits"]:
+            result["failures"].append(
+                f"{len(result['fenced_edits'])} edit(s) outside the residue list; the pre-pass output is Catapult-legal, restore those lines"
+            )
+
     dfile = dir_output / "directives.json"
     if dfile.exists():
         d = json.loads(dfile.read_text(encoding="utf-8", errors="replace"))
@@ -354,28 +443,57 @@ def _normalize_output(text: str) -> list[str]:
     return lines
 
 
+_RE_NUMBER = re.compile(r"-?\d+\.\d+(?:[eE][-+]?\d+)?")
+NUMERIC_TOLERANCE = 1e-4  # relative and absolute; a target's float math (CORDIC trig) differs from libm in low bits
+
+
+def _close(x: str, y: str) -> float | None:
+    """Max relative difference when x and y differ only in printed numbers within tolerance, else None."""
+    if _RE_NUMBER.sub("#", x) != _RE_NUMBER.sub("#", y):
+        return None
+    worst = 0.0
+    for u, v in zip(_RE_NUMBER.findall(x), _RE_NUMBER.findall(y)):
+        fu, fv = float(u), float(v)
+        d = abs(fu - fv)
+        if d > NUMERIC_TOLERANCE and d > NUMERIC_TOLERANCE * max(abs(fu), abs(fv)):
+            return None
+        worst = max(worst, d / max(abs(fu), abs(fv), 1e-30))
+    return worst
+
+
 def compare_outputs(original: str, translated: str) -> dict:
     """Line-by-line comparison of the original testbench's stdout with the translated one's.
 
     The original design is the oracle, so any printed value that differs is a translation concern,
-    even when both testbenches report PASS.
+    even when both testbenches report PASS. Numbers within NUMERIC_TOLERANCE count as matching and are
+    reported separately.
     """
     a, b = _normalize_output(original), _normalize_output(translated)
     n = max(len(a), len(b))
     differing = 0
+    close = 0
+    max_rel = 0.0
     sample: list[str] = []
     for i in range(n):
         x = a[i] if i < len(a) else ""
         y = b[i] if i < len(b) else ""
-        if x != y:
-            differing += 1
-            if len(sample) < 5:
-                sample.append(f"{x} | {y}")
+        if x == y:
+            continue
+        rel = _close(x, y)
+        if rel is not None:
+            close += 1
+            max_rel = max(max_rel, rel)
+            continue
+        differing += 1
+        if len(sample) < 5:
+            sample.append(f"{x} | {y}")
     return {
         "identical": differing == 0,
         "original_lines": len(a),
         "translated_lines": len(b),
         "differing": differing,
+        "close_within_tolerance": close,
+        "max_relative_difference": max_rel,
         "sample": sample,
     }
 
@@ -472,6 +590,40 @@ def run_checks_standalone(
         container.remove(force=True)
 
 
+RE_COMPILE_ERROR = re.compile(r"(?m)^(?:[^\s:]*/)?([^\s:/]+):(\d+):\d+: error: (.*)$")
+
+
+def parse_compile_errors(output: str) -> list[dict]:
+    seen: set[tuple[str, int]] = set()
+    out = []
+    for f, line, msg in RE_COMPILE_ERROR.findall(output):
+        if (f, int(line)) not in seen:
+            seen.add((f, int(line)))
+            out.append({"file": f, "line": int(line), "reason": f"the pre-pass output does not compile here: {msg.strip()}"})
+    return out
+
+
+def license_compile_errors(container: Container, dir_run_area: Path, target: TargetSpec) -> int:
+    """The fence assumes the pre-pass output is legal. Where the compiler disagrees, the rejected lines become
+    residue (in both rewrite logs) so the agent may edit them and the fence licenses the edit."""
+    inc = " ".join(f"-I{CONTAINER_RUN_AREA}/{name}" for name in target.include_dir_names)
+    out = f"{CONTAINER_RUN_AREA}/{OUTPUT_DIR_NAME}"
+    entries: list[dict] = []
+    for p in sorted((dir_run_area / OUTPUT_DIR_NAME).iterdir()):
+        if p.suffix.lower() not in (".cpp", ".cc", ".c") or p.name == "testbench.cpp":
+            continue
+        _, output = _container_exec(container, f"clang++ -std={target.cxx_std_check} {inc} -I{out} -w -ferror-limit=0 -fsyntax-only {shlex.quote(p.name)}", out)
+        entries += parse_compile_errors(output)
+    if entries:
+        for d in (dir_run_area / OUTPUT_DIR_NAME, dir_run_area / PREPASS_DIR_NAME):
+            f = d / "rewrite_log.json"
+            if f.exists():
+                log = json.loads(f.read_text(encoding="utf-8"))
+                log.setdefault("residue", []).extend(entries)
+                f.write_text(json.dumps(log, indent=2), encoding="utf-8")
+    return len(entries)
+
+
 def run_container_checks(container: Container, target: TargetSpec) -> dict:
     """Independent compile and testbench checks, run inside the container after the agent exits."""
     inc = " ".join(f"-I{CONTAINER_RUN_AREA}/{name}" for name in target.include_dir_names)
@@ -522,6 +674,16 @@ def build_retry_prompt(base_prompt: str, check_data: dict) -> str:
     ]
     for f in static.get("failures", []):
         lines.append(f"- static check: {f}")
+    for l in static.get("leftovers", [])[:20]:
+        lines.append(f"  - {l['file']}:{l['line']}: `{l['text']}`")
+    if static.get("fenced_edits"):
+        lines += [
+            "",
+            "The pre-pass output you started from is already legal for the target tool. You changed or removed these lines "
+            "outside the residue list; put back the pre-pass version of each (you may still add lines anywhere):",
+        ]
+        for e in static["fenced_edits"][:20]:
+            lines.append(f"  - {e['file']}:{e['line']} ({e['kind']}), pre-pass had:\n```\n{e['prepass']}\n```")
     for k in static.get("unaccounted_pragma_kinds", []):
         lines.append(f"- report does not mention pragma kind `{k}`")
     for name, v in (cont.get("syntax_check") or {}).items():
@@ -584,6 +746,7 @@ class HLSTranslationRun:
         agent_timeout_s: int = 60 * 30,
         prepass: bool = True,
         attempts: int = 1,
+        agent_tools: bool = False,
     ):
         self.run_id = run_id
         self.dir_design = Path(dir_design).resolve()
@@ -595,6 +758,7 @@ class HLSTranslationRun:
         self.agent_timeout_s = agent_timeout_s
         self.prepass = prepass
         self.attempts = max(1, int(attempts))
+        self.agent_tools = agent_tools  # mount the vendor tools into the agent's container; off by default
 
     # ---- workspace -------------------------------------------------------------------
 
@@ -638,6 +802,7 @@ class HLSTranslationRun:
             rewrite_design(dir_run_area / INPUT_DIR_NAME, dir_output, self.target, top)
             if self.target.directive_rules:
                 self._write_directives(dir_run_area, dir_output, top or "top")
+            shutil.copytree(dir_output, dir_run_area / PREPASS_DIR_NAME)
         else:
             dir_output.mkdir(parents=True, exist_ok=True)
         os.chmod(dir_output, 0o777)
@@ -645,7 +810,7 @@ class HLSTranslationRun:
 
     def _write_directives(self, dir_run_area: Path, dir_output: Path, top: str) -> None:
         scan = json.loads((dir_run_area / "scan.json").read_text(encoding="utf-8"))
-        rendered, unrendered = render_directives(scan.get("resources", []), top, self.target.directive_rules)
+        rendered, unrendered = render_directives(scan.get("resources", []), top, self.target.directive_rules, scan.get("arrays", []))
         (dir_output / "directives.json").write_text(
             json.dumps({"rendered": rendered, "unrendered": unrendered}, indent=2), encoding="utf-8"
         )
@@ -697,16 +862,19 @@ class HLSTranslationRun:
             return check_data
 
         client = docker.from_env()
+        tools = [t for t in (installation(self.target.tool), installation("vitis")) if t] if self.agent_tools else []
         container: Container = client.containers.run(
             image=self.docker_image_name,
             command="sleep 2h",
             detach=True,
-            volumes={str(dir_run_area.resolve()): {"bind": CONTAINER_RUN_AREA, "mode": "rw"}},
+            volumes={**{k: v for t in tools for k, v in t.volumes.items()}, str(dir_run_area.resolve()): {"bind": CONTAINER_RUN_AREA, "mode": "rw"}},
+            environment={k: v for t in tools for k, v in t.environment.items()},
         )
         try:
             scan_path = dir_run_area / "scan.json"
             scan = json.loads(scan_path.read_text(encoding="utf-8")) if scan_path.exists() else None
             dir_output = dir_run_area / OUTPUT_DIR_NAME
+            run_data["prepass_compile_errors"] = license_compile_errors(container, dir_run_area, self.target)
             attempts_log: list[dict] = []
             run_data["sessions"] = []
             prompt_this = prompt
@@ -716,7 +884,7 @@ class HLSTranslationRun:
                 if not (dir_output / self.target.driver_file).exists():
                     self._render_missing_driver(dir_output)
                 check_data = {
-                    "static": check_translated_design(dir_output, self.target, scan=scan),
+                    "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_run_area / PREPASS_DIR_NAME),
                     "container": run_container_checks(container, self.target),
                 }
                 passed = bool(check_data["static"]["passed"] and check_data["container"]["testbench_ok"])

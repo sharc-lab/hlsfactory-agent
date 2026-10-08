@@ -26,6 +26,11 @@ RESOURCE_KINDS = ("array_partition", "bind_storage", "interface", "dependence", 
 RE_DEFINE = re.compile(r"^\s*#\s*define\s+([A-Za-z_]\w*)\s+(.+?)\s*$")
 RE_KV = re.compile(r"([A-Za-z_]\w*)\s*=\s*(\S+)")
 RE_ARRAY_DECL_T = r"\b{var}\s*((?:\[\s*[^\]]+?\s*\])+)"
+# a declaration line or parameter: `[static] [const] T[<...>] name[N]...` ending in `=`, `;`, `,` or `)`
+RE_ARRAY_DECL = re.compile(
+    r"(?m)(?:^|[(,;{}])[ \t]*(?!return\b|else\b|case\b|typedef\b)((?:static\s+)?(?:const\s+)?(?:unsigned\s+)?[A-Za-z_][\w:]*(?:\s*<[^;{}()]*?>)?)"
+    r"\s+([A-Za-z_]\w*)\s*((?:\[\s*[^\]]+?\s*\])+)\s*(?:=|;|,|\))"
+)
 BARE_PARTITION_WORDS = ("complete", "cyclic", "block")
 _ALLOWED_AST = (
     ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant,
@@ -123,6 +128,30 @@ def array_params(signature: str) -> set[str]:
     return set(re.findall(r"([A-Za-z_]\w*)\s*(?:\[[^\]]*\])+", signature))
 
 
+def array_decls(dir_design: Path, defines: dict[str, str], params: set[str] | None) -> list[dict]:
+    """Every array declared in the DUT sources (testbench excluded), first declaration per name."""
+    seen: dict[str, dict] = {}
+    for p in _source_files(Path(dir_design)):
+        if p.name == "testbench.cpp":
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        for m in RE_ARRAY_DECL.finditer(text):
+            qual, var, dims_text = m.group(1), m.group(2), m.group(3)
+            if var in seen or _is_comment(text[text.rfind("\n", 0, m.start()) + 1 : m.end()]):
+                continue
+            dims = [resolve_int(d, defines) for d in re.findall(r"\[\s*([^\]]+?)\s*\]", dims_text)]
+            scope = "unknown" if params is None else ("argument" if var in params else "local")
+            seen[var] = {
+                "var": var,
+                "file": str(p.relative_to(dir_design)),
+                "dims": dims if all(dims) else None,
+                "size": math.prod(dims) if all(dims) else None,
+                "scope": scope,
+                "const": bool(re.search(r"\bconst\b", qual)),
+            }
+    return list(seen.values())
+
+
 def array_dims(dir_design: Path, var: str, defines: dict[str, str]) -> list[int] | None:
     """Every dimension of the array's declaration, outermost first."""
     rx = re.compile(RE_ARRAY_DECL_T.format(var=re.escape(var)))
@@ -192,6 +221,7 @@ def scan_design(dir_design: Path, top: str | None = None) -> dict:
         "pragmas": pragmas,
         "defines": defines,
         "resources": resources,
+        "arrays": array_decls(dir_design, defines, params),
         "types": types,
         "headers": headers,
         "constructs": constructs,

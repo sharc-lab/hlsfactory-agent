@@ -18,6 +18,10 @@ from dotenv import dotenv_values
 from joblib import Parallel, delayed
 
 from hlsfactory_agent.core import HLSFactoryAgentRun
+from dataclasses import asdict, replace
+
+from hlsfactory_agent.synth import run_synth_cached, run_synth_degraded
+from hlsfactory_agent.targets.vitis import VITIS
 from hlsfactory_agent.translate import (
     OUTPUT_DIR_NAME,
     TARGETS,
@@ -26,6 +30,7 @@ from hlsfactory_agent.translate import (
     check_translated_design,
     compare_outputs,
     get_target,
+    repair_top,
     run_oracle_check,
 )
 from hlsfactory_agent.utils import check_key
@@ -88,12 +93,13 @@ def session_stats(dir_run: Path) -> dict:
 
 
 def translate_one(
-    dir_design: Path, target: str, model: str, api_key: str, dir_runs: Path, resume: bool = False, attempts: int = 1
+    dir_design: Path, target: str, model: str, api_key: str, dir_runs: Path, resume: bool = False, attempts: int = 1,
+    synth: str = "none", degrade: int = 0, synth_timeout: int | None = None,
 ) -> dict:
     run_id = f"translate-{target}-{dir_design.name}"
     dir_run = dir_runs / run_id
     t0 = time.monotonic()
-    row: dict = {"design": dir_design.name, "run_id": run_id}
+    row: dict = {"design": dir_design.name, "run_id": run_id, "top": repair_top(dir_design)}
     try:
         if resume and (dir_run / "check_data.json").exists() and (dir_run / "oracle.json").exists():
             oracle = json.loads((dir_run / "oracle.json").read_text(encoding="utf-8"))
@@ -123,6 +129,18 @@ def translate_one(
             }
         )
         row.update(session_stats(dir_run))
+        spec = get_target(target)
+        if synth_timeout:
+            spec = replace(spec, synth_timeout_s=synth_timeout)
+        cache = dir_runs / ".synth_cache"
+        row["synth_source"] = asdict(run_synth_cached(VITIS, dir_design, dir_run / "synth_source", cache)) if synth in ("both", "source") else {"status": "not run"}
+        row["synth_target"] = {"status": "not run"}
+        if synth in ("both", "target") and check["passed"] and spec.parse_report:
+            tgt = run_synth_cached(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache)
+            row["synth_target"] = asdict(tgt)
+            if tgt.status == "FAILED" and degrade:
+                row["synth_target_degraded"] = run_synth_degraded(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache, rounds=degrade)
+            (dir_run / "synth.json").write_text(json.dumps({k: row[k] for k in ("synth_target", "synth_target_degraded") if k in row}, indent=4), encoding="utf-8")
         orig_run = oracle.get("run") or {}
         trans_run = (check.get("container") or {}).get("testbench_run") or {}
         if orig_run.get("exit_code") is not None and trans_run.get("exit_code") is not None:
@@ -235,6 +253,10 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=0, help="translate at most N designs (0 = all)")
     parser.add_argument("--only", default="", help="comma-separated design names to translate; others are skipped")
     parser.add_argument("--attempts", type=int, default=1, help="agent attempts per design; failures feed a retry prompt")
+    parser.add_argument("--synth", nargs="?", const="both", default="none", choices=("both", "source", "target", "none"),
+                        help="off by default; `--synth` alone runs Vitis on the source and the target tool on the translation")
+    parser.add_argument("--degrade", type=int, default=2, help="recovery rounds after a failed target synthesis (0 = off)")
+    parser.add_argument("--synth-timeout", type=int, default=None, help="seconds per target synthesis; default is the target's own")
     parser.add_argument("--runs-dir", type=Path, default=DIR_RUNS)
     parser.add_argument("--results-dir", type=Path, default=DIR_RESULTS)
     parser.add_argument("--env", type=Path, default=Path(".env"))
@@ -258,7 +280,8 @@ def main() -> None:
     print(f"[translate] {len(designs)} designs from {dir_designs}")
 
     rows = Parallel(n_jobs=args.jobs)(
-        delayed(translate_one)(d, args.target, args.model, api_key, args.runs_dir, args.resume) for d in designs
+        delayed(translate_one)(d, args.target, args.model, api_key, args.runs_dir, args.resume, args.attempts, args.synth, args.degrade, args.synth_timeout)
+        for d in designs
     )
     rows = sorted(rows, key=lambda r: r["design"])
     out = save_results(args.repo, args.target, dir_designs, args.runs_dir, rows, args.results_dir)

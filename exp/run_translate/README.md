@@ -56,7 +56,16 @@ Run from the repository root with the package on the path, either through `uv ru
 ```
 uv run python exp/run_translate/run.py --target catapult
 PYTHONPATH=. python exp/run_translate/run.py --design exp/run_translate/designs/vitis_mac --model deepseek/deepseek-v4-flash
+PYTHONPATH=. python exp/run_translate/run.py --target catapult --synth none        # translation checks only, no tool runs
 ```
+
+Synthesis is off by default (a run stops at compile). `--synth` synthesizes the source with Vitis HLS and the
+passing translation with the target tool, each in a fresh container with the tool install mounted read-only
+(`hlsfactory_agent/tools.py`); `--synth source|target` selects one side. `--no-translate` stops after path A.
+`--agent-tools` mounts the tools into the agent's container too; off, the agent cannot call a tool. Results
+are cached by content under `<runs-dir>/.synth_cache/`.
+`--require-source-synth` skips translating a design whose Vitis synthesis did not pass. `--synth-timeout` overrides
+the target's budget; `--degrade N` (default 2) retries a failed target synthesis with one log-driven edit per round.
 
 Full loop on a real repository, extraction with HLSFactory-Agent followed by an oracle check and translation of
 every extracted design, with outputs saved under `results/<date>-<repo>-to-<target>/` for synthesis elsewhere:

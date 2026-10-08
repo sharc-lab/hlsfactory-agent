@@ -4,7 +4,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # install git, curl, clang, tree, make, cmake
 RUN apt-get update && \
-    apt-get install -y git curl wget clang tree make cmake build-essential xz-utils ca-certificates&& \
+    apt-get install -y git curl wget clang tree make cmake build-essential xz-utils ca-certificates \
+        libc6-dev-i386 locales libtinfo5 && \
+    localedef -i en_US -f UTF-8 en_US.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 
 RUN if command -v clang >/dev/null 2>&1 && command -v clang++ >/dev/null 2>&1; then \

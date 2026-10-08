@@ -3,5 +3,11 @@
   "array_partition.complete.argument": "resource_directive {var} -BLOCK_SIZE 1",
   "array_partition.cyclic.local": "resource_directive {var} -INTERLEAVE {factor}",
   "array_partition.block.local": "resource_directive {var} -BLOCK_SIZE {block_size}",
-  "array_partition.block.argument": "resource_directive {var} -BLOCK_SIZE {block_size}"
+  "array_partition.block.argument": "resource_directive {var} -BLOCK_SIZE {block_size}",
+  "bind_storage.ram_1p": "resource_directive {var} -MAP_TO_MODULE {{ccs_sample_mem.ccs_ram_sync_singleport}}",
+  "bind_storage.ram_s2p": "resource_directive {var} -MAP_TO_MODULE {{ccs_sample_mem.ccs_ram_sync_1R1W}}",
+  "bind_storage.ram_2p": "resource_directive {var} -MAP_TO_MODULE {{ccs_sample_mem.ccs_ram_sync_dualport}}",
+  "bind_storage.ram_t2p": "resource_directive {var} -MAP_TO_MODULE {{ccs_sample_mem.ccs_ram_sync_dualport}}",
+  "stream": "channel_directive {var} -FIFO_DEPTH {depth}",
+  "array.default_memory": "resource_directive {var} -MAP_TO_MODULE {{ccs_sample_mem.ccs_ram_sync_dualport}}"
 }

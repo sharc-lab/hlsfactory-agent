@@ -14,6 +14,7 @@ class SynthResult:
     first_error: str = ""
     failure_class: str = ""
     directives: dict[str, int] = field(default_factory=dict)  # resource var -> paths it was applied to
+    resources: dict[str, int | None] = field(default_factory=dict)  # tool-specific counts, e.g. Vitis BRAM/DSP/FF/LUT
 
 
 @dataclass(frozen=True)
@@ -51,7 +52,9 @@ class TargetSpec:
     blocking_types: tuple[str, ...] = field(default_factory=tuple)
     # additional header directories copied into the run area as (source_dir, name_in_run_area)
     extra_include_dirs: tuple[tuple[Path, str], ...] = field(default_factory=tuple)
-    # synthesis gate: `$NAME` in synth_command expands from synth_env, then the environment
+    # synthesis gate: runs in a fresh container with the tool named by `tool` bind-mounted read-only
+    # (hlsfactory_agent.tools); `$NAME` in synth_command expands from the tool's and synth_env's variables
+    tool: str = ""
     synth_command: tuple[str, ...] = field(default_factory=tuple)
     synth_timeout_s: int = 1200
     synth_env: dict[str, str] = field(default_factory=dict)
@@ -60,6 +63,9 @@ class TargetSpec:
     # glob, relative to the run area, that must match for a PASS to count
     synth_success_marker: str = ""
     parse_report: Callable[[Path], SynthResult] | None = None
+    # one generic recovery edit keyed on the failed run's own messages: copies the sources of dir_failed into
+    # dir_next with the edit applied and returns the step name, or None when no step applies
+    degrade_step: Callable[[Path, Path], str | None] | None = None
 
     @property
     def include_dir_names(self) -> list[str]:
@@ -70,4 +76,5 @@ class TargetSpec:
         d["include_dir"] = str(self.include_dir)
         d["extra_include_dirs"] = [[str(p), n] for p, n in self.extra_include_dirs]
         d["parse_report"] = self.parse_report.__name__ if self.parse_report else None
+        d["degrade_step"] = self.degrade_step.__name__ if self.degrade_step else None
         return d

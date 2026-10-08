@@ -2,13 +2,18 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
+import shutil
 from pathlib import Path
 
 from hlsfactory_agent.spec import PragmaRule, SynthResult, TargetSpec
 
 DIR_PKG = Path(__file__).resolve().parent.parent
 DIR_AC_TYPES_INCLUDE = DIR_PKG / "ac_types_include"
+# ac_math and the rest of the tool's headers come from the Catapult install, never vendored; without it the
+# trig shim does not compile and the container check says so
+DIR_CATAPULT_INCLUDE = Path(os.environ.get("MGC_HOME", "/tools/software/siemens/catapult/latest/Mgc_home")) / "shared" / "include"
 DIR_TARGETS = DIR_PKG / "targets"
 
 
@@ -22,13 +27,14 @@ def directive_template(resource: dict, rules: dict[str, str]) -> str | None:
     args = resource.get("args", {})
     keys = []
     if args.get("type"):
-        keys.append(f"{resource['kind']}.{args['type']}.{resource.get('scope', 'unknown')}")
-        keys.append(f"{resource['kind']}.{args['type']}")
+        keys.append(f"{resource['kind']}.{args['type'].lower()}.{resource.get('scope', 'unknown')}")
+        keys.append(f"{resource['kind']}.{args['type'].lower()}")
     keys.append(resource["kind"])
     return next((rules[k] for k in keys if k in rules), None)
 
 
 REGISTER_THRESHOLD = 256  # Catapult default; a larger array cannot map to [Register] (MEM-8)
+MEM_MAP_THRESHOLD = 32  # Catapult default; a larger array becomes a memory, mapped to the 1-read-port ccs_ram_sync_1R1W
 
 
 def _partition_form(r: dict) -> tuple[str | None, int | None, int | None, str | None]:
@@ -65,7 +71,10 @@ def _partition_form(r: dict) -> tuple[str | None, int | None, int | None, str | 
     return kind, None, None, f"{kind} partition of dim {dim} of a {'x'.join(map(str, dims))} array has no flat equivalent"
 
 
-def render_directives(resources: list[dict], top: str, rules: dict[str, str]) -> tuple[list[str], list[dict]]:
+def render_directives(resources: list[dict], top: str, rules: dict[str, str], arrays: list[dict] = ()) -> tuple[list[str], list[dict]]:
+    """Resource pragmas become directive lines; then every array Vitis would have put in a dual-port BRAM
+    (no BIND_STORAGE, not const, larger than MEM_MAP_THRESHOLD) gets the dual-port module Catapult does not
+    pick by default, so a schedule that needed two ports in Vitis stays feasible."""
     lines: list[str] = []
     unrendered: list[dict] = []
     for r in resources:
@@ -76,7 +85,9 @@ def render_directives(resources: list[dict], top: str, rules: dict[str, str]) ->
         if r.get("unresolved"):
             unrendered.append({"resource": r, "reason": f"unresolved factor {r['unresolved']}"})
             continue
-        kind, factor, block_size, reason = _partition_form(r)
+        kind, factor, block_size, reason = _partition_form(r) if r["kind"] == "array_partition" else (args.get("type"), None, None, None)
+        if r["kind"] == "stream" and not str(args.get("depth", "")).isdigit():
+            reason = "stream depth unknown"
         if reason:
             unrendered.append({"resource": r, "reason": reason})
             continue
@@ -91,11 +102,19 @@ def render_directives(resources: list[dict], top: str, rules: dict[str, str]) ->
                 factor=factor if factor is not None else "",
                 block_size=block_size if block_size is not None else "",
                 dim=args.get("dim", "1"),
+                depth=args.get("depth", ""),
                 impl=args.get("impl", ""),
                 mode=args.get("mode", ""),
                 port=args.get("port", ""),
             )
         )
+    bound = {r["args"].get("variable") for r in resources if r["kind"] == "bind_storage"}
+    registered = {l.split()[1] for l in lines if "[Register]" in l}
+    for a in arrays:
+        if a["var"] in bound or a["var"] in registered or a.get("const") or not a.get("size") or a["size"] <= MEM_MAP_THRESHOLD:
+            continue
+        if "array.default_memory" in rules:
+            lines.append(rules["array.default_memory"].format(var=a["var"]))
     return lines, unrendered
 
 
@@ -108,6 +127,10 @@ FAILURE_CLASSES = (
     ("SCHD-20", "schedule-delay"),
     ("insufficient resources", "insufficient-memory-ports"),
     ("HIER-47", "channel-fifo"),
+    ("CRAAS-6", "no-library-component"),
+    ("Cannot pipeline a fully unrolled loop", "pipeline-on-unrolled-loop"),
+    ("CIN-71", "pointer-cast"),
+    ("CIN-84", "unsized-array"),
     ("CIN-290", "float-op"),
     ("CIN-15", "unsupported-type"),
     ("CRD-20", "undefined-identifier"),
@@ -146,11 +169,82 @@ def parse_catapult_report(dir_run: Path) -> SynthResult:
     )
 
 
+RE_MIN_II = re.compile(r"Minimum II of '(\d+)' is required")
+RE_PORTS = re.compile(r"(\d+) are needed, but only (\d+) instances are available \(SCHD-4\)")
+RE_MERGE = re.compile(r"please merge accesses to '(?:[^':]*:)?([A-Za-z_]\w*)[^']*:rsc")
+RE_II_PRAGMA = re.compile(r"(#pragma\s+hls_pipeline_init_interval\s+)(\d+)")
+RE_UNROLLED_PIPE = re.compile(r"\$PROJECT_HOME/([^()\s]+)\((\d+)\): Cannot pipeline a fully unrolled loop")
+SYNTH_OUTPUTS = ("Catapult", "catapult.log", "synth_stdout.log", "synth.tcl", "synth.json")
+
+
+def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
+    """Two recoveries the log itself parameterizes: SCHD-20 names the minimum II, so every tighter pipeline
+    pragma is raised to it; SCHD-4 names how many memory ports were needed and SCHD-39 the array, so that
+    array is interleaved by the shortfall. Nothing else is touched; a log without either yields None."""
+    log = (dir_failed / "catapult.log").read_text(encoding="utf-8", errors="replace") if (dir_failed / "catapult.log").exists() else ""
+    iis = [int(x) for x in RE_MIN_II.findall(log)]
+    ports = RE_PORTS.search(log)
+    merge = RE_MERGE.search(log)
+    unrolled = sorted({(f, int(n)) for f, n in RE_UNROLLED_PIPE.findall(log)})
+    if not iis and not (ports and merge) and not unrolled:
+        return None
+    shutil.copytree(dir_failed, dir_next, ignore=shutil.ignore_patterns(*SYNTH_OUTPUTS))
+    if unrolled:
+        # the loop Catapult names is fully unrolled after constant propagation: drop the pipeline pragma in the
+        # pragma block right above it (the source-level rule only sees `hls_unroll yes`)
+        removed = 0
+        for f, n in unrolled:
+            p = dir_next / f
+            if not p.exists():
+                continue
+            lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
+            k = n - 2
+            while k >= 0 and (lines[k].lstrip().startswith("#pragma hls_") or re.match(r"\s*[A-Za-z_]\w*\s*:\s*$", lines[k])):
+                if lines[k].lstrip().startswith("#pragma hls_pipeline_init_interval"):
+                    del lines[k]
+                    removed += 1
+                    break
+                k -= 1
+            p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        return f"unpipeline:{removed}"
+    if iis:
+        target_ii = max(iis)
+        for p in dir_next.rglob("*"):
+            if not p.is_file() or p.suffix.lower() not in (".cpp", ".cc", ".c", ".h", ".hpp"):
+                continue
+            text = p.read_text(encoding="utf-8", errors="replace")
+            new = RE_II_PRAGMA.sub(lambda m: f"{m.group(1)}{max(int(m.group(2)), target_ii)}", text)
+            if new != text:
+                p.write_text(new, encoding="utf-8")
+        return f"relax_ii:{target_ii}"
+    from hlsfactory_agent.scan import array_dims, collect_defines
+
+    var, needed, have = merge.group(1), int(ports.group(1)), int(ports.group(2))
+    tcl = dir_next / "run.tcl"
+    lines = tcl.read_text(encoding="utf-8").splitlines()
+    dims = array_dims(dir_next, var, collect_defines(dir_next)) or []
+    if len(dims) >= 2 and not any(l.startswith(f"resource_directive {var} -BLOCK_SIZE") for l in lines):
+        # rows of a 2-D array accessed in parallel: one bank per row (Catapult flattens row-major)
+        size, step = math.prod(dims[1:]), "block"
+        lines.insert(lines.index("go architect"), f"resource_directive {var} -BLOCK_SIZE {size}")
+    else:
+        size, step = -(-needed // have), "interleave"
+        prev = next((i for i, l in enumerate(lines) if l.startswith(f"resource_directive {var} -INTERLEAVE ")), None)
+        if prev is not None:  # a repeat round compounds the split instead of adding a duplicate line
+            size *= int(lines[prev].rsplit(" ", 1)[1])
+            lines[prev] = f"resource_directive {var} -INTERLEAVE {size}"
+        else:
+            lines.insert(lines.index("go architect"), f"resource_directive {var} -INTERLEAVE {size}")
+    tcl.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return f"{step}:{var}:{size}"
+
+
 CATAPULT = TargetSpec(
     name="catapult",
     display_name="Siemens Catapult HLS",
     include_dir=DIR_AC_TYPES_INCLUDE,
     include_dir_name="ac_types_include",
+    extra_include_dirs=((DIR_CATAPULT_INCLUDE, "catapult_include"),) if DIR_CATAPULT_INCLUDE.is_dir() else (),
     cxx_std_check="c++17",
     header_map={
         "ap_int.h": "ac_int.h",
@@ -191,8 +285,8 @@ CATAPULT = TargetSpec(
         PragmaRule(
             source="#pragma HLS DATAFLOW",
             target="#pragma hls_design block  (on each sub-function that becomes a dataflow block)",
-            placement="on the line directly BEFORE the sub-function definition; the top keeps `#pragma hls_design top`",
-            note="Lossy: Catapult hierarchical blocks are set per function, not per region. Record it in the report.",
+            placement="already placed by the pre-pass before every function called from the region whose parameters are channels or scalars; the top keeps `#pragma hls_design top`",
+            note="Lossy: Catapult hierarchical blocks are set per function, not per region, and a stage that receives an array stays inline (ASM-35). List the region as TRANSLATED naming the block functions; do not add or remove `hls_design block` lines.",
             category="lossy",
         ),
         PragmaRule(
@@ -222,10 +316,17 @@ CATAPULT = TargetSpec(
             category="advisory",
         ),
         PragmaRule(
-            source="#pragma HLS BIND_STORAGE / RESOURCE / BIND_OP ...",
+            source="#pragma HLS BIND_STORAGE type=ram_1p|ram_s2p|ram_2p|ram_t2p ...",
             target=None,
-            placement="removed from source",
-            note="Resource binding is TCL in Catapult. Remove and list as DROPPED.",
+            placement="removed from source; already rendered into `run.tcl` as a memory module mapping",
+            note="Remove and list as TRANSLATED (directive). Other BIND_STORAGE types, RESOURCE and BIND_OP: remove and list as DROPPED.",
+            category="directive",
+        ),
+        PragmaRule(
+            source="#pragma HLS STREAM variable=x depth=n",
+            target=None,
+            placement="removed from source; already rendered into `run.tcl` as a FIFO_DEPTH on that channel",
+            note="Remove and list as TRANSLATED (directive). Without a literal depth it is DROPPED.",
             category="directive",
         ),
         PragmaRule(
@@ -249,21 +350,22 @@ CATAPULT = TargetSpec(
         r"\bap_fixed\s*<",
         r"\bap_ufixed\s*<",
         r"\bhls::stream\b",
-        r"\bhls::vector\b",
         r"#\s*pragma\s+HLS\b",
         r"[\"<]ap_int\.h[\">]",
         r"[\"<]ap_fixed\.h[\">]",
         r"[\"<]hls_stream\.h[\">]",
-        r"[\"<]hls_(vector|fft|streamofblocks|math)\.h[\">]",
+        r"[\"<]hls_math\.h[\">]",
     ),
     dut_forbidden_patterns=(
         r"\bcomplex\s*<",  # std::complex is not synthesizable (CIN-15); the pre-pass already made it ac_complex
-        r"\b(cos|sin|tan|exp|log|sqrt|pow|atan2?)f?\s*\(",  # no synthesizable float math (CIN-16)
-        r"^\s+ac_channel\s*<[^;&]*>\s+[A-Za-z_]\w*\s*;",  # a local channel must be static (HIER-6)
+        r"\b(tan|exp|log|pow|atan2?)f?\s*\(",  # no synthesizable float math (CIN-16); cos/sin come from ac_float_trig.h
+        r"^\s+ac_channel\s*<[^;&()]*>\s+[A-Za-z_]\w*(?:\s*\[[^\]]+\])*\s*(?:\(\s*\"[^\"]*\"\s*\))?\s*;",  # a local channel must be static (HIER-6)
     ),
     required_includes=(
         (r"\bu?int(8|16|32|64)_t\b", "#include <stdint.h>"),  # EDG does not include it transitively (CRD-20)
         (r"\b(ac_ieee_float32|ac_ieee_float64)\b", "#include <ac_std_float.h>"),
+        (r"\b(cos|sin|sqrt)f?\s*\(", '#include "ac_float_trig.h"'),  # fixed-point ac_math behind float cos/sin/sqrt
+        (r"\bcat_abs\s*\(", '#include "cat_abs.h"'),
     ),
     required_files=("testbench.cpp", "run.tcl", "translation_report.md"),
     driver_file="run.tcl",
@@ -276,35 +378,32 @@ CATAPULT = TargetSpec(
         "The Vitis default rounding and overflow modes (AP_TRN, AP_WRAP) equal the Catapult defaults (AC_TRN, AC_WRAP). Only translate the modes when the original code names them explicitly.",
         "Do not use `ac_int<N, false>` for a value that was `ap_int<N>`. Signedness must be preserved exactly.",
         "Streams: ac_channel<T> has read() and write(). It does not have empty(); use `!ch.available(1)` only if the original code used empty().",
-        "`hls::vector<T, N>` has no Catapult equivalent: replace it with a plain struct holding `T data[N]` and an `operator[]`, and drop `hls_vector.h`, `hls_fft.h` and `hls_streamofblocks.h` (Catapult's front end cannot see them).",
-        "Catapult does not synthesize `std::complex`, native `float`/`double` arithmetic, or `cos`/`sin`/`sqrt` on float. The pre-pass already rewrote the DUT to `ac_complex` and `ac_ieee_float32`; keep those. Compute float trig tables at compile time (a `static const float` literal table, values computed offline) instead of calling the functions in the DUT.",
+        "`hls_vector.h`, `hls_fft.h` and `hls_streamofblocks.h` are provided as local stand-in headers next to the design (hls::vector is a plain struct there); keep the includes and the `hls::vector` type as they are. Any hls::fft or stream-of-blocks API call has no equivalent and must be rewritten.",
+        "Catapult does not synthesize `std::complex` or native `float`/`double` arithmetic. The pre-pass already rewrote the DUT to `ac_complex` and `ac_ieee_float32`; keep those. `cos`/`sin` on those types come from the local `ac_float_trig.h` (fixed-point CORDIC, ~1e-9 error); keep the calls unqualified (`cos(x)`, not `std::cos(x)`). Other float math (`exp`, `log`, `pow`, `tan`) has no equivalent and must be constant-folded or rewritten.",
         "The testbench is compiled, never synthesized: it may keep `std::complex<double>` and native float for the golden model, converting to and from the DUT's types at the boundary with `.real()`/`.imag()` and casts.",
         "`#pragma hls_design top|block|inline` and `#pragma hls_pipeline_init_interval` go on the line BEFORE the function or loop. Catapult silently ignores a pragma placed inside the body (CIN-319), so a pragma in Vitis position does nothing.",
         "Every function called from a `DATAFLOW` region that receives an array (not a channel) must NOT be a `hls_design block`: Catapult blocks may only be connected by channels (ASM-35).",
     ),
     directive_rules=load_directive_rules("catapult"),
+    tool="catapult",
     synth_command=("$MGC_HOME/bin/catapult", "-shell", "-file", "synth.tcl", "-logfile", "catapult.log"),
-    synth_env={
-        "MGC_HOME": "/tools/software/siemens/catapult/latest/Mgc_home",
-        "MGLS_LICENSE_FILE": "1717@ece-winlic.ece.gatech.edu",
-        "SALT_LICENSE_FILE": "1717@ece-winlic.ece.gatech.edu",
-    },
     synth_files={"synth.tcl": 'set rc [catch {source run.tcl} err]\nif {$rc} { puts "SYNTH_ERROR: $err" }\nexit\n'},
     synth_success_marker="Catapult/*/rtl.rpt",
     parse_report=parse_catapult_report,
+    degrade_step=catapult_degrade_step,
 )
 
 
 # Resource paths only exist after `go assembly`, are nested under every hls_design block, and a struct-typed
 # array is split into one resource per field (`v._r.d`, `v._i.d`), so they are looked up, not predicted.
-RESOURCE_DIRECTIVE_PROC = """proc resource_directive {var args} {
+RESOURCE_DIRECTIVE_PROC = """proc directive_on {suffix var args} {
     set hits 0
     set pat /{top}
     for {set depth 1} {$depth <= 8} {incr depth} {
         append pat /*
-        if {[catch {directive get "$pat:rsc" -match glob -return path} paths]} continue
+        if {[catch {directive get "$pat$suffix" -match glob -return path} paths]} continue
         foreach p $paths {
-            regsub {:rsc$} [lindex [split $p /] end] {} leaf
+            regsub "$suffix\$" [lindex [split $p /] end] {} leaf
             regsub {^[^:]*:} $leaf {} leaf
             if {[string match "*.rom" $leaf] && [string match "*Register*" $args]} continue
             if {$leaf eq $var || [string match "$var.*" $leaf]} {
@@ -313,7 +412,9 @@ RESOURCE_DIRECTIVE_PROC = """proc resource_directive {var args} {
         }
     }
     puts "DIRECTIVE $var hits=$hits"
-}"""
+}
+proc resource_directive {var args} { directive_on :rsc $var {*}$args }
+proc channel_directive {var args} { directive_on :cns $var {*}$args }"""
 
 
 def render_catapult_run_tcl(
@@ -330,7 +431,7 @@ def render_catapult_run_tcl(
         "options set Message/ErrorOverride HIER-10 -remove",
         "solution options set Message/ErrorOverride HIER-10 -remove",
         "solution options set /Input/CppStandard c++11",
-        "solution options set /Input/CompilerFlags {-I. -DCATAPULT}",
+        "solution options set /Input/CompilerFlags {-I. -DCATAPULT -DNDEBUG}",  # assert() has no synthesizable body (CIN-16)
     ]
     for src in sources:
         lines.append(f"solution file add ./{src} -type C++")
@@ -343,6 +444,8 @@ def render_catapult_run_tcl(
         "solution library add ccs_sample_mem",
         "go libraries",
         f"directive set -CLOCKS {{clk {{-CLOCK_PERIOD {clock_period_ns}}}}}",
+        # a channel between inlined functions has no legal unbuffered module (HIER-47); STREAM depth overrides per channel
+        "directive set -FIFO_DEPTH 8",
         "go assembly",
     ]
     if directives:
