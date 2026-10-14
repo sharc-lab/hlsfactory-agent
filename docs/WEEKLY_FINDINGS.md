@@ -36,6 +36,47 @@ unpipeline recovery step; Vitis and Catapult in containers, 2400 s Catapult budg
 | ZongyueQin/ProgSG | 23 | 23 | 2 | 23 | 22 | 1 | 1 | Merlin-style polybench/MachSuite `.c` kernels, the cleanest family yet: every oracle and testbench passes; Vitis times out at 600 s on 18 (heavily pipelined, needs a bigger source budget); Catapult 13 SCHD-20 whose relax-II recovery was a no-op because the step edited only `.cpp` files (fixed), 5 timeouts, 2 ports, 1 unrolled-loop pipeline; atax passes directly |
 | bsc-loca/PQC-Crystals-HLS-Accelerators | 2 | 2 | 2 | 2 | 0 | - | - | both fail the static checks on fence violations |
 | icl-utk-edu/hpcc | 5 | 5 | 4 | 5 | 5 | 2 | 4 | two direct, two by recovery; the one loss is a library-component shape |
+| robertoBosio/NN2FPGA | 14 | 0 | 0 | 13 | 0 | - | - | FINN-style streaming layers sharing one header set; oracle 0 and Vitis 0 on the extracted scripts; 11 fence violations with 1-12 edits each (the agent rewrites the shared `DequantQuant.hpp` on every design), 3 dialect leftovers (`hls_math.h` include, a `cat_compat.h` the agent wrote without `<ac_std_float.h>`, a float LUT) |
+| spcl/gemm_hls | 1 | 0 | 0 | 0 | 0 | - | - | one large templated GEMM; oracle, Vitis and the translated compile all fail; 8 fence edits |
+| ECASLab/hls-fpga-accelerators | 5 | 2 | 5 | 3 | 1 | 0 | 0 | all 5 synthesize in Vitis; elementwise is the only one past the checks and Catapult rejects its unsized `T x[]` parameter (CIN-84) because the testbench passes no named array; the other 4 are fence violations (5-16 edits) |
+| **total, 25 repositories** | **181** | **95** | **100** | **156** | **102** | **38** | **42** | first pass; 12 repos predate rules they need, a second pass over them is prepared but not launched |
+
+### Bambu (PandA) 2024.10 as a second target: `vitis_examples` + `pp4fpgas`, 24 designs (runs `bambu_imp`, `bambu_imp2`, `bambu_imp2b`, 2026-10-08)
+
+Source: the same 24 imported HLSFactory designs as the Catapult funnel of 2026-09-29. Target added on 2026-10-08:
+Catapult's ac-type dialect, native float kept (Bambu links its soft libm), Bambu's own loop pragmas, interfaces
+inferred, no top marker, synthesis in the container from the extracted AppImage. `run.py --target bambu --attempts 2
+--synth target`. The first pass (`bambu_imp`) is the control; the rerun carries the four rules it produced.
+
+| stage | gate | first pass | rerun | lost, and why |
+|---|---|---|---|---|
+| 1. Translated design compiles | clang on every source in the container | 24 / 24 | 24 / 24 | none |
+| 2. Testbench match | translated testbench output equals the original's | 24 / 24 | 24 / 24 | none |
+| 3. Static checks | required files, no Vitis dialect left, driver complete, fence respected | 24 / 24 | 22 / 24 | rerun: 2 fence violations, one edit each (static_memory, pointer_casting); agent regressions, not rules |
+| 4. Bambu synthesis | `<top>.v` written | 15 / 24 | 20 / 24 | first pass: 5 Bambu aborts (`map::at`) on a top returning an ac type by value (fixed_point_sqrt, max_bounded_loop, pipelined_nested_loops, both array_access_bottleneck); 2 `clock constraint too tight` at 5 ns (both window_conv); 1 `<hls_vector.h>` not found with an angled include; 1 `unexpected pattern` from interface inference on a pointer passed to memcpy (axi_master). Rerun: the four rules (void + `ret_out` reference, 10 ns, `-I.`, label above the pragma) clear the first three classes; double_pointer needed the rule narrowed to C++ class returns (`bambu_imp2b`); streaming_vadd is a Bambu limit, no FIFO unit for `ac_channel<hls::vector>` |
+| 5. Recovery | `--generate-interface=INFER` -> `MINIMAL` after `unexpected pattern` | - | 21 / 24 | +1: axi_master |
+
+Takeaway: with the dialect already settled for Catapult, a second tool cost one day and four rules, and its
+synthesizable count on this set (21) exceeds Catapult's (15), because Bambu has no library-component or
+scheduling walls, only interface-inference and aggregate-channel limits. The FFT set follows below once its rerun finishes.
+
+### Bambu: UCLA-VAST/HP-FFT-HLS, 16 designs (runs `bambu_fft`, `bambu_fft2`, 2026-10-08)
+
+Source: the same 16 FFT variants as the Catapult funnel of 2026-09-30, `run.py --target bambu --attempts 2 --synth target
+--degrade 1`. The first pass (`bambu_fft`) is the control; the rerun carries the four rules from the imported set.
+
+| stage | gate | first pass | rerun | lost, and why |
+|---|---|---|---|---|
+| 1. Translated design compiles | clang on every source in the container | 16 / 16 | 16 / 16 | none |
+| 2. Testbench match | translated testbench output equals the original's | 16 / 16 | 16 / 16 | none |
+| 3. Static checks | required files, no Vitis dialect left, driver complete, fence respected | 13 / 16 | 14 / 16 | fence violations, 1-3 edits (first pass n1024_UF2, n1024_original_C_style, n256_UF32; rerun n1024_UF4, n256_UF2); agent regressions |
+| 4. Bambu synthesis | `<top>.v` written | 0 / 16 | 1 / 16 | first pass: 12 `#pragma HLS unroll` followed by a labelled loop (now the label moves above the pragma), 1 clock too tight at 5 ns. Rerun: the 7 n1024 variants crash Bambu's clang plugin on the `llvm.bitreverse` intrinsic the optimizer forms from the bit-reverse loop (same at -O1 and -O0); 5 n256 variants have no FIFO functional unit for their `ac_channel<hls::vector<ac_complex<float>, N>>` ports (aggregate channel); n256_original_C_style segfaults the tool; n256_no_StagePipeline, the one variant with plain array ports, passes (area 19546, 1878 FF) |
+| 5. Recovery | interface mode fallback | - | 1 / 16 | no step applies to these classes |
+
+Takeaway: the FFT family is a Bambu wall, not a translation wall: every variant compiles, matches and clears the
+checks, and the two losses are tool limits on this family's port types (aggregate channels, a bit-reverse intrinsic
+the plugin cannot lower). Catapult takes 8 of the same 16. Across both sets Bambu synthesizes 22 of 40 and Catapult
+23 of 40, with disjoint failure classes.
 
 ## Week of 2026-09-28
 

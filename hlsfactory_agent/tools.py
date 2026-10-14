@@ -10,6 +10,7 @@ DEFAULT_MGC_HOME = "/tools/software/siemens/catapult/latest/Mgc_home"
 DEFAULT_MGC_LICENSE = "1717@ece-winlic.ece.gatech.edu"
 DEFAULT_VITIS_HLS = "/tools/software/xilinx/ARCHIVE/Vitis_HLS/2024.1"
 DEFAULT_XILINX_LICENSE = "2100@ece-winlic.ece.gatech.edu"
+DEFAULT_BAMBU_APPDIR = "/export/hdd/scratch/tshukla31/tools/bambu-2024.10"
 
 
 @dataclass(frozen=True)
@@ -50,7 +51,19 @@ def vitis_installation(vitis_dir: str | Path | None = None, vivado_dir: str | Pa
     )
 
 
-RESOLVERS = {"catapult": catapult_installation, "vitis": vitis_installation}
+def bambu_installation(app_dir: str | Path | None = None) -> ToolInstallation | None:
+    """An extracted Bambu AppImage (`bambu-<ver>.AppImage --appimage-extract`): AppRun puts the bundled
+    clang, PandA data and soft libm on the path, so the driver calls `$BAMBU` rather than `bambu`."""
+    root = Path(app_dir or os.environ.get("BAMBU_APPDIR", DEFAULT_BAMBU_APPDIR)).resolve()
+    if not (root / "AppRun").is_file() or not (root / "usr" / "bin" / "bambu").is_file():
+        return None
+    return ToolInstallation(
+        _ro(root, "/opt/panda/bambu"),
+        {"APPDIR": "/opt/panda/bambu", "ARGV0": "bambu", "OWD": "/work", "BAMBU": "/opt/panda/bambu/AppRun"},
+    )
+
+
+RESOLVERS = {"catapult": catapult_installation, "vitis": vitis_installation, "bambu": bambu_installation}
 
 
 def installation(tool: str) -> ToolInstallation | None:
