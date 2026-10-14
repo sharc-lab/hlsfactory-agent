@@ -43,3 +43,42 @@ Didn't: The final FFT run (r8) is 13/16 past the checks and 7/16 Catapult PASS, 
 ## 2026-10-07 (Wednesday)
 Worked: Ran the two things the week closed on. (1) The six FFT timeouts with a 90-minute budget: the four heavy variants (n1024_UF16/UF32, n256_UF16/UF32) now reach a real verdict inside 90 minutes, the same pipeline-on-a-fully-unrolled-loop error, and their unpipeline recovery rounds are running. (2) The repo census: `run_repo.py` over the 25 `run_base` repos with `--attempts 2 --synth --degrade 2 --synth-timeout 2400`, one repo after another (driver retries a repo once on an upstream model error). Three repos in: fpgaconvnet-hls extracts nothing; S2CBench 22 designs, 7 Catapult on the first pass; balor 40 designs, 21 Catapult. Each census repo produced rules the same day: `set_top <folder name>` written by extraction for a differently named function (15 of 22 S2CBench Vitis failures) is repaired from the testbench's call or a name prefix (`translate.repair_top`, both drivers); unsized `T x[]` top parameters get the size the testbench passes (CIN-84, 9 of 22); `abs(` -> `cat_abs(` shim (CIN-16); `sqrt` joins the trig shim; `ac_ieee_floatNN v = <literal>` becomes direct initialization (CRD-415); a `#define`'d `float`/`double` is now rewritten like any type (13 of 40 balor designs kept native double through a macro, CIN-290). Also: the synthesis cache key carries the budget, the gate driver gained `--synth-timeout/--degrade/--only`, `run_repo.py` gained the synthesis flags and now honours `--attempts`; `docs/WEEKLY_FINDINGS.md` has the census table. Later repos added: the fence now licenses every pre-pass line the container compiler rejects (Spector-HLS: the dialect rewrite itself produced illegal code and the agent was blocked from fixing it), float literal tables stay native whether const or not, a second test program with its own `main` is not copied, `#pragma SDS` lines are dropped, typedef'd float types get the literal rule, unsized parameters are also sized from `malloc`/`new` with sizes resolved through local `int` assignments (blaze: all 8 designs). 23 tests pass, nothing committed.
 Didn't: The S2CBench rerun with the new rules and the rest of the census (22 repos) are still running; balor's extracted testbenches all fail to link against their kernels (oracle 0/40), an extraction defect outside this pipeline; cholesky still fails the checks on an agent-written support header.
+
+## 2026-10-08 (Thursday)
+Worked: Committed the pre-Bambu tree as c985a8e (container-backed synthesis, dual-port default, recovery rounds, imported set, census findings; 23 tests). Added Bambu (PandA) 2024.10 as a target: `tools.py` resolver over the extracted AppImage, `targets/bambu.py` (driver `run_bambu.sh`, log parser, failure classes, INFER-to-MINIMAL recovery step), per-target `PRAGMA_FORMS`/`DIALECT_TYPES` in `rewrite.py` (Bambu keeps native float, drops PIPELINE, label above the pragma, a top returning an ac type by value becomes void + `ret_out`), 10 ns clock and `-I.`; validated end to end on the MAC. Imported set 15 -> 21 of 24 after the four rules; FFT set 0 -> 1 of 16 (7 clang-plugin crashes on `llvm.bitreverse`, 5 aggregate-channel ports, 1 segfault; tool walls). Census first pass complete: 181 designs over 25 repos, oracle 95, Vitis 100, compile+match 156, checks 102, Catapult 38 + 4 recovery = 42; report republished.
+Didn't: The census second pass over the 12 repos that predate their rules is prepared and deliberately not launched; Bambu's aggregate-channel and bitreverse limits have no rule; the Bambu tree (7 files) is uncommitted.
+
+## 2026-10-09 (Friday)
+Worked: Instrumented the repo driver (`hlsfactory_agent/stats.py`: per-stage timers, 30 s host sampler, retry accounting; `exp/run_translate/stats_report.py` -> `docs/RUN_STATISTICS.md`) and started the census second pass over all 25 repos with 3 agent attempts, first-pass extractions reused; 15 repos recorded by 17:04 (140 designs, 60 Catapult passes so far; balor 21 -> 36 of 40, Spector 0 -> 4, blaze 0 -> 3, SERI 0 -> 5 past the checks but all on CRD-2388 constexpr-with-statements). Retry curve over 125 designs: 22% at attempt 1, attempt 2 rescues 44% of the rest, attempt 3 another 22%; 3 designs thrash identically. Wrote the Dynamatic assessment (`docs/plans/2026-10-09-dynamatic-target.md`, nothing implemented).
+Didn't: The pass stopped at 19:50 with OpenRouter credits exhausted (402 from 18:15 on); DP-HLS, CLINK, ScaleHLS-HIDA, ThunderGP and the partial ProgSG ran with a dead agent and were discarded, so 10 repos remain plus the S2CBench jpeg pair whose containers vanished at 06:28; resume with `census2.sh repos.txt` once credits are added. Two code fixes on the way: the sampler's stop event (crashed the first S2CBench run) and a corrupt rewrite_log.json in the README step (balor). Nothing committed.
+
+## 2026-10-13 (Tuesday)
+Worked: Implemented fixes 1-7 from `docs/plans/2026-10-10-failure-fixability.md` and validated each on recorded census2 outputs, without the agent:
+- C++14 in `run.tcl` clears SERI's CRD-2388.
+- Fence repair (mechanical restore, line-granular, kept only if no check gets worse) passes 5 of the 38 fenced failures on replay.
+- The recovery step relaxes the II when a split array still collides, and adds the missing `resource_directive` proc. histogram, sobel_subdimx and piMonteCarlo now synthesize.
+- Pointer and commented-size ports are sized from the testbench, which clears CIN-84 on all 5 designs (MurmurHash3 PASS).
+- `ac_float_exp.h` (CORDIC exp/log/pow) plus a native-float check in the DUT.
+- `hls_math.h` mapping, struct-member channels, copied Vitis library headers, required includes inserted after each attempt.
+- `normalize_vitis_script` (fpgaconvnet accum/conv/fork now pass Vitis) and a 2400 s source budget.
+- Testbench-only headers are exempt from the fence and the DUT rules.
+- 27 tests pass, nothing committed.
+
+Didn't:
+- No end-to-end rerun: OpenRouter credits are still exhausted, so the prompt clause and fence repair inside the loop are untested with the agent.
+- The 4 "float-op" losses turned out to be native float the agent reintroduced (CIN-290), not exp/log; 2 of them (`2.0 * PI / len` shapes) are still uncaught.
+- SERI now stops at CIN-71 pointer casts.
+- fpgaconvnet's fence failures are an extraction defect (no `testbench.cpp`, and the kernel includes its testbench header).
+
+## 2026-10-14 (Wednesday)
+Worked:
+- `cat_bytes.h` shim and pre-pass rule for CIN-71 (SERI's packed_array): all 5 SERI designs pass their testbench without pointer casts.
+- k_rr_a with 5 recovery rounds: II 7, then a 6-way split of `int4d_dmbn`; it schedules but times out at 1200 s.
+- Dataflow regions behind macros, with stages in other headers, now get `hls_design block`. k_buffer_permutation moves from HIER-11 to ASM-59/62, a loop around block calls that the agent must restructure.
+- OpenRouter credits are back ($250).
+- 28 tests pass, nothing committed.
+
+Didn't:
+- k_rr_a is not rerun with a longer timeout.
+- The census second pass has not resumed yet.
+

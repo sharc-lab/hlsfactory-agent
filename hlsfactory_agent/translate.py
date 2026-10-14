@@ -14,6 +14,7 @@ import os
 import re
 import shlex
 import shutil
+import time
 from pathlib import Path
 from typing import Any
 
@@ -31,6 +32,7 @@ from hlsfactory_agent.targets.catapult import (
     render_catapult_run_tcl,
     render_directives,
 )
+from hlsfactory_agent.targets.bambu import BAMBU, render_bambu_driver
 from hlsfactory_agent.targets.xlscc import XLSCC, render_xlscc_driver
 from hlsfactory_agent.utils import load_jsonl_text
 
@@ -54,7 +56,7 @@ SOURCE_SUFFIXES = (".cpp", ".cc", ".c", ".h", ".hpp")
 # --------------------------------------------------------------------------------------
 
 
-TARGETS: dict[str, TargetSpec] = {CATAPULT.name: CATAPULT, XLSCC.name: XLSCC}
+TARGETS: dict[str, TargetSpec] = {CATAPULT.name: CATAPULT, XLSCC.name: XLSCC, BAMBU.name: BAMBU}
 
 
 def get_target(name: str) -> TargetSpec:
@@ -94,6 +96,8 @@ def untranslatable_check_data(blockers: list[dict], target: TargetSpec) -> dict:
 def render_driver(target: TargetSpec, top: str, sources: list[str], testbench: str | None) -> str:
     if target.name == "xlscc":
         return render_xlscc_driver(top, sources)
+    if target.name == "bambu":
+        return render_bambu_driver(top, sources)
     return render_catapult_run_tcl(top, sources, testbench)
 
 
@@ -129,6 +133,8 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
             "- Read `rewrite_log.json` first. Fix every residue item by hand.\n"
             "- Review the moved pragmas: the script places a loop pragma on the line before the nearest loop header; correct any it placed wrongly.\n"
             "- Do not redo the mechanical work; do verify it in Step 6.\n"
+            "- Change only the lines a residue item names and the few lines around them. Every other line of the pre-pass output is "
+            "already legal: leave it exactly as it is, with no renaming, reformatting or comment edits. You may add new lines anywhere.\n"
             "- `synth.tcl` was intentionally not copied; the output gets its own driver script (Step 7).\n"
             f"- `{target.driver_file}` and `directives.json` were generated from the input's resource pragmas. "
             f"Do NOT rewrite `{target.driver_file}` from scratch. For every line in it starting with `# UNRESOLVED`, "
@@ -175,7 +181,9 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
         f"{_format_pragma_table(target)}\n"
         "\n"
         "### Step 5: Mark the top-level function\n"
-        f"- Put `{target.top_marker}` on the line directly before the top-level function definition in the source file (not the header).\n"
+        + (f"- Put `{target.top_marker}` on the line directly before the top-level function definition in the source file (not the header).\n"
+           if target.top_marker else f"- {target.display_name} has no top marker: the driver's top name must be the function the testbench calls.\n")
+        +
         "\n"
         "### Step 6: Compile-check and run the testbench\n"
         "For every .cpp file in the output folder run:\n"
@@ -264,6 +272,59 @@ def repair_top(dir_design: Path) -> dict:
     return {"top": called[0], "repaired": True, "was": top}
 
 
+# options the extraction copies from older Vitis versions that 2024.1 rejects as unknown
+VITIS_REMOVED_OPTIONS = (r"config_interface\s+-trim_dangling_width\b",)
+
+
+def _include_dirs_needed(d: Path) -> list[str]:
+    """Folders (relative to the design, "." for its root) that resolve a quoted include no includer finds
+    next to itself; an include found in several folders is ambiguous and left alone."""
+    files = [p for p in d.rglob("*") if p.is_file()]
+    found: set[str] = set()
+    for p in files:
+        if p.suffix.lower() not in SOURCE_SUFFIXES:
+            continue
+        for inc in re.findall(r'(?m)^\s*#\s*include\s*"([^"]+)"', p.read_text(encoding="utf-8", errors="replace")):
+            if (p.parent / inc).exists():
+                continue
+            hits = {str(q.relative_to(d))[: -len(inc)].rstrip("/") or "." for q in files if str(q.relative_to(d)).endswith(inc) and (str(q.relative_to(d)) == inc or str(q.relative_to(d)).endswith("/" + inc))}
+            if len(hits) == 1:
+                found |= hits
+    return sorted(found)
+
+
+def normalize_vitis_script(dir_design: Path) -> dict:
+    """Extraction writes scripts that do not run as-is: a project name built from Tcl variables it never sets,
+    headers in subfolders that are not on the include path, options 2024.1 no longer has. Each is repaired in
+    `synth.tcl`; returns what was changed."""
+    tcl = Path(dir_design) / "synth.tcl"
+    if not tcl.exists():
+        return {}
+    text = tcl.read_text(encoding="utf-8", errors="replace")
+    lines = text.splitlines()
+    changes: dict = {}
+    defined = set(re.findall(r"(?m)^\s*set\s+([A-Za-z_]\w*)\b", text))
+    used = sorted(set(re.findall(r"\$\{?([A-Za-z_]\w*)\}?", text)) - defined - {"env", "argv", "argc"})
+    if used:
+        lines = [f"set {v} {Path(dir_design).name}" for v in used] + lines
+        changes["variables_set"] = used
+    flags = [("-I[pwd]" if d == "." else f"-I[pwd]/{d}") for d in _include_dirs_needed(Path(dir_design))]
+    if (Path(dir_design) / "hlslib").is_dir():
+        flags.append("-DHLSLIB_SYNTHESIS")  # hlslib's own switch: without it the headers keep host-only code (throw)
+    for i, l in enumerate(lines if flags else []):
+        if re.match(r"\s*add_files\b", l) and "-tb" not in l.split() and not any(f in l for f in flags):
+            m = re.search(r'-cflags\s+"([^"]*)"', l)
+            lines[i] = l[: m.start(1)] + " ".join(flags) + " " + m.group(1) + l[m.end(1):] if m else f'{l} -cflags "{" ".join(flags)}"'
+            changes["cflags"] = " ".join(flags)
+    kept = [l for l in lines if not any(re.match(r"\s*" + rx, l) for rx in VITIS_REMOVED_OPTIONS)]
+    if len(kept) != len(lines):
+        changes["options_dropped"] = [l.strip() for l in lines if l not in kept]
+    new = "\n".join(kept) + "\n"
+    if new != text:
+        tcl.write_text(new, encoding="utf-8")
+    return changes
+
+
 PREPASS_DIR_NAME = "prepass_design"
 FENCE_LINES = 3  # a residue item also licenses edits this many lines either side of it
 # a pre-pass line the agent may change on its own merits: comment or blank, or itself a residue trigger
@@ -280,37 +341,145 @@ def _licensed(lines: list[str], patterns: tuple[str, ...]) -> bool:
     return all(any(re.search(pat, l) for pat in patterns) for l in lines)
 
 
-def fenced_edits(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> list[dict]:
-    """Lines of the pre-pass output the agent changed or deleted that no residue item licenses.
-    Insertions are free (new structs, includes); the testbench is not fenced."""
+def testbench_files(d: Path) -> set[str]:
+    """`testbench.cpp` and every header only it reaches through quoted includes: compiled, never synthesized,
+    so the DUT-only rules and the fence do not apply to them."""
+    files = {str(p.relative_to(d)): p for p in _iter_source_files(d)}
+
+    def reach(roots: list[str]) -> set[str]:
+        seen, todo = set(), list(roots)
+        while todo:
+            rel = todo.pop()
+            if rel in seen or rel not in files:
+                continue
+            seen.add(rel)
+            for inc in re.findall(r'(?m)^\s*#\s*include\s*"([^"]+)"', files[rel].read_text(encoding="utf-8", errors="replace")):
+                near = str(Path(rel).parent / inc) if Path(rel).parent != Path(".") else inc
+                hits = [near] if near in files else [inc] if inc in files else [f for f in files if f.endswith("/" + inc)]
+                todo += hits[:1] if len(hits) == 1 else []
+        return seen
+
+    if "testbench.cpp" not in files:
+        return set()
+    dut = [r for r in files if Path(r).suffix.lower() in (".cpp", ".cc", ".c") and r != "testbench.cpp"]
+    return reach(["testbench.cpp"]) - reach(dut)
+
+
+def _fenced_hunks(dir_output: Path, dir_prepass: Path, target: TargetSpec):
+    """(rel, prepass lines, output lines, opcode) for every changed or deleted pre-pass hunk no residue item
+    licenses; opcode is None when the agent deleted the whole file."""
     log_path = dir_prepass / "rewrite_log.json"
     if not log_path.exists():
-        return []
+        return
     log = json.loads(log_path.read_text(encoding="utf-8", errors="replace"))
     windows: dict[str, list[int]] = {}
     for r in log.get("residue", []):
         windows.setdefault(r["file"], []).append(int(r.get("line", 0)))
     free = RE_FENCE_FREE + target.forbidden_patterns + target.dut_forbidden_patterns
-    out: list[dict] = []
+    tb = testbench_files(dir_prepass)
     for p in _iter_source_files(dir_prepass):
-        if p.name == "testbench.cpp":
-            continue
         rel = str(p.relative_to(dir_prepass))
-        q = dir_output / rel
-        if not q.exists():
-            out.append({"file": rel, "line": 1, "kind": "file deleted", "prepass": ""})
+        if rel in tb:
             continue
+        q = dir_output / rel
         a = p.read_text(encoding="utf-8", errors="replace").splitlines()
+        if not q.exists():
+            yield rel, a, [], None
+            continue
         b = q.read_text(encoding="utf-8", errors="replace").splitlines()
-        for op, i1, i2, _, _ in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
-            if op not in ("replace", "delete"):
+        for op in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+            tag, i1, i2, j1, j2 = op
+            if tag not in ("replace", "delete"):
                 continue
-            if any(i1 - FENCE_LINES <= ln - 1 < i2 + FENCE_LINES for ln in windows.get(rel, [])):
-                continue
-            if _licensed(a[i1:i2], free):
-                continue
-            out.append({"file": rel, "line": i1 + 1, "kind": op, "prepass": "\n".join(a[i1:i2])[:400]})
+            # a replace that maps line for line is judged line by line, so a licensed line in it stays the agent's
+            subs = [("replace", i1 + k, i1 + k + 1, j1 + k, j1 + k + 1) for k in range(i2 - i1)] if tag == "replace" and i2 - i1 == j2 - j1 else [op]
+            for sub in subs:
+                if any(sub[1] - FENCE_LINES <= ln - 1 < sub[2] + FENCE_LINES for ln in windows.get(rel, [])):
+                    continue
+                if _licensed(a[sub[1]:sub[2]], free):
+                    continue
+                yield rel, a, b, sub
+
+
+def fenced_edits(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> list[dict]:
+    """Lines of the pre-pass output the agent changed or deleted that no residue item licenses.
+    Insertions are free (new structs, includes); the testbench is not fenced."""
+    out: list[dict] = []
+    for rel, a, _, op in _fenced_hunks(dir_output, dir_prepass, target):
+        if op is None:
+            out.append({"file": rel, "line": 1, "kind": "file deleted", "prepass": ""})
+        else:
+            out.append({"file": rel, "line": op[1] + 1, "kind": op[0], "prepass": "\n".join(a[op[1]:op[2]])[:400]})
     return out
+
+
+def restore_fenced(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> dict[str, str | None]:
+    """Fence repair: put the pre-pass text back on every hunk `fenced_edits` flags, leaving the agent's
+    licensed edits and insertions in place. Returns each touched file's previous text (None if it was
+    deleted) so the caller can undo the repair."""
+    by_file: dict[str, list] = {}
+    for rel, a, b, op in _fenced_hunks(dir_output, dir_prepass, target):
+        by_file.setdefault(rel, []).append((a, b, op))
+    undo: dict[str, str | None] = {}
+    for rel, hunks in by_file.items():
+        q = dir_output / rel
+        undo[rel] = q.read_text(encoding="utf-8", errors="replace") if q.exists() else None
+        a, b = hunks[0][0], list(hunks[0][1])
+        if hunks[0][2] is None:
+            b = a
+        else:
+            for _, _, (_, i1, i2, j1, j2) in sorted(hunks, key=lambda h: h[2][3], reverse=True):
+                b[j1:j2] = a[i1:i2]
+        q.write_text("\n".join(b) + "\n", encoding="utf-8")
+    return undo
+
+
+RE_COMMENT = re.compile(r"//[^\n]*|/\*.*?\*/", re.S)
+
+
+def in_class_body(lines: list[str], idx: int) -> bool:
+    """Whether line `idx` sits directly in a struct/class/union body (a member, not a local)."""
+    depth = 0
+    for j in range(idx - 1, -1, -1):
+        code = lines[j].split("//", 1)[0]
+        depth += code.count("}") - code.count("{")
+        if depth < 0:
+            head = " ".join(l.split("//", 1)[0] for l in lines[max(0, j - 2):j + 1])
+            return re.search(r"\b(struct|class|union)\b[^;(){}]*\{[^{}]*$", head) is not None
+    return False
+
+
+def _missing_includes(name: str, text: str, target: TargetSpec) -> list[str]:
+    code = RE_COMMENT.sub("", text)
+    return [
+        inc for needed, inc in target.required_includes
+        if name not in inc  # the header that provides the construct does not include itself
+        and re.search(needed, code) and inc not in text and inc.replace("<stdint.h>", "<cstdint>") not in text
+    ]
+
+
+def insert_required_includes(dir_output: Path, target: TargetSpec) -> list[str]:
+    """A file the agent wrote or edited that uses a construct without its header gets the include on top,
+    the same rule the pre-pass applies; shims an include needs are written as the pre-pass would."""
+    from hlsfactory_agent.rewrite import SHIM_HEADERS
+
+    added: list[str] = []
+    tb = testbench_files(dir_output)
+    for p in _iter_source_files(dir_output):
+        if str(p.relative_to(dir_output)) in tb:
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        missing = _missing_includes(p.name, text, target)
+        if not missing:
+            continue
+        p.write_text("\n".join(missing) + "\n" + text, encoding="utf-8")
+        for inc in missing:
+            shim = re.search(r'"([^"]+)"', inc)
+            body = SHIM_HEADERS.get(target.name, {}).get(shim.group(1)) if shim else None
+            if body is not None and not (dir_output / shim.group(1)).exists():
+                (dir_output / shim.group(1)).write_text(body, encoding="utf-8")
+            added.append(f"{p.relative_to(dir_output)}: {inc}")
+    return added
 
 
 def check_translated_design(
@@ -345,18 +514,19 @@ def check_translated_design(
 
     leftovers: list[dict] = []
     commented: list[dict] = []
+    tb = testbench_files(dir_output)
     for p in sources:
         text = p.read_text(encoding="utf-8", errors="replace")
-        if p.name != "testbench.cpp":
-            for needed, inc in target.required_includes:
-                if p.name in inc:  # the header that provides the construct does not include itself
-                    continue
-                if re.search(needed, text) and inc not in text and inc.replace("<stdint.h>", "<cstdint>") not in text:
-                    leftovers.append({"file": str(p.relative_to(dir_output)), "line": 1, "text": f"missing {inc}"})
-        patterns = target.forbidden_patterns + (() if p.name == "testbench.cpp" else target.dut_forbidden_patterns)
-        for i, line in enumerate(text.splitlines(), start=1):
+        is_tb = str(p.relative_to(dir_output)) in tb
+        if not is_tb:
+            leftovers += [{"file": str(p.relative_to(dir_output)), "line": 1, "text": f"missing {inc}"} for inc in _missing_includes(p.name, text, target)]
+        patterns = target.forbidden_patterns + (() if is_tb else target.dut_forbidden_patterns)
+        lines = text.splitlines()
+        for i, line in enumerate(lines, start=1):
             for pat in patterns:
                 if re.search(pat, line):
+                    if "ac_channel" in pat and in_class_body(lines, i - 1):
+                        continue  # a channel member of a struct is not a local channel
                     entry = {"file": str(p.relative_to(dir_output)), "line": i, "text": line.strip()}
                     # A line that is entirely a // comment is inert for the target tool; record it separately.
                     (commented if line.lstrip().startswith("//") else leftovers).append(entry)
@@ -367,7 +537,7 @@ def check_translated_design(
     if leftovers:
         result["failures"].append(f"{len(leftovers)} line(s) still use the source tool's dialect")
 
-    has_top_marker = any(target.top_marker in p.read_text(encoding="utf-8", errors="replace") for p in cpp_sources)
+    has_top_marker = not target.top_marker or any(target.top_marker in p.read_text(encoding="utf-8", errors="replace") for p in cpp_sources)
     checks["has_top_marker"] = has_top_marker
     if not has_top_marker:
         result["failures"].append(f"top marker `{target.top_marker}` not found in any source")
@@ -402,7 +572,7 @@ def check_translated_design(
         checks["edits_within_residue"] = not result["fenced_edits"]
         if result["fenced_edits"]:
             result["failures"].append(
-                f"{len(result['fenced_edits'])} edit(s) outside the residue list; the pre-pass output is Catapult-legal, restore those lines"
+                f"{len(result['fenced_edits'])} edit(s) outside the residue list; the pre-pass output is {target.display_name}-legal, restore those lines"
             )
 
     dfile = dir_output / "directives.json"
@@ -880,15 +1050,25 @@ class HLSTranslationRun:
             prompt_this = prompt
             check_data: dict[str, Any] = {}
             for attempt in range(1, self.attempts + 1):
+                t0 = time.monotonic()
                 self._run_agent_once(container, prompt_this, dir_run_area, run_data, attempt)
+                t1 = time.monotonic()
                 if not (dir_output / self.target.driver_file).exists():
                     self._render_missing_driver(dir_output)
+                includes_added = insert_required_includes(dir_output, self.target)
                 check_data = {
                     "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_run_area / PREPASS_DIR_NAME),
                     "container": run_container_checks(container, self.target),
                 }
                 passed = bool(check_data["static"]["passed"] and check_data["container"]["testbench_ok"])
-                attempts_log.append({"attempt": attempt, "passed": passed, "failures": list(check_data["static"]["failures"])})
+                entry = {"attempt": attempt, "passed": passed, "failures": list(check_data["static"]["failures"])}
+                if includes_added:
+                    entry["includes_added"] = includes_added
+                if not passed and check_data["static"].get("fenced_edits"):
+                    check_data, entry["fence_repair"] = self._repair_fence(container, dir_output, dir_run_area / PREPASS_DIR_NAME, scan, check_data)
+                    passed = bool(check_data["static"]["passed"] and check_data["container"]["testbench_ok"])
+                    entry["passed"] = passed
+                attempts_log.append({**entry, "agent_s": round(t1 - t0), "check_s": round(time.monotonic() - t1)})
                 if passed:
                     break
                 prompt_this = build_retry_prompt(prompt, check_data)
@@ -903,6 +1083,26 @@ class HLSTranslationRun:
         (self.dir_work / "check_data.json").write_text(json.dumps(check_data, indent=4), encoding="utf-8")
         print(f"Translation `{self.run_id}`: passed={check_data['passed']} failures={check_data['static']['failures']}")
         return check_data
+
+    def _repair_fence(self, container: Container, dir_output: Path, dir_prepass: Path, scan: dict | None, check_data: dict) -> tuple[dict, dict]:
+        """Restore the fenced lines mechanically and re-check, before any agent attempt is spent on it. The
+        repair is kept when the compile and testbench results are no worse; otherwise the agent's text returns."""
+        undo = restore_fenced(dir_output, dir_prepass, self.target)
+        repaired = {
+            "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass),
+            "container": run_container_checks(container, self.target),
+        }
+        rank = lambda c: (bool(c["container"]["syntax_all_ok"]), bool(c["container"]["testbench_ok"]))
+        kept = all(x >= y for x, y in zip(rank(repaired), rank(check_data)))
+        if not kept:
+            for rel, text in undo.items():
+                q = dir_output / rel
+                if text is None:
+                    q.unlink(missing_ok=True)
+                else:
+                    q.write_text(text, encoding="utf-8")
+        info = {"files": sorted(undo), "kept": kept, "passed": kept and bool(repaired["static"]["passed"] and repaired["container"]["testbench_ok"])}
+        return (repaired if kept else check_data), info
 
     def _run_agent_once(self, container: Container, prompt_text: str, dir_run_area: Path, run_data: dict, attempt: int) -> None:
         """Run Pi once with the given prompt and capture the session it produced."""

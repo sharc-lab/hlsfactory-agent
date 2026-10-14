@@ -49,7 +49,7 @@ VITIS = TargetSpec(
     top_marker="",
     tool="vitis",
     synth_command=("vitis_hls", "-f", "synth.tcl"),
-    synth_timeout_s=600,
+    synth_timeout_s=2400,  # large NTT and sparse kernels need over 600 s
     synth_success_marker="*/*/syn/report/csynth.rpt",
     parse_report=parse_vitis_report,
 )

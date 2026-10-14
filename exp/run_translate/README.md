@@ -1,8 +1,8 @@
-# Translation flow: Vitis HLS -> Catapult HLS, Vitis HLS -> XLS
+# Translation flow: Vitis HLS -> Catapult HLS, XLS, Bambu
 
 Cross-tool translation flows built on the existing Pi-in-Docker agent harness. A standalone Vitis HLS
 design folder (as produced by HLSFactory-Agent) becomes an equivalent design for a target tool. Targets
-are data (`TargetSpec` in `translate.py`): Catapult is complete through synthesis, XLS through emulation.
+are data (`TargetSpec` in `translate.py`): Catapult and Bambu are complete through synthesis, XLS through emulation.
 
 Code: `hlsfactory_agent/translate.py` (targets, prompt, checks, run class), `scan.py` (inventory),
 `rewrite.py` (mechanical pre-pass). Tests: `tests/`.
@@ -11,13 +11,16 @@ Code: `hlsfactory_agent/translate.py` (targets, prompt, checks, run class), `sca
 
 1. **Scan**: `scan.py` inventories every `#pragma HLS` kind, vendor type, header, and risky construct;
    written as `scan.json` for the agent and used later to check the report.
-2. **Oracle**: the design's own testbench must pass on its original code (`run_oracle_check`).
+2. **Oracle**: the design's own testbench must pass on its original code (`run_oracle_check`). Before it,
+   `repair_top` and `normalize_vitis_script` fix the extracted `synth.tcl` (top name, unset Tcl variables,
+   include paths, removed options).
 3. **Mechanical pre-pass**: `rewrite.py` copies the design and swaps headers and types, moves loop
    pragmas to the target's placement, drops pragmas with no equivalent, inserts the top marker, and
    writes `rewrite_log.json` with a `residue` list of what it could not do safely. No numerics are guessed.
 4. **Agent**: Pi fixes the residue, ports the testbench, writes the driver script and a translation
    report. Bounded by `attempts`; each failed attempt feeds a retry prompt built from the harness's own
-   findings (`build_retry_prompt`).
+   findings (`build_retry_prompt`). Before a retry is spent, the harness inserts missing required includes
+   and repairs the fence mechanically (fenced lines back to the pre-pass text, kept if no check gets worse).
 5. **Checks**, independent of the agent's claims: static (required files, no leftover Vitis identifiers,
    top marker, driver complete, report accounts for every pragma kind in the scan), in-container clang
    syntax check and testbench run with the target's headers, and `compare_outputs` against the original
@@ -149,6 +152,27 @@ Logs and reports are kept outside this repository.
 emulation the translated code includes `xls_emu.h` (`hlsfactory_agent/xls_emu_include/`), a small
 channel emulation that is empty under `__SYNTHESIS__`. The driver `run_xlscc.sh` runs xlscc, opt_main
 and codegen_main; the synthesis rung for XLS needs those binaries in the Docker image and is not run yet.
+
+## Bambu target
+
+`--target bambu`. Same ac types as Catapult (Bambu bundles ac_types and ac_math); native `float`/`double`
+and `<math.h>` stay, since the driver links Bambu's soft libm (`-lm`); `std::complex` becomes `ac_complex`.
+Loop pragmas use Bambu's spellings on the line before the loop (`#pragma HLS unroll [factor=n]`,
+`#pragma HLS inline`); `PIPELINE` is dropped (Bambu rejects it on loops) and `DATAFLOW` is dropped (lossy).
+No top marker: `run_bambu.sh` names the top with `--top-fname` and infers interfaces
+(`--generate-interface=INFER`: `ac_channel` parameters become FIFOs, arrays memories). Synthesis runs the
+extracted AppImage (`BAMBU_APPDIR`, default `/export/hdd/scratch/tshukla31/tools/bambu-2024.10`) in the
+container at 10 ns (`-I.` for the shim headers); PASS means `<top>.v` was written, area/DSP/FF come from
+the log, latency is not measured. Bambu 2024.10 aborts on a top that returns an ac type by value, so the
+pre-pass makes it `void` with a trailing `ret_out` reference and leaves the testbench call sites as residue;
+a loop label moves above the pragma. One recovery step: `unexpected pattern` from interface inference
+(a pointer the top passes to memcpy) reruns with `--generate-interface=MINIMAL`.
+
+## Run statistics
+
+`run_repo.py` records per-stage times, the attempt list and host samples under `<runs>/stats/`;
+`PYTHONPATH=. python exp/run_translate/stats_report.py --runs-dir ... --results-dir ... [--baseline-results ...]`
+writes `docs/RUN_STATISTICS.md`.
 
 ## Known gaps
 

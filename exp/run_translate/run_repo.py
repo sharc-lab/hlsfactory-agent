@@ -11,7 +11,7 @@ import argparse
 import json
 import shutil
 import time
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 from dotenv import dotenv_values
@@ -20,6 +20,7 @@ from joblib import Parallel, delayed
 from hlsfactory_agent.core import HLSFactoryAgentRun
 from dataclasses import asdict, replace
 
+from hlsfactory_agent.stats import ResourceSampler, StageTimer, agent_usage, host_info
 from hlsfactory_agent.synth import run_synth_cached, run_synth_degraded
 from hlsfactory_agent.targets.vitis import VITIS
 from hlsfactory_agent.translate import (
@@ -30,6 +31,7 @@ from hlsfactory_agent.translate import (
     check_translated_design,
     compare_outputs,
     get_target,
+    normalize_vitis_script,
     repair_top,
     run_oracle_check,
 )
@@ -56,40 +58,9 @@ def extract(repo_id: str, model: str, api_key: str, dir_runs: Path) -> Path:
 
 
 def session_stats(dir_run: Path) -> dict:
-    """Wall time, tokens, cost, and tool-call counts from the saved Pi session in run_data.json."""
-    stats = {"wall_s": None, "tokens_in": 0, "tokens_out": 0, "cost_usd": 0.0, "tool_calls": 0}
-    f = dir_run / "run_data.json"
-    if not f.exists():
-        return stats
-    try:
-        events = json.loads(f.read_text(encoding="utf-8")).get("session_data") or []
-    except Exception:
-        return stats
-    t0 = t1 = None
-    for e in events:
-        ts = e.get("timestamp")
-        if ts:
-            t0 = t0 or ts
-            t1 = ts
-        m = e.get("message") or {}
-        u = m.get("usage") or {}
-        if u:
-            stats["tokens_in"] += int(u.get("input", u.get("input_tokens", 0)) or 0)
-            stats["tokens_out"] += int(u.get("output", u.get("output_tokens", 0)) or 0)
-            c = u.get("cost") or 0
-            stats["cost_usd"] += float(c.get("total", 0) if isinstance(c, dict) else c)
-        content = m.get("content")
-        if isinstance(content, list):
-            stats["tool_calls"] += sum(1 for part in content if isinstance(part, dict) and part.get("type") == "toolCall")
-    if t0 and t1:
-        from datetime import datetime
-        fmt = "%Y-%m-%dT%H:%M:%S.%fZ"
-        try:
-            stats["wall_s"] = round((datetime.strptime(t1, fmt) - datetime.strptime(t0, fmt)).total_seconds())
-        except ValueError:
-            pass
-    stats["cost_usd"] = round(stats["cost_usd"], 4)
-    return stats
+    """Wall time, tokens, cost and tool calls summed over every agent attempt of the run."""
+    u = agent_usage(dir_run)
+    return {k: u[k] for k in ("wall_s", "tokens_in", "tokens_out", "cost_usd", "tool_calls")}
 
 
 def translate_one(
@@ -99,7 +70,8 @@ def translate_one(
     run_id = f"translate-{target}-{dir_design.name}"
     dir_run = dir_runs / run_id
     t0 = time.monotonic()
-    row: dict = {"design": dir_design.name, "run_id": run_id, "top": repair_top(dir_design)}
+    row: dict = {"design": dir_design.name, "run_id": run_id, "top": repair_top(dir_design), "script": normalize_vitis_script(dir_design)}
+    timer = StageTimer()
     try:
         if resume and (dir_run / "check_data.json").exists() and (dir_run / "oracle.json").exists():
             oracle = json.loads((dir_run / "oracle.json").read_text(encoding="utf-8"))
@@ -112,8 +84,10 @@ def translate_one(
             (dir_run / "check_data.json").write_text(json.dumps(check, indent=4), encoding="utf-8")
             row["resumed"] = True
         else:
-            oracle = run_oracle_check(dir_design)
-            check = HLSTranslationRun(run_id, dir_design, dir_run, model, api_key, target=target, attempts=attempts).run()
+            with timer("oracle"):
+                oracle = run_oracle_check(dir_design)
+            with timer("translate"):
+                check = HLSTranslationRun(run_id, dir_design, dir_run, model, api_key, target=target, attempts=attempts).run()
             (dir_run / "oracle.json").write_text(json.dumps(oracle, indent=2), encoding="utf-8")
             row["resumed"] = False
         row.update(
@@ -125,6 +99,7 @@ def translate_one(
                 "syntax_all_ok": check["container"]["syntax_all_ok"],
                 "testbench_ok": check["container"]["testbench_ok"],
                 "attempts_used": check.get("attempts_used", 1),
+                "attempts": check.get("attempts", []),
                 "error": None,
             }
         )
@@ -133,13 +108,16 @@ def translate_one(
         if synth_timeout:
             spec = replace(spec, synth_timeout_s=synth_timeout)
         cache = dir_runs / ".synth_cache"
-        row["synth_source"] = asdict(run_synth_cached(VITIS, dir_design, dir_run / "synth_source", cache)) if synth in ("both", "source") else {"status": "not run"}
+        with timer("synth_source"):
+            row["synth_source"] = asdict(run_synth_cached(VITIS, dir_design, dir_run / "synth_source", cache)) if synth in ("both", "source") else {"status": "not run"}
         row["synth_target"] = {"status": "not run"}
         if synth in ("both", "target") and check["passed"] and spec.parse_report:
-            tgt = run_synth_cached(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache)
+            with timer("synth_target"):
+                tgt = run_synth_cached(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache)
             row["synth_target"] = asdict(tgt)
             if tgt.status == "FAILED" and degrade:
-                row["synth_target_degraded"] = run_synth_degraded(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache, rounds=degrade)
+                with timer("recovery"):
+                    row["synth_target_degraded"] = run_synth_degraded(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache, rounds=degrade)
             (dir_run / "synth.json").write_text(json.dumps({k: row[k] for k in ("synth_target", "synth_target_degraded") if k in row}, indent=4), encoding="utf-8")
         orig_run = oracle.get("run") or {}
         trans_run = (check.get("container") or {}).get("testbench_run") or {}
@@ -160,6 +138,7 @@ def translate_one(
             }
         )
     row["seconds"] = round(time.monotonic() - t0)
+    row["stage_s"] = timer.seconds
     print(f"[design] {dir_design.name}: oracle={row['oracle_passed']} translation={row['translation_passed']} ({row['seconds']}s)")
     return row
 
@@ -219,7 +198,11 @@ def save_results(repo_id: str, target: str, dir_designs: Path, dir_runs: Path, r
         f = dir_runs / row["run_id"] / "run_area" / OUTPUT_DIR_NAME / "rewrite_log.json"
         if not f.exists():
             continue
-        for k, v in json.loads(f.read_text(encoding="utf-8")).get("category_counts", {}).items():
+        try:
+            counts = json.loads(f.read_text(encoding="utf-8")).get("category_counts", {})
+        except json.JSONDecodeError:  # the agent may edit the log it was given
+            counts = {}
+        for k, v in counts.items():
             categories[k] = categories.get(k, 0) + v
 
     n = len(rows)
@@ -266,10 +249,16 @@ def main() -> None:
     args.runs_dir.mkdir(parents=True, exist_ok=True)
 
     repo_name = args.repo.split("/")[1]
+    tag = args.repo.replace("/", "__")
+    dir_stats = args.runs_dir / "stats"
+    sampler = ResourceSampler(dir_stats / f"{tag}.resources.jsonl")
+    sampler.start()
+    started, timer = datetime.now(), StageTimer()
     if args.skip_extract:
-        dir_designs = args.runs_dir / f"extract-{args.repo.replace('/', '__')}" / "run_area" / "output_hls_designs" / repo_name
+        dir_designs = args.runs_dir / f"extract-{tag}" / "run_area" / "output_hls_designs" / repo_name
     else:
-        dir_designs = extract(args.repo, args.model, api_key, args.runs_dir)
+        with timer("extract"):
+            dir_designs = extract(args.repo, args.model, api_key, args.runs_dir)
 
     designs = sorted(p for p in dir_designs.iterdir() if p.is_dir())
     if args.only:
@@ -279,11 +268,21 @@ def main() -> None:
         designs = designs[: args.limit]
     print(f"[translate] {len(designs)} designs from {dir_designs}")
 
-    rows = Parallel(n_jobs=args.jobs)(
-        delayed(translate_one)(d, args.target, args.model, api_key, args.runs_dir, args.resume, args.attempts, args.synth, args.degrade, args.synth_timeout)
-        for d in designs
-    )
+    with timer("translate"):
+        rows = Parallel(n_jobs=args.jobs)(
+            delayed(translate_one)(d, args.target, args.model, api_key, args.runs_dir, args.resume, args.attempts, args.synth, args.degrade, args.synth_timeout)
+            for d in designs
+        )
     rows = sorted(rows, key=lambda r: r["design"])
+    sampler.stop()
+    stats = {
+        "repo": args.repo, "target": args.target, "model": args.model, "started": started.isoformat(timespec="seconds"),
+        "ended": datetime.now().isoformat(timespec="seconds"), "wall_s": round((datetime.now() - started).total_seconds()),
+        "jobs": args.jobs, "attempts": args.attempts, "synth": args.synth, "degrade": args.degrade, "synth_timeout": args.synth_timeout,
+        "designs": len(designs), "extract_reused": args.skip_extract, "stage_s": timer.seconds, "host": host_info(),
+        "resources": sampler.summary(), "design_seconds": {r["design"]: r.get("seconds") for r in rows},
+    }
+    (dir_stats / f"{tag}.json").write_text(json.dumps(stats, indent=2), encoding="utf-8")
     out = save_results(args.repo, args.target, dir_designs, args.runs_dir, rows, args.results_dir)
     print((out / "README.md").read_text())
     print(f"[done] results saved to {out}")

@@ -28,6 +28,9 @@ With `--require-source-synth`, a design whose Vitis synthesis did not pass is no
 - Top repair: before anything else both drivers call `translate.repair_top`. When `set_top` names a function
   that is not defined (extraction writes the folder name), and exactly one DUT function is called from the
   testbench, `set_top` is rewritten to it.
+- Script repair: `translate.normalize_vitis_script` then sets the Tcl variables the script uses but never
+  defines (to the design name), adds `-I[pwd]/<dir>` for each folder that resolves an otherwise unresolvable
+  quoted include (plus `-DHLSLIB_SYNTHESIS` when the design carries hlslib), and drops options 2024.1 removed.
 - `exp/run_translate/import_dataset.py` produces the same layout from HLSFactory's built-in dataset folders
   (`dataset_hls.tcl`); designs whose testbench spans several source files are skipped.
 
@@ -75,25 +78,50 @@ Catapult dialect rules — headers and math:
 - `cos`/`sin`/`sqrt` on the float types come from a local `ac_float_trig.h`: fixed-point CORDIC from `ac_math` in
   the Catapult install (`$MGC_HOME/shared/include`, mounted into the container as `catapult_include`; nothing
   from the tool is vendored, ~1e-9 error). `std::cos` is unqualified so that overload is found.
+- `exp`/`log`/`pow` come from a local `ac_float_exp.h`: hyperbolic CORDIC (`ac_math/ac_hcordic.h`), which takes
+  the float types directly (~2e-7 worst error on float32). `tan`/`atan` stay residue.
+- `hls_math.h` becomes `<cmath>` (both C++ targets). A copied Vitis library header (`_AP_W` template parameters)
+  is not copied; its includes already map to the target's types.
 - `abs(` becomes `cat_abs(` from a local shim (the C library `abs` has no body for synthesis, CIN-16).
+- Byte-level idioms Catapult rejects (CIN-71) map to typed helpers in a local `cat_bytes.h`: `memcpy` ->
+  `cat_memcpy` (an element loop between arrays of one type, a bit pack or unpack between an array and wide
+  `ac_int` words at a stride of `8*sizeof(T)`), `memset(p, 0, n)` -> `cat_memset0`, `*reinterpret_cast<V*>(p) = v`
+  -> `cat_store<V>(p, v)` and the read form -> `cat_load<V>(p)`; a `void*` parameter becomes a template
+  parameter so the copy sees the element type. Any left in the DUT fails the checks.
 
 Catapult dialect rules — channels, interfaces and files:
 - Local `ac_channel`s made `static`. A local channel declared with `hls::stream`'s name argument, or as an
-  array, is made `static` and the name argument removed.
-- An unsized top parameter `T x[]` gets the size of the array the testbench passes at the call site (a static
-  array, `malloc(n * sizeof)` or `new T[n]`), with `n` resolved through the testbench's defines and local `int`
-  assignments. Without it Catapult assumes 1024 words and fails (CIN-84).
+  array, is made `static` and the name argument removed, also when its template argument holds a macro call or a
+  `#define` declares it. A channel member of a struct or class is left alone.
+- An unsized top parameter `T x[]` (or `x[/*expr*/]`), or a pointer port `T *x`, gets the size of the array the
+  testbench passes at the call site (a static array, `malloc(n * sizeof)`, `malloc(sizeof(T) * n)` or
+  `new T[n]`), with `n` resolved through the testbench's defines and local `int` assignments. A pointer port
+  becomes `T x[n]` in the definition (the same type after decay). Without a size Catapult assumes 1024 words and
+  cannot reduce it for a runtime index (CIN-84).
 - A second source file defining `main()` next to `testbench.cpp` is not copied (it cannot be linked).
 
 `DATAFLOW`:
 - Every function called from the region whose parameters are channels or scalars gets
   `#pragma hls_design block` before its definition.
-- A stage that receives an array or carries its own `INLINE` stays inline, since Catapult blocks may share
-  nothing but channels (ASM-35).
+- A stage that receives an array, returns a value, or carries its own `INLINE` stays inline, since Catapult
+  blocks may share nothing but channels (ASM-35).
+- A region may be a macro that expands to the pragma (`#define DF PRAGMA( hls dataflow )`), and stages may be
+  defined in any design file.
+- A parent of blocks may hold only the calls and static channels (ASM-59/62). A loop around the region is not
+  moved mechanically; the residue note tells the agent to push it into the stages.
 
 Left as residue / not handled:
 - Other float math, `.range(hi, lo)` with two different bounds, and the testbench's type boundary.
 - No rule for fixed-point conversion.
+
+Per-target forms: `PRAGMA_FORMS` spells the loop and inline pragmas (Catapult `hls_pipeline_init_interval` /
+`hls_unroll` / `hls_design inline`; Bambu `#pragma HLS unroll [factor=n]` / `#pragma HLS inline`, no loop
+pipelining, so `PIPELINE` is dropped) and `DIALECT_TYPES` the type substitutions (Bambu keeps native
+`float`/`double`; only `std::complex` becomes `ac_complex`). The float shims, `cat_abs`, static local channels,
+dataflow blocks and the top marker are Catapult-only; sizing unsized parameters applies to both. Bambu-only:
+a loop label moves to its own line above the pragma (Bambu wants the loop right after it), and a top that
+returns a class by value becomes `void top(..., T &ret_out)` with its `return x;` rewritten (Bambu aborts on
+the hidden return pointer); the testbench call sites are residue for the agent.
 
 ## 4. Resource channel — `hlsfactory_agent/targets/catapult.py`, `catapult_directives.json`
 - `ARRAY_PARTITION`, `BIND_STORAGE` and `STREAM` pragmas become lines in `run.tcl`; `directives.json` records
@@ -123,6 +151,12 @@ Left as residue / not handled:
 - Up to `attempts` tries (`run.py --attempts`), with a retry prompt that lists the failing lines and, for edits
   outside the residue, the pre-pass text to restore.
 - Never rewrites `run.tcl` from scratch.
+- `run.tcl` sets `Input/CppStandard c++14` (relaxed `constexpr`, CRD-2388 under the c++11 default).
+- After each attempt, before the checks: a file missing a required include gets it on top (the pre-pass rule,
+  applied to files the agent wrote or edited).
+- Fence repair: when the checks fail with fenced edits, the pre-pass text is put back on exactly those hunks and
+  the checks rerun, at no agent cost. The repair is kept when compile and testbench results are no worse
+  (recorded as `fence_repair` in the attempt log), otherwise the agent's text returns.
 
 ## 6. Static checks — `translate.check_translated_design`
 Independent of the agent's claims.
@@ -133,14 +167,17 @@ Whole design:
 - Driver has the required commands; every rendered directive present verbatim; no `# UNRESOLVED` left.
 - Report covers every pragma kind from the scan.
 
-DUT-only (testbench exempt):
-- No float math calls, no `std::complex`.
-- Local channels static; required includes present.
+DUT-only (testbench and testbench-only headers exempt):
+- No `tan`/`atan` calls, no `std::complex`, no conversion back to native float (`.to_float()`, `(float)`), whose
+  arithmetic Catapult rejects (CIN-290).
+- Local channels static; required includes present (comments ignored).
 
 Fence (DUT diffed against `prepass_design`):
 - A changed or deleted pre-pass line fails the check unless a residue item licenses it: within 3 lines of one,
   or the line itself is a residue trigger (comment, forbidden pattern, non-literal pragma argument, float math,
-  vendor method).
+  vendor method). A replace that maps line for line is judged per line.
+- Testbench code is not fenced: `testbench.cpp` and every header only it reaches through quoted includes
+  (`translate.testbench_files`). The same set is exempt from the DUT-only rules, in the checks and the pre-pass.
 - Before the agent runs, every pre-pass source is compiled in the container and each line the compiler rejects
   is added to the residue, so the fence never blocks a fix the pre-pass itself made necessary.
 - Insertions are free.
@@ -159,6 +196,8 @@ Running the tool (`run_synth_cached`):
 - The host install named by `TargetSpec.tool` is bind-mounted read-only (`hlsfactory_agent/tools.py`):
   - Catapult from `MGC_HOME` at `/opt/siemens/catapult`;
   - Vitis HLS plus its matching Vivado at `/opt/amd/hls` and `/opt/amd/vivado`;
+  - Bambu from an extracted AppImage (`BAMBU_APPDIR`) at `/opt/panda/bambu`, run through its `AppRun`
+    (`$BAMBU` in the driver), which puts the bundled clang, ac_types and soft libm on the path;
   - licenses passed as environment.
 - The work dir is mounted at `/work`; the process is owned by the calling user.
 - The agent never shares this container; `run.py --agent-tools` (off by default) is the only way a tool reaches
@@ -172,8 +211,8 @@ Running the tool (`run_synth_cached`):
   needs 25-30 min to reach a scheduling verdict).
 
 Source and target sides:
-- Source: `targets/vitis.py` is a synth-only spec (Vitis HLS 2024.1); the `csynth.rpt` top-level row is parsed
-  into latency, interval, BRAM/DSP/FF/LUT.
+- Source: `targets/vitis.py` is a synth-only spec (Vitis HLS 2024.1, 2400 s budget); the `csynth.rpt` top-level
+  row is parsed into latency, interval, BRAM/DSP/FF/LUT.
 - Target: the Catapult spec, with `FAILURE_CLASSES` matched on the log.
 - `exp/run_translate/synth.py` re-runs the target gate over finished runs.
 - Synthesis results do not feed the agent's retry loop.
@@ -183,16 +222,34 @@ Recovery (`run_synth_degraded`, `run.py --degrade N`, default 2 rounds):
   itself parameterizes and synthesizes again.
 - Rounds are recorded under `synth_target_degraded`, never merged into `synth_target`.
 - Catapult steps (`catapult_degrade_step`):
-  - SCHD-87's minimum II raises every tighter `hls_pipeline_init_interval`.
+  - SCHD-87's minimum II raises every tighter `hls_pipeline_init_interval`; so does a failed feedback loop
+    (SCHD-85: II x delay / budget, rounded up).
   - SCHD-4's port shortfall splits the array SCHD-39 names: a 2-D array gets one bank per row
     (`BLOCK_SIZE` = inner size), a 1-D array `INTERLEAVE ceil(needed/have)`, compounded on a repeat round.
+    The `resource_directive` proc is added when `run.tcl` has none.
+  - An array already split (`INTERLEAVE` or `BLOCK_SIZE`, carried or added) that is still short collides in one
+    bank (strided or data-dependent index): every pipelined loop that indexes it gets its II multiplied by
+    `ceil(needed/have)` instead.
   - "Cannot pipeline a fully unrolled loop" names the loop's file and line; the pipeline pragma above it is
     removed.
 - Any other failure class ends the loop with its class reported.
 
+## 9. Run statistics — `hlsfactory_agent/stats.py`, `exp/run_translate/stats_report.py`
+- `run_repo.py` times each design's stages (`row["stage_s"]`: oracle, translate, synth_source, synth_target,
+  recovery), keeps the agent's attempt list with per-attempt agent and check seconds (`row["attempts"]`), samples
+  the host every 30 s (load, memory, running pipeline containers) and writes `<runs>/stats/<repo>.json` and
+  `.resources.jsonl` per repository (wall, jobs, attempts, extraction time or reuse, host, resource summary).
+- `stats_report.py` reads those plus the results rows and writes `docs/RUN_STATISTICS.md`: method, per-repo
+  time and resources, time per stage, the retry curve (first pass per attempt, rescued share per retry, optional
+  baseline pass), failure-class transitions between attempts, thrashing designs (identical failures every
+  attempt), synthesis and recovery counts.
+
 ## Targets
-| | Catapult | XLS (xlscc) |
-|---|---|---|
-| spec | `targets/catapult.py` | `targets/xlscc.py` |
-| tool on chao-srv1 | Catapult Prime 2026.2, license `1717@ece-winlic` | xlscc not built (needs Bazel from source) |
-| stages exercised | 0-8 | 0-7 |
+| | Catapult | XLS (xlscc) | Bambu (PandA) |
+|---|---|---|---|
+| spec | `targets/catapult.py` | `targets/xlscc.py` | `targets/bambu.py` |
+| tool on chao-srv1 | Catapult Prime 2026.2, license `1717@ece-winlic` | xlscc not built (needs Bazel from source) | Bambu 2024.10 AppImage, extracted under `/export/hdd/scratch/tshukla31/tools` |
+| stages exercised | 0-8 | 0-7 | 0-8 (no directives) |
+| driver | `run.tcl` | `run_xlscc.sh` | `run_bambu.sh` (`--top-fname`, `--generate-interface=INFER`, `-lm`) |
+| PASS means | `rtl.rpt` written | not run | `<top>.v` written; area/DSP/FF from the log, no latency (no simulation) |
+| recovery | relax II, unpipeline, block/interleave | none | `--generate-interface=INFER` -> `MINIMAL` after `unexpected pattern` |

@@ -124,6 +124,7 @@ FAILURE_CLASSES = (
     ("ASM-35", "shared-array"),
     ("ASM-34", "unsupported-construct"),
     ("Logic mixed with interconnect", "logic-in-interconnect"),
+    ("ASM-59", "logic-in-interconnect"),
     ("SCHD-20", "schedule-delay"),
     ("insufficient resources", "insufficient-memory-ports"),
     ("HIER-47", "channel-fifo"),
@@ -133,6 +134,7 @@ FAILURE_CLASSES = (
     ("CIN-84", "unsized-array"),
     ("CIN-290", "float-op"),
     ("CIN-15", "unsupported-type"),
+    ("CRD-2388", "constexpr-body"),
     ("CRD-20", "undefined-identifier"),
     ("CIN-16", "missing-function"),
     ("HIER-6", "non-static-channel"),
@@ -170,6 +172,8 @@ def parse_catapult_report(dir_run: Path) -> SynthResult:
 
 
 RE_MIN_II = re.compile(r"Minimum II of '(\d+)' is required")
+# a feedback loop that misses its budget at the tried II: scaling the II by delay/budget is the smallest that fits
+RE_FAILED_LOOP = re.compile(r"Failed Loop: II=(\d+).*?Maximum allowed budget=([\d.]+)ns\s+Sequential Delay of loop\(ns\)=([\d.]+)ns")
 RE_PORTS = re.compile(r"(\d+) are needed, but only (\d+) instances are available \(SCHD-4\)")
 RE_MERGE = re.compile(r"please merge accesses to '(?:[^':]*:)?([A-Za-z_]\w*)[^']*:rsc")
 RE_II_PRAGMA = re.compile(r"(#pragma\s+hls_pipeline_init_interval\s+)(\d+)")
@@ -178,11 +182,13 @@ SYNTH_OUTPUTS = ("Catapult", "catapult.log", "synth_stdout.log", "synth.tcl", "s
 
 
 def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
-    """Two recoveries the log itself parameterizes: SCHD-20 names the minimum II, so every tighter pipeline
+    """Recoveries the log itself parameterizes: SCHD-20 names the minimum II, so every tighter pipeline
     pragma is raised to it; SCHD-4 names how many memory ports were needed and SCHD-39 the array, so that
-    array is interleaved by the shortfall. Nothing else is touched; a log without either yields None."""
+    array is split by the shortfall, or, once it is already split, the loops reading it get a longer II.
+    Nothing else is touched; a log without either yields None."""
     log = (dir_failed / "catapult.log").read_text(encoding="utf-8", errors="replace") if (dir_failed / "catapult.log").exists() else ""
     iis = [int(x) for x in RE_MIN_II.findall(log)]
+    iis += [math.ceil(int(ii) * float(delay) / float(budget)) for ii, budget, delay in RE_FAILED_LOOP.findall(log) if float(delay) > float(budget)]
     ports = RE_PORTS.search(log)
     merge = RE_MERGE.search(log)
     unrolled = sorted({(f, int(n)) for f, n in RE_UNROLLED_PIPE.findall(log)})
@@ -222,6 +228,15 @@ def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
     var, needed, have = merge.group(1), int(ports.group(1)), int(ports.group(2))
     tcl = dir_next / "run.tcl"
     lines = tcl.read_text(encoding="utf-8").splitlines()
+    if any(l.startswith(f"resource_directive {var} -") and ("-INTERLEAVE" in l or "-BLOCK_SIZE" in l) for l in lines):
+        # the array is already split and still short of ports: the accesses collide in one bank (a strided or
+        # data-dependent index), which no further split fixes; the loops reading it get a longer II instead
+        factor = -(-needed // have)
+        n = _relax_ii_on_loops_using(dir_next, var, factor)
+        if n:
+            return f"relax_ii_for:{var}:x{factor}:{n}"
+    if not any(l.startswith("proc resource_directive") for l in lines):
+        lines[lines.index("go architect"):lines.index("go architect")] = RESOURCE_DIRECTIVE_PROC.replace("{top}", _top_name(dir_next) or "*").splitlines()
     dims = array_dims(dir_next, var, collect_defines(dir_next)) or []
     if len(dims) >= 2 and not any(l.startswith(f"resource_directive {var} -BLOCK_SIZE") for l in lines):
         # rows of a 2-D array accessed in parallel: one bank per row (Catapult flattens row-major)
@@ -237,6 +252,58 @@ def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
             lines.insert(lines.index("go architect"), f"resource_directive {var} -INTERLEAVE {size}")
     tcl.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return f"{step}:{var}:{size}"
+
+
+RE_TOP_FN = re.compile(r"#pragma\s+hls_design\s+top\s*\n[^(;{]*?\b([A-Za-z_]\w*)\s*\(")
+
+
+def _top_name(d: Path) -> str | None:
+    for p in sorted(d.rglob("*")):
+        if p.is_file() and p.suffix.lower() in (".cpp", ".cc", ".c", ".h", ".hpp"):
+            m = RE_TOP_FN.search(p.read_text(encoding="utf-8", errors="replace"))
+            if m:
+                return m.group(1)
+    return None
+
+
+def _loop_body(text: str, start: int) -> tuple[int, int] | None:
+    """Span of the body of the first `for`/`while` at or after `start`: braces, or one statement."""
+    m = re.compile(r"\b(for|while)\s*\(").search(text, start)
+    if not m:
+        return None
+    k, depth = m.end(), 1
+    while k < len(text) and depth:
+        depth += {"(": 1, ")": -1}.get(text[k], 0)
+        k += 1
+    j = len(text) - len(text[k:].lstrip())
+    if j < len(text) and text[j] == "{":
+        e, depth = j + 1, 1
+        while e < len(text) and depth:
+            depth += {"{": 1, "}": -1}.get(text[e], 0)
+            e += 1
+        return j, e
+    e = text.find(";", j)
+    return (j, e + 1) if e >= 0 else None
+
+
+def _relax_ii_on_loops_using(d: Path, var: str, factor: int) -> int:
+    """Multiply the II of every pipelined loop whose body indexes `var`; returns how many were changed."""
+    changed = 0
+    use = re.compile(r"\b" + re.escape(var) + r"\s*\[")
+    for p in sorted(d.rglob("*")):
+        if not p.is_file() or p.suffix.lower() not in (".cpp", ".cc", ".c", ".h", ".hpp") or p.name == "testbench.cpp":
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        out, last = [], 0
+        for m in RE_II_PRAGMA.finditer(text):
+            span = _loop_body(text, m.end())
+            if span and use.search(text, span[0], span[1]):
+                out += [text[last:m.start(2)], str(int(m.group(2)) * factor)]
+                last = m.end(2)
+                changed += 1
+        if last:
+            p.write_text("".join(out) + text[last:], encoding="utf-8")
+    return changed
 
 
 CATAPULT = TargetSpec(
@@ -286,7 +353,7 @@ CATAPULT = TargetSpec(
             source="#pragma HLS DATAFLOW",
             target="#pragma hls_design block  (on each sub-function that becomes a dataflow block)",
             placement="already placed by the pre-pass before every function called from the region whose parameters are channels or scalars; the top keeps `#pragma hls_design top`",
-            note="Lossy: Catapult hierarchical blocks are set per function, not per region, and a stage that receives an array stays inline (ASM-35). List the region as TRANSLATED naming the block functions; do not add or remove `hls_design block` lines.",
+            note="Lossy: Catapult hierarchical blocks are set per function, not per region, and a stage that receives an array stays inline (ASM-35). List the region as TRANSLATED naming the block functions; do not add or remove `hls_design block` lines. The function holding the blocks may contain only the block calls and static channels: a loop, condition or other statement around them is rejected (ASM-59, ASM-62). If the region sits in a loop or beside other statements, move those into the stages (each stage runs the loop itself; send a runtime trip count to each stage through its own channel).",
             category="lossy",
         ),
         PragmaRule(
@@ -358,30 +425,35 @@ CATAPULT = TargetSpec(
     ),
     dut_forbidden_patterns=(
         r"\bcomplex\s*<",  # std::complex is not synthesizable (CIN-15); the pre-pass already made it ac_complex
-        r"\b(tan|exp|log|pow|atan2?)f?\s*\(",  # no synthesizable float math (CIN-16); cos/sin come from ac_float_trig.h
-        r"^\s+ac_channel\s*<[^;&()]*>\s+[A-Za-z_]\w*(?:\s*\[[^\]]+\])*\s*(?:\(\s*\"[^\"]*\"\s*\))?\s*;",  # a local channel must be static (HIER-6)
+        r"\b(tan|atan2?)f?\s*\(",  # no synthesizable float math (CIN-16); cos/sin/sqrt and exp/log/pow have shims
+        r"\.to_(float|double)\s*\(|\((float|double)\)",  # back to native float in the DUT: its arithmetic fails synthesis (CIN-290)
+        r"\b(?:std::)?(memcpy|memset)\s*\(|\breinterpret_cast\s*<",  # byte-level copies and casts (CIN-71); cat_bytes.h has typed ones
+        r"^\s+ac_channel\s*<(?:[^;&()]|\([^()]*\))*>\s+[A-Za-z_]\w*(?:\s*\[[^\]]+\])*\s*(?:\(\s*\"[^\"]*\"\s*\))?\s*;",  # a local channel must be static (HIER-6)
     ),
     required_includes=(
         (r"\bu?int(8|16|32|64)_t\b", "#include <stdint.h>"),  # EDG does not include it transitively (CRD-20)
         (r"\b(ac_ieee_float32|ac_ieee_float64)\b", "#include <ac_std_float.h>"),
         (r"\b(cos|sin|sqrt)f?\s*\(", '#include "ac_float_trig.h"'),  # fixed-point ac_math behind float cos/sin/sqrt
+        (r"\b(exp|log|pow)f?\s*\(", '#include "ac_float_exp.h"'),  # hyperbolic CORDIC behind float exp/log/pow
         (r"\bcat_abs\s*\(", '#include "cat_abs.h"'),
+        (r"\bcat_(memcpy|memset0|store|load)\b", '#include "cat_bytes.h"'),
     ),
     required_files=("testbench.cpp", "run.tcl", "translation_report.md"),
     driver_file="run.tcl",
     driver_required_tokens=("solution file add", "go analyze", "go extract"),
     top_marker="#pragma hls_design top",
     extra_rules=(
-        "Keep the code C++11 compatible. Catapult's default C++ standard is c++11.",
+        "Keep the code C++14 compatible; `run.tcl` sets Catapult's C++ standard to c++14.",
         "ac_int and ac_fixed require an explicit signedness template parameter; ap_int is signed, ap_uint is unsigned.",
         "ac_fixed<W, I, S> takes the total width W and the integer width I, the same convention as ap_fixed, so W and I are copied as-is.",
         "The Vitis default rounding and overflow modes (AP_TRN, AP_WRAP) equal the Catapult defaults (AC_TRN, AC_WRAP). Only translate the modes when the original code names them explicitly.",
         "Do not use `ac_int<N, false>` for a value that was `ap_int<N>`. Signedness must be preserved exactly.",
         "Streams: ac_channel<T> has read() and write(). It does not have empty(); use `!ch.available(1)` only if the original code used empty().",
         "`hls_vector.h`, `hls_fft.h` and `hls_streamofblocks.h` are provided as local stand-in headers next to the design (hls::vector is a plain struct there); keep the includes and the `hls::vector` type as they are. Any hls::fft or stream-of-blocks API call has no equivalent and must be rewritten.",
-        "Catapult does not synthesize `std::complex` or native `float`/`double` arithmetic. The pre-pass already rewrote the DUT to `ac_complex` and `ac_ieee_float32`; keep those. `cos`/`sin` on those types come from the local `ac_float_trig.h` (fixed-point CORDIC, ~1e-9 error); keep the calls unqualified (`cos(x)`, not `std::cos(x)`). Other float math (`exp`, `log`, `pow`, `tan`) has no equivalent and must be constant-folded or rewritten.",
+        "Catapult does not synthesize `std::complex` or native `float`/`double` arithmetic. The pre-pass already rewrote the DUT to `ac_complex` and `ac_ieee_float32`; keep those. `cos`/`sin` on those types come from the local `ac_float_trig.h` (fixed-point CORDIC, ~1e-9 error); keep the calls unqualified (`cos(x)`, not `std::cos(x)`). `exp`/`log`/`pow` come from the local `ac_float_exp.h` (hyperbolic CORDIC); keep those unqualified too. `tan`/`atan` have no equivalent and must be constant-folded or rewritten. Never convert back to native `float`/`double` in the DUT (`.to_float()`, `(float)` casts): Catapult rejects native float arithmetic (CIN-290).",
         "The testbench is compiled, never synthesized: it may keep `std::complex<double>` and native float for the golden model, converting to and from the DUT's types at the boundary with `.real()`/`.imag()` and casts.",
         "`#pragma hls_design top|block|inline` and `#pragma hls_pipeline_init_interval` go on the line BEFORE the function or loop. Catapult silently ignores a pragma placed inside the body (CIN-319), so a pragma in Vitis position does nothing.",
+        "Catapult rejects `memcpy`, `memset` and `reinterpret_cast` between different types (CIN-71). The pre-pass maps the common forms to the typed helpers in the local `cat_bytes.h` (`cat_memcpy`, `cat_memset0`, `cat_store<V>(p, v)`, `cat_load<V>(p)`): use those, with a constant byte count, and give a `void*` parameter a template type instead.",
         "Every function called from a `DATAFLOW` region that receives an array (not a channel) must NOT be a `hls_design block`: Catapult blocks may only be connected by channels (ASM-35).",
     ),
     directive_rules=load_directive_rules("catapult"),
@@ -430,7 +502,8 @@ def render_catapult_run_tcl(
         # an ac_channel between two inlined functions is an error by default; the hls4ml flow downgrades it too
         "options set Message/ErrorOverride HIER-10 -remove",
         "solution options set Message/ErrorOverride HIER-10 -remove",
-        "solution options set /Input/CppStandard c++11",
+        # c++14 relaxes constexpr to statements (CRD-2388 under the c++11 default)
+        "solution options set /Input/CppStandard c++14",
         "solution options set /Input/CompilerFlags {-I. -DCATAPULT -DNDEBUG}",  # assert() has no synthesizable body (CIN-16)
     ]
     for src in sources:

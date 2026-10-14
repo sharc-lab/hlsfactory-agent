@@ -189,16 +189,17 @@ def test_prepass_catapult_dialect(tmp_path: Path):
     assert "int q = cat_abs(idx); ac_ieee_float32 z(0); ac_ieee_float64 s = sqrt(a); const w_dt vth(1.0);" in c
     assert "#pragma SDS" not in c and any(d.get("kind") == "sds" for d in log["pragmas_dropped"])
     assert "#pragma hls_design inline\nvoid node1(\n" in c  # multi-line signature with a trailing comment: pragma before its first line
-    assert c.startswith("#include <stdint.h>\n#include <ac_std_float.h>\n#include \"ac_float_trig.h\"\n#include \"cat_abs.h\"\n")
+    assert c.startswith("#include <stdint.h>\n#include <ac_std_float.h>\n#include \"ac_float_trig.h\"\n#include \"ac_float_exp.h\"\n#include \"cat_abs.h\"\n")
     assert "ac_sqrt" in (tmp_path / "out" / "ac_float_trig.h").read_text(encoding="utf-8") and (tmp_path / "out" / "cat_abs.h").exists()
-    exp_res = next(r for r in log["residue"] if "exp(" in r["reason"])
-    assert "exp(" in c.splitlines()[exp_res["line"] - 1]  # residue lines point at the output file after insertions
+    assert "ac_exp_cordic" in (tmp_path / "out" / "ac_float_exp.h").read_text(encoding="utf-8")
+    float_res = next(r for r in log["residue"] if "feeding a ac_ieee_float32" in r["reason"])
+    assert "ac_ieee_float32" in c.splitlines()[float_res["line"] - 1]  # residue lines point at the output file after insertions
     assert (tmp_path / "out" / "testbench.cpp").read_text(encoding="utf-8").count("std::complex<double>") == 1
     reasons = " ".join(r["reason"] for r in log["residue"])
-    assert "float math in Siemens Catapult HLS: exp(" in reasons and "float math in Siemens Catapult HLS: cos(" not in reasons
-    # the shim defines cos/sin and must not be asked to include itself
+    assert "float math in Siemens Catapult HLS" not in reasons  # cos and exp both have shims
+    # the shims define cos/sin/exp and must not be asked to include themselves
     static = check_translated_design(tmp_path / "out", CATAPULT)
-    assert not [l for l in static["leftovers"] if l["file"] == "ac_float_trig.h"]
+    assert not [l for l in static["leftovers"] if l["file"] in ("ac_float_trig.h", "ac_float_exp.h")]
     assert "feeding a ac_ieee_float32" in reasons
     assert "testbench" in reasons
 
@@ -212,6 +213,47 @@ def test_prepass_sizes_unsized_top_parameters_from_the_testbench(tmp_path: Path)
     rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
     assert "void top(const int in[2000], int out[64], int n)" in (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")  # static array, then malloc(len * sizeof)
     assert "int out[64]" in (tmp_path / "out" / "k.h").read_text(encoding="utf-8")
+    # a pointer port sized from `new T[n]` or `malloc(sizeof(T) * N)`, in the definition only
+    (d / "k.cpp").write_text('void top(int *keys,  // in\n         int *out, int n) { for (int i = 0; i < n; i++) out[i] = keys[i]; }\n', encoding="utf-8")
+    (d / "testbench.cpp").write_text('#define N 10*10\nint main() { int num = 1000; int *keys = new int[num]; int *b; b = (int*)malloc(sizeof(int)*N); top(keys, b, 5); return 0; }\n', encoding="utf-8")
+    shutil.rmtree(tmp_path / "out")
+    rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
+    assert "void top(int keys[1000],  // in\n         int out[100], int n)" in (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")
+
+
+def test_prepass_and_check_mechanical_leftovers(tmp_path: Path):
+    from hlsfactory_agent.translate import insert_required_includes
+
+    d = tmp_path / "design"
+    d.mkdir()
+    (d / "ap_fixed.h").write_text("template <int _AP_W, int _AP_I> struct ap_fixed {};\n", encoding="utf-8")  # a copied Vitis library header
+    (d / "k.h").write_text('#include "hls_math.h"\n#include "hls_stream.h"\ntemplate <typename T> struct Pipe {\n    hls::stream<T> ch;\n};\n#define DEF_Q( z ) hls::stream<int> q_##z; \\\n    int unused_##z;\n', encoding="utf-8")
+    (d / "k.cpp").write_text('#include "k.h"\nvoid top(hls::stream<int> &o) {\n    hls::stream<int> q;\n    q.write(1); o.write(q.read());\n}\n', encoding="utf-8")
+    log = rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
+    out = tmp_path / "out"
+    h, c = (out / "k.h").read_text(encoding="utf-8"), (out / "k.cpp").read_text(encoding="utf-8")
+    assert not (out / "ap_fixed.h").exists() and "#include <cmath>" in h and "hls_math" not in h
+    assert "    ac_channel<T> ch;" in h and "    static ac_channel<int> q;" in c  # a member stays, a local becomes static
+    assert "#define DEF_Q( z ) static ac_channel<int> q_##z; \\" in h  # a channel declared by a macro too
+    assert not any("ac_channel" in r["reason"] for r in log["residue"])
+    # byte-level idioms become the typed cat_bytes.h helpers; a void* parameter becomes a template parameter
+    (d / "pk.h").write_text("#include <cstring>\ntemplate <typename T, int N> struct pk {\n    T data[N];\n"
+                            "    pk(ap_uint<32 * N> u) { *reinterpret_cast<ap_uint<32 * N>*>(data) = u; }\n"
+                            "    inline void copy_from( const void* src ) { memcpy( data, src, sizeof(data) ); }\n"
+                            "    inline void set_zero() { memset( data, 0, sizeof(data) ); }\n};\n", encoding="utf-8")
+    (d / "k.cpp").write_text('#include "k.h"\n#include "pk.h"\n' + (d / "k.cpp").read_text(encoding="utf-8").split("\n", 1)[1], encoding="utf-8")
+    shutil.rmtree(out)
+    rewrite_design(d, out, CATAPULT, top="top")
+    pk = (out / "pk.h").read_text(encoding="utf-8")
+    assert pk.startswith('#include "cat_bytes.h"') and (out / "cat_bytes.h").exists()
+    assert "cat_store<ac_int<32 * N, false>>(data, u);" in pk and "template <class P0> inline void copy_from( const P0 * src )" in pk
+    assert "cat_memcpy( data, src, sizeof(data) );" in pk and "cat_memset0(data, sizeof(data) );" in pk
+    # a header the agent writes with float types gets its include; native float in the DUT is flagged
+    (out / "helper.h").write_text("inline ac_ieee_float32 twice(ac_ieee_float32 x) { return x + x; } // exp(x) in a comment\n", encoding="utf-8")
+    (out / "k.cpp").write_text(c + "float f(ac_ieee_float32 a) { return a.to_float() * 2; }\n", encoding="utf-8")
+    assert insert_required_includes(out, CATAPULT) == ["helper.h: #include <ac_std_float.h>", "k.cpp: #include <ac_std_float.h>"]
+    static = check_translated_design(out, CATAPULT)
+    assert [l["text"] for l in static["leftovers"]] == ["float f(ac_ieee_float32 a) { return a.to_float() * 2; }"]
 
 
 def test_compile_errors_in_the_prepass_output_become_residue():
@@ -240,6 +282,23 @@ def test_repair_top_uses_the_function_the_testbench_calls(tmp_path: Path):
     assert repair_top(d)["top"] == "aes_encrypt"
 
 
+
+def test_normalize_vitis_script_sets_variables_include_paths_and_drops_removed_options(tmp_path: Path):
+    from hlsfactory_agent.translate import normalize_vitis_script
+
+    d = tmp_path / "accum"
+    (d / "lib").mkdir(parents=True)
+    (d / "lib" / "common.h").write_text("#pragma once\n", encoding="utf-8")
+    (d / "accum.cpp").write_text('#include "common.h"\nvoid accum() {}\n', encoding="utf-8")
+    (d / "synth.tcl").write_text("open_project -reset ${project_name}_prj\nset_top accum\nadd_files accum.cpp\nadd_files -tb tb.cpp\n"
+                                 "config_interface -trim_dangling_width 0\ncsynth_design\n", encoding="utf-8")
+    assert normalize_vitis_script(d) == {"variables_set": ["project_name"], "cflags": "-I[pwd]/lib",
+                                         "options_dropped": ["config_interface -trim_dangling_width 0"]}
+    tcl = (d / "synth.tcl").read_text(encoding="utf-8")
+    assert tcl.startswith("set project_name accum\n") and 'add_files accum.cpp -cflags "-I[pwd]/lib"' in tcl and "add_files -tb tb.cpp\n" in tcl
+    assert normalize_vitis_script(d) == {}  # idempotent
+
+
 def test_prepass_places_dataflow_blocks_on_channel_only_stages(tmp_path: Path):
     d = tmp_path / "design"
     d.mkdir()
@@ -257,6 +316,25 @@ def test_prepass_places_dataflow_blocks_on_channel_only_stages(tmp_path: Path):
     assert c.count("#pragma hls_design block") == 1  # consume takes an array, helper is inlined, top is the top
     assert [b["function"] for b in log["blocks"]] == ["produce"]
 
+
+
+def test_prepass_finds_dataflow_behind_a_macro_and_stages_in_other_headers(tmp_path: Path):
+    d = tmp_path / "design"
+    d.mkdir()
+    (d / "defs.h").write_text("#define PRAGMA(x) _Pragma(#x)\n#define DF_REGION PRAGMA( hls dataflow )\n", encoding="utf-8")
+    (d / "stages.h").write_text(
+        "#include <hls_stream.h>\nconstexpr int ceil_div(int a, int b) { return (a + b - 1) / b; }\n"
+        "template <int N> void produce(hls::stream<int> &o) { o.write(N); }\n",
+        encoding="utf-8",
+    )
+    (d / "k.cpp").write_text(
+        '#include "defs.h"\n#include "stages.h"\n'
+        "void top(hls::stream<int> &o) {\n    for (int i = 0; i < 2; ++i)\n    DF_REGION\n    {\n        produce<ceil_div(4, 2)>(o);\n    }\n}\n",
+        encoding="utf-8",
+    )
+    log = rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
+    assert [b["function"] for b in log["blocks"]] == ["produce"]  # ceil_div returns a value
+    assert "#pragma hls_design block\ntemplate <int N> void produce(" in (tmp_path / "out" / "stages.h").read_text(encoding="utf-8")
 
 # --- Catapult directives (forms confirmed on Catapult 2026.2, 2026-09-16) ---------------
 
@@ -399,6 +477,23 @@ def test_check_fences_agent_edits_to_the_residue(tmp_path: Path):
     (out / "mac.cpp").write_text(kernel.replace('#include "ac_channel.h"\n', ""), encoding="utf-8")
     r = check_translated_design(out, CATAPULT, dir_prepass=pre)
     assert r["checks"]["edits_within_residue"] is False and r["fenced_edits"][0]["prepass"] == '#include "ac_channel.h"'
+    # fence repair puts the fenced line back and keeps the licensed edit
+    from hlsfactory_agent.translate import restore_fenced
+
+    (out / "mac.cpp").write_text(kernel.replace('#include "ac_channel.h"\n', "").replace("out.write(in.read());", "out.write(in.read()); // fix"), encoding="utf-8")
+    assert list(restore_fenced(out, pre, CATAPULT)) == ["mac.cpp"]
+    fixed = (out / "mac.cpp").read_text(encoding="utf-8")
+    assert '#include "ac_channel.h"' in fixed and "// fix" in fixed
+    assert check_translated_design(out, CATAPULT, dir_prepass=pre)["checks"]["edits_within_residue"] is True
+    # a header only the testbench includes is testbench code: not fenced
+    from hlsfactory_agent.translate import testbench_files
+
+    for d in (pre, out):
+        (d / "tb_util.h").write_text("inline double gold(double x) { return x; }\n", encoding="utf-8")
+        (d / "testbench.cpp").write_text('#include "tb_util.h"\n#include "mac.cpp"\nint main() { return 0; }\n', encoding="utf-8")
+    assert testbench_files(out) == {"testbench.cpp", "tb_util.h"}
+    (out / "tb_util.h").write_text("inline double gold(double x) { return x * 1.0; }\n", encoding="utf-8")
+    assert check_translated_design(out, CATAPULT, dir_prepass=pre)["checks"]["edits_within_residue"] is True
 
 
 def test_check_flags_pragma_kind_missing_from_the_report(tmp_path: Path):
@@ -445,6 +540,9 @@ def test_catapult_degrade_step_reads_the_number_from_the_log(tmp_path: Path):
     (failed / "catapult.log").write_text("#  Minimum II of '4' is required to schedule the design (SCHD-87)\n", encoding="utf-8")
     assert catapult_degrade_step(failed, tmp_path / "d1") == "relax_ii:4"
     assert (tmp_path / "d1" / "k.c").read_text(encoding="utf-8").count("init_interval 4") == 1  # the 8 stays
+    (failed / "catapult.log").write_text("# Failed Loop: II=4  Usable clock=4.0000ns  total feedback in loop=3Cy  Maximum allowed budget=48.0000ns  "
+                                         "Sequential Delay of loop(ns)=55.9754ns  Delay exceeds budget by=7.9754ns (SCHD-85)\n", encoding="utf-8")
+    assert catapult_degrade_step(failed, tmp_path / "d1b") == "relax_ii:5"  # ceil(4 * 55.98 / 48)
     (failed / "catapult.log").write_text(
         "# Error: insufficient resources 'x' to schedule '/T'. 4 are needed, but only 2 instances are available (SCHD-4)\n"
         "# Error: please merge accesses to 'stage:data_rev._r.d:rsc' to reduce the number of required resources (SCHD-39)\n",
@@ -457,6 +555,14 @@ def test_catapult_degrade_step_reads_the_number_from_the_log(tmp_path: Path):
     assert (tmp_path / "d2b" / "run.tcl").read_text(encoding="utf-8").count("INTERLEAVE") == 1
     (failed / "k.cpp").write_text("static int data_rev[4][256];\n", encoding="utf-8")  # rows in parallel: one bank per row
     assert catapult_degrade_step(failed, tmp_path / "d2c") == "block:data_rev:256"
+    # already split and still short: the pipelined loop that indexes it gets the longer II instead
+    shutil.copytree(tmp_path / "d2c", tmp_path / "d2d_in", ignore=shutil.ignore_patterns("k.c"))
+    (tmp_path / "d2d_in" / "k.cpp").write_text("#pragma hls_pipeline_init_interval 1\nfor (int i = 0; i < 8; i++) { s += data_rev[i][0]; }\n"
+                                               "#pragma hls_pipeline_init_interval 1\nfor (;;) { t++; }\n", encoding="utf-8")
+    (tmp_path / "d2d_in" / "catapult.log").write_text((failed / "catapult.log").read_text(encoding="utf-8"), encoding="utf-8")
+    assert catapult_degrade_step(tmp_path / "d2d_in", tmp_path / "d2d") == "relax_ii_for:data_rev:x2:1"
+    assert (tmp_path / "d2d" / "k.cpp").read_text(encoding="utf-8").count("init_interval 2") == 1
+    (failed / "run.tcl").write_text("go assembly\ngo architect\n", encoding="utf-8")
     (failed / "catapult.log").write_text("# Error: something else\n", encoding="utf-8")
     assert catapult_degrade_step(failed, tmp_path / "d3") is None
     (failed / "k.cpp").write_text("    L:\n    #pragma hls_pipeline_init_interval 1\n    #pragma hls_unroll 4\n    for(;;){}\n", encoding="utf-8")
@@ -505,3 +611,78 @@ def test_parse_catapult_report(tmp_path):
     assert (r.status, r.latency, r.throughput, r.area) == ("PASS", 8, 10, 2220.6)
     assert r.directives == {"coef": 2, "tw": 0}
 
+
+def test_bambu_target_keeps_float_and_uses_its_own_pragma_forms(tmp_path: Path):
+    from hlsfactory_agent.tools import bambu_installation
+    from hlsfactory_agent.targets.bambu import BAMBU, parse_bambu_report, render_bambu_driver
+
+    assert bambu_installation(tmp_path / "nowhere") is None
+    (tmp_path / "app" / "usr" / "bin").mkdir(parents=True)
+    (tmp_path / "app" / "AppRun").touch()
+    (tmp_path / "app" / "usr" / "bin" / "bambu").touch()
+    inst = bambu_installation(tmp_path / "app")
+    assert inst.volumes[str(tmp_path / "app")]["mode"] == "ro" and inst.environment["BAMBU"] == "/opt/panda/bambu/AppRun"
+    assert "--top-fname=mac" in render_bambu_driver("mac", ["mac.cpp"]) and "-lm" in render_bambu_driver("mac", ["mac.cpp"])
+
+    src = tmp_path / "in"
+    src.mkdir()
+    (src / "k.cpp").write_text(
+        "#include <ap_int.h>\n#include <complex>\n#include <math.h>\n"
+        "void k(ap_int<8> a[4], float *o) {\n    std::complex<float> z(1.0f, 2.0f);\n"
+        "    for (int i = 0; i < 4; i++) {\n#pragma HLS UNROLL factor=2\n#pragma HLS PIPELINE II=1\n        o[i] = cosf(a[i]) + fabs(z.real());\n    }\n}\n",
+        encoding="utf-8",
+    )
+    (src / "testbench.cpp").write_text("int main() { return 0; }\n", encoding="utf-8")
+    log = rewrite_design(src, tmp_path / "out", BAMBU, "k")
+    text = (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")
+    assert "#pragma HLS unroll factor=2\n    for" in text and "pipeline" not in text.lower()
+    assert "ac_complex<float>" in text and "float *o" in text and "cosf(" in text and "cat_abs" not in text
+    assert [d["kind"] for d in log["pragmas_dropped"]] == ["pipeline"] and not log["top_marker"]["inserted"] and not log["residue"]
+
+    (src / "k.h").write_text("#include <ap_int.h>\ntypedef ap_int<13> dout_t;\ndout_t k(ap_int<8> A[4], int w);\n", encoding="utf-8")
+    (src / "k.cpp").write_text(
+        "#include \"k.h\"\ndout_t k(ap_int<8> A[4], int w) {\n    dout_t acc = 0;\n    L: for (int i = 0; i < 4; i++) {\n#pragma HLS UNROLL\n        if (i < w) return acc;\n        acc += A[i];\n    }\n    return acc + 1;\n}\n",
+        encoding="utf-8",
+    )
+    (src / "testbench.cpp").write_text("#include \"k.h\"\nint main() {\n    ap_int<8> a[4];\n    dout_t r = k(a, 2);\n    return r != 3;\n}\n", encoding="utf-8")
+    log = rewrite_design(src, tmp_path / "out2", BAMBU, "k")
+    text = (tmp_path / "out2" / "k.cpp").read_text(encoding="utf-8")
+    assert "void k(ac_int<8, true> A[4], int w, dout_t &ret_out) {" in text and "{ ret_out = acc + 1; return; }" in text and "{ ret_out = acc; return; }" in text
+    assert "    L:\n    #pragma HLS unroll\n    for (int i" in text  # Bambu wants the loop right after the pragma, the label above
+    assert "void k(ac_int<8, true> A[4], int w, dout_t &ret_out);" in (tmp_path / "out2" / "k.h").read_text(encoding="utf-8")
+    assert [r["line"] for r in log["residue"] if r["file"] == "testbench.cpp"] == [4]
+
+    (tmp_path / "synth_stdout.log").write_text("mac.cpp:4:13: error: Missing interface mode attribute\nerror -> Front-end compiler returns an error during compilation 2\n", encoding="utf-8")
+    r = parse_bambu_report(tmp_path)
+    assert (r.status, r.failure_class) == ("FAILED", "missing-interface") and r.first_error.startswith("mac.cpp:4:13")
+    (tmp_path / "synth_stdout.log").write_text("    Total estimated area: 1421\n    Estimated number of DSPs: 8\n  Total number of flip-flops in function _Z3mac: 871\n", encoding="utf-8")
+    assert parse_bambu_report(tmp_path).status == "FAILED"  # no RTL written
+    (tmp_path / "mac.v").touch()
+    r = parse_bambu_report(tmp_path)
+    assert (r.status, r.area, r.resources) == ("PASS", 1421.0, {"DSP": 8, "FF": 871})
+
+    from hlsfactory_agent.targets.bambu import bambu_degrade_step
+
+    (tmp_path / "run_bambu.sh").write_text(render_bambu_driver("mac", ["mac.cpp"]), encoding="utf-8")
+    assert bambu_degrade_step(tmp_path, tmp_path / "d1") is None
+    (tmp_path / "synth_stdout.log").write_text("    Parameter @500069 a\nerror -> unexpected pattern\n", encoding="utf-8")
+    assert bambu_degrade_step(tmp_path, tmp_path / "d1") == "interface:minimal"
+    assert "--generate-interface=MINIMAL" in (tmp_path / "d1" / "run_bambu.sh").read_text(encoding="utf-8") and not (tmp_path / "d1" / "mac.v").exists()
+
+
+def test_retry_stats_and_stage_timer():
+    from hlsfactory_agent.stats import StageTimer, retry_stats
+
+    t = StageTimer()
+    with t("oracle"):
+        pass
+    assert set(t.seconds) == {"oracle"}
+    rows = [
+        {"design": "a", "attempts": [{"attempt": 1, "passed": False, "failures": ["3 edit(s) outside the residue list"]}, {"attempt": 2, "passed": True, "failures": []}]},
+        {"design": "b", "attempts": [{"attempt": 1, "passed": False, "failures": ["1 line(s) still use the source tool's dialect"]}, {"attempt": 2, "passed": False, "failures": ["1 line(s) still use the source tool's dialect"]}]},
+        {"design": "c", "attempts": [{"attempt": 1, "passed": True, "failures": []}]},
+    ]
+    rs = retry_stats(rows)
+    assert rs["first_pass"] == {1: 1, 2: 1} and rs["never"] == ["b"]
+    assert [x["design"] for x in rs["thrashing"]] == ["b"] and rs["thrashing"][0]["category"] == "dialect"
+    assert rs["transitions"] == {"dialect->same": 1, "fence->pass": 1}
