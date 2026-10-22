@@ -17,3 +17,6 @@ wheels/
 agents.md
 
 .DS_Store
+
+# generated test output
+tests/test_outputs/
