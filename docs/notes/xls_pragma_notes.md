@@ -2,6 +2,7 @@
 
 XLS paths are relative to `xls/xls/contrib/xlscc/` unless noted. Vitis facts come from the AMD UG1399 pages listed under [Sources](#sources), fetched 2026-09-28. **The fetch tool gave summaries of those pages, not the raw text, so check exact option spellings on the pages themselves.**
 
+
 ## Legend
 
 - ⭐ = likely to be used or seen often in a Vitis → XLS translation
@@ -63,7 +64,7 @@ XLS paths are relative to `xls/xls/contrib/xlscc/` unless noted. Vitis facts com
 
 | | Pragma / attribute | What it does | Usage | Defined | Vitis equivalent |
 |---|---|---|---|---|---|
-| ⭐ | `hls_fifo_depth(N)` | Sets the FIFO depth of an **internal** `__xls_channel`. | `[[hls_fifo_depth(4)]] static __xls_channel<int> internal;` (test `LocalChannel` in `unit_tests/translator_proc_test.cc`) | `cc_parser.cc:619` | ⚠️ `#pragma HLS stream variable=<v> depth=N`. **Caution:** the Vitis doc text says depth is "relevant only for array streaming in DATAFLOW channels," which suggests it targets C arrays converted to FIFOs, not `hls::stream` variables. Check how Vitis sets the depth of an `hls::stream`. The Vitis `type=fifo/pipo/shared/unsync` option has no XLS equivalent (❓). |
+| ⭐ | `hls_fifo_depth(N)` | Sets the FIFO depth of an **internal** `__xls_channel`. | `[[hls_fifo_depth(4)]] static __xls_channel<int> internal;` (test `LocalChannel` in `unit_tests/translator_proc_test.cc`) | `cc_parser.cc:619` | ⚠️ `#pragma HLS stream variable=<v> depth=N`. **Caution:** the Vitis doc text says depth is "relevant only for array streaming in DATAFLOW channels," which suggests it targets C arrays converted to FIFOs, not `hls::stream` variables. Check how Vitis sets the depth of an `hls::stream`. The Vitis `type=fifo/pipo/shared/unsync` option has no XLS equivalent (❓). **Probed 2026-10-22:** the depth does reach the IR and the Verilog; see [Experiment 1](xls_pragma_experiment_results.md#experiment-1-hls_fifo_depth-on-an-internal-channel). |
 | | `hls_channel_strictness(mode)` | Controls how multiple reads/writes on one channel are legalized. Modes (`xls/xls/ir/channel.h:338`): `proven_mutually_exclusive` (default), `runtime_mutually_exclusive`, `total_order`, `runtime_ordered`, `arbitrary_static_order`. Can also be set with `--channel_strictness` / `--default_channel_strictness`. | `[[hls_channel_strictness(total_order)]]` on a channel declaration | `cc_parser.cc:516`; used at `translate_block.cc:96` | ❓ none found. The Vitis pragma list has nothing similar. |
 
 ### Data and type pragmas
