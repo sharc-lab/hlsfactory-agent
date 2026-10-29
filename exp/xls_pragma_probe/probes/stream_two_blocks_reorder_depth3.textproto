@@ -1,0 +1,7 @@
+# proto-file: xls/contrib/xlscc/hls_block.proto
+# proto-message: xlscc.HLSBlock
+# Block spec for the top function (free-function style needs one; run.sh
+# passes it with --block_pb ... --block_pb_text).
+name: "top"
+channels { name: "in"  is_input: true  type: CHANNEL_TYPE_FIFO }
+channels { name: "out" is_input: false type: CHANNEL_TYPE_FIFO }

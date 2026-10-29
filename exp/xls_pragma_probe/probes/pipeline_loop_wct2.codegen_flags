@@ -1,0 +1,2 @@
+# Let the scheduler use up to 2 cycles per activation (whole proc).
+--worst_case_throughput=2

@@ -1,7 +1,8 @@
-// Experiment 4 (docs/notes/xls_pragma_experiment_results.md).
+// Experiment 6 (docs/notes/xls_pragma_experiment_results.md).
 // Burst variant: the producer writes 4 values per input and the consumer reads
 // all 4 and sums them, so several values can be in flight in xfer at once.
-// This is the case where a Vitis stream depth matters.
+// This is the case where a Vitis stream depth matters. Here xfer has no depth
+// pragma (default depth 0); compare stream_two_blocks_burst_depth4.cc.
 #pragma hls_design block
 void producer(__xls_channel<int, __xls_channel_dir_In>& in,
               __xls_channel<int, __xls_channel_dir_InOut>& xfer) {
@@ -26,7 +27,7 @@ void consumer(__xls_channel<int, __xls_channel_dir_Out>& out,
 #pragma hls_top
 void top(__xls_channel<int, __xls_channel_dir_In>& in,
          __xls_channel<int, __xls_channel_dir_Out>& out) {
-  [[hls_fifo_depth(4)]] static __xls_channel<int, __xls_channel_dir_InOut> xfer;
+  static __xls_channel<int, __xls_channel_dir_InOut> xfer;
   producer(in, xfer);
   consumer(out, xfer);
 }

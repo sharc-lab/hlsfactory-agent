@@ -1,0 +1,2 @@
+# Turn off the input/output registers codegen puts on every block port.
+--flop_inputs=false --flop_outputs=false
