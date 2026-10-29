@@ -82,3 +82,62 @@ Didn't:
 - k_rr_a is not rerun with a longer timeout.
 - The census second pass has not resumed yet.
 
+
+Later:
+- Smoke test of 5 designs on deepseek-v4.1-flash, registered with Pi through `models.json`: all 5 pass checks, pool and histogram synthesize. Cost $0.99.
+- Smoke fixes: the fence restores deleted folders, chmod after each agent run, channel aliases become static, `#else` members stay non-static, and a model guard catches Pi's silent fallback.
+- The pre-pass wraps double literals in float-typed ternaries (`: fp_t(0.0)`, k_rr_a CRD-42). The check flags `float(...)` casts (cnn CIN-290).
+- census3 started on v4.1-flash over 25 repos.
+- The 9 fpgaconvnet `*_layer` designs failed Catapult with CRD-1066 in hlslib `Flatten.h`. Helper types sit in an anonymous namespace, so the class using them differs between the two translation units. The pre-pass now names such namespaces (`inline namespace anon_<file>`) when they hold only types, templates and inline code. relu_layer then synthesizes (latency 2).
+
+## 2026-10-23 (Friday)
+
+- The NFS home went stale on 10-15 23:09 and stayed down a week: `uv` lives there, so census3's last 7 repos failed in 2 s each. Resumed with the venv's own python (local disk) and a retry on exit 126/127; 183 of 242 designs were already done. A `uv run` from the tmux shell then removed and recreated the venv under the running census: it survived, but never again (memory updated).
+- Census3 analysis (183 designs): 172 pass checks, 89 synthesize. Fence failures are the main retry cause (98 designs on attempt 1); 122 whole-restore repairs were rejected 103 times. The rejected single-hunk cases were our own pre-pass gaps: `<ap_axi_sdata.h>` with no shim (42 designs; the licensing regex missed clang's `fatal error`), `<gmp.h>`, DP-HLS relative includes to flattened files, and a sqrt shim that overflowed (NaN in backprop's testbench).
+- Changes: `ap_axi_sdata.h` shim; sqrt through ac_math's float overload (backprop testbench passes); flattened-include resolution; host-only includes dropped; `fatal error` licensed; fence repair restores per file then per hunk and licenses what cannot be restored; the agent container no longer dies after `sleep 2h` (resnet18, 7353 s); Vitis budget 900 s (saves ~6 h a census); SCHD-39 array name from scoped messages (DP-HLS rounds targeted the class `Align`); the `BLOCK_SIZE` recovery step dropped (0 of 6).
+- Experiments: a 10 ns clock does not clear DP-HLS's SCHD-20 (a loop recurrence in cycles, not a path delay), so no clock-relax step. FIFO depth against Catapult's `cap>=0` assertion and the corrected DP-HLS recovery chain are running in tmux `hlsfactory`.
+- 30 tests pass; a fence rerun of 8 census3 designs on the new code is queued.
+
+## 2026-10-24 (Saturday)
+
+- Census4 finished overnight: all 242 designs, 25 repos, three lanes of 11/11/10 designs in parallel (32 containers, load ~26, 68 GB), 7.6 h wall from 13:44 to 21:22 (census3 at 3 in flight took 27 h for 183). No license-checkout failures at 32 Catapult and Vitis seats. Cost $14.58.
+- Results: 236 pass checks (98%), 122 synthesize in Catapult (50%; 98 direct, 24 after recovery). On the 192 designs both passes ran, census4 vs census3: checks 187 vs 181, Catapult 99 vs 89, first-attempt passes 127 vs 87, cost $12.27 vs $15.34. On the 140 designs census2 also ran: Catapult 91 vs 60.
+- Fence repair: 137 repairs, 76 of them turned the attempt into a pass; 2678 fenced hunks, 623 restored, 300 licensed, 843 check rounds. Retries fell from 96 to 80 designs; the remaining retries are mostly leftover Vitis dialect, not the fence.
+- Catapult failures left: SCHD-20 25 (DP-HLS loop recurrences), timeouts 21, CIN-84 12 (arrays inside `ac_std_float`), ASSERT-1 8 (Catapult crash), CIN-15 5, SCHD-4 5. Recovery: relax_ii 16/96, relax_ii_for 5/5, interleave 3/48.
+- census3 (183 designs) and the smoke runs are archived under `/export/hdd/scratch/tshukla31/hlsfactory-census-archive/`. `RUN_STATISTICS.md`, the dashboard and WEEKLY_FINDINGS now describe census4 only.
+
+## 2026-10-25 (Sunday)
+
+- Dynamatic is the fourth target, as an initial exploration of translating into a smaller language (plain C, one file, `main()` with `CALL_KERNEL`). Image `hlsfactory/dynamatic:latest` built from upstream `main` in 15 minutes; `fir` from the integration tests compiles, writes VHDL and matches in GHDL co-simulation in 17 s.
+- Harness: `TargetSpec.language="c"` (clang C17 syntax check, clang++ testbench build, no `testbench.cpp`), `fence=False`, `ToolInstallation.image` so `run_synth` can run in a tool's own image, `targets/dynamatic.py`, pre-pass entries for C types and clang loop pragmas, prompt wording for the C target. 31 tests pass.
+- First run, 16 designs for $0.20: all 15 translatable ones pass the checks on attempt 1; 10 synthesize and match in co-simulation (all 8 ProgSG kernels, ave8, fir). The same 8 ProgSG kernels mostly timed out in Vitis and none passed Catapult directly in census4.
+- Fixed from the run: unsized array parameters crash the translator (pre-pass sizes them, the check forbids them); the classifier read an INFO line (`Placed simple buffers`) as a failure class (fatal lines only now); timeouts keep the tool log. Found, not fixed: int<->float units are 32-bit only (idct), a second `CALL_KERNEL` breaks the verifier (lstm_n), ScaleHLS gesummv's GHDL co-simulation exceeds 1200 s.
+- Design names collide across repos in one runs dir: the ScaleHLS pair was rerun in `runs/dyn1_scalehls`. Nothing committed.
+
+Evening: image rebuilt with CBC (`--enable-cbc`), driver on `fpga20` MILP buffering, recovery falls back to
+`on-merges`. First fpga20 run failed every design: the profiler reads `main()`'s stdout as its input vectors, so
+any `printf` breaks `compile`. Pre-pass redirects prints to stderr, check forbids stdout, rule in the prompt.
+`TargetSpec.extra_checks` added; Dynamatic's requires one `CALL_KERNEL` (lstm_n now fails the check, not the
+synthesis). Rerun on the same translations (`runs/dyn2`, no agent calls): all 10 still pass co-sim, 3 to 5x
+fewer cycles on the independent-iteration kernels (stencil2d 421980 -> 78503, fir 84499 -> 17901), bicg and
+jacobi-1d unchanged (loop-carried dependence). adpcm's mismatch is an out-of-bounds load the profiler caught.
+Synthesis is 1 to 8 minutes per design now (seconds before). 31 tests pass; nothing committed.
+
+## 2026-10-28 (Tuesday)
+
+Extraction repair so the original testbenches run (step 1 of the plan). Of census4's 144 oracle losses, 52 were
+link failures (the oracle compiled every source while the testbench already included the kernel, or a second
+`main`), 52 missing headers (escaped `../../include` paths, headers never copied, TAPA, `ap_cint.h`), the rest
+data or runtime. New `hlsfactory_agent/extraction_repair.py`: `oracle_sources` takes the `synth.tcl` source set
+and `-cflags`, drops a source another unit includes and extra `main`s; `repair_includes` points escaped includes
+at the local copy or recovers the file from a repository clone; `repair_data_files` likewise for data files.
+`run_oracle_check` builds that set, falls back to one translation unit on duplicate symbols, takes `dir_scratch`
+and a timeout; `ap_cint.h` stand-in; `run_repo.py --oracle-only --repair-extraction --repo-clone --oracle-timeout
+--reoracle`. Rerun on copies of the census4 extractions (`runs/oracle5/<repo>`, 900 s budget, no agent):
+oracle 98 -> 170 of 242 (balor 0 -> 40, DP-HLS 0 -> 16, ThunderGP 1 -> 9, ScaleHLS 11 -> 14, CLINK 0 -> 2,
+pasta 0 -> 2). Two SERI "passes" were hollow (a stub testbench that never called the kernel; now the kernel
+compiles and clang rejects an implicit `ap_uint` conversion). Left: AutoNTT (TAPA, 10), NN2FPGA (agent-written
+`test_config.hpp` against a generated matrix, 14), fpgaconvnet (goldens made up, 21), S2CBench (agent-written
+testbenches, 8), DP-HLS 9 (clang strictness on array references, `N_BLOCKS`, 2 crashes). Mishap: cloning the
+25 repos into the scratchpad filled the shared 70 GB root volume; clones now live under /export/hdd (memory note).
+34 tests pass; nothing committed.

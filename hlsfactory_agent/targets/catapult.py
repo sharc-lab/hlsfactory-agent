@@ -175,7 +175,7 @@ RE_MIN_II = re.compile(r"Minimum II of '(\d+)' is required")
 # a feedback loop that misses its budget at the tried II: scaling the II by delay/budget is the smallest that fits
 RE_FAILED_LOOP = re.compile(r"Failed Loop: II=(\d+).*?Maximum allowed budget=([\d.]+)ns\s+Sequential Delay of loop\(ns\)=([\d.]+)ns")
 RE_PORTS = re.compile(r"(\d+) are needed, but only (\d+) instances are available \(SCHD-4\)")
-RE_MERGE = re.compile(r"please merge accesses to '(?:[^':]*:)?([A-Za-z_]\w*)[^']*:rsc")
+RE_MERGE = re.compile(r"please merge accesses to '(?:[^']*:)?([A-Za-z_]\w*)[^':]*:rsc")  # the array is the last scope segment: 'A::f:buf.data:rsc' names buf
 RE_II_PRAGMA = re.compile(r"(#pragma\s+hls_pipeline_init_interval\s+)(\d+)")
 RE_UNROLLED_PIPE = re.compile(r"\$PROJECT_HOME/([^()\s]+)\((\d+)\): Cannot pipeline a fully unrolled loop")
 SYNTH_OUTPUTS = ("Catapult", "catapult.log", "synth_stdout.log", "synth.tcl", "synth.json")
@@ -223,8 +223,6 @@ def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
             if new != text:
                 p.write_text(new, encoding="utf-8")
         return f"relax_ii:{target_ii}"
-    from hlsfactory_agent.scan import array_dims, collect_defines
-
     var, needed, have = merge.group(1), int(ports.group(1)), int(ports.group(2))
     tcl = dir_next / "run.tcl"
     lines = tcl.read_text(encoding="utf-8").splitlines()
@@ -237,19 +235,14 @@ def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
             return f"relax_ii_for:{var}:x{factor}:{n}"
     if not any(l.startswith("proc resource_directive") for l in lines):
         lines[lines.index("go architect"):lines.index("go architect")] = RESOURCE_DIRECTIVE_PROC.replace("{top}", _top_name(dir_next) or "*").splitlines()
-    dims = array_dims(dir_next, var, collect_defines(dir_next)) or []
-    if len(dims) >= 2 and not any(l.startswith(f"resource_directive {var} -BLOCK_SIZE") for l in lines):
-        # rows of a 2-D array accessed in parallel: one bank per row (Catapult flattens row-major)
-        size, step = math.prod(dims[1:]), "block"
-        lines.insert(lines.index("go architect"), f"resource_directive {var} -BLOCK_SIZE {size}")
+    # interleaving by the port shortfall; a row-wise block split was tried on 2-D arrays and rescued none of 6 (census3)
+    size, step = -(-needed // have), "interleave"
+    prev = next((i for i, l in enumerate(lines) if l.startswith(f"resource_directive {var} -INTERLEAVE ")), None)
+    if prev is not None:  # a repeat round compounds the split instead of adding a duplicate line
+        size *= int(lines[prev].rsplit(" ", 1)[1])
+        lines[prev] = f"resource_directive {var} -INTERLEAVE {size}"
     else:
-        size, step = -(-needed // have), "interleave"
-        prev = next((i for i, l in enumerate(lines) if l.startswith(f"resource_directive {var} -INTERLEAVE ")), None)
-        if prev is not None:  # a repeat round compounds the split instead of adding a duplicate line
-            size *= int(lines[prev].rsplit(" ", 1)[1])
-            lines[prev] = f"resource_directive {var} -INTERLEAVE {size}"
-        else:
-            lines.insert(lines.index("go architect"), f"resource_directive {var} -INTERLEAVE {size}")
+        lines.insert(lines.index("go architect"), f"resource_directive {var} -INTERLEAVE {size}")
     tcl.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return f"{step}:{var}:{size}"
 
@@ -426,7 +419,7 @@ CATAPULT = TargetSpec(
     dut_forbidden_patterns=(
         r"\bcomplex\s*<",  # std::complex is not synthesizable (CIN-15); the pre-pass already made it ac_complex
         r"\b(tan|atan2?)f?\s*\(",  # no synthesizable float math (CIN-16); cos/sin/sqrt and exp/log/pow have shims
-        r"\.to_(float|double)\s*\(|\((float|double)\)",  # back to native float in the DUT: its arithmetic fails synthesis (CIN-290)
+        r"\.to_(float|double)\s*\(|\((float|double)\)|(?<![\w.:])(float|double)\s*\((?!\s*\))",  # back to native float in the DUT: its arithmetic fails synthesis (CIN-290)
         r"\b(?:std::)?(memcpy|memset)\s*\(|\breinterpret_cast\s*<",  # byte-level copies and casts (CIN-71); cat_bytes.h has typed ones
         r"^\s+ac_channel\s*<(?:[^;&()]|\([^()]*\))*>\s+[A-Za-z_]\w*(?:\s*\[[^\]]+\])*\s*(?:\(\s*\"[^\"]*\"\s*\))?\s*;",  # a local channel must be static (HIER-6)
     ),

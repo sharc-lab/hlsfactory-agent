@@ -31,6 +31,18 @@ With `--require-source-synth`, a design whose Vitis synthesis did not pass is no
 - Script repair: `translate.normalize_vitis_script` then sets the Tcl variables the script uses but never
   defines (to the design name), adds `-I[pwd]/<dir>` for each folder that resolves an otherwise unresolvable
   quoted include (plus `-DHLSLIB_SYNTHESIS` when the design carries hlslib), and drops options 2024.1 removed.
+- Extraction repair (`hlsfactory_agent/extraction_repair.py`, `run_repo.py --repair-extraction --repo-clone DIR`,
+  log in `<design>/extraction_repair.json`), in place on the design before the oracle: `repair_includes` points a
+  quoted include that escapes the folder (`../../include/x.h`) at the copy the extraction placed next to the
+  includer, else recovers the file from a clone of the repository (by path suffix; several hits resolved by
+  content, then the design name in the path); `repair_data_files` recovers data files named in string literals
+  the same way (a leading `/` joins the design's `DATA_DIR` define). Tool and system headers are left alone.
+- Oracle sources (`extraction_repair.oracle_sources`): the units `run_oracle_check` compiles are the ones
+  `synth.tcl` lists (`add_files`, `-tb`, `-cflags`/`-csimflags` kept as `-I`/`-D` flags, `[pwd]` the design dir),
+  minus a source another unit `#include`s and minus extra `main`s (the `-tb` one wins); the script-less fallback
+  is every top-level source. When separate compilation fails on duplicate symbols the units are built once more
+  as one translation unit, testbench last (`build_mode: unity`). `ap_cint.h` (retired C types) has a stand-in
+  in `vitis_hls_include/`.
 - `exp/run_translate/import_dataset.py` produces the same layout from HLSFactory's built-in dataset folders
   (`dataset_hls.tcl`); designs whose testbench spans several source files are skipped.
 
@@ -117,7 +129,9 @@ Left as residue / not handled:
 Per-target forms: `PRAGMA_FORMS` spells the loop and inline pragmas (Catapult `hls_pipeline_init_interval` /
 `hls_unroll` / `hls_design inline`; Bambu `#pragma HLS unroll [factor=n]` / `#pragma HLS inline`, no loop
 pipelining, so `PIPELINE` is dropped) and `DIALECT_TYPES` the type substitutions (Bambu keeps native
-`float`/`double`; only `std::complex` becomes `ac_complex`). The float shims, `cat_abs`, static local channels,
+`float`/`double`; only `std::complex` becomes `ac_complex`; Dynamatic maps `ap_int<N>` to `int8/16/32_t` or
+`_BitInt(N)` and `hls_math.h` to `<math.h>`, pipelines and inlines are dropped, unroll becomes
+`#pragma clang loop unroll_count(n)`, and every print in the test program moves to stderr because the tool reads the program's stdout as the profiling vectors). The float shims, `cat_abs`, static local channels,
 dataflow blocks and the top marker are Catapult-only; sizing unsized parameters applies to both. Bambu-only:
 a loop label moves to its own line above the pragma (Bambu wants the loop right after it), and a top that
 returns a class by value becomes `void top(..., T &ret_out)` with its `return x;` rewritten (Bambu aborts on
@@ -154,9 +168,13 @@ the hidden return pointer); the testbench call sites are residue for the agent.
 - `run.tcl` sets `Input/CppStandard c++14` (relaxed `constexpr`, CRD-2388 under the c++11 default).
 - After each attempt, before the checks: a file missing a required include gets it on top (the pre-pass rule,
   applied to files the agent wrote or edited).
-- Fence repair: when the checks fail with fenced edits, the pre-pass text is put back on exactly those hunks and
-  the checks rerun, at no agent cost. The repair is kept when compile and testbench results are no worse
-  (recorded as `fence_repair` in the attempt log), otherwise the agent's text returns.
+- Fence repair: when the checks fail with fenced edits, the pre-pass text is put back mechanically, at no agent
+  cost: all hunks at once, then file by file, then hunk by hunk (at most `FENCE_REPAIR_ROUNDS` single-hunk
+  check rounds), keeping every restore whose compile and testbench results are no worse. A hunk whose restore
+  makes them worse shows the pre-pass text is not legal in that design, so it is licensed as residue (a line-0
+  item licenses a removed file) and the agent's edit stands. The attempt log records `fence_repair` with the
+  hunks restored and licensed. Missing headers are licensed up front too: the pre-pass compile check reads
+  clang's `fatal error` lines as well as `error` lines.
 
 ## 6. Static checks — `translate.check_translated_design`
 Independent of the agent's claims.
@@ -198,6 +216,9 @@ Running the tool (`run_synth_cached`):
   - Vitis HLS plus its matching Vivado at `/opt/amd/hls` and `/opt/amd/vivado`;
   - Bambu from an extracted AppImage (`BAMBU_APPDIR`) at `/opt/panda/bambu`, run through its `AppRun`
     (`$BAMBU` in the driver), which puts the bundled clang, ac_types and soft libm on the path;
+  - Dynamatic is the exception: it only ships as a from-source build, so `ToolInstallation.image` names its
+    own image (`DYNAMATIC_IMAGE`, default `hlsfactory/dynamatic:latest`, tree at `/opt/dynamatic`) and
+    `run_synth` runs there instead of in `hlsfactory-agent`;
   - licenses passed as environment.
 - The work dir is mounted at `/work`; the process is owned by the calling user.
 - The agent never shares this container; `run.py --agent-tools` (off by default) is the only way a tool reaches
@@ -211,7 +232,7 @@ Running the tool (`run_synth_cached`):
   needs 25-30 min to reach a scheduling verdict).
 
 Source and target sides:
-- Source: `targets/vitis.py` is a synth-only spec (Vitis HLS 2024.1, 2400 s budget); the `csynth.rpt` top-level
+- Source: `targets/vitis.py` is a synth-only spec (Vitis HLS 2024.1, 900 s budget: in census3 every passing run took under 4 min and the 14 that ran 40 min all timed out); the `csynth.rpt` top-level
   row is parsed into latency, interval, BRAM/DSP/FF/LUT.
 - Target: the Catapult spec, with `FAILURE_CLASSES` matched on the log.
 - `exp/run_translate/synth.py` re-runs the target gate over finished runs.
@@ -224,8 +245,9 @@ Recovery (`run_synth_degraded`, `run.py --degrade N`, default 2 rounds):
 - Catapult steps (`catapult_degrade_step`):
   - SCHD-87's minimum II raises every tighter `hls_pipeline_init_interval`; so does a failed feedback loop
     (SCHD-85: II x delay / budget, rounded up).
-  - SCHD-4's port shortfall splits the array SCHD-39 names: a 2-D array gets one bank per row
-    (`BLOCK_SIZE` = inner size), a 1-D array `INTERLEAVE ceil(needed/have)`, compounded on a repeat round.
+  - SCHD-4's port shortfall splits the array SCHD-39 names with `INTERLEAVE ceil(needed/have)`, compounded on
+    a repeat round; the array is the last scope segment of the name (`Align::f:dp_mem.data:rsc` is `dp_mem`).
+    A row-wise `BLOCK_SIZE` split for 2-D arrays rescued none of the 6 designs it ran on in census3 and is gone.
     The `resource_directive` proc is added when `run.tcl` has none.
   - An array already split (`INTERLEAVE` or `BLOCK_SIZE`, carried or added) that is still short collides in one
     bank (strided or data-dependent index): every pipelined loop that indexes it gets its II multiplied by
@@ -245,11 +267,24 @@ Recovery (`run_synth_degraded`, `run.py --degrade N`, default 2 rounds):
   attempt), synthesis and recovery counts.
 
 ## Targets
-| | Catapult | XLS (xlscc) | Bambu (PandA) |
-|---|---|---|---|
-| spec | `targets/catapult.py` | `targets/xlscc.py` | `targets/bambu.py` |
-| tool on chao-srv1 | Catapult Prime 2026.2, license `1717@ece-winlic` | xlscc not built (needs Bazel from source) | Bambu 2024.10 AppImage, extracted under `/export/hdd/scratch/tshukla31/tools` |
-| stages exercised | 0-8 | 0-7 | 0-8 (no directives) |
-| driver | `run.tcl` | `run_xlscc.sh` | `run_bambu.sh` (`--top-fname`, `--generate-interface=INFER`, `-lm`) |
-| PASS means | `rtl.rpt` written | not run | `<top>.v` written; area/DSP/FF from the log, no latency (no simulation) |
-| recovery | relax II, unpipeline, block/interleave | none | `--generate-interface=INFER` -> `MINIMAL` after `unexpected pattern` |
+| | Catapult | XLS (xlscc) | Bambu (PandA) | Dynamatic (EPFL) |
+|---|---|---|---|---|
+| spec | `targets/catapult.py` | `targets/xlscc.py` | `targets/bambu.py` | `targets/dynamatic.py` |
+| tool on chao-srv1 | Catapult Prime 2026.2, license `1717@ece-winlic` | xlscc not built (needs Bazel from source) | Bambu 2024.10 AppImage, extracted under `/export/hdd/scratch/tshukla31/tools` | built into the image `hlsfactory/dynamatic` (`docker_images/Dockerfile.dynamatic`, `main` of 2026-10-25, prebuilt LLVM, CBC solver, GHDL) |
+| stages exercised | 0-8 | 0-7 | 0-8 (no directives) | 0-8 (no directives, no fence: the pre-pass output is still C++) |
+| driver | `run.tcl` | `run_xlscc.sh` | `run_bambu.sh` (`--top-fname`, `--generate-interface=INFER`, `-lm`) | `run_dynamatic.dyn` (`set-src /work/<top>.c`, `compile --buffer-algorithm fpga20 --milp-solver cbc`, `write-hdl --hdl vhdl`, `simulate --simulator ghdl`) |
+| PASS means | `rtl.rpt` written | not run | `<top>.v` written; area/DSP/FF from the log, no latency (no simulation) | `out/hdl/<top>.vhd` written and the GHDL C/RTL co-simulation matches; latency = simulated cycles |
+| recovery | relax II, unpipeline, block/interleave | none | `--generate-interface=INFER` -> `MINIMAL` after `unexpected pattern` | `on-merges` buffering after a profiling or MILP failure; `compile --disable-lsq` when the log names the LSQ |
+
+Dynamatic is plain C with one file: the kernel `<top>.c` holds `main()`, which calls the kernel through
+`CALL_KERNEL` so the tool can dump co-simulation inputs (the harness's host stand-in for
+`dynamatic/Integration.h` is `hlsfactory_agent/dynamatic_include`). `TargetSpec.language="c"` switches the
+compile checks to `clang -std=c17` for the syntax check and `clang++ -x c++` for the testbench build (the tool
+compiles the same file both ways), drops `testbench.cpp` from the required files and rewords the prompt;
+`fence=False` leaves the agent free to collapse the C++ files into the one C file. The kernel rules the
+prompt carries (no calls, no local arrays, no pointers or globals, no 64-bit types, `_BitInt(N)` for other
+widths, `#pragma clang loop unroll_count(n)`, `#pragma DYN array_partition`) come from Dynamatic's
+`KernelCodeGuideLines.md`. Designs with `ap_fixed`, `hls::stream` or `hls::vector` are blocked before the
+pre-pass (`blocking_types`). `TargetSpec.extra_checks` holds target-specific static checks; Dynamatic's requires exactly
+one `CALL_KERNEL`, naming the function the kernel file is named after, since the co-simulation records a single
+transaction (lstm_n called it three times and failed only after a full synthesis).

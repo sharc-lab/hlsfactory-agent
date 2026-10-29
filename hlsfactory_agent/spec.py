@@ -50,8 +50,16 @@ class TargetSpec:
     # (regex a DUT file may use, include line it then needs): the pre-pass inserts it, the check enforces it
     required_includes: tuple[tuple[str, str], ...] = field(default_factory=tuple)
     blocking_types: tuple[str, ...] = field(default_factory=tuple)
+    # target-specific static checks on the agent's output: each returns failure messages (empty = pass)
+    extra_checks: tuple[Callable[[Path], list[str]], ...] = field(default_factory=tuple)
     # additional header directories copied into the run area as (source_dir, name_in_run_area)
     extra_include_dirs: tuple[tuple[Path, str], ...] = field(default_factory=tuple)
+    # "c++" (default) or "c": the compile checks and the prompt use clang -std=<cxx_std_check> for C, and the
+    # testbench lives in the kernel file (main) rather than in testbench.cpp
+    language: str = "c++"
+    # False when the pre-pass output is not yet legal for the target (a different language): the agent's edits are
+    # not fenced to the residue list
+    fence: bool = True
     # synthesis gate: runs in a fresh container with the tool named by `tool` bind-mounted read-only
     # (hlsfactory_agent.tools); `$NAME` in synth_command expands from the tool's and synth_env's variables
     tool: str = ""
@@ -75,6 +83,7 @@ class TargetSpec:
         d = asdict(self)
         d["include_dir"] = str(self.include_dir)
         d["extra_include_dirs"] = [[str(p), n] for p, n in self.extra_include_dirs]
+        d["extra_checks"] = [f.__name__ for f in self.extra_checks]
         d["parse_report"] = self.parse_report.__name__ if self.parse_report else None
         d["degrade_step"] = self.degrade_step.__name__ if self.degrade_step else None
         return d

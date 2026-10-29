@@ -33,6 +33,7 @@ from hlsfactory_agent.targets.catapult import (
     render_directives,
 )
 from hlsfactory_agent.targets.bambu import BAMBU, render_bambu_driver
+from hlsfactory_agent.targets.dynamatic import DYNAMATIC, render_dynamatic_driver
 from hlsfactory_agent.targets.xlscc import XLSCC, render_xlscc_driver
 from hlsfactory_agent.utils import load_jsonl_text
 
@@ -47,6 +48,17 @@ DOCKER_IMAGE_NAME = "hlsfactory-agent"
 CONTAINER_RUN_AREA = "/workspace/run_area"
 INPUT_DIR_NAME = "input_design"
 OUTPUT_DIR_NAME = "output_design"
+# OpenRouter models newer than Pi's built-in list; Pi silently falls back to another model for an unknown id.
+# Fields follow Pi's entry for deepseek/deepseek-v4-flash; prices are USD per million tokens from OpenRouter.
+PI_EXTRA_MODELS = {
+    "deepseek/deepseek-v4.1-flash": {
+        "name": "DeepSeek: DeepSeek V4.1 Flash", "api": "openai-completions", "baseUrl": "https://openrouter.ai/api/v1",
+        "compat": {"requiresReasoningContentOnAssistantMessages": True, "thinkingFormat": "deepseek"},
+        "reasoning": True, "input": ["text"], "cost": {"input": 0.01584, "output": 0.891, "cacheRead": 0.0054, "cacheWrite": 0},
+        "contextWindow": 1048576, "maxTokens": 384000,
+    },
+}
+PI_AGENT_DIR = ".pi/agent"  # under the run area; holds models.json
 
 SOURCE_SUFFIXES = (".cpp", ".cc", ".c", ".h", ".hpp")
 
@@ -56,7 +68,7 @@ SOURCE_SUFFIXES = (".cpp", ".cc", ".c", ".h", ".hpp")
 # --------------------------------------------------------------------------------------
 
 
-TARGETS: dict[str, TargetSpec] = {CATAPULT.name: CATAPULT, XLSCC.name: XLSCC, BAMBU.name: BAMBU}
+TARGETS: dict[str, TargetSpec] = {CATAPULT.name: CATAPULT, XLSCC.name: XLSCC, BAMBU.name: BAMBU, DYNAMATIC.name: DYNAMATIC}
 
 
 def get_target(name: str) -> TargetSpec:
@@ -98,7 +110,17 @@ def render_driver(target: TargetSpec, top: str, sources: list[str], testbench: s
         return render_xlscc_driver(top, sources)
     if target.name == "bambu":
         return render_bambu_driver(top, sources)
+    if target.name == "dynamatic":
+        return render_dynamatic_driver(top, sources)
     return render_catapult_run_tcl(top, sources, testbench)
+
+
+def compile_commands(target: TargetSpec) -> tuple[str, str]:
+    """(syntax check, testbench build) compiler prefixes. A C target is checked as C, the way its tool compiles
+    the kernel, and its test program is built as C++ the way Dynamatic's co-simulation builds it."""
+    if target.language == "c":
+        return f"clang -std={target.cxx_std_check}", "clang++ -std=c++17 -x c++"
+    return f"clang++ -std={target.cxx_std_check}", f"clang++ -std={target.cxx_std_check}"
 
 
 # --------------------------------------------------------------------------------------
@@ -125,6 +147,16 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
     inc = " ".join(f"-I{CONTAINER_RUN_AREA}/{name}" for name in target.include_dir_names)
     out = f"{CONTAINER_RUN_AREA}/{OUTPUT_DIR_NAME}"
     driver_example = render_driver(target, "<top_function>", ["<kernel>.cpp"], "testbench.cpp")
+    syntax_cc, build_cc = compile_commands(target)
+    src_glob = "*.c" if target.language == "c" else "*.cpp"
+    tb_rule = (
+        "- The testbench becomes `main()` in the kernel file (`<top_function>.c`); it keeps every check and returns 0 on success, 1 on failure.\n"
+        if target.language == "c" else
+        "- Apply the same translation to the testbench. The testbench must keep its checks and still return 0 on success and 1 on failure.\n"
+    )
+    required = (f"`<top_function>.c`, `{target.driver_file}`, `translation_report.md`, and `compile_log.txt`; no `testbench.cpp`"
+                if target.language == "c" else
+                f"at least one .cpp source, `testbench.cpp`, `{target.driver_file}`, `translation_report.md`, and `compile_log.txt`")
     if prepass:
         step2 = (
             "### Step 2: A mechanical pre-pass already ran\n"
@@ -133,14 +165,18 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
             "- Read `rewrite_log.json` first. Fix every residue item by hand.\n"
             "- Review the moved pragmas: the script places a loop pragma on the line before the nearest loop header; correct any it placed wrongly.\n"
             "- Do not redo the mechanical work; do verify it in Step 6.\n"
-            "- Change only the lines a residue item names and the few lines around them. Every other line of the pre-pass output is "
-            "already legal: leave it exactly as it is, with no renaming, reformatting or comment edits. You may add new lines anywhere.\n"
-            "- `synth.tcl` was intentionally not copied; the output gets its own driver script (Step 7).\n"
-            f"- `{target.driver_file}` and `directives.json` were generated from the input's resource pragmas. "
-            f"Do NOT rewrite `{target.driver_file}` from scratch. For every line in it starting with `# UNRESOLVED`, "
-            f"work out the numeric value (the expression and the #defines are in `{CONTAINER_RUN_AREA}/scan.json`), "
-            "replace that whole comment line with the finished directive; if the reason in parentheses says the directive does not apply "
-            "(array size unknown or over the register threshold), delete the line instead. Leave every other line alone.\n"
+            + ("- Change only the lines a residue item names and the few lines around them. Every other line of the pre-pass output is "
+               "already legal: leave it exactly as it is, with no renaming, reformatting or comment edits. You may add new lines anywhere.\n"
+               if target.fence else
+               "- The pre-pass only swapped headers, types and loop pragmas; the output is still C++ in several files. The rest of the "
+               "translation (one C file named after the top, `main()` with CALL_KERNEL, inlining, hoisted local arrays, Step 3) is yours.\n")
+            + "- `synth.tcl` was intentionally not copied; the output gets its own driver script (Step 7).\n"
+            + (f"- `{target.driver_file}` and `directives.json` were generated from the input's resource pragmas. "
+               f"Do NOT rewrite `{target.driver_file}` from scratch. For every line in it starting with `# UNRESOLVED`, "
+               f"work out the numeric value (the expression and the #defines are in `{CONTAINER_RUN_AREA}/scan.json`), "
+               "replace that whole comment line with the finished directive; if the reason in parentheses says the directive does not apply "
+               "(array size unknown or over the register threshold), delete the line instead. Leave every other line alone.\n"
+               if target.directive_rules else "")
         )
     else:
         step2 = (
@@ -173,7 +209,7 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
         "Types and operations:\n"
         f"{_format_map(target.type_map)}\n"
         "Rules:\n" + "\n".join(f"- {r}" for r in target.extra_rules) + "\n"
-        "- Apply the same translation to the testbench. The testbench must keep its checks and still return 0 on success and 1 on failure.\n"
+        + tb_rule +
         "\n"
         "### Step 4: Translate pragmas\n"
         "Placement differs between the tools. Vitis pragmas sit INSIDE the loop body; "
@@ -182,17 +218,20 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
         "\n"
         "### Step 5: Mark the top-level function\n"
         + (f"- Put `{target.top_marker}` on the line directly before the top-level function definition in the source file (not the header).\n"
-           if target.top_marker else f"- {target.display_name} has no top marker: the driver's top name must be the function the testbench calls.\n")
+           if target.top_marker else
+           "- No top marker: the kernel file is named after the top function and `main()` calls it through CALL_KERNEL.\n"
+           if target.language == "c" else
+           f"- {target.display_name} has no top marker: the driver's top name must be the function the testbench calls.\n")
         +
         "\n"
         "### Step 6: Compile-check and run the testbench\n"
-        "For every .cpp file in the output folder run:\n"
+        f"For every {src_glob} file in the output folder run:\n"
         "```\n"
-        f"clang++ -std={target.cxx_std_check} {inc} -I{out} -w -fsyntax-only <file.cpp>\n"
+        f"{syntax_cc} {inc} -I{out} -w -fsyntax-only <file>\n"
         "```\n"
         "Then build and run the testbench with a timeout:\n"
         "```\n"
-        f"cd {out} && clang++ -std={target.cxx_std_check} {inc} -I{out} -w *.cpp -o testbench.out && timeout 30s ./testbench.out\n"
+        f"cd {out} && {build_cc} {inc} -I{out} -w {src_glob} -o testbench.out && timeout 30s ./testbench.out\n"
         "```\n"
         "- Record the commands and their results in `compile_log.txt` in the output folder.\n"
         "- If compilation or the testbench fails, fix the translation and retry, up to 3 times. Never weaken the testbench to make it pass.\n"
@@ -201,7 +240,8 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
         "### Step 7: Write the driver script\n"
         f"Create `{target.driver_file}` in the output folder. Use exactly this structure, filling in the top function and the "
         "source file names (for Catapult: one `solution file add` line per source file and the testbench with `-exclude true`; "
-        "for xlscc: the kernel sources only, never the testbench, and make the script executable):\n"
+        "for xlscc: the kernel sources only, never the testbench, and make the script executable; "
+        "for Dynamatic: only the `set-src` line changes, to `/work/<top_function>.c`):\n"
         "```\n"
         f"{driver_example}"
         "```\n"
@@ -215,15 +255,17 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
         "\n"
         "## Hard Rules\n"
         "- Do not change the algorithm, loop structure, bit widths, signedness, or rounding behavior.\n"
-        "- Do not rename functions or reorder function arguments. Only their types change.\n"
+        + ("- Do not rename functions or reorder function arguments. Only their types change; hoisted local arrays are appended after them.\n"
+           if target.language == "c" else
+           "- Do not rename functions or reorder function arguments. Only their types change.\n") +
         "- No Vitis identifiers may remain in the output: no `ap_int`, `ap_uint`, `ap_fixed`, `hls::stream`, no `#pragma HLS`, no Vitis headers.\n"
         "- Do not delete testbench checks or replace them with placeholders.\n"
         "- Start immediately. Do not only describe the steps.\n"
         "\n"
         "## Pre-Ending Checklist (MANDATORY)\n"
         f"1. `grep -rnE 'ap_int|ap_uint|ap_fixed|hls::stream|pragma HLS' {out}` prints nothing.\n"
-        f"2. `{out}` contains at least one .cpp source, `testbench.cpp`, `{target.driver_file}`, `translation_report.md`, and `compile_log.txt`.\n"
-        "3. The syntax check passed for every .cpp file and the testbench ran and exited 0, or the report explains exactly why not.\n"
+        f"2. `{out}` contains {required}.\n"
+        f"3. The syntax check passed for every {src_glob} file and the testbench ran and exited 0, or the report explains exactly why not.\n"
         "Do NOT terminate until all checks pass or are explained in the report.\n"
     )
 
@@ -327,6 +369,7 @@ def normalize_vitis_script(dir_design: Path) -> dict:
 
 PREPASS_DIR_NAME = "prepass_design"
 FENCE_LINES = 3  # a residue item also licenses edits this many lines either side of it
+FENCE_REPAIR_ROUNDS = 12  # single-hunk check rounds the fence repair spends after the whole-file pass
 # a pre-pass line the agent may change on its own merits: comment or blank, or itself a residue trigger
 RE_FENCE_FREE = (
     r"^\s*(//.*)?$",
@@ -384,7 +427,8 @@ def _fenced_hunks(dir_output: Path, dir_prepass: Path, target: TargetSpec):
         q = dir_output / rel
         a = p.read_text(encoding="utf-8", errors="replace").splitlines()
         if not q.exists():
-            yield rel, a, [], None
+            if 0 not in windows.get(rel, []):  # a line-0 residue item licenses removing the file
+                yield rel, a, [], None
             continue
         b = q.read_text(encoding="utf-8", errors="replace").splitlines()
         for op in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
@@ -413,13 +457,19 @@ def fenced_edits(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> lis
     return out
 
 
-def restore_fenced(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> dict[str, str | None]:
-    """Fence repair: put the pre-pass text back on every hunk `fenced_edits` flags, leaving the agent's
-    licensed edits and insertions in place. Returns each touched file's previous text (None if it was
-    deleted) so the caller can undo the repair."""
+def _hunk_key(rel: str, op) -> tuple:
+    """A fenced hunk named in pre-pass coordinates, which do not move as the output is edited."""
+    return (rel, None, None) if op is None else (rel, op[1], op[2])
+
+
+def restore_fenced(dir_output: Path, dir_prepass: Path, target: TargetSpec, only: set | None = None) -> dict[str, str | None]:
+    """Fence repair: put the pre-pass text back on every hunk `fenced_edits` flags (or only the hunks whose
+    `_hunk_key` is in `only`), leaving the agent's licensed edits and insertions in place. Returns each
+    touched file's previous text (None if it was deleted) so the caller can undo the repair."""
     by_file: dict[str, list] = {}
     for rel, a, b, op in _fenced_hunks(dir_output, dir_prepass, target):
-        by_file.setdefault(rel, []).append((a, b, op))
+        if only is None or _hunk_key(rel, op) in only:
+            by_file.setdefault(rel, []).append((a, b, op))
     undo: dict[str, str | None] = {}
     for rel, hunks in by_file.items():
         q = dir_output / rel
@@ -430,6 +480,7 @@ def restore_fenced(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> d
         else:
             for _, _, (_, i1, i2, j1, j2) in sorted(hunks, key=lambda h: h[2][3], reverse=True):
                 b[j1:j2] = a[i1:i2]
+        q.parent.mkdir(parents=True, exist_ok=True)  # the agent may have deleted the whole folder
         q.write_text("\n".join(b) + "\n", encoding="utf-8")
     return undo
 
@@ -437,10 +488,29 @@ def restore_fenced(dir_output: Path, dir_prepass: Path, target: TargetSpec) -> d
 RE_COMMENT = re.compile(r"//[^\n]*|/\*.*?\*/", re.S)
 
 
+def _first_branch_mask(lines: list[str]) -> list[bool]:
+    """Lines outside `#else`/`#elif` branches: alternative branches often repeat a function head, which would
+    unbalance a brace count taken across both."""
+    keep, stack = [], []  # per open #if: whether we are past its first branch
+    for line in lines:
+        d = re.match(r"\s*#\s*(if|ifdef|ifndef|elif|else|endif)\b", line)
+        if d and d.group(1).startswith("if"):
+            stack.append(False)
+        elif d and d.group(1) in ("elif", "else") and stack:
+            stack[-1] = True
+        elif d and d.group(1) == "endif" and stack:
+            stack.pop()
+        keep.append(not any(stack))
+    return keep
+
+
 def in_class_body(lines: list[str], idx: int) -> bool:
     """Whether line `idx` sits directly in a struct/class/union body (a member, not a local)."""
     depth = 0
+    keep = _first_branch_mask(lines[:idx])
     for j in range(idx - 1, -1, -1):
+        if not keep[j]:
+            continue
         code = lines[j].split("//", 1)[0]
         depth += code.count("}") - code.count("{")
         if depth < 0:
@@ -536,6 +606,11 @@ def check_translated_design(
     result["commented_leftovers"] = commented
     if leftovers:
         result["failures"].append(f"{len(leftovers)} line(s) still use the source tool's dialect")
+
+    target_failures = [msg for chk in target.extra_checks for msg in chk(dir_output)]
+    checks["target_checks"] = not target_failures
+    result["target_check_failures"] = target_failures
+    result["failures"] += target_failures
 
     has_top_marker = not target.top_marker or any(target.top_marker in p.read_text(encoding="utf-8", errors="replace") for p in cpp_sources)
     checks["has_top_marker"] = has_top_marker
@@ -672,16 +747,24 @@ def run_oracle_check(
     dir_design: Path,
     docker_image_name: str = DOCKER_IMAGE_NAME,
     timeout_s: int = 120,
+    dir_scratch: Path | None = None,
 ) -> dict:
     """Compile and run a Vitis design's own testbench against its own sources with clang.
 
     This is the pre-filter: a design whose testbench does not pass on the original code has no
-    oracle for translation. The design is copied into a scratch folder so the testbench may write files.
+    oracle for translation. The sources are the ones `synth.tcl` declares (see `oracle_sources`), built with
+    the script's `-I`/`-D` flags; when separate compilation fails on duplicate symbols (a header with
+    non-inline functions shared by two kernels) the units are built again as one translation unit. The design
+    is copied into a scratch folder (`dir_scratch`, else the system temp dir) so the testbench may write files.
     """
     import tempfile
 
+    from hlsfactory_agent.extraction_repair import oracle_sources
+
     dir_design = Path(dir_design).resolve()
-    tmp_root = Path(tempfile.mkdtemp(prefix="oracle_"))
+    if dir_scratch is not None:
+        Path(dir_scratch).mkdir(parents=True, exist_ok=True)
+    tmp_root = Path(tempfile.mkdtemp(prefix="oracle_", dir=dir_scratch))
     dir_copy = tmp_root / "input_design"
     shutil.copytree(dir_design, dir_copy)
     os.chmod(dir_copy, 0o777)
@@ -698,19 +781,26 @@ def run_oracle_check(
     )
     inp = f"{CONTAINER_RUN_AREA}/{INPUT_DIR_NAME}"
     inc = f"{CONTAINER_RUN_AREA}/vitis_hls_include"
-    result: dict[str, Any] = {"design": dir_design.name, "top": find_top_from_synth_tcl(dir_design)}
+    sel = oracle_sources(dir_design)
+    result: dict[str, Any] = {
+        "design": dir_design.name, "top": find_top_from_synth_tcl(dir_design), "cpp_files": sel["sources"],
+        "dropped": sel["dropped"], "cflags": sel["cflags"], "build_mode": "separate",
+    }
+    flags = " ".join(shlex.quote(f.replace("[pwd]", inp)) for f in sel["cflags"])
     try:
-        code, listing = _container_exec(container, f"ls -1 {inp}/*.cpp {inp}/*.cc {inp}/*.c 2>/dev/null", inp)
-        cpp_files = [ln.strip() for ln in listing.splitlines() if ln.strip()]
-        result["cpp_files"] = [Path(f).name for f in cpp_files]
-        if not cpp_files:
+        if not sel["sources"]:
             result["build"] = {"exit_code": None, "output": "no sources"}
             result["run"] = {"exit_code": None, "output": "no sources"}
         else:
-            build_cmd = (
-                f"clang++ -std=c++17 -I{inc} -I{inp} -w " + " ".join(shlex.quote(f) for f in cpp_files) + " -o /tmp/oracle.out"
-            )
-            code, output = _container_exec(container, build_cmd, inp)
+            cc = f"clang++ -std=c++17 -I{inc} -I{inp} {flags} -w"
+            files = " ".join(shlex.quote(f"{inp}/{s}") for s in sel["sources"])
+            code, output = _container_exec(container, f"{cc} {files} -o /tmp/oracle.out", inp)
+            if code != 0 and "multiple definition" in output and len(sel["sources"]) > 1:
+                unity = dir_copy / "_oracle_unity.cpp"  # every unit in one, the testbench last
+                unity.write_text("".join(f'#include "{s}"\n' for s in sel["sources"]), encoding="utf-8")
+                result["build_mode"] = "unity"
+                result["separate_build"] = {"exit_code": code, "output": output[-2000:]}
+                code, output = _container_exec(container, f"{cc} {inp}/_oracle_unity.cpp -o /tmp/oracle.out", inp)
             result["build"] = {"exit_code": code, "output": output[-4000:]}
             if code == 0:
                 code, output = _container_exec(container, f"timeout {timeout_s}s /tmp/oracle.out", inp)
@@ -760,7 +850,7 @@ def run_checks_standalone(
         container.remove(force=True)
 
 
-RE_COMPILE_ERROR = re.compile(r"(?m)^(?:[^\s:]*/)?([^\s:/]+):(\d+):\d+: error: (.*)$")
+RE_COMPILE_ERROR = re.compile(r"(?m)^(?:[^\s:]*/)?([^\s:/]+):(\d+):\d+: (?:fatal )?error: (.*)$")  # a missing header is a fatal error
 
 
 def parse_compile_errors(output: str) -> list[dict]:
@@ -782,23 +872,28 @@ def license_compile_errors(container: Container, dir_run_area: Path, target: Tar
     for p in sorted((dir_run_area / OUTPUT_DIR_NAME).iterdir()):
         if p.suffix.lower() not in (".cpp", ".cc", ".c") or p.name == "testbench.cpp":
             continue
-        _, output = _container_exec(container, f"clang++ -std={target.cxx_std_check} {inc} -I{out} -w -ferror-limit=0 -fsyntax-only {shlex.quote(p.name)}", out)
+        _, output = _container_exec(container, f"{compile_commands(target)[0]} {inc} -I{out} -w -ferror-limit=0 -fsyntax-only {shlex.quote(p.name)}", out)
         entries += parse_compile_errors(output)
     if entries:
-        for d in (dir_run_area / OUTPUT_DIR_NAME, dir_run_area / PREPASS_DIR_NAME):
-            f = d / "rewrite_log.json"
-            if f.exists():
-                log = json.loads(f.read_text(encoding="utf-8"))
-                log.setdefault("residue", []).extend(entries)
-                f.write_text(json.dumps(log, indent=2), encoding="utf-8")
+        add_residue((dir_run_area / OUTPUT_DIR_NAME, dir_run_area / PREPASS_DIR_NAME), entries)
     return len(entries)
+
+
+def add_residue(dirs, entries: list[dict]) -> None:
+    """Append residue items to the rewrite logs in `dirs`; the fence licenses edits at those lines."""
+    for d in dirs:
+        f = Path(d) / "rewrite_log.json"
+        if f.exists():
+            log = json.loads(f.read_text(encoding="utf-8"))
+            log.setdefault("residue", []).extend(entries)
+            f.write_text(json.dumps(log, indent=2), encoding="utf-8")
 
 
 def run_container_checks(container: Container, target: TargetSpec) -> dict:
     """Independent compile and testbench checks, run inside the container after the agent exits."""
     inc = " ".join(f"-I{CONTAINER_RUN_AREA}/{name}" for name in target.include_dir_names)
     out = f"{CONTAINER_RUN_AREA}/{OUTPUT_DIR_NAME}"
-    std = target.cxx_std_check
+    syntax_cc, build_cc = compile_commands(target)
     results: dict = {}
 
     code, listing = _container_exec(container, f"ls -1 {out}/*.cpp {out}/*.cc {out}/*.c 2>/dev/null", out)
@@ -808,14 +903,14 @@ def run_container_checks(container: Container, target: TargetSpec) -> dict:
     syntax: dict[str, dict] = {}
     for f in cpp_files:
         code, output = _container_exec(
-            container, f"clang++ -std={std} {inc} -I{out} -w -fsyntax-only {shlex.quote(f)}", out
+            container, f"{syntax_cc} {inc} -I{out} -w -fsyntax-only {shlex.quote(f)}", out
         )
         syntax[Path(f).name] = {"exit_code": code, "output": output[-4000:]}
     results["syntax_check"] = syntax
     results["syntax_all_ok"] = bool(cpp_files) and all(v["exit_code"] == 0 for v in syntax.values())
 
     if cpp_files:
-        build_cmd = f"clang++ -std={std} {inc} -I{out} -w " + " ".join(shlex.quote(f) for f in cpp_files) + " -o /tmp/tb_check.out"
+        build_cmd = f"{build_cc} {inc} -I{out} -w " + " ".join(shlex.quote(f) for f in cpp_files) + " -o /tmp/tb_check.out"
         code, output = _container_exec(container, build_cmd, out)
         results["testbench_build"] = {"exit_code": code, "output": output[-4000:]}
         if code == 0:
@@ -951,6 +1046,10 @@ class HLSTranslationRun:
                 indent=4,
             )
         )
+        dir_agent = dir_run_area / PI_AGENT_DIR
+        dir_agent.mkdir(parents=True, exist_ok=True)
+        models = [{"id": k, **v} for k, v in PI_EXTRA_MODELS.items()]
+        (dir_agent / "models.json").write_text(json.dumps({"providers": {"openrouter": {"models": models}}}, indent=4), encoding="utf-8")
         dir_sessions = dir_pi / "sessions"
         dir_sessions.mkdir(parents=True, exist_ok=True)
         os.chmod(dir_pi, 0o777)
@@ -1035,7 +1134,7 @@ class HLSTranslationRun:
         tools = [t for t in (installation(self.target.tool), installation("vitis")) if t] if self.agent_tools else []
         container: Container = client.containers.run(
             image=self.docker_image_name,
-            command="sleep 2h",
+            command="sleep infinity",  # the attempts and their checks outlast a fixed budget on large designs
             detach=True,
             volumes={**{k: v for t in tools for k, v in t.volumes.items()}, str(dir_run_area.resolve()): {"bind": CONTAINER_RUN_AREA, "mode": "rw"}},
             environment={k: v for t in tools for k, v in t.environment.items()},
@@ -1057,7 +1156,7 @@ class HLSTranslationRun:
                     self._render_missing_driver(dir_output)
                 includes_added = insert_required_includes(dir_output, self.target)
                 check_data = {
-                    "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_run_area / PREPASS_DIR_NAME),
+                    "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=(dir_run_area / PREPASS_DIR_NAME) if self.target.fence else None),
                     "container": run_container_checks(container, self.target),
                 }
                 passed = bool(check_data["static"]["passed"] and check_data["container"]["testbench_ok"])
@@ -1085,36 +1184,80 @@ class HLSTranslationRun:
         return check_data
 
     def _repair_fence(self, container: Container, dir_output: Path, dir_prepass: Path, scan: dict | None, check_data: dict) -> tuple[dict, dict]:
-        """Restore the fenced lines mechanically and re-check, before any agent attempt is spent on it. The
-        repair is kept when the compile and testbench results are no worse; otherwise the agent's text returns."""
-        undo = restore_fenced(dir_output, dir_prepass, self.target)
-        repaired = {
-            "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass),
-            "container": run_container_checks(container, self.target),
-        }
+        """Restore the fenced hunks mechanically before any agent attempt is spent on them: all at once, then
+        file by file, then hunk by hunk, keeping each restore whose compile and testbench results are no worse.
+        A hunk whose restore makes them worse shows the pre-pass text is not legal in this design (census3:
+        a shim that overflowed, an include the checks resolved but Catapult could not), so it is licensed as
+        residue the way a pre-pass compile error is, and the agent's edit stands."""
+        best, rounds = check_data, 0
         rank = lambda c: (bool(c["container"]["syntax_all_ok"]), bool(c["container"]["testbench_ok"]))
-        kept = all(x >= y for x, y in zip(rank(repaired), rank(check_data)))
-        if not kept:
+        keys = lambda: [_hunk_key(rel, op) for rel, _, _, op in _fenced_hunks(dir_output, dir_prepass, self.target)]
+
+        def attempt(only: set | None) -> bool:
+            nonlocal best, rounds
+            undo = restore_fenced(dir_output, dir_prepass, self.target, only=only)
+            if not undo:
+                return False
+            rounds += 1
+            new = {
+                "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass),
+                "container": run_container_checks(container, self.target),
+            }
+            if all(x >= y for x, y in zip(rank(new), rank(best))):
+                best = new
+                return True
             for rel, text in undo.items():
                 q = dir_output / rel
                 if text is None:
                     q.unlink(missing_ok=True)
                 else:
                     q.write_text(text, encoding="utf-8")
-        info = {"files": sorted(undo), "kept": kept, "passed": kept and bool(repaired["static"]["passed"] and repaired["container"]["testbench_ok"])}
-        return (repaired if kept else check_data), info
+            return False
+
+        before, rejected = keys(), []
+        if attempt(None):
+            pass
+        elif len(before) == 1:
+            rejected = list(before)
+        else:
+            files = sorted({k[0] for k in before})
+            if len(files) > 1:
+                for f in files:
+                    group = {k for k in before if k[0] == f}
+                    if len(group) > 1:
+                        attempt(group)
+            for k in keys()[:FENCE_REPAIR_ROUNDS]:
+                if not attempt({k}):
+                    rejected.append(k)
+        if rejected:
+            entries = []
+            for rel, i1, i2 in rejected:
+                why = "restoring the pre-pass text here breaks the build or the testbench: the agent's edit stands (fence repair)"
+                entries += [{"file": rel, "line": ln, "reason": why} for ln in ([0] if i1 is None else range(i1 + 1, i2 + 1))]
+            add_residue((dir_output, dir_prepass), entries)
+            best = {**best, "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass)}
+        remaining = keys()
+        info = {
+            "files": sorted({k[0] for k in before}), "hunks": len(before), "restored": len([k for k in before if k not in remaining and k not in rejected]),
+            "licensed": len(rejected), "rounds": rounds, "kept": best is not check_data,
+            "passed": bool(best["static"]["passed"] and best["container"]["testbench_ok"]),
+        }
+        return best, info
 
     def _run_agent_once(self, container: Container, prompt_text: str, dir_run_area: Path, run_data: dict, attempt: int) -> None:
         """Run Pi once with the given prompt and capture the session it produced."""
         cmd = f"umask 000 && timeout {self.agent_timeout_s}s pi -p {shlex.quote(prompt_text)}"
         exit_code, output_agent = container.exec_run(
             ["sh", "-lc", cmd],
-            environment={"OPENROUTER_API_KEY": self.api_key},
+            environment={"OPENROUTER_API_KEY": self.api_key, "PI_CODING_AGENT_DIR": f"{CONTAINER_RUN_AREA}/{PI_AGENT_DIR}"},
             workdir=CONTAINER_RUN_AREA,
         )
         tail = output_agent.decode("utf-8", errors="replace")[-8000:] if isinstance(output_agent, bytes) else str(output_agent)[-8000:]
         run_data["agent_exit_code"] = exit_code
         run_data["agent_stdout_tail"] = tail
+        # the agent runs as root and may copy files in with their own modes; the host rewrites the output next
+        # (include insertion, fence repair), so make it writable
+        container.exec_run(["chmod", "-R", "a+rwX", f"{CONTAINER_RUN_AREA}/{OUTPUT_DIR_NAME}"])
 
         dir_sessions = dir_run_area / ".pi" / "sessions"
         seen = {s["file"] for s in run_data["sessions"] if s.get("file")}
@@ -1129,6 +1272,9 @@ class HLSTranslationRun:
             run_data["sessions"].append({"attempt": attempt, "file": None, "exit_code": exit_code, "events": 0})
             return
         events = load_jsonl_text(session_file.read_text(encoding="utf-8", errors="replace"))
+        used = {(e.get("message") or {}).get("model") for e in events} - {None}
+        if used and used != {self.model_name}:  # Pi falls back to another model for an id it does not know
+            raise RuntimeError(f"agent ran on {sorted(used)}, not {self.model_name}")
         run_data["session_data"] = events  # the latest attempt; session_stats in run_repo reads this
         run_data["sessions"].append({"attempt": attempt, "file": session_file.name, "exit_code": exit_code, "events": len(events)})
         container.exec_run(

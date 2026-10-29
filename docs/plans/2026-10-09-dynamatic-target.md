@@ -96,3 +96,90 @@ loop; `ARRAY_PARTITION` maps directly to `#pragma DYN array_partition` (the firs
 Recommendation: worth doing after the census second pass, scoped to the C-kernel families first (ProgSG,
 CLINK, S2CBench C-style, ScaleHLS polybench), with `simulate --simulator xsim` as the PASS gate and
 `synthesize` off until Gurobi is settled.
+
+## Update 2026-10-15
+
+- Not installed on chao-srv1: no Dynamatic, no Gurobi. Upstream has no releases, only `main`. Its Dockerfile is
+  Ubuntu 24.04 with clang, ghdl and verilator, so co-simulation needs no Vivado mount; our image is 22.04.
+- Kernel rules unchanged upstream: no calls inside the kernel (macros only), no pointers, no local arrays, no
+  globals, `CALL_KERNEL` in `main`.
+- Census3 sources (168 designs scanned): 69 have none of streams, `ap_fixed`, classes or templates, 64-bit types,
+  DATAFLOW, or dynamic allocation. Mostly S2CBench, MachSuite-style ProgSG kernels, blaze, SyncNN helpers and
+  the ScaleHLS polybench/LSTM kernels. That is the ceiling before the inlining and local-array rules.
+
+## Update 2026-10-25: implemented, first run
+
+Built and run as an initial exploration (`--target dynamatic`, `exp/run_translate/results/dynamatic1`,
+runs under `runs/dyn1` and `runs/dyn1_scalehls`). What exists:
+
+- Image `hlsfactory/dynamatic:latest` from `docker_images/Dockerfile.dynamatic` (upstream `main`, prebuilt
+  LLVM, GHDL; 15 minutes to build). `tools.py` resolves it as `ToolInstallation.image` and `run_synth` runs
+  there with the design at `/work`. No Gurobi/CBC: `on-merges` buffering only.
+- `targets/dynamatic.py`: `TargetSpec(language="c", fence=False)`, driver `run_dynamatic.dyn`
+  (`set-src /work/<top>.c`, `compile --buffer-algorithm on-merges`, `write-hdl --hdl vhdl`,
+  `simulate --simulator ghdl`), PASS = VHDL written and C/RTL co-simulation match, latency = simulated
+  cycles, failure classes from the `[FATAL]` lines, one recovery step (`--disable-lsq`). `blocking_types`
+  reject `ap_fixed`, `hls::stream`, `hls::vector` before the pre-pass.
+- Pre-pass for C: `ap_int<N>` -> `int8/16/32_t` or `_BitInt(N)`, `hls_math.h` -> `<math.h>`, unroll ->
+  `#pragma clang loop unroll_count(n)`, pipeline/inline dropped, unsized parameters sized from the
+  testbench (the translator segfaults on `T x[]`). The checks compile as C17 and build as C++, as the tool
+  does; the testbench is `main()` in `<top>.c` with `CALL_KERNEL`.
+
+Results, 16 designs (deepseek-v4.1-flash, 2 attempts allowed, $0.20 in total, 4 to 160 s of agent time each):
+
+| set | designs | checks (attempt 1) | synthesize + co-sim match | failures |
+|---|---|---|---|---|
+| ProgSG (MachSuite/polybench C) | atax, bicg, gemm-ncubed, gesummv, jacobi-1d, mvt, nw, stencil2d | 8/8 | 8/8 | |
+| S2CBench | ave8, fir, idct, adpcm | 4/4 | 2/4 | idct: int16 arrays converted to float (`handshake.sitofp` is 32-bit only); adpcm: co-sim mismatch on `out_data` (its own testbench fails the oracle) |
+| CLINK | lstm_n | 1/1 | 0/1 | `main()` calls the kernel twice; the verifier reports a transaction-count mismatch (oracle fails too) |
+| ScaleHLS-HIDA | atax, gesummv | atax blocked (`hls::stream`), gesummv 1/1 | 0/1 | gesummv: 250x250 float, GHDL co-simulation past the 1200 s budget |
+
+Against census4 on the same designs: the eight ProgSG kernels timed out or failed in Vitis (one PASS,
+jacobi-1d) and none passed Catapult directly (four after recovery); all eight pass Dynamatic. Static
+schedulers stall on these kernels' `PIPELINE` loops over double-precision recurrences; the dynamic one
+has nothing to schedule. The price is cycles: jacobi-1d is 27624 cycles against Vitis's 1260 (no
+unrolling, naive buffers, one port per array); ave8 and fir take 23 and 42 cycles per sample.
+
+Lessons that went into the code: unsized parameters (sized by the pre-pass, forbidden by the check); the
+int<->float converters are 32-bit only (rule in the prompt; widening idct's arrays by hand gets it through
+`compile`, after which the co-simulation differs by float rounding at the truncation, so it stays a
+failure); a tool log line such as `Placed simple buffers` must not feed the classifier (fatal lines only);
+timeouts now keep the tool's log. Not done: Vivado `synthesize` for area; the `hls::stream` families stay out
+of scope.
+
+### Update 2026-10-25, evening: CBC + fpga20 buffering, `CALL_KERNEL` check
+
+- Image rebuilt with `--enable-cbc` (cmake fetches the prebuilt CBC 2.10.12); the driver now runs
+  `compile --buffer-algorithm fpga20 --milp-solver cbc`. Recovery step 1 falls back to `on-merges` when
+  profiling or the MILP fails; `--disable-lsq` is step 2.
+- New tool rule found by the first fpga20 run: the profiler reads the test program's stdout (one line per
+  kernel argument), so a `printf` in `main()` gives `has 5 actual arguments, but 9 arguments were provided`
+  and `[FATAL] Failed to profile cf-level`. Every one of the 14 translations printed to stdout. The pre-pass
+  now moves prints to stderr (`printf` -> `fprintf(stderr, `, `cout` -> `cerr`, `stdout` -> `stderr`), the
+  check forbids `printf`/`puts`/`putchar`/`stdout` in the kernel file, the prompt says why.
+- `TargetSpec.extra_checks`: Dynamatic requires exactly one `CALL_KERNEL`, naming the function the file is
+  named after. lstm_n now fails the static check in seconds instead of after a full synthesis.
+
+Rerun `runs/dyn2` (the dyn1 translations copied, driver switched to fpga20, prints redirected by the same
+pre-pass function; no agent calls, 1800 s synthesis budget):
+
+| design | on-merges cycles | fpga20 cycles | speedup | fpga20 wall s |
+|---|---|---|---|---|
+| atax | 129716 | 43637 | 3.0 | 95 |
+| bicg | 57410 | 57294 | 1.0 | 91 |
+| gemm-ncubed | 1835013 | 524294 | 3.5 | 480 |
+| gesummv | 64813 | 32148 | 2.0 | 362 |
+| jacobi-1d | 27624 | 27465 | 1.0 | 56 |
+| mvt | 201599 | 57363 | 3.5 | 340 |
+| nw | 172871 | 139844 | 1.2 | 383 |
+| stencil2d | 421980 | 78503 | 5.4 | 341 |
+| ave8 | 46723 | 15910 | 2.9 | 90 |
+| fir | 84499 | 17901 | 4.7 | 323 |
+
+All ten still match in co-simulation. The loops whose iterations are independent gain 3 to 5x; bicg and
+jacobi-1d are bound by a loop-carried memory dependence and gain nothing, so jacobi-1d stays 22x behind
+Vitis (27465 vs 1260): unrolling and more memory ports, not buffering, are what that kernel lacks.
+adpcm: the profiler's interpreter reports `memref.load ... Out-of-bounds access to memory '2'. Memory has 89
+elements but requested element 89`, which is the real cause of its earlier co-simulation mismatch (the
+on-merges fallback reproduces the mismatch). idct: unchanged (32-bit converters). ScaleHLS gesummv
+(250x250 float): 1800 s spent before buffer placement finished; it timed out in GHDL under on-merges too.

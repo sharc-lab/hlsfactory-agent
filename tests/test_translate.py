@@ -236,6 +236,15 @@ def test_prepass_and_check_mechanical_leftovers(tmp_path: Path):
     assert "    ac_channel<T> ch;" in h and "    static ac_channel<int> q;" in c  # a member stays, a local becomes static
     assert "#define DEF_Q( z ) static ac_channel<int> q_##z; \\" in h  # a channel declared by a macro too
     assert not any("ac_channel" in r["reason"] for r in log["residue"])
+    # a local declared through a channel alias is static too; a member under #ifdef/#else is not
+    (d / "a.h").write_text('#include "hls_stream.h"\n#define stream_t(x) hls::stream<x>\ntemplate <typename T> class S {\n#ifdef SYN\n  void w(T v) {\n#else\n  void w(T v, int n) {\n#endif\n    s_.write(v);\n  }\n#ifndef SYN\n  int n_;\n#else\n  hls::stream<T> s_;\n#endif\n};\n', encoding="utf-8")
+    (d / "a.cpp").write_text('#include "a.h"\nvoid f(stream_t(int) &o) {\n    stream_t(int) buf[2];\n    buf[0].write(1); o.write(buf[0].read());\n}\n', encoding="utf-8")
+    shutil.rmtree(out)
+    rewrite_design(d, out, CATAPULT, top="top")
+    assert "    static stream_t(int) buf[2];" in (out / "a.cpp").read_text(encoding="utf-8")
+    assert "\n  ac_channel<T> s_;" in (out / "a.h").read_text(encoding="utf-8")
+    for f in ("a.h", "a.cpp"):
+        (d / f).unlink()
     # byte-level idioms become the typed cat_bytes.h helpers; a void* parameter becomes a template parameter
     (d / "pk.h").write_text("#include <cstring>\ntemplate <typename T, int N> struct pk {\n    T data[N];\n"
                             "    pk(ap_uint<32 * N> u) { *reinterpret_cast<ap_uint<32 * N>*>(data) = u; }\n"
@@ -254,6 +263,24 @@ def test_prepass_and_check_mechanical_leftovers(tmp_path: Path):
     assert insert_required_includes(out, CATAPULT) == ["helper.h: #include <ac_std_float.h>", "k.cpp: #include <ac_std_float.h>"]
     static = check_translated_design(out, CATAPULT)
     assert [l["text"] for l in static["leftovers"]] == ["float f(ac_ieee_float32 a) { return a.to_float() * 2; }"]
+    (out / "k.cpp").write_text("#include <ac_std_float.h>\n" + c + "void g(ac_ieee_float32 &a, int w) { a += float(w * 2); }\n", encoding="utf-8")
+    assert [l["text"] for l in check_translated_design(out, CATAPULT)["leftovers"]] == ["void g(ac_ieee_float32 &a, int w) { a += float(w * 2); }"]
+    # a double literal as a ternary branch of a float-typed declaration takes the float type (CRD-42)
+    shutil.rmtree(out)
+    (d / "t.h").write_text("using fp_t = float;\ninline fp_t pick(int i, fp_t x) {\n    fp_t t = i ? i * x : 0.0;\n    return t;\n}\n", encoding="utf-8")
+    rewrite_design(d, out, CATAPULT, top="top")
+    assert "    fp_t t = i ? i * x : fp_t(0.0);" in (out / "t.h").read_text(encoding="utf-8")
+
+
+def test_prepass_names_anonymous_namespaces_in_headers_that_hold_only_types(tmp_path: Path):
+    d = tmp_path / "design"
+    d.mkdir()
+    (d / "flat.h").write_text("namespace lib {\nnamespace {\ntemplate <int N>\nstruct Impl {\n  int v{N};\n};\n} // anonymous\ntemplate <int N> class Flat { Impl<N> impl_{}; };\n}\n", encoding="utf-8")
+    (d / "vars.h").write_text("namespace {\n  int acc = 0;\n}\n", encoding="utf-8")  # one object per unit: naming it would define it twice
+    (d / "k.cpp").write_text('#include "flat.h"\n#include "vars.h"\nvoid top(int &o) { o = acc; }\n', encoding="utf-8")
+    rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
+    assert "\ninline namespace anon_flat {\n" in (tmp_path / "out" / "flat.h").read_text(encoding="utf-8")
+    assert (tmp_path / "out" / "vars.h").read_text(encoding="utf-8").startswith("namespace {\n")
 
 
 def test_compile_errors_in_the_prepass_output_become_residue():
@@ -494,6 +521,41 @@ def test_check_fences_agent_edits_to_the_residue(tmp_path: Path):
     assert testbench_files(out) == {"testbench.cpp", "tb_util.h"}
     (out / "tb_util.h").write_text("inline double gold(double x) { return x * 1.0; }\n", encoding="utf-8")
     assert check_translated_design(out, CATAPULT, dir_prepass=pre)["checks"]["edits_within_residue"] is True
+    # a file in a folder the agent deleted entirely is restored, folder included
+    (pre / "etc").mkdir()
+    (pre / "etc" / "lib.h").write_text("#define LIB 1\n", encoding="utf-8")
+    assert list(restore_fenced(out, pre, CATAPULT)) == ["etc/lib.h"]
+    assert (out / "etc" / "lib.h").read_text(encoding="utf-8") == "#define LIB 1\n"
+    # the repair can put back one hunk at a time, and a line-0 residue item licenses a file the agent removed
+    from hlsfactory_agent.translate import _fenced_hunks, _hunk_key
+
+    keys = lambda: {_hunk_key(r, o) for r, _, _, o in _fenced_hunks(out, pre, CATAPULT)}
+    (out / "mac.cpp").write_text(kernel.replace('#include "ac_channel.h"\n', "").replace("typedef", "typedef  "), encoding="utf-8")
+    (out / "etc" / "lib.h").unlink()
+    ks = keys()
+    assert len(ks) == 3 and ("etc/lib.h", None, None) in ks
+    inc = next(k for k in ks if k[0] == "mac.cpp" and k[1] == kernel.splitlines().index('#include "ac_channel.h"'))
+    assert list(restore_fenced(out, pre, CATAPULT, only={inc})) == ["mac.cpp"]
+    assert keys() == ks - {inc} and '#include "ac_channel.h"' in (out / "mac.cpp").read_text(encoding="utf-8")
+    log = json.loads((pre / "rewrite_log.json").read_text(encoding="utf-8"))
+    log["residue"].append({"file": "etc/lib.h", "line": 0, "reason": "licensed"})
+    (pre / "rewrite_log.json").write_text(json.dumps(log), encoding="utf-8")
+    assert {k[0] for k in keys()} == {"mac.cpp"}
+
+
+def test_prepass_resolves_flattened_includes_and_drops_host_libraries(tmp_path: Path):
+    from hlsfactory_agent.translate import parse_compile_errors
+
+    d = tmp_path / "design"
+    d.mkdir()
+    (d / "pe.h").write_text("#define PE 1\n", encoding="utf-8")  # extraction flattened ../include/pe.h next to the source
+    (d / "k.cpp").write_text('#include "../include/pe.h"\n#include <gmp.h>\n#include <ap_axi_sdata.h>\nvoid top(int &o) { o = PE; }\n', encoding="utf-8")
+    rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
+    k = (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")
+    assert '#include "pe.h"\n// #include <gmp.h>  // host-only library, not synthesized\n#include <ap_axi_sdata.h>\n' in k
+    assert "struct ap_axis" in (tmp_path / "out" / "ap_axi_sdata.h").read_text(encoding="utf-8")  # the shim makes the include resolve
+    # a missing header is a fatal error; it is licensed like any other compile error
+    assert [e["line"] for e in parse_compile_errors("k.cpp:10:10: fatal error: 'x.h' file not found\nk.cpp:12:3: error: no\n")] == [10, 12]
 
 
 def test_check_flags_pragma_kind_missing_from_the_report(tmp_path: Path):
@@ -553,8 +615,19 @@ def test_catapult_degrade_step_reads_the_number_from_the_log(tmp_path: Path):
     (tmp_path / "d2" / "catapult.log").write_text((failed / "catapult.log").read_text(encoding="utf-8"), encoding="utf-8")  # same verdict again
     assert catapult_degrade_step(tmp_path / "d2", tmp_path / "d2b") == "interleave:data_rev:4"  # a repeat round compounds
     assert (tmp_path / "d2b" / "run.tcl").read_text(encoding="utf-8").count("INTERLEAVE") == 1
-    (failed / "k.cpp").write_text("static int data_rev[4][256];\n", encoding="utf-8")  # rows in parallel: one bank per row
-    assert catapult_degrade_step(failed, tmp_path / "d2c") == "block:data_rev:256"
+    (failed / "k.cpp").write_text("static int data_rev[4][256];\n", encoding="utf-8")  # a 2-D array interleaves like any other
+    assert catapult_degrade_step(failed, tmp_path / "d2c") == "interleave:data_rev:2"
+    (failed / "catapult.log").write_text(  # a scoped name: the array is the last segment, not the class
+        "# Error: insufficient resources 'x' to schedule '/T'. 2 are needed, but only 1 instances are available (SCHD-4)\n"
+        "# Error: please merge accesses to 'Align::Fixed::ChunkCompute:dp_mem.data:rsc' to reduce the number of required resources (SCHD-39)\n",
+        encoding="utf-8",
+    )
+    assert catapult_degrade_step(failed, tmp_path / "d2s") == "interleave:dp_mem:2"
+    (failed / "catapult.log").write_text(
+        "# Error: insufficient resources 'x' to schedule '/T'. 4 are needed, but only 2 instances are available (SCHD-4)\n"
+        "# Error: please merge accesses to 'stage:data_rev._r.d:rsc' to reduce the number of required resources (SCHD-39)\n",
+        encoding="utf-8",
+    )
     # already split and still short: the pipelined loop that indexes it gets the longer II instead
     shutil.copytree(tmp_path / "d2c", tmp_path / "d2d_in", ignore=shutil.ignore_patterns("k.c"))
     (tmp_path / "d2d_in" / "k.cpp").write_text("#pragma hls_pipeline_init_interval 1\nfor (int i = 0; i < 8; i++) { s += data_rev[i][0]; }\n"
@@ -686,3 +759,76 @@ def test_retry_stats_and_stage_timer():
     assert rs["first_pass"] == {1: 1, 2: 1} and rs["never"] == ["b"]
     assert [x["design"] for x in rs["thrashing"]] == ["b"] and rs["thrashing"][0]["category"] == "dialect"
     assert rs["transitions"] == {"dialect->same": 1, "fence->pass": 1}
+
+
+def test_dynamatic_target_rewrites_to_c_types_and_parses_its_cosim_report(tmp_path: Path):
+    from hlsfactory_agent.tools import dynamatic_installation
+    from hlsfactory_agent.targets.dynamatic import DYNAMATIC, dynamatic_degrade_step, parse_dynamatic_report, render_dynamatic_driver
+    from hlsfactory_agent.translate import compile_commands, feasibility
+
+    assert dynamatic_installation("hlsfactory/no-such-image:none") is None
+    drv = render_dynamatic_driver("atax", ["atax.c"])
+    assert "set-src /work/atax.c" in drv and "simulate --simulator ghdl" in drv and "write-hdl --hdl vhdl" in drv
+    assert "compile --buffer-algorithm fpga20 --milp-solver cbc" in drv
+    assert compile_commands(DYNAMATIC) == ("clang -std=c17", "clang++ -std=c++17 -x c++")
+    assert not DYNAMATIC.fence and "testbench.cpp" not in DYNAMATIC.required_files
+
+    src = tmp_path / "in"
+    src.mkdir()
+    (src / "k.cpp").write_text(
+        "#include <ap_int.h>\n#include \"hls_math.h\"\nvoid k(ap_int<32> a[8], ap_uint<12> b[8]) {\n"
+        "  for (int i = 0; i < 8; i++) {\n#pragma HLS PIPELINE II=1\n#pragma HLS UNROLL factor=2\n    b[i] = a[i].range(11, 0);\n  }\n}\n",
+        encoding="utf-8",
+    )
+    (src / "testbench.cpp").write_text("int main() { printf(\"%d\\n\", 1); std::cout << 2; fflush(stdout); return 0; }\n", encoding="utf-8")
+    (src / "synth.tcl").write_text("set_top k\n", encoding="utf-8")
+    log = rewrite_design(src, tmp_path / "out", DYNAMATIC, "k")
+    tb = (tmp_path / "out" / "testbench.cpp").read_text(encoding="utf-8")
+    assert "fprintf(stderr, \"%d" in tb and "std::cerr << 2" in tb and "fflush(stderr)" in tb and len(log["stdout"]) == 1
+    text = (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")
+    assert "int32_t a[8]" in text and "unsigned _BitInt(12) b[8]" in text and "#include <stdint.h>" in text and "<math.h>" in text
+    assert "#pragma clang loop unroll_count(2)" in text and "PIPELINE" not in text and "ac_int" not in text
+    assert any("pipeline" == e["kind"] for e in log["pragmas_dropped"]) and any(".range" in r["reason"] for r in log["residue"])
+    scan = {"types": [{"kind": "hls::stream", "file": "k.cpp", "line": 1}, {"kind": "ap_fixed", "file": "testbench.cpp", "line": 1}]}
+    assert [b["kind"] for b in feasibility(scan, DYNAMATIC)] == ["hls::stream"]
+    (src / "k.cpp").write_text("void k(const unsigned char in[], int out[8], int n) {}\n", encoding="utf-8")
+    (src / "testbench.cpp").write_text("#define N 16\nint main() { unsigned char a[N]; int o[8]; k(a, o, N); return 0; }\n", encoding="utf-8")
+    rewrite_design(src, tmp_path / "out3", DYNAMATIC, "k")
+    text = (tmp_path / "out3" / "k.cpp").read_text(encoding="utf-8")
+    assert "in[16]" in text, text  # sized from the testbench call, as for Catapult
+    assert check_translated_design(tmp_path / "out3", DYNAMATIC)["leftovers"] == []
+    (tmp_path / "out3" / "k.cpp").write_text("void k(const unsigned char in[], int out[8], int n) {}\n", encoding="utf-8")
+    assert any("in[]" in l["text"] for l in check_translated_design(tmp_path / "out3", DYNAMATIC)["leftovers"])
+    kc = tmp_path / "out3" / "k.c"
+    kc.write_text("void k(int a[4]) {}\nint main() { int a[4]; CALL_KERNEL(k, a); CALL_KERNEL(k, a); return 0; }\n", encoding="utf-8")
+    assert any("CALL_KERNEL appears 2 times" in f for f in check_translated_design(tmp_path / "out3", DYNAMATIC)["failures"])
+    kc.write_text("void k(int a[4]) {}\nint main() { int a[4]; // CALL_KERNEL(k, a);\n  CALL_KERNEL(kk, a); return 0; }\n", encoding="utf-8")
+    assert any("named after the kernel" in f for f in check_translated_design(tmp_path / "out3", DYNAMATIC)["failures"])
+    kc.write_text("void k(int a[4]) {}\nint main() { int a[4]; CALL_KERNEL(k, a); return 0; }\n", encoding="utf-8")
+    assert check_translated_design(tmp_path / "out3", DYNAMATIC)["target_check_failures"] == []
+    kc.write_text("#include <stdio.h>\nvoid k(int a[4]) {}\nint main() { int a[4]; CALL_KERNEL(k, a); printf(\"ok\"); fprintf(stderr, \"ok\"); return 0; }\n", encoding="utf-8")
+    lo = check_translated_design(tmp_path / "out3", DYNAMATIC)["leftovers"]
+    assert [l["text"] for l in lo if "printf" in l["text"]] and all("stdio.h" not in l["text"] for l in lo)  # stdout forbidden; the file includes stdio.h
+
+    (tmp_path / "synth_stdout.log").write_text("[INFO] Placed simple buffers\n[FATAL] Failed to convert to std dialect\n", encoding="utf-8")
+    r = parse_dynamatic_report(tmp_path)
+    assert r.status == "FAILED" and r.failure_class == "unsupported-construct" and "std dialect" in r.first_error
+    (tmp_path / "out" / "hdl").mkdir(parents=True)
+    (tmp_path / "out" / "hdl" / "k.vhd").touch()
+    (tmp_path / "out" / "sim").mkdir()
+    (tmp_path / "synth_stdout.log").write_text("[INFO] HDL generation succeeded\n[FATAL] Simulation failed\n", encoding="utf-8")
+    (tmp_path / "out" / "sim" / "report.txt").write_text("Comparison of [b] : Fail\n[ERROR HLS_VERIFIER] C and VHDL outputs do not match\n", encoding="utf-8")
+    assert parse_dynamatic_report(tmp_path).failure_class == "cosim-mismatch"
+    (tmp_path / "out" / "sim" / "report.txt").write_text(
+        "tb_k.vhd:307:9:@24018ns:(assertion note): Simulation done! Latency = 6002 cycles\n[INFO  HLS_VERIFIER] C and VHDL outputs match\n", encoding="utf-8")
+    r = parse_dynamatic_report(tmp_path)
+    assert r.status == "PASS" and r.latency == 6002
+    (tmp_path / "run_dynamatic.dyn").write_text(drv, encoding="utf-8")
+    assert dynamatic_degrade_step(tmp_path, tmp_path / "d1") is None  # the log never named the LSQ
+    (tmp_path / "synth_stdout.log").write_text("[FATAL] Failed to place smart buffers\n", encoding="utf-8")
+    assert dynamatic_degrade_step(tmp_path, tmp_path / "d0") == "buffers:on-merges"
+    assert "compile --buffer-algorithm on-merges --milp-solver cbc" in (tmp_path / "d0" / "run_dynamatic.dyn").read_text(encoding="utf-8")
+    assert dynamatic_degrade_step(tmp_path / "d0", tmp_path / "d00") is None  # already on-merges, no LSQ in the log
+    (tmp_path / "synth_stdout.log").write_text("[FATAL] Failed to lower to HW: LSQ generation failed\n", encoding="utf-8")
+    assert dynamatic_degrade_step(tmp_path, tmp_path / "d1") == "lsq:off"
+    assert "compile --disable-lsq --buffer-algorithm" in (tmp_path / "d1" / "run_dynamatic.dyn").read_text(encoding="utf-8") and not (tmp_path / "d1" / "out").exists()

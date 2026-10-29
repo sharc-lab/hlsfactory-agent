@@ -3,7 +3,7 @@ per-design rows under results/: wall time and resources per repository, time per
 agent's attempts move between failure classes, and the designs that thrash. One function per section.
 
 Example:
-    PYTHONPATH=. python exp/run_translate/stats_report.py --runs-dir exp/run_translate/runs/census2 --results-dir exp/run_translate/results/census2
+    PYTHONPATH=. python exp/run_translate/stats_report.py --runs-dir exp/run_translate/runs/census4 --results-dir exp/run_translate/results/census4
 """
 from __future__ import annotations
 
@@ -60,12 +60,16 @@ def load(dir_runs: Path, dir_results: Path) -> list[dict]:
 def section_method(repos: list[dict]) -> str:
     st = next((r["stats"] for r in repos if r["stats"]), {})
     host = st.get("host", {})
+    spans = sorted((r["stats"]["started"], r["stats"]["ended"]) for r in repos if r["stats"].get("started") and r["stats"].get("ended"))
+    lanes = max((sum(1 for a, b in spans if a <= t < b) for t, _ in spans), default=1)  # repos in flight at once
+    organised = (f"- Repositories run in {lanes} concurrent lanes (`run_repo.py`, one process per repo; a lane runs its repos one after another), so the resource columns describe the host while several repos ran, not one repo. Inside a repo,"
+                 if lanes > 1 else "- Repositories run one after another (`run_repo.py`, one process per repo). Inside a repo,")
     return "\n".join([
         "## 1. How the runs are organised",
         "",
         f"- Host: `{host.get('hostname', '?')}`, {host.get('cpus', '?')} CPUs, {host.get('mem_total_gb', '?')} GB; every tool runs in a container of the `hlsfactory-agent` image, the vendor installs bind-mounted read-only.",
-        f"- Repositories run one after another (`run_repo.py`, one process per repo). Inside a repo, `--jobs {st.get('jobs', '?')}` designs run concurrently (joblib workers); each design is sequential: oracle, pre-pass, up to `--attempts {st.get('attempts', '?')}` agent attempts each followed by the static and container checks, then Vitis on the source and {st.get('target', 'the target')} on the translation ({st.get('synth_timeout') or 'target default'} s budget), then up to {st.get('degrade', '?')} recovery rounds.",
-        "- A design therefore holds at most one agent container and one tool container at a time; the host sees at most `jobs` of each. The resource columns below are host-wide samples every 30 s (1-minute load, memory in use, running containers of the image).",
+        f"{organised} `--jobs {st.get('jobs', '?')}` designs run concurrently (joblib workers); each design is sequential: oracle, pre-pass, up to `--attempts {st.get('attempts', '?')}` agent attempts each followed by the static and container checks, then Vitis on the source and {st.get('target', 'the target')} on the translation ({st.get('synth_timeout') or 'target default'} s budget), then up to {st.get('degrade', '?')} recovery rounds.",
+        f"- A design therefore holds at most one agent container and one tool container at a time; the host sees at most `jobs`{' x lanes' if lanes > 1 else ''} of each. The resource columns below are host-wide samples every 30 s (1-minute load, memory in use, running containers of the image).",
         "- Retry mechanics: after a failed attempt the agent gets the original prompt plus a `Previous attempt failed` section listing the harness's findings (static-check failures, fenced edits with the pre-pass version to restore, compile errors, the testbench diff); the next attempt edits the same output folder. A design passes when the static checks and the container testbench both pass; the retry loop stops at the first pass.",
         "- Stage time is wall time inside the design's worker, so `translate` includes the agent's own wall time and the checks; the per-attempt split (`agent_s`, `check_s`) is in each row's `attempts` list.",
     ])
@@ -150,7 +154,13 @@ def section_per_repo(repos: list[dict]) -> str:
     passed = sum(1 for x in allrows if x.get("translation_passed")); synth = sum(1 for x in allrows if (x.get("synth_target") or {}).get("status") == "PASS")
     ecost = sum(float((r["stats"].get("extract_usage") or {}).get("cost_usd") or 0) for r in repos)
     lines.append(f"| **total, {len(repos)} repositories** | {len(allrows)} | | {_hms(total_wall)} | | {_hms(_mean([x['seconds'] for x in allrows if x.get('seconds') is not None]))} / | | | | | | | | | {ecost:.2f} | {cost:.2f} | {ecost + cost:.2f} |")
-    lines += ["", f"Total wall time over the repositories with a stats record: {_hms(total_wall)}. Stage columns are per-design means; `translate` is the pre-pass, every agent attempt and its checks. "
+    spans = [(r["stats"]["started"], r["stats"]["ended"]) for r in repos if r["stats"].get("started") and r["stats"].get("ended")]
+    elapsed = ""
+    if spans:
+        from datetime import datetime
+        t0, t1 = min(a for a, _ in spans), max(b for _, b in spans)
+        elapsed = f" Elapsed from the first repository's start to the last one's end: {_hms((datetime.fromisoformat(t1) - datetime.fromisoformat(t0)).total_seconds())} (less than the sum where repositories ran concurrently)."
+    lines += ["", f"Total wall time over the repositories with a stats record: {_hms(total_wall)}.{elapsed} Stage columns are per-design means; `translate` is the pre-pass, every agent attempt and its checks. "
               "`extract $` is the extraction agent's API cost (* = extraction reused from the previous pass, cost incurred then); `agent $` covers every translation attempt.",
               f"API cost ${ecost + cost:.2f} in total; the translation agent's ${cost:.2f} is {tin / 1e6:.1f} M input and {tout / 1e6:.2f} M output tokens, "
               f"${cost / len(allrows):.3f} per design, ${cost / passed:.3f} per design passing the checks, ${cost / synth:.3f} per design synthesizing in the target." if allrows and passed and synth else ""]
@@ -269,19 +279,47 @@ def section_synthesis(repos: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def section_qor(repos: list[dict]) -> str:
+    """Quality of results for every design the target synthesizes, next to Vitis on the original."""
+    lines = ["## 10. Quality of results: designs that synthesize", "",
+             "Latency and throughput are in clock cycles as each tool reports them (Catapult at a 5 ns clock; Vitis at the extracted script's clock). "
+             "Catapult area is its score for the nangate-45nm library; Vitis resources are its post-synthesis estimates. `via` names the recovery step when one was needed; `?` is a latency Vitis could not bound.", "",
+             "| repository | design | via | Catapult latency | Catapult throughput | Catapult area | Vitis latency | Vitis LUT / FF / DSP / BRAM |", "|---|---|---|---|---|---|---|---|"]
+    ratios = []
+    for r in repos:
+        for x in sorted(r["rows"], key=lambda x: x.get("design", "")):
+            t = x.get("synth_target") or {}
+            if t.get("status") != "PASS":
+                t = next((d for d in x.get("synth_target_degraded") or [] if d.get("status") == "PASS"), None)
+                if not t:
+                    continue
+            v = x.get("synth_source") or {}
+            res = v.get("resources") or {}
+            vres = " / ".join(str(res.get(k, "-")) for k in ("LUT", "FF", "DSP", "BRAM")) if v.get("status") == "PASS" else "-"
+            vlat = v.get("latency") if v.get("status") == "PASS" else None
+            if vlat and t.get("latency"):
+                ratios.append(t["latency"] / vlat)
+            area = f"{t['area']:.0f}" if t.get("area") is not None else "-"
+            lines.append(f"| {r['name']} | {x.get('design')} | {t.get('step', 'direct')} | {t.get('latency', '-')} | {t.get('throughput', '-')} | {area} | {'?' if vlat == 0 else vlat if vlat is not None else '-'} | {vres} |")
+    if ratios:
+        lines += ["", f"Catapult latency over Vitis latency, {len(ratios)} designs with both: median {statistics.median(ratios):.2f}, "
+                      f"{sum(q <= 1 for q in ratios)} at or below Vitis, {sum(q > 1 for q in ratios)} above."]
+    return "\n".join(lines)
+
+
 def build(repos: list[dict], title: str, baseline: list[dict] | None = None) -> str:
     parts = [f"# {title}", "", "Generated by `exp/run_translate/stats_report.py`; numbers come from `summary.json` under results/ and `stats/*.json` under the runs directory.", ""]
-    for section in (section_method, section_funnel, section_per_repo, section_stages, section_stage_cost, section_retries, section_iteration, section_thrashing, section_synthesis):
+    for section in (section_method, section_funnel, section_per_repo, section_stages, section_stage_cost, section_retries, section_iteration, section_thrashing, section_synthesis, section_qor):
         parts += [section(repos, baseline) if section is section_retries else section(repos), ""]
     return "\n".join(parts)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--runs-dir", type=Path, default=DIR_CURRENT / "runs" / "census2")
-    parser.add_argument("--results-dir", type=Path, default=DIR_CURRENT / "results" / "census2")
+    parser.add_argument("--runs-dir", type=Path, default=DIR_CURRENT / "runs" / "census4")
+    parser.add_argument("--results-dir", type=Path, default=DIR_CURRENT / "results" / "census4")
     parser.add_argument("--out", type=Path, default=DIR_CURRENT.parent.parent / "docs" / "RUN_STATISTICS.md")
-    parser.add_argument("--title", default="Run statistics: census second pass")
+    parser.add_argument("--title", default="Run statistics: census fourth pass")
     parser.add_argument("--baseline-results", type=Path, default=None, help="results dir of a previous pass; its retry curve is shown for comparison")
     args = parser.parse_args()
     repos = load(args.runs_dir, args.results_dir)

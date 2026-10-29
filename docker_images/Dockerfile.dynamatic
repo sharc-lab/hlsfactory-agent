@@ -1,0 +1,39 @@
+# EPFL-LAP Dynamatic built into a runnable image (upstream only ships a from-source build).
+# Build: docker_images/build_dynamatic.sh  (passes the invoking UID/GID so bind-mounted output stays ours)
+FROM ubuntu:24.04
+
+ARG UID=1000
+ARG GID=1000
+ARG UNAME=ubuntu
+ARG DYNAMATIC_REF=main
+# --use-prebuilt-llvm downloads a prebuilt LLVM instead of compiling the submodule (minutes, not hours).
+# --enable-cbc fetches the prebuilt COIN-OR CBC MILP solver so the fpga20/fpl22 buffer placements work without Gurobi.
+ARG DYNAMATIC_BUILD_ARGS="--release --use-prebuilt-llvm --enable-cbc"
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y update && apt-get -y upgrade && \
+    apt-get install -y --option APT::Immediate-Configure=false \
+        sudo vim clang lld ccache cmake wget ninja-build python3 graphviz git curl \
+        gzip libreadline-dev ca-certificates unzip libboost-all-dev pkg-config python3-venv \
+        ghdl verilator && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN userdel -r ubuntu 2>/dev/null || true
+RUN groupadd -g $GID -o $UNAME
+RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+RUN echo "$UNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER $UNAME
+WORKDIR /home/$UNAME
+RUN git clone --recurse-submodules https://github.com/EPFL-LAP/dynamatic.git /home/$UNAME/dynamatic \
+    && cd /home/$UNAME/dynamatic \
+    && git checkout "$DYNAMATIC_REF" \
+    && git submodule update --init --recursive
+
+WORKDIR /home/$UNAME/dynamatic
+RUN bash -lc "./build.sh $DYNAMATIC_BUILD_ARGS"
+
+ENV PATH="/home/$UNAME/dynamatic/bin:${PATH}"
+CMD ["/bin/bash"]
+# stable path for the harness (hlsfactory_agent/tools.py), independent of the build user's name
+RUN sudo ln -s /home/$UNAME/dynamatic /opt/dynamatic

@@ -68,3 +68,16 @@ Validated on recorded census2 outputs, no agent (credits exhausted); `runs/fixte
 - Cascaded Code Editing: Large-Small Model Collaboration, arXiv 2604.19201.
 - FPGAgent, arXiv 2608.23630; HLS-Eval, arXiv 2504.12268; HLStrans, arXiv 2507.04315.
 - Catapult 2026.2 reference (ARRAY_SIZE directive, Input/CppStandard option) and `ac_math` headers in the install.
+
+## Outcome, census4 (2026-10-24)
+
+With rows 1-10 in and the census3 fixes (shims, licensing, per-hunk fence repair, scoped SCHD-39 names), census4 passes checks on 236 of 242 designs and synthesizes 122, against 90 and 60 on census2's 140. Still open: extraction testbenches (144 originals do not build, link or match), SCHD-20 loop recurrences in DP-HLS (25), Catapult's ASSERT-1 crash (8) and `ac_std_float` arrays (CIN-84, 12).
+
+## Oracle repair (2026-10-28)
+
+Rows 1 and 4 of the extraction table turned out to be ours after all: the loss was in how the oracle compiled the
+folder, not in the extraction. `extraction_repair.py` (script source set, escaped includes, files recovered from a
+clone, single-unit fallback, `ap_cint.h` stand-in, 900 s budget) takes the oracle from 98 to 170 of 242 on the
+census4 extractions (`runs/oracle5`). Still upstream: agent-written testbench configurations (NN2FPGA 14,
+S2CBench 8), invented goldens (fpgaconvnet 21), TAPA (AutoNTT 10).
+

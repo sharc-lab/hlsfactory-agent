@@ -11,12 +11,15 @@ DEFAULT_MGC_LICENSE = "1717@ece-winlic.ece.gatech.edu"
 DEFAULT_VITIS_HLS = "/tools/software/xilinx/ARCHIVE/Vitis_HLS/2024.1"
 DEFAULT_XILINX_LICENSE = "2100@ece-winlic.ece.gatech.edu"
 DEFAULT_BAMBU_APPDIR = "/export/hdd/scratch/tshukla31/tools/bambu-2024.10"
+DEFAULT_DYNAMATIC_IMAGE = "hlsfactory/dynamatic:latest"  # docker_images/build_dynamatic.sh
+DYNAMATIC_ROOT = "/opt/dynamatic"  # where the image keeps the built tree (symlink in Dockerfile.dynamatic)
 
 
 @dataclass(frozen=True)
 class ToolInstallation:
     volumes: dict[str, dict[str, str]] = field(default_factory=dict)  # host path -> docker volume spec
     environment: dict[str, str] = field(default_factory=dict)
+    image: str | None = None  # a tool that only ships as its own image (Dynamatic) runs there instead of hlsfactory-agent
 
 
 def _ro(host: Path, container: str) -> dict[str, dict[str, str]]:
@@ -63,7 +66,20 @@ def bambu_installation(app_dir: str | Path | None = None) -> ToolInstallation | 
     )
 
 
-RESOLVERS = {"catapult": catapult_installation, "vitis": vitis_installation, "bambu": bambu_installation}
+def dynamatic_installation(image: str | None = None) -> ToolInstallation | None:
+    """Dynamatic only ships as a from-source build, so it is built into its own image (docker_images/Dockerfile.dynamatic)
+    and synthesis runs in that image rather than mounting an install into hlsfactory-agent."""
+    name = image or os.environ.get("DYNAMATIC_IMAGE", DEFAULT_DYNAMATIC_IMAGE)
+    try:
+        import docker  # local import: the unit tests never touch a daemon
+
+        docker.from_env().images.get(name)
+    except Exception:
+        return None
+    return ToolInstallation({}, {"DYNAMATIC": DYNAMATIC_ROOT, "PATH": f"{DYNAMATIC_ROOT}/bin:/usr/local/bin:/usr/bin:/bin"}, image=name)
+
+
+RESOLVERS = {"catapult": catapult_installation, "vitis": vitis_installation, "bambu": bambu_installation, "dynamatic": dynamatic_installation}
 
 
 def installation(tool: str) -> ToolInstallation | None:

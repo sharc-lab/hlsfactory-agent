@@ -9,6 +9,7 @@ marker, and writes ``rewrite_log.json``. Anything it cannot do with certainty go
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 from collections import Counter
@@ -21,11 +22,13 @@ HEADER_MAPS: dict[str, dict[str, str]] = {
     "catapult": {"ap_int.h": "ac_int.h", "ap_fixed.h": "ac_fixed.h", "hls_stream.h": "ac_channel.h"},
     "xlscc": {"ap_int.h": "ac_int.h", "ap_fixed.h": "ac_fixed.h", "hls_stream.h": "xls_emu.h"},
     "bambu": {"ap_int.h": "ac_int.h", "ap_fixed.h": "ac_fixed.h", "hls_stream.h": "ac_channel.h"},
+    "dynamatic": {"ap_int.h": "stdint.h", "ap_fixed.h": "stdint.h", "hls_stream.h": "stdint.h"},  # fixed point and streams are blocked before the pre-pass
 }
 # how a target spells loop and function pragmas; a None form has no equivalent and the pragma is dropped
 PRAGMA_FORMS: dict[str, dict[str, str | None]] = {
     "catapult": {"pipeline": "#pragma hls_pipeline_init_interval {v}", "unroll": "#pragma hls_unroll {v}", "unroll_full": "#pragma hls_unroll yes", "inline": "#pragma hls_design inline"},
     "bambu": {"pipeline": None, "unroll": "#pragma HLS unroll factor={v}", "unroll_full": "#pragma HLS unroll", "inline": "#pragma HLS inline", "label_own_line": True},
+    "dynamatic": {"pipeline": None, "unroll": "#pragma clang loop unroll_count({v})", "unroll_full": "#pragma clang loop unroll(full)", "inline": None, "label_own_line": True},
 }
 RE_LABELED_LOOP = re.compile(r"^(\s*)([A-Za-z_]\w*)\s*:\s*((?:for|while)\b.*)$")
 STREAM_MAPS: dict[str, str] = {"catapult": "ac_channel<", "xlscc": "__xls_channel<"}
@@ -69,6 +72,9 @@ DIALECT_TYPES: dict[str, dict[str, str]] = {
 DIALECT_HEADERS: dict[str, dict[str, str]] = {
     t: {"<complex>": "<ac_complex.h>", '"hls_math.h"': "<cmath>", "<hls_math.h>": "<cmath>"} for t in ("catapult", "bambu")
 }
+DIALECT_HEADERS["dynamatic"] = {'"hls_math.h"': "<math.h>", "<hls_math.h>": "<math.h>"}
+# Dynamatic is C: ap_int<N> becomes the stdint type of that width or a bit-precise _BitInt(N)
+STDINT_WIDTHS = ("8", "16", "32")
 RE_VITIS_LIB_COPY = re.compile(r"\b_AP_[WIQON]\b")  # the template parameters of a copied ap_int/ap_fixed library header
 # Vendor headers with no target equivalent, written next to the design as a local synthesizable stand-in when
 # the source includes them. hls::vector is a plain aggregate; hls_fft.h/hls_streamofblocks.h are empty, so
@@ -87,8 +93,30 @@ SHIM_HEADERS: dict[str, dict[str, str]] = {
         ),
         "hls_fft.h": "#pragma once\n",
         "hls_streamofblocks.h": "#pragma once\n",
+        # the Vitis AXI-stream side-band struct over ac_int: the include resolves and typedefs of it stay valid, while the
+        # ports themselves are plain channels in Catapult. A zero-width field keeps one bit (ac_int<0> is not a type).
+        "ap_axi_sdata.h": (
+            "#pragma once\n"
+            "#include <ac_int.h>\n"
+            "template <int WData, int WUser = 0, int WId = 0, int WDest = 0> struct ap_axis {\n"
+            "    ac_int<WData, true> data;\n"
+            "    ac_int<(WData / 8 > 0 ? WData / 8 : 1), false> keep, strb;\n"
+            "    ac_int<(WUser > 0 ? WUser : 1), false> user;\n"
+            "    ac_int<1, false> last;\n"
+            "    ac_int<(WId > 0 ? WId : 1), false> id;\n"
+            "    ac_int<(WDest > 0 ? WDest : 1), false> dest;\n"
+            "};\n"
+            "template <int WData, int WUser = 0, int WId = 0, int WDest = 0> struct ap_axiu {\n"
+            "    ac_int<WData, false> data;\n"
+            "    ac_int<(WData / 8 > 0 ? WData / 8 : 1), false> keep, strb;\n"
+            "    ac_int<(WUser > 0 ? WUser : 1), false> user;\n"
+            "    ac_int<1, false> last;\n"
+            "    ac_int<(WId > 0 ? WId : 1), false> id;\n"
+            "    ac_int<(WDest > 0 ? WDest : 1), false> dest;\n"
+            "};\n"
+        ),
         "cat_abs.h": "#pragma once\n// Catapult has no synthesizable body for the C library abs(); the pre-pass rewrites abs( to cat_abs(.\ntemplate <typename T> inline T cat_abs(const T &x) { return x < 0 ? T(-x) : x; }\n",
-        "ac_float_trig.h": '#pragma once\n// Catapult synthesizes no trig on its float types: fixed-point CORDIC from ac_math, converted at the boundary.\n// Angle in radians, |x| < 2^15; about 1e-9 absolute error. Written next to the design by the translation pre-pass.\n#include <ac_std_float.h>\n#include <ac_math/ac_sincos_cordic.h>\n#include <ac_math/ac_sqrt.h>\nnamespace ac_float_trig {\ntypedef ac_fixed<48, 16, true, AC_RND, AC_SAT> angle_t;\ntypedef ac_fixed<40, 2, true> unit_t;\nstatic const ac_fixed<48, 2, true> INV_PI = 0.31830988618379067154;\ntemplate <typename F> inline F sin_of(const F &x) {\n    angle_t a = x.template convert_to_ac_fixed<48, 16, true, AC_RND, AC_SAT>() * INV_PI;\n    unit_t s;\n    ac_math::ac_sin_cordic(a, s);\n    return F(s);\n}\ntemplate <typename F> inline F cos_of(const F &x) {\n    angle_t a = x.template convert_to_ac_fixed<48, 16, true, AC_RND, AC_SAT>() * INV_PI;\n    unit_t c;\n    ac_math::ac_cos_cordic(a, c);\n    return F(c);\n}\n}\ninline ac_ieee_float32 sin(const ac_ieee_float32 &x) { return ac_float_trig::sin_of(x); }\ninline ac_ieee_float32 cos(const ac_ieee_float32 &x) { return ac_float_trig::cos_of(x); }\ninline ac_ieee_float64 sin(const ac_ieee_float64 &x) { return ac_float_trig::sin_of(x); }\ninline ac_ieee_float64 cos(const ac_ieee_float64 &x) { return ac_float_trig::cos_of(x); }\ninline ac_ieee_float32 sinf(const ac_ieee_float32 &x) { return sin(x); }\ninline ac_ieee_float32 cosf(const ac_ieee_float32 &x) { return cos(x); }\nnamespace ac_float_trig {\ntemplate <typename F> inline F sqrt_of(const F &x) {\n    ac_fixed<48, 16, false, AC_RND, AC_SAT> a = x.template convert_to_ac_fixed<48, 16, true, AC_RND, AC_SAT>();\n    ac_fixed<40, 8, false> r;\n    ac_math::ac_sqrt(a, r);\n    return F(r);\n}\n}\ninline ac_ieee_float32 sqrt(const ac_ieee_float32 &x) { return ac_float_trig::sqrt_of(x); }\ninline ac_ieee_float64 sqrt(const ac_ieee_float64 &x) { return ac_float_trig::sqrt_of(x); }\ninline ac_ieee_float32 sqrtf(const ac_ieee_float32 &x) { return sqrt(x); }\n',
+        "ac_float_trig.h": '#pragma once\n// Catapult synthesizes no trig on its float types: fixed-point CORDIC from ac_math, converted at the boundary.\n// Angle in radians, |x| < 2^15; about 1e-9 absolute error. Written next to the design by the translation pre-pass.\n#include <ac_std_float.h>\n#include <ac_math/ac_sincos_cordic.h>\n#include <ac_math/ac_sqrt.h>\nnamespace ac_float_trig {\ntypedef ac_fixed<48, 16, true, AC_RND, AC_SAT> angle_t;\ntypedef ac_fixed<40, 2, true> unit_t;\nstatic const ac_fixed<48, 2, true> INV_PI = 0.31830988618379067154;\ntemplate <typename F> inline F sin_of(const F &x) {\n    angle_t a = x.template convert_to_ac_fixed<48, 16, true, AC_RND, AC_SAT>() * INV_PI;\n    unit_t s;\n    ac_math::ac_sin_cordic(a, s);\n    return F(s);\n}\ntemplate <typename F> inline F cos_of(const F &x) {\n    angle_t a = x.template convert_to_ac_fixed<48, 16, true, AC_RND, AC_SAT>() * INV_PI;\n    unit_t c;\n    ac_math::ac_cos_cordic(a, c);\n    return F(c);\n}\n}\ninline ac_ieee_float32 sin(const ac_ieee_float32 &x) { return ac_float_trig::sin_of(x); }\ninline ac_ieee_float32 cos(const ac_ieee_float32 &x) { return ac_float_trig::cos_of(x); }\ninline ac_ieee_float64 sin(const ac_ieee_float64 &x) { return ac_float_trig::sin_of(x); }\ninline ac_ieee_float64 cos(const ac_ieee_float64 &x) { return ac_float_trig::cos_of(x); }\ninline ac_ieee_float32 sinf(const ac_ieee_float32 &x) { return sin(x); }\ninline ac_ieee_float32 cosf(const ac_ieee_float32 &x) { return cos(x); }\nnamespace ac_float_trig {\ntemplate <typename F> inline F sqrt_of(const F &x) {\n    F r;\n    ac_math::ac_sqrt(x, r);  // ac_math has the float overload; a fixed-point detour overflowed past 2^16 (NaN in the testbench)\n    return r;\n}\n}\ninline ac_ieee_float32 sqrt(const ac_ieee_float32 &x) { return ac_float_trig::sqrt_of(x); }\ninline ac_ieee_float64 sqrt(const ac_ieee_float64 &x) { return ac_float_trig::sqrt_of(x); }\ninline ac_ieee_float32 sqrtf(const ac_ieee_float32 &x) { return sqrt(x); }\n',
         "ac_float_exp.h": '#pragma once\n// Catapult synthesizes no exp/log/pow on its float types: hyperbolic CORDIC from ac_math, which takes the float\n// types directly (30 fractional bits in the temporaries). Written next to the design by the translation pre-pass.\n#include <ac_std_float.h>\n#include <ac_math/ac_hcordic.h>\nnamespace ac_float_exp {\ntemplate <typename F> inline F exp_of(const F &x) { F z; ac_math::ac_exp_cordic<true, 30>(x, z); return z; }\ntemplate <typename F> inline F log_of(const F &x) { F z; ac_math::ac_log_cordic<true, 30>(x, z); return z; }\ntemplate <typename F> inline F pow_of(const F &a, const F &b) { F z; ac_math::ac_pow_cordic<true, 30>(a, b, z); return z; }\n}\ninline ac_ieee_float32 exp(const ac_ieee_float32 &x) { return ac_float_exp::exp_of(x); }\ninline ac_ieee_float64 exp(const ac_ieee_float64 &x) { return ac_float_exp::exp_of(x); }\ninline ac_ieee_float32 log(const ac_ieee_float32 &x) { return ac_float_exp::log_of(x); }\ninline ac_ieee_float64 log(const ac_ieee_float64 &x) { return ac_float_exp::log_of(x); }\ninline ac_ieee_float32 pow(const ac_ieee_float32 &a, const ac_ieee_float32 &b) { return ac_float_exp::pow_of(a, b); }\ninline ac_ieee_float64 pow(const ac_ieee_float64 &a, const ac_ieee_float64 &b) { return ac_float_exp::pow_of(a, b); }\ninline ac_ieee_float32 expf(const ac_ieee_float32 &x) { return exp(x); }\ninline ac_ieee_float32 logf(const ac_ieee_float32 &x) { return log(x); }\ninline ac_ieee_float32 powf(const ac_ieee_float32 &a, const ac_ieee_float32 &b) { return pow(a, b); }\n',
         "cat_bytes.h": (
             "#pragma once\n"
@@ -138,7 +166,9 @@ RE_DIALECT_TYPE = re.compile(r"\b(std::complex|complex|float|double)\b")
 RE_CONST_TABLE = re.compile(r"\b(?:const\s+)?(float|double)\b[^=;]*\[[^=;]*=\s*\{|\bconst\s+(float|double)\b[^=;]*\[|\bconstexpr\s+(float|double)\b")  # a literal table or constexpr stays native
 RE_MAIN = re.compile(r"\bint\s+main\s*\(")
 RE_SDS_PRAGMA = re.compile(r"^\s*#\s*pragma\s+SDS\b", re.I)  # SDSoC pragmas have no Catapult meaning
-RE_FLOAT_TYPEDEF = re.compile(r"\btypedef\s+(?:float|double)\s+([A-Za-z_]\w*)\s*;")
+RE_FLOAT_TYPEDEF = re.compile(r"\b(?:typedef\s+(?:float|double)\s+([A-Za-z_]\w*)|using\s+([A-Za-z_]\w*)\s*=\s*(?:float|double))\s*;")
+# a bare float literal as a ternary branch: `T v = c ? x : 0.0;` mixes the float type with double (CRD-42)
+RE_TERNARY_LITERAL = re.compile(r"(\?\s*|:\s*)(-?\d+\.\d*(?:[eE][-+]?\d+)?|-?\d+[eE][-+]?\d+)(?=\s*[:;])")
 RE_FLOAT_MATH = re.compile(r"\b(tan|atan2?)f?\s*\(")  # cos/sin/sqrt and exp/log/pow come from the ac_float_trig and ac_float_exp shims
 RE_STD_TRIG = re.compile(r"\bstd::((?:cos|sin|sqrt)f?)\s*\(")
 # byte-level idioms Catapult rejects (CIN-71), mapped to the typed helpers in cat_bytes.h
@@ -161,6 +191,40 @@ RE_TYPED_LITERAL = re.compile(r"\d\.?\d*[fFuUlL]\b")
 # a local channel, possibly an array, possibly with the hls::stream name argument ac_channel has no constructor for
 RE_LOCAL_CHANNEL = re.compile(r"^(\s+)(ac_channel\s*<(?:[^;&()]|\([^()]*\))*>\s+[A-Za-z_]\w*(?:\s*\[[^\]]+\])*)\s*(?:\(\s*\"[^\"]*\"\s*\))?\s*;")
 RE_MACRO_CHANNEL = re.compile(r"^(\s*#\s*define\s+\w+(?:\([^)]*\))?\s+)(ac_channel\s*<(?:[^;&()]|\([^()]*\))*>\s+[\w#]+\s*;)")
+# a name that stands for a channel type: `#define stream_t(x) hls::stream<x>`, `typedef ac_channel<T> ch_t;`
+RE_CHANNEL_ALIAS = re.compile(
+    r"^\s*(?:#\s*define\s+(\w+)\s*\([^)]*\)\s*(?:ac_channel|hls::stream)\s*<"
+    r"|typedef\s+(?:ac_channel|hls::stream)\s*<.*>\s*(\w+)\s*;"
+    r"|using\s+(\w+)\s*=\s*(?:ac_channel|hls::stream)\s*<)",
+    re.M,
+)
+
+
+DROP_INCLUDES = ("gmp.h", "gmpxx.h")  # host-only libraries the Vitis flow links for simulation; nothing to synthesize
+
+
+def _resolve_include(line: str, path: str, p: Path, dir_out: Path) -> str:
+    """A header the extraction copied next to the sources is still included by its repository-relative path
+    (`../../include/x.h`), which the compiler cannot find; the include takes the path the file now has."""
+    if path in DROP_INCLUDES:
+        return f"// {line.strip()}  // host-only library, not synthesized"
+    name = Path(path).name
+    if "/" in path and not (p.parent / path).exists():
+        found = next((c for c in (p.parent / name, dir_out / name) if c.exists()), None)
+        if found is not None:
+            return line.replace(path, os.path.relpath(found, p.parent).replace(os.sep, "/"), 1)
+    return line
+
+
+def channel_aliases(texts) -> list[str]:
+    return sorted({n for t in texts for m in RE_CHANNEL_ALIAS.finditer(t) for n in m.groups() if n})
+
+
+def _local_alias_channel(aliases: list[str]) -> re.Pattern | None:
+    """A local declaration through a channel alias, `stream_t(T) s[N];` or `ch_t s;`, which needs `static` too."""
+    if not aliases:
+        return None
+    return re.compile(r"^(\s+)((?:" + "|".join(map(re.escape, aliases)) + r")\s*(?:\((?:[^;()&]|\([^()]*\))*\))?\s+[A-Za-z_]\w*(?:\s*\[[^\]]+\])*)\s*;")
 LOOKBACK_LINES = 3
 SIGNATURE_LINES = 8
 
@@ -227,6 +291,42 @@ def dataflow_blocks(dir_in: Path, top: str | None) -> set[str]:
     return blocks
 
 
+RE_ANON_NAMESPACE = re.compile(r"^(\s*)namespace\s*\{")
+# what an anonymous namespace in a header may hold and still be safely named: no object or out-of-line
+# function definitions, which would then be defined once per translation unit
+RE_LINKAGE_FREE = re.compile(r"^\s*(?:template\b|struct\b|class\b|union\b|enum\b|using\b|typedef\b|inline\b|constexpr\b|static\s+constexpr\b|static_assert\b|#|//|/\*|\*|\}|$)")
+
+
+def _name_anonymous_namespaces(lines: list[str], log: dict, rel: str) -> list[str]:
+    """An anonymous namespace in a header gives each translation unit its own copy of the types in it, so a
+    class outside it that uses them differs between units; Catapult compiles every unit of a design together
+    and rejects that (CRD-1066). A named inline namespace keeps the unqualified lookup and makes it one type."""
+    out = list(lines)
+    name = "anon_" + re.sub(r"\W", "_", Path(rel).stem)
+    for i, line in enumerate(lines):
+        m = RE_ANON_NAMESPACE.match(line)
+        if not m:
+            continue
+        depth, start, safe = 0, True, True
+        for l in lines[i:]:
+            code = re.sub(r'"(?:\\.|[^"\\])*"', '""', l.split("//", 1)[0])
+            if depth == 1 and start and code.strip() and not RE_LINKAGE_FREE.match(code):
+                safe = False
+                break
+            if depth == 1 and code.strip() and not code.lstrip().startswith("#"):
+                start = False
+            for ch in code:
+                depth += (ch == "{") - (ch == "}")
+            if depth == 1 and code.rstrip().endswith((";", "}")):
+                start = True
+            if depth <= 0:
+                break
+        if safe and depth <= 0:
+            out[i] = RE_ANON_NAMESPACE.sub(rf"\1inline namespace {name} {{", line, count=1)
+            log["types"].append({"file": rel, "line": i + 1, "before": line.strip(), "after": out[i].strip()})
+    return out
+
+
 def _insert_block_markers(lines: list[str], blocks: set[str], log: dict, rel: str) -> list[str]:
     for name in sorted(blocks):
         rx = _fn_def_regex(name)
@@ -249,10 +349,37 @@ def _fn_def_regex(top: str) -> re.Pattern:
     return re.compile(r"^\s*[A-Za-z_][\w:<>,\s\*&]*?\b" + re.escape(top) + r"\s*\([^;{}]*\)\s*\{")
 
 
+def _c_int(m: re.Match, signed: bool) -> str:
+    n = m.group(1).strip()
+    if n in STDINT_WIDTHS:
+        return f"{'' if signed else 'u'}int{n}_t"
+    return f"{'' if signed else 'unsigned '}_BitInt({n})"
+
+
+# Dynamatic captures the test program's stdout as the profiling vectors (one line per kernel argument), so
+# `main()` may write nothing there; the rewrite moves every print to stderr and leaves `puts`/`putchar` to the check.
+RE_STDOUT = (
+    (re.compile(r"(?<![\w.])printf\s*\("), "fprintf(stderr, "),
+    (re.compile(r"\bstd::cout\b"), "std::cerr"),
+    (re.compile(r"(?<![\w:])cout\b"), "cerr"),
+    (re.compile(r"\bstdout\b"), "stderr"),
+)
+
+
+def redirect_stdout(line: str) -> str:
+    for rx, rep in RE_STDOUT:
+        line = rx.sub(rep, line)
+    return line
+
+
 def _rewrite_types(line: str, target: TargetSpec, log: dict, rel: str, i: int) -> str:
     before = line
-    line = RE_AP_INT.sub(r"ac_int<\1, true>", line)
-    line = RE_AP_UINT.sub(r"ac_int<\1, false>", line)
+    if target.name == "dynamatic":
+        line = RE_AP_INT.sub(lambda m: _c_int(m, True), line)
+        line = RE_AP_UINT.sub(lambda m: _c_int(m, False), line)
+    else:
+        line = RE_AP_INT.sub(r"ac_int<\1, true>", line)
+        line = RE_AP_UINT.sub(r"ac_int<\1, false>", line)
 
     def fixed(m: re.Match) -> str:
         signed = "true" if m.group(1) == "ap_fixed" else "false"
@@ -286,16 +413,24 @@ def float_typedefs(dir_in: Path) -> set[str]:
     names: set[str] = set()
     for p in sorted(Path(dir_in).rglob("*")):
         if p.is_file() and p.suffix.lower() in SOURCE_SUFFIXES and p.name != "testbench.cpp":
-            names |= set(RE_FLOAT_TYPEDEF.findall(p.read_text(encoding="utf-8", errors="replace")))
+            names |= {a or b for a, b in RE_FLOAT_TYPEDEF.findall(p.read_text(encoding="utf-8", errors="replace"))}
     return names
 
 
-def _rewrite_dialect(lines: list[str], target: TargetSpec, log: dict, rel: str, testbench: bool) -> list[str]:
+def _rewrite_dialect(lines: list[str], target: TargetSpec, log: dict, rel: str, testbench: bool, alias_channel: re.Pattern | None = None) -> list[str]:
     """Constructs the target's synthesizer rejects but a host compiler accepts. The testbench keeps host
     types (it is compiled, never synthesized); mixing at the DUT boundary is left to the agent as residue."""
     types = DIALECT_TYPES.get(target.name, {})
-    if not types:
-        return lines
+    if not types:  # a target with header swaps only (Dynamatic: hls_math.h -> math.h)
+        out = []
+        for i, line in enumerate(lines, start=1):
+            for h, new_h in DIALECT_HEADERS.get(target.name, {}).items():
+                if line.lstrip().startswith("#") and h in line:
+                    log["headers"].append({"file": rel, "line": i, "before": line.strip(), "after": line.replace(h, new_h).strip()})
+                    line = line.replace(h, new_h)
+                    break
+            out.append(line)
+        return out
     catapult = target.name == "catapult"  # the float shims, cat_abs and static local channels are Catapult rules
     out: list[str] = []
     for i, line in enumerate(lines, start=1):
@@ -315,7 +450,7 @@ def _rewrite_dialect(lines: list[str], target: TargetSpec, log: dict, rel: str, 
                 log["types"].append({"file": rel, "line": i, "before": line.strip(), "after": new.strip()})
                 log["dialect_dut_changed"] = True
                 line = new
-        m = RE_LOCAL_CHANNEL.match(line) if catapult else None
+        m = (RE_LOCAL_CHANNEL.match(line) or (alias_channel and alias_channel.match(line))) if catapult else None
         if m and not in_class_body(lines, i - 1):
             line = f"{m.group(1)}static {m.group(2)};"
             log["types"].append({"file": rel, "line": i, "before": lines[i - 1].strip(), "after": line.strip()})
@@ -345,6 +480,12 @@ def _rewrite_dialect(lines: list[str], target: TargetSpec, log: dict, rel: str, 
             # the float types' constructors are explicit: copy-initialization from a literal does not compile (CRD-415)
             line = lit_rx.sub(r"\1 \2(\3);", line)
             log["types"].append({"file": rel, "line": i, "before": lines[i - 1].strip(), "after": line.strip()})
+        decl = re.match(r"\s*" + lit_rx.pattern.split(r"\s+(\w+)", 1)[0] + r"\s+\w+\s*=[^;]*\?", line)  # the literal rule's type
+        if catapult and decl and not line.lstrip().startswith("#"):
+            new = RE_TERNARY_LITERAL.sub(lambda t: f"{t.group(1)}{decl.group(1).replace('const', '').strip()}({t.group(2)})", line)
+            if new != line:
+                log["types"].append({"file": rel, "line": i, "before": lines[i - 1].strip(), "after": new.strip()})
+                line = new
         if RE_SDS_PRAGMA.match(line):
             log["pragmas_dropped"].append({"file": rel, "line": i, "kind": "sds", "before": line.strip(), "category": "absent", "reason": "SDSoC pragma, no target equivalent"})
             continue
@@ -628,6 +769,7 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
         "pragmas_dropped": [],
         "top_marker": {"inserted": False},
         "blocks": [],
+        "stdout": [],
         "residue": [],
     }
     header_map = HEADER_MAPS.get(target.name, HEADER_MAPS["catapult"])
@@ -651,12 +793,14 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(p, dst)
 
-    if top and target.name in ("catapult", "bambu"):
+    if top and target.name in ("catapult", "bambu", "dynamatic"):  # Dynamatic's translator segfaults on `T x[]`
         _size_unsized_params(dir_out, top, log)
     if top and target.name == "bambu":
         _void_class_return(dir_out, top, log)
 
     tb_files = testbench_files(dir_out)
+    sources = [q for q in dir_out.rglob("*") if q.is_file() and q.suffix.lower() in SOURCE_SUFFIXES]
+    alias_channel = _local_alias_channel(channel_aliases(q.read_text(encoding="utf-8", errors="replace") for q in sources))
     for p in sorted(dir_out.rglob("*"), key=lambda q: (q.name == "testbench.cpp", str(q))):
         if not p.is_file() or p.suffix.lower() not in SOURCE_SUFFIXES:
             continue
@@ -670,8 +814,18 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
                 log["headers"].append({"file": rel, "line": i, "before": line.strip(), "after": new.strip()})
                 new_lines.append(new)
                 continue
+            m = RE_ANY_INCLUDE.match(line)
+            if m and target.name == "catapult":
+                new = _resolve_include(line, m.group(1), p, dir_out)
+                if new != line:
+                    log["headers"].append({"file": rel, "line": i, "before": line.strip(), "after": new.strip()})
+                    new_lines.append(new)
+                    continue
+            if target.name == "dynamatic" and (new := redirect_stdout(line)) != line:
+                log["stdout"].append({"file": rel, "line": i, "before": line.strip(), "after": new.strip()})
+                line = new
             new_lines.append(_rewrite_types(line, target, log, rel, i))
-        new_lines = _rewrite_dialect(new_lines, target, log, rel, testbench=rel in tb_files)
+        new_lines = _rewrite_dialect(new_lines, target, log, rel, testbench=rel in tb_files, alias_channel=alias_channel)
         for line in new_lines:
             m = RE_ANY_INCLUDE.match(line)
             shim = SHIM_HEADERS.get(target.name, {}).get(m.group(1)) if m else None
@@ -683,6 +837,8 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
             new_lines = _insert_top_marker(new_lines, top, target, log, rel)
         if blocks and rel not in tb_files:
             new_lines = _insert_block_markers(new_lines, blocks, log, rel)
+        if target.name == "catapult" and p.suffix.lower() in (".h", ".hpp"):
+            new_lines = _name_anonymous_namespaces(new_lines, log, rel)
         _relocate_residue(log, rel, new_lines)
         text = "\n".join(new_lines) + "\n"
         for k, l in enumerate(text.splitlines(), start=1):

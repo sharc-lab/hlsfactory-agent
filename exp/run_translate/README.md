@@ -1,8 +1,8 @@
-# Translation flow: Vitis HLS -> Catapult HLS, XLS, Bambu
+# Translation flow: Vitis HLS -> Catapult HLS, XLS, Bambu, Dynamatic
 
 Cross-tool translation flows built on the existing Pi-in-Docker agent harness. A standalone Vitis HLS
 design folder (as produced by HLSFactory-Agent) becomes an equivalent design for a target tool. Targets
-are data (`TargetSpec` in `translate.py`): Catapult and Bambu are complete through synthesis, XLS through emulation.
+are data (`TargetSpec` in `translate.py`): Catapult, Bambu and Dynamatic are complete through synthesis, XLS through emulation.
 
 Code: `hlsfactory_agent/translate.py` (targets, prompt, checks, run class), `scan.py` (inventory),
 `rewrite.py` (mechanical pre-pass). Tests: `tests/`.
@@ -13,7 +13,8 @@ Code: `hlsfactory_agent/translate.py` (targets, prompt, checks, run class), `sca
    written as `scan.json` for the agent and used later to check the report.
 2. **Oracle**: the design's own testbench must pass on its original code (`run_oracle_check`). Before it,
    `repair_top` and `normalize_vitis_script` fix the extracted `synth.tcl` (top name, unset Tcl variables,
-   include paths, removed options).
+   include paths, removed options), and `--repair-extraction` (`extraction_repair.py`) makes escaped includes
+   resolve and recovers missing headers and data files from a repository clone (`--repo-clone`).
 3. **Mechanical pre-pass**: `rewrite.py` copies the design and swaps headers and types, moves loop
    pragmas to the target's placement, drops pragmas with no equivalent, inserts the top marker, and
    writes `rewrite_log.json` with a `residue` list of what it could not do safely. No numerics are guessed.
@@ -79,8 +80,18 @@ PYTHONPATH=. python exp/run_translate/run_repo.py --repo UCLA-VAST/HP-FFT-HLS --
 ```
 
 The oracle check (`run_oracle_check` in `translate.py`) compiles each extracted design's own testbench against its
-own sources with clang and the Vitis headers inside the container and runs it. A design whose testbench does not
-pass on the original code has no reference to translate against; it is still translated, but flagged.
+own sources with clang and the Vitis headers inside the container and runs it. The sources are the ones `synth.tcl`
+lists, with its `-cflags`; a source the testbench already includes is dropped, a second `main` loses to the `-tb`
+file, and duplicate symbols across units fall back to a single translation unit (`oracle.json` records
+`cpp_files`, `dropped`, `cflags`, `build_mode`). A design whose testbench does not pass on the original code has
+no reference to translate against; it is still translated, but flagged. `--oracle-only` runs just this step
+(`--oracle-timeout` seconds per design, default 120) and keeps an earlier translation's checks if the run dir has
+them; `--reoracle` does the same on a `--resume`:
+
+```
+PYTHONPATH=. python exp/run_translate/run_repo.py --repo ETHZ-DYNAMO/balor --skip-extract --oracle-only \
+    --repair-extraction --repo-clone /export/hdd/scratch/tshukla31/census_repo_clones --oracle-timeout 900
+```
 
 Unit tests, no Docker or key needed:
 
@@ -167,6 +178,24 @@ the log, latency is not measured. Bambu 2024.10 aborts on a top that returns an 
 pre-pass makes it `void` with a trailing `ret_out` reference and leaves the testbench call sites as residue;
 a loop label moves above the pragma. One recovery step: `unexpected pattern` from interface inference
 (a pointer the top passes to memcpy) reruns with `--generate-interface=MINIMAL`.
+
+## Dynamatic target
+
+`--target dynamatic`. Plain C, one file: the kernel `<top>.c` also holds `main()`, which calls the kernel
+once through `CALL_KERNEL(top, args...)` with variables named like the parameters (Dynamatic dumps them as
+co-simulation inputs). The kernel calls no function, declares no local array (hoisted to parameters appended
+after the originals), uses no pointers, globals or 64-bit types; `ap_int<N>` becomes `int8/16/32_t` or
+`_BitInt(N)`; `UNROLL` becomes `#pragma clang loop unroll_count(n)`, `ARRAY_PARTITION` becomes
+`#pragma DYN array_partition`, `PIPELINE`/`INLINE`/`DATAFLOW` are dropped (dynamic scheduling, no calls).
+Designs with `ap_fixed`, `hls::stream` or `hls::vector` are reported untranslatable before the pre-pass. The
+checks compile the file as C17 and build it as C++ (the tool does both). Synthesis runs in the image built by
+`docker_images/build_dynamatic.sh` (`hlsfactory/dynamatic:latest`, built with `--enable-cbc`):
+`compile --buffer-algorithm fpga20 --milp-solver cbc` (throughput-driven MILP buffering, profiled through the
+`CALL_KERNEL` in `main()`, which is why `main()` must print nothing to stdout: the pre-pass redirects prints to stderr and the check forbids `printf`/`puts`/`stdout`), `write-hdl --hdl vhdl`, `simulate --simulator ghdl`; PASS means the VHDL was
+written and the C/RTL co-simulation matched, latency is the simulated cycle count. A target check requires
+exactly one `CALL_KERNEL`, naming the function the file is named after (the verifier records one transaction).
+Recovery steps, one per round: `on-merges` buffering when profiling or the MILP failed, `--disable-lsq` when
+the log names the LSQ.
 
 ## Run statistics
 

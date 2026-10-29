@@ -5,6 +5,8 @@ outputs under results/ so they can be synthesized elsewhere.
 Example:
     PYTHONPATH=. python exp/run_translate/run_repo.py --repo UCLA-VAST/HP-FFT-HLS --target catapult --jobs 4
     PYTHONPATH=. python exp/run_translate/run_repo.py --repo UCLA-VAST/HP-FFT-HLS --skip-extract   # reuse extraction
+    PYTHONPATH=. python exp/run_translate/run_repo.py --repo UCLA-VAST/HP-FFT-HLS --skip-extract --oracle-only \\
+        --repair-extraction --repo-clone /path/to/clones   # rerun only the original testbenches, repaired
 """
 
 import argparse
@@ -18,6 +20,7 @@ from dotenv import dotenv_values
 from joblib import Parallel, delayed
 
 from hlsfactory_agent.core import HLSFactoryAgentRun
+from hlsfactory_agent.extraction_repair import repair_extraction
 from dataclasses import asdict, replace
 
 from hlsfactory_agent.stats import ResourceSampler, StageTimer, agent_usage, host_info
@@ -65,16 +68,33 @@ def session_stats(dir_run: Path) -> dict:
 
 def translate_one(
     dir_design: Path, target: str, model: str, api_key: str, dir_runs: Path, resume: bool = False, attempts: int = 1,
-    synth: str = "none", degrade: int = 0, synth_timeout: int | None = None,
+    synth: str = "none", degrade: int = 0, synth_timeout: int | None = None, oracle_timeout: int = 120,
+    reoracle: bool = False, oracle_only: bool = False,
 ) -> dict:
     run_id = f"translate-{target}-{dir_design.name}"
     dir_run = dir_runs / run_id
     t0 = time.monotonic()
     row: dict = {"design": dir_design.name, "run_id": run_id, "top": repair_top(dir_design), "script": normalize_vitis_script(dir_design)}
     timer = StageTimer()
+    oracle_kw = {"timeout_s": oracle_timeout, "dir_scratch": dir_runs / ".oracle_scratch"}
     try:
-        if resume and (dir_run / "check_data.json").exists() and (dir_run / "oracle.json").exists():
-            oracle = json.loads((dir_run / "oracle.json").read_text(encoding="utf-8"))
+        if oracle_only:  # the original testbench only: no agent; an earlier translation's checks ride along
+            with timer("oracle"):
+                oracle = run_oracle_check(dir_design, **oracle_kw)
+            dir_run.mkdir(parents=True, exist_ok=True)
+            (dir_run / "oracle.json").write_text(json.dumps(oracle, indent=2), encoding="utf-8")
+            row["resumed"] = (dir_run / "check_data.json").exists()
+            check = json.loads((dir_run / "check_data.json").read_text(encoding="utf-8")) if row["resumed"] else {
+                "passed": False, "static": {"passed": False, "failures": ["not run"]},
+                "container": {"syntax_all_ok": False, "testbench_ok": False}, "attempts_used": 0,
+            }
+        elif resume and (dir_run / "check_data.json").exists() and (dir_run / "oracle.json").exists():
+            if reoracle:
+                with timer("oracle"):
+                    oracle = run_oracle_check(dir_design, **oracle_kw)
+                (dir_run / "oracle.json").write_text(json.dumps(oracle, indent=2), encoding="utf-8")
+            else:
+                oracle = json.loads((dir_run / "oracle.json").read_text(encoding="utf-8"))
             check = json.loads((dir_run / "check_data.json").read_text(encoding="utf-8"))
             # Static checks are cheap and deterministic: recompute them so resumed rows follow the current rules.
             scan_path = dir_run / "run_area" / "scan.json"
@@ -85,7 +105,7 @@ def translate_one(
             row["resumed"] = True
         else:
             with timer("oracle"):
-                oracle = run_oracle_check(dir_design)
+                oracle = run_oracle_check(dir_design, **oracle_kw)
             with timer("translate"):
                 check = HLSTranslationRun(run_id, dir_design, dir_run, model, api_key, target=target, attempts=attempts).run()
             (dir_run / "oracle.json").write_text(json.dumps(oracle, indent=2), encoding="utf-8")
@@ -240,6 +260,14 @@ def main() -> None:
                         help="off by default; `--synth` alone runs Vitis on the source and the target tool on the translation")
     parser.add_argument("--degrade", type=int, default=2, help="recovery rounds after a failed target synthesis (0 = off)")
     parser.add_argument("--synth-timeout", type=int, default=None, help="seconds per target synthesis; default is the target's own")
+    parser.add_argument("--oracle-timeout", type=int, default=120, help="seconds the original testbench may run")
+    parser.add_argument("--reoracle", action="store_true", help="with --resume: run the original testbench again instead of reusing oracle.json")
+    parser.add_argument("--oracle-only", action="store_true", help="run only the original testbenches; no translation agent")
+    parser.add_argument("--repair-extraction", action="store_true",
+                        help="before the oracle, repair the extracted designs in place (script source set, escaped includes, "
+                             "files recovered from --repo-clone); logs to <design>/extraction_repair.json")
+    parser.add_argument("--repo-clone", type=Path, default=None,
+                        help="a clone of the repository, or a folder of clones named owner__repo, for --repair-extraction")
     parser.add_argument("--runs-dir", type=Path, default=DIR_RUNS)
     parser.add_argument("--results-dir", type=Path, default=DIR_RESULTS)
     parser.add_argument("--env", type=Path, default=Path(".env"))
@@ -267,10 +295,22 @@ def main() -> None:
     if args.limit:
         designs = designs[: args.limit]
     print(f"[translate] {len(designs)} designs from {dir_designs}")
+    if args.repair_extraction:
+        clone = args.repo_clone
+        if clone is not None and (clone / tag).is_dir():
+            clone = clone / tag
+        with timer("repair"):
+            for d in designs:
+                log = repair_extraction(d, clone)
+                inc = log["includes"]
+                print(f"[repair] {d.name}: sources={log['sources']['sources']} dropped={list(log['sources']['dropped'])} "
+                      f"includes rewritten={len(inc['rewritten'])} copied={len(inc['copied'])} unresolved={len(inc['unresolved'])} "
+                      f"data copied={len(log.get('data', {}).get('copied', {}))}")
 
     with timer("translate"):
         rows = Parallel(n_jobs=args.jobs)(
-            delayed(translate_one)(d, args.target, args.model, api_key, args.runs_dir, args.resume, args.attempts, args.synth, args.degrade, args.synth_timeout)
+            delayed(translate_one)(d, args.target, args.model, api_key, args.runs_dir, args.resume, args.attempts, args.synth, args.degrade,
+                                   args.synth_timeout, args.oracle_timeout, args.reoracle, args.oracle_only)
             for d in designs
         )
     rows = sorted(rows, key=lambda r: r["design"])
@@ -279,6 +319,7 @@ def main() -> None:
         "repo": args.repo, "target": args.target, "model": args.model, "started": started.isoformat(timespec="seconds"),
         "ended": datetime.now().isoformat(timespec="seconds"), "wall_s": round((datetime.now() - started).total_seconds()),
         "jobs": args.jobs, "attempts": args.attempts, "synth": args.synth, "degrade": args.degrade, "synth_timeout": args.synth_timeout,
+        "oracle_timeout": args.oracle_timeout, "oracle_only": args.oracle_only, "repair_extraction": args.repair_extraction,
         "designs": len(designs), "extract_reused": args.skip_extract, "stage_s": timer.seconds, "host": host_info(),
         "resources": sampler.summary(), "design_seconds": {r["design"]: r.get("seconds") for r in rows},
     }

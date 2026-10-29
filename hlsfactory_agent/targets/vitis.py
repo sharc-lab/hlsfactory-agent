@@ -49,7 +49,7 @@ VITIS = TargetSpec(
     top_marker="",
     tool="vitis",
     synth_command=("vitis_hls", "-f", "synth.tcl"),
-    synth_timeout_s=2400,  # large NTT and sparse kernels need over 600 s
+    synth_timeout_s=900,  # census3: every passing run took under 4 min, the longest failing one 18; the 14 that ran 40 min all timed out
     synth_success_marker="*/*/syn/report/csynth.rpt",
     parse_report=parse_vitis_report,
 )

@@ -36,7 +36,7 @@ def run_synth(target: TargetSpec, dir_run: Path, image: str = DOCKER_IMAGE_NAME)
 
     client = docker.from_env()
     container = client.containers.run(
-        image=image,
+        image=inst.image or image,
         command=["bash", "-c", cmd],
         volumes={**inst.volumes, str(Path(dir_run).resolve()): {"bind": CONTAINER_WORK, "mode": "rw"}},
         environment=env,
@@ -49,6 +49,10 @@ def run_synth(target: TargetSpec, dir_run: Path, image: str = DOCKER_IMAGE_NAME)
             container.wait(timeout=target.synth_timeout_s)
         except Exception:  # requests' read timeout: the budget is spent
             container.kill()
+            try:
+                (dir_run / "synth_stdout.log").write_bytes(container.logs())  # how far the tool got
+            except Exception:
+                pass
             return SynthResult("TIMEOUT", failure_class="timeout")
         (dir_run / "synth_stdout.log").write_bytes(container.logs())
     finally:
