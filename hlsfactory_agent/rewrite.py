@@ -372,14 +372,31 @@ def redirect_stdout(line: str) -> str:
     return line
 
 
+RE_STRING_LITERAL = re.compile(r'"(?:\\.|[^"\\\n])*"')
+
+
+def outside_strings(line: str, fn) -> str:
+    """`fn` applied to the parts of a line outside string literals: printed text is never rewritten."""
+    out, pos = [], 0
+    for m in RE_STRING_LITERAL.finditer(line):
+        out += [fn(line[pos:m.start()]), m.group(0)]
+        pos = m.end()
+    out.append(fn(line[pos:]))
+    return "".join(out)
+
+
 def _rewrite_types(line: str, target: TargetSpec, log: dict, rel: str, i: int) -> str:
     before = line
-    if target.name == "dynamatic":
-        line = RE_AP_INT.sub(lambda m: _c_int(m, True), line)
-        line = RE_AP_UINT.sub(lambda m: _c_int(m, False), line)
-    else:
-        line = RE_AP_INT.sub(r"ac_int<\1, true>", line)
-        line = RE_AP_UINT.sub(r"ac_int<\1, false>", line)
+    residue = log["residue"]
+
+    def convert(part: str) -> str:
+        if target.name == "dynamatic":
+            part = RE_AP_INT.sub(lambda m: _c_int(m, True), part)
+            part = RE_AP_UINT.sub(lambda m: _c_int(m, False), part)
+        else:
+            part = RE_AP_INT.sub(r"ac_int<\1, true>", part)
+            part = RE_AP_UINT.sub(r"ac_int<\1, false>", part)
+        return RE_CHANNEL_DEPTH.sub(r"ac_channel<\1>", RE_STREAM.sub(STREAM_MAPS.get(target.name, "ac_channel<"), RE_AP_FIXED.sub(fixed, part)))
 
     def fixed(m: re.Match) -> str:
         signed = "true" if m.group(1) == "ap_fixed" else "false"
@@ -390,15 +407,13 @@ def _rewrite_types(line: str, target: TargetSpec, log: dict, rel: str, i: int) -
             if mode in MODE_MAP:
                 parts.append(MODE_MAP[mode])
             else:
-                log["residue"].append(
+                residue.append(
                     {"file": rel, "line": i, "reason": f"no {target.display_name} mapping for fixed-point mode {mode}; numerics must be preserved"}
                 )
                 parts.append(mode)
         return f"ac_fixed<{', '.join(parts)}>"
 
-    line = RE_AP_FIXED.sub(fixed, line)
-    line = RE_STREAM.sub(STREAM_MAPS.get(target.name, "ac_channel<"), line)
-    line = RE_CHANNEL_DEPTH.sub(r"ac_channel<\1>", line)  # ac_channel takes one template argument; FIFO_DEPTH comes from run.tcl
+    line = outside_strings(line, convert)  # ac_channel takes one template argument; FIFO_DEPTH comes from run.tcl
     if line != before:
         log["types"].append({"file": rel, "line": i, "before": before.strip(), "after": line.strip()})
     m = RE_VENDOR_METHOD.search(line)
@@ -445,7 +460,7 @@ def _rewrite_dialect(lines: list[str], target: TargetSpec, log: dict, rel: str, 
                 line = line.replace(h, new_h)
         directive = line.lstrip().startswith("#") and not re.match(r"\s*#\s*define\b", line)  # a #define'd type is a type
         if not RE_CONST_TABLE.search(code) and not directive:
-            new = RE_STD_TRIG.sub(r"\1(", RE_DIALECT_TYPE.sub(lambda m: types.get(m.group(1), m.group(0)), line))
+            new = outside_strings(line, lambda part: RE_STD_TRIG.sub(r"\1(", RE_DIALECT_TYPE.sub(lambda m: types.get(m.group(1), m.group(0)), part)))
             if new != line:
                 log["types"].append({"file": rel, "line": i, "before": line.strip(), "after": new.strip()})
                 log["dialect_dut_changed"] = True

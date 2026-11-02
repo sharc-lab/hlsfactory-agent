@@ -7,6 +7,8 @@ Example:
     PYTHONPATH=. python exp/run_translate/run_repo.py --repo UCLA-VAST/HP-FFT-HLS --skip-extract   # reuse extraction
     PYTHONPATH=. python exp/run_translate/run_repo.py --repo UCLA-VAST/HP-FFT-HLS --skip-extract --oracle-only \\
         --repair-extraction --repo-clone /path/to/clones   # rerun only the original testbenches, repaired
+    PYTHONPATH=. python exp/run_translate/run_repo.py --repo UCLA-VAST/HP-FFT-HLS --skip-extract --oracle-only --resume \\
+        --synth source --vitis-timeout 2400              # Vitis on the repaired sources, oracle.json reused
 """
 
 import argparse
@@ -69,7 +71,7 @@ def session_stats(dir_run: Path) -> dict:
 def translate_one(
     dir_design: Path, target: str, model: str, api_key: str, dir_runs: Path, resume: bool = False, attempts: int = 1,
     synth: str = "none", degrade: int = 0, synth_timeout: int | None = None, oracle_timeout: int = 120,
-    reoracle: bool = False, oracle_only: bool = False,
+    reoracle: bool = False, oracle_only: bool = False, vitis_timeout: int | None = None,
 ) -> dict:
     run_id = f"translate-{target}-{dir_design.name}"
     dir_run = dir_runs / run_id
@@ -79,10 +81,13 @@ def translate_one(
     oracle_kw = {"timeout_s": oracle_timeout, "dir_scratch": dir_runs / ".oracle_scratch"}
     try:
         if oracle_only:  # the original testbench only: no agent; an earlier translation's checks ride along
-            with timer("oracle"):
-                oracle = run_oracle_check(dir_design, **oracle_kw)
             dir_run.mkdir(parents=True, exist_ok=True)
-            (dir_run / "oracle.json").write_text(json.dumps(oracle, indent=2), encoding="utf-8")
+            if resume and not reoracle and (dir_run / "oracle.json").exists():  # e.g. Vitis on an oracle run
+                oracle = json.loads((dir_run / "oracle.json").read_text(encoding="utf-8"))
+            else:
+                with timer("oracle"):
+                    oracle = run_oracle_check(dir_design, **oracle_kw)
+                (dir_run / "oracle.json").write_text(json.dumps(oracle, indent=2), encoding="utf-8")
             row["resumed"] = (dir_run / "check_data.json").exists()
             check = json.loads((dir_run / "check_data.json").read_text(encoding="utf-8")) if row["resumed"] else {
                 "passed": False, "static": {"passed": False, "failures": ["not run"]},
@@ -128,8 +133,9 @@ def translate_one(
         if synth_timeout:
             spec = replace(spec, synth_timeout_s=synth_timeout)
         cache = dir_runs / ".synth_cache"
+        vitis = replace(VITIS, synth_timeout_s=vitis_timeout) if vitis_timeout else VITIS
         with timer("synth_source"):
-            row["synth_source"] = asdict(run_synth_cached(VITIS, dir_design, dir_run / "synth_source", cache)) if synth in ("both", "source") else {"status": "not run"}
+            row["synth_source"] = asdict(run_synth_cached(vitis, dir_design, dir_run / "synth_source", cache)) if synth in ("both", "source") else {"status": "not run"}
         row["synth_target"] = {"status": "not run"}
         if synth in ("both", "target") and check["passed"] and spec.parse_report:
             with timer("synth_target"):
@@ -260,6 +266,7 @@ def main() -> None:
                         help="off by default; `--synth` alone runs Vitis on the source and the target tool on the translation")
     parser.add_argument("--degrade", type=int, default=2, help="recovery rounds after a failed target synthesis (0 = off)")
     parser.add_argument("--synth-timeout", type=int, default=None, help="seconds per target synthesis; default is the target's own")
+    parser.add_argument("--vitis-timeout", type=int, default=None, help="seconds per Vitis synthesis of the source; default is Vitis's own")
     parser.add_argument("--oracle-timeout", type=int, default=120, help="seconds the original testbench may run")
     parser.add_argument("--reoracle", action="store_true", help="with --resume: run the original testbench again instead of reusing oracle.json")
     parser.add_argument("--oracle-only", action="store_true", help="run only the original testbenches; no translation agent")
@@ -278,12 +285,17 @@ def main() -> None:
 
     repo_name = args.repo.split("/")[1]
     tag = args.repo.replace("/", "__")
+    if args.runs_dir.name != tag:  # one folder per repository: same-named designs of two repositories never share a run dir
+        args.runs_dir = args.runs_dir / tag
+        args.runs_dir.mkdir(parents=True, exist_ok=True)
     dir_stats = args.runs_dir / "stats"
     sampler = ResourceSampler(dir_stats / f"{tag}.resources.jsonl")
     sampler.start()
     started, timer = datetime.now(), StageTimer()
     if args.skip_extract:
         dir_designs = args.runs_dir / f"extract-{tag}" / "run_area" / "output_hls_designs" / repo_name
+        if not dir_designs.is_dir():  # an extraction from before the per-repository layout sits one level up
+            dir_designs = args.runs_dir.parent / f"extract-{tag}" / "run_area" / "output_hls_designs" / repo_name
     else:
         with timer("extract"):
             dir_designs = extract(args.repo, args.model, api_key, args.runs_dir)
@@ -310,7 +322,7 @@ def main() -> None:
     with timer("translate"):
         rows = Parallel(n_jobs=args.jobs)(
             delayed(translate_one)(d, args.target, args.model, api_key, args.runs_dir, args.resume, args.attempts, args.synth, args.degrade,
-                                   args.synth_timeout, args.oracle_timeout, args.reoracle, args.oracle_only)
+                                   args.synth_timeout, args.oracle_timeout, args.reoracle, args.oracle_only, args.vitis_timeout)
             for d in designs
         )
     rows = sorted(rows, key=lambda r: r["design"])
@@ -319,6 +331,7 @@ def main() -> None:
         "repo": args.repo, "target": args.target, "model": args.model, "started": started.isoformat(timespec="seconds"),
         "ended": datetime.now().isoformat(timespec="seconds"), "wall_s": round((datetime.now() - started).total_seconds()),
         "jobs": args.jobs, "attempts": args.attempts, "synth": args.synth, "degrade": args.degrade, "synth_timeout": args.synth_timeout,
+        "vitis_timeout": args.vitis_timeout,
         "oracle_timeout": args.oracle_timeout, "oracle_only": args.oracle_only, "repair_extraction": args.repair_extraction,
         "designs": len(designs), "extract_reused": args.skip_extract, "stage_s": timer.seconds, "host": host_info(),
         "resources": sampler.summary(), "design_seconds": {r["design"]: r.get("seconds") for r in rows},

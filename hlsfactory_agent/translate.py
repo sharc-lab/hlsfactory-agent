@@ -260,6 +260,8 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
            "- Do not rename functions or reorder function arguments. Only their types change.\n") +
         "- No Vitis identifiers may remain in the output: no `ap_int`, `ap_uint`, `ap_fixed`, `hls::stream`, no `#pragma HLS`, no Vitis headers.\n"
         "- Do not delete testbench checks or replace them with placeholders.\n"
+        "- Do not change the testbench's printed text: every string literal in the testbench stays byte for byte, even one that "
+        "names a Vitis type; its output is compared line by line with the original's.\n"
         "- Start immediately. Do not only describe the steps.\n"
         "\n"
         "## Pre-Ending Checklist (MANDATORY)\n"
@@ -552,14 +554,40 @@ def insert_required_includes(dir_output: Path, target: TargetSpec) -> list[str]:
     return added
 
 
+def _string_literals(path: Path) -> list[str]:
+    """Contents of the string literals in a source file, comments and #include lines left out."""
+    code = RE_COMMENT.sub("", path.read_text(encoding="utf-8", errors="replace"))
+    code = "\n".join(l for l in code.splitlines() if not re.match(r"\s*#\s*include\b", l))
+    return [m.group(1) for m in re.finditer(r'"((?:\\.|[^"\\\n])*)"', code)]
+
+
+def _testbench_files(dir_design: Path) -> list[Path]:
+    from hlsfactory_agent.extraction_repair import tcl_files
+
+    marked = [dir_design / e["file"] for e in tcl_files(dir_design) if e["tb"] and (dir_design / e["file"]).suffix.lower() in SOURCE_SUFFIXES]
+    if marked:
+        return [p for p in marked if p.exists()]
+    return [p for p in _iter_source_files(dir_design) if re.search(r"\bint\s+main\s*\(", p.read_text(encoding="utf-8", errors="replace"))]
+
+
+def testbench_strings_kept(dir_input: Path, dir_output: Path) -> list[str]:
+    """Literals of the input testbench that no literal of the output testbench contains: printed text the
+    translation changed (a Vitis type name in a message, a 'fixed' escape), which breaks the line comparison."""
+    wanted = {s for p in _testbench_files(dir_input) for s in _string_literals(p)}
+    tb_out = [dir_output / "testbench.cpp"] if (dir_output / "testbench.cpp").exists() else _testbench_files(dir_output)
+    have = "\x00".join(s for p in tb_out for s in _string_literals(p))
+    return sorted(s for s in wanted if s not in have)
+
+
 def check_translated_design(
-    dir_output: Path, target: TargetSpec, scan: dict | None = None, dir_prepass: Path | None = None
+    dir_output: Path, target: TargetSpec, scan: dict | None = None, dir_prepass: Path | None = None, dir_input: Path | None = None
 ) -> dict:
     """Static checks on the agent's output. Pure Python, no tools, no container.
 
     When ``scan`` (the scanner inventory of the input) is given, the translation report must mention
     every pragma kind in it, translated or dropped, or the check fails. When ``dir_prepass`` (the
     pre-pass output the agent started from) is given, edits outside the residue list fail the check.
+    When ``dir_input`` is given, the output testbench must keep every string literal of the input's.
     """
     result: dict = {"target": target.name, "checks": {}, "failures": []}
     checks = result["checks"]
@@ -663,6 +691,13 @@ def check_translated_design(
                 f"{len(result['directive_failures'])} directive(s) missing or unresolved in {target.driver_file}"
             )
 
+    if dir_input is not None and dir_input.exists():
+        result["changed_strings"] = testbench_strings_kept(dir_input, dir_output)
+        checks["testbench_strings_kept"] = not result["changed_strings"]
+        if result["changed_strings"]:
+            shown = ", ".join(repr(s)[:60] for s in result["changed_strings"][:5])
+            result["failures"].append(f"testbench printed text changed; restore these literals: {shown}")
+
     result["passed"] = not result["failures"]
     return result
 
@@ -673,8 +708,30 @@ def _container_exec(container: Container, cmd: str, workdir: str) -> tuple[int, 
     return (exit_code if exit_code is not None else -1), text
 
 
+FIXED_SEED = 20261101
+_RE_RANDOM_DEVICE_DECL = re.compile(r"\bstd::random_device\s+(\w+)\s*;")
+_RE_RANDOM_DEVICE_TEMP = re.compile(r"\bstd::random_device\s*(?:\(\)|\{\})\s*\(\)")
+_RE_SRAND_TIME = re.compile(r"\bsrand\s*\(\s*(?:\((?:unsigned|unsigned int|int)\)\s*)?time\s*\(\s*(?:NULL|0|nullptr)\s*\)\s*\)")
+
+
+def seed_random_sources(dir_design: Path) -> list[str]:
+    """Pin the testbench's entropy in a copy of the design: `std::random_device` and `srand(time(...))` become a
+    fixed seed, so the original and the translation draw the same inputs and print comparable lines. Returns
+    the files changed (relative paths)."""
+    changed: list[str] = []
+    for p in _iter_source_files(dir_design):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        new = _RE_RANDOM_DEVICE_DECL.sub(rf"std::mt19937 \1({FIXED_SEED}); /* hlsfactory: fixed seed, was std::random_device */", text)
+        new = _RE_RANDOM_DEVICE_TEMP.sub(f"{FIXED_SEED}u /* hlsfactory: fixed seed, was std::random_device */", new)
+        new = _RE_SRAND_TIME.sub(f"srand({FIXED_SEED}) /* hlsfactory: fixed seed, was time() */", new)
+        if new != text:
+            p.write_text(new, encoding="utf-8")
+            changed.append(p.relative_to(dir_design).as_posix())
+    return changed
+
+
 _RE_NEG_ZERO = re.compile(r"-(0\.0+)\b")
-_RE_SIM_NOISE = re.compile(r"^(INFO|WARNING|ERROR) \[(HLS SIM|SIM)\]:", re.IGNORECASE)
+_RE_SIM_NOISE = re.compile(r"^(INFO|WARNING|ERROR) \[(HLS SIM|SIM)\]:|^WARNING: Bitsize mismatch for ap_", re.IGNORECASE)
 
 
 def _normalize_output(text: str) -> list[str]:
@@ -767,6 +824,7 @@ def run_oracle_check(
     tmp_root = Path(tempfile.mkdtemp(prefix="oracle_", dir=dir_scratch))
     dir_copy = tmp_root / "input_design"
     shutil.copytree(dir_design, dir_copy)
+    seeded = seed_random_sources(dir_copy)
     os.chmod(dir_copy, 0o777)
 
     client = docker.from_env()
@@ -784,7 +842,7 @@ def run_oracle_check(
     sel = oracle_sources(dir_design)
     result: dict[str, Any] = {
         "design": dir_design.name, "top": find_top_from_synth_tcl(dir_design), "cpp_files": sel["sources"],
-        "dropped": sel["dropped"], "cflags": sel["cflags"], "build_mode": "separate",
+        "dropped": sel["dropped"], "cflags": sel["cflags"], "build_mode": "separate", "seeded": seeded,
     }
     flags = " ".join(shlex.quote(f.replace("[pwd]", inp)) for f in sel["cflags"])
     try:
@@ -1056,6 +1114,7 @@ class HLSTranslationRun:
         os.chmod(dir_sessions, 0o777)
 
         shutil.copytree(self.dir_design, dir_run_area / INPUT_DIR_NAME)
+        seed_random_sources(dir_run_area / INPUT_DIR_NAME)  # the same fixed seed the oracle ran with
         shutil.copytree(self.target.include_dir, dir_run_area / self.target.include_dir_name)
         for src, name in self.target.extra_include_dirs:
             shutil.copytree(src, dir_run_area / name)
@@ -1091,8 +1150,8 @@ class HLSTranslationRun:
                 continue
             hint = template.replace("{top}", top).replace("{var}", r["args"].get("variable", "?")).replace("{factor}", "<factor>")
             comments.append(f"# UNRESOLVED ({u['reason']}) finish this directive only if that is settled, otherwise delete the line: {hint}")
-        sources = [
-            f.name for f in _iter_source_files(dir_output)
+        sources = [  # relative paths: a source in a subfolder (device/k.cpp) is added where it is
+            f.relative_to(dir_output).as_posix() for f in _iter_source_files(dir_output)
             if f.suffix.lower() in (".cpp", ".cc", ".c") and f.name != "testbench.cpp"
         ]
         tb = "testbench.cpp" if (dir_output / "testbench.cpp").exists() else None
@@ -1156,7 +1215,8 @@ class HLSTranslationRun:
                     self._render_missing_driver(dir_output)
                 includes_added = insert_required_includes(dir_output, self.target)
                 check_data = {
-                    "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=(dir_run_area / PREPASS_DIR_NAME) if self.target.fence else None),
+                    "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=(dir_run_area / PREPASS_DIR_NAME) if self.target.fence else None,
+                                                      dir_input=dir_run_area / INPUT_DIR_NAME),
                     "container": run_container_checks(container, self.target),
                 }
                 passed = bool(check_data["static"]["passed"] and check_data["container"]["testbench_ok"])
@@ -1200,7 +1260,7 @@ class HLSTranslationRun:
                 return False
             rounds += 1
             new = {
-                "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass),
+                "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass, dir_input=dir_prepass.parent / INPUT_DIR_NAME),
                 "container": run_container_checks(container, self.target),
             }
             if all(x >= y for x, y in zip(rank(new), rank(best))):
@@ -1235,7 +1295,7 @@ class HLSTranslationRun:
                 why = "restoring the pre-pass text here breaks the build or the testbench: the agent's edit stands (fence repair)"
                 entries += [{"file": rel, "line": ln, "reason": why} for ln in ([0] if i1 is None else range(i1 + 1, i2 + 1))]
             add_residue((dir_output, dir_prepass), entries)
-            best = {**best, "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass)}
+            best = {**best, "static": check_translated_design(dir_output, self.target, scan=scan, dir_prepass=dir_prepass, dir_input=dir_prepass.parent / INPUT_DIR_NAME)}
         remaining = keys()
         info = {
             "files": sorted({k[0] for k in before}), "hunks": len(before), "restored": len([k for k in before if k not in remaining and k not in rejected]),
@@ -1289,6 +1349,6 @@ class HLSTranslationRun:
 
     def _render_missing_driver(self, dir_output: Path) -> None:
         top = find_top_from_synth_tcl(self.dir_design) or "top"
-        sources = [p.name for p in _iter_source_files(dir_output) if p.suffix.lower() in (".cpp", ".cc", ".c") and p.name != "testbench.cpp"]
+        sources = [p.relative_to(dir_output).as_posix() for p in _iter_source_files(dir_output) if p.suffix.lower() in (".cpp", ".cc", ".c") and p.name != "testbench.cpp"]
         tb = "testbench.cpp" if (dir_output / "testbench.cpp").exists() else None
         (dir_output / self.target.driver_file).write_text(render_driver(self.target, top, sources, tb), encoding="utf-8")

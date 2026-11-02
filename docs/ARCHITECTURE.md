@@ -43,6 +43,13 @@ With `--require-source-synth`, a design whose Vitis synthesis did not pass is no
   is every top-level source. When separate compilation fails on duplicate symbols the units are built once more
   as one translation unit, testbench last (`build_mode: unity`). `ap_cint.h` (retired C types) has a stand-in
   in `vitis_hls_include/`.
+- Fixed seed (`translate.seed_random_sources`): the oracle's copy and the agent's `input_design` copy both get
+  `std::random_device` and `srand(time(..))` replaced by `FIXED_SEED`, so an original that draws random inputs
+  (DP-HLS) prints the same lines as its translation; the extracted design itself is untouched (`oracle.json`
+  records `seeded`).
+- Run layout: `run_repo.py` puts each repository under `<runs-dir>/<owner__repo>/` (extraction, run dirs,
+  `.synth_cache`, `stats`), so two repositories with a design of the same name (fft, viterbi) never share a run dir;
+  `--skip-extract` still finds an extraction one level up from the older flat layout.
 - `exp/run_translate/import_dataset.py` produces the same layout from HLSFactory's built-in dataset folders
   (`dataset_hls.tcl`); designs whose testbench spans several source files are skipped.
 
@@ -281,6 +288,12 @@ Dynamatic is plain C with one file: the kernel `<top>.c` holds `main()`, which c
 `dynamatic/Integration.h` is `hlsfactory_agent/dynamatic_include`). `TargetSpec.language="c"` switches the
 compile checks to `clang -std=c17` for the syntax check and `clang++ -x c++` for the testbench build (the tool
 compiles the same file both ways), drops `testbench.cpp` from the required files and rewords the prompt;
+The pre-pass never rewrites inside a string literal (`rewrite.outside_strings`), and the static check
+`testbench_strings_kept` fails an output whose testbench lost a literal of the input's testbench (a Vitis type
+name inside a message, a "fixed" escape): the outputs are compared line by line, so printed text must stay.
+`compare_outputs` drops the ap_int library's runtime `WARNING: Bitsize mismatch` lines with the simulator noise.
+Catapult's `run.tcl` adds sources by their path inside the design (`device/k.cpp`), not the bare file name.
+
 `fence=False` leaves the agent free to collapse the C++ files into the one C file. The kernel rules the
 prompt carries (no calls, no local arrays, no pointers or globals, no 64-bit types, `_BitInt(N)` for other
 widths, `#pragma clang loop unroll_count(n)`, `#pragma DYN array_partition`) come from Dynamatic's

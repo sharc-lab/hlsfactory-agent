@@ -45,7 +45,8 @@ def load(dir_runs: Path, dir_results: Path) -> list[dict]:
                 r.update({k: v for k, v in u.items() if k != "attempts"})
                 r["usage_attempts"] = u["attempts"]
         name = res.name.split("-", 3)[3].rsplit("-to-", 1)[0]
-        stats_file = next((f for f in (dir_runs / "stats").glob("*.json") if f.stem.endswith("__" + name)), None) if (dir_runs / "stats").exists() else None
+        stats_files = list((dir_runs / "stats").glob("*.json")) + list(dir_runs.glob("*/stats/*.json"))  # flat or per-repository layout
+        stats_file = next((f for f in stats_files if f.stem.endswith("__" + name)), None)
         stats = json.loads(stats_file.read_text(encoding="utf-8")) if stats_file else {}
         samples_file = stats_file.with_name(stats_file.stem + ".resources.jsonl") if stats_file else None
         if samples_file and samples_file.exists() and not stats.get("resources"):

@@ -67,9 +67,11 @@ Synthesis is off by default (a run stops at compile). `--synth` synthesizes the 
 passing translation with the target tool, each in a fresh container with the tool install mounted read-only
 (`hlsfactory_agent/tools.py`); `--synth source|target` selects one side. `--no-translate` stops after path A.
 `--agent-tools` mounts the tools into the agent's container too; off, the agent cannot call a tool. Results
-are cached by content under `<runs-dir>/.synth_cache/`.
+are cached by content under `<runs-dir>/.synth_cache/`. `run_repo.py` keeps each repository under
+`<runs-dir>/<owner__repo>/` (extraction, run dirs, cache, stats), so same-named designs of different repositories
+never collide; `synth.py` and `stats_report.py` take that folder as their `--runs-dir`.
 `--require-source-synth` skips translating a design whose Vitis synthesis did not pass. `--synth-timeout` overrides
-the target's budget; `--degrade N` (default 2) retries a failed target synthesis with one log-driven edit per round.
+the target's budget and `--vitis-timeout` the source's (Vitis's own is 900 s); `--degrade N` (default 2) retries a failed target synthesis with one log-driven edit per round.
 
 Full loop on a real repository, extraction with HLSFactory-Agent followed by an oracle check and translation of
 every extracted design, with outputs saved under `results/<date>-<repo>-to-<target>/` for synthesis elsewhere:
@@ -86,7 +88,8 @@ file, and duplicate symbols across units fall back to a single translation unit 
 `cpp_files`, `dropped`, `cflags`, `build_mode`). A design whose testbench does not pass on the original code has
 no reference to translate against; it is still translated, but flagged. `--oracle-only` runs just this step
 (`--oracle-timeout` seconds per design, default 120) and keeps an earlier translation's checks if the run dir has
-them; `--reoracle` does the same on a `--resume`:
+them; `--reoracle` does the same on a `--resume`. `--oracle-only --resume` reuses `oracle.json`, so with
+`--synth source --vitis-timeout 2400` it runs just Vitis on the repaired sources:
 
 ```
 PYTHONPATH=. python exp/run_translate/run_repo.py --repo ETHZ-DYNAMO/balor --skip-extract --oracle-only \

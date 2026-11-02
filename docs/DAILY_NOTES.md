@@ -141,3 +141,7 @@ compiles and clang rejects an implicit `ap_uint` conversion). Left: AutoNTT (TAP
 testbenches, 8), DP-HLS 9 (clang strictness on array references, `N_BLOCKS`, 2 crashes). Mishap: cloning the
 25 repos into the scratchpad filled the shared 70 GB root volume; clones now live under /export/hdd (memory note).
 34 tests pass; nothing committed.
+
+## 2026-11-01 (Sunday)
+Worked: Vitis rerun at 2400 s on the repaired oracle5 designs (`--oracle-only --resume --synth source --vitis-timeout 2400`, oracle.json reused; 2mm smoke 40 s), and five harness fixes: per-repository run folders (fft/viterbi collisions), a fixed seed for std::random_device/srand(time) in the oracle and agent copies (14 DP-HLS testbenches), string literals skipped by the pre-pass plus a `testbench_strings_kept` static check (knn_fixed_manhattan's "ap_fixed<32, 4>" message, md's `PASS\\n`), ap_int `Bitsize mismatch` runtime warnings dropped from the output comparison (uart), and Catapult `run.tcl` adding sources by path (SERI's `device/k.cpp` was added as `./k.cpp`).
+Didn't: The "lenient compiler" cause was wrong: g++ -fpermissive rejects DP-HLS align.cpp:207 (short passed where short[4] is expected, a kernel/config mismatch) and SERI k_rr_a (packed_array -> ap_uint<512> conversion missing from the extracted headers) just like clang, so those six are design or extraction problems, not harness ones.
