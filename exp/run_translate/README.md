@@ -71,7 +71,7 @@ are cached by content under `<runs-dir>/.synth_cache/`. `run_repo.py` keeps each
 `<runs-dir>/<owner__repo>/` (extraction, run dirs, cache, stats), so same-named designs of different repositories
 never collide; `synth.py` and `stats_report.py` take that folder as their `--runs-dir`.
 `--require-source-synth` skips translating a design whose Vitis synthesis did not pass. `--synth-timeout` overrides
-the target's budget and `--vitis-timeout` the source's (Vitis's own is 900 s); `--degrade N` (default 2) retries a failed target synthesis with one log-driven edit per round.
+the target's budget and `--vitis-timeout` the source's (Vitis's own is 900 s); `--degrade N` (default 2) retries a failed or timed-out target synthesis with one log-driven edit per round.
 
 Full loop on a real repository, extraction with HLSFactory-Agent followed by an oracle check and translation of
 every extracted design, with outputs saved under `results/<date>-<repo>-to-<target>/` for synthesis elsewhere:

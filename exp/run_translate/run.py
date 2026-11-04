@@ -85,7 +85,7 @@ def main() -> None:
             dir_run = args.runs_dir / run_id
             tgt = run_synth_cached(target, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache)
             entry["synth_target"] = asdict(tgt)
-            if tgt.status == "FAILED" and args.degrade:
+            if tgt.status != "PASS" and args.degrade:
                 entry["synth_target_degraded"] = run_synth_degraded(target, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache, rounds=args.degrade)
             (dir_run / "synth.json").write_text(json.dumps({k: entry[k] for k in ("synth_target", "synth_target_degraded") if k in entry}, indent=4), encoding="utf-8")
 

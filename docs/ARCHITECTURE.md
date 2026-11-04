@@ -37,6 +37,14 @@ With `--require-source-synth`, a design whose Vitis synthesis did not pass is no
   includer, else recovers the file from a clone of the repository (by path suffix; several hits resolved by
   content, then the design name in the path); `repair_data_files` recovers data files named in string literals
   the same way (a leading `/` joins the design's `DATA_DIR` define). Tool and system headers are left alone.
+- Standard includes (`extraction_repair.repair_std_includes`): a file using `uintN_t`, `INT_MAX`-style limits or
+  `std::stringstream` without the header gets `<stdint.h>`, `<limits.h>` or `<sstream>` prepended; the original
+  had them transitively, Vitis compiles each unit alone (BitBlender MurmurHash3.h, ThunderGP l2.h).
+- `ap_cint.h` (`extraction_repair.repair_ap_cint`): Vitis 2024.1 dropped the C integer types, so a design
+  including it gets the harness stand-in next to its sources and its `.c` units become `.cpp` (in `synth.tcl`
+  and includes too), as the oracle already compiled them (CLINK).
+- Two `set_top` lines (ThunderGP: two kernels in one script): `normalize_vitis_script` keeps the last, as Vitis
+  does, and marks the unit defining the dropped top `-tb` so the headers' function bodies reach llvm-link once.
 - Oracle sources (`extraction_repair.oracle_sources`): the units `run_oracle_check` compiles are the ones
   `synth.tcl` lists (`add_files`, `-tb`, `-cflags`/`-csimflags` kept as `-I`/`-D` flags, `[pwd]` the design dir),
   minus a source another unit `#include`s and minus extra `main`s (the `-tb` one wins); the script-less fallback
@@ -47,6 +55,10 @@ With `--require-source-synth`, a design whose Vitis synthesis did not pass is no
   `std::random_device` and `srand(time(..))` replaced by `FIXED_SEED`, so an original that draws random inputs
   (DP-HLS) prints the same lines as its translation; the extracted design itself is untouched (`oracle.json`
   records `seeded`).
+- Verdict: the oracle passes on exit code 0 unless a line of its output is a bare FAIL verdict (`FAIL`,
+  `*** Test FAILED ***`; `translate.oracle_fail_line`, recorded as `fail_line`). Spector's matrix_mul_int prints
+  `FAIL` and returns 0. The oracle, the check and the agent's own run share one budget, `TB_RUN_TIMEOUT_S`
+  (120 s; the check's 60 s cut matrix_mul_float's 1024^3 float product short).
 - Run layout: `run_repo.py` puts each repository under `<runs-dir>/<owner__repo>/` (extraction, run dirs,
   `.synth_cache`, `stats`), so two repositories with a design of the same name (fft, viterbi) never share a run dir;
   `--skip-extract` still finds an extraction one level up from the older flat layout.
@@ -113,21 +125,43 @@ Catapult dialect rules — channels, interfaces and files:
   array, is made `static` and the name argument removed, also when its template argument holds a macro call or a
   `#define` declares it. A channel member of a struct or class is left alone.
 - An unsized top parameter `T x[]` (or `x[/*expr*/]`), or a pointer port `T *x`, gets the size of the array the
-  testbench passes at the call site (a static array, `malloc(n * sizeof)`, `malloc(sizeof(T) * n)` or
-  `new T[n]`), with `n` resolved through the testbench's defines and local `int` assignments. A pointer port
+  testbench passes at the call site (a static array, a local `T a[expr]`, `malloc(n * sizeof)`,
+  `malloc(sizeof(T) * n)`, `calloc(n, ..)`, `new T[n]`, or `malloc(n)` for a byte element), with `n` resolved
+  through the testbench's defines (backslash continuations joined, `/* */` stripped, `/` as C integer division),
+  `constexpr`/`const` integers and local `int` assignments, including a chain of them (`int w = (D + 15) / 16;
+  int total = w + N * w;`) as long as the local is never written again (two test functions may declare it alike).
+  A function the top calls with a sized port gets the size on its own `T *x` parameter (`_size_callee_params`:
+  a block's pointer parameter is otherwise 1024 words, CIN-84). A pointer port
   becomes `T x[n]` in the definition (the same type after decay). Without a size Catapult assumes 1024 words and
   cannot reduce it for a runtime index (CIN-84).
-- A second source file defining `main()` next to `testbench.cpp` is not copied (it cannot be linked).
+- `log2(N)` and `ceil(log2(N))` with a constant `N` in the DUT become the number (`_fold_log2`): Catapult has no
+  synthesizable body for the builtin (CIN-16, Spector's `#define Mlog log2(M)`); a variable argument is residue.
+- The one source file defining `main()` when there is no `testbench.cpp` (`add_files -tb k_test.cpp` kept its
+  name) is copied as `testbench.cpp`, so the sizing above and the checks find it; a second `main()` next to
+  `testbench.cpp` is not copied (it cannot be linked).
 
 `DATAFLOW`:
-- Every function called from the region whose parameters are channels or scalars gets
-  `#pragma hls_design block` before its definition.
-- A stage that receives an array, returns a value, or carries its own `INLINE` stays inline, since Catapult
-  blocks may share nothing but channels (ASM-35).
+- Every function called from the region whose parameters are channels, scalars or ports of the region gets
+  `#pragma hls_design block` before its definition. A port of the region may be owned by one block (ECASLab's
+  `load_input(in1, ..)` / `store_result(out, ..)`); a top whose stages are not all blocks fails with "logic
+  mixed with interconnect".
+- A stage that receives a local array, or a port another stage also receives, returns a value, or carries its
+  own `INLINE` stays inline, since Catapult blocks may share nothing but channels (ASM-35). Comments are blanked
+  before the scan (a doc comment's `in1 (input) --> ..` used to pass for a function).
 - A region may be a macro that expands to the pragma (`#define DF PRAGMA( hls dataflow )`), and stages may be
   defined in any design file.
 - A parent of blocks may hold only the calls and static channels (ASM-59/62). A loop around the region is not
   moved mechanically; the residue note tells the agent to push it into the stages.
+- A stage called under an `if`/`else`/`while`/`do`/`switch`, or a `for` whose bound is a run-time value
+  (`_conditional_call`), stays inline: Catapult rejects a conditional call to a sub-block (ASM-59, SERI's
+  `for (i_n < n)` around `merge_stream`). A `for` with a constant or macro bound keeps its blocks. A region
+  that is itself called conditionally (PQC's `if (kem_cfg == 0) sign(..) else verify(..)`) keeps no blocks:
+  inlined into the top, each stage call would be conditional.
+- A block called n times in its region (ECASLab's `load_input(in1, ..); load_input(in2, ..)`, PQC's
+  `duplicate<uint8_t>`) loses its block marker and gets n wrapper blocks `stage__k` that call it, the k-th
+  call renamed to its wrapper (`_instance_blocks`): Catapult allows one call per block with channel I/O
+  (HIER-43), so the stage inlines into each wrapper (a block wrapper calling a block still instantiates it
+  twice). A template stage's wrapper repeats its template head.
 
 Left as residue / not handled:
 - Other float math, `.range(hi, lo)` with two different bounds, and the testbench's type boundary.
@@ -246,7 +280,7 @@ Source and target sides:
 - Synthesis results do not feed the agent's retry loop.
 
 Recovery (`run_synth_degraded`, `run.py --degrade N`, default 2 rounds):
-- After a FAILED target run, the target's `degrade_step` copies the failed run's sources with one edit the log
+- After a FAILED or TIMEOUT target run, the target's `degrade_step` copies the failed run's sources with one edit the log
   itself parameterizes and synthesizes again.
 - Rounds are recorded under `synth_target_degraded`, never merged into `synth_target`.
 - Catapult steps (`catapult_degrade_step`):
@@ -261,6 +295,17 @@ Recovery (`run_synth_degraded`, `run.py --degrade N`, default 2 rounds):
     `ceil(needed/have)` instead.
   - "Cannot pipeline a fully unrolled loop" names the loop's file and line; the pipeline pragma above it is
     removed.
+  - SIF-4 "multicycle component prohibited" (a 32-bit divider, blaze) adds `directive set -SCHED_USE_MULTICYCLE true`.
+  - MEM-71 "connected to multiple sub-blocks not mapped to [DirectInput]" names the scalar port's resource path
+    (ECASLab elementwise's `size`, read by every block), which is mapped `-MAP_TO_MODULE {[DirectInput]}` after
+    `go assembly` (`direct_input:<port>`).
+  - A run that hit its time budget (`synth_result.json`, written by `run_synth`) loses its partial
+    `hls_unroll N` pragmas, then on a repeat its `hls_unroll yes` ones (`unroll_cap:partial|full:N`).
+  - A minimum II above `MAX_RELAXED_II` (8), or a schedule failure the log does not parameterize (SCHD-26),
+    doubles the clock period once (`clock:10`); the loop-carried chain does not fit 5 ns.
+  - Last resort, once the unroll caps or the clock are spent: every `hls_pipeline_init_interval` pragma goes
+    (`unpipeline:all:N`), so the loops run sequentially (HIDA's 16-way replicated float bodies keep the
+    architect step busy past 2400 s; a read-modify-write through memory never schedules at any II).
 - Any other failure class ends the loop with its class reported.
 
 ## 9. Run statistics — `hlsfactory_agent/stats.py`, `exp/run_translate/stats_report.py`

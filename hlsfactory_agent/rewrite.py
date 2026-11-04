@@ -176,6 +176,9 @@ RE_MEMSET0 = re.compile(r"\b(?:std::)?memset\s*\(\s*([^,]+?)\s*,\s*0\s*,")
 RE_MEMCPY = re.compile(r"\b(?:std::)?memcpy\s*\(")
 RE_CAST_STORE = re.compile(r"\*\s*reinterpret_cast\s*<\s*((?:[^<>]|<[^<>]*>)+?)\s*\*\s*>\s*\(([^()]+)\)\s*=\s*([^;]+);")
 RE_CAST_LOAD = re.compile(r"\*\s*reinterpret_cast\s*<\s*((?:[^<>]|<[^<>]*>)+?)\s*\*\s*>\s*\(([^()]+)\)")
+# the C spelling of the same pun: `*((T*)(&x)) = v` and `*((T*)&x)` (CHIP-KNN's float/int id packing)
+RE_CPTR_STORE = re.compile(r"\*\s*\(\s*\(\s*([A-Za-z_][\w:<>, ]*?)\s*\*\s*\)\s*(\(?\s*&\s*[A-Za-z_]\w*(?:\[[^\]]*\])*\s*\)?)\s*\)\s*=(?!=)\s*([^;]+);")
+RE_CPTR_LOAD = re.compile(r"\*\s*\(\s*\(\s*([A-Za-z_][\w:<>, ]*?)\s*\*\s*\)\s*(\(?\s*&\s*[A-Za-z_]\w*(?:\[[^\]]*\])*\s*\)?)\s*\)")
 RE_VOID_PTR_FN = re.compile(r"^(\s*)((?:(?:inline|static)\s+)*[A-Za-z_][\w:<>]*\s+[A-Za-z_]\w*\s*\()([^()]*\bvoid\s*\*[^()]*)\)")
 RE_ABS = re.compile(r"\b(?:std::)?abs\s*\(")  # the C library abs has no synthesizable body (CIN-16); cat_abs.h replaces it
 RE_FLOAT_LITERAL_DECL = re.compile(r"(?<![\w.])(ac_ieee_float(?:32|64))\s+(\w+)\s*=\s*(-?\d+(?:\.\d*)?(?:[eE][-+]?\d+)?[fF]?)\s*;")
@@ -255,13 +258,66 @@ def _body_end(text: str, start: int) -> int:
     return len(text)
 
 
+def _conditional_call(body: str, pos: int) -> bool:
+    """Whether the call at `pos` of a function body sits under an `if`, `else`, `while`, `do`, `switch`, or a
+    `for` with a run-time bound: Catapult accepts only unconditional calls to sub-blocks (ASM-59), so such a stage
+    stays inline. A `for` with a constant bound is the usual dataflow-in-loop idiom and keeps its blocks."""
+
+    def runtime_bound(header: str) -> bool:
+        clauses = header.split(";")
+        if len(clauses) != 3:
+            return True
+        declared = set(re.findall(r"\b([A-Za-z_]\w*)\s*=", clauses[0]))
+        names = set(re.findall(r"\b[A-Za-z_]\w*\b", clauses[1])) - declared - {"sizeof"}
+        return any(not re.fullmatch(r"[A-Z][A-Z0-9_]*", n) for n in names)  # an all-caps name is a macro constant
+
+    def controlled(head: str) -> bool:
+        head = re.sub(r"(?:\s|^)[A-Z_][A-Z0-9_]*\s*$", "", head.rstrip())  # a trailing macro line (AGGRESSIVE_UNROLL_...)
+        head = head.rstrip()
+        if re.search(r"\b(else|do)\s*$", head):
+            return True
+        if not head.endswith(")"):
+            return False
+        depth, i = 0, len(head) - 1
+        while i >= 0:
+            depth += {")": 1, "(": -1}.get(head[i], 0)
+            if depth == 0:
+                break
+            i -= 1
+        kw = re.search(r"\b(if|for|while|switch)\s*$", head[:i])
+        if kw and kw.group(1) == "for":
+            return runtime_bound(head[i + 1 : -1])
+        return bool(kw)
+
+    opens: list[int] = []
+    for i, ch in enumerate(body[:pos]):
+        if ch == "{":
+            opens.append(i)
+        elif ch == "}" and opens:
+            opens.pop()
+    if any(controlled(body[:i]) for i in opens[1:]):  # opens[0] is the function body itself
+        return True
+    depth, i = 0, pos - 1  # a brace-less `for (...) stage();`: back to the statement start, skipping `;` inside the header
+    while i >= 0 and not (depth == 0 and body[i] in ";{}"):
+        depth += {")": 1, "(": -1}.get(body[i], 0)
+        i -= 1
+    return controlled(body[i + 1 : pos])
+
+
 def dataflow_blocks(dir_in: Path, top: str | None) -> set[str]:
+    return _dataflow_analysis(dir_in, top)[0]
+
+
+def _dataflow_analysis(dir_in: Path, top: str | None) -> tuple[set[str], dict[str, tuple[str, int]]]:
     """Functions called from a `#pragma HLS dataflow` region, or a macro expanding to one, that take only
-    channels and scalars. Catapult blocks may share nothing but channels (ASM-35), so a stage that receives
-    an array or returns a value stays inline; a stage with its own `#pragma HLS inline` stays inline too.
-    Stages may be defined in any design file."""
+    channels, scalars and ports of the region. Catapult blocks may share nothing but channels (ASM-35), so a
+    stage that receives a local array, or a port another stage also receives, stays inline, as does one that
+    returns a value or has its own `#pragma HLS inline`. Stages may be defined in any design file. A region
+    that is itself called conditionally (PQC's `if (kem_cfg == 0) sign(..)`) keeps no blocks: inlined into
+    its caller, every stage call would be conditional (ASM-59). The second value maps a stage called more
+    than once in its region to (region, count): Catapult wants one call per block with channel I/O (HIER-43)."""
     files = [p for p in sorted(Path(dir_in).rglob("*")) if p.is_file() and p.suffix.lower() in SOURCE_SUFFIXES and p.name != "testbench.cpp"]
-    texts = [p.read_text(encoding="utf-8", errors="replace") for p in files]
+    texts = [_blank_comments(p.read_text(encoding="utf-8", errors="replace")) for p in files]  # `in1 (input) --> ...` is not a function
     macros = sorted({m.group(1) for t in texts for m in RE_DATAFLOW_MACRO.finditer(t)})
     marker = RE_DATAFLOW
     if macros:
@@ -272,23 +328,149 @@ def dataflow_blocks(dir_in: Path, top: str | None) -> set[str]:
         found = [m for m in RE_FN_DEF.finditer(text) if m.group(1) not in KEYWORDS]
         defs = {m.group(1): (m.start(), m.group(2), re.search(r"\bvoid\b", text[m.start() : m.start(1)])) for m in found}
         spans = {n: (s, _body_end(text, s) + 1) for n, (s, _, _) in defs.items()}
-        per_file.append((text, spans))
+        per_file.append((text, spans, {n: d[1] for n, d in defs.items()}))
         for n, (s, e) in spans.items():
             if defs[n][2]:  # a block returns void
                 params.setdefault(n, defs[n][1])
             bodies.setdefault(n, text[s:e])
     blocks: set[str] = set()
-    for text, spans in per_file:
+    repeated: dict[str, tuple[str, int]] = {}
+    for text, spans, fn_params in per_file:
         for m in marker.finditer(text):
             inside = [n for n, (s, e) in spans.items() if s < m.start() < e]
             if not inside:
                 continue
             region = max(inside, key=lambda n: spans[n][0])
+            if region != top and _called_conditionally(region, per_file):
+                continue
             s, e = spans[region]
-            for c in re.findall(r"\b([A-Za-z_]\w*)\s*(?:<(?:[^;()]|\([^()]*\))*>)?\s*\(", text[s:e]):
-                if c in params and c not in (region, top) and not _has_memory_param(params[c]) and not RE_INLINE_ON.search(bodies[c]):
-                    blocks.add(c)
-    return blocks
+            body = text[s:e]
+            ports = {_param_name(p) for p in _split_params(fn_params.get(region, "")) if _has_memory_param(p)}
+            cands: list[tuple[str, list[str]]] = []
+            for cm in re.finditer(r"\b([A-Za-z_]\w*)\s*(?:<(?:[^;()]|\([^()]*\))*>)?\s*\(", body):
+                c = cm.group(1)
+                if c in params and c not in (region, top) and not RE_INLINE_ON.search(bodies[c]) and not _conditional_call(body, cm.start()):
+                    mem = _memory_args(params[c], body, cm.end())
+                    if all(a in ports for a in mem):  # a port of the region may be owned by one block
+                        cands.append((c, mem))
+            used = Counter(a for _, mem in cands for a in mem)
+            here = {c for c, mem in cands if all(used[a] == 1 for a in mem)}
+            blocks.update(here)
+            calls = Counter(c for c, _ in cands)
+            repeated.update({c: (region, calls[c]) for c in here if calls[c] > 1})
+    return blocks, repeated
+
+
+def _called_conditionally(fn: str, per_file: list) -> bool:
+    rx = re.compile(r"\b" + re.escape(fn) + r"\s*(?:<(?:[^;()]|\([^()]*\))*>)?\s*\(")
+    for text, spans, _ in per_file:
+        for caller, (s, e) in spans.items():
+            if caller == fn:
+                continue
+            body = text[s:e]
+            if any(_conditional_call(body, cm.start()) for cm in rx.finditer(body)):
+                return True
+    return False
+
+
+RE_FN_HEADER_T = r"(?m)^([ \t]*template\s*<[^>]*>\s*\n)?([ \t]*[A-Za-z_][\w:<>,\s\*&]*?\b{name}\s*\(([^;{{}}]*)\)\s*)\{{"
+
+
+def _template_params(header: str) -> list[str]:
+    """Names of the template parameters of a `template <class T, int N = 4> ...` header, or []."""
+    m = re.match(r"\s*template\s*<", header)
+    if not m:
+        return []
+    depth, i = 1, m.end()
+    while i < len(header) and depth:
+        depth += {"<": 1, ">": -1}.get(header[i], 0)
+        i += 1
+    return [_param_name(x) for x in _split_params(header[m.end() : i - 1])]
+
+
+def _instance_blocks(dir_out: Path, repeated: dict[str, tuple[str, int]], log: dict) -> None:
+    """A block called n times in its region loses its block marker (so it inlines) and gets n block wrappers
+    `stage__k`, one instance each (HIER-43); the k-th call in the region is renamed to its wrapper."""
+    files = {p: p.read_text(encoding="utf-8", errors="replace") for p in sorted(dir_out.rglob("*"))
+             if p.is_file() and p.suffix.lower() in SOURCE_SUFFIXES and p.name != "testbench.cpp"}
+    for name, (region, count) in sorted(repeated.items()):
+        hit = next(((p, m) for p, t in files.items() for m in [re.search(RE_FN_HEADER_T.format(name=re.escape(name)), t)] if m), None)
+        if not hit:
+            continue
+        p, m = hit
+        text = files[p]
+        marker = text.rfind(BLOCK_MARKER + "\n", 0, m.start() + 1)
+        if marker >= 0 and not text[marker + len(BLOCK_MARKER) + 1 : m.start()].strip():
+            text = text[:marker] + text[marker + len(BLOCK_MARKER) + 1 :]
+            m = re.search(RE_FN_HEADER_T.format(name=re.escape(name)), text)
+        end = _body_end(text, m.end() - 1) + 1
+        tparams = _template_params(m.group(1) or m.group(2))
+        args = ", ".join(_param_name(x) for x in _split_params(m.group(3)))
+        targs = f"<{', '.join(tparams)}>" if tparams else ""
+        wrappers = ""
+        for k in range(1, count + 1):
+            header = re.sub(r"\b" + re.escape(name) + r"(?=\s*\()", f"{name}__{k}", m.group(2).strip("\n"), count=1)
+            wrappers += f"\n\n{BLOCK_MARKER}\n{m.group(1) or ''}{header}{{\n    {name}{targs}({args});\n}}"
+        text = text[:end] + wrappers + text[end:]
+        files[p] = text
+        log["blocks"].append({"file": str(p.relative_to(dir_out)), "line": text[:end].count("\n") + 2, "function": f"{name}__1..{count}",
+                              "reason": f"a block with channel I/O is called once; {name} is called {count} times in {region}"})
+        rm = next(((q, rmm) for q, t in files.items() for rmm in [re.search(RE_FN_HEADER_T.format(name=re.escape(region)), t)] if rmm), None)
+        if not rm:
+            continue
+        q, rmm = rm
+        rtext = files[q]
+        rs, re_ = rmm.end() - 1, _body_end(files[q], rmm.end() - 1)
+        body = rtext[rs:re_]
+        k, out, last = 0, "", 0
+        for cm in re.finditer(r"\b" + re.escape(name) + r"(?=\s*(?:<(?:[^;()]|\([^()]*\))*>)?\s*\()", body):
+            k += 1
+            out += body[last : cm.start()] + f"{name}__{k}"
+            last = cm.end()
+        files[q] = rtext[:rs] + out + body[last:] + rtext[re_:]
+    for p, text in files.items():
+        if text != p.read_text(encoding="utf-8", errors="replace"):
+            p.write_text(text, encoding="utf-8")
+
+
+def _blank_comments(text: str) -> str:
+    """Comments replaced by spaces, newlines kept, so offsets and line numbers still hold."""
+    return re.sub(r"/\*.*?\*/|//[^\n]*", lambda m: re.sub(r"[^\n]", " ", m.group(0)), text, flags=re.S)
+
+
+def _split_params(params: str) -> list[str]:
+    """Top-level comma split of a parameter or argument list (template and call commas kept inside)."""
+    out, depth, cur = [], 0, ""
+    for ch in params:
+        if ch in "<([":
+            depth += 1
+        elif ch in ">)]":
+            depth -= 1
+        if ch == "," and depth == 0:
+            out.append(cur.strip())
+            cur = ""
+        else:
+            cur += ch
+    if cur.strip():
+        out.append(cur.strip())
+    return out
+
+
+def _param_name(param: str) -> str:
+    m = re.search(r"([A-Za-z_]\w*)\s*(?:\[[^\]]*\]\s*)*(?:=[^,]*)?$", param.split("//", 1)[0].strip())
+    return m.group(1) if m else ""
+
+
+def _memory_args(params: str, body: str, open_end: int) -> list[str]:
+    """The call's arguments in array or pointer parameter positions, `&` stripped; an expression that is not
+    a plain name comes back as itself, so it never matches a port."""
+    depth, j = 1, open_end
+    while j < len(body) and depth:
+        depth += body[j] == "("
+        depth -= body[j] == ")"
+        j += 1
+    args = _split_params(body[open_end : j - 1])
+    return [args[i].lstrip("&").strip() for i, p in enumerate(_split_params(params)) if _has_memory_param(p) and i < len(args)]
 
 
 RE_ANON_NAMESPACE = re.compile(r"^(\s*)namespace\s*\{")
@@ -335,7 +517,7 @@ def _insert_block_markers(lines: list[str], blocks: set[str], log: dict, rel: st
                 continue
             while idx < len(lines) - 1 and not lines[idx].strip():
                 idx += 1
-            at = idx - 1 if idx and lines[idx - 1].lstrip().startswith("template") else idx
+            at = idx - 1 if idx and re.fullmatch(r"\s*template\s*<[^>]*>\s*", lines[idx - 1]) else idx  # a bare `template <..>` line above
             if at and lines[at - 1].lstrip().startswith("#pragma hls_design"):
                 break
             lines.insert(at, BLOCK_MARKER)
@@ -478,8 +660,9 @@ def _rewrite_dialect(lines: list[str], target: TargetSpec, log: dict, rel: str, 
         if catapult and RE_ABS.search(code):
             line = RE_ABS.sub("cat_abs(", line)
             log["types"].append({"file": rel, "line": i, "before": lines[i - 1].strip(), "after": line.strip()})
-        if catapult and re.search(r"\b(memset|memcpy|reinterpret_cast)\b|\bvoid\s*\*", code) and not line.lstrip().startswith("#"):
+        if catapult and (re.search(r"\b(memset|memcpy|reinterpret_cast)\b|\bvoid\s*\*", code) or RE_CPTR_LOAD.search(code)) and not line.lstrip().startswith("#"):
             new = RE_CAST_LOAD.sub(r"cat_load<\1>(\2)", RE_CAST_STORE.sub(r"cat_store<\1>(\2, \3);", line))
+            new = RE_CPTR_LOAD.sub(r"cat_load<\1>(\2)", RE_CPTR_STORE.sub(r"cat_store<\1>(\2, \3);", new))
             new = RE_MEMCPY.sub("cat_memcpy(", RE_MEMSET0.sub(r"cat_memset0(\1,", new))
             m = RE_VOID_PTR_FN.match(new)
             if m:  # a void* parameter erases the element type the typed copies need: it becomes a template parameter
@@ -658,8 +841,11 @@ def _size_unsized_params(dir_out: Path, top: str, log: dict) -> None:
     if not args:
         return
     defines = collect_defines(dir_out)
-    # `int n = 1024;` in the testbench resolves like a #define for the heap idioms below
-    locals_ = {m.group(1): m.group(2) for m in re.finditer(r"\b(?:const\s+)?(?:int|unsigned|size_t|long)\s+([A-Za-z_]\w*)\s*=\s*([^;(){}]+?)\s*;", tb_text)}
+    # `int n = 1024;` or `int n = (D + W - 1) / W;` in the testbench resolves like a #define for the heap idioms
+    # below, but only a local that is never written again (`if (n < 8) n = 8;` would make the value wrong)
+    decls = [(m.group(1), m.group(2)) for m in re.finditer(r"\b(?:const\s+)?(?:int|unsigned|size_t|long)\s+([A-Za-z_]\w*)\s*=\s*([^;{}]+?)\s*;", tb_text)]
+    locals_ = {k: v for k, v in decls if len({v2 for k2, v2 in decls if k2 == k}) == 1  # two test functions may declare it alike
+               and len(re.findall(r"\b" + re.escape(k) + r"\s*(?:=(?!=)|\+\+|--|[-+*/%&|^]=)", tb_text)) == sum(k2 == k for k2, _ in decls)}
     sizes: dict[str, int] = {}
     pointers: set[str] = set()  # `T *x` ports
     for k, p in enumerate(params):
@@ -671,18 +857,24 @@ def _size_unsized_params(dir_out: Path, top: str, log: dict) -> None:
         dims = array_dims(dir_out, args[k], defines)
         n = dims[0] if dims and len(dims) == 1 else None
         heap = re.search(
-            r"\b" + re.escape(args[k]) + r"\s*=\s*(?:\([^()]*\)\s*)?(?:malloc\s*\(\s*([^;]*?)\s*\*\s*sizeof"
-            r"|malloc\s*\(\s*sizeof\s*\([^()]*\)\s*\*\s*([^;()]+?)\s*\)|new\s+[\w:<>]+\s*\[\s*([^\]]+?)\s*\])",
+            r"\b" + re.escape(args[k]) + r"\s*=\s*(?:\([^()]*\)\s*)?\(?\s*(?:malloc\s*\(\s*([^;]*?)\s*\*\s*sizeof"
+            r"|malloc\s*\(\s*sizeof\s*\([^()]*\)\s*\*\s*([^;()]+?)\s*\)|new\s+[\w:<>]+\s*\[\s*([^\]]+?)\s*\]"
+            r"|calloc\s*\(\s*([^;,]+?)\s*,"
+            + (r"|malloc\s*\(\s*([^;()]+?)\s*\)" if re.search(r"\b(?:u?int8_t|(?:unsigned\s+|signed\s+)?char)\b", p) else "") + ")",  # malloc(N) bytes: a byte element
             tb_text,
         )
+        local_arr = re.search(r"\b[A-Za-z_][\w:<>]*\s+" + re.escape(args[k]) + r"\s*\[\s*([^\]]+?)\s*\]\s*[;=]", tb_text)  # a sized local, its size a local
         if n is None and heap:
             n = resolve_int(next(g for g in heap.groups() if g), {**defines, **locals_})
+        if n is None and local_arr:
+            n = resolve_int(local_arr.group(1), {**defines, **locals_})
         if n:
             sizes[name] = n
             if ptr:
                 pointers.add(name)
     if not sizes:
         return
+    _size_callee_params(dir_out, top, sizes, log)
     # a pointer port becomes a sized array parameter (the same C++ type after decay), in the definition only
     for p in sorted(dir_out.rglob("*")):
         if not pointers or not p.is_file() or p.suffix.lower() not in (".cpp", ".cc", ".c") or p.name == "testbench.cpp":
@@ -708,8 +900,87 @@ def _size_unsized_params(dir_out: Path, top: str, log: dict) -> None:
             log["types"].append({"file": str(p.relative_to(dir_out)), "line": 0, "before": "unsized top parameters " + ", ".join(sizes), "after": ", ".join(f"{k}[{v}]" for k, v in sizes.items())})
 
 
+def _size_callee_params(dir_out: Path, top: str, sizes: dict[str, int], log: dict) -> None:
+    """A function the top calls with a sized port gets that size on its own `T *x` / `T x[]` parameter, in its
+    definition: a block's pointer parameter is otherwise 1024 words Catapult cannot reduce (CIN-84, ECASLab's
+    `load_input(in1, ..)`)."""
+    files = {p: p.read_text(encoding="utf-8", errors="replace") for p in sorted(dir_out.rglob("*"))
+             if p.is_file() and p.suffix.lower() in SOURCE_SUFFIXES and p.name != "testbench.cpp"}
+    tm = next(((p, m) for p, t in files.items() for m in [re.search(RE_FN_HEADER_T.format(name=re.escape(top)), t)] if m), None)
+    if not tm:
+        return
+    p, m = tm
+    body = files[p][m.end() - 1 : _body_end(files[p], m.end() - 1)]
+    wanted: dict[str, dict[int, int]] = {}  # callee -> param index -> size
+    for cm in re.finditer(r"\b([A-Za-z_]\w*)\s*(?:<(?:[^;()]|\([^()]*\))*>)?\s*\(", body):
+        c = cm.group(1)
+        if c in KEYWORDS or c == top:
+            continue
+        depth, j = 1, cm.end()
+        while j < len(body) and depth:
+            depth += body[j] == "("
+            depth -= body[j] == ")"
+            j += 1
+        for i, a in enumerate(_split_params(body[cm.end() : j - 1])):
+            a = a.lstrip("&").strip()
+            if a in sizes:
+                wanted.setdefault(c, {})[i] = max(sizes[a], wanted.get(c, {}).get(i, 0))
+    for c, by_index in wanted.items():
+        hit = next(((q, dm) for q, t in files.items() for dm in [re.search(RE_FN_HEADER_T.format(name=re.escape(c)), t)] if dm), None)
+        if not hit:
+            continue
+        q, dm = hit
+        params = _split_params(dm.group(3))
+        changed = []
+        for i, n in by_index.items():
+            if i >= len(params) or not _has_memory_param(params[i]):
+                continue
+            new = re.sub(r"\*\s*([A-Za-z_]\w*)\s*$", rf"\1[{n}]", params[i]) if "*" in params[i] else RE_UNSIZED_PARAM.sub(lambda mm: f"{mm.group(1)}[{n}]", params[i])
+            if new != params[i]:
+                params[i] = new
+                changed.append(new)
+        if changed:
+            text = files[q]
+            files[q] = text[: dm.start(3)] + ", ".join(params) + text[dm.end(3) :]
+            log["types"].append({"file": str(q.relative_to(dir_out)), "line": 0, "before": f"parameters of {c} receiving a sized port", "after": ", ".join(changed)})
+    for q, text in files.items():
+        if text != q.read_text(encoding="utf-8", errors="replace"):
+            q.write_text(text, encoding="utf-8")
+
+
 RE_SCALAR_TYPE = re.compile(r"^(?:const\s+)?(?:unsigned\s+|signed\s+)?(?:void|bool|char|short|int|long|long\s+long|float|double|size_t|u?int(?:8|16|32|64)_t)$")
 RET_PARAM = "ret_out"
+
+
+RE_LOG2_CALL = re.compile(r"\b(?:std::)?(ceil\s*\(\s*)?(?:std::)?log2f?\s*\(\s*((?:[^()]|\([^()]*\))+?)\s*\)(?(1)\s*\))")
+
+
+def _fold_log2(dir_out: Path, defines: dict[str, str], log: dict) -> None:
+    """`log2(N)` (and `ceil(log2(N))`) with a constant N becomes the number: Catapult has no synthesizable body for
+    the builtin (CIN-16), and the Vitis designs only use it for bit counts. A variable argument is residue."""
+    import math
+
+    for p in sorted(dir_out.rglob("*")):
+        if not p.is_file() or p.suffix.lower() not in SOURCE_SUFFIXES or p.name == "testbench.cpp":
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        rel = str(p.relative_to(dir_out))
+
+        def fold(m: re.Match) -> str:
+            n = resolve_int(m.group(2), defines)
+            if n is None or n <= 0:
+                line = text.count("\n", 0, m.start()) + 1
+                log["residue"].append({"file": rel, "line": line, "text": m.group(0), "reason": "log2 has no synthesizable body in Catapult (CIN-16): constant-fold it or use a lookup table"})
+                return m.group(0)
+            v = math.log2(n)
+            if m.group(1):
+                v = math.ceil(v - 1e-9)
+            return str(int(v)) if float(v).is_integer() else repr(float(v))
+
+        new = RE_LOG2_CALL.sub(fold, text)
+        if new != text:
+            p.write_text(new, encoding="utf-8")
+            log["types"].append({"file": rel, "line": 0, "before": "log2(constant)", "after": "folded to the number"})
 
 
 def _void_class_return(dir_out: Path, top: str, log: dict) -> None:
@@ -788,16 +1059,23 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
         "residue": [],
     }
     header_map = HEADER_MAPS.get(target.name, HEADER_MAPS["catapult"])
-    blocks = dataflow_blocks(dir_in, top) if target.name == "catapult" else set()
+    blocks, repeated = _dataflow_analysis(dir_in, top) if target.name == "catapult" else (set(), {})
     defines = collect_defines(dir_in)
     names = float_typedefs(dir_in) if target.name == "catapult" else set()
     if names:  # `const w_dt v = 1.0;` with `typedef float w_dt` needs direct initialization like the float types themselves
         log["_float_literal_rx"] = re.compile(r"(?<![\w.])((?:const\s+)?(?:ac_ieee_float(?:32|64)|" + "|".join(map(re.escape, sorted(names))) + r"))\s+(\w+)\s*=\s*(-?\d+(?:\.\d*)?(?:[eE][-+]?\d+)?[fF]?)\s*;")
 
+    mains = [p for p in sorted(dir_in.rglob("*")) if p.is_file() and p.suffix.lower() in SOURCE_SUFFIXES and p.name != "testbench.cpp"
+             and RE_MAIN.search(p.read_text(encoding="utf-8", errors="replace"))]
+    lone_tb = mains[0] if len(mains) == 1 and not (dir_in / "testbench.cpp").exists() else None  # `add_files -tb foo_test.cpp` kept its name
     for p in sorted(dir_in.rglob("*")):
         if not p.is_file() or p.name == "synth.tcl":
             continue
-        if p.suffix.lower() in SOURCE_SUFFIXES and p.name != "testbench.cpp" and RE_MAIN.search(p.read_text(encoding="utf-8", errors="replace")):
+        if p == lone_tb:
+            shutil.copy2(p, dir_out / "testbench.cpp")
+            log["headers"].append({"file": str(p.relative_to(dir_in)), "line": 0, "before": "the test program", "after": "copied as testbench.cpp"})
+            continue
+        if p in mains:
             log["pragmas_dropped"].append({"file": str(p.relative_to(dir_in)), "line": 0, "kind": "file", "before": "second main()", "category": "absent",
                                            "reason": "a second test program next to testbench.cpp cannot be linked; not copied"})
             continue
@@ -810,6 +1088,8 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
 
     if top and target.name in ("catapult", "bambu", "dynamatic"):  # Dynamatic's translator segfaults on `T x[]`
         _size_unsized_params(dir_out, top, log)
+    if target.name == "catapult":
+        _fold_log2(dir_out, defines, log)
     if top and target.name == "bambu":
         _void_class_return(dir_out, top, log)
 
@@ -865,6 +1145,8 @@ def rewrite_design(dir_in: Path, dir_out: Path, target: TargetSpec, top: str | N
                     break
         p.write_text(text, encoding="utf-8")
 
+    if repeated:
+        _instance_blocks(dir_out, repeated, log)
     log.pop("_float_literal_rx", None)
     log["category_counts"] = dict(Counter(e["category"] for e in log["pragmas_moved"] + log["pragmas_dropped"]))
     (dir_out / "rewrite_log.json").write_text(json.dumps(log, indent=2), encoding="utf-8")

@@ -121,6 +121,7 @@ def render_directives(resources: list[dict], top: str, rules: dict[str, str], ar
 # first match wins; keys are message fragments from catapult.log
 FAILURE_CLASSES = (
     ("License request failed", "license"),
+    ("MEM-71", "shared-scalar-port"),
     ("ASM-35", "shared-array"),
     ("ASM-34", "unsupported-construct"),
     ("Logic mixed with interconnect", "logic-in-interconnect"),
@@ -178,23 +179,67 @@ RE_PORTS = re.compile(r"(\d+) are needed, but only (\d+) instances are available
 RE_MERGE = re.compile(r"please merge accesses to '(?:[^']*:)?([A-Za-z_]\w*)[^':]*:rsc")  # the array is the last scope segment: 'A::f:buf.data:rsc' names buf
 RE_II_PRAGMA = re.compile(r"(#pragma\s+hls_pipeline_init_interval\s+)(\d+)")
 RE_UNROLLED_PIPE = re.compile(r"\$PROJECT_HOME/([^()\s]+)\((\d+)\): Cannot pipeline a fully unrolled loop")
-SYNTH_OUTPUTS = ("Catapult", "catapult.log", "synth_stdout.log", "synth.tcl", "synth.json")
+SYNTH_OUTPUTS = ("Catapult", "catapult.log", "synth_stdout.log", "synth.tcl", "synth.json", "synth_result.json")
+RE_MULTICYCLE = re.compile(r"multicycle component prohibited by directive SCHED_USE_MULTICYCLE=false")
+RE_DIRECT_INPUT = re.compile(r"Resource '([^']+:rsc)' with variable connected to multiple sub-blocks not mapped to '\[DirectInput\]' \(MEM-71\)")
+RE_CLOCK = re.compile(r"(directive set -CLOCKS \{clk \{-CLOCK_PERIOD )([\d.]+)")
+RE_UNROLL_PARTIAL = re.compile(r"^[ \t]*#pragma\s+hls_unroll\s+(\d+)\s*$", re.M)
+RE_UNROLL_FULL = re.compile(r"^[ \t]*#pragma\s+hls_unroll\s+yes\s*$", re.M)
+MAX_RELAXED_II = 8  # past this the loop is really asking for a slower clock
 
 
 def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
     """Recoveries the log itself parameterizes: SCHD-20 names the minimum II, so every tighter pipeline
-    pragma is raised to it; SCHD-4 names how many memory ports were needed and SCHD-39 the array, so that
-    array is split by the shortfall, or, once it is already split, the loops reading it get a longer II.
-    Nothing else is touched; a log without either yields None."""
+    pragma is raised to it (past MAX_RELAXED_II the clock period is doubled instead, once); SCHD-4 names how
+    many memory ports were needed and SCHD-39 the array, so that array is split by the shortfall, or, once it
+    is already split, the loops reading it get a longer II; SIF-4 names a prohibited multicycle component
+    (a 32-bit divider), so multicycle components are allowed; MEM-71 names a scalar port read by several
+    blocks, so it is mapped to DirectInput; a run that hit its time budget loses its partial unroll pragmas,
+    then its full ones. Nothing else is touched; a log without any yields None."""
     log = (dir_failed / "catapult.log").read_text(encoding="utf-8", errors="replace") if (dir_failed / "catapult.log").exists() else ""
+    verdict = json.loads((dir_failed / "synth_result.json").read_text(encoding="utf-8")) if (dir_failed / "synth_result.json").exists() else {}
     iis = [int(x) for x in RE_MIN_II.findall(log)]
     iis += [math.ceil(int(ii) * float(delay) / float(budget)) for ii, budget, delay in RE_FAILED_LOOP.findall(log) if float(delay) > float(budget)]
     ports = RE_PORTS.search(log)
     merge = RE_MERGE.search(log)
     unrolled = sorted({(f, int(n)) for f, n in RE_UNROLLED_PIPE.findall(log)})
-    if not iis and not (ports and merge) and not unrolled:
+    multicycle = bool(RE_MULTICYCLE.search(log))
+    direct = sorted(set(RE_DIRECT_INPUT.findall(log)))
+    timeout = verdict.get("status") == "TIMEOUT"
+    schedule_failed = "Schedule failed" in log
+    if not iis and not (ports and merge) and not unrolled and not multicycle and not direct and not timeout and not schedule_failed:
         return None
     shutil.copytree(dir_failed, dir_next, ignore=shutil.ignore_patterns(*SYNTH_OUTPUTS))
+    tcl = dir_next / "run.tcl"
+    if multicycle:
+        text = tcl.read_text(encoding="utf-8")
+        if "-SCHED_USE_MULTICYCLE true" in text:
+            return None
+        tcl.write_text(RE_CLOCK.sub(lambda m: f"directive set -SCHED_USE_MULTICYCLE true\n{m.group(0)}", text, count=1), encoding="utf-8")
+        return "multicycle"
+    if direct:
+        lines = tcl.read_text(encoding="utf-8").splitlines()
+        new = [f"directive set {path} -MAP_TO_MODULE {{[DirectInput]}}" for path in direct if not any(l.startswith(f"directive set {path} ") for l in lines)]
+        if not new:
+            return None
+        lines[lines.index("go architect"):lines.index("go architect")] = new
+        tcl.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        return "direct_input:" + ",".join(path.rsplit("/", 1)[-1][:-4] for path in direct)
+    if timeout:
+        for rx, step in ((RE_UNROLL_PARTIAL, "unroll_cap:partial"), (RE_UNROLL_FULL, "unroll_cap:full")):
+            removed = 0
+            for p in sorted(dir_next.rglob("*")):
+                if p.is_file() and p.suffix.lower() in (".cpp", ".cc", ".c", ".h", ".hpp") and p.name != "testbench.cpp":
+                    text = p.read_text(encoding="utf-8", errors="replace")
+                    new, k = rx.subn("", text)
+                    if k:
+                        p.write_text(new, encoding="utf-8")
+                        removed += k
+            if removed:
+                return f"{step}:{removed}"
+        return _unpipeline_all(dir_next)
+    if (iis and max(iis) > MAX_RELAXED_II) or (schedule_failed and not iis and not (ports and merge) and not unrolled):
+        return _relax_clock(tcl) or _unpipeline_all(dir_next)
     if unrolled:
         # the loop Catapult names is fully unrolled after constant propagation: drop the pipeline pragma in the
         # pragma block right above it (the source-level rule only sees `hls_unroll yes`)
@@ -224,7 +269,6 @@ def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
                 p.write_text(new, encoding="utf-8")
         return f"relax_ii:{target_ii}"
     var, needed, have = merge.group(1), int(ports.group(1)), int(ports.group(2))
-    tcl = dir_next / "run.tcl"
     lines = tcl.read_text(encoding="utf-8").splitlines()
     if any(l.startswith(f"resource_directive {var} -") and ("-INTERLEAVE" in l or "-BLOCK_SIZE" in l) for l in lines):
         # the array is already split and still short of ports: the accesses collide in one bank (a strided or
@@ -245,6 +289,32 @@ def catapult_degrade_step(dir_failed: Path, dir_next: Path) -> str | None:
         lines.insert(lines.index("go architect"), f"resource_directive {var} -INTERLEAVE {size}")
     tcl.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return f"{step}:{var}:{size}"
+
+
+def _unpipeline_all(dir_next: Path) -> str | None:
+    """The last resort once unroll caps and the clock are spent: every loop runs sequentially (a 16-way
+    replicated float body under II=1 keeps the architect step busy past any budget; a loop-carried
+    read-modify-write through memory never schedules at any II)."""
+    removed = 0
+    for p in sorted(dir_next.rglob("*")):
+        if p.is_file() and p.suffix.lower() in (".cpp", ".cc", ".c", ".h", ".hpp") and p.name != "testbench.cpp":
+            lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
+            kept = [l for l in lines if not l.lstrip().startswith("#pragma hls_pipeline_init_interval")]
+            if len(kept) != len(lines):
+                p.write_text("\n".join(kept) + "\n", encoding="utf-8")
+                removed += len(lines) - len(kept)
+    return f"unpipeline:all:{removed}" if removed else None
+
+
+def _relax_clock(tcl: Path) -> str | None:
+    """Double the clock period once (5 -> 10 ns): the loop-carried chain does not fit the target clock."""
+    text = tcl.read_text(encoding="utf-8")
+    m = RE_CLOCK.search(text)
+    if not m or float(m.group(2)) >= 10.0:
+        return None
+    period = float(m.group(2)) * 2
+    tcl.write_text(text[: m.start(2)] + f"{period:g}" + text[m.end(2):], encoding="utf-8")
+    return f"clock:{period:g}"
 
 
 RE_TOP_FN = re.compile(r"#pragma\s+hls_design\s+top\s*\n[^(;{]*?\b([A-Za-z_]\w*)\s*\(")

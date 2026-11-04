@@ -24,6 +24,8 @@ RE_HEADER = re.compile(
 )
 RESOURCE_KINDS = ("array_partition", "bind_storage", "interface", "dependence", "stream")
 RE_DEFINE = re.compile(r"^\s*#\s*define\s+([A-Za-z_]\w*)\s+(.+?)\s*$")
+# `static constexpr int kPackets = kBusWidth / kDataWidth;` resolves like a #define
+RE_CONST_INT = re.compile(r"^\s*(?:static\s+)?(?:constexpr|const)\s+(?:unsigned\s+|u?int(?:8|16|32|64)_t\s+|int\s+|long\s+|size_t\s+)+([A-Za-z_]\w*)\s*=\s*([^;]+);")
 RE_KV = re.compile(r"([A-Za-z_]\w*)\s*=\s*(\S+)")
 RE_ARRAY_DECL_T = r"\b{var}\s*((?:\[\s*[^\]]+?\s*\])+)"
 # a declaration line or parameter: `[static] [const] T[<...>] name[N]...` ending in `=`, `;`, `,` or `)`
@@ -77,10 +79,10 @@ def _recursion_candidates(text: str, rel: str) -> list[dict]:
 def collect_defines(dir_design: Path) -> dict[str, str]:
     defines: dict[str, str] = {}
     for p in _source_files(Path(dir_design)):
-        for line in p.read_text(encoding="utf-8", errors="replace").splitlines():
-            m = RE_DEFINE.match(line)
+        for line in p.read_text(encoding="utf-8", errors="replace").replace("\\\n", " ").splitlines():  # `#define X (a \` continues
+            m = RE_DEFINE.match(line) or RE_CONST_INT.match(line)
             if m and "(" not in m.group(1):
-                defines.setdefault(m.group(1), m.group(2).split("//")[0].strip())
+                defines.setdefault(m.group(1), re.sub(r"/\*.*?\*/", " ", m.group(2)).split("//")[0].strip())  # `2 /* note */`
     return defines
 
 
@@ -93,6 +95,8 @@ def resolve_int(expr: str, defines: dict[str, str], _depth: int = 0) -> int | No
             text = re.sub(rf"\b{re.escape(name)}\b", f"({defines[name]})", text)
     if re.search(r"[A-Za-z_]", text):
         return resolve_int(text, defines, _depth + 1) if text != expr.strip() else None
+    if "." not in text:  # C integer division: (D + W - 1) / W
+        text = text.replace("/", "//")
     try:
         tree = ast.parse(text, mode="eval")
     except SyntaxError:

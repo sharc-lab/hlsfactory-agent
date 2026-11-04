@@ -44,6 +44,14 @@ DIR_TARGETS = DIR_CURRENT / "targets"
 DIR_XLS_EMU_INCLUDE = DIR_CURRENT / "xls_emu_include"
 
 DOCKER_IMAGE_NAME = "hlsfactory-agent"
+TB_RUN_TIMEOUT_S = 120  # one limit for the oracle, the check and the agent's own testbench run
+# a line that is nothing but a FAIL verdict (`FAIL`, `*** Test FAILED ***`); `FAIL: 0` or `failures: 0` is not one
+_RE_FAIL_LINE = re.compile(r"^[\s*#=!-]*(?:test\s+)?fail(?:ed|ure)?[\s*#=!.-]*$", re.IGNORECASE)
+
+
+def oracle_fail_line(output: str) -> str:
+    """The first bare FAIL verdict line in a testbench's output, or '' (a testbench that prints FAIL and exits 0 did not pass)."""
+    return next((l.strip() for l in output.splitlines() if _RE_FAIL_LINE.match(l)), "")
 
 CONTAINER_RUN_AREA = "/workspace/run_area"
 INPUT_DIR_NAME = "input_design"
@@ -231,7 +239,7 @@ def build_translate_prompt(design_name: str, target: TargetSpec, prepass: bool =
         "```\n"
         "Then build and run the testbench with a timeout:\n"
         "```\n"
-        f"cd {out} && {build_cc} {inc} -I{out} -w {src_glob} -o testbench.out && timeout 30s ./testbench.out\n"
+        f"cd {out} && {build_cc} {inc} -I{out} -w {src_glob} -o testbench.out && timeout {TB_RUN_TIMEOUT_S}s ./testbench.out\n"
         "```\n"
         "- Record the commands and their results in `compile_log.txt` in the output folder.\n"
         "- If compilation or the testbench fails, fix the translation and retry, up to 3 times. Never weaken the testbench to make it pass.\n"
@@ -363,6 +371,21 @@ def normalize_vitis_script(dir_design: Path) -> dict:
     kept = [l for l in lines if not any(re.match(r"\s*" + rx, l) for rx in VITIS_REMOVED_OPTIONS)]
     if len(kept) != len(lines):
         changes["options_dropped"] = [l.strip() for l in lines if l not in kept]
+    tops = [m.group(1) for l in kept if (m := re.match(r"\s*set_top\s+(\S+)", l))]
+    if len(tops) > 1:  # two kernels in one script (ThunderGP): Vitis keeps the last set_top, and the other kernel's
+        # unit, which shares the headers' function bodies, becomes a -tb file so llvm-link sees it once; every
+        # solution's set_top names the kept top (a solution without one synthesizes 'dut' and fails)
+        kept = [re.sub(r"^(\s*set_top\s+)\S+", lambda m: m.group(1) + tops[-1], l) if re.match(r"\s*set_top\s+", l) else l for l in kept]
+        dropped = sorted({t for t in tops[:-1] if t != tops[-1]})
+        for i, l in enumerate(kept):
+            m = re.match(r"\s*add_files\s+(?!-tb)(?:\{([^}]*)\}|\"([^\"]*)\"|(\S+))", l)
+            f = m and next(g for g in m.groups() if g)
+            p = Path(dir_design) / f if f else None
+            if p and p.suffix.lower() in (".cpp", ".cc", ".c") and p.exists() and any(
+                re.search(r"\b" + re.escape(t) + r"\s*\([^;{}]*\)\s*\{", p.read_text(encoding="utf-8", errors="replace")) for t in dropped
+            ):
+                kept[i] = l.replace("add_files", "add_files -tb", 1)
+        changes["tops_dropped"] = dropped
     new = "\n".join(kept) + "\n"
     if new != text:
         tcl.write_text(new, encoding="utf-8")
@@ -554,6 +577,9 @@ def insert_required_includes(dir_output: Path, target: TargetSpec) -> list[str]:
     return added
 
 
+_RE_STRING_LITERAL = re.compile(r'"(?:\\.|[^"\\\n])*"')
+
+
 def _string_literals(path: Path) -> list[str]:
     """Contents of the string literals in a source file, comments and #include lines left out."""
     code = RE_COMMENT.sub("", path.read_text(encoding="utf-8", errors="replace"))
@@ -621,8 +647,10 @@ def check_translated_design(
         patterns = target.forbidden_patterns + (() if is_tb else target.dut_forbidden_patterns)
         lines = text.splitlines()
         for i, line in enumerate(lines, start=1):
+            # printed text may name a Vitis type ("Data type: ap_fixed<32, 4>"); only an #include line keeps its literal
+            probe = line if line.lstrip().startswith("#") else _RE_STRING_LITERAL.sub('""', line)
             for pat in patterns:
-                if re.search(pat, line):
+                if re.search(pat, probe):
                     if "ac_channel" in pat and in_class_body(lines, i - 1):
                         continue  # a channel member of a struct is not a local channel
                     entry = {"file": str(p.relative_to(dir_output)), "line": i, "text": line.strip()}
@@ -803,7 +831,7 @@ def compare_outputs(original: str, translated: str) -> dict:
 def run_oracle_check(
     dir_design: Path,
     docker_image_name: str = DOCKER_IMAGE_NAME,
-    timeout_s: int = 120,
+    timeout_s: int = TB_RUN_TIMEOUT_S,
     dir_scratch: Path | None = None,
 ) -> dict:
     """Compile and run a Vitis design's own testbench against its own sources with clang.
@@ -870,7 +898,8 @@ def run_oracle_check(
         container.remove(force=True)
         shutil.rmtree(tmp_root, ignore_errors=True)
 
-    result["passed"] = result["run"]["exit_code"] == 0
+    result["fail_line"] = oracle_fail_line(result["run"].get("output") or "")
+    result["passed"] = result["run"]["exit_code"] == 0 and not result["fail_line"]
     return result
 
 
@@ -972,7 +1001,7 @@ def run_container_checks(container: Container, target: TargetSpec) -> dict:
         code, output = _container_exec(container, build_cmd, out)
         results["testbench_build"] = {"exit_code": code, "output": output[-4000:]}
         if code == 0:
-            code, output = _container_exec(container, "timeout 60s /tmp/tb_check.out", out)
+            code, output = _container_exec(container, f"timeout {TB_RUN_TIMEOUT_S}s /tmp/tb_check.out", out)
             results["testbench_run"] = {"exit_code": code, "output": output[-4000:]}
         else:
             results["testbench_run"] = {"exit_code": None, "output": "not run: build failed"}

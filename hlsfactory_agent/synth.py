@@ -53,7 +53,9 @@ def run_synth(target: TargetSpec, dir_run: Path, image: str = DOCKER_IMAGE_NAME)
                 (dir_run / "synth_stdout.log").write_bytes(container.logs())  # how far the tool got
             except Exception:
                 pass
-            return SynthResult("TIMEOUT", failure_class="timeout")
+            result = SynthResult("TIMEOUT", failure_class="timeout")
+            (dir_run / "synth_result.json").write_text(json.dumps(asdict(result)), encoding="utf-8")  # the degrade step reads it
+            return result
         (dir_run / "synth_stdout.log").write_bytes(container.logs())
     finally:
         try:
@@ -62,7 +64,8 @@ def run_synth(target: TargetSpec, dir_run: Path, image: str = DOCKER_IMAGE_NAME)
             pass
     result = target.parse_report(dir_run)
     if result.status == "PASS" and target.synth_success_marker and not any(dir_run.glob(target.synth_success_marker)):
-        return SynthResult("FAILED", first_error=f"missing {target.synth_success_marker}", failure_class="no-output")
+        result = SynthResult("FAILED", first_error=f"missing {target.synth_success_marker}", failure_class="no-output")
+    (dir_run / "synth_result.json").write_text(json.dumps(asdict(result)), encoding="utf-8")
     return result
 
 

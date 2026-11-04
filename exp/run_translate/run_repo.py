@@ -141,7 +141,7 @@ def translate_one(
             with timer("synth_target"):
                 tgt = run_synth_cached(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache)
             row["synth_target"] = asdict(tgt)
-            if tgt.status == "FAILED" and degrade:
+            if tgt.status != "PASS" and degrade:
                 with timer("recovery"):
                     row["synth_target_degraded"] = run_synth_degraded(spec, dir_run / "run_area" / OUTPUT_DIR_NAME, dir_run / "synth", cache, rounds=degrade)
             (dir_run / "synth.json").write_text(json.dumps({k: row[k] for k in ("synth_target", "synth_target_degraded") if k in row}, indent=4), encoding="utf-8")

@@ -340,8 +340,8 @@ def test_prepass_places_dataflow_blocks_on_channel_only_stages(tmp_path: Path):
     log = rewrite_design(d, tmp_path / "out", CATAPULT, top="top")
     c = (tmp_path / "out" / "k.cpp").read_text(encoding="utf-8")
     assert "#pragma hls_design block\nvoid produce(" in c
-    assert c.count("#pragma hls_design block") == 1  # consume takes an array, helper is inlined, top is the top
-    assert [b["function"] for b in log["blocks"]] == ["produce"]
+    assert c.count("#pragma hls_design block") == 2  # consume owns the port buf, helper is inlined, top is the top
+    assert sorted(b["function"] for b in log["blocks"]) == ["consume", "produce"]
 
 
 

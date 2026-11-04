@@ -211,12 +211,68 @@ def repair_data_files(dir_design: Path, clone: CloneIndex) -> dict:
     return log
 
 
+STD_INCLUDES = (  # names Vitis's front end will not find unless the header is included (the original got it transitively)
+    (re.compile(r"\bu?int(?:8|16|32|64)_t\b"), re.compile(r"#\s*include\s*<(?:stdint\.h|cstdint)>"), "#include <stdint.h>"),
+    (re.compile(r"\b(?:INT|UINT|LONG|ULONG|SHRT|USHRT|CHAR|UCHAR)_(?:MAX|MIN)\b"), re.compile(r"#\s*include\s*<(?:limits\.h|climits)>"), "#include <limits.h>"),
+    (re.compile(r"\bstd::(?:i|o)?stringstream\b"), re.compile(r"#\s*include\s*<sstream>"), "#include <sstream>"),
+)
+
+
+def repair_std_includes(dir_design: Path) -> dict[str, list[str]]:
+    """Add the standard header a file's own names need when it lacks the include (BitBlender's MurmurHash3.h
+    uses uint32_t, ThunderGP's l2.h INT_MAX); Vitis compiles each unit on its own. Returns {file: [includes]}."""
+    out: dict[str, list[str]] = {}
+    for p in sorted(Path(dir_design).rglob("*")):
+        if not p.is_file() or p.suffix.lower() not in SOURCE_SUFFIXES + (".h", ".hpp"):
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        code = re.sub(r"//[^\n]*|/\*.*?\*/", "", text, flags=re.S)
+        add = [inc for use, has, inc in STD_INCLUDES if use.search(code) and not has.search(code)]
+        if add:
+            p.write_text("".join(f"{inc}  // hlsfactory: extraction repair\n" for inc in add) + text, encoding="utf-8")
+            out[p.relative_to(dir_design).as_posix()] = add
+    return out
+
+
+AP_CINT_STANDIN = Path(__file__).resolve().parent / "vitis_hls_include" / "ap_cint.h"
+
+
+def repair_ap_cint(dir_design: Path) -> dict:
+    """Vitis 2024.1 has no `ap_cint.h` (C arbitrary-precision integers): a design that includes it gets the
+    harness stand-in (intN as ap_int<N>, C++ only), and its `.c` units become `.cpp` in place, in `synth.tcl`
+    and in any `#include` of them (CLINK). Returns what moved."""
+    dir_design = Path(dir_design)
+    files = [p for p in sorted(dir_design.rglob("*")) if p.is_file() and p.suffix.lower() in SOURCE_SUFFIXES + (".h", ".hpp")]
+    users = [p for p in files if re.search(r'#\s*include\s*["<]ap_cint\.h[">]', p.read_text(encoding="utf-8", errors="replace"))]
+    if not users or (dir_design / "ap_cint.h").exists():
+        return {}
+    shutil.copy2(AP_CINT_STANDIN, dir_design / "ap_cint.h")
+    renamed: dict[str, str] = {}
+    for p in files:
+        if p.suffix.lower() == ".c" and not p.with_suffix(".cpp").exists():
+            p.rename(p.with_suffix(".cpp"))
+            renamed[p.relative_to(dir_design).as_posix()] = p.with_suffix(".cpp").relative_to(dir_design).as_posix()
+    for p in [dir_design / "synth.tcl"] + [q if q.suffix.lower() != ".c" else q.with_suffix(".cpp") for q in files]:
+        if not p.exists():
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        new = text
+        for old, nw in renamed.items():
+            new = re.sub(r"(?<![\w/])" + re.escape(old) + r"(?![\w.])", nw, new)
+            new = re.sub(r"(?<![\w/])" + re.escape(Path(old).name) + r"(?![\w.])", Path(nw).name, new)
+        if new != text:
+            p.write_text(new, encoding="utf-8")
+    return {"standin": "ap_cint.h", "renamed": renamed}
+
+
 def repair_extraction(dir_design: Path, dir_clone: Path | None = None) -> dict:
     """Run every repair on a design in place and write the log next to it."""
     clone = CloneIndex(dir_clone) if dir_clone and Path(dir_clone).is_dir() else None
     log = {"clone": str(dir_clone) if clone else None, "includes": repair_includes(dir_design, clone)}
     if clone is not None:
         log["data"] = repair_data_files(dir_design, clone)
+    log["std_includes"] = repair_std_includes(dir_design)
+    log["ap_cint"] = repair_ap_cint(dir_design)
     log["sources"] = oracle_sources(dir_design)
     (Path(dir_design) / REPAIR_LOG).write_text(json.dumps(log, indent=2), encoding="utf-8")
     return log
