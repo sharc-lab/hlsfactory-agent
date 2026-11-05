@@ -1,12 +1,12 @@
 # XLS[cc] Pragma Experiment Results
 
-Everything here was checked by compiling (and, from Exp 6 on, simulating) code with our own XLS build. The pragma mapping tables are in [xls_pragma_notes.md](xls_pragma_notes.md); those come from reading source and docs, so where the two disagree, trust this file. Last updated 2026-10-29.
+Everything here was checked by compiling (and, from Exp 6 on, simulating) code with our own XLS build. The pragma mapping tables are in [xls_pragma_notes.md](xls_pragma_notes.md); those come from reading source and docs, so where the two disagree, trust this file. Last updated 2026-11-05.
 
 ## Purpose
 
 Each experiment is a small XLS C++ program pushed through xlscc → opt_main → codegen_main (and, where it has test vectors, a cycle-accurate block simulation), to check one Vitis → XLS mapping from the notes. Priority order: `stream`, `pipeline`, `array_partition`, then everything rated ⚠️ or ❓ in the notes.
 
-Exp 1–5 are structural (IR and Verilog only). Exp 6–7 are simulated with `eval_proc_main`. There are no area numbers yet (no `yosys` on `chao-srv1`).
+Exp 1–5 and 8 are structural (IR and Verilog only). Exp 6–7 are simulated with `eval_proc_main`. There are no area numbers yet (no `yosys` on `chao-srv1`).
 
 ## Experiment index
 
@@ -19,6 +19,7 @@ Exp 1–5 are structural (IR and Verilog only). Exp 6–7 are simulated with `ev
 | 5 | [Plain array vs `__xls_memory` (array_partition)](#experiment-5-plain-array-vs-__xls_memory-array_partition) | `array_{plain,memory}_sum8` | ✅ A plain array is already fully partitioned (registers, all reads in one cycle). `__xls_memory` is a RAM: one access per FSM state. |
 | 6 | [Does stream depth matter? (simulated)](#experiment-6-does-stream-depth-matter-simulated) | `stream_two_blocks_burst*`, `stream_two_blocks_reorder*` | ⚠️ Depth only matters when one side must run ahead. **Codegen's port registers add hidden buffering**: depth 0 works with them and deadlocks without. |
 | 7 | [Loop and function pipelining](#experiment-7-loop-and-function-pipelining) | `pipeline_loop_{ii1,ii2,nopragma,wct2}` | ✅ Loops run at II=1 (with or without the pragma). II=2 is ignored with a warning. Function-level II=N → codegen `--worst_case_throughput=N`. |
+| 8 | [Where channels go, directions, `static`, modules](#experiment-8-where-channels-go-directions-static-modules) | `chan_class_*`, `chan_free_*`, `module_helper_fn` | ✅ Ports: class members or top parameters (same hardware). Internal channels: `static` locals only. Only `hls_top` and `hls_design block` functions become modules. |
 
 ## Probe file map
 
@@ -58,6 +59,15 @@ Naming: `<what is tested>_<where>_<variant>`. Probe `X` = C++ in `probes/X.cc`, 
 | [pipeline_loop_ii2](../../exp/xls_pragma_probe/probes/pipeline_loop_ii2.cc) | 7 | same, II=2 | [out/](../../exp/xls_pragma_probe/out/pipeline_loop_ii2/) |
 | [pipeline_loop_nopragma](../../exp/xls_pragma_probe/probes/pipeline_loop_nopragma.cc) | 7 | same, no pragma | [out/](../../exp/xls_pragma_probe/out/pipeline_loop_nopragma/) |
 | [pipeline_loop_wct2](../../exp/xls_pragma_probe/probes/pipeline_loop_wct2.cc) | 7 | `_ii1` source + codegen `--worst_case_throughput=2` | [out/](../../exp/xls_pragma_probe/out/pipeline_loop_wct2/) |
+| [chan_class_nodir](../../exp/xls_pragma_probe/probes/chan_class_nodir.cc) | 8 | class-member port, no direction | [xlscc.log](../../exp/xls_pragma_probe/out/chan_class_nodir/xlscc.log) |
+| [chan_class_inout_port](../../exp/xls_pragma_probe/probes/chan_class_inout_port.cc) | 8 | class-member port marked `InOut` | [xlscc.log](../../exp/xls_pragma_probe/out/chan_class_inout_port/xlscc.log) |
+| [chan_class_member_internal](../../exp/xls_pragma_probe/probes/chan_class_member_internal.cc) | 8 | internal channel as a class member (constructor) | [xlscc.log](../../exp/xls_pragma_probe/out/chan_class_member_internal/xlscc.log) |
+| [chan_class_member_internal_init](../../exp/xls_pragma_probe/probes/chan_class_member_internal_init.cc) | 8 | same, in-class initializer | [xlscc.log](../../exp/xls_pragma_probe/out/chan_class_member_internal_init/xlscc.log) |
+| [chan_class_local_nonstatic](../../exp/xls_pragma_probe/probes/chan_class_local_nonstatic.cc) | 8 | internal channel, not `static` | [xlscc.log](../../exp/xls_pragma_probe/out/chan_class_local_nonstatic/xlscc.log) |
+| [chan_free_nodir](../../exp/xls_pragma_probe/probes/chan_free_nodir.cc) | 8 | top parameters, no direction (`.textproto` gives it) | [out/](../../exp/xls_pragma_probe/out/chan_free_nodir/) |
+| [chan_free_internal_nodir](../../exp/xls_pragma_probe/probes/chan_free_internal_nodir.cc) | 8 | `stream_two_blocks` with no directions anywhere | [out/](../../exp/xls_pragma_probe/out/chan_free_internal_nodir/) |
+| [chan_free_internal_split](../../exp/xls_pragma_probe/probes/chan_free_internal_split.cc) | 8 | sub-blocks take the internal channel as `Out` / `In` | [xlscc.log](../../exp/xls_pragma_probe/out/chan_free_internal_split/xlscc.log) |
+| [module_helper_fn](../../exp/xls_pragma_probe/probes/module_helper_fn.cc) | 8 | plain helper function + helper method | [out/](../../exp/xls_pragma_probe/out/module_helper_fn/) |
 
 ## How to run
 
@@ -69,7 +79,7 @@ cd exp/xls_pragma_probe
 ./sim.sh probes/stream_two_blocks_reorder.cc                       # simulate one probe (after run.sh)
 ```
 
-Expected failures: `fifo_depth_internal_0` (xlscc error) and the simulation of `stream_two_blocks_reorder_noflops` (deadlock).
+Expected failures: `fifo_depth_internal_0` (xlscc error), the simulation of `stream_two_blocks_reorder_noflops` (deadlock), and the Exp 8 probes that test what xlscc rejects (all except `chan_free_nodir`, `chan_free_internal_nodir`, `module_helper_fn`).
 
 [run.sh](../../exp/xls_pragma_probe/run.sh) codegen settings: `--generator=pipeline --pipeline_stages=2 --delay_model=unit --reset=rst`, plus the probe's `.codegen_flags`. [sim.sh](../../exp/xls_pragma_probe/sim.sh) runs `eval_proc_main --backend=block_interpreter` on the `.mat.v` design's block IR. Inputs are always valid and outputs always ready.
 
@@ -77,9 +87,10 @@ Expected failures: `fifo_depth_internal_0` (xlscc error) and the simulation of `
 
 - `xlscc` is built from source (`e735697f0`, 2026-09-29) and symlinked as `~/bin/xlscc`; the release tarball doesn't include it. `opt_main`/`codegen_main` come from the older release build. Mixing them has worked so far. `eval_proc_main` is built from the same checkout as `xlscc` (2026-10-29) and symlinked as `~/bin/eval_proc_main`.
 - **Channels need block mode**, in one of two styles:
-  - *Class style* (Exp 1–3, 5, 7): `--block_from_class <Class>`.
+  - *Class style* (Exp 1–3, 5, 7): `--block_from_class <Class>`. xlscc writes the block spec itself.
   - *Free-function style* (Exp 4, 6): a `--block_pb <spec>.textproto --block_pb_text` input naming the top and its ports. Needed for multi-block designs; `hls_design block` on class methods is unimplemented.
   - With neither, `opt_main` rejects the IR ("channel has no associated send node").
+  - Both styles give the same ports. Where each kind of channel is declared: [Exp 8](#experiment-8-where-channels-go-directions-static-modules).
 
 ---
 
@@ -209,7 +220,7 @@ endmodule
 - `_array` behaves like a Vitis ping-pong (PIPO) buffer. Sending elements one at a time (Exp 6's `_burst`) is like a Vitis array-to-FIFO stream. The translator picks between them through the channel's item type.
 - Whether depth changes behavior is in [Exp 6](#experiment-6-does-stream-depth-matter-simulated).
 
-**Takeaway:** Vitis DATAFLOW + `hls::stream` → `hls_design block` free functions, plus a `static ... _dir_InOut` channel in the top with an explicit `hls_fifo_depth`.
+**Takeaway:** Vitis DATAFLOW + `hls::stream` → `hls_design block` free functions, plus a `static ... _dir_InOut` channel in the top with an explicit `hls_fifo_depth`. The sub-blocks' parameters for that channel must also be `InOut` (or have no direction); `In`/`Out` doesn't compile ([Exp 8](#experiment-8-where-channels-go-directions-static-modules)).
 
 ---
 
@@ -250,6 +261,7 @@ reg [3:0] ____fsm_foo_impl_state_0;    // states 0..8: 1 write + 8 reads
 
 - Plain array: IR proc state `bits[32][8]`, 8 `array_index` reads, no FSM. Verilog is 97 lines.
 - `__xls_memory`: four channels (`arr_read_request/response`, `arr_write_request/response`) become ports to a RAM **outside** the module, plus a 9-state FSM (340 lines). Reads are serialized because xlscc puts each memory op in its own state.
+- `__xls_memory` is **always** external, even as a `static` local inside the function (xlscc unit test `MemoryLocallyDeclared`, `unit_tests/translator_memory_test.cc:1642`). XLS never builds a RAM inside the module; the only internal storage is registers.
 - The RAM interface is abstract: separate read and write channels, no RAM model. Mapping it onto a real 1RW/1R1W SRAM is the `opt_main --ram_rewrites_pb` step (untested here).
 - No pragma for Vitis `block`/`cyclic` partitioning was found, and none is needed for `complete`.
 
@@ -336,3 +348,49 @@ W... translate_loops.cc:1697] Only initiation interval 1 supported, 2 requested,
 - `--worst_case_throughput=N` is an **upper bound** ("no slower than once per N cycles"), applied to the whole block. In a quick check that kept no probe, `=4` also gave 65 cycles (II=2): the scheduler doesn't have to use all N.
 
 **Takeaway:** Vitis `pipeline II=1` → drop it or emit `hls_pipeline_init_interval 1` (same result). `pipeline II=N>1` has no per-loop equivalent. The closest is codegen `--worst_case_throughput=N`, which applies to the whole block and is an upper bound. Vitis `pipeline off` / `rewind` / `style`: still none.
+
+---
+
+## Experiment 8: where channels go, directions, `static`, modules
+
+**Question:** where is each kind of channel declared, when is a direction required, and which functions become Verilog modules?
+**Result:** ✅ see the tables. Class style and free-function style give the same hardware; they differ only in where the ports are written.
+
+**Where to declare a channel:**
+
+| Channel | Class style (Exp 1–3) | Free-function style (Exp 4) |
+|---|---|---|
+| Port (`In` / `Out`) | class member | top-function parameter + `.textproto` |
+| Internal FIFO (`InOut`) | `static` local in the method | `static` local in `top`, passed by reference to sub-blocks |
+
+**Directions** (`Out` = write only, `In` = read only, `InOut` = both; the default is none):
+
+| Probe | Case | Result |
+|---|---|---|
+| `chan_class_nodir` | class-member port, no direction | ❌ `Direction or depth unspecified for external channel` |
+| `chan_free_nodir` | top parameter, no direction | ✅ the `.textproto` supplies it |
+| `chan_class_inout_port` | class-member port marked `InOut` | ❌ `Internal (InOut) channels in top class` |
+| `chan_class_member_internal` | internal channel as a class member | ❌ same error |
+| `chan_class_member_internal_init` | same, with `= __xls_channel<...>()` | ❌ **xlscc crashes** (`translator.cc:774`, likely an XLS bug) |
+| `chan_class_local_nonstatic` | internal channel, not `static` | ❌ `local channel declarations should be static` |
+| `chan_free_internal_split` | sub-blocks take the internal channel as `Out` / `In` | ❌ C++ error: can't convert `InOut` to `Out&` |
+| `chan_free_internal_nodir` | no directions anywhere | ✅ same IR channels as `stream_two_blocks` |
+
+- Ports are one end of a channel, so they're `In` or `Out`. An internal channel has both ends inside the design, so it's `InOut`.
+- The direction is part of the C++ type, so every reference to an internal channel (including sub-block parameters) must be `InOut` too.
+- Leaving directions out only works when a `.textproto` gives the port directions.
+
+**`static`:** same meaning as in Vitis: the value survives from one call (activation) to the next, so it becomes a register reset to its initial value.
+- `static` locals and class members with initializers are state (Exp 5's `static int arr[8]`; the counter in xlscc's state tutorial). Non-`static` locals are recomputed every call.
+- Statics need constant initializers (`translator.cc:2232`). Plain globals can't be assigned to (`translator.cc:2310`).
+- Channels and memories declared inside a function must be `static`: they are fixed hardware, not per-call values.
+
+**Which functions become modules:**
+
+| Function | Verilog |
+|---|---|
+| `#pragma hls_top` | top module (`Block_proc`, `top_proc`) |
+| `#pragma hls_design block` | its own module, instantiated in the top, joined by FIFOs (Exp 4) |
+| anything else (`module_helper_fn`'s `scale()` and `offset()`) | inlined: `module_helper_fn.v` has only `Block_proc` |
+
+**Takeaway:** for a single block, use class style (the tutorials' style; xlscc writes the spec). For multiple blocks, use free functions with `hls_design block` sub-blocks. Either way, internal channels are `static` locals marked `InOut`, and a helper function only becomes a separate module if it's marked `hls_design block`.

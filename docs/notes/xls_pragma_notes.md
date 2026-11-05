@@ -2,6 +2,16 @@
 
 XLS paths are relative to `xls/xls/contrib/xlscc/` unless noted. Vitis facts come from the AMD UG1399 pages listed under [Sources](#sources), fetched 2026-09-28. **The fetch tool gave summaries of those pages, not the raw text, so check exact option spellings on the pages themselves.**
 
+## Recent findings (2026-11-05)
+
+Code-structure basics, checked by compiling. Details and probes: [Exp 8](xls_pragma_experiment_results.md#experiment-8-where-channels-go-directions-static-modules).
+
+- **Where to declare channels.** Ports go in class members (class style, `--block_from_class`) or top-function parameters (free-function style, with a `.textproto` spec). Both give the same hardware. Internal channels are always `static` locals in the function, never class members.
+- **Which style.** Class style for a single block (xlscc writes the spec). Free functions for multiple `hls_design block` sub-blocks.
+- **Directions.** `In` = read-only port, `Out` = write-only port, `InOut` = internal channel (the design holds both ends). Sub-block parameters for an internal channel must be `InOut` too. Directions can be left out only when a `.textproto` supplies them.
+- **Memory.** Plain C arrays are registers inside the module (all elements readable at once). `__xls_memory` / `hls_memory` is always a RAM **outside** the module, reached through request/response ports, even when declared `static` inside a function. XLS never builds a RAM itself.
+- **`static`.** Keeps its value from one call to the next, so it becomes a register (reset to its initial value). Class members with initializers act the same. Local channels and memories must be `static`.
+- **Modules.** Only `hls_top` and `hls_design block` functions become Verilog modules. Every other function or method is inlined into its caller.
 
 ## Legend
 
@@ -55,7 +65,7 @@ XLS paths are relative to `xls/xls/contrib/xlscc/` unless noted. Vitis facts com
 | ⭐ | `hls_top` | Marks the top function or method, the entry point for translation. You can also pass `--top` on the command line. | `#pragma hls_top` before the function | `cc_parser.cc:170`, `:913` | ⚠️ **Not `#pragma HLS top`.** In Vitis, the top is chosen with `set_top` (Tcl) or the config file. `#pragma HLS top name=<string>` only "assigns an alternate identifier to a function so it can be referenced by the `set_top` command." So the translator must learn the top from the Vitis project config, not from a pragma. |
 | ⭐ | `hls_design top` | Pragma shorthand for `hls_top`. Used in `examples/mux3.cc`. | `#pragma hls_design top` | `cc_parser.cc:950` | ❓ Not a Vitis pragma. The syntax looks like Siemens Catapult HLS style (matching the `ac_*` types); unverified. |
 | | `hls_design block` | Pragma shorthand for `hls_block`. | `#pragma hls_design block` | `cc_parser.cc:950` | ❓ same as above |
-| ⭐ | `hls_block` | Makes a function its **own sub-block** (a separate proc) below the top, called through I/O ops. | `#pragma hls_design block` or `[[hls_block]]` on a function | `cc_parser.cc:734`; used at `translator.cc:1650` | ⚠️ Two partial overlaps: `#pragma HLS inline off` keeps a function "as a separate RTL module," and `#pragma HLS dataflow` runs functions as concurrent processes connected by channels. `hls_block` produces a separate, channel-connected proc, which is closer to a DATAFLOW process, but the semantics aren't confirmed equal. |
+| ⭐ | `hls_block` | Makes a function its **own sub-block** (a separate proc) below the top, called through I/O ops. | `#pragma hls_design block` or `[[hls_block]]` on a function | `cc_parser.cc:734`; used at `translator.cc:1650` | ⚠️ Two partial overlaps: `#pragma HLS inline off` keeps a function "as a separate RTL module," and `#pragma HLS dataflow` runs functions as concurrent processes connected by channels. `hls_block` produces a separate, channel-connected proc, which is closer to a DATAFLOW process. **Probed** ([Exp 4](xls_pragma_experiment_results.md#experiment-4-producer--stream--consumer), [Exp 8](xls_pragma_experiment_results.md#experiment-8-where-channels-go-directions-static-modules)): each `hls_design block` function becomes its own Verilog module; functions without it are inlined. |
 | | `hls_shared_function` | Uses **one shared hardware instance** for all calls to the function, reached through I/O ops. Requires `--generate_new_fsm` (`translator.cc:1278-1281`). | `[[hls_shared_function]]` on a function | `cc_parser.cc:1037` | ✅ `#pragma HLS allocation function instances=<f> limit=1`. ALLOCATION with `limit=1` forces "multiple C-level function calls to share a single RTL implementation." ⚠️ No XLS equivalent for `limit>1`, or for the `operation` type (e.g. limiting multipliers). |
 | | `hls_control_channel_depth(N)` | Sets the depth of the control-channel FIFO for a sub-block. Default 0. | `[[hls_control_channel_depth(2)]]` on a function | `cc_parser.cc:770` | ❓ none found |
 | | `hls_propagate_barrier_scopes` | Advanced. Makes a function pass its activation-barrier scopes up to the caller (see `xls/docs_src/design_docs/xlscc_activation_barriers.md`). Not yet supported together with `hls_shared_function`. | `[[hls_propagate_barrier_scopes]]` on a function | `cc_parser.cc:1075`; used at `translator.cc:1284`, `:4709` | ❓ none. This is an XLS-internal FSM concept. |
@@ -90,8 +100,8 @@ Defined in the virtual header `/xls_builtin.h` (`cc_parser.cc:1409-1540`).
 
 - `__xlscc_activation_barrier<bool conditional>()` forces the FSM to start a new activation at that point.
 - `__xlscc_on_reset` is `true` on the first activation after reset.
-- `__xls_channel<T, Dir>` is a FIFO stream with ready/valid. The Vitis equivalent is `hls::stream<T>`.
-- `__xls_memory<T, N>` is an external SRAM.
+- `__xls_channel<T, Dir>` is a FIFO stream with ready/valid. The Vitis equivalent is `hls::stream<T>`. `Dir` is `In`/`Out` for ports, `InOut` for internal channels; rules in [Exp 8](xls_pragma_experiment_results.md#experiment-8-where-channels-go-directions-static-modules).
+- `__xls_memory<T, N>` is an external SRAM, even when declared `static` inside a function ([Exp 5](xls_pragma_experiment_results.md#experiment-5-plain-array-vs-__xls_memory-array_partition)).
 
 ### Command-line flags that act like pragmas (`main.cc`)
 
@@ -121,7 +131,7 @@ This is the translation-direction view. ⭐ marks the pragmas most common in rea
 | ⭐ | `bind_storage variable= type= impl= latency=` | Binds an array to a memory type/implementation, with latency. | `hls_memory` / `__xls_memory` + `opt_main --ram_rewrites_pb` (RAM_1RW / RAM_1R1W) + codegen `--ram_configurations`. The memory tutorial assumes a "fixed 1-cycle latency" (`xls/docs_src/tutorials/xlscc_memory.md`). `impl=`: none found. | ⚠️ |
 | | `bind_op` | Binds an operator to a specific implementation. | none found | ❓ |
 | | `allocation function/operation instances= limit=` | Limits how many instances of a function or operator are built. | `hls_shared_function` = function with `limit=1` only | ✅ for function `limit=1`, ❓ otherwise |
-| ⭐ | `inline [off] [recursive]` | Dissolves a function into its caller. By default Vitis inlines small functions. | XLS has inlining passes in `opt_main` (`xls/docs_src/passes_list.md`, "inlining"). For `off` (keep as a separate module), the closest lead is `hls_block`. | ⚠️ |
+| ⭐ | `inline [off] [recursive]` | Dissolves a function into its caller. By default Vitis inlines small functions. | **Probed** ([Exp 8](xls_pragma_experiment_results.md#experiment-8-where-channels-go-directions-static-modules)): XLS inlines every function not marked `hls_design block`, so `inline` / `inline recursive` → drop. `inline off` → `hls_design block` (separate module, [Exp 4](xls_pragma_experiment_results.md#experiment-4-producer--stream--consumer)), but that also makes the call channel-connected. | ✅ inline (drop), ⚠️ off |
 | | `function_instantiate variable=` | Builds a separate RTL copy per call site, each specialized for a constant argument. | Possibly unnecessary: XLS inlines calls, after which constants propagate. **Unverified**. | ❓ |
 | | `dependence variable= type=inter/intra direction= distance= true/false` | Declares or removes loop dependencies. | `xlscc::asap` for the whole loop, with no per-variable control | ⚠️ |
 | ⭐ | `loop_tripcount min= max= avg=` | "For analysis only, and does not impact the results of synthesis." | **Safe to drop** in translation. | ✅ (drop it) |
