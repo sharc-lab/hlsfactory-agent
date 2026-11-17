@@ -12,3 +12,8 @@ wheels/
 .venv
 
 .env
+# Paper PDFs (publisher-copyrighted, do not commit)
+exp/paper_filter/pdfs/
+
+# Local session notes
+CLAUDE.md
