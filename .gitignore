@@ -14,6 +14,8 @@ wheels/
 .env
 # Paper PDFs (publisher-copyrighted, do not commit)
 exp/paper_filter/pdfs/
+# Derived data from the PDFs (run outputs, registry, transcripts)
+exp/paper_filter/runs/
 
 # Local session notes
 CLAUDE.md

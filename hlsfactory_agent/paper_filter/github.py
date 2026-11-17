@@ -47,6 +47,7 @@ def check_repo(repo_id: str, token: str | None, cache_dir: Path | None = None) -
             "pushed": d.get("pushed_at"),
             "archived": d.get("archived"),
             "fork": d.get("fork"),
+            "size_kb": d.get("size"),
             "stars": d.get("stargazers_count"),
             "description": d.get("description"),
         }

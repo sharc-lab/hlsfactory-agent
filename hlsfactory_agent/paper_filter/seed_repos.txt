@@ -1,0 +1,32 @@
+# Repos already handled by HLSFactory (exp/run_base/run.py). Seeded into the registry as
+# `seeded` so a paper pointing at one reports `already_known` and is not searched again.
+# One owner/name per line; blank lines and # comments are ignored.
+AlexMontgomerie/fpgaconvnet-hls
+DARClab-UTD/S2CBench
+ETHZ-DYNAMO/balor
+FedericoSerafini/HLS-CNN
+KastnerRG/Spector-HLS
+OswaldHe/InTAR
+SFU-HiAccel/AutoNTT
+SFU-HiAccel/BitBlender
+SFU-HiAccel/CHIP-KNN
+SFU-HiAccel/FORC
+SFU-HiAccel/HiSpMV
+SFU-HiAccel/SyncNN
+SFU-HiAccel/blaze
+SFU-HiAccel/pasta
+SFU-HiAccel/SERI
+TurakhiaLab/DP-HLS
+UCLA-VAST/CLINK
+UCLA-VAST/HP-FFT-HLS
+UIUC-ChenLab/ScaleHLS-HIDA
+Xtra-Computing/ThunderGP
+ZongyueQin/ProgSG
+bsc-loca/PQC-Crystals-HLS-Accelerators
+icl-utk-edu/hpcc
+robertoBosio/NN2FPGA
+spcl/gemm_hls
+ECASLab/hls-fpga-accelerators
+
+# TODO (user): add well-known benchmark suites that many papers use, after confirming the
+# exact GitHub ids (candidates to check, NOT verified: MachSuite, Rosetta, PolyBench, CHStone).
