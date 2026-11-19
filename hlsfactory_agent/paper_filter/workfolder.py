@@ -21,7 +21,7 @@ def prepare_work_folder(
 ) -> Path:
     """Layout (all under dir_run_area, mounted at /workspace/run_area):
 
-    paper.pdf  pages/pNN.txt  meta.json  prepass.json  known_repos.json  tools/  output/
+    paper.pdf  pages/pNN.txt  prepass.json  known_repos.json  tools/  output/
     """
     if dir_run_area.exists():
         shutil.rmtree(dir_run_area)
@@ -32,7 +32,6 @@ def prepare_work_folder(
     shutil.copy(meta.pdf, dir_run_area / "paper.pdf")
     for i, text in enumerate(doc.pages, start=1):
         (dir_run_area / "pages" / f"p{i:02d}.txt").write_text(text)
-    (dir_run_area / "meta.json").write_text(json.dumps(meta.to_json(), indent=2))
     (dir_run_area / "prepass.json").write_text(json.dumps(prepass, indent=2))
     (dir_run_area / "known_repos.json").write_text(
         json.dumps(sorted(v["display_id"] for v in snapshot.values()), indent=2)

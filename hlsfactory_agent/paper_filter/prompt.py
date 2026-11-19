@@ -1,5 +1,6 @@
 """Prompt for the per-paper repo-discovery agent (run with `pi -p`)."""
 
+# Per-paper call caps: shown to the agent here and enforced by the proxy (proxy.py).
 DEFAULT_BUDGETS = {"search": 12, "code_search": 4, "web": 3, "core": 80}
 
 
@@ -10,9 +11,8 @@ def build_agent_prompt(
     year: int | None,
     venue: str | None,
     doi: str | None,
-    budgets: dict | None = None,
 ) -> str:
-    b = {**DEFAULT_BUDGETS, **(budgets or {})}
+    b = DEFAULT_BUDGETS
     meta = [f"- paper_id: {paper_id}", f"- title: {title}"]
     for label, val in (("authors", authors), ("year", year), ("venue", venue), ("doi", doi)):
         if val:

@@ -27,7 +27,7 @@ def test_dry_run_builds_the_work_folder(tmp_path):
     final = run_one(meta, cfg, tmp_path / "run", snapshot={})
     area = tmp_path / "run" / "work" / meta.paper_id / "run_area"
     assert final["status"] == "prepared"
-    for rel in ["paper.pdf", "pages/p01.txt", "meta.json", "prepass.json",
+    for rel in ["paper.pdf", "pages/p01.txt", "prepass.json",
                 "known_repos.json", "tools/gh_api.sh", "tools/hls_scan.py", "output"]:
         assert (area / rel).exists(), rel
     prepass = json.loads((area / "prepass.json").read_text())

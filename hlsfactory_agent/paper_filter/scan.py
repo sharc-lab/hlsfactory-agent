@@ -169,10 +169,7 @@ def clone_source_only(url: str, dest: Path) -> str | None:
     Returns an error string, or None on success. Works for repos far over the size cap
     because the cap applies to source bytes, not the whole repo.
     """
-    steps = [
-        ["clone", "--depth", "1", "--filter=blob:none", "--no-checkout", "--quiet", url, str(dest)],
-    ]  # fmt: skip
-    p = _git(steps[0])
+    p = _git(["clone", "--depth", "1", "--filter=blob:none", "--no-checkout", "--quiet", url, str(dest)])
     if p.returncode != 0:
         return f"git clone failed: {p.stderr.strip()[:300]}"
     _git(["config", "core.sparseCheckout", "true"], cwd=dest)

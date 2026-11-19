@@ -8,7 +8,6 @@ MIN_CHARS_PER_PAGE = 100
 
 @dataclass
 class PdfDoc:
-    path: Path
     pages: list[str]
     links: list[tuple[int, str]] = field(default_factory=list)  # (1-indexed page, uri)
 
@@ -31,4 +30,4 @@ def read_pdf(path: Path) -> PdfDoc:
             links.extend(
                 (i, link["uri"]) for link in page.get_links() if link.get("uri")
             )
-    return PdfDoc(path=path, pages=pages, links=links)
+    return PdfDoc(pages=pages, links=links)

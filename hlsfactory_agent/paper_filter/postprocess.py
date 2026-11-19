@@ -2,7 +2,7 @@
 
 The agent supplies repos, evidence (with quotes) and the HLS scan output. This code
 verifies quotes against the PDF text, computes confidence, decides each repo's outcome from
-the scan, and decides whether it is handed off. See CLAUDE.md, chunks 1, 4, 5.
+the scan, and decides whether it is handed off.
 """
 
 import re

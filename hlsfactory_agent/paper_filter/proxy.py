@@ -2,7 +2,7 @@
 
 Adds the token, enforces rate limits by WAITING (not failing), caches identical queries
 across agents, enforces a per-paper search budget, and logs every call. Runs as a thread in
-the orchestrator. See CLAUDE.md, chunk 6.
+the orchestrator.
 
     containers --curl--> http://host.docker.internal:PORT/github/<path>  --> api.github.com
                                                           /web/search?q=...
@@ -21,6 +21,7 @@ from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from hlsfactory_agent.paper_filter.prompt import DEFAULT_BUDGETS
 from hlsfactory_agent.paper_filter.registry import Registry
 
 GITHUB_API = "https://api.github.com"
@@ -36,9 +37,7 @@ class ProxyConfig:
         default_factory=lambda: {"search": 27, "code_search": 8, "core": 75, "web": 30}
     )
     # per-paper caps on calls (cache hits count too, so a loop cannot hide behind the cache)
-    budgets: dict = field(
-        default_factory=lambda: {"search": 12, "code_search": 4, "core": 80, "web": 3}
-    )
+    budgets: dict = field(default_factory=lambda: dict(DEFAULT_BUDGETS))
     cache_ttl_s: float = 24 * 3600
     max_retries: int = 3
     max_wait_s: float = 120.0
@@ -120,10 +119,6 @@ class ProxyServer:
             n = self.counts.get((paper_id, category), 0) + 1
             self.counts[(paper_id, category)] = n
         return limit is not None and n > limit
-
-    def usage(self, paper_id: str) -> dict:
-        with self._lock:
-            return {c: n for (p, c), n in self.counts.items() if p == paper_id}
 
     def log(self, **entry) -> None:
         if not self.cfg.log_path:

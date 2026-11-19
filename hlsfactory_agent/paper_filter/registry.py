@@ -2,7 +2,7 @@
 
 The host process owns it; containers only ever see a read-only snapshot. Every method opens
 its own short-lived connection (WAL mode, busy timeout) so threads and processes can share
-the file safely. See CLAUDE.md, chunk 6.
+the file safely.
 """
 
 import json

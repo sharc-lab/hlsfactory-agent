@@ -8,7 +8,7 @@ import json
 import os
 import shlex
 import traceback
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 from hlsfactory_agent.paper_filter.extract import run_prepass
@@ -31,7 +31,6 @@ class RunConfig:
     timeout_s: int = 1800
     mem_limit: str = "4g"
     cpus: float = 1.0
-    budgets: dict = field(default_factory=dict)
     dry_run: bool = False
 
 
@@ -126,7 +125,7 @@ def run_one(meta: PaperMeta, cfg: RunConfig, dir_runs: Path, snapshot: dict) -> 
         return final
 
     prompt = build_agent_prompt(
-        meta.paper_id, meta.title, meta.authors, meta.year, meta.venue, meta.doi, cfg.budgets
+        meta.paper_id, meta.title, meta.authors, meta.year, meta.venue, meta.doi
     )
     (dir_paper / "prompt.txt").write_text(prompt)
 

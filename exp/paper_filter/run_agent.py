@@ -3,7 +3,7 @@
     python exp/paper_filter/run_agent.py [--pdfs DIR] [--sheet XLSX] [--run-dir DIR]
         [--jobs N] [--limit N] [--only SUBSTR] [--dry-run] [--force]
 
-Use `.venv/bin/python` with PYTHONPATH=. (plain `uv run` does not work here; see CLAUDE.md).
+Use `.venv/bin/python` with PYTHONPATH=. (plain `uv run` does not work here).
 Needs: OPENROUTER_API_KEY in .env (not for --dry-run); GITHUB_TOKEN in .env or the
 environment (strongly recommended). Build the image first: docker_images/paper_filter/build.sh.
 
@@ -23,7 +23,6 @@ from joblib import Parallel, delayed
 from hlsfactory_agent.paper_filter.github import load_token
 from hlsfactory_agent.paper_filter.manifest import discover_papers
 from hlsfactory_agent.paper_filter.outputs import build_outputs
-from hlsfactory_agent.paper_filter.prompt import DEFAULT_BUDGETS
 from hlsfactory_agent.paper_filter.proxy import ProxyConfig, ProxyServer, bridge_address
 from hlsfactory_agent.paper_filter.registry import Registry, load_seeds
 from hlsfactory_agent.paper_filter.runner import RunConfig, run_one
@@ -77,7 +76,7 @@ print(f"{len(done)} already done, running {len(todo)}")
 proxy = None
 cfg = RunConfig(
     model=args.model, api_key=api_key, image=args.image, github_token=github_token,
-    timeout_s=args.timeout, budgets=DEFAULT_BUDGETS, dry_run=args.dry_run,
+    timeout_s=args.timeout, dry_run=args.dry_run,
 )  # fmt: skip
 if not args.dry_run:
     secret = secrets.token_hex(16)

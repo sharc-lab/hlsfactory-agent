@@ -1,7 +1,7 @@
 """Evidence items and the deterministic confidence score.
 
 The agent reports evidence (type, quote, source); this code decides confidence. The model's
-own confidence is never used. See CLAUDE.md, chunk 4.
+own confidence is never used.
 """
 
 import re
@@ -66,7 +66,7 @@ def clean_evidence(
         if len(quote) < MIN_QUOTE_CHARS:
             problems.append(f"{etype}: missing or too short quote")
             continue
-        item = {"type": etype, "quote": quote, "source": source, "page": it.get("page")}
+        item = {"type": etype, "quote": quote, "source": source}
         if source.lower().startswith("paper"):
             if not verify_quote(quote, pages):
                 problems.append(f"{etype}: quote not found in the PDF text")
