@@ -32,6 +32,9 @@ def main() -> None:
     )
     parser.add_argument("--max-points", type=int, default=8, help="cap on design-space points, explicit or implicit")
     parser.add_argument("--agent-timeout", type=int, default=60 * 30, help="seconds per agent attempt")
+    parser.add_argument(
+        "--synth", action="store_true", help="off by default; synthesize each passing point with Vitis HLS"
+    )
     args = parser.parse_args()
 
     api_key = check_key(dotenv_values(args.env).get("OPENROUTER_API_KEY"))
@@ -53,6 +56,7 @@ def main() -> None:
             attempts=args.attempts,
             max_design_points=args.max_points,
             agent_timeout_s=args.agent_timeout,
+            do_synth=args.synth,
         )
         check = run.run()
         summary[run_id] = {

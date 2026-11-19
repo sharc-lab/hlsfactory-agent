@@ -106,12 +106,26 @@ def _uses_jinja(sources: T_sources) -> bool:
 
 
 def build_parameterization_prompt(
-    design_name: str, kernel_files: list[str], max_design_points: int
+    design_name: str, kernel_files: list[str], max_design_points: int, do_synth: bool = False
 ) -> str:
     """Task prompt for one parameterization run, adapted from hls-eval's
     prompt sections to this repo's conventions and extended to cover the
     explicit-vs-implicit submission choice."""
     files_list = ", ".join(f"`{f}`" for f in kernel_files)
+    evaluation = (
+        "Each rendered point is compiled and run against the unchanged testbench with a "
+        "timeout, then synthesized with Vitis HLS. A point that fails to render, compile, "
+        "pass the testbench, or synthesize is scored as a failure. Validate what you can "
+        "yourself with `clang++ -fsyntax-only` and by compiling/running the testbench before "
+        "finishing; Vitis HLS synthesis itself is not available to you here and is checked "
+        "automatically after you submit."
+        if do_synth
+        else "Each rendered point is compiled and run against the unchanged testbench with a "
+        "timeout. A point that fails to render, compile, or pass the testbench is scored as a "
+        "failure. Vitis HLS synthesis is not run as part of this evaluation. Validate what you "
+        "can yourself with `clang++ -fsyntax-only` and by compiling/running the testbench "
+        "before finishing."
+    )
     return (
         f"You are optimizing the complete, working Vitis HLS design `{design_name}` in "
         f"'./{INPUT_DIR_NAME}'. Read every source, header, and the testbench first.\n"
@@ -172,12 +186,7 @@ def build_parameterization_prompt(
         "arithmetic semantics to obtain a speedup, and do not bypass or weaken the testbench.\n"
         "\n"
         "## Evaluation\n"
-        "Each rendered point is compiled and run against the unchanged testbench with a "
-        "timeout, then synthesized with Vitis HLS. A point that fails to render, compile, "
-        "pass the testbench, or synthesize is scored as a failure. Validate what you can "
-        "yourself with `clang++ -fsyntax-only` and by compiling/running the testbench before "
-        "finishing; Vitis HLS synthesis itself is not available to you here and is checked "
-        "automatically after you submit.\n"
+        f"{evaluation}\n"
         "\n"
         "Start immediately. Do not only describe the steps. Do NOT terminate until you have "
         f"written exactly one of the two design-space files, between 2 and {max_design_points} "
@@ -240,6 +249,7 @@ class HLSParameterizationRun:
         agent_timeout_s: int = 60 * 30,
         attempts: int = 1,
         max_design_points: int = 8,
+        do_synth: bool = False,
     ) -> None:
         self.run_id = run_id
         self.dir_design = Path(dir_design).resolve()
@@ -251,6 +261,10 @@ class HLSParameterizationRun:
         self.agent_timeout_s = agent_timeout_s
         self.attempts = max(1, int(attempts))
         self.max_design_points = max_design_points
+        # Off by default, mirroring run_translate/run.py's own `--synth` flag:
+        # synthesis (a real call into the vendor tool, Vitis HLS here) is an
+        # opt-in, separate pass, never implied by just running the agent.
+        self.do_synth = do_synth
 
     # ---- workspace -----------------------------------------------------------------
 
@@ -522,7 +536,9 @@ class HLSParameterizationRun:
             return check_data
 
         kernel_files = find_sources_from_synth_tcl(dir_original)
-        prompt = build_parameterization_prompt(design_name, kernel_files, self.max_design_points)
+        prompt = build_parameterization_prompt(
+            design_name, kernel_files, self.max_design_points, do_synth=self.do_synth
+        )
         run_data["prompt_task"] = prompt
 
         client = docker.from_env()
@@ -567,7 +583,7 @@ class HLSParameterizationRun:
             container.stop()
             container.remove(force=True)
 
-        if check_data.get("passed"):
+        if check_data.get("passed") and self.do_synth:
             dir_cache = self.dir_work / "synth_cache"
             synth_results: list[dict] = []
             for point in check_data["container"]["points"]:
