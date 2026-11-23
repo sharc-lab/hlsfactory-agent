@@ -1,4 +1,9 @@
-"""Find PDFs in a folder tree and join them to spreadsheet rows by normalized title.
+"""Find PDFs in a folder tree and join them to spreadsheet rows.
+
+Join order: normalized title from the filename; then the filename as a DOI (publishers such
+as ACM name downloads after the DOI suffix, e.g. 3706628.3708871.pdf for
+10.1145/3706628.3708871; a full DOI with "_" for "/" also works); then the title in the PDF's
+own metadata. Unmatched PDFs keep a title from the metadata or, failing that, the filename.
 
 PDFs may sit in subfolders (e.g. pdfs/with_repo/, pdfs/without_repo/); the subfolder path is
 kept as the paper's `group` so outputs can be broken down by it.
@@ -10,6 +15,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import pandas as pd
+import pymupdf
 
 MIN_PREFIX = 40  # chars of normalized title needed for the truncated-filename fallback
 MAX_ID_CHARS = 80
@@ -41,6 +47,7 @@ class PaperMeta:
     doi: str | None = None
     group: str | None = None  # subfolder under the PDF root, e.g. "with_repo"; None at top level
     matched: bool = False  # joined to a spreadsheet row
+    matched_by: str | None = None  # "title" | "doi" | "pdf_title"
     ambiguous: bool = False  # several rows share the normalized title; first was used
 
     def to_json(self) -> dict:
@@ -65,6 +72,47 @@ def _index(df: pd.DataFrame) -> dict[str, list[int]]:
     return idx
 
 
+def norm_doi(s: object) -> str:
+    s = str(s).strip().lower()
+    return re.sub(r"^(https?://(dx\.)?doi\.org/|doi:)", "", s)
+
+
+def _doi_index(df: pd.DataFrame) -> tuple[dict[str, list[int]], dict[str, list[int]]]:
+    """(full DOI -> rows, DOI suffix after the first '/' -> rows)."""
+    full: dict[str, list[int]] = {}
+    suffix: dict[str, list[int]] = {}
+    if "DOI" not in df:
+        return full, suffix
+    for i, d in enumerate(df["DOI"]):
+        if pd.isna(d) or "/" not in str(d):
+            continue
+        doi = norm_doi(d)
+        full.setdefault(doi, []).append(i)
+        suffix.setdefault(doi.split("/", 1)[1], []).append(i)
+    return full, suffix
+
+
+def _lookup_doi(stem: str, full: dict, suffix: dict, df: pd.DataFrame) -> list[int]:
+    s = stem.strip().lower()
+    if s.startswith("10.") and "_" in s:
+        return full.get(s.replace("_", "/", 1), [])
+    rows = suffix.get(s, [])
+    # the same suffix under two publishers would be a guess: no match
+    return rows if len({norm_doi(df.iloc[i]["DOI"]) for i in rows}) == 1 else []
+
+
+def pdf_metadata_title(pdf: Path) -> str | None:
+    """Title from the PDF's metadata, if it looks like a real title."""
+    try:
+        with pymupdf.open(pdf) as doc:
+            t = (doc.metadata or {}).get("title") or ""
+    except Exception:
+        return None
+    t = " ".join(t.split())
+    bad = t.lower() in {"untitled", "title", "paper"} or t.lower().endswith((".doc", ".docx", ".pdf", ".dvi"))
+    return t if len(t) >= 12 and not bad else None
+
+
 def _lookup(key: str, idx: dict[str, list[int]]) -> list[int]:
     if key in idx:
         return idx[key]
@@ -80,13 +128,14 @@ def _lookup(key: str, idx: dict[str, list[int]]) -> list[int]:
 
 
 def discover_papers(pdf_dir: Path, sheet: Path | None = None) -> list[PaperMeta]:
-    """Every *.pdf under pdf_dir (recursive). Unmatched PDFs get a title from the filename.
+    """Every *.pdf under pdf_dir (recursive), joined to the sheet (see module docstring).
 
     Paper ids come from filename stems, so the same filename in two subfolders is an error.
     """
     pdf_dir = Path(pdf_dir)
     df = load_sheet(sheet) if sheet else None
     idx = _index(df) if df is not None else {}
+    doi_full, doi_suffix = _doi_index(df) if df is not None else ({}, {})
     papers = []
     seen: dict[str, Path] = {}
     for pdf in sorted(pdf_dir.rglob("*.pdf")):
@@ -99,7 +148,14 @@ def discover_papers(pdf_dir: Path, sheet: Path | None = None) -> list[PaperMeta]
             paper_id=paper_id, pdf=pdf, title=title_from_filename(pdf),
             group=None if rel_dir == "." else rel_dir,
         )  # fmt: skip
-        rows = _lookup(norm_title(pdf.stem), idx)
+        rows, how = _lookup(norm_title(pdf.stem), idx), "title"
+        if not rows and df is not None:
+            rows, how = _lookup_doi(pdf.stem, doi_full, doi_suffix, df), "doi"
+        md_title = None
+        if not rows:
+            md_title = pdf_metadata_title(pdf)
+            if md_title:
+                rows, how = _lookup(norm_title(md_title), idx), "pdf_title"
         if rows and df is not None:
             r = df.iloc[rows[0]]
             meta.title = str(r["Title"])
@@ -109,6 +165,9 @@ def discover_papers(pdf_dir: Path, sheet: Path | None = None) -> list[PaperMeta]
             meta.venue = _clean(r.get("Venue"))
             meta.doi = _clean(r.get("DOI"))
             meta.matched = True
+            meta.matched_by = how
             meta.ambiguous = len(rows) > 1
+        elif md_title:  # not in the sheet: the PDF's own title beats e.g. "3702005"
+            meta.title = md_title
         papers.append(meta)
     return papers

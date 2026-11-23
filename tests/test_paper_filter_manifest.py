@@ -71,3 +71,45 @@ def test_same_filename_in_two_folders_is_an_error(tmp_path):
         (pdfs / sub / "Same.pdf").write_bytes(b"%PDF-1.4")
     with pytest.raises(ValueError, match="duplicate paper id"):
         discover_papers(pdfs)
+
+
+def _sheet_with_dois(tmp_path, rows):
+    pd.DataFrame({"Title": [r[0] for r in rows], "DOI": [r[1] for r in rows]}).to_csv(
+        tmp_path / "s.csv", index=False)
+    return tmp_path / "s.csv"
+
+
+def test_acm_doi_suffix_filename_matches(tmp_path):
+    sheet = _sheet_with_dois(tmp_path, [("Dynamic Loop Fusion in HLS", "10.1145/3706628.3708871"),
+                                        ("Other", "10.1109/FCCM.2016.50")])
+    pdfs = tmp_path / "pdfs"
+    pdfs.mkdir()
+    for f in ("3706628.3708871.pdf", "10.1109_FCCM.2016.50.pdf"):
+        (pdfs / f).write_bytes(b"%PDF-1.4")
+    got = {p.paper_id: (p.title, p.matched_by) for p in discover_papers(pdfs, sheet)}
+    assert got == {"3706628.3708871": ("Dynamic Loop Fusion in HLS", "doi"),
+                   "10.1109_FCCM.2016.50": ("Other", "doi")}
+
+
+def test_ambiguous_doi_suffix_is_not_matched(tmp_path):
+    sheet = _sheet_with_dois(tmp_path, [("A", "10.1145/123.456"), ("B", "10.1109/123.456")])
+    pdfs = tmp_path / "pdfs"
+    pdfs.mkdir()
+    (pdfs / "123.456.pdf").write_bytes(b"%PDF-1.4")
+    (p,) = discover_papers(pdfs, sheet)
+    assert not p.matched
+
+
+def test_pdf_metadata_title_is_used_when_filename_is_an_id(tmp_path):
+    import pymupdf
+    sheet = _sheet_with_dois(tmp_path, [("CRUSH: A Credit-Based Approach", "10.9/x")])
+    pdfs = tmp_path / "pdfs"
+    pdfs.mkdir()
+    for name, title in (("999.pdf", "CRUSH: A Credit-Based Approach"), ("888.pdf", "Not In The Sheet At All")):
+        doc = pymupdf.open()
+        doc.new_page()
+        doc.set_metadata({"title": title})
+        doc.save(pdfs / name)
+    got = {p.paper_id: (p.title, p.matched_by) for p in discover_papers(pdfs, sheet)}
+    assert got == {"999": ("CRUSH: A Credit-Based Approach", "pdf_title"),
+                   "888": ("Not In The Sheet At All", None)}
