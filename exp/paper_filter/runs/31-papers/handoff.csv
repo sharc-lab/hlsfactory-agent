@@ -1,0 +1,9 @@
+repo_id,provenance,confidence,dialects,flags,papers
+breagen/MachSuite,third_party_demo,high,,hls_via_tcl;third_party,A_Reinforcement_Learning_Based_Multi-objective_Evolutionary_Algorithm_for_High-l-5585df5e
+EPFL-LAP/dynamatic,third_party_demo,high,dynamatic=460,third_party,3669940.3707273
+jiahaogai/LLM-for-HLS,own_found_by_search,high,vitis=3;vitis_weak=4,,3658617.3697616
+jianyicheng/HLS-benchmarks,third_party_demo,high,vitis=1,third_party,3705732
+Lucaz97/Agentic-HLS,own_found_by_search,high,vitis=272;catapult=233,,Can_Reasoning_Models_Reason_about_Hardware_An_Agentic_HLS_Perspective
+MasLiang/AutoClock,own_in_paper,high,vitis=58;vitis_weak=17,,AutoClock_Automated_Clock_Management_for_Power-Efficient_HLS_Designs_on_FPGAs
+UT-LCA/ML4Accel-Dataset,third_party_demo,high,vitis=150;vitis_weak=60,third_party,3658617.3697616
+zhaijiaqi/AccelES,own_found_by_search,high,vitis=5;vitis_weak=4,,AccelES_Accelerating_Top-K_SpMV_for_Embedding_Similarity_via_Low-bit_Pruning

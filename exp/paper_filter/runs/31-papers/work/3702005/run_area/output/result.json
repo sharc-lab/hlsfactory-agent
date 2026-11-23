@@ -1,0 +1,99 @@
+{
+  "repos": [
+    {
+      "repo_id": "aferikoglou/CollectiveHLS",
+      "provenance": "own_found_by_search",
+      "evidence": [
+        {
+          "type": "readme_has_title",
+          "quote": "# CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization",
+          "source": "readme"
+        },
+        {
+          "type": "readme_has_doi_or_arxiv",
+          "quote": "@article{ferikoglou2024collectivehls, title={CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization}, ... year={2024}, publisher={ACM New York, NY}}",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Aggelos Ferikoglou (lead author) is the sole committer across all 12 commits",
+          "source": "github_api"
+        },
+        {
+          "type": "description_matches_abstract",
+          "quote": "CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization",
+          "source": "github_api"
+        },
+        {
+          "type": "name_matches_system",
+          "quote": "CollectiveHLS",
+          "source": "github_api"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "aferikoglou — lead author Aggelos Ferikoglou at National Technical University of Athens",
+          "source": "github_api"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "created 2024-08-20, pushed 2025-01-30 — paper received April 2024, accepted October 2024",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "weak_hls_only",
+        "mode": "clone",
+        "files_scanned": 7,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 1,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 1,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "aferikoglou/CollectiveHLS",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "aferikoglou/CollectiveHLS",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2024-08-20T14:47:26Z",
+          "pushed_at": "2025-01-30T15:28:50Z",
+          "description": "CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization",
+          "size_kb": 173
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Authors' own repo for the CollectiveHLS system. Found via GitHub repo search by name. The paper does not include a direct link to the repo. The repo contains the Python implementation of CollectiveHLS and orchestrates Vitis HLS calls (hence weak HLS classification). No hardware kernel files with HLS pragmas are included — the tool operates on external benchmark designs."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "gh_search_repos",
+      "query": "CollectiveHLS in:name",
+      "found": "aferikoglou/CollectiveHLS — description matches paper title exactly, Python, 6 stars, not a fork"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization\"",
+      "found": "2 results, both in aferikoglou/CollectiveHLS (CollectiveHLS.py and README.md)"
+    }
+  ],
+  "summary": "Found one repository: aferikoglou/CollectiveHLS, which is the authors' own implementation of the CollectiveHLS system described in the paper. It was found by searching GitHub for the system name. The paper itself does not include a direct URL to this repository. The repo contains Python code that orchestrates Vitis HLS, with weak HLS content (references to Vitis HLS in Python scripts). No third-party repos that the paper builds on were identified beyond standard benchmark suites (RodiniaHLS, Machsuite) which are separate projects. The evidence is very strong: the repo description is the exact paper title, the README cites the paper with full bibliographic details, the owner is the lead author, and all commits are by the lead author."
+}

@@ -1,0 +1,25 @@
+All evidence verified. The result is written to `/workspace/run_area/output/result.json`.
+
+## Summary
+
+**Found 1 repo: `SFU-HiAccel/AutoNTT`** — the authors' own repository.
+
+The paper explicitly states on **page 1**: *"AutoNTT will be released soon at https://github.com/SFU-HiAccel/AutoNTT."*
+
+### Evidence for the repo
+| Evidence | Detail |
+|---|---|
+| **paper_own_link** | Direct link in the paper abstract (not references) |
+| **readme_has_title** | README carries the exact paper title |
+| **git_log_authors_match** | Commits from Dilshan Kumarathunga (1st author), Qilin Hu (2nd), Zhenman Fang (last) |
+| **description_matches_abstract** | GitHub description matches the FCCM paper title |
+| **owner_matches_affiliation** | SFU-HiAccel = Simon Fraser University, matching author affiliation |
+| **dates_fit** | Created 2025-03-21, consistent with FCCM 2025 timeline |
+
+### HLS scan result
+The HLS scan classifies it as **`tapa_only`** — it uses the TAPA framework (task-parallel HLS dialect) with 20 TAPA files and 1011 pragma/HLS-related lines. No standard standalone `.cpp` HLS source files were found, but the designs are HLS-based via TAPA.
+
+### No other repos reported
+- **Microsoft/SEAL** — appears only in the references (cited library, not a subject design)
+- **TAPA** (UCLA-VAST/tapa) — the paper uses it as a framework, but it's a separate published work, not a design the paper builds on or evaluates as a subject
+- All comparison baselines (NTTGen, Proteus, OpenNTT, etc.) are only compared numerically, per the guidelines

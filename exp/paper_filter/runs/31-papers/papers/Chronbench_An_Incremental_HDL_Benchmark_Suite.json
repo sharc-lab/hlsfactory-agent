@@ -1,0 +1,449 @@
+{
+  "paper_id": "Chronbench_An_Incremental_HDL_Benchmark_Suite",
+  "title": "Chronbench: An Incremental HDL Benchmark Suite",
+  "status": "ok",
+  "outcome": "repo_no_hls",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "ZakSN/chronbench",
+      "provenance": "own_in_paper",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "is available at https://github.com/ZakSN/chronbench.",
+          "source": "paper p.2",
+          "verified": true
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "1Available at: https://github.com/ZakSN/chronbench",
+          "source": "paper p.8",
+          "verified": true
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "# Chronbench: An Incremental HDL Benchmark Suite",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Zakary Nafziger zsnafzig@ece.ubc.ca",
+          "source": "git_log"
+        },
+        {
+          "type": "description_matches_abstract",
+          "quote": "timeseries HDL benchmarks",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 0,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "ZakSN/chronbench",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "ZakSN/chronbench",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2024-09-19T22:38:41Z",
+          "pushed_at": "2025-04-15T17:54:13Z",
+          "description": "timeseries HDL benchmarks",
+          "size_kb": 95
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Authors' own repository for the Chronbench benchmark suite. Contains Python scripts for converting git repos into incremental HDL benchmarks. No HLS designs; this is an HDL benchmark suite tool."
+    },
+    {
+      "repo_id": "DanieleParravicini/regex_coprocessor",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "regex_coprocessor benchmark in Chronbench.",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "paper_names_repo",
+          "quote": "regex_coprocessor: The first project selected for inclu-",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "An accelerator to which you can offload RE matching and that does not use backtracking",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 95,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "DanieleParravicini/regex_coprocessor",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "DanieleParravicini/regex_coprocessor",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "VHDL",
+          "created_at": "2020-04-21T19:11:38Z",
+          "pushed_at": "2021-09-18T12:36:35Z",
+          "description": "An accelerator to which you can offload RE matching and that does not use backtracking",
+          "size_kb": 67249
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Upstream repository for the regex_coprocessor Chronbench benchmark. The paper references it as DanieleParravicini/regex coprocessor (with a space); the actual repo name is regex_coprocessor (underscore). Written in VHDL, no HLS."
+    },
+    {
+      "repo_id": "openhwfoundation/cva5",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "distributed in the cva5 git",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "paper_names_repo",
+          "quote": "cva5: The next project selected for inclusion in the Chron-",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "The CORE-V CVA5 is an Application class 5-stage RISC-V CPU specifically targetting FPGA implementations.",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 12,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "openhwfoundation/cva5",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "openhwfoundation/cva5",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "SystemVerilog",
+          "created_at": "2022-02-08T19:12:27Z",
+          "pushed_at": "2026-11-15T22:14:18Z",
+          "description": "The CORE-V CVA5 is an Application class 5-stage RISC-V CPU specifically targetting FPGA implementations.",
+          "size_kb": 10071
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Upstream repository for the cva5 Chronbench benchmark. The paper cites the repo as openhwgroup/cva5 [30], but the repo has since been transferred to openhwfoundation/cva5 (GitHub redirects). Written in SystemVerilog, no HLS."
+    },
+    {
+      "repo_id": "ZipCPU/zipcpu",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "The zipcpu git",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "paper_names_repo",
+          "quote": "zipcpu: The Chronbench suite also includes a benchmark",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "A small, light weight, RISC CPU soft core",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 58,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "ZipCPU/zipcpu",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "ZipCPU/zipcpu",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Verilog",
+          "created_at": "2016-09-21T18:45:32Z",
+          "pushed_at": "2026-09-16T13:00:18Z",
+          "description": "A small, light weight, RISC CPU soft core",
+          "size_kb": 270038
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Upstream repository for the zipcpu Chronbench benchmark. A RISC CPU soft core written in Verilog. No HLS."
+    },
+    {
+      "repo_id": "jotego/jt12",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "contents_match_paper",
+          "quote": "FM sound source written in Verilog, fully compatible with YM2612, YM3438 (JT12), YM2203 (JT03) and YM2610 (JT10)",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 41,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "jotego/jt12",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "jotego/jt12",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Verilog",
+          "created_at": "2017-02-22T05:36:48Z",
+          "pushed_at": "2026-11-22T16:03:03Z",
+          "description": "FM sound source written in Verilog, fully compatible with YM2612, YM3438 (JT12), YM2203 (JT03) and YM2610 (JT10)",
+          "size_kb": 119335
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Upstream repository for the jt12 Chronbench benchmark. An FPGA emulation of Yamaha sound chips written in Verilog. No HLS."
+    },
+    {
+      "repo_id": "vortexgpgpu/vortex",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "vortex git repository [34], is used as the basis of the",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "paper_names_repo",
+          "quote": "vortex: Finally, the Vortex GPU [33], distributed in the",
+          "source": "paper p.5",
+          "verified": true
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Vortex: Extending the risc-v isa for gpgpu and 3d-graphics",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "sparse",
+        "files_scanned": 1114,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "source_kb": 10266,
+        "repo_id": "vortexgpgpu/vortex",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "vortexgpgpu/vortex",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Verilog",
+          "created_at": "2020-06-18T17:24:17Z",
+          "pushed_at": "2026-11-23T02:42:45Z",
+          "description": null,
+          "size_kb": 679554
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Upstream repository for the vortex Chronbench benchmark. An open-hardware GPGPU with RISC-V ISA, written in Verilog. No HLS."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "prepass",
+      "query": "prepass.json analysis of paper PDF",
+      "found": "Found direct link github.com/ZakSN/chronbench in paper body (pages 2 and 8). Also identified candidate references to DanieleParravicini/regex, ZipCPU/zipcpu, jotego/jt12, vortexgpgpu/vortex."
+    },
+    {
+      "step": "github_api",
+      "query": "repos/DanieleParravicini/regex_coprocessor",
+      "found": "Repo exists at DanieleParravicini/regex_coprocessor (underscore, not 'regex' as prepass guessed). Matches reference [26] in the paper."
+    },
+    {
+      "step": "github_api",
+      "query": "repos/openhwfoundation/cva5 (redirected from openhwgroup/cva5)",
+      "found": "Repo exists at openhwfoundation/cva5, was transferred from openhwgroup/cva5. Matches reference [30] in the paper."
+    }
+  ],
+  "summary": "Found the authors' own repository ZakSN/chronbench directly linked in the paper body (pages 2 and 8). The paper presents Chronbench, an incremental HDL benchmark suite, and builds on five upstream FPGA projects: DanieleParravicini/regex_coprocessor, openhwfoundation/cva5, ZipCPU/zipcpu, jotego/jt12, and vortexgpgpu/vortex \u2014 all identified from Section V of the paper and confirmed via GitHub API. None of the repos contain HLS designs (all classified as repo_no_hls), which is consistent with the paper's focus on HDL (Verilog/SystemVerilog/VHDL) rather than HLS.",
+  "problems": [
+    "jotego/jt12: paper_names_repo: link only appears in the references",
+    "jotego/jt12: paper_names_repo: link only appears in the references"
+  ],
+  "meta": {
+    "paper_id": "Chronbench_An_Incremental_HDL_Benchmark_Suite",
+    "title": "Chronbench: An Incremental HDL Benchmark Suite",
+    "authors": "Zakary Nafziger, Steven J.E. Wilton",
+    "year": 2025,
+    "venue": "2025 IEEE 33rd Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM)",
+    "doi": "10.1109/FCCM62733.2025.00045",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

@@ -1,0 +1,19 @@
+The result is written and validated. Here's a summary of my findings:
+
+## Summary
+
+**Paper**: "An Empirical Comparision of LLM-based Hardware Design and High-level Synthesis" (FPGA 2025, poster paper)
+
+**Result**: **No repository found** — `repos` list is empty.
+
+**Why**: This is a 1-page poster paper (listed as [W10] on Yun Liang's publications page) that describes an LLM-based prompting methodology for generating Verilog code. It compares three approaches (their LLM-guided prompting, the Cement framework, and Vitis HLS) on PolyBench benchmarks. The paper contains **no code availability statement, no GitHub links, and no footnotes with repository URLs**. It is a methodology/comparison study, not a software tool release.
+
+**What was searched**:
+- The full paper text (both the 1-page ACM abstract and a longer preprint from the authors' website)
+- GitHub repos by exact title, keywords ("LLM-based Hardware Design", "HLS comparison", "FPGA LLM", etc.) 
+- GitHub code search for the paper title, DOI, and partial title
+- Web search for paper + "github" / "code"
+- All 45 repos in the `pku-liang` organization (the authors' research group)
+- Personal repos of `uv-xiao` (Youwei Xiao) and `ericlyun` (Yun Liang)
+
+**Related but separate** (not for this paper): `pku-liang/OriGen` (Fan Cui's ICCAD 2024 paper on RTL code generation, cited as reference [5]), `pku-liang/Cement` (Youwei Xiao's FPGA 2024 HLS framework, used as a comparison baseline), and `pku-liang/hwe-bench` (Fan Cui's ICCAD 2026 paper on hardware bug repair).

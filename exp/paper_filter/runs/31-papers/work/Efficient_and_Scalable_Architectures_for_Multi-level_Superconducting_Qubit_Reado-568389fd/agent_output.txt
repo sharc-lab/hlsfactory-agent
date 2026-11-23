@@ -1,0 +1,11 @@
+The result is written to `output/result.json` and parses correctly.
+
+## Summary of findings
+
+**Paper**: "Efficient and Scalable Architectures for Multi-level Superconducting Qubit Readout" (DAC 2025)
+
+**No code repository found for this paper itself**. The paper contains no code availability statement, no GitHub links, and no URLs. The authors' personal pages list only PDF and BibTeX for this paper. The arXiv page has no linked code.
+
+**One third-party repo reported**: `satvikmaurya/HERQULES` — this is the code for the HERQULES baseline (ISCA 2023, reference [2]), which the current paper builds on and evaluates against. Two co-authors (Satvik Maurya, Chaithanya Naik Mude) are shared between both papers. The repo contains a Jupyter notebook with Python matched-filter code but **no HLS designs** (classified as `repo_no_hls`).
+
+The paper uses **hls4ml** as a tool for HLS synthesis but does not release its own HLS designs.

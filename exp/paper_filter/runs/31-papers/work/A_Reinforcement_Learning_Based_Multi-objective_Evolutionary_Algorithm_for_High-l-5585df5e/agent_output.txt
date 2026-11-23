@@ -1,0 +1,19 @@
+The result is valid JSON. Here's a summary of what I found:
+
+## Results
+
+**Primary finding: 23ydqian/QLearning_MOEA** (authors' own repo)
+- **Provenance**: `own_found_by_search` — no explicit link in the paper
+- **Evidence**:
+  - Repo name "QLearning_MOEA" matches the paper's system name "QL-MOEA"
+  - Owner "23ydqian" matches the first author's email prefix `23ydqian@stu.edu.cn`
+  - Code contains hyperparameters `alpha=0.8` and `gamma=0.5` matching the paper
+  - Commit author "qyd" corresponds to Yuda Qian
+  - Repo created 2024-10-29, predating paper submission (2025-02-04)
+- **HLS scan**: `repo_no_hls` — it's a Python DSE algorithm, not HLS hardware designs
+
+**Third-party repos found**:
+- `breagen/MachSuite` — benchmark suite used as evaluation subject (hls_tcl_only)
+- `lorenzoferretti/db4hls` — database of HLS synthesis results used as data source (repo_no_hls)
+
+The paper has no "code availability" statement; the repo was found via searching for the system name QL-MOEA.

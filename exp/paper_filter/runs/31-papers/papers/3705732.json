@@ -1,0 +1,156 @@
+{
+  "paper_id": "3705732",
+  "title": "A Speculative Loop Pipeline Framework with Accurate Path Modeling for High-Level Synthesis.",
+  "status": "ok",
+  "outcome": "hls_found",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "jianyicheng/HLS-benchmarks",
+      "provenance": "third_party_demo",
+      "outcome": "hls_found",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": true,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "We select nine benchmark programs from the open-source HLS benchmark set made publicly available by Cheng et al. [6].",
+          "source": "paper p.20",
+          "verified": true
+        },
+        {
+          "type": "name_matches_system",
+          "quote": "Benchmarks for High-Level Synthesis",
+          "source": "github_api"
+        },
+        {
+          "type": "description_matches_abstract",
+          "quote": "We select nine benchmark programs from the open-source HLS benchmark set made publicly available by Cheng et al.",
+          "source": "paper p.20",
+          "verified": true
+        }
+      ],
+      "scan": {
+        "classification": "hls_found",
+        "mode": "clone",
+        "files_scanned": 107,
+        "hls_files": 1,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 1,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 1,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [
+          "PNAnalyser/chaosNCG/src/chaosNCG.cpp"
+        ],
+        "truncated": false,
+        "repo_id": "jianyicheng/HLS-benchmarks",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "jianyicheng/HLS-benchmarks",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "C++",
+          "created_at": "2019-09-12T15:21:08Z",
+          "pushed_at": "2023-03-17T15:28:20Z",
+          "description": "Benchmarks for High-Level Synthesis",
+          "size_kb": 66
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Benchmark suite used as subject of the paper's evaluation; referenced as [6] via Zenodo DOI 10.5281/zenodo.3561115. The paper selects nine benchmark programs from this set."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "inspect_paper",
+      "query": "scan PDF for URLs, GitHub links, code availability statements",
+      "found": "No GitHub links or code availability statements found. Paper states 'As all the related works are not open-sourced' (p.24). Lab website (CityUHK-CALAS) has url_code explicitly empty."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Speculative Loop Pipeline",
+      "found": "kaist-flexml-lab/loopspec (unrelated), ulysse-lh/stage2024 (unrelated student project on SLP with UCLID5, predates paper)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "speculative loop pipelining HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "SLP HLS speculative loop pipeline",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_users",
+      "query": "Yuhan She",
+      "found": "GitHub user YuhanShe found with 2 repos (SE2_proj-1, test) both unrelated to HLS/SLP"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "exact paper title",
+      "found": "CityUHK-CALAS/cityuhk-calas.github.io (lab website with publication listing and news announcement, no code)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "yuhanshe in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "SLP HLS FPGA",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "speculative loop pipeline hls in:name,description,readme",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "SLP Autotuner",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "10.1145/3705732",
+      "found": "CityUHK-CALAS/cityuhk-calas.github.io (lab website publication listing), joshuadahlunr/IRSurvey (unrelated DOI listing)"
+    },
+    {
+      "step": "web_search",
+      "query": "exact paper title + github",
+      "found": "6 results - all pointing to ACM page, CityUHK scholars page, ResearchGate, CALAS group page - no GitHub repo found"
+    }
+  ],
+  "summary": "The paper's own code (SLP framework on LLVM infrastructure) was NOT found on GitHub or any public repository. No code availability statement appears in the paper, and the lab website explicitly leaves url_code empty. Searches for the authors (YuhanShe on GitHub, only has irrelevant repos), system name (SLP Autotuner, speculative loop pipeline), and paper title all returned no matching code repo. The paper benchmarks against jianyicheng/HLS-benchmarks, which is an open-source HLS benchmark set from which nine programs were selected for evaluation; this repo was confirmed to contain HLS designs.",
+  "problems": [],
+  "meta": {
+    "paper_id": "3705732",
+    "title": "A Speculative Loop Pipeline Framework with Accurate Path Modeling for High-Level Synthesis.",
+    "authors": "Yuhan She, Jierui Liu, Yanlong Huang, Ray C. C. Cheung, Hong Yan 0001",
+    "year": 2025,
+    "venue": "ACM Trans. Reconfigurable Technol. Syst.",
+    "doi": "10.1145/3705732",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "doi",
+    "ambiguous": false
+  }
+}

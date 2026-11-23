@@ -1,0 +1,12 @@
+The result is valid JSON. Here's the summary:
+
+**Result for "Banked Memories for Soft SIMT Processors"**: No GitHub repository found.
+
+**What I did:**
+1. **Read the full paper and its TeX source** — no code availability statement, no GitHub link, no footnote, no URL of any kind.
+2. **Searched GitHub repos** (12 queries, budget exhausted) — searched by paper title, system names ("eGPU", "soft SIMT processor", "soft GPGPU"), author names ("Martin Langhammer", "George Constantinides", "langhammer"), keywords ("banked memory HLS"), all returning 0 relevant results.
+3. **Searched GitHub code** (2 queries) — the paper title appears only in aggregator/archival repos (hacker news, arxiv-daily), not in any code repository.
+4. **Web search** (2 queries) — found the arxiv page, researchgate entry, and one unrelated repo (`lee-cheng-han/programmable-simt-asic`, a separate student project from 2026, not the authors' work).
+5. **Checked author profiles** — Martin Langhammer's GitHub (`mlanghamm`, `Langhammer`) has no SIMT/GPU repos; George Constantinides has no GitHub account found.
+
+**Why no repo exists**: The paper describes hardware designs (SIMT processor RTL on FPGAs, benchmarks in assembler) but does not publish them. The authors are from Altera (Intel) and Imperial College London — it's likely proprietary/alumni work without open-source release.

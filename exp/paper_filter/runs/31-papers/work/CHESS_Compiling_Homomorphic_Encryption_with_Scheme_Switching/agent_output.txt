@@ -1,0 +1,16 @@
+The result is saved. Here's a summary of what I found:
+
+**Paper:** CHESS: Compiling Homomorphic Encryption with Scheme Switching (IEEE HOST 2025)
+
+**Found repo:** `TrustworthyComputing/CHESS` — **the authors' own repository**
+
+**Evidence:**
+- **Paper link (p.333):** The Resources section states: "The artifacts of this work are available at https://github.com/TrustworthyComputing/CHESS."
+- **README title:** "CHESS: Compiling Homomorphic Encryption with Scheme Switching" — matches the paper title exactly
+- **README citation:** Contains the full BibTeX citation for the HOST'25 paper with the correct authors
+- **Git author:** All commits by "rostin" (rostin.shokri@gmail.com) — matches first author Rostin Shokri
+- **Dates:** Created 2025-03-11, consistent with the 2025 publication date
+
+**HLS scan:** `repo_no_hls` — no HLS designs found. This is expected since CHESS is a software compiler for homomorphic encryption (C++ with OpenFHE backend and MLIR frontend), not a hardware design.
+
+**No other repos to report:** The only other repo link found in the paper (`google/heir`) appears solely in the references as a cited related work, not as code the paper builds on or evaluates.

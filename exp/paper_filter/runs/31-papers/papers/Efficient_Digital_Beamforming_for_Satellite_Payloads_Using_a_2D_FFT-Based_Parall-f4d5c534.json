@@ -1,0 +1,125 @@
+{
+  "paper_id": "Efficient_Digital_Beamforming_for_Satellite_Payloads_Using_a_2D_FFT-Based_Parall-f4d5c534",
+  "title": "Efficient Digital Beamforming for Satellite Payloads Using a 2D FFT-Based Parallel Architecture",
+  "status": "ok",
+  "outcome": "not_found",
+  "needs_ocr": false,
+  "repos": [],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_paper",
+      "query": "Searched PDF for GitHub links, code availability statements, and URLs",
+      "found": "No GitHub links or code availability statements found in the paper body, footnotes, or references."
+    },
+    {
+      "step": "read_prepass",
+      "query": "prepass.json",
+      "found": "No candidate links identified."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "EGERTON digital beamforming",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "2DFFT beamforming",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "digital beamforming satellite FPGA",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "DFT beamforming FPGA",
+      "found": "1 result: Razia9372/approximate-dft-beamforming \u2014 unrelated (approximate DFT, not 2D FFT; different author; created Oct 2026)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Benes permutation network HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "EGERTON ESA beamforming",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "2D FFT beamforming FPGA HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "digital beamforming FPGA Vitis HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "EGERTON HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "DFT beamforming satellite",
+      "found": "budget_exhausted (attempted 12 searches)"
+    },
+    {
+      "step": "author_profile_check",
+      "query": "Checked GitHub profiles of authors rakeshp2608 (Rakesh Palisetty) and lmgarcess (Luis M. Garc\u00e9s-Socarr\u00e1s)",
+      "found": "rakeshp2608 has repos 'Classical-ML-models-on-FPGA' and 'ECE374' \u2014 unrelated. lmgarcess has 'digital-namecard', 'PYNQ_RFSOC_Workshop_ZCU111', 'XIL_XSGImgLib' \u2014 unrelated to this paper."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "'Efficient Digital Beamforming for Satellite Payloads'",
+      "found": "Ruichen0424/ic-paper-explorer \u2014 a paper listing index, not the authors' code (budget exhausted)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "'10.1109/ISCAS56072.2025.11043196'",
+      "found": "Ruichen0424/ic-paper-explorer \u2014 same paper listing (budget exhausted)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "EGERTON beamforming",
+      "found": "29 results but all noise (references to EGERTON in unrelated papers/READMEs)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "2DFFT beamforming FPGA",
+      "found": "8 results but all noise (bibliographic references)"
+    },
+    {
+      "step": "web_search",
+      "query": "Efficient Digital Beamforming for Satellite Payloads Using a 2D FFT-Based Parallel Architecture github",
+      "found": "No GitHub repos. Results: ORBilu paper page, ESA RNC project page, SAH paper aggregator."
+    },
+    {
+      "step": "web_search",
+      "query": "EGERTON ESA project 2D FFT beamforming github repository",
+      "found": "No GitHub repos. Results: ESA project page (no code), ORBilu PDFs, related papers."
+    },
+    {
+      "step": "web_check",
+      "query": "Checked ESA RNC project page and EGERTON project page",
+      "found": "No links to public code repositories found on these pages."
+    }
+  ],
+  "summary": "This paper (ISCAS 2025) presents a digital beamforming architecture using 2D FFT for satellite payloads, with FPGA implementation using Vivado HLS and VITIS HLS on a VCU129EK board. No code availability statement appears in the paper. Thorough searching across GitHub (repo search, code search, author profile checks) and web search found no repository associated with this work. The paper is part of the ESA EGERTON project, whose public pages also do not link to any source code. I am confident this paper does not have a publicly available GitHub repository.",
+  "problems": [],
+  "meta": {
+    "paper_id": "Efficient_Digital_Beamforming_for_Satellite_Payloads_Using_a_2D_FFT-Based_Parall-f4d5c534",
+    "title": "Efficient Digital Beamforming for Satellite Payloads Using a 2D FFT-Based Parallel Architecture",
+    "authors": "Luis M. Garc\u00e9s-Socarr\u00e1s, Jorge L. Gonz\u00e1lez-Rios, Rakesh Palisetty, Raudel Cuiman, Vu Nguyen Ha, Juan A. V\u00e1squez-Peralvo, Geoffrey Eappen, Ti Ti Nguyen, Juan C. M. Duncan, Symeon Chatzinotas, Bj\u00f6rn Ottersten, Calos L. Marcos, Adem Coskun, Stephen King, Salvatore D\u2019Addio, Piero Angeletti",
+    "year": 2025,
+    "venue": "2025 IEEE International Symposium on Circuits and Systems (ISCAS)",
+    "doi": "10.1109/ISCAS56072.2025.11043196",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

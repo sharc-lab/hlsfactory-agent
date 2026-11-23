@@ -1,0 +1,111 @@
+{
+  "paper_id": "AutoNTT_Automatic_Architecture_Design_and_Exploration_for_Number_Theoretic_Trans-906c9404",
+  "title": "AutoNTT: Automatic Architecture Design and Exploration for Number Theoretic Transform Acceleration on FPGAs",
+  "status": "ok",
+  "outcome": "already_known",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "SFU-HiAccel/AutoNTT",
+      "provenance": "own_in_paper",
+      "outcome": "already_known",
+      "confidence": "high",
+      "flags": [],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "AutoNTT will be released soon at https://github.com/SFU-HiAccel/AutoNTT.",
+          "source": "paper p.1",
+          "verified": true
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "AutoNTT: Automatic Architecture Design and Exploration for Number Theoretic Transform Acceleration on FPGAs",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Dilshan Kumarathunga, Qilin (ha29), Zhenman Fang",
+          "source": "git_log"
+        },
+        {
+          "type": "description_matches_abstract",
+          "quote": "[FCCM 2025 Best Paper Nominee] AutoNTT: Automatic Architecture Design and Exploration for Number Theoretic Transform Acceleration on FPGAs",
+          "source": "github_api"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "Created 2025-03-21, pushed 2025-07-16",
+          "source": "github_api"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "SFU-HiAccel (Simon Fraser University - High Acceleration Lab) matches author affiliation: Simon Fraser University",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "tapa_only",
+        "mode": "clone",
+        "files_scanned": 30,
+        "hls_files": 0,
+        "tapa_files": 20,
+        "weak_files": 10,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 20,
+          "vitis": 10,
+          "vitis_weak": 10,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 1011,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "SFU-HiAccel/AutoNTT",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "SFU-HiAccel/AutoNTT",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2025-03-21T06:40:34Z",
+          "pushed_at": "2025-07-16T19:14:02Z",
+          "description": "[FCCM 2025 Best Paper Nominee] AutoNTT: Automatic Architecture Design and Exploration for Number Theoretic Transform Acceleration on FPGAs",
+          "size_kb": 852
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Authors' own repo linked in the paper abstract. Contains TAPA-based HLS designs for NTT acceleration on FPGAs. The HLS scan classifies it as tapa_only (uses TAPA framework for task-parallel HLS). The repo is not a fork, was created right before the FCCM 2025 submission, and includes commits from the paper's first author (Dilshan Kumarathunga), second author (Qilin Hu), and last author (Zhenman Fang)."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "gh_api repos/SFU-HiAccel/AutoNTT",
+      "query": "Prepass candidate verification",
+      "found": "SFU-HiAccel/AutoNTT - exists, 14 stars, Python, created 2025-03-21"
+    }
+  ],
+  "summary": "Found the authors' own repo SFU-HiAccel/AutoNTT directly linked in the paper abstract (page 1) with 'AutoNTT will be released soon at https://github.com/SFU-HiAccel/AutoNTT'. The repo exists, contains TAPA-based HLS designs, has commits from authors Dilshan Kumarathunga, Qilin Hu, and Zhenman Fang, and its description matches the paper title exactly. The HLS scan classifies it as tapa_only (uses TAPA framework). The paper also builds on the TAPA framework (UCLA-VAST/tapa, cited as [32]), but this is a separate published framework and not reported as a third-party design repo per the guidelines. No other repos were identified as designs the paper builds on or evaluates with as subjects. Confidence is very high: the link is explicit in the paper body (not just references), and all repo metadata aligns perfectly.",
+  "problems": [],
+  "meta": {
+    "paper_id": "AutoNTT_Automatic_Architecture_Design_and_Exploration_for_Number_Theoretic_Trans-906c9404",
+    "title": "AutoNTT: Automatic Architecture Design and Exploration for Number Theoretic Transform Acceleration on FPGAs",
+    "authors": "Dilshan Kumarathunga, Qilin Hu, Zhenman Fang",
+    "year": 2025,
+    "venue": "2025 IEEE 33rd Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM)",
+    "doi": "10.1109/FCCM62733.2025.00024",
+    "group": "with_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "repos": [
+    {
+      "repo_id": "EPFL-LAP/dynamatic",
+      "provenance": "third_party_demo",
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "CRUSH has been integrated into the Dynamatic HLS compiler (https://github.com/EPFL-LAP/dynamatic).",
+          "source": "paper p.1"
+        },
+        {
+          "type": "paper_names_repo",
+          "quote": "CRUSH has been integrated into the Dynamatic HLS compiler (https://github.com/EPFL-LAP/dynamatic).",
+          "source": "paper p.12"
+        },
+        {
+          "type": "readme_has_doi_or_arxiv",
+          "quote": "Dynamatic uses a resource sharing strategy based on ASPLOS'25 (https://dl.acm.org/doi/10.1145/3669940.3707273).",
+          "source": "readme (OptimizationsAndDirectives.md)"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Jiahui Xu is a frequent committer to the Dynamatic repo (e.g., '32f4415e6f [Sharing] Move Credit-Based Sharing Out from Experimental (#737)').",
+          "source": "github_api"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Crush.cpp implements the credit-based resource sharing algorithm described in the paper.",
+          "source": "repo_contents (lib/Transforms/ResourceSharing/Crush.cpp)"
+        }
+      ],
+      "scan": {
+        "classification": "hls_found",
+        "mode": "sparse",
+        "files_scanned": 676,
+        "hls_files": 460,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 460
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [
+          "experimental/include/experimental/Analysis/GSAAnalysis.h",
+          "experimental/include/experimental/Analysis/Passes.h",
+          "experimental/include/experimental/Support/BlifReader.h",
+          "experimental/include/experimental/Support/CFGAnnotation.h",
+          "experimental/include/experimental/Support/CreateSmvFormalTestbench.h",
+          "experimental/include/experimental/Support/CutlessMapping.h",
+          "experimental/include/experimental/Support/FormalProperty.h",
+          "experimental/include/experimental/Support/FtdImplementation.h",
+          "experimental/include/experimental/Support/FtdSupport.h",
+          "experimental/include/experimental/Support/FtdSuppression.h"
+        ],
+        "truncated": false,
+        "source_kb": 4592,
+        "repo_id": "EPFL-LAP/dynamatic",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "EPFL-LAP/dynamatic",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "VHDL",
+          "created_at": "2022-11-28T13:54:10Z",
+          "pushed_at": "2026-11-22T22:32:03Z",
+          "description": "DHLS (Dynamic High-Level Synthesis) compiler based on MLIR ",
+          "size_kb": 830076
+        },
+        "cap_kb": 307200
+      },
+      "notes": "CRUSH has been integrated into the Dynamatic HLS compiler (the project this paper builds on). The CRUSH source code lives within this repo (lib/Transforms/ResourceSharing/Crush.cpp). The paper's own peer-reviewed artifact is on Zenodo (10.5281/zenodo.14017399), not as a separate GitHub repo. Dynamatic is a pre-existing open-source HLS compiler from EPFL-LAP that the authors extended with the CRUSH resource sharing strategy."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {"step": "gh_search_repos", "query": "CRUSH HLS functional unit sharing", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "CRUSH credit-based sharing dataflow", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "CRUSH HLS", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "CRUSH: A Credit-Based Approach in:name", "found": "0 results"},
+    {"step": "gh_search_code", "query": "Credit-Based Approach for Functional Unit Sharing in Dynamically Scheduled HLS", "found": "10 items (only paper-listing repos, no actual code repos)"},
+    {"step": "gh_search_code", "query": "10.5281/zenodo.14017399", "found": "4 items (Jiahui17.github.io, light-hls benchmark ref)"},
+    {"step": "gh_search_code", "query": "10.1145/3669940.3707273", "found": "30 items (includes EPFL-LAP/dynamatic docs)"}
+  ],
+  "summary": "This paper (CRUSH) presents a credit-based resource sharing strategy for dynamically scheduled HLS. The authors' own code artifact is on Zenodo (10.5281/zenodo.14017399), not as a standalone GitHub repo. However, CRUSH has been integrated into the Dynamatic HLS compiler at github.com/EPFL-LAP/dynamatic, which is the pre-existing open-source HLS compiler that the paper builds on and extends. The Dynamatic repo contains Crush.cpp implementing the algorithm, and the paper body (abstract and conclusion) explicitly links to it. Jiahui Xu (first author) is an active committer to the repo. Benchmark designs used in the evaluation come from standard benchmark suites (Polybench), not separate repos."
+}

@@ -1,0 +1,39 @@
+{
+  "pdf": "InTAR_Inter-Task_Auto-Reconfigurable_Accelerator_Design_for_High_Data_Volume_Variation_in_DNNs.pdf",
+  "title": "InTAR: Inter-Task Auto-Reconfigurable Accelerator Design for High Data Volume Variation in DNNs",
+  "pages": 10,
+  "text_chars": 54856,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "OswaldHe/InTAR",
+      "raws": [
+        "github.com/OswaldHe/InTAR"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        1
+      ],
+      "context": "vious acceler- ators focus on two types of fixed task execution patterns: dataflow (also called spatial) [6], [7] or sequential (also called 1https://github.com/OswaldHe/InTAR temporal) executions [8]\u2013[11]. For dataflow executions, each processing element (PE) specializes in a single task. Data is streamed through FIFOs con",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "OswaldHe/InTAR",
+        "renamed_to": null,
+        "language": "C++",
+        "created": "2023-10-25T07:05:16Z",
+        "pushed": "2025-03-26T04:25:50Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 1186873,
+        "stars": 15,
+        "description": "[FCCM 2025] Code Samples for InTAR: Inter-Task Auto-Reconfigurable Accelerator Design for High Data Volume Variation in DNNs"
+      }
+    }
+  ],
+  "profiles": []
+}

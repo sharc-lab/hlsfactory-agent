@@ -1,0 +1,16 @@
+The result is written and validated. Here's a summary:
+
+## Found repo: `Lucaz97/Agentic-HLS`
+
+**Provenance**: `own_found_by_search` — no explicit URL in the paper (double-blind submission used anonymous.4open.science), but I identified it through GitHub search and confirmed it's the authors' code.
+
+**Evidence**:
+- **GitHub user `Lucaz97`** matches first author **Luca Collini** (PhD student in ECE at NYU Tandon)
+- **Commit author** is "Luca"
+- **Repo name** `Agentic-HLS` matches the paper's "agentic HLS optimization framework"
+- **Input benchmarks** (`aes`, `present`, `sha256`, `kmp`, `nw`, `filter`) exactly match Table I in the paper
+- **Output logs** (`run_aes_deepseek-chat_*.log`, `run_aes_deepseek-reasoner_*.log`) match the paper's experiments with DeepSeek-V3, DeepSeek-R1, and o3-mini
+- Created **2025-03-05**, consistent with the ICLAD 2025 timeframe
+- Paper states: *"Code, benchmarks, and raw results are provided here"* (p.3) and *"We open-source our framework"* (p.7)
+
+**HLS scan**: 336 HLS files found (233 Catapult dialect, 272 Vitis dialect) — conclusively contains HLS designs.

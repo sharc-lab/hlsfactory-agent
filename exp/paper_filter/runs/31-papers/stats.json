@@ -1,0 +1,38 @@
+{
+  "papers": 31,
+  "by_status": {
+    "ok": 31
+  },
+  "by_outcome": {
+    "hls_found": 7,
+    "needs_review": 2,
+    "not_found": 13,
+    "repo_no_hls": 6,
+    "already_known": 3
+  },
+  "needs_ocr": 0,
+  "handoff_repos": 8,
+  "review_rows": 3,
+  "papers_with_problems": 6,
+  "by_group": {
+    "with_repo": {
+      "papers": 3,
+      "by_outcome": {
+        "hls_found": 1,
+        "already_known": 2
+      },
+      "with_handoff": 1
+    },
+    "without_repo": {
+      "papers": 28,
+      "by_outcome": {
+        "hls_found": 6,
+        "needs_review": 2,
+        "not_found": 13,
+        "repo_no_hls": 6,
+        "already_known": 1
+      },
+      "with_handoff": 6
+    }
+  }
+}

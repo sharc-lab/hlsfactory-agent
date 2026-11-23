@@ -1,0 +1,89 @@
+{
+  "repos": [
+    {
+      "repo_id": "DARClab-UTD/S2CBench",
+      "provenance": "third_party_demo",
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "These designs were taken from the open source Synthesizable SystemC Benchmark suite (S2CBench) [35].",
+          "source": "paper p.5"
+        }
+      ],
+      "scan": null,
+      "notes": "Benchmark suite used for evaluating the proposed ADVISOR flow. In known_repos.json; scan skipped as per instructions."
+    },
+    {
+      "repo_id": "ehw-fit/evoapproxlib",
+      "provenance": "third_party_demo",
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "For this we use EvoApproxLib [34] an open-source library of approximated adders and multipliers.",
+          "source": "paper p.5"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 978,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "ehw-fit/evoapproxlib",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "ehw-fit/evoapproxlib",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Verilog",
+          "created_at": "2018-12-20T11:37:22Z",
+          "pushed_at": "2026-01-14T14:40:32Z",
+          "description": "Library of approximate arithmetic circuits",
+          "size_kb": 58039
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Open-source library of approximate adders and multipliers used in the FU approximation step of the ADVISOR flow. No HLS content."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {"step": "gh_search_repos", "query": "ADVISOR HLS", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "approximate computing HLS design space exploration", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "ADVISOR approximate computing", "found": "1 unrelated result (romitsutariya/aws-kinesis-shard-advisor)"},
+    {"step": "gh_search_repos", "query": "carrion schaefer", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "parchamdar", "found": "3 unrelated personal repos"},
+    {"step": "gh_search_repos", "query": "S2CBench", "found": "4 results, including DARClab-UTD/S2CBench and schaferb/S2CBench"},
+    {"step": "gh_search_repos", "query": "EvoApproxLib", "found": "4 results, including ehw-fit/evoapproxlib"},
+    {"step": "gh_search_repos", "query": "ADVISOR approximate computing high-level synthesis", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "ADVISOR DAC 2025", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "ADVISOR approximate", "found": "7 unrelated results"},
+    {"step": "gh_search_code", "query": "\"ADVISOR: Approximate Computing-frienDly High-LeVel Synthesis DesIgn Space ExplORer\"", "found": "10 results (paper listing databases, no code repos)"},
+    {"step": "gh_search_code", "query": "\"Approximation Friendly Index\"", "found": "0 results"},
+    {"step": "gh_api", "query": "users/schaferb/repos?per_page=100", "found": "user 'schaferb' (B. Carrion Schaefer) has 2 repos: dse_attr_fus (2015, unrelated) and S2CBench (2015)"},
+    {"step": "gh_api", "query": "users/BCarrionSchaefer/repos?per_page=100", "found": "404 Not Found"},
+    {"step": "web_search", "query": "ADVISOR Approximate Computing High-Level Synthesis Design Space Explorer github", "found": "No GitHub repo found; only paper links and a LinkedIn presentation post"},
+    {"step": "web_search", "query": "ADVISOR DAC 2025 approximate computing HLS", "found": "DARClab publications page listing the paper; no code link"},
+    {"step": "web_search", "query": "darclab ADVISOR github code", "found": "DARClab org on GitHub (mostly drone-related); DARCLabHao/DSEframe (HLS DSE framework, predates paper); no ADVISOR repo found"}
+  ],
+  "summary": "The ADVISOR paper does not provide any link to the authors' own code repository, and no GitHub repository matching the ADVISOR tool was found despite extensive searching across repo names, code content, and web sources. The paper's GitHub repo search budget (12) and code search budget (4) were fully exhausted. The paper's experimental evaluation uses S2CBench benchmarks (DARClab-UTD/S2CBench, in known_repos.json) and the EvoApproxLib approximate arithmetic library (ehw-fit/evoapproxlib), both reported as third-party. The ADVISOR methodology itself involves commercial EDA tools (NEC CyberWorkBench for HLS, proprietary logic synthesis) and is not released as open-source."
+}

@@ -1,0 +1,68 @@
+{
+  "pdf": "AutoClock_Automated_Clock_Management_for_Power-Efficient_HLS_Designs_on_FPGAs.pdf",
+  "title": "AutoClock: Automated Clock Management for Power-Efficient HLS Designs on FPGAs",
+  "pages": 7,
+  "text_chars": 38759,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "MasLiang/AutoClock",
+      "raws": [
+        "github.com/MasLiang/AutoClock"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        2
+      ],
+      "context": "source clock resource management framework that addresses a significant gap in current HLS tools. The open-source repository is available at: https://github.com/MasLiang/AutoClock. \u2022 By formulating the resource binding of clock generation as an integer linear programming (ILP) problem featuring iterative constraint refinement, a",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "MasLiang/AutoClock",
+        "renamed_to": null,
+        "language": "Tcl",
+        "created": "2024-04-22T02:03:43Z",
+        "pushed": "2025-05-07T16:07:13Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 1789,
+        "stars": 7,
+        "description": null
+      }
+    },
+    {
+      "repo_id": "PyHDI/Pyverilog",
+      "raws": [
+        "github.com/PyHDI/Pyverilog"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        7
+      ],
+      "context": "l synthesis user guide (ug1399).\u201d [Online]. https://docs. amd.com/r/en-US/ug1399-vitis-hls/pragma-HLS-allocation. [18] \u201cPyverilog.\u201d [Online]. https://github.com/PyHDI/Pyverilog/. [19] \u201cXilinx. 2022. vitis accelerated libraries.\u201d [Online]. https://github.com/ Xilinx/Vitis Libraries/. [20] Y. Zhou, U. Gupta, S. Dai, R. Zhao, N",
+      "repaired": false,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "PyHDI/Pyverilog",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2013-12-02T18:53:03Z",
+        "pushed": "2024-06-15T15:44:30Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 718,
+        "stars": 801,
+        "description": "Python-based Hardware Design Processing Toolkit for Verilog HDL"
+      }
+    }
+  ],
+  "profiles": []
+}

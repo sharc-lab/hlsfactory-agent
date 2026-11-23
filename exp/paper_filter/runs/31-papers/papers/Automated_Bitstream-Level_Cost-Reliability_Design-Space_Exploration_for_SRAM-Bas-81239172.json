@@ -1,0 +1,379 @@
+{
+  "paper_id": "Automated_Bitstream-Level_Cost-Reliability_Design-Space_Exploration_for_SRAM-Bas-81239172",
+  "title": "Automated Bitstream-Level Cost-Reliability Design-Space Exploration for SRAM-Based FPGAs",
+  "status": "ok",
+  "outcome": "repo_no_hls",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "byuccl/bfat",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "2https://github.com/byuccl/bfat, accessed 2025-05-21",
+          "source": "paper p.2",
+          "verified": true
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 1,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "byuccl/bfat",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "byuccl/bfat",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2022-06-29T21:04:59Z",
+          "pushed_at": "2023-07-17T15:11:54Z",
+          "description": "Bitstream Fault Analysis Tool",
+          "size_kb": 783
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Third-party tool used by the paper's approach for static bitstream criticality analysis. Referenced in footnote 2 on page 2."
+    },
+    {
+      "repo_id": "f4pga/prjxray",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "increasing availability of (third-party) bitstream documentation for popular FPGA technologies, including AMD's popular 7 Series3 devices",
+          "source": "paper p.2",
+          "verified": true
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "3https://github.com/f4pga/prjxray, accessed 2025-05-21",
+          "source": "paper p.2",
+          "verified": true
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "5https://github.com/f4pga/prjxray, accessed 2025-05-21",
+          "source": "paper p.5",
+          "verified": true
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 335,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "f4pga/prjxray",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "f4pga/prjxray",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2017-12-16T00:16:19Z",
+          "pushed_at": "2025-06-05T15:15:54Z",
+          "description": "Documenting the Xilinx 7-series bit-stream format.",
+          "size_kb": 6823
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Third-party open-source bitstream documentation project for Xilinx 7-series FPGAs. Used in the paper's proof-of-concept implementation for bitstream analysis. Referenced in footnotes 3 and 5."
+    },
+    {
+      "repo_id": "olofk/serv",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "Adler32, and SERV allow demonstration and evaluation of the proposed approach in terms of larger population size and exhaustive fault injection runs",
+          "source": "paper p.7",
+          "verified": true
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "8https://github.com/olofk/serv, accessed 2025-05-21",
+          "source": "paper p.7",
+          "verified": true
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 21,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "olofk/serv",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "olofk/serv",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Verilog",
+          "created_at": "2018-10-31T07:15:00Z",
+          "pushed_at": "2026-08-25T12:38:55Z",
+          "description": "SERV - The SErial RISC-V CPU",
+          "size_kb": 13097
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Third-party RISC-V CPU design used as one of the five case-study benchmarks for evaluating the paper's DSE approach. Referenced in footnote 8 on page 7."
+    },
+    {
+      "repo_id": "stnolting/neorv32",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "low",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 114,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "stnolting/neorv32",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "stnolting/neorv32",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "VHDL",
+          "created_at": "2020-06-23T15:29:41Z",
+          "pushed_at": "2026-11-22T15:08:20Z",
+          "description": "\ud83d\udda5\ufe0f A small, customizable and extensible MCU-class 32-bit RISC-V soft-core CPU and microcontroller-like SoC written in platform-independent VHDL.",
+          "size_kb": 254165
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Third-party RISC-V processor used as the largest case-study design for evaluating the paper's DSE approach. Referenced via project page (panda.dei.polimi.it) in footnote 7; the primary GitHub repository is stnolting/neorv32."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_prepass",
+      "query": "prepass.json",
+      "found": "3 candidate repos: byuccl/bfat, f4pga/prjxray, olofk/serv"
+    },
+    {
+      "step": "read_paper",
+      "query": "full PDF text",
+      "found": "No code availability statement. Four GitHub URLs found as footnotes: byuccl/bfat, f4pga/prjxray (x2), olofk/serv. One non-GitHub URL for NEORV32."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'\"Automated Bitstream-Level Cost-Reliability Design-Space Exploration\" in:name'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'design space exploration TMR FPGA cost reliability in:name'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'TMR DSE FPGA exploration in:name language:Python'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'partial TMR DSE FPGA bitstream in:name'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'bitstream DSE TMR FPGA in:name'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'cost reliability design space exploration fpga in:name'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'\"Automated Bitstream-Level\" in:readme'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'partial TMR genetic algorithm fpga in:name'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'TMR DSE FPGA module in:name'",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'nsga2 TMR module fpga in:name'",
+      "found": "budget exhausted"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'bitstream fault analysis tool bfat in:name'",
+      "found": "budget exhausted"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'102.1109/TCAD.2025.3573225 in:readme'",
+      "found": "budget exhausted"
+    },
+    {
+      "step": "gh_api",
+      "query": "search/users?q=Christian+Fibich+in:name",
+      "found": "cfib user found"
+    },
+    {
+      "step": "gh_api",
+      "query": "users/cfib/repos?per_page=100",
+      "found": "No repo matching this paper found in cfib's repos"
+    },
+    {
+      "step": "gh_api",
+      "query": "search/users?q=Martin+Horauer+in:name",
+      "found": "mhorauer user found"
+    },
+    {
+      "step": "gh_api",
+      "query": "users/mhorauer/repos?per_page=100",
+      "found": "No repo matching this paper found in mhorauer's repos"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "'\"Automated Bitstream-Level Cost-Reliability Design-Space Exploration\"'",
+      "found": "2 results in aayejinpeng/survey CSV file (bibliographic data only)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "'\"10.1109/TCAD.2025.3573225\"'",
+      "found": "2 results in aayejinpeng/survey CSV file (bibliographic data only)"
+    },
+    {
+      "step": "web_search",
+      "query": "'\"Automated Bitstream-Level Cost-Reliability Design-Space Exploration\" github'",
+      "found": "Research group page listing publications; no code repository for this paper"
+    },
+    {
+      "step": "web_search",
+      "query": "'\"Automated Bitstream-Level Cost-Reliability Design-Space Exploration\" source code repository'",
+      "found": "No source code repository found for this paper"
+    }
+  ],
+  "summary": "The paper (Fibich et al., TCAD 2025) does not provide a code availability statement or link to the authors' own implementation. No GitHub repository was found in the GitHub profiles of the authors (cfib, mhorauer) or through extensive searches. Four third-party GitHub repositories are referenced in footnotes and used by the paper: byuccl/bfat (Bitstream Fault Analysis Tool) and f4pga/prjxray (bitstream documentation) are tools the approach builds on; olofk/serv (SERV RISC-V CPU) and stnolting/neorv32 (NEORV32 RISC-V CPU) are case-study benchmark designs. None of these repos contain HLS designs.",
+  "problems": [
+    "byuccl/bfat: paper_names_repo: quote not found in the PDF text",
+    "stnolting/neorv32: paper_names_repo: quote not found in the PDF text",
+    "stnolting/neorv32: paper_names_repo: quote not found in the PDF text"
+  ],
+  "meta": {
+    "paper_id": "Automated_Bitstream-Level_Cost-Reliability_Design-Space_Exploration_for_SRAM-Bas-81239172",
+    "title": "Automated Bitstream-Level Cost-Reliability Design-Space Exploration for SRAM-Based FPGAs",
+    "authors": "Christian Fibich, Martin Horauer, Roman Obermaisser",
+    "year": 2025,
+    "venue": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems",
+    "doi": "10.1109/TCAD.2025.3573225",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

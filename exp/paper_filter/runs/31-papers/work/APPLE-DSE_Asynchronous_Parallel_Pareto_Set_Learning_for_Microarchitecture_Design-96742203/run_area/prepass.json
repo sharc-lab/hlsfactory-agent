@@ -1,0 +1,39 @@
+{
+  "pdf": "APPLE-DSE_Asynchronous_Parallel_Pareto_Set_Learning_for_Microarchitecture_Design_Space_Exploration.pdf",
+  "title": "APPLE-DSE: Asynchronous Parallel Pareto Set Learning for Microarchitecture Design Space Exploration",
+  "pages": 14,
+  "text_chars": 66147,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "riscv-software-src/riscv-tests",
+      "raws": [
+        "github.com/riscv-software-src/riscv-tests"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        7
+      ],
+      "context": "m to assess our processor\u2019s capabilities. The average CPI of benchmarks is taken as the performance metric. Finally, Cadence Genus Synthesis 1https://github.com/riscv-software-src/riscv-tests 2https://www.ice.rwth-aachen.de/research/tools-projects/closed- projects/dspstone 3https://netlib.org/benchmark/whetstone.c Authorized licensed use l",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "riscv-software-src/riscv-tests",
+        "renamed_to": null,
+        "language": "Assembly",
+        "created": "2013-04-24T08:05:07Z",
+        "pushed": "2026-10-19T22:08:41Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 3166,
+        "stars": 1264,
+        "description": null
+      }
+    }
+  ],
+  "profiles": []
+}

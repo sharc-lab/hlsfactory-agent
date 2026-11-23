@@ -1,0 +1,16 @@
+The result is valid JSON. Here's a summary of my findings:
+
+**Paper**: "A Systematic Methodology for Time-multiplexing Algorithms on a Reconfigurable System-on-Chip" (ISCAS 2025)
+
+**Result: No repository found.** The paper contains no code availability statement, no GitHub links, and no footnotes with repository URLs. It uses HLS (High-Level Synthesis) extensively as part of its proposed methodology — HLS is used to generate IP cores, and the authors restructured HLS source code from their prior work (reference [10]) — but no repository is linked or named.
+
+**Search summary**:
+- Read the full PDF text: no URLs, no "code available" statements
+- prepass.json: empty candidates
+- GitHub repo search (12 queries): searched for system name "ESP-PF", algorithm name, authors, keywords — nothing relevant found
+- GitHub code search (4 queries): found only citation databases and literature review repos, not the authors' code
+- Web search (3 queries via Exa): found only academic pages (ORCID, Macquarie University profiles, DBLP, DOI), no repositories
+- Author GitHub profiles checked: `VDucDung` and `ducdung8491` (lead author's likely accounts) have no FPGA/HLS/SoC projects
+- Organization repos checked (Macquarie University, IIIT Delhi): no relevant repos
+
+The paper is not a survey/position paper (`no_artifact: false`) since it presents a concrete methodology and implementation results, but I could not find any associated GitHub repository.

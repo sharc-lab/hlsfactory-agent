@@ -1,0 +1,8 @@
+The output is valid JSON. Here's a summary of the findings:
+
+**Repo found: `zhaijiaqi/AccelES`** (provenance: `own_found_by_search`)
+
+- **Evidence**: The owner `zhaijiaqi` matches first author **Jiaqi Zhai**; the repo name matches the system name **AccelES**; the README contains the exact paper title; the single commit author is `zhaijiaqi`; the README lists **Vitis_HLS 2023.2** and **Xilinx Alveo U280** platform matching the paper's FPGA setup; created Dec 2024 (before HPCA 2025).
+- **HLS scan**: **`hls_found`** — 5 Vitis HLS files detected with 213 HLS pragmas, implementing the FPGA accelerator (Ultra-CSR SpMV cores, decoder, etc.)
+- **Paper**: No explicit code availability link is present in the paper body; the only GitHub URLs are in the reference list (ing-bank/sparse dot topn and Xilinx/Vitis Libraries), neither of which the paper builds on as a subject design.
+- **No third-party repos**: The paper builds on standard FPGA toolchains (Vitis HLS, Alveo U280), not other projects' code repositories.

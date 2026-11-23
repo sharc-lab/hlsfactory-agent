@@ -1,0 +1,48 @@
+{
+  "pdf": "AccelES_Accelerating_Top-K_SpMV_for_Embedding_Similarity_via_Low-bit_Pruning.pdf",
+  "title": "AccelES: Accelerating Top-K SpMV for Embedding Similarity via Low-bit Pruning",
+  "pages": 14,
+  "text_chars": 72187,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "ing-bank/sparse",
+      "raws": [
+        "github.com/ing-bank/sparse"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        13
+      ],
+      "context": "ing-bank/sparse dot topn: Python package to accelerate the sparse matrix multiplication and top-n similarity selection. [Online]. Available: https://github.com/ing-bank/sparse dot topn [2] Vitis libraries/sparse/l2/benchmarks at main \u00b7 xilinx/vitis libraries. [Online]. Available: https://github.com/Xilinx/Vitis Libraries/tr",
+      "repaired": false,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": false
+      }
+    },
+    {
+      "repo_id": "Xilinx/Vitis",
+      "raws": [
+        "github.com/Xilinx/Vitis"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        13
+      ],
+      "context": ": https://github.com/ing-bank/sparse dot topn [2] Vitis libraries/sparse/l2/benchmarks at main \u00b7 xilinx/vitis libraries. [Online]. Available: https://github.com/Xilinx/Vitis Libraries/tree/main/ sparse/L2/benchmarks [3] M. M. Afsar, T. Crump, and B. Far, \u201cReinforcement learning based recommender systems: A survey,\u201d ACM Co",
+      "repaired": false,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": false
+      }
+    }
+  ],
+  "profiles": []
+}

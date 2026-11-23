@@ -1,0 +1,43 @@
+{
+  "pdf": "3669940.3707273.pdf",
+  "title": "CRUSH: A Credit-Based Approach for Functional Unit Sharing in Dynamically Scheduled HLS.",
+  "pages": 15,
+  "text_chars": 77406,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "EPFL-LAP/dynamatic",
+      "raws": [
+        "github.com/EPFL-LAP/dynamatic",
+        "https://github.com/EPFL-LAP/dynamatic"
+      ],
+      "found_via": [
+        "text",
+        "annotation"
+      ],
+      "pages": [
+        1,
+        12,
+        14
+      ],
+      "context": "ieves an average reduc- tion of 12% DSPs, 15% FFs, and 90% optimization runtime. CRUSH has been integrated into the Dynamatic HLS com- piler (https://github.com/EPFL-LAP/dynamatic). CCS Concepts: \u2022 Hardware \u2192Resource binding and sharing; Datapath optimization; \u2022 Computer systems organization \u2192Data flow architectures. Keywords:",
+      "repaired": true,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "EPFL-LAP/dynamatic",
+        "renamed_to": null,
+        "language": "VHDL",
+        "created": "2022-11-28T13:54:10Z",
+        "pushed": "2026-11-22T22:32:03Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 830076,
+        "stars": 217,
+        "description": "DHLS (Dynamic High-Level Synthesis) compiler based on MLIR "
+      }
+    }
+  ],
+  "profiles": []
+}

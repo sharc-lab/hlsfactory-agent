@@ -1,0 +1,98 @@
+{
+  "pdf": "Automated_Bitstream-Level_Cost-Reliability_Design-Space_Exploration_for_SRAM-Based_FPGAs.pdf",
+  "title": "Automated Bitstream-Level Cost-Reliability Design-Space Exploration for SRAM-Based FPGAs",
+  "pages": 14,
+  "text_chars": 81509,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "byuccl/bfat",
+      "raws": [
+        "github.com/byuccl/bfat"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        2
+      ],
+      "context": "onsidered by the approach. Validation of the reliability of the found solutions using fault simulation or injection is not reported in [24]. 2https://github.com/byuccl/bfat, accessed 2025-05-21 3https://github.com/f4pga/prjxray, accessed 2025-05-21",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "byuccl/bfat",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2022-06-29T21:04:59Z",
+        "pushed": "2023-07-17T15:11:54Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 783,
+        "stars": 16,
+        "description": "Bitstream Fault Analysis Tool"
+      }
+    },
+    {
+      "repo_id": "f4pga/prjxray",
+      "raws": [
+        "github.com/f4pga/prjxray"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        2,
+        5
+      ],
+      "context": "ity of the found solutions using fault simulation or injection is not reported in [24]. 2https://github.com/byuccl/bfat, accessed 2025-05-21 3https://github.com/f4pga/prjxray, accessed 2025-05-21",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "f4pga/prjxray",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2017-12-16T00:16:19Z",
+        "pushed": "2025-06-05T15:15:54Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 6823,
+        "stars": 929,
+        "description": "Documenting the Xilinx 7-series bit-stream format."
+      }
+    },
+    {
+      "repo_id": "olofk/serv",
+      "raws": [
+        "github.com/olofk/serv"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        7
+      ],
+      "context": "n. NEORV32 allows to evaluate our proposed DSE approach on a larger real-world 7https://panda.dei.polimi.it/?page_id=31, accessed 2025-05-21 8https://github.com/olofk/serv, accessed 2025-05-21",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "olofk/serv",
+        "renamed_to": null,
+        "language": "Verilog",
+        "created": "2018-10-31T07:15:00Z",
+        "pushed": "2026-08-25T12:38:55Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 13097,
+        "stars": 1927,
+        "description": "SERV - The SErial RISC-V CPU"
+      }
+    }
+  ],
+  "profiles": []
+}

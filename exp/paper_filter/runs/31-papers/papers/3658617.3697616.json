@@ -1,0 +1,297 @@
+{
+  "paper_id": "3658617.3697616",
+  "title": "Exploring Code Language Models for Automated HLS-based Hardware Generation: Benchmark, Infrastructure and Analysis.",
+  "status": "ok",
+  "outcome": "hls_found",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "jiahaogai/LLM-for-HLS",
+      "provenance": "own_found_by_search",
+      "outcome": "hls_found",
+      "confidence": "high",
+      "flags": [],
+      "handoff": true,
+      "evidence": [
+        {
+          "type": "name_matches_system",
+          "quote": "LLM-for-HLS is an open-source project focused on leveraging Large Language Models (LLMs) for High-Level Synthesis (HLS). This project aims to construct datasets, fine-tune LLMs, and evaluate their performance in generating HLS code based on natural language instructions. It also involves some techniques like feedback loop and chain of thoughts.",
+          "source": "readme"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Later, we extended the orignial dataset by adding tens of new source file after thoroughly inspecting the repository https://github.com/UT-LCA/ML4Accel-Dataset/tree/main/fpga_ml_dataset/HLS_dataset.",
+          "source": "readme"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Modify the axolotl/examples/code-llama/7b/qlora.yml file, changing the base_model to the absolute path of the model just downloaded.",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "2024-06-03T05:58:58Z | Jiahao Gai | moved fd_loop to src",
+          "source": "git_log"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "jiahaogai | Jiahao Gai",
+          "source": "github_api"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "created_at: 2023-12-18T04:31:24Z, pushed_at: 2024-06-03T06:00:56Z (development precedes the Jan 2025 ASP-DAC publication)",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "hls_found",
+        "mode": "clone",
+        "files_scanned": 43302,
+        "source_files": 43302,
+        "archives": [],
+        "hls_files": 3,
+        "tapa_files": 0,
+        "weak_files": 1,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 3,
+          "vitis_weak": 4,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 72,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [
+          "data/new_data/new2.c",
+          "data/new_data/new3.c",
+          "data/new_data/new4.c"
+        ],
+        "truncated": false,
+        "repo_id": "jiahaogai/LLM-for-HLS",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "jiahaogai/LLM-for-HLS",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "C",
+          "created_at": "2023-12-18T04:31:24Z",
+          "pushed_at": "2024-06-03T06:00:56Z",
+          "description": null,
+          "size_kb": 22035
+        },
+        "cap_kb": 307200
+      },
+      "notes": "First author Jiahao Gai's GitHub repo (github.com/jiahaogai, display name 'Jiahao Gai'). README describes exactly the paper's pipeline: collecting an HLS dataset (extending UT-LCA/ML4Accel-Dataset), fine-tuning CodeLlama-7b with QLoRA via axolotl, and HLS code generation with feedback loops and chain-of-thought. Repo contains train.sh/inference.sh/functionality_check.sh and data/ dirs. The paper itself has no explicit 'code available' statement, so this is own_found_by_search. Note: repo creation (Dec 2023) predates the paper publication (Jan 2025), consistent with code released during the project's development. Contains HLS (Vitis-style) C code, so it contains HLS designs."
+    },
+    {
+      "repo_id": "UCLA-DM/HLSyn",
+      "provenance": "third_party_demo",
+      "outcome": "needs_review",
+      "confidence": "high",
+      "flags": [
+        "fork",
+        "hls_maybe_in_archive",
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "We collect 52 HLS-based designs from open-source repositories, including HLSyn [3]\u00a7 and ML4Accel",
+          "source": "paper p.3",
+          "verified": true
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "https://github.com/UCLA-DM/HLSyn",
+          "source": "paper p.3",
+          "verified": true
+        }
+      ],
+      "scan": {
+        "classification": "archive_only",
+        "mode": "clone",
+        "files_scanned": 0,
+        "source_files": 0,
+        "archives": [
+          "data/HLSyn_data.tar.gz"
+        ],
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "UCLA-DM/HLSyn",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "UCLA-DM/HLSyn",
+          "renamed_to": null,
+          "archived": false,
+          "fork": true,
+          "language": "Python",
+          "created_at": "2023-10-19T22:14:57Z",
+          "pushed_at": "2023-12-13T04:40:38Z",
+          "description": "HLSyn benchmark for paper \"Towards a Comprehensive Benchmark for FPGA Targeted High-Level Synthesis\"",
+          "size_kb": 1432
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Third-party benchmark the paper collects its 52 HLS designs from (footnote link in paper body, Section 3.2). HLS designs are stored in data/HLSyn_data.tar.gz (scan is archive_only; the repo itself is a fork mirror of the HLSyn benchmark)."
+    },
+    {
+      "repo_id": "UT-LCA/ML4Accel-Dataset",
+      "provenance": "third_party_demo",
+      "outcome": "hls_found",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": true,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "We collect 52 HLS-based designs from open-source repositories, including HLSyn [3]\u00a7 and ML4Accel",
+          "source": "paper p.3",
+          "verified": true
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "https://github.com/UT-LCA/ML4Accel-Dataset",
+          "source": "paper p.3",
+          "verified": true
+        }
+      ],
+      "scan": {
+        "classification": "hls_found",
+        "mode": "clone",
+        "files_scanned": 885,
+        "source_files": 613,
+        "archives": [],
+        "hls_files": 150,
+        "tapa_files": 0,
+        "weak_files": 27,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 150,
+          "vitis_weak": 60,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 3623,
+        "tcl_set_top": [
+          "$top",
+          "DGNN_Booster_convLSTM",
+          "DGNN_booster_evolveGCN",
+          "DGN_compute_graphs",
+          "DigitRec",
+          "GAT_compute_graphs",
+          "GCN_compute_graphs",
+          "GIN_compute_graphs",
+          "GP_kernel_fixed",
+          "GP_kernel_float",
+          "Gsm_LPC_Analysis",
+          "MaskNet",
+          "PNA_compute_graphs",
+          "SgdLR",
+          "SkyNet",
+          "ViT_compute",
+          "aes256_encrypt_ecb",
+          "array_mem_bottleneck",
+          "atax",
+          "backprop"
+        ],
+        "tcl_csynth_count": 87,
+        "examples": [
+          "fpga_ml_dataset/HLS_dataset/edgemoe/include/datatypes.hpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/include/hardware.hpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/include/linear.hpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/include/tbutil.hpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/include/util.hpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/src/ViT_compute.cpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/src/add.cpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/src/attention.cpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/src/conv.cpp",
+          "fpga_ml_dataset/HLS_dataset/edgemoe/src/gelu.cpp"
+        ],
+        "truncated": false,
+        "repo_id": "UT-LCA/ML4Accel-Dataset",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "UT-LCA/ML4Accel-Dataset",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Verilog",
+          "created_at": "2022-11-07T19:40:30Z",
+          "pushed_at": "2024-11-18T18:20:09Z",
+          "description": "Dataset for ML-guided Accelerator Design",
+          "size_kb": 176280
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Third-party dataset (ML4Accel) the paper collects 52 HLS designs from (footnote link in paper body, Section 3.2); the LLM-for-HLS README also confirms it extends this repo's HLS_data set. Contains 150 Vitis-HLS source files, so it contains HLS designs."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "gh_search_repos",
+      "query": "hls llm in:name",
+      "found": "jiahaogai/LLM-for-HLS (C, created 2023-12-18) \u2014 matches first author; also databricks-industry-solutions/hls-llm-doc-qa, Lucaz97/LLM4HLS and other unrelated projects"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "HLS benchmark LLM in:readme",
+      "found": "jiahaogai/LLM-for-HLS appeared again in results; other entries unrelated (awesome lists, HLSPilot, etc.)"
+    },
+    {
+      "step": "gh_api",
+      "query": "users/jiahaogai (and name variants of other authors)",
+      "found": "jiahaogai profile exists with display name 'Jiahao Gai' (first author); other author name variants not found"
+    },
+    {
+      "step": "gh_api",
+      "query": "users/jiahaogai/repos?per_page=100",
+      "found": "LLM-for-HLS is the only HLS/LLM-related repo on the first author's account"
+    }
+  ],
+  "summary": "The paper's own code is jiahaogai/LLM-for-HLS (first author Jiahao Gai's repo), found by search since the paper has no explicit 'code available' statement; its README describes exactly the paper's pipeline (HLS dataset from ML4Accel, CodeLlama-7B QLoRA fine-tuning via axolotl, feedback loops + chain-of-thought), commits are by 'Jiahao Gai', and the scan confirms HLS/Vitis-style code. The paper builds its benchmark on two other repos, UCLA-DM/HLSyn and UT-LCA/ML4Accel-Dataset, both linked in the paper body (Section 3.2) and both containing HLS designs (ML4Accel verified; HLSyn holds designs in a tar.gz archive). Confidence is high for all three; no other artifacts claimed.",
+  "problems": [],
+  "meta": {
+    "paper_id": "3658617.3697616",
+    "title": "Exploring Code Language Models for Automated HLS-based Hardware Generation: Benchmark, Infrastructure and Analysis.",
+    "authors": "Jiahao Gai, Hao Chen, Zhican Wang, Hongyu Zhou, Wanru Zhao, Nicholas D. Lane, Hongxiang Fan",
+    "year": 2025,
+    "venue": "ASP-DAC",
+    "doi": "10.1145/3658617.3697616",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "doi",
+    "ambiguous": false
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "repos": [
+    {
+      "repo_id": "23ydqian/QLearning_MOEA",
+      "provenance": "own_found_by_search",
+      "evidence": [
+        {
+          "type": "name_matches_system",
+          "quote": "objective evolutionary algorithm (QL-MOEA) proposed in this",
+          "source": "paper p.1"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "E-mail:{23ydqian,sswang,chlxiao}@stu.edu.cn",
+          "source": "paper p.1"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "alpha = 0.8  # 学习率\ngamma = 0.5  # 折扣因子",
+          "source": "repo_contents"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "qyd (qyd)",
+          "source": "github_api"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "created_at: 2024-10-29T02:02:12Z, paper IEEE creation date: 2025-02-04",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 0,
+        "source_files": 0,
+        "archives": [],
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "23ydqian/QLearning_MOEA",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "23ydqian/QLearning_MOEA",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2024-10-29T02:02:12Z",
+          "pushed_at": "2024-11-05T02:44:07Z",
+          "description": null,
+          "size_kb": 7802
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Authors' Python implementation of QL-MOEA algorithm for HLS DSE. Contains DSE algorithm code (Q-learning + evolutionary algorithm) but no HLS hardware designs. Uses simulated synthesis (FakeSynthesis) with pre-computed data from db4hls. No explicit link in paper; found by searching repo name matching proposed system name and owner matching author email."
+    },
+    {
+      "repo_id": "breagen/MachSuite",
+      "provenance": "third_party_demo",
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "Our experiments targeted the functions in the MachSuite [7] benchmarks collection.",
+          "source": "paper p.3"
+        }
+      ],
+      "scan": {
+        "classification": "hls_tcl_only",
+        "mode": "clone",
+        "files_scanned": 109,
+        "source_files": 90,
+        "archives": [],
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [
+          "aes256_encrypt_ecb",
+          "backprop",
+          "bbgemm",
+          "bfs",
+          "ellpack",
+          "fft",
+          "fft1D_512",
+          "gemm",
+          "kmp",
+          "md",
+          "md_kernel",
+          "ms_mergesort",
+          "needwun",
+          "spmv",
+          "ss_sort",
+          "stencil",
+          "stencil3d",
+          "viterbi"
+        ],
+        "tcl_csynth_count": 19,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "breagen/MachSuite",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "breagen/MachSuite",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "C",
+          "created_at": "2014-08-21T20:26:32Z",
+          "pushed_at": "2020-04-01T18:40:36Z",
+          "description": "Benchmarks for Accelerator Design and Customized Architectures",
+          "size_kb": 2029
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Benchmark suite used as evaluation subject in the paper. Contains HLS tcl scripts for synthesis of various benchmark functions. Referenced as [7] in the paper."
+    },
+    {
+      "repo_id": "lorenzoferretti/db4hls",
+      "provenance": "third_party_demo",
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "The configurations and synthesis results of each design are available from db4hls [8].",
+          "source": "paper p.3"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 0,
+        "source_files": 0,
+        "archives": [],
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "lorenzoferretti/db4hls",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "lorenzoferretti/db4hls",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2020-12-04T11:17:27Z",
+          "pushed_at": "2021-01-05T21:13:03Z",
+          "description": "Repository of DB4HLS. A database of design space exploration in high-level synthesis.",
+          "size_kb": 78
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Database of pre-computed HLS synthesis results used as data source in the paper. Referenced as [8]. Contains no HLS source files, only synthesis data."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "gh_search_repos",
+      "query": "QL-MOEA",
+      "found": "Found repo 23ydqian/QLearning_MOEA. Owner login matches first author's email prefix."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "db4hls",
+      "found": "Found lorenzoferretti/db4hls and fastmachinelearning/db4hls"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "MachSuite benchmarks",
+      "found": "Found breagen/MachSuite"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Q-learning MOEA HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Reinforcement Learning Based Multi-objective Evolutionary Algorithm for High-level Synthesis\"",
+      "found": "Found only in Ruichen0424/ic-paper-explorer (a paper index), not in the authors' repo."
+    },
+    {
+      "step": "gh_api",
+      "query": "users/chlxiao/repos?per_page=100",
+      "found": "chlxiao has only Hello-World and learning-area forks, no relevant repo."
+    },
+    {
+      "step": "gh_api",
+      "query": "search/users?q=Yuda+Qian+Shantou+University",
+      "found": "0 users found via search"
+    }
+  ],
+  "summary": "Found the authors' own repository 23ydqian/QLearning_MOEA by searching for 'QL-MOEA' as a repo name. The repo owner '23ydqian' matches the first author's email prefix (23ydqian@stu.edu.cn). The code implements the QL-MOEA algorithm with matching hyperparameters (alpha=0.8, gamma=0.5) and commit author 'qyd' corresponds to Yuda Qian. The repo contains no HLS designs (repo_no_hls) as it is a Python DSE algorithm, not a hardware design. Also identified two third-party repos used as benchmarks/data: breagen/MachSuite (HLS benchmarks, hls_tcl_only) and lorenzoferretti/db4hls (HLS synthesis database, repo_no_hls). Confidence in the authors' repo is high (owner match, system name match, code content match, dates fit)."
+}

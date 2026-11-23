@@ -1,0 +1,139 @@
+{
+  "repos": [
+    {
+      "repo_id": "robertszafa/elastic-sycl-hls",
+      "provenance": "own_found_by_search",
+      "evidence": [
+        {
+          "type": "contents_match_paper",
+          "quote": "Our implementation and evaluation are publicly available [59].",
+          "source": "paper p.8"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "[59] Robert Szafarczyk. 2024. Dynamic Loop Fusion in HLS - FPGA25 artifact. https://doi.org/10.5281/zenodo.14383450",
+          "source": "paper p.12"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Code implementing the ideas from the paper \"Dynamic Loop Fusion in High-Level Synthesis\", together with the evaluation. This repo consists of: Data Unit template in lsq/DataUntiDRAM.hpp... Address monotonicity analysis... in lib/DynamicLoopFusionAnalysis.cpp... The transformation that inserts our DU and generates loop PEs and AGUs is in lib/DynamicLoopFusionTransform.cpp. Evaluation scripts, benchmarks, and results are in the directory experiments/.",
+          "source": "web:doi.org/10.5281/zenodo.14383450"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Commit 47ecacb7 by Robert Szafarczyk on 2024-09-27: 'Add hazard pair prunning. Use DUInfo name.'",
+          "source": "github_api"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Commit b7f49fe4 by Robert Szafarczyk on 2024-09-27: 'Add tanh+spmv bench.'",
+          "source": "github_api"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Commit 3c59ad13 by Robert Szafarczyk on 2024-09-10: 'Add \"l\" definition in hazard check.'",
+          "source": "github_api"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Commit 6dfbacff by Robert Szafarczyk on 2024-09-17: 'Add speculation support to dynamic loop fusion.'",
+          "source": "github_api"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Commit 3f9e0c14 by Robert Szafarczyk on 2024-08-26: 'Add fusion benchmarks and supporting files.'",
+          "source": "github_api"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "The dynamic-fusion branch contains files: lib/DynamicLoopFusionAnalysis.cpp, lib/DynamicLoopFusionTransform.cpp, lsq/DataUnitDRAM.hpp, and experiments/ with benchmark files (raw_loop, war_loop, waw_loop, bnn_dram, page_rank_dram, fft2x_dram, matrix_power_dram, hist2x_dram, tanh_spmv_dram) which match the paper's benchmarks (RAWloop, WARloop, WAWloop, bnn, pagerank, fft, matpower, hist+add, tanh+spmv).",
+          "source": "github_api"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "Repository owner 'robertszafa' is the first author Robert Szafarczyk (University of Glasgow).",
+          "source": "github_api"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "Commits on the dynamic-fusion branch date from Aug 2024 to Oct 2024, matching the artifact date (2024) and predating the FPGA 2025 conference.",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 81,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "robertszafa/elastic-sycl-hls",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "robertszafa/elastic-sycl-hls",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "C++",
+          "created_at": "2023-05-22T11:42:14Z",
+          "pushed_at": "2025-07-31T17:31:22Z",
+          "description": null,
+          "size_kb": 128619
+        },
+        "cap_kb": 307200
+      },
+      "notes": "The repo robertszafa/elastic-sycl-hls is the authors' codebase. The FPGA25 paper's code is in the 'dynamic-fusion' branch. The HLS scan returned 'repo_no_hls' because Intel SYCL HLS uses C++ attributes (e.g., [[intel::fpga_register]]) rather than #pragma HLS or other dialects that the scanner detects. The code is clearly HLS: the DataUnitDRAM.hpp implements the Data Unit (DU) for dynamic memory disambiguation, and the LLVM passes in lib/ are compiler passes for the Intel SYCL HLS toolchain."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "web_search",
+      "query": "Dynamic Loop Fusion in High-Level Synthesis github",
+      "found": "Found Zenodo artifact DOI 10.5281/zenodo.14383450 and reference to robertszafa/elastic-sycl-hls from related work."
+    },
+    {
+      "step": "gh_api",
+      "query": "users/robertszafa/repos",
+      "found": "Found robertszafa/elastic-sycl-hls (existing repo, primarily for FPL23 paper, with dynamic-fusion branch containing FPGA25 code). Also found elastic-sycl-hls via arxiv footnote reference from prior FPL23 paper."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "dynamic-loop-fusion in:name",
+      "found": "No repos found with that exact name pattern."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "fpga25 artifact in:name",
+      "found": "Found UCLA-VAST/sisyphus-fpga25-artifact (unrelated, another FPGA25 paper)."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Dynamic Loop Fusion in High-Level Synthesis\"",
+      "found": "Found 11 hits, all bibliographic/citation references, not the code repo itself."
+    },
+    {
+      "step": "gh_api",
+      "query": "repos/robertszafa/elastic-sycl-hls/branches",
+      "found": "Found branches: artifact-fpt23, cgo, dynamic-fusion, main. The dynamic-fusion branch contains the FPGA25 paper code."
+    }
+  ],
+  "summary": "Found the authors' code repository (robertszafa/elastic-sycl-hls, dynamic-fusion branch) containing the FPGA25 artifact. The paper cites a Zenodo DOI (10.5281/zenodo.14383450) for code availability; the Zenodo artifact description matches files in the dynamic-fusion branch exactly (DynamicLoopFusionAnalysis.cpp, DynamicLoopFusionTransform.cpp, DataUnitDRAM.hpp, and matching benchmark files). Commits by first author Robert Szafarczyk from Aug-Oct 2024 add dynamic loop fusion support. The HLS scanner returned 'repo_no_hls' because it does not detect Intel SYCL HLS patterns (the code uses Intel's SYCL HLS compiler, not Vitis/Catapult dialects). I am highly confident this is the correct repo for the paper."
+}

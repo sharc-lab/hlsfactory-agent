@@ -1,0 +1,98 @@
+{
+  "repos": [
+    {
+      "repo_id": "ncsys-lab/FUSE",
+      "provenance": "own_in_paper",
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "The artifact is available at https://github.com/ncsys-lab/FUSE.",
+          "source": "paper p.13"
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "This is the implementation for the tool described in Efficient Optimization with Encoded Energy Functions (HPCA 2025, link pending).",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Devrath Iyer <deviyer@stanford.edu>",
+          "source": "git_log"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "The authors Devrath Iyer and Sara Achour are from Stanford University. The repo is under ncsys-lab.",
+          "source": "paper p.1"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "Repo created 2024-12-03, pushed 2025-01-21, paper published at HPCA 2025.",
+          "source": "github_api"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Repo contains FUSE framework (solver.py, synth.py, circuit.py, problems/) implementing the E-I model and p-computer simulator described in the paper.",
+          "source": "repo_contents"
+        }
+      ],
+      "scan": {
+        "classification": "archive_only",
+        "mode": "clone",
+        "files_scanned": 0,
+        "source_files": 0,
+        "archives": [
+          "exp_data.tar.gz"
+        ],
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "ncsys-lab/FUSE",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "ncsys-lab/FUSE",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Python",
+          "created_at": "2024-12-03T02:51:25Z",
+          "pushed_at": "2025-01-21T22:09:59Z",
+          "description": null,
+          "size_kb": 68508
+        },
+        "cap_kb": 307200
+      },
+      "notes": "The paper mentions 'offers an HLS backend for some problems' (p.2) and 'In our HLS flow' (p.12), but the repo generates Verilog via Python and uses OpenLane (RTL-to-GDS) for synthesis; no traditional HLS C/C++ source files (.cpp with HLS pragmas) were found. The HLS scan classified the repo as 'archive_only' because the only archive (exp_data.tar.gz) was not expanded. The core HLS-like flow uses Yosys/OpenLane for ASIC synthesis of generated Verilog."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "prepass.json",
+      "query": "extracted links from PDF",
+      "found": "ncsys-lab/FUSE from page 13 appendix"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "FUSE Encoded Ising in:name",
+      "found": "no results"
+    }
+  ],
+  "summary": "Found the authors' own repo ncsys-lab/FUSE directly linked in the paper (page 13 appendix: 'The artifact is available at https://github.com/ncsys-lab/FUSE'). The repo implements the FUSE framework for encoded Ising models described in the paper, with commits authored by first author Devrath Iyer. The paper offers an HLS backend for some problems, using Yosys/OpenLane for RTL synthesis of generated Verilog circuits. This is a clean, high-confidence match."
+}

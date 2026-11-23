@@ -1,0 +1,21 @@
+The output file is valid JSON. Here's a summary of what I found:
+
+## Result Summary
+
+**No GitHub repository found for this paper.**
+
+After an exhaustive search using all available tools and budgets:
+
+1. **Paper text (6 pages)** — Read in full. No code availability statement, no GitHub links, no footnotes with URLs, no repository mentioned.
+2. **prepass.json** — No candidates.
+3. **arXiv HTML/PDF** — Checked both v1 and v2. Only GitHub links are arXiv infrastructure (LaTeXML, html_feedback). No code/artifact links.
+4. **Author GitHub profiles**:
+   - `aferikoglou` (Aggelos Ferikoglou) — Has HLS tooling repos (GenHLSOptimizer, GNWSIS, CollectiveHLS, etc.) but none are the CFD accelerator from this paper.
+   - `GeoAnagn` (George Anagnostopoulos) — Has RefMap-related CFD repos, but those are performance portability/autotuning projects, not this paper.
+   - `akapetanakis` (Anastassis Kapetanakis) — No repos.
+   - `sxydis` (Sotirios Xydis) — No repos.
+5. **GitHub searches** — By keywords (FEM, CFD, FPGA, HLS, Navier-Stokes), by repo name, and by exact paper title (code search) — all returned nothing relevant.
+6. **Web searches** — Found NTUA DSpace thesis page (only the PDF) and arXiv, but no code repository.
+7. **No third-party repos** the paper builds on as subject designs.
+
+The paper presents a concrete HLS-based FPGA accelerator design but does **not** make the code publicly available on GitHub. Therefore, the `repos` list is empty, and `no_artifact` is `false` (the paper has a design artifact, it just wasn't released on GitHub).

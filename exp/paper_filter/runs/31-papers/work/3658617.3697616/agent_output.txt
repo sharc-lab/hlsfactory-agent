@@ -1,0 +1,14 @@
+Done. The result JSON is valid.
+
+## Findings
+
+**Authors' own repo (found by search, not linked in the paper):**
+- **`jiahaogai/LLM-for-HLS`** — owned by the GitHub user `jiahaogai` (display name "Jiahao Gai"), who is the paper's first author. The README describes exactly the paper's pipeline: constructing an HLS dataset (extending `UT-LCA/ML4Accel-Dataset`), fine-tuning CodeLlama-7B with QLoRA via axolotl, and HLS code generation with feedback loops + chain-of-thought. All commits are by "Jiahao Gai". `hls_scan.py` classified it `hls_found` (Vitis-style C with HLS pragmas). The paper itself contains no "code available" sentence, so provenance is `own_found_by_search`.
+
+**Subject benchmarks the paper builds on (Section 3.2, both linked in the paper body):**
+- **`UCLA-DM/HLSyn`** — paper: *"We collect 52 HLS-based designs from open-source repositories, including HLSyn [3]§..."* with footnote link; designs stored in a tar.gz archive (`archive_only`).
+- **`UT-LCA/ML4Accel-Dataset`** — paper: *"...and ML4Accel"* with footnote link; `hls_found` (150 Vitis-HLS sources).
+
+I deliberately did **not** report `OpenAccess-AI-Collective/axolotl`, `StarCoder`, or CodeLlama — generic tools/models the paper uses, not design/benchmark subjects. The paper is not a survey and does contain design/code, so `no_artifact` is `false`.
+
+Confidence: high for all three repos. Result at `output/result.json` parses with `jq`.

@@ -5,7 +5,8 @@ producing a list of repos to hand to HLSFactory (`exp/run_base/run.py`). Input: 
 paper PDFs, joined to `hls_source_indexing/hls_papers_merged.xlsx` by title.
 
 Library code: `hlsfactory_agent/paper_filter/`. This folder: the run script, PDFs (`pdfs/`,
-gitignored) and run outputs (`runs/`, gitignored).
+gitignored) and run outputs (`runs/`, committed so results can be checked; see below for what is
+kept local).
 
 ## Usage
 
@@ -70,6 +71,11 @@ Tests: `PYTHONPATH=. .venv/bin/python -m pytest -q tests`
 | `run.log` | Log of a `--detach` run. |
 | `proxy_calls.jsonl`, `registry.sqlite` | Every GitHub/Exa call; repos already seen (internal). |
 
+Committed to git: everything above except anything that copies the paper text (PDFs, `pages/`,
+the agent transcripts in `.pi/`, which quote whole pages) and internal caches (`registry.sqlite`,
+`_github_cache/`). So the transcript links in a committed `report.md` only work on the machine that
+ran it. The evidence the agent relied on is still in `papers/<id>.json` and `agent_output.txt`.
+
 ### Reading the results
 
 Each repo gets a **provenance** and an **outcome**:
@@ -104,7 +110,7 @@ Common flags: `third_party`, `hls_via_tcl` (directives in TCL scripts, no `#prag
 
 ## Test results (2026-11-23)
 
-Run `exp/paper_filter/runs/groups1/`: 31 PDFs labeled by hand only as "has a repo" (3) or "no repo"
+Run `exp/paper_filter/runs/31-papers/`: 31 PDFs labeled by hand only as "has a repo" (3) or "no repo"
 (28). All 31 finished (`ok`), with 6 agents in parallel, in about 20 minutes. Exa cost about $0.40;
 LLM cost is not tracked yet.
 

@@ -1,0 +1,14 @@
+## Summary
+
+After a thorough search, **no public GitHub repository was found** for the code associated with this paper.
+
+**What I checked:**
+- The paper's full text (no code availability statement, no GitHub links, no footnotes)
+- The PDF metadata and hyperlinks (no links found)
+- The first author's GitHub account `you-li-nu` (all 22 repos checked - none contain DE2/LIM code; the most recent push is from early 2023)
+- The first author's personal website `youl.org` (DE2 paper has only [Paper] and [Slides] links — notably, no [Code] link, unlike some of their other papers)
+- All four authors' GitHub profiles searched directly
+- 12 GitHub repo search queries, 2 code search queries, 3 web search queries
+- Other GitHub API calls to organizations, users, and repos
+
+**Conclusion:** The paper states "We built a prototype for LIM and DE2 in Python" but the code has likely **not been publicly released** as of the current date. This is a standard research paper presenting an algorithm with evaluation results, not a survey/position paper (so `no_artifact` is `false`). The result is an honest "not found" with comprehensive documentation of all search attempts.

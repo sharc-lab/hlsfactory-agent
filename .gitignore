@@ -15,8 +15,17 @@ wheels/
 .env
 # Paper PDFs (publisher-copyrighted, do not commit)
 exp/paper_filter/pdfs/
-# Derived data from the PDFs (run outputs, registry, transcripts)
-exp/paper_filter/runs/
+# Run outputs are committed, except copies of paper text (PDF, extracted pages, agent
+# transcripts, which quote whole pages) and bulky internal caches
+exp/paper_filter/runs/**/*.pdf
+exp/paper_filter/runs/*/work/*/run_area/pages/
+exp/paper_filter/runs/*/work/*/run_area/.pi/
+exp/paper_filter/runs/*/work/*/run_area/home/
+exp/paper_filter/runs/*/work/*/run_area/tools/
+exp/paper_filter/runs/*/registry.sqlite
+exp/paper_filter/runs/*/_github_cache/
+exp/paper_filter/runs/*/run.log
+exp/paper_filter/runs/*/run.pid
 
 # Local session notes
 CLAUDE.md

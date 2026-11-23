@@ -1,0 +1,16 @@
+The result parses correctly. Here's a summary of what was found:
+
+**Repository found: `aferikoglou/CollectiveHLS`** (provenance: `own_found_by_search`)
+
+This is the authors' own implementation repository for the CollectiveHLS system described in the paper. Key evidence:
+- GitHub description matches the paper title verbatim: "CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization"
+- README contains the exact paper title and a full BibTeX citation for this ACM TRETS paper
+- All 12 commits are by lead author Aggelos Ferikoglou
+- Repository creation date (Aug 2024) fits the paper timeline (received Apr 2024, accepted Oct 2024)
+- Topics include "fpga", "hls", "optimization"
+
+The paper itself does **not** include a direct link to this GitHub repository — it has no code availability statement. The repo was found by searching GitHub for the system name `CollectiveHLS`.
+
+**HLS scan result:** The repo is classified as `weak_hls_only` — it contains Python code that orchestrates Vitis HLS (1 weak Vitis reference) but no hardware kernel files with HLS pragmas. This is expected since CollectiveHLS is an optimization tool that operates on external benchmark designs.
+
+No third-party repos that the paper builds on were identified beyond standard benchmark suites (RodiniaHLS, Machsuite) which are separate projects handled independently.

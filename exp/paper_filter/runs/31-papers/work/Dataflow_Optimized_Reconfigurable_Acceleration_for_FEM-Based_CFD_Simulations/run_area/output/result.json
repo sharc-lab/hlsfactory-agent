@@ -1,0 +1,24 @@
+{
+  "repos": [],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {"step": "paper_reading", "query": "read full paper PDF (6 pages) for links, footnotes, code availability statements", "found": "No GitHub links, no code availability statement, no repository mention anywhere in the paper body or footnotes."},
+    {"step": "prepass.json", "query": "check prepass.json for candidates", "found": "No candidates (empty list)."},
+    {"step": "gh_search_repos", "query": "FEM CFD FPGA HLS", "found": "total_count: 0"},
+    {"step": "gh_search_repos", "query": "Navier-Stokes FPGA accelerator HLS", "found": "total_count: 0"},
+    {"step": "gh_search_repos", "query": "microlab ntua", "found": "23 repos, but none related to this paper (mostly student exercises, lab projects)"},
+    {"step": "gh_search_repos", "query": "FEM reconfigurable acceleration CFD", "found": "total_count: 0"},
+    {"step": "gh_search_repos", "query": "microlab.ntua", "found": "16 repos, none related"},
+    {"step": "gh_api_user_repos", "query": "users/aferikoglou/repos", "found": "Repos: GenHLSOptimizer, GNWSIS, CollectiveHLS, HLSAnalysisTools, FPGAScheduler, KNNBasedRSFPGA — all are HLS tooling/data projects, not the CFD accelerator from this paper."},
+    {"step": "gh_api_user_repos", "query": "users/akapetanakis/repos", "found": "No repos (empty)"},
+    {"step": "gh_api_user_repos", "query": "users/sxydis/repos", "found": "No repos (empty)"},
+    {"step": "gh_api_user_repos", "query": "users/GeoAnagn/repos", "found": "4 repos, all RefMap-related (WP2_CFD_Performance_Autotuning, etc.) — not this paper."},
+    {"step": "gh_search_code", "query": "\"Dataflow Optimized Reconfigurable Acceleration for FEM-Based CFD Simulations\"", "found": "9 matches, all in citation/arXiv digest repos, not the authors' code."},
+    {"step": "web_search", "query": "Dataflow Optimized Reconfigurable Acceleration for FEM-Based CFD Simulations github", "found": "NTUA DSpace thesis page, arXiv, IEEE Xplore — no GitHub repo."},
+    {"step": "web_search", "query": "Dataflow Optimized Reconfigurable Acceleration FEM CFD github code", "found": "Same results, no GitHub repo."},
+    {"step": "web_search", "query": "Kapetanakis FPGA FEM CFD HLS github", "found": "NTUA Artemis thesis repository — thesis PDF only, no code repo."},
+    {"step": "arxiv_html_check", "query": "check arxiv HTML for code availability links", "found": "No GitHub links except arXiv infrastructure (LaTeXML, html_feedback). No code/artifact links."}
+  ],
+  "summary": "No GitHub repository was found for this paper. A thorough search of the full paper text (6 pages, read completely), prepass.json, arXiv HTML/PDF versions, author GitHub profiles (aferikoglou, GeoAnagn, akapetanakis, sxydis), GitHub code search by exact paper title, and web searches all failed to find any repository. The paper presents an FPGA accelerator for FEM-based CFD simulations implemented with HLS, but does not include a code availability statement or link to any public repository. The closest author repos (e.g., aferikoglou's GenHLSOptimizer, CollectiveHLS) are about general HLS optimization tools, unrelated to this specific CFD accelerator. This paper is not a survey/position paper (it presents a concrete design), so no_artifact is false — the code simply was not released/published on GitHub."
+}

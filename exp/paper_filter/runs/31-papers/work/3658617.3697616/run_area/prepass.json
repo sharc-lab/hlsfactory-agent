@@ -1,0 +1,126 @@
+{
+  "pdf": "3658617.3697616.pdf",
+  "title": "Exploring Code Language Models for Automated HLS-based Hardware Generation: Benchmark, Infrastructure and Analysis.",
+  "pages": 7,
+  "text_chars": 41230,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "UCLA-DM/HLSyn",
+      "raws": [
+        "github.com/UCLA-DM/HLSyn"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        3
+      ],
+      "context": "inations of programs such as PIPELINE, PARALLEL and TILE. We filter out the HLS programs that are invalid, resulting in a collection of over \u00a7https://github.com/UCLA-DM/HLSyn \u0007https://github.com/UT-LCA/ML4Accel-Dataset 42, 000 HLS programs. The whole dataset is split into training and test sets for supervised fine-tuning a",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "UCLA-DM/HLSyn",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2023-10-19T22:14:57Z",
+        "pushed": "2023-12-13T04:40:38Z",
+        "archived": false,
+        "fork": true,
+        "size_kb": 1432,
+        "stars": 33,
+        "description": "HLSyn benchmark for paper \"Towards a Comprehensive Benchmark for FPGA Targeted High-Level Synthesis\""
+      }
+    },
+    {
+      "repo_id": "UT-LCA/ML4Accel-Dataset",
+      "raws": [
+        "github.com/UT-LCA/ML4Accel-Dataset"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        3
+      ],
+      "context": "INE, PARALLEL and TILE. We filter out the HLS programs that are invalid, resulting in a collection of over \u00a7https://github.com/UCLA-DM/HLSyn \u0007https://github.com/UT-LCA/ML4Accel-Dataset 42, 000 HLS programs. The whole dataset is split into training and test sets for supervised fine-tuning and evaluation, respectively. 3.3 Generation",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "UT-LCA/ML4Accel-Dataset",
+        "renamed_to": null,
+        "language": "Verilog",
+        "created": "2022-11-07T19:40:30Z",
+        "pushed": "2024-11-18T18:20:09Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 176280,
+        "stars": 45,
+        "description": "Dataset for ML-guided Accelerator Design"
+      }
+    },
+    {
+      "repo_id": "OpenAccess-AI-Collective/axolotl",
+      "raws": [
+        "github.com/OpenAccess-AI-Collective/axolotl"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        3
+      ],
+      "context": "ion 3.2). We adopt axolotl\u2020\u2020 to perform the fine-tuning, allowing \u2225https://huggingface.co/codellama \u2217\u2217https://huggingface.co/blog/starcoder \u2020\u2020https://github.com/OpenAccess-AI-Collective/axolotl 990",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "axolotl-ai-cloud/axolotl",
+        "renamed_to": "axolotl-ai-cloud/axolotl",
+        "language": "Python",
+        "created": "2023-04-14T04:25:47Z",
+        "pushed": "2026-11-20T18:24:44Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 75552,
+        "stars": 12743,
+        "description": "Go ahead and axolotl questions"
+      }
+    },
+    {
+      "repo_id": "hpcaitech/Open-Sora",
+      "raws": [
+        "github.com/hpcaitech/Open-Sora"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        7
+      ],
+      "context": "arning. PMLR, 12697\u201312706. [33] Zangwei Zheng, Xiangyu Peng, and Yang You. 2024. Open-Sora: Democratizing Efficient Video Production for All. https://github.com/hpcaitech/Open-Sora 994",
+      "repaired": false,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "hpcaitech/Open-Sora",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2024-02-20T03:01:34Z",
+        "pushed": "2026-04-09T01:52:40Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 34694,
+        "stars": 29948,
+        "description": "Open-Sora: Democratizing Efficient Video Production for All"
+      }
+    }
+  ],
+  "profiles": []
+}

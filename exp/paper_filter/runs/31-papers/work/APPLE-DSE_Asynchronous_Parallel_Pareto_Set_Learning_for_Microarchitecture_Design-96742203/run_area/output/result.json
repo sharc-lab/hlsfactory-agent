@@ -1,0 +1,159 @@
+{
+  "repos": [
+    {
+      "repo_id": "riscv-software-src/riscv-tests",
+      "provenance": "third_party_demo",
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "The first 11 benchmarks are from riscv-test,1 a benchmark suite by RISC-V International designed to evaluate RISC-V processor performance.",
+          "source": "paper p.7"
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "1 https://github.com/riscv-software-src/riscv-tests",
+          "source": "paper p.7"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 107,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "riscv-software-src/riscv-tests",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "riscv-software-src/riscv-tests",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Assembly",
+          "created_at": "2013-04-24T08:05:07Z",
+          "pushed_at": "2026-10-19T22:08:41Z",
+          "description": null,
+          "size_kb": 3166
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Benchmark suite used in evaluation (11 of 13 benchmarks). Not the authors' own code. No HLS content."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "gh_search_repos",
+      "query": "APPLE-DSE in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "apple-dse in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "APPLE DSE in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "asynchronous parallel pareto set learning in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "APPLE-DSE in:readme",
+      "found": "320 results, none relevant (false positives matching partial substrings)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "asynchronous parallel pareto set learning in:readme",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Pareto Set Learning microarchitecture in:readme",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "APPLE-DSE microarchitecture design space exploration in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "pareto set learning in:name",
+      "found": "11 results (PSL-related papers, not APPLE-DSE)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"APPLE-DSE: Asynchronous Parallel Pareto Set Learning for Microarchitecture Design Space Exploration\"",
+      "found": "2 results in bibliography/reference files only"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Asynchronous Parallel Pareto Set Learning for Microarchitecture Design Space Exploration\"",
+      "found": "3 results in bibliography/reference files only"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"APPLE-DSE\" \"design space exploration\"",
+      "found": "3 results in bibliography/reference files only"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "APPLE-DSE TCAD",
+      "found": "2 results in bibliography/reference files only"
+    },
+    {
+      "step": "web_search",
+      "query": "APPLE-DSE asynchronous parallel pareto set learning github",
+      "found": "No code repo found. IEEE page, author homepage (bzr2915.github.io), and citation pages only."
+    },
+    {
+      "step": "web_search",
+      "query": "APPLE-DSE code github repository",
+      "found": "No relevant results."
+    },
+    {
+      "step": "web_search",
+      "query": "APPLE-DSE TCAD 2025 zhao github.com",
+      "found": "No code repo found. IEEE page and author publications page only."
+    },
+    {
+      "step": "gh_api",
+      "query": "users/bzr2915/repos",
+      "found": "2 repos: bzr2915/bzr2915 (personal page), bzr2915/clay (unrelated). No APPLE-DSE repo."
+    },
+    {
+      "step": "gh_api",
+      "query": "users/zhaoxuyang/repos",
+      "found": "Several Android-related repos (forks), none related to APPLE-DSE."
+    },
+    {
+      "step": "gh_api",
+      "query": "users/XuyangZhao/repos",
+      "found": "User not found (xuyangzhao has only one unrelated fork)."
+    }
+  ],
+  "summary": "The paper presents the APPLE-DSE algorithm for microarchitecture design space exploration, but contains no code availability statement, no GitHub link to the authors' code, and no indication that code will be released. Extensive searching across GitHub repo names, READMEs, code contents, and web searches found no repository belonging to the authors. The only GitHub link in the paper is to riscv-software-src/riscv-tests, a benchmark suite used in evaluation, which contains no HLS designs. No authors' code repository was found for this paper."
+}

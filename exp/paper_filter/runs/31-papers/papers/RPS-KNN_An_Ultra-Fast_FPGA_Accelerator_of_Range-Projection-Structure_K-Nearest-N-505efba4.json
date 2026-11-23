@@ -1,0 +1,105 @@
+{
+  "paper_id": "RPS-KNN_An_Ultra-Fast_FPGA_Accelerator_of_Range-Projection-Structure_K-Nearest-N-505efba4",
+  "title": "RPS-KNN: An Ultra-Fast FPGA Accelerator of Range-Projection-Structure K-Nearest-Neighbor Search for LiDAR Odometry in Smart Vehicles",
+  "status": "ok",
+  "outcome": "not_found",
+  "needs_ocr": false,
+  "repos": [],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_paper",
+      "query": "text extraction and link detection in PDF",
+      "found": "No code availability statement, GitHub link, or footnote URL in the paper body or references"
+    },
+    {
+      "step": "read_prepass",
+      "query": "prepass.json",
+      "found": "No candidates found"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "RPS-KNN in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "range-projection-structure in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "RPS KNN FPGA in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "RPS-KNN in:readme",
+      "found": "306 results (none relevant; RPS is a common trigram)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'RPS-KNN' in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'RPS-KNN' in:readme",
+      "found": "1 result (unrelated)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "'Range-Projection-Structure' in:readme",
+      "found": "1 result (unrelated)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "'\"RPS-KNN: An Ultra-Fast FPGA Accelerator of Range-Projection-Structure\"'",
+      "found": "3 results (metadata references only: morningD/lang.csconf, Ruichen0424/ic-paper-explorer, nerdneilsfield/go-translator-agent)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "'\"RPS-KNN\" \"LiDAR\" \"FPGA\"'",
+      "found": "4 results (same metadata references)"
+    },
+    {
+      "step": "gh_api_users_repos",
+      "query": "xiaojzh (first author) repos",
+      "found": "11 repos, none related to RPS-KNN"
+    },
+    {
+      "step": "gh_api_users_repos",
+      "query": "hechzh (co-author) repos",
+      "found": "12 repos, none related to RPS-KNN"
+    },
+    {
+      "step": "gh_api_users_repos",
+      "query": "ECASLab (Yajun Ha's lab) repos",
+      "found": "~40 repos, none related to RPS-KNN"
+    },
+    {
+      "step": "web_search",
+      "query": "RPS-KNN An Ultra-Fast FPGA Accelerator github",
+      "found": "No GitHub repo found; only DOI link and paper metadata sites"
+    },
+    {
+      "step": "web_search",
+      "query": "RPS-KNN FPGA accelerator code",
+      "found": "No GitHub repo found"
+    }
+  ],
+  "summary": "This paper presents RPS-KNN, an FPGA accelerator for K-nearest-neighbor search in LiDAR odometry, implemented using Xilinx Vitis HLS. No code availability statement appears in the paper \u2014 there is no 'our code is available at' sentence, no GitHub link, no footnote URL, and no project page. Searches across GitHub (repo names, READMEs, code contents), the first author's (xiaojzh) and co-authors' repositories, and the ECASLab organization yielded no repository matching this paper. I am confident the authors have not publicly released their code for this paper.",
+  "problems": [],
+  "meta": {
+    "paper_id": "RPS-KNN_An_Ultra-Fast_FPGA_Accelerator_of_Range-Projection-Structure_K-Nearest-N-505efba4",
+    "title": "RPS-KNN: An Ultra-Fast FPGA Accelerator of Range-Projection-Structure K-Nearest-Neighbor Search for LiDAR Odometry in Smart Vehicles",
+    "authors": "Jianzhong Xiao, Hao Sun, Qi Deng, Xinzhe Liu, Hongtu Zhang, ChengZhang He, Yuhao Shu, Yajun Ha",
+    "year": 2023,
+    "venue": "2023 IEEE International Symposium on Circuits and Systems (ISCAS)",
+    "doi": "10.1109/ISCAS46773.2023.10182151",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

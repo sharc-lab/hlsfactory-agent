@@ -1,0 +1,89 @@
+{
+  "repos": [
+    {
+      "repo_id": "TrustworthyComputing/CHESS",
+      "provenance": "own_in_paper",
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "The artifacts of this work are available at https://github.com/\nTrustworthyComputing/CHESS.",
+          "source": "paper p.333"
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "CHESS: Compiling Homomorphic Encryption with Scheme Switching",
+          "source": "readme"
+        },
+        {
+          "type": "readme_has_doi_or_arxiv",
+          "quote": "@inproceedings{shokri2025chess,\n    author = {Rostin Shokri and Nektarios Georgios Tsoutsos},\n    title = {{CHESS: Compiling Homomorphic Encryption with Scheme Switching}},\n    booktitle={International Symposium on Hardware Oriented Security and Trust (HOST)},\n    pages={1--11},\n    year={2025},\n    organization={IEEE}\n}",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "rostin rostin.shokri@gmail.com",
+          "source": "github_api"
+        },
+        {
+          "type": "name_matches_system",
+          "quote": "CHESS",
+          "source": "paper p.325"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "created_at: 2025-03-11 (paper accepted at IEEE HOST 2025)",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 9,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "TrustworthyComputing/CHESS",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "TrustworthyComputing/CHESS",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "C++",
+          "created_at": "2025-03-11T04:07:54Z",
+          "pushed_at": "2026-01-22T03:09:42Z",
+          "description": null,
+          "size_kb": 71548
+        },
+        "cap_kb": 307200
+      },
+      "notes": "The CHESS compiler for homomorphic encryption with scheme switching. Written in C++, uses OpenFHE backend and MLIR/Polygeist frontend. No HLS hardware designs found, as expected for an FHE compiler project."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_prepass_and_paper",
+      "query": "prepass.json + pdftotext paper.pdf",
+      "found": "Link in paper (Resources section, p.333): https://github.com/TrustworthyComputing/CHESS. Also google/heir in references (related work only)."
+    }
+  ],
+  "summary": "Found the authors' own repository TrustworthyComputing/CHESS directly linked in the paper (p.333, Resources section). The README confirms the exact paper title and authors, the commit author (rostin) matches the first author Rostin Shokri, and the repo was created in March 2025 consistent with the IEEE HOST 2025 publication. The HLS scan confirms no HLS designs are present; this is a homomorphic encryption compiler implemented in C++. No additional repos are needed: google/heir appeared only in the reference list as a cited related work, not as code the paper builds on or evaluates."
+}

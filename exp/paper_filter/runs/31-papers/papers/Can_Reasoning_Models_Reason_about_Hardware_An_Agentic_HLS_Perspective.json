@@ -1,0 +1,168 @@
+{
+  "paper_id": "Can_Reasoning_Models_Reason_about_Hardware_An_Agentic_HLS_Perspective",
+  "title": "Can Reasoning Models Reason about Hardware? An Agentic HLS Perspective",
+  "status": "ok",
+  "outcome": "hls_found",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "Lucaz97/Agentic-HLS",
+      "provenance": "own_found_by_search",
+      "outcome": "hls_found",
+      "confidence": "high",
+      "flags": [],
+      "handoff": true,
+      "evidence": [
+        {
+          "type": "git_log_authors_match",
+          "quote": "Commit author 'Luca' matches first author Luca Collini",
+          "source": "git_log"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "I'm a PhD student in ECE at NYU Tandon",
+          "source": "github_api"
+        },
+        {
+          "type": "name_matches_system",
+          "quote": "Agentic-HLS \u2014 matches paper's 'agentic HLS framework' and 'HLS Optimization Agent'",
+          "source": "repo_contents"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Input benchmarks include aes, present, sha256, kmp, nw (Needleman-Wunsch), filter (FIR+IIR) \u2014 all match Table I benchmarks in the paper",
+          "source": "repo_contents"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Output logs named run_aes_deepseek-chat_*.log match the paper's DeepSeek-V3 experiments on AES",
+          "source": "repo_contents"
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "# Agentic HLS",
+          "source": "readme"
+        },
+        {
+          "type": "readme_has_doi_or_arxiv",
+          "quote": "To be used with https://anonymous.4open.science/",
+          "source": "readme"
+        },
+        {
+          "type": "description_matches_abstract",
+          "quote": "To be used with https://anonymous.4open.science/ \u2014 typical double-blind submission placeholder",
+          "source": "github_api"
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "Code, benchmarks, and raw results are provided here",
+          "source": "paper p.3",
+          "verified": true
+        },
+        {
+          "type": "paper_own_link",
+          "quote": "We open-source our framework",
+          "source": "paper p.7",
+          "verified": true
+        }
+      ],
+      "scan": {
+        "classification": "hls_found",
+        "mode": "clone",
+        "files_scanned": 927,
+        "hls_files": 336,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 272,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 233,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 1406,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [
+          "include/ac_channel.h",
+          "include/ac_complex.h",
+          "include/ac_sc.h",
+          "include/ac_std_float.h",
+          "include/ac_sync.h",
+          "output_folders/outputs_Cipher_deepseek-chat_2/Cipher_result.c",
+          "output_folders/outputs_Cipher_deepseek-chat_4/Cipher_result.c",
+          "output_folders/outputs_Cipher_deepseek-chat_8/Cipher_result.c",
+          "output_folders/outputs_Cipher_deepseek-chat_9/Cipher_result.c",
+          "output_folders/outputs_Cipher_hyperbolic-reasoner_1/Cipher_result.c"
+        ],
+        "truncated": false,
+        "repo_id": "Lucaz97/Agentic-HLS",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "Lucaz97/Agentic-HLS",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Tcl",
+          "created_at": "2025-03-05T23:25:39Z",
+          "pushed_at": "2025-05-28T06:28:55Z",
+          "description": "To be used with https://anonymous.4open.science/",
+          "size_kb": 7200
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Found by searching for 'agentic-hls' on GitHub. GitHub user Lucaz97 matches first author Luca Collini (NYU Tandon PhD student). Repo contains the agentic HLS optimization framework with all benchmarks listed in the paper (AES, Present, SHA256, KMP, NW, FIR+IIR, synthetic tests), Catapult HLS configurations, and experiment output logs matching the paper's DeepSeek-V3/R1 and o3-mini experiments. No explicit URL in the paper \u2014 the anonymous.4open.science link in the repo description was used for double-blind review."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "gh_search_repos",
+      "query": "HLS agentic optimization framework",
+      "found": "1 result, unrelated"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Can Reasoning Models Reason about Hardware",
+      "found": "1 result, unrelated"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "LLM HLS optimization agent",
+      "found": "1 result (tiantian-1110/FPT26-HLS-Agent), unrelated"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "HLS optimization agent in:name,description",
+      "found": "4 results including Lucaz97/Agentic-HLS, tiantian-1110/FPT26-HLS-Agent, ksr-coder/HLSAgent, taitashaw/hls-agentic-verify \u2014 Lucaz97/Agentic-HLS matched"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "agentic HLS",
+      "found": "Many results including Lucaz97/Agentic-HLS (repo name matches, description mentions anonymous.4open.science)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Luca Collini",
+      "found": "1 result (ChPedro-dev/Portifolio-Lucas-Collinii) unrelated; Lucaz97 not found by this query"
+    }
+  ],
+  "summary": "Found one repo: Lucaz97/Agentic-HLS. This is the authors' own code for the paper, confirmed by (1) GitHub username Lucaz97 matching first author Luca Collini (NYU Tandon PhD student in ECE), (2) repo name 'Agentic-HLS' matching the paper's agentic HLS optimization framework, (3) input benchmarks (aes, present, sha256, kmp, nw, filter) exactly matching Table I in the paper, (4) output logs matching the paper's DeepSeek-V3/DeepSeek-R1/o3-mini experiments, and (5) the paper's statements 'Code, benchmarks, and raw results are provided here' and 'We open-source our framework'. The repo contains Catapult HLS configurations and HLS C/C++ code, confirmed by the HLS scan which found 336 HLS files with both Catapult and Vitis dialects. No explicit GitHub URL appears in the paper \u2014 the anonymous.4open.science link was used for double-blind review \u2014 so the repo was found by search and has provenance 'own_found_by_search'.",
+  "problems": [],
+  "meta": {
+    "paper_id": "Can_Reasoning_Models_Reason_about_Hardware_An_Agentic_HLS_Perspective",
+    "title": "Can Reasoning Models Reason about Hardware? An Agentic HLS Perspective",
+    "authors": "Luca Collini, Andrew Hennessee, Ramesh Karri, Siddharth Garg",
+    "year": 2025,
+    "venue": "2025 IEEE International Conference on LLM-Aided Design (ICLAD)",
+    "doi": "10.1109/ICLAD65226.2025.00028",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

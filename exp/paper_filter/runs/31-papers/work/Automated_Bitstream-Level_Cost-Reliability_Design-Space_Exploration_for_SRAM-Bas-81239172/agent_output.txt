@@ -1,0 +1,14 @@
+The result is valid and has been written to `output/result.json`. Here's a summary:
+
+**No authors' own repository found** for this paper. The paper does not contain a code availability statement, and extensive searching (author profiles `cfib` and `mhorauer`, multiple repo/code searches, web search) turned up no public implementation.
+
+**Four third-party repos** are referenced in the paper as tools it builds on or benchmark designs it evaluates with:
+
+| Repo | Role | Evidence |
+|------|------|----------|
+| `byuccl/bfat` | Bitstream Fault Analysis Tool (tool the approach uses) | Footnotes 2 on p.2 |
+| `f4pga/prjxray` | Xilinx 7-series bitstream documentation (dependency) | Footnotes 3, 5 on pp.2,5 |
+| `olofk/serv` | SERV RISC-V CPU (case-study benchmark design) | Footnote 8 on p.7 |
+| `stnolting/neorv32` | NEORV32 RISC-V CPU (case-study benchmark design) | Referenced throughout via p.1 abstract and p.7 footnote 7 |
+
+**HLS scan results:** All four repos contain no HLS designs (`repo_no_hls`).

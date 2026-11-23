@@ -1,0 +1,95 @@
+{
+  "paper_id": "3706628.3708861",
+  "title": "An Empirical Comparision of LLM-based Hardware Design and High-level Synthesis.",
+  "status": "ok",
+  "outcome": "not_found",
+  "needs_ocr": false,
+  "repos": [],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_paper",
+      "query": "full text of paper.pdf and full_paper.pdf (preprint from uv-xiao.github.io)",
+      "found": "No code availability statement, no GitHub links, no footnotes with repository URLs. Paper is a 1-page poster describing an LLM prompting methodology, not a software framework."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "\"An Empirical Comparision of LLM-based Hardware Design\" in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "\"LLM-based Hardware Design\" in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "\"Empirical Comparison\" HLS LLM in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "\"Empirical Comparision\" in:readme",
+      "found": "5 results, none relevant to this paper"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "LLM FPGA Verilog HLS in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"An Empirical Comparision of LLM-based Hardware Design and High-level Synthesis\"",
+      "found": "3 results: ericlyun.github.io (publications page listing), morningD/lang.csconf (affiliations JSON), anmolsahoo25/pc_builder_2026 (unrelated)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"3706628.3708861\"",
+      "found": "3 results: uv-xiao.github.io (papers.bib), same unrelated sites"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Empirical Comparision\" LLM",
+      "found": "7 results, all personal/academic pages, no code repos"
+    },
+    {
+      "step": "web_search",
+      "query": "\"An Empirical Comparision of LLM-based Hardware Design\" github",
+      "found": "Found longer preprint PDF at uv-xiao.github.io, no code repos mentioned"
+    },
+    {
+      "step": "web_search",
+      "query": "\"An Empirical Comparision of LLM-based Hardware Design\" code",
+      "found": "No code repos found. Results only link to ACM DL, PDF, researchgate, and personal pages."
+    },
+    {
+      "step": "gh_api",
+      "query": "orgs/pku-liang/repos (45 repos)",
+      "found": "None match this paper. Related but separate: pku-liang/OriGen (Fan Cui, ICCAD 2024, prior work), pku-liang/Cement (Youwei Xiao, FPGA 2024, comparison baseline), pku-liang/hwe-bench (Fan Cui, ICCAD 2026, different paper)"
+    },
+    {
+      "step": "gh_api",
+      "query": "users/uv-xiao/repos (30 repos)",
+      "found": "None match this paper"
+    },
+    {
+      "step": "gh_api",
+      "query": "users/ericlyun/repos (8 repos)",
+      "found": "Only personal website and tutorial repos; none match this paper"
+    }
+  ],
+  "summary": "This is a 1-page poster paper (FPGA 2025, categorized as W10/poster) that presents an empirical comparison of LLM-based hardware design vs HLS. The paper describes a prompting methodology for guiding LLMs (Claude 3.5 Sonnet) to generate synthesizable Verilog, using PolyBench benchmarks. No code availability statement, GitHub link, or repository is mentioned anywhere in the paper. The paper is a methodology/comparison study rather than a software artifact release. Despite thorough searching of the paper text, GitHub (by title, keywords, code content, and authors' organization/accounts), and the web, no dedicated repository for this paper was found. I am confident there is no public code repository associated with this specific paper.",
+  "problems": [],
+  "meta": {
+    "paper_id": "3706628.3708861",
+    "title": "An Empirical Comparision of LLM-based Hardware Design and High-level Synthesis.",
+    "authors": "Fan Cui, Youwei Xiao, Kexing Zhou, Yun Liang 0001",
+    "year": 2025,
+    "venue": "FPGA",
+    "doi": "10.1145/3706628.3708861",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "doi",
+    "ambiguous": false
+  }
+}

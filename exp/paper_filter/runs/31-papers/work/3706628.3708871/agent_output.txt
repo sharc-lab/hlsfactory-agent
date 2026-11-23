@@ -1,0 +1,17 @@
+Done. Here's a summary of what I found:
+
+## Findings
+
+**Repo: `robertszafa/elastic-sycl-hls`** (provenance: `own_found_by_search`)
+
+The paper's own code — "Dynamic Loop Fusion in HLS - FPGA25 artifact" — is released via Zenodo DOI 10.5281/zenodo.14383450, cited in the paper as "Our implementation and evaluation are publicly available [59]". The Zenodo artifact description (file structure, benchmark names) matches **exactly** the `dynamic-fusion` branch of `robertszafa/elastic-sycl-hls`:
+
+- `lsq/DataUnitDRAM.hpp` (DU hardware template), `lib/DynamicLoopFusionAnalysis.cpp`, `lib/DynamicLoopFusionTransform.cpp` — all present on the `dynamic-fusion` branch
+- Benchmarks (raw_loop, war_loop, waw_loop, bnn, pagerank, fft2x, matrix_power, tanh_spmv, etc.) match the paper's evaluation
+- All commits (Aug–Oct 2024, e.g., "Add speculation support to dynamic loop fusion", "Add hazard pair prunning") are by first author Robert Szafarczyk
+
+**Caveats reported honestly:**
+- The repo is the authors' shared codebase (originally the FPL'23 paper's `elastic-sycl-hls`), with this paper's code living in the `dynamic-fusion` branch — the paper itself links to Zenodo, not GitHub (no direct GitHub URL in the PDF).
+- `hls_scan.py` returned `repo_no_hls` (0 HLS files detected) — the scanner doesn't recognize Intel SYCL HLS patterns (`[[intel::fpga_*]]` attributes on SYCL kernels), though the code is clearly HLS (Intel SYCL compiler passes + synthesizable Data Unit templates). Scan output pasted verbatim into the result.
+
+Result written to `output/result.json` and validated with `jq`.

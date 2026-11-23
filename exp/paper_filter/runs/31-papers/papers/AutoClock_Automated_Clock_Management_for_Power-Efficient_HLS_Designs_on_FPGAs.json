@@ -1,0 +1,112 @@
+{
+  "paper_id": "AutoClock_Automated_Clock_Management_for_Power-Efficient_HLS_Designs_on_FPGAs",
+  "title": "AutoClock: Automated Clock Management for Power-Efficient HLS Designs on FPGAs",
+  "status": "ok",
+  "outcome": "hls_found",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "MasLiang/AutoClock",
+      "provenance": "own_in_paper",
+      "outcome": "hls_found",
+      "confidence": "high",
+      "flags": [],
+      "handoff": true,
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "The open-source repository is available at: https://github.com/MasLiang/AutoClock.",
+          "source": "paper p.2",
+          "verified": true
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "# AutoClock",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Jiawei Liang",
+          "source": "git_log"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "AutoClock provides clock management for HLS designs on FPGAs",
+          "source": "repo_contents"
+        }
+      ],
+      "scan": {
+        "classification": "hls_found",
+        "mode": "clone",
+        "files_scanned": 160,
+        "hls_files": 58,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 58,
+          "vitis_weak": 17,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 68744,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [
+          "benchmarks/P1MC_cdc/kernel/top.cpp",
+          "benchmarks/P1MC_cdc/kernel/top.h",
+          "benchmarks/P1MC_cdc/kernel/top_backup.cpp",
+          "benchmarks/P1MC_cdc_cg/top.cpp",
+          "benchmarks/P1MC_cdc_cg/kernel/top.cpp",
+          "benchmarks/P1MC_cdc_cg/kernel/top.h",
+          "benchmarks/P1MC_cdc_cg/kernel/top_backup.cpp",
+          "benchmarks/P1MC_cg/kernel/top.cpp",
+          "benchmarks/P1MC_cg/kernel/top.h",
+          "benchmarks/P1MC_cg/kernel/top_backup.cpp"
+        ],
+        "truncated": false,
+        "repo_id": "MasLiang/AutoClock",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "MasLiang/AutoClock",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Tcl",
+          "created_at": "2024-04-22T02:03:43Z",
+          "pushed_at": "2025-05-07T16:07:13Z",
+          "description": null,
+          "size_kb": 1789
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Explicitly linked in the paper on page 2 as the open-source repository. The repo contains Vitis HLS designs for AutoClock, including benchmark examples (PnMC, P1MC, etc.) and the AutoClock framework code. The HLS scan confirms Vitis HLS source files with pragmas."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "prepass.json",
+      "query": "pre-existing candidate MasLiang/AutoClock found on page 2",
+      "found": "MasLiang/AutoClock - exists, not in references, explicitly the open-source repo link"
+    }
+  ],
+  "summary": "Found the authors' own repo MasLiang/AutoClock directly linked in the paper on page 2 (\"The open-source repository is available at: https://github.com/MasLiang/AutoClock\"). The repo contains Vitis HLS designs (58 HLS files detected by hls_scan.py), matching the paper's focus on automated clock management for HLS on FPGAs. The first author (Jiawei Liang, GitHub user MasLiang) is verified via git log. No other third-party repos need reporting (PyHDI/Pyverilog is only a cited reference tool, not a repo the paper builds on as its subject).",
+  "problems": [],
+  "meta": {
+    "paper_id": "AutoClock_Automated_Clock_Management_for_Power-Efficient_HLS_Designs_on_FPGAs",
+    "title": "AutoClock: Automated Clock Management for Power-Efficient HLS Designs on FPGAs",
+    "authors": "Jiawei Liang, Linfeng Du, Xiaofeng Zhou, Zhe Lin, Jiang Xu, Wei Zhang",
+    "year": 2025,
+    "venue": "2025 62nd ACM/IEEE Design Automation Conference (DAC)",
+    "doi": "10.1109/DAC63849.2025.11133279",
+    "group": "with_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "paper_id": "Efficient_and_Scalable_Architectures_for_Multi-level_Superconducting_Qubit_Reado-568389fd",
+  "title": "Efficient and Scalable Architectures for Multi-level Superconducting Qubit Readout",
+  "status": "ok",
+  "outcome": "repo_no_hls",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "satvikmaurya/HERQULES",
+      "provenance": "third_party_demo",
+      "outcome": "repo_no_hls",
+      "confidence": "high",
+      "flags": [
+        "third_party"
+      ],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_names_repo",
+          "quote": "HERQULES Design [2]",
+          "source": "paper p.4",
+          "verified": true
+        },
+        {
+          "type": "paper_names_repo",
+          "quote": "HERQULES [2]",
+          "source": "paper p.1",
+          "verified": true
+        },
+        {
+          "type": "paper_names_repo",
+          "quote": "HERQULES [2] often struggle to scale",
+          "source": "paper p.2",
+          "verified": true
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "Code for [Scaling Qubit Readout with Hardware Efficient Machine Learning Architectures](https://dl.acm.org/doi/abs/10.1145/3579371.3589042) published at ISCA 2023.",
+          "source": "readme"
+        },
+        {
+          "type": "description_matches_abstract",
+          "quote": "Scaling Qubit Readout with Hardware Efficient Machine Learning Architectures",
+          "source": "github_api"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "satvikmaurya",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "repo_no_hls",
+        "mode": "clone",
+        "files_scanned": 0,
+        "hls_files": 0,
+        "tapa_files": 0,
+        "weak_files": 0,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 0,
+          "vitis_weak": 0,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 0,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "repo_id": "satvikmaurya/HERQULES",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "satvikmaurya/HERQULES",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "Jupyter Notebook",
+          "created_at": "2025-09-07T20:07:23Z",
+          "pushed_at": "2025-09-07T20:10:41Z",
+          "description": "Scaling Qubit Readout with Hardware Efficient Machine Learning Architectures",
+          "size_kb": 28
+        },
+        "cap_kb": 307200
+      },
+      "notes": "HERQULES is the ISCA 2023 baseline that this DAC 2025 paper builds on and evaluates against. Co-authors Satvik Maurya and Chaithanya Naik Mude are shared between both papers. The repo contains a Jupyter notebook with matched filter code but no HLS designs."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "prepass.json",
+      "query": "PDF prepass",
+      "found": "No candidates or profiles found in prepass.json. No links in PDF."
+    },
+    {
+      "step": "paper_text_search",
+      "query": "Search PDF for URLs, GitHub links, code availability",
+      "found": "No code availability statements, GitHub links, or URLs found in the paper text or PDF links."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "HERQULES in:name",
+      "found": "Found satvikmaurya/HERQULES - the ISCA 2023 baseline paper's repo. Also found secure-foundations/herqules and conix-center/herqules (unrelated security projects)."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "satvikmaurya",
+      "found": "Found satvikmaurya (profile repo) and satvikmaurya.github.io. No repo for this DAC 2025 paper."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "multi-level qubit readout",
+      "found": "No results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "multi-level readout",
+      "found": "No results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Efficient and Scalable Architectures Multi-level Superconducting Qubit Readout",
+      "found": "No results."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Efficient and Scalable Architectures for Multi-level Superconducting Qubit Readout\"",
+      "found": "Only paper listings/metadata repos, no official code repository."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"multi-level superconducting qubit readout\" \"code\"|\"github\"|\"repository\"",
+      "found": "No results."
+    },
+    {
+      "step": "web_search",
+      "query": "\"Efficient and Scalable Architectures for Multi-level Superconducting Qubit Readout\" github",
+      "found": "Found personal pages of authors (metalcyanide.github.io, satvikmaurya.github.io) and arXiv page. Satvik's page lists the DAC 2025 paper with PDF and BibTeX links only, no code link."
+    },
+    {
+      "step": "github_api",
+      "query": "users/satvikmaurya/repos",
+      "found": "Listed all repos; none correspond to this DAC 2025 paper."
+    },
+    {
+      "step": "github_api",
+      "query": "users/metalcyanide/repos",
+      "found": "Listed all repos; none correspond to this DAC 2025 paper."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Deep-neural-network discrimination of multiplexed superconducting-qubit states\"",
+      "found": "Only citation listings, no official code repo."
+    },
+    {
+      "step": "web_search",
+      "query": "arXiv page for paper 2405.08982",
+      "found": "arXiv page shows no direct GitHub links or code availability."
+    }
+  ],
+  "summary": "No code repository was found for this DAC 2025 paper itself. The paper does not include a code availability statement, and the authors' personal pages (satvikmaurya.github.io, metalcyanide.github.io) list only PDF and BibTeX links for this paper. The HERQULES baseline repo (satvikmaurya/HERQULES) was identified as a third-party repo that the paper builds on and evaluates against; it contains Python/Jupyter code with no HLS designs. The paper uses hls4ml for HLS synthesis but does not release its own HLS designs.",
+  "problems": [],
+  "meta": {
+    "paper_id": "Efficient_and_Scalable_Architectures_for_Multi-level_Superconducting_Qubit_Reado-568389fd",
+    "title": "Efficient and Scalable Architectures for Multi-level Superconducting Qubit Readout",
+    "authors": "Chaithanya Naik Mude, Satvik Maurya, Benjamin Lienhard, Swamit Tannu",
+    "year": 2025,
+    "venue": "2025 62nd ACM/IEEE Design Automation Conference (DAC)",
+    "doi": "10.1109/DAC63849.2025.11133314",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

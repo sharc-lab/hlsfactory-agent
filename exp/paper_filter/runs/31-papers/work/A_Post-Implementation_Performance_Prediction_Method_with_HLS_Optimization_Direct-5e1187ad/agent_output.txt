@@ -1,0 +1,12 @@
+The result is written and parses correctly. Here's my summary:
+
+## Result: no repository found
+
+**What I did:**
+1. **Read the full paper** (prepass.json showed no URL candidates, confirmed by full-text scan) — the paper contains **no code availability statement, no GitHub link, no footnote** with a repository. The only URLs are the Xilinx doc reference [2] and the PolyBench site reference [17] (cited works, not authors' code).
+2. **GitHub repo searches** (12 queries budget): topic- and author-based queries all returned 0 results. The only relevant hit (`lydiawunan/HLS-Perf-Prediction-with-GNNs`) is the repo of a baseline paper (PNA, ref [18] by Nan Wu et al.), explicitly not this paper's code.
+3. **GitHub code search** (3 of 4 queries): the exact paper title appears only in paper-listing/index repos (paperhub, topaperlist, etc.), never in a code repository.
+4. **Web search** (3/3): only academic publisher pages (ACM, IEEE, researchr, Lune Research) — no repo.
+5. **Author GitHub profiles**: checked `jingyuzhu`, `chuboliu`, `yanding-hnu`, `Zenxiao`, `luxiao-hnu` via the GitHub API — none has an HLS-related repository.
+
+**Conclusion:** This is a `not_found` case (empty `repos` list), not `no_artifact` — the paper presents a concrete method (Graph Builder + GNN prediction model, evaluated on MachSuite/PolyBench kernels), but the authors did not release any public code. I'm reasonably confident there's no authors' repo, though of course code could exist under a username not linked to the author names.

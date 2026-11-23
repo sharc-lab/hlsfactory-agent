@@ -1,0 +1,3 @@
+The result is valid JSON and has been written to `output/result.json`. Here's the summary of what was found:
+
+**No code repository was found for this paper.** The paper (RPS-KNN at ISCAS 2023) presents an FPGA accelerator implemented using Xilinx Vitis HLS, but contains no code availability statement — no GitHub link, no "code available at" sentence, no footnote URL. Extensive searches across GitHub (12 repo searches, 4 code searches, 3 web searches) plus manual inspection of the first author's (`xiaojzh`), co-authors' and the ECASLab organization repositories all came up empty. The paper has HLS designs (the paper states it uses "Xilinx Vitis HLS (high-level-synthesis) tool") but the authors did not publicly release the code.

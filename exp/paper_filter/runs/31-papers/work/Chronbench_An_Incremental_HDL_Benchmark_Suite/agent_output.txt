@@ -1,0 +1,19 @@
+The result is ready. Here's a summary of what was found:
+
+## Results for "Chronbench: An Incremental HDL Benchmark Suite"
+
+**6 repos found**, all scanned as `repo_no_hls` (no HLS designs):
+
+### Authors' own repo
+- **ZakSN/chronbench** — `own_in_paper` — directly linked on pages 2 and 8 of the paper. Contains Python scripts for converting git repos into incremental HDL benchmarks. Git log shows commits by first author Zakary Nafziger.
+
+### 5 upstream repos (third-party, paper builds on)
+The paper's Section V describes these as the "upstream repositories on which the Chronbench incremental benchmarks are based":
+
+1. **DanieleParravicini/regex_coprocessor** — CICERO regex accelerator (VHDL)
+2. **openhwfoundation/cva5** — CVA5 RISC-V CPU (SystemVerilog; cited as `openhwgroup/cva5` in the paper, now at `openhwfoundation`)
+3. **ZipCPU/zipcpu** — ZipCPU soft core (Verilog)
+4. **jotego/jt12** — JT12 Yamaha sound chip emulation (Verilog)
+5. **vortexgpgpu/vortex** — Vortex GPGPU (Verilog)
+
+**None of the repos contain HLS designs** — consistent with the paper's focus on HDL (Verilog/SystemVerilog/VHDL) benchmarks for incremental FPGA CAD flows.

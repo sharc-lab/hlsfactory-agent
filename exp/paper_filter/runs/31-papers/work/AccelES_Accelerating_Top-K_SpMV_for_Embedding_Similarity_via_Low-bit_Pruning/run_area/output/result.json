@@ -1,0 +1,105 @@
+{
+  "repos": [
+    {
+      "repo_id": "zhaijiaqi/AccelES",
+      "provenance": "own_found_by_search",
+      "evidence": [
+        {
+          "type": "name_matches_system",
+          "quote": "AccelES",
+          "source": "paper p.1"
+        },
+        {
+          "type": "owner_matches_affiliation",
+          "quote": "Jiaqi Zhai",
+          "source": "paper p.1"
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "AccelES: Accelerating Top-K SpMV for Embedding Similarity via Low-bit Pruning",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "zhaijiaqi",
+          "source": "git_log"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Vitis_HLS 2023.2",
+          "source": "readme"
+        },
+        {
+          "type": "contents_match_paper",
+          "quote": "Xilinx Alveo U280 platform",
+          "source": "readme"
+        },
+        {
+          "type": "dates_fit",
+          "quote": "created_at: 2024-12-09T02:44:55Z",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "hls_found",
+        "mode": "clone",
+        "files_scanned": 23,
+        "hls_files": 5,
+        "tapa_files": 0,
+        "weak_files": 4,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 0,
+          "vitis": 5,
+          "vitis_weak": 4,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 213,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [
+          "src/fpga/src/ip/fpga_utils.hpp",
+          "src/fpga/src/ip/spmv/spmv_ucsr_top_k_multicore.cpp",
+          "src/fpga/src/ip/spmv/spmv_ucsr_top_k_multicore.hpp",
+          "src/fpga/src/ip/spmv/spmv_utils.hpp",
+          "src/fpga/src/x_decoder/x_decoder.cpp"
+        ],
+        "truncated": false,
+        "repo_id": "zhaijiaqi/AccelES",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "zhaijiaqi/AccelES",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "C++",
+          "created_at": "2024-12-09T02:44:55Z",
+          "pushed_at": "2024-12-09T02:44:59Z",
+          "description": null,
+          "size_kb": 134
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Authors' own repo found by searching GitHub for the system name 'AccelES'. Owner 'zhaijiaqi' matches first author Jiaqi Zhai. README contains the exact paper title, mentions Vitis_HLS 2023.2 and Alveo U280 FPGA platform matching the paper. Contains 5 Vitis HLS files with 213 HLS pragmas. Single commit on 2024-12-09, before HPCA 2025. Paper does not contain an explicit code availability link."
+    }
+  ],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "gh_search_repos",
+      "query": "AccelES in:name",
+      "found": "zhaijiaqi/AccelES (matched) and 8 unrelated repos"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "AccelES in:readme",
+      "found": "zhaijiaqi/AccelES (matched) and many unrelated repos"
+    }
+  ],
+  "summary": "Found the authors' own repository zhaijiaqi/AccelES via GitHub search for the system name 'AccelES'. The owner matches first author Jiaqi Zhai, the README contains the exact paper title, and the repo contains 5 Vitis HLS files (213 HLS pragmas) implementing the FPGA accelerator described in the paper. The paper itself does not contain an explicit code availability link. No third-party repos need to be reported as the paper builds on standard FPGA toolchains (Vitis HLS, Alveo U280) rather than other projects' code repos."
+}

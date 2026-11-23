@@ -1,0 +1,16 @@
+Good - the quote matches. The paper does say "The artifact is available at https://github.com/ncsys-lab/FUSE." across two lines. The result JSON is valid and correctly formatted.
+
+Here's a summary of the findings:
+
+**Paper**: "Efficient Optimization with Encoded Ising Models" by Devrath Iyer and Sara Achour (Stanford University), HPCA 2025.
+
+**Found repo**: `ncsys-lab/FUSE` — proven as **the authors' own repo** (provenance: `own_in_paper`).
+
+**Evidence**:
+- ✅ **paper_own_link**: The paper's artifact appendix (p.13) explicitly states: "The artifact is available at https://github.com/ncsys-lab/FUSE."
+- ✅ **readme_has_title**: The README says it implements the tool described in the HPCA 2025 paper
+- ✅ **git_log_authors_match**: Commits by Devrath Iyer (deviyer@stanford.edu), matching the first author
+- ✅ **owner_matches_affiliation**: ncsys-lab (Stanford lab), matching authors' Stanford affiliation
+- ✅ **contents_match_paper**: Repo contains the FUSE framework (solver, synth, circuit modules, problem definitions) matching the paper's description
+
+**HLS relevance**: The paper mentions "offers an HLS backend for some problems" (p.2) and "In our HLS flow" (p.12). The repo uses Python to generate Verilog, then runs Yosys/OpenLane (RTL-to-GDS) for synthesis — not traditional C/C++ HLS. The HLS scan found no HLS source files, classifying the repo as `archive_only` due to an unexpanded tarball of experiment data.

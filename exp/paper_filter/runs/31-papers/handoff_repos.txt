@@ -1,0 +1,8 @@
+EPFL-LAP/dynamatic
+Lucaz97/Agentic-HLS
+MasLiang/AutoClock
+UT-LCA/ML4Accel-Dataset
+breagen/MachSuite
+jiahaogai/LLM-for-HLS
+jianyicheng/HLS-benchmarks
+zhaijiaqi/AccelES

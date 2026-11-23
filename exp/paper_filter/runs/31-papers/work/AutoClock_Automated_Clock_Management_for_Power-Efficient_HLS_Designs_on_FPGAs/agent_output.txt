@@ -1,0 +1,18 @@
+The result is written and valid JSON. Here's a summary:
+
+## Result
+
+**Repo found: `MasLiang/AutoClock`** — **provenance: own_in_paper**
+
+The paper explicitly contains a direct link to this GitHub repository on **page 2**:
+> "The open-source repository is available at: https://github.com/MasLiang/AutoClock."
+
+**Evidence:**
+- **paper_own_link**: Verbatim quote from page 2 showing the repo URL
+- **readme_has_title**: README starts with "# AutoClock" matching the paper title
+- **git_log_authors_match**: Commits by "Jiawei Liang" (first author), GitHub user "MasLiang"
+- **contents_match_paper**: Repo contains AutoClock framework with Vitis HLS benchmarks (P1MC, P2MC, etc.) matching the evaluation section
+
+**HLS scan result:** `hls_found` — 58 Vitis HLS files detected with 68,744 `#pragma HLS` occurrences, confirming the repo contains HLS designs directly related to the paper.
+
+**No third-party repos** need reporting. PyHDI/Pyverilog is only cited as a dependency in the reference list. Benchmarks like Vitis Libraries, Rosetta, and PolyBench are referenced works that the paper compares numbers against, not repos it builds on as its subject.

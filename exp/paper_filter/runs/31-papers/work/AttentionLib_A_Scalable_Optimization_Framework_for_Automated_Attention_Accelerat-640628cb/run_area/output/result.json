@@ -1,0 +1,25 @@
+{
+  "repos": [],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {"step": "read_paper_text", "query": "full paper text for GitHub links, code availability statements, repo URLs", "found": "No GitHub links or code availability statements found anywhere in the paper, including abstract, introduction, conclusion, evaluation, footnotes, references, and page metadata."},
+    {"step": "gh_search_repos", "query": "AttentionLib in:name", "found": "1 result: chengchingwen/NeuralAttentionlib.jl (Julia package, 2021, unrelated)"},
+    {"step": "gh_search_repos", "query": "AttentionLib in:readme", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "attention accelerator FPGA MLIR in:readme", "found": "85 results, none matching AttentionLib"},
+    {"step": "gh_search_repos", "query": "attention accelerator HLS in:readme language:C++", "found": "45 results, none matching AttentionLib"},
+    {"step": "gh_search_code", "query": "\"AttentionLib: A Scalable Optimization Framework for Automated Attention Acceleration on FPGA\"", "found": "2 results, both are citation/metadata databases (aayejinpeng/survey, morningD/lang.csconf), not the authors' repo"},
+    {"step": "gh_search_code", "query": "\"AttentionLib\"", "found": "317 results, all unrelated (ebook app, robotology attention library)"},
+    {"step": "web_search", "query": "AttentionLib A Scalable Optimization Framework for Automated Attention Acceleration on FPGA github", "found": "No GitHub repo. Results show only DOI, IEEE Xplore, ConnectedPapers, SemanticScholar entries. No code repository found."},
+    {"step": "gh_search_repos", "query": "Fudan attention accelerator FPGA", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "MLIR attention FPGA", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "fusion dataflow HLS attention", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "fusion dataflow attention FPGA MLIR", "found": "0 results"},
+    {"step": "gh_search_users", "query": "Zhenyu Liu Fudan", "found": "1 user (Yuchen-10001), no relevant repos found"},
+    {"step": "gh_search_users", "query": "Kun Wang Fudan FPGA", "found": "0 results"},
+    {"step": "gh_search_users", "query": "23212020007@m.fudan.edu.cn", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "TransLib FPGA transformer", "found": "0 results (referenced paper from same group, no public repo found)"},
+    {"step": "web_search", "query": "\"AttentionLib\" FPGA github", "found": "Same academic-index results. No GitHub repo."}
+  ],
+  "summary": "The paper 'AttentionLib: A Scalable Optimization Framework for Automated Attention Acceleration on FPGA' (DATE 2025) presents an MLIR-based framework called AttentionLib that automatically generates HLS C/C++ code for attention acceleration on FPGAs. No code availability statement or GitHub link appears anywhere in the paper. Extensive GitHub searches (repo search by name and keyword variants, code search for the exact paper title and the name 'AttentionLib', user searches by author names and emails) and web searches all failed to locate a public repository. The paper does not build on or evaluate with any specific third-party open-source designs either; it compares against Vitis HLS's automatic optimizations. I am confident no public repository exists for this paper."
+}

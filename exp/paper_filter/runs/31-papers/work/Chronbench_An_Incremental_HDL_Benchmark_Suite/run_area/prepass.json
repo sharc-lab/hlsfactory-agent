@@ -1,0 +1,88 @@
+{
+  "pdf": "Chronbench_An_Incremental_HDL_Benchmark_Suite.pdf",
+  "title": "Chronbench: An Incremental HDL Benchmark Suite",
+  "pages": 9,
+  "text_chars": 50230,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "ZakSN/chronbench",
+      "raws": [
+        "github.com/ZakSN/chronbench"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        2,
+        8
+      ],
+      "context": "dis- cusses future work, and finally, Section IX concludes. Our benchmark suite and our flow for converting git repositories is available at https://github.com/ZakSN/chronbench. II. PRIOR WORK This section first presents a brief discussion of incremental FPGA flows, followed by a discussion of FPGA CAD bench- marking. A. Incr",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "ZakSN/chronbench",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2024-09-19T22:38:41Z",
+        "pushed": "2025-04-15T17:54:13Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 95,
+        "stars": 1,
+        "description": "timeseries HDL benchmarks"
+      }
+    },
+    {
+      "repo_id": "DanieleParravicini/regex",
+      "raws": [
+        "github.com/DanieleParravicini/regex"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        9
+      ],
+      "context": "1\u201324, oct 2021. [Online]. Available: https://doi.org/10.1145%2F3476982 [26] D. Parravicini, \u201cregex coprocessor,\u201d 2024. [Online]. Available: https: //github.com/DanieleParravicini/regex coprocessor [27] E. Matthews and L. Shannon, \u201cTaiga: A new risc-v soft-processor framework enabling high performance cpu architectural features,\u201d in",
+      "repaired": false,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": false
+      }
+    },
+    {
+      "repo_id": "jotego/jt12",
+      "raws": [
+        "github.com/jotego/jt12"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        9
+      ],
+      "context": "31] D. Gisselquist, \u201cZipcpu,\u201d 2024. [Online]. Available: https://github.com/ ZipCPU/zipcpu [32] J. Tejada, \u201cjt12,\u201d 2024. [Online]. Available: https://github.com/jotego/ jt12 [33] B. Tine, K. P. Yalamarthy, F. Elsabbagh, and K. Hyesoon, \u201cVortex: Extending the risc-v isa for gpgpu and 3d-graphics,\u201d in MICRO-54: 54th Annual",
+      "repaired": true,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "jotego/jt12",
+        "renamed_to": null,
+        "language": "Verilog",
+        "created": "2017-02-22T05:36:48Z",
+        "pushed": "2026-11-22T16:03:03Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 119335,
+        "stars": 131,
+        "description": "FM sound source written in Verilog, fully compatible with YM2612, YM3438 (JT12), YM2203 (JT03) and YM2610 (JT10)"
+      }
+    }
+  ],
+  "profiles": []
+}

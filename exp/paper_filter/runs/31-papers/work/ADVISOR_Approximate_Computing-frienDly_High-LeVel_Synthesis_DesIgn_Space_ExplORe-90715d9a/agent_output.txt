@@ -1,0 +1,11 @@
+The result is complete and validated. Here's a summary:
+
+## Summary
+
+**No authors' own code repository was found for ADVISOR.** The paper does not contain any code availability statement or GitHub link. Extensive searching across GitHub (repo names, code content) and web searches found no repository matching the ADVISOR tool from B. Parchamdar and B. Carrion Schaefer. The authors' known GitHub accounts (`schaferb`) contain only older, unrelated repos from 2015.
+
+**Two third-party repos were identified** that the paper builds on/evaluates with:
+1. **DARClab-UTD/S2CBench** – The Synthesizable SystemC Benchmark suite from which the paper's evaluation benchmarks are taken. Already in known_repos.json; scan skipped.
+2. **ehw-fit/evoapproxlib** – The open-source approximate arithmetic library (adders, multipliers) used in the paper's FU approximation step. Scanned as `repo_no_hls` (no HLS content, just Verilog circuit cells).
+
+The ADVISOR methodology itself uses commercial EDA tools (NEC CyberWorkBench for HLS, proprietary logic synthesis) and has not been released as open-source.

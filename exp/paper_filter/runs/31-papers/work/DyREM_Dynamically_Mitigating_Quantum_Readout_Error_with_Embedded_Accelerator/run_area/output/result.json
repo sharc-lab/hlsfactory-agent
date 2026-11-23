@@ -1,0 +1,26 @@
+{
+  "repos": [],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {"step": "read_paper", "query": "full text", "found": "No code availability statement, no GitHub link, no repository URL in the paper text or footnotes."},
+    {"step": "read_prepass", "query": "prepass.json", "found": "No candidates listed."},
+    {"step": "check_pdf_links", "query": "PDF link/annotation extraction", "found": "No hyperlinks or annotations found in the PDF."},
+    {"step": "gh_search_repos", "query": "DyREM", "found": "9 unrelated repos (DyremiX/DyremiX, DyremaR92/dyremar92.github.io, xansar/DyReMe, etc.) - none related to quantum readout error mitigation."},
+    {"step": "gh_search_repos", "query": "DyREM quantum readout error", "found": "0 results."},
+    {"step": "gh_search_repos", "query": "DyREM readout error", "found": "0 results."},
+    {"step": "gh_search_repos", "query": "DyREM mitigation", "found": "0 results."},
+    {"step": "gh_search_repos", "query": "Dynamically Mitigating Quantum Readout Error", "found": "1 result: hmzbn/qemlib (unrelated, a general QEM library)."},
+    {"step": "gh_search_repos", "query": "DyREM in:readme", "found": "0 results."},
+    {"step": "gh_search_code", "query": "DyREM: Dynamically Mitigating Quantum Readout Error", "found": "Only paper listing sites, personal websites (KaiwenZhou2003.github.io, liqianglu-zju.github.io, chenning-tao.github.io), and paper hubs - no code repos."},
+    {"step": "check_author_github_profiles", "query": "KaiwenZhou2003 repos", "found": "4 repos: personal website, policy-search-and-recommendation, Server_QEC (QEC backup - unrelated), vue (fork). No DyREM repo."},
+    {"step": "check_author_github_profiles", "query": "liqianglu-zju repos", "found": "3 repos: personal websites only."},
+    {"step": "check_author_github_profiles", "query": "Chenning-Tao repos", "found": "10 repos: MICRO2026-Tenkai, QRAM_simulator, etc. No DyREM repo."},
+    {"step": "check_author_website", "query": "KaiwenZhou2003.github.io", "found": "DAC2025 page lists only [Paper], [Slides], [Poster] links - no code link."},
+    {"step": "check_author_website", "query": "liqianglu-zju.github.io", "found": "Publication page lists only PDF download - no code link."},
+    {"step": "web_search", "query": "DyREM: Dynamically Mitigating Quantum Readout Error with Embedded Accelerator github", "found": "No repo found. Results point to author websites and paper listing sites only."},
+    {"step": "web_search", "query": "DyREM github code accelerator quantum", "found": "No repo found."},
+    {"step": "web_search", "query": "DyREM github code HLS", "found": "No repo found."}
+  ],
+  "summary": "The paper presents DyREM, a software-hardware co-design approach for quantum readout error mitigation, implemented using Xilinx High-Level Synthesis (HLS) C++ on a Xilinx U50 FPGA. However, the paper contains no code availability statement, no GitHub link, and no repository URL. Extensive searching across GitHub (repo searches, code searches), author profiles (KaiwenZhou2003, liqianglu-zju, Chenning-Tao), author websites, and web search (Exa) failed to locate any associated code repository. No public repository for the DyREM accelerator was found."
+}

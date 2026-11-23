@@ -1,0 +1,18 @@
+Done. `output/result.json` is valid JSON with the scan embedded verbatim.
+
+## Summary
+
+**Found: `OswaldHe/InTAR`** — the authors' own repository, linked directly in a footnote on **page 1** of the paper ("1https://github.com/OswaldHe/InTAR"). This is the only GitHub link in the entire PDF.
+
+Confirmation evidence:
+- **paper_own_link** — footnote on p.1 (verbatim quote from the PDF text)
+- **readme_has_title** — README is titled "InTAR: Inter-Task Auto-Reconfigurable Accelerator Design"
+- **readme_has_doi_or_arxiv** — Zenodo DOI (10.5281/zenodo.14823241) + arXiv 2502.08807
+- **git_log_authors_match** — commits by "Oswald(Zifan) He" (Zifan He, first author) and "Richard Cao" (Yingqi Cao)
+- **description_matches_abstract** — "[FCCM 2025] Code Samples for InTAR..."
+
+**HLS content:** The design is implemented in C++ via **TAPA** (a task-parallel HLS framework) targeting Vitis HLS 2021.2 — the paper explicitly states it supports HLS. The scanner classifies it `tapa_only` (34 TAPA files, ~1092 HLS pragmas, 0 standalone `.cpp` HLS entry files). So this is an HLS-family design (TAPA-based), though not classical Vitis HLS code.
+
+**No other subject repos:** TAPA (`rapidstream-org/rapidstream-tapa`) appears only as a build-tool dependency, and Allo/DFX are baselines compared by numbers only — neither qualifies as an artifact this paper builds on or evaluates. Confidence is very high.
+
+Note: `OswaldHe/InTAR` was in `known_repos.json` (already handled by the pipeline), so I reported it with evidence without scanning beyond the API-level scan the task required — which I did run and included verbatim.

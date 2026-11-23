@@ -1,0 +1,39 @@
+{
+  "pdf": "Efficient_Optimization_with_Encoded_Ising_Models.pdf",
+  "title": "Efficient Optimization with Encoded Ising Models",
+  "pages": 14,
+  "text_chars": 72379,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "ncsys-lab/FUSE",
+      "raws": [
+        "github.com/ncsys-lab/FUSE"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        13
+      ],
+      "context": "all results from the paper is about 1.5 days on a consumer-grade laptop, but benefits from a higher core-count. The artifact is available at https://github.com/ncsys-lab/FUSE. B. Artifact check-list (meta-information) \u2022 Program: FUSE \u2022 Data set: SkyWater 130nm PDK. \u2022 Hardware: Local laptop \u2022 Metrics: Estimated Success Proba",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "ncsys-lab/FUSE",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2024-12-03T02:51:25Z",
+        "pushed": "2025-01-21T22:09:59Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 68508,
+        "stars": 8,
+        "description": null
+      }
+    }
+  ],
+  "profiles": []
+}

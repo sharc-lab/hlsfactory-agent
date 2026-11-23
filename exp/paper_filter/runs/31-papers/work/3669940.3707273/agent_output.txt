@@ -1,0 +1,13 @@
+The JSON is valid. The output is complete. Let me summarize what was found:
+
+**Result summary:**
+
+The paper **CRUSH: A Credit-Based Approach for Functional Unit Sharing in Dynamically Scheduled HLS** extends the open-source **Dynamatic HLS compiler** with a credit-based resource sharing strategy.
+
+1. **EPFL-LAP/dynamatic** — The Dynamatic HLS compiler that CRUSH is integrated into. The paper explicitly links to it in the abstract (p.1) and conclusion (p.12). The repo contains `Crush.cpp` implementing the CRUSH algorithm, and first author Jiahui Xu is an active committer. The Dynamatic docs (OptimizationsAndDirectives.md) reference the ASPLOS'25 paper by DOI. The `hls_scan.py` confirms it's an HLS project (460 Dynamatic-dialect HLS files).
+
+2. **No separate GitHub repo for the paper itself** — The authors' official artifact is on **Zenodo** (doi: `10.5281/zenodo.14017399`), not as a standalone GitHub repo. Multiple GitHub searches for the paper title, system name "CRUSH", and author names found no dedicated repo.
+
+3. **Benchmarks** — The paper evaluates on standard benchmark suites (Polybench), not on separate repos.
+
+The repo is classified as `third_party_demo` because Dynamatic is a pre-existing compiler that the paper builds on and extends, rather than being the paper's own stand-alone repository.

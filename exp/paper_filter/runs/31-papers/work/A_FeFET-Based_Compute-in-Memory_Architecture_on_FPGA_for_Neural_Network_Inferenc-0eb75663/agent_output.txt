@@ -1,0 +1,11 @@
+The JSON parses correctly. Here's a summary:
+
+**Result: No repository found.** Despite an exhaustive search of:
+- The full paper text (no GitHub link, no code availability statement)
+- prepass.json (no candidates)
+- 12 GitHub repo searches (various keyword combinations)
+- 4 GitHub code searches (exact title, author names)
+- 3 web searches (title + GitHub, author + GitHub, institute + paper topic)
+- All 6 author GitHub profiles checked for relevant repos (none found)
+
+The paper is a hardware architecture paper (FeFET-based CIM on FPGA) that uses Cadence Virtuoso for layout simulation and VTR for FPGA evaluation, but the authors did not release any code. HLS is only mentioned in passing as a comparison baseline for another system (SPAR-2). The design itself generates RTL code via its own framework, fed into VTR, but no open-source implementation was provided.

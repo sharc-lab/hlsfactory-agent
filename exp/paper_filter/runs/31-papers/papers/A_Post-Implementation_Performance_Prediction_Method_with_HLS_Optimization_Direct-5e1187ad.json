@@ -1,0 +1,140 @@
+{
+  "paper_id": "A_Post-Implementation_Performance_Prediction_Method_with_HLS_Optimization_Direct-5e1187ad",
+  "title": "A Post-Implementation Performance Prediction Method with HLS Optimization Directives",
+  "status": "ok",
+  "outcome": "not_found",
+  "needs_ocr": false,
+  "repos": [],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_paper",
+      "query": "full text scan for GitHub links, URLs, code availability",
+      "found": "No GitHub links or code availability statements found anywhere in the paper (6 pages, full text checked)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "post-implementation performance prediction HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "HLS performance prediction directive",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "directive-optimized graph HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Graph Builder HLS performance prediction",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "post-implementation performance prediction in:readme",
+      "found": "255 results, none related to this paper; top result was 'lydiawunan/HLS-Perf-Prediction-with-GNNs' (a baseline paper's repo, not this paper)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "HLS optimization directives GNN",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Jingyu Zhu HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Kenli Li HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Lu Xiao HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Zheng Xiao HLS",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"A Post-Implementation Performance Prediction Method with HLS Optimization Directives\"",
+      "found": "10 results: paper listing/index repos (topaperlist, paperhub, survey, ic-paper-explorer), benchmark repo (HpcKernelBench), none are the authors' code repo"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Post-Implementation Performance Prediction Method\" HLS",
+      "found": "11 results: same paper listing repos, no code repo"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Jingyu Zhu\" HLS directives",
+      "found": "2 results: paper listing repos, no code repo"
+    },
+    {
+      "step": "web_search",
+      "query": "\"A Post-Implementation Performance Prediction Method with HLS Optimization Directives\" github",
+      "found": "Only academic publisher pages (ACM, IEEE, researchr), no GitHub repo"
+    },
+    {
+      "step": "web_search",
+      "query": "\"Jingyu Zhu\" \"graph builder\" HLS github",
+      "found": "Same academic pages, no GitHub repo"
+    },
+    {
+      "step": "web_search",
+      "query": "\"Post-Implementation Performance Prediction\" github code",
+      "found": "Only paper listing/page sites, no code repo"
+    },
+    {
+      "step": "gh_api_user_repos",
+      "query": "users/jingyuzhu/repos",
+      "found": "User jingyuzhu exists but repos are unrelated (jingpy, KalmanJ, media tools, etc.) \u2014 no HLS-related repo"
+    },
+    {
+      "step": "gh_api_user_repos",
+      "query": "users/chuboliu/repos",
+      "found": "Not found (404)"
+    },
+    {
+      "step": "gh_api_user_repos",
+      "query": "users/yanding-hnu/repos",
+      "found": "Not found (404)"
+    },
+    {
+      "step": "gh_api_user_repos",
+      "query": "users/zenxiao/repos",
+      "found": "User Zenxiao (Zheng Xiao) exists but repos are unrelated (wedding app, ZooAR, hacktoberfest)"
+    },
+    {
+      "step": "gh_api_user_repos",
+      "query": "users/luxiao-hnu/repos",
+      "found": "Not found (404)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"62472155\" HLS",
+      "found": "No relevant results"
+    }
+  ],
+  "summary": "This paper (DAC 2025) proposes a post-implementation performance prediction method for HLS directive-optimized designs using a Graph Builder and GNN-based model. The paper contains no code availability statement, no GitHub link, and no footnote with a repository URL. Extensive searching across GitHub (repo search, code search, author profile lookups) and the web found no repository belonging to the authors for this paper. The paper is not a survey/position paper (it presents a concrete method with experiments) but no code was publicly released.",
+  "problems": [],
+  "meta": {
+    "paper_id": "A_Post-Implementation_Performance_Prediction_Method_with_HLS_Optimization_Direct-5e1187ad",
+    "title": "A Post-Implementation Performance Prediction Method with HLS Optimization Directives",
+    "authors": "Jingyu Zhu, Yan Ding, Lu Xiao, Kenli Li, Chubo Liu, Zheng Xiao",
+    "year": 2025,
+    "venue": "2025 62nd ACM/IEEE Design Automation Conference (DAC)",
+    "doi": "10.1109/DAC63849.2025.11132701",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

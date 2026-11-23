@@ -1,0 +1,39 @@
+{
+  "pdf": "CHESS_Compiling_Homomorphic_Encryption_with_Scheme_Switching.pdf",
+  "title": "CHESS: Compiling Homomorphic Encryption with Scheme Switching",
+  "pages": 11,
+  "text_chars": 69859,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "google/heir",
+      "raws": [
+        "github.com/google/heir"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        11
+      ],
+      "context": "ption Accelerator with Parallelized Bootstrapping.\u201d [37] H. Contributors, \u201cHEIR: Homomorphic Encryption Intermediate Repre- sentation,\u201d 2023, https://github.com/google/heir. [38] E. Chielle, O. Mazonka, H. Gamil, and M. Maniatakos, \u201cAccelerating fully homomorphic encryption by bridging modular and bit-level arith- metic,\u201d",
+      "repaired": false,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "google/heir",
+        "renamed_to": null,
+        "language": "MLIR",
+        "created": "2023-04-17T21:14:13Z",
+        "pushed": "2026-11-22T16:12:52Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 92730,
+        "stars": 951,
+        "description": "The compiler for homomorphic encryption"
+      }
+    }
+  ],
+  "profiles": []
+}

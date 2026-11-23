@@ -1,0 +1,22 @@
+The result has been written to `output/result.json` and validates correctly.
+
+## Summary
+
+**No repository found for this paper.** Here's what I did:
+
+1. **Read the full paper (7 pages)** — No code availability statement, no GitHub link, no repository URL appears anywhere in the paper body, footnotes, or references.
+
+2. **GitHub repo search (12 calls, budget exhausted):**
+   - `AttentionLib in:name` → only found `chengchingwen/NeuralAttentionlib.jl` (unrelated Julia package from 2021)
+   - `AttentionLib in:readme` → 0 results
+   - Various keyword combos (`attention accelerator FPGA MLIR`, `fusion dataflow HLS attention`, `Fudan attention accelerator FPGA`, `MLIR attention FPGA`) → none matched
+
+3. **GitHub code search (2 calls):**
+   - Exact paper title → only citation databases (survey datasets), not the authors' code
+   - `"AttentionLib"` → 317 hits, all unrelated (ebook Java app, robotology library)
+
+4. **Web search (2 calls, 1 exhausted):** Only returned academic index pages (DOI, IEEE Xplore, Semantic Scholar, ConnectedPapers). No repo.
+
+5. **Author lookup:** Searched for "Zhenyu Liu Fudan", "Kun Wang Fudan FPGA", and the first author's email on GitHub → no relevant profiles found.
+
+The paper presents AttentionLib as a framework that generates HLS C/C++ code, but it does not appear to be open-sourced. It is **not** a survey paper (`no_artifact: false`) — it presents a concrete design — but no public repository exists for it.

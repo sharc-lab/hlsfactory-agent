@@ -1,0 +1,150 @@
+{
+  "paper_id": "A_Systematic_Methodology_for_Time-multiplexing_Algorithms_on_a_Reconfigurable_Sy-bde51c71",
+  "title": "A Systematic Methodology for Time-multiplexing Algorithms on a Reconfigurable System-on-Chip",
+  "status": "ok",
+  "outcome": "not_found",
+  "needs_ocr": false,
+  "repos": [],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_prepass",
+      "query": "prepass.json",
+      "found": "No candidates for GitHub links found in prepass.json."
+    },
+    {
+      "step": "read_paper",
+      "query": "Full PDF text search for URL, github, code, repository",
+      "found": "No code availability statement, no GitHub links, no footnotes with repository URLs. Paper mentions HLS source code from reference [10] but does not link to a repository."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "ESP-PF in:name",
+      "found": "124 results, none relevant to this paper."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Extrapolated Single Propagation Particle Filter",
+      "found": "0 results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "time-multiplexing FPGA",
+      "found": "17 results, none relevant."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "ESP-PF HLS",
+      "found": "0 results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Duc Dung Vu HLS",
+      "found": "0 results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "particle filter Xilinx HLS",
+      "found": "0 results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "GNSS interference source localization HLS",
+      "found": "0 results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "particle filter GNSS FPGA HLS",
+      "found": "0 results."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "richard.vu mq.edu.au github",
+      "found": "0 results."
+    },
+    {
+      "step": "gh_search_users",
+      "query": "Duc Dung Vu",
+      "found": "Found users 'VDucDung' and 'ducdung8491'. Checked their repos: no FPGA/HLS/SoC projects."
+    },
+    {
+      "step": "gh_search_users",
+      "query": "Sanat K. Biswas",
+      "found": "No GitHub user found."
+    },
+    {
+      "step": "gh_search_users",
+      "query": "Alan Kan",
+      "found": "No GitHub user found."
+    },
+    {
+      "step": "gh_search_users",
+      "query": "Ediz Cetin",
+      "found": "No GitHub user found."
+    },
+    {
+      "step": "gh_api_search_users",
+      "query": "Duc+Dung+Vu (search/users)",
+      "found": "Checked VDucDung repos: all unrelated (web apps, TypeScript, Java, C#). Checked ducdung8491 repos: all unrelated (Go, JavaScript, forks)."
+    },
+    {
+      "step": "gh_search_orgs",
+      "query": "Macquarie-University repos",
+      "found": "No relevant FPGA/HLS repos."
+    },
+    {
+      "step": "gh_search_orgs",
+      "query": "IIIT-Delhi repos",
+      "found": "No relevant FPGA/HLS repos."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "ESP-PF FPGA (budget exhausted)",
+      "found": "Budget exhausted."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "exact paper title",
+      "found": "1 result: Ruichen0424/ic-paper-explorer (paper database, not code)."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "ESP-PF XCZU28DR",
+      "found": "1 result: kyleiwaniec/lit_review_pdm (literature review, not code)."
+    },
+    {
+      "step": "gh_search_code",
+      "query": "time-multiplexing methodology SoC HLS",
+      "found": "Various repos citing the paper, none are the authors' code."
+    },
+    {
+      "step": "web_search",
+      "query": "paper title + github",
+      "found": "No GitHub repos found, only academic databases and ORCID profiles."
+    },
+    {
+      "step": "web_search",
+      "query": "Duc Dung Vu ESP-PF github",
+      "found": "No GitHub repos found, only Macquarie University research pages."
+    },
+    {
+      "step": "web_search",
+      "query": "paper title + github repository (budget exhausted)",
+      "found": "Budget exhausted."
+    }
+  ],
+  "summary": "No GitHub repository could be found for this paper. The paper presents a systematic methodology for time-multiplexing algorithms on a reconfigurable SoC, applied to the ESP-PF algorithm on a Xilinx RFSoC XCZU28DR platform using HLS. The paper contains no code availability statement, no GitHub links, and no footnotes with repository URLs. Extensive searches (GitHub repo search, code search, web search, author profile checks, organization searches) turned up no repository belonging to the authors or providing the HLS designs described in the paper. The paper builds on HLS source code from reference [10] (a prior paper by the same authors), but no repository for that work was found either.",
+  "problems": [],
+  "meta": {
+    "paper_id": "A_Systematic_Methodology_for_Time-multiplexing_Algorithms_on_a_Reconfigurable_Sy-bde51c71",
+    "title": "A Systematic Methodology for Time-multiplexing Algorithms on a Reconfigurable System-on-Chip",
+    "authors": "Duc Dung Vu, Sanat K. Biswas, Alan Kan, Ediz Cetin",
+    "year": 2025,
+    "venue": "2025 IEEE International Symposium on Circuits and Systems (ISCAS)",
+    "doi": "10.1109/ISCAS56072.2025.11043191",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

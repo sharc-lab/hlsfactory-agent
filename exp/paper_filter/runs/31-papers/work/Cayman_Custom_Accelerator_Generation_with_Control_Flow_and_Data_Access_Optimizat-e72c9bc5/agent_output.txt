@@ -1,0 +1,15 @@
+The result is valid JSON. Here's a summary of my findings:
+
+**Paper**: "Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization" (DAC 2025)
+
+**Result**: No public GitHub repository found for this paper.
+
+**What I checked**:
+1. **Paper text**: Scanned the full PDF for GitHub links, code availability statements, or URLs — none found.
+2. **Author project page** (`uv-xiao.github.io/projects/cayman/`): Describes the Cayman framework but has **no link** to source code (unlike the authors' other projects APS and Hector which do link to GitHub).
+3. **Author GitHub profiles**: `uv-xiao` (Youwei Xiao) and `ericlyun` (Yun Liang) — neither has a Cayman repo.
+4. **PKU Liang group** (`pku-liang` on GitHub): Contains repos for APS, Hector, Cement, ISAMORE, etc., but **no Cayman repo**.
+5. **GitHub searches**: repo search (12 queries), code search (4 queries), and web search (3 queries) all failed to find a Cayman source repo.
+6. **Author CV** (`cv.yml`): Lists Cayman with only a DOI link — no GitHub URL, confirming the code is not publicly released.
+
+The paper is **not** a survey (`no_artifact: false`) — it presents a real HLS/accelerator generation framework — but its source code has not been made publicly available.

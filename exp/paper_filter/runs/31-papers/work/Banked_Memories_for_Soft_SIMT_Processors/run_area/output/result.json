@@ -1,0 +1,29 @@
+{
+  "repos": [],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {"step": "gh_search_repos", "query": "Banked Memories for Soft SIMT in:name", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "banked memory soft SIMT processor", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "soft SIMT processor", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "eGPU FPGA soft GPGPU", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "Martin Langhammer eGPU", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "langhammer constantinides soft GPGPU", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "eGPU soft GPGPU", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "soft gpgpu fpga", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "banked memory HLS", "found": "2 results (unrelated: victorvroeg/cpmb-media-staging, thkaratzas/Alveo-Stream-Optimizer)"},
+    {"step": "gh_search_repos", "query": "Martin Langhammer", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "George Constantinides", "found": "1 result (unrelated: gorakraj/earlyexit_onnx)"},
+    {"step": "gh_search_repos", "query": "langhammer", "found": "10 results (profile repos, unrelated)"},
+    {"step": "gh_search_code", "query": "\"Banked Memories for Soft SIMT Processors\"", "found": "8 results (all aggregator sites: hacker-news, arxiv-daily, RSS, etc. No code repos)"},
+    {"step": "gh_search_code", "query": "\"eGPU\" \"soft GPGPU\"", "found": "15 results (all aggregator sites, no code repos)"},
+    {"step": "web_search", "query": "Banked Memories for Soft SIMT Processors github", "found": "8 results: arxiv page, researchgate, themoonlight.io, one unrelated repo (lee-cheng-han/programmable-simt-asic)"},
+    {"step": "web_search", "query": "Martin Langhammer soft GPGPU FPGA github repository", "found": "8 results: arxiv pages, Intel fpga-npu (archived, unrelated), SPIRAL thesis, Google Scholar"},
+    {"step": "gh_api", "query": "orgs/intel/repos?per_page=100", "found": "No relevant repos in Intel org"},
+    {"step": "gh_api", "query": "users/mlanghamm/repos?per_page=50", "found": "2 repos, both unrelated"},
+    {"step": "gh_api", "query": "users/Langhammer/repos?per_page=50", "found": "8 repos, all unrelated"},
+    {"step": "gh_api", "query": "users/gaconstantinides/repos?per_page=50", "found": "Not Found (no account)"},
+    {"step": "gh_api", "query": "search/repositories?q=egpu+fpga+in:name", "found": "0 results"}
+  ],
+  "summary": "No GitHub repository was found for the paper 'Banked Memories for Soft SIMT Processors'. The paper presents original hardware designs (a SIMT processor with banked memories on FPGAs) implemented in RTL/HDL with benchmarks written in assembler, but does not contain any code availability statement, footnote link, or GitHub URL. Exhaustive searches across GitHub (repo names, code content, author organizations, and profiles), the arxiv TeX source, and the web found no repository belonging to the authors (Martin Langhammer, Altera/Intel & Imperial College London; George A. Constantinides, Imperial College London)."
+}

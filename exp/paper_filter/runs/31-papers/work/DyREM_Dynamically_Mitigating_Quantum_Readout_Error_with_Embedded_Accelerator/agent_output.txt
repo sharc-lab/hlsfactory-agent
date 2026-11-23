@@ -1,0 +1,18 @@
+The result has been written to `output/result.json`. Here's a summary:
+
+## Result: No repository found
+
+**Paper**: DyREM: Dynamically Mitigating Quantum Readout Error with Embedded Accelerator (DAC 2025)
+
+**What I found**: The paper presents a software-hardware co-design approach with an HLS-based accelerator (implemented using Xilinx HLS C++, running on Xilinx U50 FPGA). However:
+
+- **No code availability statement** exists anywhere in the paper text
+- **No GitHub link, repository URL, or footnote** in the paper
+- **No candidates** in prepass.json
+- **No hyperlinks** in the PDF
+- **Authors' GitHub profiles** (KaiwenZhou2003, liqianglu-zju, Chenning-Tao) contain no DyREM repo
+- **Authors' personal websites** only link to paper/slides/poster PDFs, not code
+- **GitHub searches** (repo + code) across 12 repo and 4 code search calls found nothing related
+- **Web searches** (3 calls) returned no repository
+
+The paper is **not** a survey/position paper (`no_artifact: false`), but the authors have not publicly released their code on GitHub. The `repos` list is empty, which is an honest reflection of what was found.

@@ -1,0 +1,12 @@
+The result is written to `output/result.json`. Here's a summary:
+
+**No repository found.** This ISCAS 2025 paper presents a digital beamforming architecture using 2D FFT for satellite payloads, with FPGA implementation using Vivado HLS and VITIS HLS on a VCU129EK board. However:
+
+1. **No code availability statement** appears anywhere in the paper.
+2. **No GitHub links** in the paper text, footnotes, or references.
+3. **prepass.json** had no candidates.
+4. **GitHub searches** (12 repo searches, 4 code searches) returned no relevant repos. The only remotely related repo (`Razia9372/approximate-dft-beamforming`) is by a different author, about approximate DFT (not 2D FFT), and created after the paper.
+5. **Author profiles** (`rakeshp2608` and `lmgarcess`) were checked — neither has repos related to this work.
+6. **Web searches** (2 queries) confirmed no repos exist; the paper's project page (ESA EGERTON) also does not link to any public code.
+
+The paper describes an HLS-based design (Vivado HLS for 2DFFT, VITIS HLS for BPN) but the source code was not publicly released. I set `no_artifact: false` because the paper does present an original design (it's not a survey/position paper), but no associated repository was found.

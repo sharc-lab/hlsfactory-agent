@@ -1,0 +1,124 @@
+{
+  "paper_id": "DE2_SAT-Based_Sequential_Logic_Decryption_with_a_Functional_Description",
+  "title": "DE2: SAT-Based Sequential Logic Decryption with a Functional Description",
+  "status": "ok",
+  "outcome": "not_found",
+  "needs_ocr": false,
+  "repos": [],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "read_paper",
+      "query": "search paper for code availability and GitHub links",
+      "found": "No code availability statement found. No GitHub links in paper body. Only GitHub link in references [16] is PrincetonUniversity/IMDb (unrelated)."
+    },
+    {
+      "step": "read_prepass",
+      "query": "prepass.json",
+      "found": "No URL candidates found in PDF. One profile: Princeton (affiliation of [16] reference only)."
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "DE2 SAT sequential logic decryption in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "DE2 logic decryption in:readme",
+      "found": "12 results, all unrelated (DE2 FPGA board projects)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "LIM parameter synthesis attack logic locking in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "DE2 logic locking in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "LIM logic decryption in:name",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "sequential logic decryption in:readme",
+      "found": "2586 results (too broad, no relevant matches)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "SAT-based Sequential Logic Decryption",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "DE2 sequential logic decryption in:readme",
+      "found": "6 results, all DE2 FPGA board projects"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "northwestern logic locking in:readme",
+      "found": "125 results, none relevant"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "you-li-nu in:name",
+      "found": "Search budget exhausted at this point"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "northwestern logic decryption in:readme",
+      "found": "Search budget exhausted"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"DE2: SAT-based Sequential Logic Decryption\"",
+      "found": "2 results: aayejinpeng/survey and morningD/lang.csconf (both paper databases, not code)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"SAT-based Sequential Logic Decryption with a Functional Description\"",
+      "found": "Same 2 results as above"
+    },
+    {
+      "step": "web_search",
+      "query": "DE2 SAT-based Sequential Logic Decryption github",
+      "found": "Found youl.org (author's site), par.nsf.gov, descyphy/Fun-SAT (unrelated). No repo found."
+    },
+    {
+      "step": "web_search",
+      "query": "site:github.com youli northwestern logic locking",
+      "found": "Found you-li-nu GitHub profile (author's account). Checked all 22 repos - none contain DE2/LIM code."
+    },
+    {
+      "step": "web_search",
+      "query": "you-li-nu DE2 github",
+      "found": "Profile confirmed but no DE2 repo exists."
+    },
+    {
+      "step": "github_api_user_check",
+      "query": "Checked users: youli (404), gnzhao (ML repos from 2015-2017, unrelated), haizhou (generic non-security repos), you-li-nu (author, 22 repos, none match), yunqii (404)"
+    },
+    {
+      "step": "github_api_profile",
+      "query": "Checked you-li-nu repos comprehensively",
+      "found": "22 repos. Most recent is 'epubs' (2023-02-04). No DE2, LIM, or logic-decryption repo found. Author's publication page (youl.org) shows [Paper] and [Slides] for DE2 but no [Code] link (unlike their other papers which do have code links)."
+    }
+  ],
+  "summary": "No public GitHub repository was found for the DE2/LIM code from this paper. The paper states 'We built a prototype for LIM and DE2 in Python' but contains no code availability statement, no GitHub links, and no footnotes pointing to a repository. The first author's personal website (youl.org) lists the paper with only a PDF and slides \u2014 no code link \u2014 unlike several of their other papers which do provide downloadable code. The first author's GitHub account (you-li-nu) has 22 public repos, none of which contain DE2 or LIM implementations; the most recent repo was pushed in early 2023. Searches on GitHub (repo name, README text, code content) and web searches all returned no results for the authors' own code. It is likely that the code has not been publicly released as of the current date.",
+  "problems": [],
+  "meta": {
+    "paper_id": "DE2_SAT-Based_Sequential_Logic_Decryption_with_a_Functional_Description",
+    "title": "DE2: SAT-Based Sequential Logic Decryption with a Functional Description",
+    "authors": "You Li, Guannan Zhao, Yunqi He, Hai Zhou",
+    "year": 2025,
+    "venue": "2025 Design, Automation & Test in Europe Conference (DATE)",
+    "doi": "10.23919/DATE64628.2025.10993011",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

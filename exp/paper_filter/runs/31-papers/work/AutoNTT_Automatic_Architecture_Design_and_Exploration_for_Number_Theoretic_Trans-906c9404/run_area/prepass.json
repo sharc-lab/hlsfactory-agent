@@ -1,0 +1,68 @@
+{
+  "pdf": "AutoNTT_Automatic_Architecture_Design_and_Exploration_for_Number_Theoretic_Transform_Acceleration_on_FPGAs.pdf",
+  "title": "AutoNTT: Automatic Architecture Design and Exploration for Number Theoretic Transform Acceleration on FPGAs",
+  "pages": 9,
+  "text_chars": 52589,
+  "needs_ocr": false,
+  "candidates": [
+    {
+      "repo_id": "SFU-HiAccel/AutoNTT",
+      "raws": [
+        "github.com/SFU-HiAccel/AutoNTT"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        1
+      ],
+      "context": "etter latency and 3.61\u00d7 better throughput on average, while maintaining a similar FPGA resource utilization. AutoNTT will be released soon at https://github.com/SFU-HiAccel/AutoNTT. I. INTRODUCTION Along with rapid developments in the fields of machine learning and quantum computing, the requirement for efficient and reliable cry",
+      "repaired": false,
+      "in_references": false,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "SFU-HiAccel/AutoNTT",
+        "renamed_to": null,
+        "language": "Python",
+        "created": "2025-03-21T06:40:34Z",
+        "pushed": "2025-07-16T19:14:02Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 852,
+        "stars": 14,
+        "description": "[FCCM 2025 Best Paper Nominee] AutoNTT: Automatic Architecture Design and Exploration for Number Theoretic Transform Acceleration on FPGAs"
+      }
+    },
+    {
+      "repo_id": "Microsoft/SEAL",
+      "raws": [
+        "github.com/Microsoft/SEAL"
+      ],
+      "found_via": [
+        "text"
+      ],
+      "pages": [
+        9
+      ],
+      "context": ")-an overview,\u201d in 2020 IEEE High Performance Extreme Computing Con- ference (HPEC). IEEE, 2020, pp. 1\u20139. [6] \u201cMicrosoft SEAL (release 3.2),\u201d https://github.com/Microsoft/SEAL, Feb. 2019, microsoft Research, Redmond, WA. [7] Y. Zhang, S. R. Sathi, Z. Kou, S. Sinha, and W. Zhang, \u201cTensor-product- based accelerator for area-e",
+      "repaired": false,
+      "in_references": true,
+      "gh": {
+        "checked": true,
+        "exists": true,
+        "full_name": "microsoft/SEAL",
+        "renamed_to": null,
+        "language": "C++",
+        "created": "2018-11-09T00:33:14Z",
+        "pushed": "2026-10-28T04:59:56Z",
+        "archived": false,
+        "fork": false,
+        "size_kb": 6086,
+        "stars": 4066,
+        "description": "Microsoft SEAL is an easy-to-use and powerful homomorphic encryption library."
+      }
+    }
+  ],
+  "profiles": []
+}

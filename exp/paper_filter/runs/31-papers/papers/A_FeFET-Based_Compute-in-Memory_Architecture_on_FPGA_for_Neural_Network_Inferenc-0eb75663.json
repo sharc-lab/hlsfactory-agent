@@ -1,0 +1,150 @@
+{
+  "paper_id": "A_FeFET-Based_Compute-in-Memory_Architecture_on_FPGA_for_Neural_Network_Inferenc-0eb75663",
+  "title": "A FeFET-Based Compute-in-Memory Architecture on FPGA for Neural Network Inference",
+  "status": "ok",
+  "outcome": "not_found",
+  "needs_ocr": false,
+  "repos": [],
+  "no_artifact_reason": "The paper presents a novel FeFET-based compute-in-memory FPGA architecture with an automated deployment toolchain. It is not a survey. However, no code or design artifacts were released or linked in the paper.",
+  "searches": [
+    {
+      "step": "read_paper",
+      "query": "full text scan for github/code links",
+      "found": "No code availability statement, no GitHub link, no repository URL found in the paper"
+    },
+    {
+      "step": "read_prepass",
+      "query": "prepass.json",
+      "found": "No candidates found"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "FeFET-based Compute-in-Memory FPGA",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "FeFET CIM FPGA neural",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "2T1C FeFET",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "compute-in-memory FPGA FeFET",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "CIM FPGA 2T1C",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Kejie Huang FPGA",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Zhejiang University CIM FPGA",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "FeFET compute",
+      "found": "3 repos unrelated to this paper (fefet_sim, fefet-reservoir, paper-knowledge-base)"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Minghan Jiang",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Haibin Shen FPGA",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_repos",
+      "query": "Zhejiang University CIM",
+      "found": "0 results"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"FeFET-Based Compute-in-Memory Architecture\"",
+      "found": "1 result: morningD/lang.csconf (metadata file indexing FCCM papers, not a code repo)"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"A FeFET-Based Compute-in-Memory Architecture on FPGA\"",
+      "found": "1 result: same metadata file"
+    },
+    {
+      "step": "gh_search_code",
+      "query": "\"Kejie Huang\" FPGA",
+      "found": "Only references/index entries, no code repos"
+    },
+    {
+      "step": "web_search",
+      "query": "\"A FeFET-Based Compute-in-Memory Architecture on FPGA\" github",
+      "found": "No GitHub repo found; only DOI page, Scholar Inbox, and index sites"
+    },
+    {
+      "step": "web_search",
+      "query": "Minghan Jiang FeFET FPGA github",
+      "found": "No repo link found"
+    },
+    {
+      "step": "web_search",
+      "query": "Zhejiang University FeFET CIM FPGA code",
+      "found": "No repo link found"
+    },
+    {
+      "step": "github_api_user_repos",
+      "query": "jiangmh repos",
+      "found": "1 repo (tis-solr, unrelated fork)"
+    },
+    {
+      "step": "github_api_user_repos",
+      "query": "ruixiao repos",
+      "found": "2 repos (ClickHouse fork, Linux fork)"
+    },
+    {
+      "step": "github_api_user_repos",
+      "query": "huangkejie repos",
+      "found": "0 public repos"
+    },
+    {
+      "step": "github_api_user_repos",
+      "query": "shenhb repos",
+      "found": "4 repos (Java/JS projects, unrelated)"
+    },
+    {
+      "step": "github_api_user_repos",
+      "query": "yonggenli repos",
+      "found": "0 public repos"
+    },
+    {
+      "step": "github_api_user_repos",
+      "query": "list0830 repos",
+      "found": "3 repos (personal homepage fork, ResComp for LLM quantization, SSVQ for VQ; none related to this paper)"
+    }
+  ],
+  "summary": "The paper presents a FeFET-based compute-in-memory FPGA architecture for neural network inference. An exhaustive search of the paper text, GitHub (repo search, code search, author profile repos), and web search found no code repository or code availability statement associated with this paper. The authors did not release their design (which uses Cadence Virtuoso for layout and VTR for FPGA evaluation) as open-source code. No HLS designs were found either.",
+  "problems": [],
+  "meta": {
+    "paper_id": "A_FeFET-Based_Compute-in-Memory_Architecture_on_FPGA_for_Neural_Network_Inferenc-0eb75663",
+    "title": "A FeFET-Based Compute-in-Memory Architecture on FPGA for Neural Network Inference",
+    "authors": "Minghan Jiang, Yonggen Li, Rui Xiao, Haibin Shen, Kejie Huang",
+    "year": 2025,
+    "venue": "2025 IEEE 33rd Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM)",
+    "doi": "10.1109/FCCM62733.2025.00015",
+    "group": "without_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

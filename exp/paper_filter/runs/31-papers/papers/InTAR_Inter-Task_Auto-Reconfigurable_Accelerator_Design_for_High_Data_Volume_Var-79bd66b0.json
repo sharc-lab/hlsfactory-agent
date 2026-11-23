@@ -1,0 +1,117 @@
+{
+  "paper_id": "InTAR_Inter-Task_Auto-Reconfigurable_Accelerator_Design_for_High_Data_Volume_Var-79bd66b0",
+  "title": "InTAR: Inter-Task Auto-Reconfigurable Accelerator Design for High Data Volume Variation in DNNs",
+  "status": "ok",
+  "outcome": "already_known",
+  "needs_ocr": false,
+  "repos": [
+    {
+      "repo_id": "OswaldHe/InTAR",
+      "provenance": "own_in_paper",
+      "outcome": "already_known",
+      "confidence": "high",
+      "flags": [],
+      "handoff": false,
+      "evidence": [
+        {
+          "type": "paper_own_link",
+          "quote": "1https://github.com/OswaldHe/InTAR",
+          "source": "paper p.1",
+          "verified": true
+        },
+        {
+          "type": "readme_has_title",
+          "quote": "# InTAR: Inter-Task Auto-Reconfigurable Accelerator Design",
+          "source": "readme"
+        },
+        {
+          "type": "readme_has_doi_or_arxiv",
+          "quote": "[![DOI](https://zenodo.org/badge/709673845.svg)](https://doi.org/10.5281/zenodo.14823241)",
+          "source": "readme"
+        },
+        {
+          "type": "git_log_authors_match",
+          "quote": "Oswald(Zifan) He, Richard Cao",
+          "source": "github_api"
+        },
+        {
+          "type": "description_matches_abstract",
+          "quote": "[FCCM 2025] Code Samples for InTAR: Inter-Task Auto-Reconfigurable Accelerator Design for High Data Volume Variation in DNNs",
+          "source": "github_api"
+        }
+      ],
+      "scan": {
+        "classification": "tapa_only",
+        "mode": "sparse",
+        "files_scanned": 44,
+        "hls_files": 0,
+        "tapa_files": 34,
+        "weak_files": 1,
+        "mixed_tapa": false,
+        "tapa_dominant": false,
+        "by_dialect": {
+          "tapa": 34,
+          "vitis": 21,
+          "vitis_weak": 35,
+          "intel": 0,
+          "catapult": 0,
+          "legup": 0,
+          "dynamatic": 0
+        },
+        "pragma_hls_count": 1092,
+        "tcl_set_top": [],
+        "tcl_csynth_count": 0,
+        "examples": [],
+        "truncated": false,
+        "source_kb": 561,
+        "repo_id": "OswaldHe/InTAR",
+        "exists": true,
+        "repo_meta": {
+          "full_name": "OswaldHe/InTAR",
+          "renamed_to": null,
+          "archived": false,
+          "fork": false,
+          "language": "C++",
+          "created_at": "2023-10-25T07:05:16Z",
+          "pushed_at": "2025-03-26T04:25:50Z",
+          "description": "[FCCM 2025] Code Samples for InTAR: Inter-Task Auto-Reconfigurable Accelerator Design for High Data Volume Variation in DNNs",
+          "size_kb": 1186873
+        },
+        "cap_kb": 307200
+      },
+      "notes": "Authors' official repo (footnote on p.1). Implemented in C++ via TAPA (a task-parallel HLS framework); scanner classifies it tapa_only (34 TAPA files, ~1092 HLS pragmas, Vitis HLS 2021.2 per paper). No other subject repos: TAPA is a build-tool dependency; Allo/DFX are only compared baselines."
+    }
+  ],
+  "no_artifact_reason": null,
+  "searches": [
+    {
+      "step": "prepass",
+      "query": "github.com in PDF text",
+      "found": "OswaldHe/InTAR linked in footnote on p.1 (paper_own_link); no other github links in paper"
+    },
+    {
+      "step": "gh_api",
+      "query": "repos/OswaldHe/InTAR/commits",
+      "found": "Authors Oswald(Zifan) He and Richard Cao"
+    },
+    {
+      "step": "gh_api",
+      "query": "repos/OswaldHe/InTAR/contents",
+      "found": "benchmark/, gpt-2-medium/, README.md, LICENSE, figures/"
+    }
+  ],
+  "summary": "Found the authors' own repo OswaldHe/InTAR, linked directly in a footnote on page 1 of the paper (https://github.com/OswaldHe/InTAR). Confirmed by README title + Zenodo DOI + arXiv, git-log authors matching Zifan He (Oswald(Zifan) He) and Yingqi Cao (Richard Cao), and GitHub description naming the FCCM 2025 paper. The design is HLS-based via TAPA (Vitis HLS 2021.2), so the repo is an HLS design repo. No other subject repos in the paper; very high confidence.",
+  "problems": [],
+  "meta": {
+    "paper_id": "InTAR_Inter-Task_Auto-Reconfigurable_Accelerator_Design_for_High_Data_Volume_Var-79bd66b0",
+    "title": "InTAR: Inter-Task Auto-Reconfigurable Accelerator Design for High Data Volume Variation in DNNs",
+    "authors": "Zifan He, Anderson Truong, Yingqi Cao, Jason Cong",
+    "year": 2025,
+    "venue": "2025 IEEE 33rd Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM)",
+    "doi": "10.1109/FCCM62733.2025.00047",
+    "group": "with_repo",
+    "matched": true,
+    "matched_by": "title",
+    "ambiguous": false
+  }
+}

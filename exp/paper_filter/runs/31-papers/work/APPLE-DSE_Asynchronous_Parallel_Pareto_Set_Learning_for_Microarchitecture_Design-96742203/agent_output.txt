@@ -1,0 +1,15 @@
+The result is valid JSON and ready. Here's my summary:
+
+## Summary
+
+**Paper**: APPLE-DSE: Asynchronous Parallel Pareto Set Learning for Microarchitecture Design Space Exploration (TCAD 2025)
+
+**Key finding**: No code repository exists for this paper's own implementation. After exhaustive searching:
+- The paper contains **no code availability statement**, no GitHub link to the authors' code, and no "will be released" promise
+- Searched GitHub by name (`APPLE-DSE`, `apple-dse`, etc.), README content, and code content — zero relevant results
+- Checked the GitHub profiles of the first author (Xuyang Zhao / `zhaoxuyang`) and co-author Zhaori Bi (`bzr2915`) — no APPLE-DSE repo exists
+- Web searches also turned up nothing
+
+**The only GitHub link in the paper** is `riscv-software-src/riscv-tests`, a benchmark suite used for evaluating the RISC-V processor designs. This is reported as a `third_party_demo` artifact. It contains **no HLS designs** (scanned as `repo_no_hls`).
+
+**HLS relevance**: The paper is about a microarchitecture design space exploration *algorithm* (Python-based ML method), not an HLS design. It uses traditional RTL simulation (Verilator) and logic synthesis (Cadence Genus), not HLS tools.

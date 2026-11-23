@@ -1,0 +1,26 @@
+{
+  "repos": [],
+  "no_artifact": false,
+  "no_artifact_reason": null,
+  "searches": [
+    {"step": "read_prepass", "query": "prepass.json", "found": "no candidates"},
+    {"step": "read_paper", "query": "paper PDF text search for github, code availability, URLs", "found": "no GitHub links or code availability statements in paper body or footnotes"},
+    {"step": "gh_search_repos", "query": "Cayman accelerator generation", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "Cayman HLS", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "Cayman in:name language:C++", "found": "only unrelated Jekyll theme repos (pages-themes/cayman, jasonlong/cayman-theme, etc.)"},
+    {"step": "gh_search_repos", "query": "Cayman in:name language:SystemVerilog", "found": "0 results (unrelated Cayman Jekyll themes only)"},
+    {"step": "gh_search_repos", "query": "Cayman accelerator in:name", "found": "0 results"},
+    {"step": "gh_search_repos", "query": "Cayman in:readme accelerator", "found": "only unrelated Cayman Jekyll theme repos"},
+    {"step": "gh_search_repos", "query": "Cayman LLVM in:readme", "found": "0 results"},
+    {"step": "gh_search_code", "query": "'\"Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization\"'", "found": "15 items, all paper listings / citation files (bojieli/ai-infra-book, freezed-corpse-143/topaperlist, xuanway/paperhub, ericlyun.github.io, uv-xiao.github.io); no source code repo"},
+    {"step": "check_author_profiles", "query": "users/uv-xiao/repos (Youwei Xiao)", "found": "many repos but no Cayman repo"},
+    {"step": "check_author_profiles", "query": "users/ericlyun/repos (Yun Liang)", "found": "no Cayman repo"},
+    {"step": "check_org", "query": "orgs/pku-liang/repos (PKU Liang group)", "found": "many related repos (APS, Hector, Cement, ISAMORE, etc.) but no Cayman repo"},
+    {"step": "read_project_page", "query": "https://uv-xiao.github.io/projects/cayman/ (author's project page)", "found": "describes Cayman but has no GitHub link to source code"},
+    {"step": "read_cv", "query": "uv-xiao.github.io/_data/cv.yml", "found": "Cayman listed with DOI link only, no GitHub URL (contrast: APS and Hector have GitHub links)"},
+    {"step": "web_search", "query": "Cayman: Custom Accelerator Generation github", "found": "project page, DOI, paper listings; no source code repo"},
+    {"step": "web_search", "query": "Cayman accelerator generation github", "found": "no repo found"},
+    {"step": "web_search", "query": "Cayman custom accelerator source code github", "found": "no repo found"}
+  ],
+  "summary": "The paper 'Cayman: Custom Accelerator Generation with Control Flow and Data Access Optimization' presents an end-to-end framework for custom accelerator generation. Despite extensive searching through GitHub (repo search, code search, author profiles, org repos) and web search, no public source code repository was found. The authors (Youwei Xiao, Yun Liang et al., Peking University) have publicly released source code for their other projects (APS at github.com/pku-liang/APS, Hector at github.com/pku-liang/Hector, Cement at github.com/pku-liang/Cement) but Cayman's code does not appear to be publicly available at this time. The paper does not contain a code availability statement or GitHub link. The paper is not a survey/position paper (no_artifact=false) — it presents a real framework and includes HLS/hardware synthesis content — but its source code is not publicly released."
+}

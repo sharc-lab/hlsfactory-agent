@@ -1,0 +1,7 @@
+The result is ready and valid JSON. Here's a summary of what I found:
+
+**Paper**: "A Speculative Loop Pipeline Framework with Accurate Path Modeling for High-Level Synthesis" (TRETS 2025, She et al., City University of Hong Kong)
+
+**Authors' own repo**: **NOT FOUND**. The paper has no code availability statement, no GitHub links, and the lab website (CityUHK-CALAS) explicitly lists `url_code: ''` empty. Searches for the first author's GitHub account (YuhanShe) yielded only two unrelated repos. No repo matching the system name ("SLP Autotuner", "speculative loop pipeline") or any variant was found.
+
+**Third-party repo found**: `jianyicheng/HLS-benchmarks` — the paper states: *"We select nine benchmark programs from the open-source HLS benchmark set made publicly available by Cheng et al. [6]."* The scan confirms HLS content (Vitis dialect). This is the benchmark suite used as the subject of the paper's evaluation.
