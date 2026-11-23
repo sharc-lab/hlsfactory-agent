@@ -14,13 +14,15 @@ RUN pip3 install --no-cache-dir pymupdf
 ### Node and pi-coding-agent (same versions as docker_images/Dockerfile) ###
 ENV NODE_VERSION=24.15.0
 
-# TARGETARCH is set by BuildKit (amd64 or arm64), so this builds on Intel servers and
-# Apple Silicon alike. (docker_images/Dockerfile hardcodes x64.)
+# Builds on Intel servers and Apple Silicon alike (docker_images/Dockerfile hardcodes x64).
+# TARGETARCH is only set by BuildKit; the legacy builder leaves it empty, so fall back to
+# the build container's own architecture.
 ARG TARGETARCH
-RUN case "$TARGETARCH" in \
-      amd64) NODE_ARCH=x64 ;; \
-      arm64) NODE_ARCH=arm64 ;; \
-      *) echo "unsupported arch: $TARGETARCH" >&2; exit 1 ;; \
+RUN ARCH="${TARGETARCH:-$(uname -m)}" && \
+    case "$ARCH" in \
+      amd64|x86_64) NODE_ARCH=x64 ;; \
+      arm64|aarch64) NODE_ARCH=arm64 ;; \
+      *) echo "unsupported arch: $ARCH" >&2; exit 1 ;; \
     esac && \
     curl -fsSL https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$NODE_ARCH.tar.xz \
     | tar -xJ -C /usr/local --strip-components=1

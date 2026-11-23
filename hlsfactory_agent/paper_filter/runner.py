@@ -45,29 +45,29 @@ def _failure(meta: PaperMeta, status: str, error: str) -> dict:
     }
 
 
-def _run_agent(cfg: RunConfig, meta: PaperMeta, run_area: Path, prompt: str) -> tuple[str, str]:
-    """Run pi in a container. Returns (status, detail); output lands in run_area/output."""
-    import docker  # lazy: only needed for real runs
-
+def write_pi_settings(run_area: Path, model: str) -> None:
+    """pi config inside the bind mount; HOME is also there because the uid has no home."""
     pi_dir = run_area / ".pi"
     (pi_dir / "sessions").mkdir(parents=True, exist_ok=True)
     (pi_dir / "settings.json").write_text(
         json.dumps(
-            {
-                "defaultProvider": "openrouter",
-                "defaultModel": cfg.model,
-                "sessionDir": ".pi/sessions",
-            },
+            {"defaultProvider": "openrouter", "defaultModel": model, "sessionDir": ".pi/sessions"},
             indent=4,
         )
     )
     (run_area / "home").mkdir(exist_ok=True)
 
-    # Run as the host user so files in the bind mount are not root-owned. Untested on the
-    # lab server; a writable HOME is required, hence HOME below. Fall back to chmod if needed.
+
+def start_container(cfg: RunConfig, run_area: Path, paper_id: str):
+    """Start the agent container idle (`sleep infinity`); the caller execs into it and removes it.
+
+    Runs as the host user so files in the bind mount are not root-owned. A writable HOME is
+    required, hence HOME inside the run area.
+    """
+    import docker  # lazy: only needed for real runs
+
     user = f"{os.getuid()}:{os.getgid()}" if hasattr(os, "getuid") else None
-    client = docker.from_env()
-    container = client.containers.run(
+    return docker.from_env().containers.run(
         image=cfg.image,
         command="sleep infinity",
         detach=True,
@@ -79,12 +79,19 @@ def _run_agent(cfg: RunConfig, meta: PaperMeta, run_area: Path, prompt: str) -> 
             "PROXY_URL": cfg.proxy_url,
             "PROXY_SECRET": cfg.proxy_secret,
             "GH_API_BASE": f"{cfg.proxy_url}/github",
-            "PAPER_ID": meta.paper_id,
+            "PAPER_ID": paper_id,
         },
         extra_hosts={"host.docker.internal": "host-gateway"},
         mem_limit=cfg.mem_limit,
         nano_cpus=int(cfg.cpus * 1e9),
     )
+
+
+def _run_agent(cfg: RunConfig, meta: PaperMeta, run_area: Path, prompt: str) -> tuple[str, str]:
+    """Run pi in a container. Returns (status, detail); output lands in run_area/output."""
+    write_pi_settings(run_area, cfg.model)
+    pi_dir = run_area / ".pi"
+    container = start_container(cfg, run_area, meta.paper_id)
     try:
         cmd = f"umask 000 && timeout {cfg.timeout_s} pi -p {shlex.quote(prompt)}"
         exit_code, out = container.exec_run(
