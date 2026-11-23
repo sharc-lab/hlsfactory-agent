@@ -91,14 +91,30 @@ class Registry:
                 [(r.lower(), r, time.time(), source) for r in repo_ids],
             )
 
-    def snapshot(self) -> dict[str, dict]:
-        """Known repos as {lowercase id: {status, display_id}} for the agent's read-only copy."""
+    def snapshot(self, exclude_papers=()) -> dict[str, dict]:
+        """Known repos as {lowercase id: {status, display_id}} for the agent's read-only copy.
+
+        `exclude_papers`: papers about to be (re)run. A repo known ONLY through those papers
+        is left out, so a rerun does not see its own earlier finds as `already_known` and
+        skip the scan. Seeded repos and repos also found by other papers stay in.
+        """
+        excluded = set(exclude_papers)
         with self._conn() as c:
-            rows = c.execute("SELECT repo_id, display_id, status FROM repos").fetchall()
+            rows = c.execute("SELECT repo_id, display_id, status, source FROM repos").fetchall()
+            links: dict[str, set[str]] = {}
+            for r in c.execute("SELECT repo_id, paper_id FROM paper_repos"):
+                links.setdefault(r["repo_id"], set()).add(r["paper_id"])
+
+        def known_elsewhere(r) -> bool:
+            if r["source"] == "seed" or not excluded:
+                return True
+            papers = links.get(r["repo_id"]) or {r["source"]}
+            return bool(papers - excluded)
+
         return {
             r["repo_id"]: {"status": r["status"], "display_id": r["display_id"]}
             for r in rows
-            if r["status"] not in UNKNOWN_STATUSES
+            if r["status"] not in UNKNOWN_STATUSES and known_elsewhere(r)
         }
 
     def get_repo(self, repo_id: str) -> dict | None:
@@ -122,7 +138,8 @@ class Registry:
                     "INSERT INTO repos(repo_id, display_id, status, size_kb, archived, fork,"
                     " scan_json, checked_at, source) VALUES (?,?,?,?,?,?,?,?,?)"
                     " ON CONFLICT(repo_id) DO UPDATE SET"
-                    "  status = CASE WHEN repos.status = 'seeded' THEN repos.status"
+                    "  status = CASE WHEN repos.status = 'seeded'"
+                    "                  OR excluded.status = 'already_known' THEN repos.status"
                     "                ELSE excluded.status END,"
                     "  size_kb = excluded.size_kb, archived = excluded.archived,"
                     "  fork = excluded.fork, scan_json = excluded.scan_json,"
@@ -130,7 +147,7 @@ class Registry:
                     (
                         rid.lower(),
                         rid,
-                        repo["outcome"] if repo["outcome"] != "already_known" else "seeded",
+                        repo["outcome"],  # already_known never overwrites (see CASE above)
                         meta.get("size_kb"),
                         _b(meta.get("archived")),
                         _b(meta.get("fork")),

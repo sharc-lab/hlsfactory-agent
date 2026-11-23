@@ -122,3 +122,37 @@ def test_tapa_dominant_when_tapa_files_outnumber_hls_files(tmp_path):
     write(tmp_path, "v.cpp", "#pragma HLS PIPELINE\n")
     out = scan_dir(tmp_path)
     assert out["classification"] == "hls_found" and out["tapa_dominant"]
+
+
+def test_tcl_project_with_c_source_counts_as_hls(tmp_path):
+    # MachSuite layout: plain C kernel, directives in a TCL-sourced file, no #pragma HLS.
+    write(tmp_path, "aes/aes.c", "void aes256_encrypt_ecb(int *k) { k[0] = 1; }\n")
+    write(tmp_path, "aes/hls.tcl", "open_project p\nadd_files aes.c\nset_top aes256_encrypt_ecb\nsource ./aes_dir\ncsynth_design\n")
+    out = scan_dir(tmp_path)
+    assert out["classification"] == "hls_tcl_only" and out["source_files"] == 1
+
+
+def test_tcl_project_does_not_override_tapa(tmp_path):
+    write(tmp_path, "k.cpp", '#include <tapa.h>\n')
+    write(tmp_path, "run.tcl", "set_top k\ncsynth_design\n")
+    assert scan_dir(tmp_path)["classification"] == "tapa_only"
+
+
+def test_archive_only_repo_goes_to_review(tmp_path):
+    write(tmp_path, "train.py", "print(1)\n")
+    write(tmp_path, "data/HLSyn_data.tar.gz", "x")
+    out = scan_dir(tmp_path)
+    assert out["classification"] == "archive_only"
+    assert out["archives"] == ["data/HLSyn_data.tar.gz"]
+
+
+def test_archives_do_not_override_real_hls(tmp_path):
+    write(tmp_path, "k.cpp", "#pragma HLS PIPELINE\n")
+    write(tmp_path, "data.zip", "x")
+    assert scan_dir(tmp_path)["classification"] == "hls_found"
+
+
+def test_archive_next_to_plain_source_stays_no_hls(tmp_path):
+    write(tmp_path, "rtl/top.c", "int main(void) { return 0; }\n")
+    write(tmp_path, "data/results.tar.gz", "x")
+    assert scan_dir(tmp_path)["classification"] == "repo_no_hls"

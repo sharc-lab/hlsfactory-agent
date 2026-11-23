@@ -93,3 +93,8 @@ def test_tapa_dominant_repo_is_not_handed_off():
 def test_weak_markers_only_goes_to_review():
     r = run({"repos": [raw_repo("SFU-HiAccel/AutoNTT", {"classification": "weak_hls_only"}, GOOD_EV)]})["repos"][0]
     assert r["outcome"] == "needs_review" and "weak_hls_markers_only" in r["flags"] and not r["handoff"]
+
+
+def test_tcl_and_archive_outcomes():
+    assert repo_outcome({"classification": "hls_tcl_only"}, False) == ("hls_found", ["hls_via_tcl"])
+    assert repo_outcome({"classification": "archive_only"}, False) == ("needs_review", ["hls_maybe_in_archive"])

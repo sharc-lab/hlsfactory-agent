@@ -68,3 +68,22 @@ def test_load_seeds_ignores_comments(tmp_path):
     f = tmp_path / "s.txt"
     f.write_text("# c\nA/b\n\nC/d  # trailing\n")
     assert load_seeds(f) == ["A/b", "C/d"]
+
+
+def test_already_known_result_does_not_turn_repo_into_seed(tmp_path):
+    reg = Registry(tmp_path / "r.sqlite")
+    reg.merge_result(final(paper_id="p1", outcome="hls_found"))
+    reg.merge_result(final(paper_id="p2", outcome="already_known"))
+    assert reg.get_repo("foo/bar")["status"] == "hls_found"
+
+
+def test_rerun_does_not_see_its_own_finds_as_known(tmp_path):
+    reg = Registry(tmp_path / "r.sqlite")
+    reg.seed(["Seed/Repo"])
+    reg.merge_result(final(paper_id="p1", repo="Own/Repo"))
+    reg.merge_result(final(paper_id="p1", repo="Shared/Repo"))
+    reg.merge_result(final(paper_id="p2", repo="Shared/Repo"))
+    snap = reg.snapshot(exclude_papers={"p1"})
+    assert "own/repo" not in snap
+    assert "shared/repo" in snap and "seed/repo" in snap
+    assert "own/repo" in reg.snapshot()

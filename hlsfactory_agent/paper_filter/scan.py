@@ -24,6 +24,8 @@ from pathlib import Path
 DEFAULT_CAP_KB = 300 * 1024
 SOURCE_EXTS = {".c", ".cc", ".cpp", ".cxx", ".h", ".hh", ".hpp", ".hxx", ".cl"}
 TCL_EXT = ".tcl"
+# Archives may hold the designs (e.g. UCLA-DM/HLSyn ships its kernels in a .tar.gz).
+ARCHIVE_SUFFIXES = (".tar.gz", ".tgz", ".tar", ".zip", ".tar.xz", ".tar.bz2", ".7z")
 SKIP_DIRS = {".git", "node_modules", ".svn", "__pycache__"}
 MAX_FILE_BYTES = 2_000_000
 MAX_FILES = 50_000
@@ -68,6 +70,8 @@ def scan_dir(root: Path) -> dict:
     hls_files = tapa_files = weak_files = pragma_count = scanned = 0
     tcl_tops: list[str] = []
     tcl_synth = 0
+    source_files = 0
+    archives: list[str] = []
     examples: list[str] = []
     truncated = False
 
@@ -75,6 +79,10 @@ def scan_dir(root: Path) -> dict:
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for name in filenames:
             ext = Path(name).suffix.lower()
+            if name.lower().endswith(ARCHIVE_SUFFIXES):
+                if len(archives) < 10:
+                    archives.append(str((Path(dirpath) / name).relative_to(root)))
+                continue
             if ext not in SOURCE_EXTS and ext != TCL_EXT:
                 continue
             path = Path(dirpath) / name
@@ -92,6 +100,7 @@ def scan_dir(root: Path) -> dict:
                 tcl_tops += SET_TOP.findall(text)
                 tcl_synth += len(CSYNTH.findall(text))
                 continue
+            source_files += 1
             dialects = classify_text(text)
             for d in dialects:
                 by_dialect[d] += 1
@@ -111,14 +120,22 @@ def scan_dir(root: Path) -> dict:
         classification = "hls_found"
     elif tapa_files:
         classification = "tapa_only"
+    elif tcl_tops and tcl_synth and source_files:
+        # Vitis/Vivado HLS project whose directives live in TCL (set_directive_*), not in
+        # #pragma HLS lines, e.g. breagen/MachSuite. Needs C/C++ source next to the script.
+        classification = "hls_tcl_only"
     elif weak_files:
         classification = "weak_hls_only"  # only ap_int-style includes: needs a human look
+    elif archives and not source_files:
+        classification = "archive_only"  # no C/C++ at all, but designs may be in an archive
     else:
         classification = "repo_no_hls"
     return {
         "classification": classification,
         "mode": "clone",
         "files_scanned": scanned,
+        "source_files": source_files,
+        "archives": archives,
         "hls_files": hls_files,
         "tapa_files": tapa_files,
         "weak_files": weak_files,

@@ -82,6 +82,8 @@ def start_container(cfg: RunConfig, run_area: Path, paper_id: str):
             "PAPER_ID": paper_id,
         },
         extra_hosts={"host.docker.internal": "host-gateway"},
+        # run_area = <run_dir>/work/<paper_id>/run_area; labels let `run_agent.py --status` find these
+        labels={"paper_filter.run_dir": str(run_area.resolve().parents[2]), "paper_filter.paper": paper_id},
         mem_limit=cfg.mem_limit,
         nano_cpus=int(cfg.cpus * 1e9),
     )

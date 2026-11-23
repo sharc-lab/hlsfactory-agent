@@ -43,6 +43,10 @@ def repo_outcome(scan: dict | None, known: bool) -> tuple[str, list[str]]:
         return "repo_no_hls", flags
     if cls == "link_dead":
         return "link_dead", flags
+    if cls == "hls_tcl_only":
+        return "hls_found", flags + ["hls_via_tcl"]
+    if cls == "archive_only":
+        return "needs_review", flags + ["hls_maybe_in_archive"]
     if cls == "weak_hls_only":
         return "needs_review", flags + ["weak_hls_markers_only"]
     return "needs_review", flags + [f"scan_{cls or 'missing'}"]
