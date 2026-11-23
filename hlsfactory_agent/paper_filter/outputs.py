@@ -17,6 +17,10 @@ def _dialects(repo: dict) -> str:
     return ";".join(f"{k}={v}" for k, v in by.items() if v)
 
 
+def _group(r: dict) -> str:
+    return (r.get("meta") or {}).get("group") or ""
+
+
 def review_reasons(repo: dict) -> list[str]:
     """Why a repo needs a human look (empty: nothing to review)."""
     reasons = []
@@ -77,12 +81,12 @@ def build_outputs(run_dir: Path, results: list[dict]) -> dict:
     # summary: one row per paper
     with open(run_dir / "summary.csv", "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["paper_id", "title", "status", "outcome", "needs_ocr", "repos",
+        w.writerow(["paper_id", "group", "title", "status", "outcome", "needs_ocr", "repos",
                     "handoff_repos", "problems"])  # fmt: skip
         for r in results:
             repos = r.get("repos", [])
             w.writerow([
-                r["paper_id"], r.get("title", ""), r["status"], r.get("outcome") or "",
+                r["paper_id"], _group(r), r.get("title", ""), r["status"], r.get("outcome") or "",
                 r.get("needs_ocr", ""), ";".join(x["repo_id"] for x in repos),
                 ";".join(x["repo_id"] for x in repos if x["handoff"]),
                 len(r.get("problems", [])) or r.get("error", "")[:120].replace("\n", " "),
@@ -97,5 +101,17 @@ def build_outputs(run_dir: Path, results: list[dict]) -> dict:
         "review_rows": len(review_rows),
         "papers_with_problems": sum(1 for r in results if r.get("problems")),
     }
+    groups = sorted({_group(r) for r in results} - {""})
+    if groups:  # e.g. with_repo / without_repo test folders
+        stats["by_group"] = {
+            g: {
+                "papers": sum(1 for r in results if _group(r) == g),
+                "by_outcome": dict(Counter(
+                    r.get("outcome") or r["status"] for r in results if _group(r) == g)),
+                "with_handoff": sum(1 for r in results if _group(r) == g
+                                    and any(x["handoff"] for x in r.get("repos", []))),
+            }
+            for g in groups
+        }  # fmt: skip
     (run_dir / "stats.json").write_text(json.dumps(stats, indent=2))
     return stats

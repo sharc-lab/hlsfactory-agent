@@ -147,3 +147,60 @@ def test_calls_are_logged(env):
     get(proxy, "/github/repos/a/b")
     lines = [json.loads(line) for line in (tmp / "calls.jsonl").read_text().splitlines()]
     assert lines[0]["category"] == "core" and lines[0]["status"] == 200
+
+
+def test_web_results_are_cached_across_papers(tmp_path):
+    class P:
+        calls = 0
+
+        def search(self, q):
+            P.calls += 1
+            return {"results": [q]}
+
+    reg = Registry(tmp_path / "r.sqlite")
+    proxy = ProxyServer(ProxyConfig(secret="s", upstream="http://127.0.0.1:1"), reg,
+                        web_provider=P()).start()
+    try:
+        assert get(proxy, "/web/search?q=same", secret="s", paper="a")[0] == 200
+        status, body, cache = get(proxy, "/web/search?q=same", secret="s", paper="b")
+        assert (status, body, cache) == (200, {"results": ["same"]}, "hit")
+        assert P.calls == 1
+        assert get(proxy, "/web/search?q=", secret="s")[0] == 400
+    finally:
+        proxy.shutdown()
+
+
+def test_exa_provider_compacts_results():
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+
+    from hlsfactory_agent.paper_filter.proxy import ExaProvider
+
+    seen = {}
+
+    class H(BaseHTTPRequestHandler):
+        def log_message(self, *a):
+            pass
+
+        def do_POST(self):  # noqa: N802
+            seen["key"] = self.headers.get("x-api-key")
+            seen["body"] = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            out = json.dumps({"results": [{
+                "title": "OswaldHe/InTAR", "url": "https://github.com/OswaldHe/InTAR",
+                "highlights": ["x" * 2000], "image": "drop-me"}]}).encode()
+            self.send_response(200)
+            self.send_header("Content-Length", str(len(out)))
+            self.end_headers()
+            self.wfile.write(out)
+
+    srv = HTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        out = ExaProvider("k", endpoint=f"http://127.0.0.1:{srv.server_address[1]}",
+                          snippet_chars=100).search("InTAR github")
+    finally:
+        srv.shutdown()
+    assert seen["key"] == "k" and seen["body"]["query"] == "InTAR github"
+    r = out["results"][0]
+    assert r["url"] == "https://github.com/OswaldHe/InTAR" and len(r["snippet"]) == 100
+    assert "image" not in r

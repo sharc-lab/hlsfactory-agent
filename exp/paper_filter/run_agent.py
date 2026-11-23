@@ -5,16 +5,20 @@
 
 Use `.venv/bin/python` with PYTHONPATH=. (plain `uv run` does not work here).
 Needs: OPENROUTER_API_KEY in .env (not for --dry-run); GITHUB_TOKEN in .env or the
-environment (strongly recommended). Build the image first: docker_images/paper_filter/build.sh.
+environment (strongly recommended); EXA_KEY in .env
+for web search (optional). Build the image first: docker_images/paper_filter/build.sh.
 
 Outputs under --run-dir: papers/*.json, handoff_repos.txt, handoff.csv, review_list.csv,
 summary.csv, stats.json, registry.sqlite, proxy_calls.jsonl, work/<paper>/ (incl. transcripts).
 Finished papers (status ok) are skipped on rerun; failed ones are retried.
+PDFs are found recursively; a subfolder name (e.g. pdfs/with_repo/) becomes the paper's
+`group`, shown in summary.csv and as by_group in stats.json.
 """
 
 import argparse
 import json
 import secrets
+from collections import Counter
 from pathlib import Path
 
 from dotenv import dotenv_values
@@ -23,14 +27,14 @@ from joblib import Parallel, delayed
 from hlsfactory_agent.paper_filter.github import load_token
 from hlsfactory_agent.paper_filter.manifest import discover_papers
 from hlsfactory_agent.paper_filter.outputs import build_outputs
-from hlsfactory_agent.paper_filter.proxy import ProxyConfig, ProxyServer, bridge_address
+from hlsfactory_agent.paper_filter.proxy import ExaProvider, ProxyConfig, ProxyServer, bridge_address
 from hlsfactory_agent.paper_filter.registry import Registry, load_seeds
 from hlsfactory_agent.paper_filter.runner import RunConfig, run_one
 
 DIR_CURRENT = Path(__file__).resolve().parent
 DIR_ROOT = DIR_CURRENT.parent.parent
 SEEDS = DIR_ROOT / "hlsfactory_agent" / "paper_filter" / "seed_repos.txt"
-MODEL = "deepseek/deepseek-v4-flash"  # same as exp/run_base/run.py
+MODEL = "deepseek/deepseek-v4-flash"  # DeepSeek V4 Flash on OpenRouter; same as exp/run_base/run.py
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--pdfs", type=Path, default=DIR_CURRENT / "pdfs")
@@ -54,6 +58,9 @@ if not args.dry_run and not api_key:
 github_token = load_token(DIR_ROOT / ".env")
 if github_token is None:
     print("warning: no GITHUB_TOKEN; code search needs one and limits are very low without")
+exa_key = env.get("EXA_KEY")
+if not exa_key:
+    print("note: no EXA_KEY in .env; web search answers 501 and agents skip it")
 
 sheet = args.sheet if args.sheet.exists() else None
 if sheet is None:
@@ -63,6 +70,9 @@ if args.only:
     papers = [p for p in papers if args.only in p.paper_id]
 unmatched = [p.paper_id for p in papers if not p.matched]
 print(f"{len(papers)} PDFs; {len(unmatched)} not matched to a spreadsheet row")
+groups = Counter(p.group or "(top level)" for p in papers)
+if len(groups) > 1 or None not in {p.group for p in papers}:
+    print("by folder: " + ", ".join(f"{g}={n}" for g, n in sorted(groups.items())))
 
 registry = Registry(args.run_dir / "registry.sqlite")
 registry.seed(load_seeds(SEEDS))
@@ -84,6 +94,7 @@ if not args.dry_run:
         ProxyConfig(secret=secret, token=github_token, log_path=args.run_dir / "proxy_calls.jsonl"),
         registry,
         host=bridge_address(),
+        web_provider=ExaProvider(exa_key) if exa_key else None,
     ).start()
     cfg.proxy_url = f"http://host.docker.internal:{proxy.port}"
     cfg.proxy_secret = secret

@@ -1,4 +1,8 @@
-"""Find PDFs in a folder and join them to spreadsheet rows by normalized title."""
+"""Find PDFs in a folder tree and join them to spreadsheet rows by normalized title.
+
+PDFs may sit in subfolders (e.g. pdfs/with_repo/, pdfs/without_repo/); the subfolder path is
+kept as the paper's `group` so outputs can be broken down by it.
+"""
 
 import hashlib
 import re
@@ -35,6 +39,7 @@ class PaperMeta:
     year: int | None = None
     venue: str | None = None
     doi: str | None = None
+    group: str | None = None  # subfolder under the PDF root, e.g. "with_repo"; None at top level
     matched: bool = False  # joined to a spreadsheet row
     ambiguous: bool = False  # several rows share the normalized title; first was used
 
@@ -75,14 +80,25 @@ def _lookup(key: str, idx: dict[str, list[int]]) -> list[int]:
 
 
 def discover_papers(pdf_dir: Path, sheet: Path | None = None) -> list[PaperMeta]:
-    """Every *.pdf in pdf_dir. Unmatched PDFs fall back to a title from the filename."""
+    """Every *.pdf under pdf_dir (recursive). Unmatched PDFs get a title from the filename.
+
+    Paper ids come from filename stems, so the same filename in two subfolders is an error.
+    """
+    pdf_dir = Path(pdf_dir)
     df = load_sheet(sheet) if sheet else None
     idx = _index(df) if df is not None else {}
     papers = []
-    for pdf in sorted(Path(pdf_dir).glob("*.pdf")):
+    seen: dict[str, Path] = {}
+    for pdf in sorted(pdf_dir.rglob("*.pdf")):
+        paper_id = make_paper_id(pdf.stem)
+        if paper_id in seen:
+            raise ValueError(f"duplicate paper id {paper_id!r}: {seen[paper_id]} and {pdf}")
+        seen[paper_id] = pdf
+        rel_dir = pdf.parent.relative_to(pdf_dir).as_posix()
         meta = PaperMeta(
-            paper_id=make_paper_id(pdf.stem), pdf=pdf, title=title_from_filename(pdf)
-        )
+            paper_id=paper_id, pdf=pdf, title=title_from_filename(pdf),
+            group=None if rel_dir == "." else rel_dir,
+        )  # fmt: skip
         rows = _lookup(norm_title(pdf.stem), idx)
         if rows and df is not None:
             r = df.iloc[rows[0]]

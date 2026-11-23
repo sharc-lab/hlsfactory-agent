@@ -25,6 +25,7 @@ from hlsfactory_agent.paper_filter.prompt import DEFAULT_BUDGETS
 from hlsfactory_agent.paper_filter.registry import Registry
 
 GITHUB_API = "https://api.github.com"
+EXA_API = "https://api.exa.ai"
 
 
 @dataclass
@@ -68,6 +69,51 @@ class NullProvider:
 
     def search(self, query: str) -> dict:
         raise NotImplementedError
+
+
+class ExaProvider:
+    """Web search through Exa (https://exa.ai). About $0.007 per query.
+
+    Returns a compact result list so the agent's context stays small:
+    {"results": [{"title", "url", "published", "snippet"}]}.
+    """
+
+    def __init__(self, api_key: str, num_results: int = 8, snippet_chars: int = 800,
+                 endpoint: str = EXA_API, timeout_s: float = 60.0):  # fmt: skip
+        self.api_key = api_key
+        self.num_results = num_results
+        self.snippet_chars = snippet_chars
+        self.endpoint = endpoint.rstrip("/")
+        self.timeout_s = timeout_s
+
+    def search(self, query: str) -> dict:
+        body = json.dumps({
+            "query": query,
+            "numResults": self.num_results,
+            "type": "auto",
+            "contents": {"highlights": {"maxCharacters": self.snippet_chars}},
+        }).encode()  # fmt: skip
+        req = urllib.request.Request(
+            f"{self.endpoint}/search", data=body, method="POST",
+            headers={"x-api-key": self.api_key, "Content-Type": "application/json",
+                     "User-Agent": "paper-filter"},
+        )  # fmt: skip
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout_s) as r:
+                data = json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            detail = e.read().decode(errors="replace")[:300]
+            raise RuntimeError(f"exa HTTP {e.code}: {detail}") from e
+        results = []
+        for item in data.get("results", []):
+            snippet = " ... ".join(item.get("highlights") or [])[: self.snippet_chars]
+            results.append({
+                "title": item.get("title"),
+                "url": item.get("url"),
+                "published": item.get("publishedDate"),
+                "snippet": snippet,
+            })  # fmt: skip
+        return {"provider": "exa", "query": query, "results": results}
 
 
 def category_for(path: str) -> str:
@@ -216,7 +262,15 @@ def _make_handler(server: ProxyServer):
                 )  # fmt: skip
 
             if category == "web":
-                query = urllib.parse.parse_qs(parsed.query).get("q", [""])[0]
+                query = urllib.parse.parse_qs(parsed.query).get("q", [""])[0].strip()
+                if not query:
+                    return self._reply(400, json.dumps({"error": "empty query"}))
+                cache_key = f"web:{type(server.web).__name__}:{query}"
+                cached = server.registry.cache_get(cache_key, server.cfg.cache_ttl_s)
+                if cached:
+                    server.log(paper=paper_id, category=category, status=200, query=query,
+                               cached=True)  # fmt: skip
+                    return self._reply(200, cached[1], {"X-Cache": "hit"})
                 server.limiters["web"].acquire()
                 try:
                     out = server.web.search(query)
@@ -228,8 +282,11 @@ def _make_handler(server: ProxyServer):
                 except Exception as e:  # provider failure must not crash the proxy
                     server.log(paper=paper_id, category=category, status=502, error=str(e))
                     return self._reply(502, json.dumps({"error": f"provider error: {e}"}))
-                server.log(paper=paper_id, category=category, status=200, query=query)
-                return self._reply(200, json.dumps(out))
+                body = json.dumps(out)
+                server.registry.cache_put(cache_key, 200, body)
+                server.log(paper=paper_id, category=category, status=200, query=query,
+                           cached=False)  # fmt: skip
+                return self._reply(200, body, {"X-Cache": "miss"})
 
             cached = server.registry.cache_get(url, server.cfg.cache_ttl_s)
             if cached:

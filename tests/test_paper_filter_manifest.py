@@ -52,3 +52,22 @@ def test_long_ids_are_truncated_and_unique():
     a, b = make_paper_id("x" * 200), make_paper_id("x" * 199 + "y")
     assert len(a) < 100 and a != b
     assert norm_title("A-b: C!") == "abc"
+
+
+def test_subfolders_become_groups(tmp_path):
+    pdfs = tmp_path / "pdfs"
+    for sub, name in (("with_repo", "A_Paper.pdf"), ("without_repo", "B_Paper.pdf"), (".", "C.pdf")):
+        (pdfs / sub).mkdir(parents=True, exist_ok=True)
+        (pdfs / sub / name).write_bytes(b"%PDF-1.4")
+    groups = {p.paper_id: p.group for p in discover_papers(pdfs)}
+    assert groups == {"A_Paper": "with_repo", "B_Paper": "without_repo", "C": None}
+
+
+def test_same_filename_in_two_folders_is_an_error(tmp_path):
+    import pytest
+    pdfs = tmp_path / "pdfs"
+    for sub in ("with_repo", "without_repo"):
+        (pdfs / sub).mkdir(parents=True)
+        (pdfs / sub / "Same.pdf").write_bytes(b"%PDF-1.4")
+    with pytest.raises(ValueError, match="duplicate paper id"):
+        discover_papers(pdfs)

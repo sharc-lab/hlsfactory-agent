@@ -70,3 +70,20 @@ def test_outputs_from_results(tmp_path):
     summary = (tmp_path / "summary.csv").read_text()
     assert "paper-d" in summary and "timeout" in summary
     assert stats["handoff_repos"] == 1 and stats["by_outcome"]["not_found"] == 1
+
+
+def test_outputs_break_down_by_group(tmp_path):
+    pages = ["see https://github.com/acme/widget-hls for the code of our accelerator"]
+    ev = [{"type": "paper_own_link", "source": "paper p.1",
+           "quote": "https://github.com/acme/widget-hls for the code of our accelerator"}]
+    found = finalize({"repos": [{"repo_id": "acme/widget-hls", "provenance": "own_in_paper",
+                                 "scan": {"classification": "hls_found"}, "evidence": ev}]},
+                     "p1", "A", pages, {}, {})
+    found["meta"] = {"group": "with_repo"}
+    empty = finalize({"repos": []}, "p2", "B", pages, {}, {})
+    empty["meta"] = {"group": "without_repo"}
+    stats = build_outputs(tmp_path, [found, empty])
+    assert stats["by_group"]["with_repo"] == {"papers": 1, "by_outcome": {"hls_found": 1},
+                                              "with_handoff": 1}
+    assert stats["by_group"]["without_repo"]["by_outcome"] == {"not_found": 1}
+    assert ",with_repo," in (tmp_path / "summary.csv").read_text()

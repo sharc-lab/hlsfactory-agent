@@ -10,7 +10,6 @@ def run_prepass(
     title: str,
     github_token: str | None = None,
     github_cache: Path | None = None,
-    check_github: bool = True,
 ) -> tuple[dict, PdfDoc]:
     """PDF -> candidate repos with evidence, plus the parsed PDF.
 
@@ -35,9 +34,8 @@ def run_prepass(
     candidates = merge_hits(scan.hits + scan_annotations(doc.links))
     result["profiles"] = scan.profiles
 
-    if check_github:
-        for c in candidates:
-            c["gh"] = check_repo(c["repo_id"], github_token, github_cache)
+    for c in candidates:
+        c["gh"] = check_repo(c["repo_id"], github_token, github_cache)
 
     result["candidates"] = candidates
     return result, doc

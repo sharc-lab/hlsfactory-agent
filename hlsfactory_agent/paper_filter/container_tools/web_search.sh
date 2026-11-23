@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Web search fallback. May answer 501 "no web search provider configured": then skip it.
+# Web search fallback (Exa via the host proxy; results cached). May answer 501 "no web search provider configured": then skip it.
 # usage: web_search.sh "<query>"
 set -euo pipefail
 : "${PROXY_URL:?PROXY_URL not set}" "${PROXY_SECRET:?PROXY_SECRET not set}"

@@ -7,17 +7,17 @@ build order.
 
 | Phase | Code | Verified |
 |---|---|---|
-| 1 Pre-pass cleanup | written (`extract.py`, `manifest.py`, `workfolder.py`, `github.py` size) | offline tests; dry run on the 3 sample PDFs |
+| 1 Pre-pass cleanup | written (`extract.py`, `manifest.py`, `workfolder.py`, `github.py` size) | offline tests; dry run on the 3 sample PDFs; PDFs found recursively, subfolder = `group` |
 | 2 Registry | written (`registry.py`, `seed_repos.txt`) | offline tests incl. concurrent merges |
 | 3 HLS scanner | written (`scan.py`, stdlib, runs on host and in container) | offline tests; real repos (SEAL, InTAR) |
 | 4 Evidence + scoring | written (`evidence.py`, `postprocess.py`) | offline tests |
-| 5 Proxy + wrappers | written (`proxy.py`, `container_tools/*.sh`) | offline tests; live unauthenticated GitHub search; NOT with a token, code search or a web provider |
+| 5 Proxy + wrappers | written (`proxy.py`, `container_tools/*.sh`, `ExaProvider`) | offline tests; live via proxy with token (`/rate_limit`: core 5000/hr, search 30/min, code_search 10/min) and Exa (cached) |
 | 6 Image + prompt | written (`docker_images/paper_filter/`, `prompt.py`) | image never built; prompt never run |
 | 7 Orchestrator + outputs | written (`runner.py`, `outputs.py`, `exp/paper_filter/run_agent.py`) | dry run only; container path untested |
 | 8 Server test, pilot, batch | not started | needs keys and the server |
 
-Run order once the keys exist: build the image (`docker_images/paper_filter/build.sh`), put
-`OPENROUTER_API_KEY` and `GITHUB_TOKEN` in `.env`, run ONE paper
+Run order once the keys exist: build the image (`docker_images/paper_filter/build.sh`), check
+`OPENROUTER_API_KEY`, `GITHUB_TOKEN` and `EXA_KEY` are in `.env` (all three are), run ONE paper
 (`run_agent.py --only <id> --jobs 1`), read its transcript and `papers/<id>.json`, then
 scale to the pilot.
 
@@ -38,7 +38,7 @@ host pre-pass (pymupdf, URL regex, GitHub existence check)  -> work folder per p
    |                                                             (pdf, page text, pre-pass json,
    v                                                              registry snapshot, scripts)
 orchestrator (joblib, resume, controls)
-   |  one container per paper (pi + deepseek-v4-flash, poppler, python+pymupdf)
+   |  one container per paper (pi + deepseek/deepseek-v4-flash, poppler, python+pymupdf)
    |      |  curl
    |      v
    |   host proxy thread: token, rate limits, cache, logs ---> api.github.com / web search API
@@ -52,9 +52,9 @@ deterministic confidence scoring -> handoff_repos.txt, review_list.csv, summary.
 
 | Needed | For phase | Status |
 |---|---|---|
-| GitHub token (read-only, no scopes) in `.env` as `GITHUB_TOKEN` | 5, 8 | user will obtain |
-| New OpenRouter key (current one returns 401) | 6, 8 | user will supply |
-| Web search API choice and key | 5 (stub until then) | user is asking |
+| GitHub token (read-only, no scopes) in `.env` as `GITHUB_TOKEN` | 5, 8 | done, verified 2026-11-21 |
+| New OpenRouter key | 6, 8 | done, verified with deepseek-v4-flash 2026-11-21 |
+| Web search API choice and key | 5 | Exa, `EXA_KEY` in `.env`, verified 2026-11-21 (~$0.007/query) |
 | Mentor's answer on "HLS-rich" | 3 (interim: any one HLS kernel) | user will ask |
 | PDF to spreadsheet row mapping | before 8 | parked; interim is filename stem |
 | Server CPU/memory, Docker access for the user | 8 | unknown |
